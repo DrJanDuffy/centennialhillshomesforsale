@@ -1,0 +1,28 @@
+name = "centennialhillshomesforsale"
+type = "webpack"
+account_id = "" # Add your Cloudflare account ID
+workers_dev = true
+
+[site]
+bucket = "./dist"
+include = ["dist/**/*"]
+exclude = ["node_modules/**/*"]
+
+[env.production]
+name = "centennialhillshomesforsale"
+route = "centennialhillshomesforsale.com/*"
+zone_id = "" # Add your Cloudflare zone ID
+
+[build]
+command = "npm run build"
+cwd = "."
+
+[build.upload]
+format = "service-worker"
+
+[env.production.vars]
+NODE_ENV = "production"
+
+[[routes]]
+pattern = "centennialhillshomesforsale.com/*"
+zone_id = "" # Add your Cloudflare zone ID 

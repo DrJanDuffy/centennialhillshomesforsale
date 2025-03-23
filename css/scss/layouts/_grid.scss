@@ -1,0 +1,317 @@
+// Grid Container
+.container {
+  @include container;
+}
+
+// Grid Row
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  margin: -$spacing-md;
+
+  @include respond-to(md) {
+    margin: -$spacing-lg;
+  }
+}
+
+// Grid Columns
+@for $i from 1 through $grid-columns {
+  .col-#{$i} {
+    flex: 0 0 percentage($i / $grid-columns);
+    max-width: percentage($i / $grid-columns);
+    padding: $spacing-md;
+
+    @include respond-to(md) {
+      padding: $spacing-lg;
+    }
+  }
+}
+
+// Responsive Grid Columns
+@each $breakpoint, $value in (
+  sm: $breakpoint-sm,
+  md: $breakpoint-md,
+  lg: $breakpoint-lg,
+  xl: $breakpoint-xl,
+  2xl: $breakpoint-2xl
+) {
+  @include respond-to($breakpoint) {
+    @for $i from 1 through $grid-columns {
+      .col-#{$breakpoint}-#{$i} {
+        flex: 0 0 percentage($i / $grid-columns);
+        max-width: percentage($i / $grid-columns);
+      }
+    }
+  }
+}
+
+// Grid Gaps
+.gap-0 { gap: 0; }
+.gap-1 { gap: $spacing-xs; }
+.gap-2 { gap: $spacing-sm; }
+.gap-3 { gap: $spacing-md; }
+.gap-4 { gap: $spacing-lg; }
+.gap-5 { gap: $spacing-xl; }
+
+// Grid Alignment
+.justify-start { justify-content: flex-start; }
+.justify-end { justify-content: flex-end; }
+.justify-center { justify-content: center; }
+.justify-between { justify-content: space-between; }
+.justify-around { justify-content: space-around; }
+
+.align-start { align-items: flex-start; }
+.align-end { align-items: flex-end; }
+.align-center { align-items: center; }
+.align-baseline { align-items: baseline; }
+.align-stretch { align-items: stretch; }
+
+// Grid Order
+@for $i from 1 through 12 {
+  .order-#{$i} {
+    order: $i;
+  }
+}
+
+// Responsive Grid Order
+@each $breakpoint, $value in (
+  sm: $breakpoint-sm,
+  md: $breakpoint-md,
+  lg: $breakpoint-lg,
+  xl: $breakpoint-xl,
+  2xl: $breakpoint-2xl
+) {
+  @include respond-to($breakpoint) {
+    @for $i from 1 through 12 {
+      .order-#{$breakpoint}-#{$i} {
+        order: $i;
+      }
+    }
+  }
+}
+
+// Grid Offset
+@for $i from 1 through $grid-columns {
+  .offset-#{$i} {
+    margin-left: percentage($i / $grid-columns);
+  }
+}
+
+// Responsive Grid Offset
+@each $breakpoint, $value in (
+  sm: $breakpoint-sm,
+  md: $breakpoint-md,
+  lg: $breakpoint-lg,
+  xl: $breakpoint-xl,
+  2xl: $breakpoint-2xl
+) {
+  @include respond-to($breakpoint) {
+    @for $i from 1 through $grid-columns {
+      .offset-#{$breakpoint}-#{$i} {
+        margin-left: percentage($i / $grid-columns);
+      }
+    }
+  }
+}
+
+// Grid Auto Columns
+.auto-cols-auto { grid-auto-columns: auto; }
+.auto-cols-min { grid-auto-columns: min-content; }
+.auto-cols-max { grid-auto-columns: max-content; }
+.auto-cols-fr { grid-auto-columns: minmax(0, 1fr); }
+
+// Grid Auto Rows
+.auto-rows-auto { grid-auto-rows: auto; }
+.auto-rows-min { grid-auto-rows: min-content; }
+.auto-rows-max { grid-auto-rows: max-content; }
+.auto-rows-fr { grid-auto-rows: minmax(0, 1fr); }
+
+// Grid Template Columns
+.grid-cols-1 { grid-template-columns: repeat(1, minmax(0, 1fr)); }
+.grid-cols-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.grid-cols-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.grid-cols-4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+.grid-cols-5 { grid-template-columns: repeat(5, minmax(0, 1fr)); }
+.grid-cols-6 { grid-template-columns: repeat(6, minmax(0, 1fr)); }
+.grid-cols-12 { grid-template-columns: repeat(12, minmax(0, 1fr)); }
+
+// Responsive Grid Template Columns
+@each $breakpoint, $value in (
+  sm: $breakpoint-sm,
+  md: $breakpoint-md,
+  lg: $breakpoint-lg,
+  xl: $breakpoint-xl,
+  2xl: $breakpoint-2xl
+) {
+  @include respond-to($breakpoint) {
+    .grid-cols-#{$breakpoint}-1 { grid-template-columns: repeat(1, minmax(0, 1fr)); }
+    .grid-cols-#{$breakpoint}-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .grid-cols-#{$breakpoint}-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    .grid-cols-#{$breakpoint}-4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+    .grid-cols-#{$breakpoint}-5 { grid-template-columns: repeat(5, minmax(0, 1fr)); }
+    .grid-cols-#{$breakpoint}-6 { grid-template-columns: repeat(6, minmax(0, 1fr)); }
+    .grid-cols-#{$breakpoint}-12 { grid-template-columns: repeat(12, minmax(0, 1fr)); }
+  }
+}
+
+// Grid Template Rows
+.grid-rows-1 { grid-template-rows: repeat(1, minmax(0, 1fr)); }
+.grid-rows-2 { grid-template-rows: repeat(2, minmax(0, 1fr)); }
+.grid-rows-3 { grid-template-rows: repeat(3, minmax(0, 1fr)); }
+.grid-rows-4 { grid-template-rows: repeat(4, minmax(0, 1fr)); }
+.grid-rows-5 { grid-template-rows: repeat(5, minmax(0, 1fr)); }
+.grid-rows-6 { grid-template-rows: repeat(6, minmax(0, 1fr)); }
+
+// Responsive Grid Template Rows
+@each $breakpoint, $value in (
+  sm: $breakpoint-sm,
+  md: $breakpoint-md,
+  lg: $breakpoint-lg,
+  xl: $breakpoint-xl,
+  2xl: $breakpoint-2xl
+) {
+  @include respond-to($breakpoint) {
+    .grid-rows-#{$breakpoint}-1 { grid-template-rows: repeat(1, minmax(0, 1fr)); }
+    .grid-rows-#{$breakpoint}-2 { grid-template-rows: repeat(2, minmax(0, 1fr)); }
+    .grid-rows-#{$breakpoint}-3 { grid-template-rows: repeat(3, minmax(0, 1fr)); }
+    .grid-rows-#{$breakpoint}-4 { grid-template-rows: repeat(4, minmax(0, 1fr)); }
+    .grid-rows-#{$breakpoint}-5 { grid-template-rows: repeat(5, minmax(0, 1fr)); }
+    .grid-rows-#{$breakpoint}-6 { grid-template-rows: repeat(6, minmax(0, 1fr)); }
+  }
+}
+
+// Grid Column Span
+@for $i from 2 through $grid-columns {
+  .col-span-#{$i} {
+    grid-column: span $i;
+  }
+}
+
+// Responsive Grid Column Span
+@each $breakpoint, $value in (
+  sm: $breakpoint-sm,
+  md: $breakpoint-md,
+  lg: $breakpoint-lg,
+  xl: $breakpoint-xl,
+  2xl: $breakpoint-2xl
+) {
+  @include respond-to($breakpoint) {
+    @for $i from 2 through $grid-columns {
+      .col-span-#{$breakpoint}-#{$i} {
+        grid-column: span $i;
+      }
+    }
+  }
+}
+
+// Grid Row Span
+@for $i from 2 through 6 {
+  .row-span-#{$i} {
+    grid-row: span $i;
+  }
+}
+
+// Responsive Grid Row Span
+@each $breakpoint, $value in (
+  sm: $breakpoint-sm,
+  md: $breakpoint-md,
+  lg: $breakpoint-lg,
+  xl: $breakpoint-xl,
+  2xl: $breakpoint-2xl
+) {
+  @include respond-to($breakpoint) {
+    @for $i from 2 through 6 {
+      .row-span-#{$breakpoint}-#{$i} {
+        grid-row: span $i;
+      }
+    }
+  }
+}
+
+// Grid Start/End
+@for $i from 1 through $grid-columns {
+  .col-start-#{$i} { grid-column-start: $i; }
+  .col-end-#{$i} { grid-column-end: $i; }
+}
+
+@for $i from 1 through 6 {
+  .row-start-#{$i} { grid-row-start: $i; }
+  .row-end-#{$i} { grid-row-end: $i; }
+}
+
+// Responsive Grid Start/End
+@each $breakpoint, $value in (
+  sm: $breakpoint-sm,
+  md: $breakpoint-md,
+  lg: $breakpoint-lg,
+  xl: $breakpoint-xl,
+  2xl: $breakpoint-2xl
+) {
+  @include respond-to($breakpoint) {
+    @for $i from 1 through $grid-columns {
+      .col-start-#{$breakpoint}-#{$i} { grid-column-start: $i; }
+      .col-end-#{$breakpoint}-#{$i} { grid-column-end: $i; }
+    }
+
+    @for $i from 1 through 6 {
+      .row-start-#{$breakpoint}-#{$i} { grid-row-start: $i; }
+      .row-end-#{$breakpoint}-#{$i} { grid-row-end: $i; }
+    }
+  }
+}
+
+// Grid Areas
+.grid-area-header { grid-area: header; }
+.grid-area-sidebar { grid-area: sidebar; }
+.grid-area-main { grid-area: main; }
+.grid-area-footer { grid-area: footer; }
+
+// Responsive Grid Areas
+@each $breakpoint, $value in (
+  sm: $breakpoint-sm,
+  md: $breakpoint-md,
+  lg: $breakpoint-lg,
+  xl: $breakpoint-xl,
+  2xl: $breakpoint-2xl
+) {
+  @include respond-to($breakpoint) {
+    .grid-area-#{$breakpoint}-header { grid-area: header; }
+    .grid-area-#{$breakpoint}-sidebar { grid-area: sidebar; }
+    .grid-area-#{$breakpoint}-main { grid-area: main; }
+    .grid-area-#{$breakpoint}-footer { grid-area: footer; }
+  }
+}
+
+// Grid Flow
+.grid-flow-row { grid-auto-flow: row; }
+.grid-flow-col { grid-auto-flow: column; }
+.grid-flow-dense { grid-auto-flow: dense; }
+
+// Grid Dense
+.grid-dense { grid-auto-flow: dense; }
+
+// Grid Auto Columns
+.grid-auto-cols-auto { grid-auto-columns: auto; }
+.grid-auto-cols-min { grid-auto-columns: min-content; }
+.grid-auto-cols-max { grid-auto-columns: max-content; }
+.grid-auto-cols-fr { grid-auto-columns: minmax(0, 1fr); }
+
+// Grid Auto Rows
+.grid-auto-rows-auto { grid-auto-rows: auto; }
+.grid-auto-rows-min { grid-auto-rows: min-content; }
+.grid-auto-rows-max { grid-auto-rows: max-content; }
+.grid-auto-rows-fr { grid-auto-rows: minmax(0, 1fr); }
+
+// Print Styles
+@media print {
+  .row {
+    display: block;
+    margin: 0;
+  }
+
+  [class*="col-"] {
+    float: none;
+    width: 100%;
+    padding: 0;
+  }
+} 

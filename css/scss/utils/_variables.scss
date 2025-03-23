@@ -1,0 +1,119 @@
+// Colors
+$primary-color: #2C5282; // Deep blue
+$secondary-color: #48BB78; // Green
+$accent-color: #F6AD55; // Orange
+$text-color: #2D3748; // Dark gray
+$text-light: #718096; // Light gray
+$background-color: #F7FAFC; // Light blue-gray
+$white: #FFFFFF;
+$black: #000000;
+
+// Brand Colors
+$brand-primary: $primary-color;
+$brand-secondary: $secondary-color;
+$brand-accent: $accent-color;
+$brand-success: #48BB78;
+$brand-warning: #ECC94B;
+$brand-danger: #F56565;
+$brand-info: #4299E1;
+
+// Neutral Colors
+$gray-100: #F7FAFC;
+$gray-200: #EDF2F7;
+$gray-300: #E2E8F0;
+$gray-400: #CBD5E0;
+$gray-500: #A0AEC0;
+$gray-600: #718096;
+$gray-700: #4A5568;
+$gray-800: #2D3748;
+$gray-900: #1A202C;
+
+// Typography
+$font-family-base: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+$font-family-heading: 'Poppins', $font-family-base;
+$font-size-base: 16px;
+$line-height-base: 1.5;
+$font-weight-normal: 400;
+$font-weight-medium: 500;
+$font-weight-bold: 700;
+
+// Spacing
+$spacing-unit: 8px;
+$spacing-xs: $spacing-unit;
+$spacing-sm: $spacing-unit * 2;
+$spacing-md: $spacing-unit * 3;
+$spacing-lg: $spacing-unit * 4;
+$spacing-xl: $spacing-unit * 6;
+
+// Breakpoints
+$breakpoint-sm: 640px;
+$breakpoint-md: 768px;
+$breakpoint-lg: 1024px;
+$breakpoint-xl: 1280px;
+$breakpoint-2xl: 1536px;
+
+// Container
+$container-max-width: 1280px;
+$container-padding: $spacing-md;
+
+// Border Radius
+$border-radius-sm: 4px;
+$border-radius-md: 8px;
+$border-radius-lg: 12px;
+$border-radius-full: 9999px;
+
+// Shadows
+$shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+$shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+$shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+$shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+
+// Transitions
+$transition-base: all 0.3s ease-in-out;
+$transition-fast: all 0.15s ease-in-out;
+$transition-slow: all 0.5s ease-in-out;
+
+// Z-index
+$z-index-dropdown: 1000;
+$z-index-sticky: 1020;
+$z-index-fixed: 1030;
+$z-index-modal-backdrop: 1040;
+$z-index-modal: 1050;
+$z-index-popover: 1060;
+$z-index-tooltip: 1070;
+
+// Grid
+$grid-columns: 12;
+$grid-gap: $spacing-md;
+
+// Forms
+$input-height: 40px;
+$input-padding: $spacing-sm;
+$input-border-color: $gray-300;
+$input-focus-border-color: $primary-color;
+$input-focus-shadow: 0 0 0 3px rgba($primary-color, 0.1);
+
+// Buttons
+$button-padding-y: $spacing-sm;
+$button-padding-x: $spacing-md;
+$button-font-weight: $font-weight-medium;
+$button-border-radius: $border-radius-md;
+$button-transition: $transition-base;
+
+// Cards
+$card-padding: $spacing-md;
+$card-border-radius: $border-radius-lg;
+$card-shadow: $shadow-md;
+$card-hover-shadow: $shadow-lg;
+
+// Property Listing Specific
+$property-card-width: 300px;
+$property-image-height: 200px;
+$property-price-color: $primary-color;
+$property-features-spacing: $spacing-sm;
+
+// Widget Specific
+$widget-border-radius: $border-radius-md;
+$widget-padding: $spacing-md;
+$widget-background: $white;
+$widget-shadow: $shadow-sm; 
