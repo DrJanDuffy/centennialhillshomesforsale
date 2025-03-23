@@ -1,103 +1,39 @@
 {
   "name": "centennialhillshomesforsale",
   "version": "1.0.0",
-  "description": "A hyperlocal real estate website focused on the Las Vegas Centennial Hills community",
-  "main": "index.html",
   "private": true,
+  "homepage": "https://geneb.github.io/centennialhillshomesforsale",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "format": "prettier --write \"**/*.{js,jsx,ts,tsx,html,css,scss,json}\"",
-    "deploy": "next build && next export",
-    "analyze": "ANALYZE=true next build",
-    "optimize-images": "next/image",
-    "generate-sitemap": "next-sitemap",
-    "generate-robots": "next-sitemap --config next-sitemap.config.js"
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d out",
+    "configure-domains": "node scripts/configure-domains.js",
+    "configure-dns": "node scripts/configure-dns.js",
+    "setup-security": "node scripts/setup-security.js",
+    "setup-analytics": "node scripts/setup-analytics.js",
+    "setup-backups": "node scripts/setup-backups.js",
+    "setup-all": "npm run configure-domains && npm run configure-dns && npm run setup-security && npm run setup-analytics && npm run setup-backups && npm run deploy",
+    "backup": "bash scripts/backup-projects.sh"
   },
   "dependencies": {
-    "@vercel/analytics": "^1.5.0",
-    "chart.js": "^4.4.1",
-    "date-fns": "^3.3.1",
-    "framer-motion": "^12.5.0",
-    "gsap": "^3.12.5",
-    "lazysizes": "^5.3.2",
-    "leaflet": "^1.9.4",
-    "lightbox2": "^2.11.4",
-    "next": "^14.1.0",
+    "dotenv": "^16.3.1",
+    "framer-motion": "^10.16.0",
+    "next": "^13.4.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "react-icons": "^5.5.0",
-    "swiper": "^11.0.5"
+    "react-icons": "^4.10.0"
   },
   "devDependencies": {
-    "@next/bundle-analyzer": "^14.1.0",
-    "@types/node": "^20.11.19",
-    "@types/react": "^18.2.57",
-    "@types/react-dom": "^18.2.19",
-    "autoprefixer": "^10.4.17",
-    "cssnano": "^6.0.3",
-    "eslint": "^8.56.0",
-    "eslint-config-next": "^14.1.0",
-    "next-sitemap": "^4.2.3",
-    "postcss": "^8.4.35",
-    "prettier": "^3.2.5",
-    "sass": "^1.86.0",
-    "sharp": "^0.33.2",
-    "typescript": "^5.3.3"
-  },
-  "engines": {
-    "node": ">=18.0.0"
-  },
-  "browserslist": [
-    ">0.2%",
-    "not dead",
-    "not op_mini all"
-  ],
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/DrJanDuffy/centennialhillshomesforsale.git"
-  },
-  "keywords": [
-    "real-estate",
-    "las-vegas",
-    "centennial-hills",
-    "property-listings",
-    "home-search",
-    "market-analysis",
-    "real-estate-agent",
-    "las-vegas-homes",
-    "centennial-hills-real-estate"
-  ],
-  "author": "Dr. Jan Duffy",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/DrJanDuffy/centennialhillshomesforsale/issues"
-  },
-  "homepage": "https://centennialhillshomesforsale.com",
-  "pwa": {
-    "name": "Centennial Hills Homes For Sale",
-    "short_name": "Centennial Hills",
-    "description": "Find your dream home in Centennial Hills, Las Vegas",
-    "start_url": "/",
-    "display": "standalone",
-    "background_color": "#ffffff",
-    "theme_color": "#2C5282",
-    "icons": [
-      {
-        "src": "/icons/icon-192x192.png",
-        "sizes": "192x192",
-        "type": "image/png"
-      },
-      {
-        "src": "/icons/icon-512x512.png",
-        "sizes": "512x512",
-        "type": "image/png"
-      }
-    ]
-  },
-  "directories": {
-    "doc": "docs"
+    "@types/node": "^18.0.0",
+    "@types/react": "^18.0.0",
+    "@types/react-dom": "^18.0.0",
+    "autoprefixer": "^10.4.0",
+    "gh-pages": "^6.3.0",
+    "postcss": "^8.4.0",
+    "tailwindcss": "^3.3.0",
+    "typescript": "^5.0.0"
   }
 }

@@ -1,48 +1,25 @@
-import { useEffect, useRef } from 'react';
+import { useRef } from 'react';
 import Head from 'next/head';
 import Image from 'next/image';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
-import Layout from '../components/layout/Layout';
+import Layout from '../components/Layout';
+import RealScoutWidget from '../components/widgets/RealScoutWidget';
 import { FaHome, FaChartLine, FaHandshake } from 'react-icons/fa';
 
-const AboutPage = () => {
+export default function About() {
   const scrollRef = useRef(null);
 
-  useEffect(() => {
-    // Load third-party scripts after component mounts
-    const scripts = [
-      'https://cdn.realscout.com/widget.js',
-      'https://cdn.homebot.com/widget.js',
-      'https://cdn.cloudcma.com/widget.js',
-      'https://cdn.percy.ai/widget.js'
-    ];
-
-    scripts.forEach(src => {
-      const script = document.createElement('script');
-      script.src = src;
-      script.async = true;
-      document.head.appendChild(script);
-    });
-
-    return () => {
-      scripts.forEach(src => {
-        const script = document.querySelector(`script[src="${src}"]`);
-        if (script) {
-          document.head.removeChild(script);
-        }
-      });
-    };
-  }, []);
-
   return (
-    <Layout
-      title="About Us | Centennial Hills Homes For Sale"
-      description="Learn about our experienced team of real estate professionals serving the Centennial Hills area of Las Vegas."
-    >
-      <div className="about-page">
+    <Layout>
+      <Head>
+        <title>About Us - Centennial Hills Homes For Sale</title>
+        <meta name="description" content="Learn about our team and services at Centennial Hills Homes For Sale." />
+      </Head>
+
+      <main className="container">
         <motion.section 
-          className="hero-section"
+          className="section"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
@@ -55,117 +32,128 @@ const AboutPage = () => {
         </motion.section>
 
         <motion.section 
-          className="content-section"
+          className="section"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.2, duration: 0.6 }}
+        >
+          <h2>Market Analysis</h2>
+          <div className="widget-container">
+            <RealScoutWidget
+              type="market-analysis"
+              propertyId="12345"
+              agentId="67890"
+              brokerId="13579"
+              clientId="24680"
+              clientName="John Doe"
+              clientEmail="john@example.com"
+              clientPhone="555-0123"
+              clientAddress="123 Main St"
+              clientCity="Las Vegas"
+              clientState="NV"
+              clientZip="89149"
+              clientBudget="500000"
+              clientTimeline="3-6 months"
+              clientPreferences="3+ beds, 2+ baths"
+            />
+          </div>
+        </motion.section>
+
+        <motion.section 
+          className="section"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.4, duration: 0.6 }}
+        >
+          <h2>Market Trends</h2>
+          <div className="widget-container">
+            <RealScoutWidget
+              type="market-trends"
+              propertyId="12345"
+              agentId="67890"
+              brokerId="13579"
+              clientId="24680"
+              clientName="John Doe"
+              clientEmail="john@example.com"
+              clientPhone="555-0123"
+              clientAddress="123 Main St"
+              clientCity="Las Vegas"
+              clientState="NV"
+              clientZip="89149"
+              clientBudget="500000"
+              clientTimeline="3-6 months"
+              clientPreferences="3+ beds, 2+ baths"
+            />
+          </div>
+        </motion.section>
+
+        <motion.section 
+          className="content-section section"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.3, duration: 0.6 }}
         >
-          <motion.div 
-            className="content-block"
-            whileHover={{ scale: 1.03 }}
-            transition={{ type: "spring", stiffness: 300 }}
-          >
-            <FaHome className="icon" />
-            <h2>Local Expertise</h2>
-            <p>
-              Our deep understanding of Centennial Hills and the greater Las Vegas market
-              helps you make informed decisions about your real estate investments.
-            </p>
-          </motion.div>
-
-          <motion.div 
-            className="content-block"
-            whileHover={{ scale: 1.03 }}
-            transition={{ type: "spring", stiffness: 300 }}
-          >
-            <FaChartLine className="icon" />
-            <h2>Market Analysis</h2>
-            <p>
-              Stay ahead with our comprehensive market analysis tools and reports,
-              giving you the latest insights into property values and market trends.
-            </p>
-          </motion.div>
-
-          <motion.div 
-            className="content-block"
-            whileHover={{ scale: 1.03 }}
-            transition={{ type: "spring", stiffness: 300 }}
-          >
-            <FaHandshake className="icon" />
-            <h2>Personalized Service</h2>
-            <p>
-              We provide tailored solutions for every client, ensuring your specific
-              needs and goals are met throughout the buying or selling process.
-            </p>
-          </motion.div>
-        </motion.section>
-
-        <motion.section 
-          className="team-section"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.6, duration: 0.6 }}
-        >
-          <h2>Meet Our Team</h2>
-          <div className="team-grid">
+          <div className="content-grid">
             <motion.div 
-              className="team-member"
-              whileHover={{ y: -5 }}
+              className="content-block"
+              whileHover={{ scale: 1.03 }}
               transition={{ type: "spring", stiffness: 300 }}
             >
-              <img src="/images/agent1.jpg" alt="Sarah Johnson" />
-              <h3>Sarah Johnson</h3>
-              <p>Principal Broker</p>
-              <div className="social-links">
-                <a href="#" aria-label="LinkedIn">
-                  <i className="fab fa-linkedin"></i>
-                </a>
-                <a href="#" aria-label="Twitter">
-                  <i className="fab fa-twitter"></i>
-                </a>
-              </div>
+              <FaHome className="icon" />
+              <h2>Local Expertise</h2>
+              <p>
+                Our deep understanding of Centennial Hills and the greater Las Vegas market
+                helps you make informed decisions about your real estate investments.
+              </p>
             </motion.div>
 
             <motion.div 
-              className="team-member"
-              whileHover={{ y: -5 }}
+              className="content-block"
+              whileHover={{ scale: 1.03 }}
               transition={{ type: "spring", stiffness: 300 }}
             >
-              <img src="/images/agent2.jpg" alt="Michael Chen" />
-              <h3>Michael Chen</h3>
-              <p>Senior Real Estate Agent</p>
-              <div className="social-links">
-                <a href="#" aria-label="LinkedIn">
-                  <i className="fab fa-linkedin"></i>
-                </a>
-                <a href="#" aria-label="Twitter">
-                  <i className="fab fa-twitter"></i>
-                </a>
-              </div>
+              <FaChartLine className="icon" />
+              <h2>Market Analysis</h2>
+              <p>
+                Stay ahead with our comprehensive market analysis tools and reports,
+                giving you the latest insights into property values and market trends.
+              </p>
             </motion.div>
 
             <motion.div 
-              className="team-member"
-              whileHover={{ y: -5 }}
+              className="content-block"
+              whileHover={{ scale: 1.03 }}
               transition={{ type: "spring", stiffness: 300 }}
             >
-              <img src="/images/agent3.jpg" alt="Emily Rodriguez" />
-              <h3>Emily Rodriguez</h3>
-              <p>Market Analysis Specialist</p>
-              <div className="social-links">
-                <a href="#" aria-label="LinkedIn">
-                  <i className="fab fa-linkedin"></i>
-                </a>
-                <a href="#" aria-label="Twitter">
-                  <i className="fab fa-twitter"></i>
-                </a>
-              </div>
+              <FaHandshake className="icon" />
+              <h2>Personalized Service</h2>
+              <p>
+                We provide tailored solutions for every client, ensuring your specific
+                needs and goals are met throughout the buying or selling process.
+              </p>
             </motion.div>
           </div>
         </motion.section>
 
         <motion.section 
-          className="cta-section"
+          className="featured-listings-section section"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.6, duration: 0.6 }}
+        >
+          <h2>Featured Listings</h2>
+          <RealScoutWidget
+            agentEncodedId="QWdlbnQtMjI1MDUw"
+            sortOrder="STATUS_AND_SIGNIFICANT_CHANGE"
+            listingStatus="For Sale"
+            propertyTypes="SFR,MF,TC,OTHER"
+            priceMin={500000}
+            className="featured-listings-widget"
+          />
+        </motion.section>
+
+        <motion.section 
+          className="cta-section section"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.9, duration: 0.6 }}
@@ -196,9 +184,7 @@ const AboutPage = () => {
             </div>
           </div>
         </motion.section>
-      </div>
+      </main>
     </Layout>
   );
-};
-
-export default AboutPage; 
+} 

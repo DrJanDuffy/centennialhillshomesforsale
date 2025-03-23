@@ -1,28 +1,8 @@
 name = "centennialhillshomesforsale"
-type = "webpack"
-account_id = "" # Add your Cloudflare account ID
-workers_dev = true
-
-[site]
-bucket = "./dist"
-include = ["dist/**/*"]
-exclude = ["node_modules/**/*"]
+compatibility_date = "2025-03-23"
+pages_build_output_dir = "out"
 
 [env.production]
-name = "centennialhillshomesforsale"
-route = "centennialhillshomesforsale.com/*"
-zone_id = "" # Add your Cloudflare zone ID
+vars = { NODE_ENV = "production", SITE_URL = "https://centennialhillshomesforsale.com" }
 
-[build]
-command = "npm run build"
-cwd = "."
-
-[build.upload]
-format = "service-worker"
-
-[env.production.vars]
-NODE_ENV = "production"
-
-[[routes]]
-pattern = "centennialhillshomesforsale.com/*"
-zone_id = "" # Add your Cloudflare zone ID 
+# Remove the routes section since we're using Vercel for DNS management 
