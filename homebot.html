@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" type="image/png" href="img/favicon.png" />
+  <title>Home Value Tracker | Centennial Hills Homes For Sale</title>
+  <link rel="stylesheet" href="css/style.css" />
+  
+  <!-- RealScout Widget Integration -->
+  <script src="https://em.realscout.com/widgets/realscout-web-components.umd.js" type="module"></script>
+  <style>
+    realscout-office-listings {
+      --rs-listing-divider-color: #4a90e2;
+      width: 100%;
+    }
+    
+    /* Homebot Page Specific Styles */
+    .homebot-hero {
+      background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('Images/Home/homebot-background.jpg');
+      background-size: cover;
+      background-position: center;
+      color: white;
+      padding: 80px 0;
+      text-align: center;
+    }
+    
+    .homebot-features {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      margin-top: 60px;
+    }
+    
+    .homebot-feature {
+      flex-basis: calc(33.333% - 30px);
+      background: #f8f8f8;
+      border-radius: 10px;
+      padding: 30px;
+      margin-bottom: 30px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+      transition: transform 0.3s ease;
+    }
+    
+    .homebot-feature:hover {
+      transform: translateY(-10px);
+    }
+    
+    .homebot-feature h3 {
+      color: #4a90e2;
+      margin-bottom: 15px;
+    }
+    
+    .homebot-icon {
+      font-size: 48px;
+      margin-bottom: 20px;
+      color: #4a90e2;
+    }
+    
+    .homebot-widget-large {
+      margin: 60px 0;
+      padding: 40px;
+      background: #f8f8f8;
+      border-radius: 10px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    }
+    
+    .homebot-testimonials {
+      margin: 80px 0;
+    }
+    
+    .homebot-cta {
+      background: #4a90e2;
+      color: white;
+      padding: 30px;
+      border-radius: 10px;
+      text-align: center;
+      margin-bottom: 60px;
+    }
+    
+    .homebot-cta h3 {
+      margin-bottom: 20px;
+    }
+    
+    .homebot-cta .button {
+      background: white;
+      color: #4a90e2;
+      font-weight: bold;
+    }
+    
+    @media (max-width: 768px) {
+      .homebot-feature {
+        flex-basis: 100%;
+      }
+    }
+  </style>
+  
+  <!-- Structured data for local business -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "RealEstateAgent",
+    "name": "Centennial Hills Homes For Sale",
+    "founder": {
+      "@type": "Person",
+      "name": "Dr. Jan Duffy",
+      "jobTitle": "REALTOR®",
+      "worksFor": {
+        "@type": "Organization",
+        "name": "Berkshire Hathaway HomeServices"
+      }
+    },
+    "description": "Find Centennial Hills homes for sale with Dr. Jan Duffy, a trusted expert in luxury and new-build Las Vegas homes with 20+ years experience in master-planned communities.",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "1490 Center Crossing Rd",
+      "addressLocality": "Las Vegas",
+      "addressRegion": "NV",
+      "postalCode": "89144"
+    },
+    "areaServed": ["Centennial Hills", "Skye Canyon", "Providence", "Lone Mountain", "North Las Vegas", "Summerlin", "Tule Springs", "Aliante"],
+    "openingHoursSpecification": [
+      {
+        "@type": "OpeningHoursSpecification",
+        "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
+        "opens": "06:00",
+        "closes": "21:00"
+      }
+    ],
+    "telephone": "(702) 903-1952",
+    "url": "https://www.centennialhillshomesforsale.com/"
+  }
+  </script>
+</head>
+
+<body>
+  <div class="wrapper">
+    <!-- Sticky neighborhood identifier -->
+    <div class="neighborhood-bar">
+      <p>Currently browsing: <strong>Home Value Tracker</strong> <span class="change-neighborhood">Change</span></p>
+    </div>
+    
+    <header class="header">
+      <div class="header__container">
+        <a href="index.html" class="header__logo logo">CENTENNIAL HILLS HOMES FOR SALE</a>
+        <div class="header__navigation">
+          <div class="header__menu menu">
+            <nav class="menu__body">
+              <ul class="menu__list">
+                <li class="menu__item"><a href="index.html" class="menu__link">Home</a></li>
+                <li class="menu__item"><a href="about.html" class="menu__link">About</a></li>
+                <li class="menu__item"><a href="listings.html" class="menu__link">Listings</a></li>
+                <li class="menu__item dropdown">
+                  <a href="neighborhoods.html" class="menu__link">Neighborhoods</a>
+                  <ul class="dropdown-menu">
+                    <li><a href="skye-canyon.html">Skye Canyon</a></li>
+                    <li><a href="providence.html">Providence</a></li>
+                    <li><a href="centennial-hills.html">Centennial Hills</a></li>
+                    <li><a href="lone-mountain.html">Lone Mountain</a></li>
+                    <li><a href="summerlin.html">Summerlin</a></li>
+                    <li><a href="tule-springs.html">Tule Springs</a></li>
+                  </ul>
+                </li>
+                <li class="menu__item"><a href="market-update.html" class="menu__link">Market Update</a></li>
+                <li class="menu__item"><a href="blog.html" class="menu__link">Blog</a></li>
+                <li class="menu__item"><a href="homebot.html" class="menu__link active">Home Value Tracker</a></li>
+                <li class="menu__item"><a href="contact.html" class="menu__link">Contact</a></li>
+              </ul>
+              <div class="header-contact">
+                <p class="local-agent">Your local expert: <strong>Dr. Jan Duffy, REALTOR®</strong></p>
+                <p class="agent-credentials">Berkshire Hathaway HomeServices • Top 1% of Las Vegas REALTORS®</p>
+                <p class="phone">(702) 903-1952</p>
+              </div>
+            </nav>
+          </div>
+          <div class="header__actions actions-header">
+            <a href="contact.html" class="actions-header__button">Free Market Analysis</a>
+            <button type="button" class="menu__icon icon-menu"><span></span></button>
+          </div>
+        </div>
+      </div>
+    </header>
+    
+    <main class="page">
+      <!-- Hero Section -->
+      <section class="homebot-hero">
+        <div class="main__container">
+          <h1 class="main__title">Track Your Las Vegas Home's Value</h1>
+          <div class="main__text">
+            Get real-time insights into your home's worth and make informed decisions about your largest investment.
+          </div>
+        </div>
+      </section>
+      
+      <!-- Main Homebot Section -->
+      <section class="page__homebot homebot">
+        <div class="homebot__container">
+          <h
