@@ -1,5 +1,4 @@
 import Head from 'next/head';
-import Script from 'next/script';
 import { useEffect } from 'react';
 
 export default function Home() {
@@ -66,12 +65,6 @@ export default function Home() {
         />
       </Head>
 
-      <Script
-        src="https://em.realscout.com/widgets/realscout-web-components.umd.js"
-        type="module"
-        strategy="lazyOnload"
-      />
-
       <div className="wrapper">
         {/* Sticky neighborhood identifier */}
         <div className="neighborhood-bar">
@@ -111,15 +104,43 @@ export default function Home() {
             <div className="services__container">
               <h2 className="services__title title">Featured Las Vegas Luxury Homes</h2>
               
-              {/* RealScout Listings Widget */}
-              <div className="realscout-widget-container">
-                <realscout-office-listings 
-                  agent-encoded-id="QWdlbnQtMjI1MDUw" 
-                  sort-order="NEWEST" 
-                  listing-status="Sold" 
-                  property-types="SFR,MF,TC" 
-                  price-min="500000">
-                </realscout-office-listings>
+              {/* Featured Listings */}
+              <div className="featured-listings">
+                <div className="listing-grid">
+                  <div className="listing-card">
+                    <div className="listing-image">
+                      <img src="/img/homes/home1.jpg" alt="Luxury Home in Centennial Hills" />
+                      <div className="listing-price">$749,900</div>
+                    </div>
+                    <div className="listing-details">
+                      <h3>Modern Luxury in Centennial Hills</h3>
+                      <p>4 bed • 3.5 bath • 3,245 sqft</p>
+                      <p>10234 Skye Canyon Drive</p>
+                    </div>
+                  </div>
+                  <div className="listing-card">
+                    <div className="listing-image">
+                      <img src="/img/homes/home2.jpg" alt="Estate in Providence" />
+                      <div className="listing-price">$899,000</div>
+                    </div>
+                    <div className="listing-details">
+                      <h3>Providence Estate with Views</h3>
+                      <p>5 bed • 4 bath • 4,120 sqft</p>
+                      <p>8756 Providence Heights Street</p>
+                    </div>
+                  </div>
+                  <div className="listing-card">
+                    <div className="listing-image">
+                      <img src="/img/homes/home3.jpg" alt="Custom Home in Lone Mountain" />
+                      <div className="listing-price">$1,250,000</div>
+                    </div>
+                    <div className="listing-details">
+                      <h3>Custom Lone Mountain Retreat</h3>
+                      <p>6 bed • 5.5 bath • 5,340 sqft</p>
+                      <p>6543 Lone Mountain View Court</p>
+                    </div>
+                  </div>
+                </div>
               </div>
               
               <form className="valuation-form">
@@ -141,11 +162,26 @@ export default function Home() {
                 <button type="submit" className="outro__button button">Get Your Free Market Analysis</button>
               </form>
               
-              {/* Homebot Widget */}
-              <div className="homebot-widget-container">
-                <h3>Track Your Home's Value Over Time</h3>
-                <p>Get instant access to your home's current value, equity position, and wealth-building opportunities:</p>
-                <div id="homebot_homeowner"></div>
+              {/* Market Stats */}
+              <div className="market-stats">
+                <h3>Current Market Statistics</h3>
+                <div className="stats-grid">
+                  <div className="stat-card">
+                    <h4>Average Sale Price</h4>
+                    <p className="stat-value">$725,000</p>
+                    <p className="stat-change">+12% from last year</p>
+                  </div>
+                  <div className="stat-card">
+                    <h4>Days on Market</h4>
+                    <p className="stat-value">28</p>
+                    <p className="stat-change">-15% from last month</p>
+                  </div>
+                  <div className="stat-card">
+                    <h4>Available Homes</h4>
+                    <p className="stat-value">142</p>
+                    <p className="stat-change">New listings daily</p>
+                  </div>
+                </div>
               </div>
             </div>
           </section>
@@ -198,21 +234,37 @@ export default function Home() {
             </div>
           </section>
           
-          {/* Market Update Section with Blog Posts */}
+          {/* Market Update Section */}
           <section className="page__market market">
             <div className="market__container">
               <h2 className="market__title title">Las Vegas Real Estate Insider</h2>
               
-              {/* Market Update Listings */}
-              <div className="market-update-listings">
-                <h3>Just Listed This Week</h3>
-                <realscout-office-listings 
-                  agent-encoded-id="QWdlbnQtMjI1MDUw" 
-                  sort-order="NEWEST" 
-                  listing-status="For Sale,For Rent" 
-                  property-types="SFR,MF,TC" 
-                  price-min="500000">
-                </realscout-office-listings>
+              {/* Featured Articles */}
+              <div className="article-grid">
+                <article className="article-card">
+                  <img src="/img/blog/market-trends.jpg" alt="Las Vegas Market Trends" />
+                  <div className="article-content">
+                    <h3>2024 Las Vegas Market Trends</h3>
+                    <p>Discover the latest trends shaping the Las Vegas real estate market, from luxury home features to buyer preferences.</p>
+                    <a href="/blog/2024-market-trends" className="read-more">Read More →</a>
+                  </div>
+                </article>
+                <article className="article-card">
+                  <img src="/img/blog/new-developments.jpg" alt="New Developments" />
+                  <div className="article-content">
+                    <h3>New Developments in Centennial Hills</h3>
+                    <p>Explore upcoming residential and commercial developments in the Centennial Hills area.</p>
+                    <a href="/blog/new-developments" className="read-more">Read More →</a>
+                  </div>
+                </article>
+                <article className="article-card">
+                  <img src="/img/blog/community-guide.jpg" alt="Community Guide" />
+                  <div className="article-content">
+                    <h3>Your Guide to Master-Planned Communities</h3>
+                    <p>Everything you need to know about Las Vegas's premier master-planned communities.</p>
+                    <a href="/blog/community-guide" className="read-more">Read More →</a>
+                  </div>
+                </article>
               </div>
             </div>
           </section>
