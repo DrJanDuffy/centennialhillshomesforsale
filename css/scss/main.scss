@@ -1,0 +1,175 @@
+// Variables and Mixins
+@import 'utils/variables';
+@import 'utils/mixins';
+@import 'utils/functions';
+@import 'utils/animations';
+@import 'utils/utilities';
+
+// Base styles
+@import 'base/reset';
+@import 'base/typography';
+@import 'base/utilities';
+
+// Layout components
+@import 'layouts/header';
+@import 'layouts/footer';
+@import 'layouts/navigation';
+@import 'layouts/grid';
+@import 'layouts/forms';
+@import 'layouts/sidebar';
+
+// Components
+@import 'components/buttons';
+@import 'components/cards';
+@import 'components/property-listing';
+@import 'components/search-filters';
+@import 'components/testimonials';
+@import 'components/team-member';
+@import 'components/contact-form';
+@import 'components/modal';
+@import 'components/slider';
+@import 'components/map';
+@import 'components/widgets';
+@import 'components/navigation';
+@import 'components/forms';
+@import 'components/modals';
+@import 'components/toasts';
+@import 'components/loading';
+
+// Third-party components
+@import 'vendors/realscout';
+@import 'vendors/homebot';
+@import 'vendors/cloudcma';
+@import 'vendors/percy';
+
+// Page-specific styles
+@import 'pages/home';
+@import 'pages/listings';
+@import 'pages/property-detail';
+@import 'pages/neighborhoods';
+@import 'pages/about';
+@import 'pages/contact';
+@import 'pages/blog';
+@import 'pages/market-update';
+@import 'pages/buyers';
+@import 'pages/sellers';
+@import 'pages/testimonials';
+
+// Responsive styles
+@import 'utils/responsive';
+
+// Import components
+@import 'components/navigation';
+@import 'components/buttons';
+@import 'components/forms';
+@import 'components/cards';
+@import 'components/modals';
+@import 'components/toasts';
+@import 'components/loading';
+@import 'components/widgets';
+
+// Import layouts
+@import 'layouts/header';
+@import 'layouts/footer';
+@import 'layouts/grid';
+@import 'layouts/sidebar';
+
+// Import pages
+@import 'pages/home';
+@import 'pages/listings';
+@import 'pages/property-detail';
+@import 'pages/neighborhoods';
+@import 'pages/about';
+@import 'pages/contact';
+@import 'pages/blog';
+@import 'pages/market-update';
+@import 'pages/buyers';
+@import 'pages/sellers';
+@import 'pages/testimonials';
+
+// Base styles
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 16px;
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: $font-family-base;
+  line-height: 1.6;
+  color: $text-color;
+  background-color: $background-color;
+  overflow-x: hidden;
+}
+
+// Typography
+h1, h2, h3, h4, h5, h6 {
+  font-family: $font-family-heading;
+  font-weight: 700;
+  line-height: 1.2;
+  margin-bottom: 1rem;
+}
+
+h1 { font-size: 2.5rem; }
+h2 { font-size: 2rem; }
+h3 { font-size: 1.75rem; }
+h4 { font-size: 1.5rem; }
+h5 { font-size: 1.25rem; }
+h6 { font-size: 1rem; }
+
+p {
+  margin-bottom: 1rem;
+}
+
+a {
+  color: $primary-color;
+  text-decoration: none;
+  transition: color 0.3s ease;
+
+  &:hover {
+    color: darken($primary-color, 10%);
+  }
+}
+
+// Container
+.container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+// Responsive
+@media (max-width: 768px) {
+  html {
+    font-size: 14px;
+  }
+
+  h1 { font-size: 2rem; }
+  h2 { font-size: 1.75rem; }
+  h3 { font-size: 1.5rem; }
+  h4 { font-size: 1.25rem; }
+  h5 { font-size: 1.1rem; }
+  h6 { font-size: 1rem; }
+}
+
+// Print styles
+@media print {
+  .no-print {
+    display: none !important;
+  }
+
+  body {
+    font-size: 12pt;
+    line-height: 1.5;
+  }
+
+  a {
+    text-decoration: underline;
+  }
+} 

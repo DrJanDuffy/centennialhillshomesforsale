@@ -1,0 +1,83 @@
+# Allow all crawlers
+User-agent: *
+Allow: /
+
+# Sitemap location
+Sitemap: https://centennialhillshomesforsale.com/sitemap.xml
+
+# Disallow admin and private areas
+Disallow: /admin/
+Disallow: /private/
+Disallow: /api/
+Disallow: /wp-admin/
+Disallow: /wp-includes/
+Disallow: /wp-content/plugins/
+Disallow: /wp-content/cache/
+Disallow: /wp-content/themes/
+Disallow: /trackback/
+Disallow: /comments/
+Disallow: /category/*/feed/
+Disallow: /author/
+Disallow: /tag/
+Disallow: /?feed=
+Disallow: /?s=
+Disallow: /search/
+Disallow: /page/
+Disallow: /wp-login.php
+Disallow: /wp-register.php
+
+# Crawl-delay for specific bots
+User-agent: AhrefsBot
+Crawl-delay: 10
+
+User-agent: Baiduspider
+Crawl-delay: 10
+
+User-agent: Bingbot
+Crawl-delay: 10
+
+User-agent: Googlebot
+Crawl-delay: 10
+
+User-agent: YandexBot
+Crawl-delay: 10
+
+# Allow specific paths for all bots
+Allow: /listings/
+Allow: /neighborhoods/
+Allow: /market-update/
+Allow: /about/
+Allow: /contact/
+Allow: /testimonials/
+Allow: /blog/
+Allow: /buyers/
+Allow: /sellers/
+
+# Block specific bots
+User-agent: MJ12bot
+Disallow: /
+
+User-agent: SemrushBot
+Disallow: /
+
+User-agent: PetalBot
+Disallow: /
+
+User-agent: CensysInspect
+Disallow: /
+
+# Additional rules for mobile crawlers
+User-agent: Mobile
+Allow: /
+Allow: /listings/
+Allow: /neighborhoods/
+Allow: /market-update/
+Allow: /about/
+Allow: /contact/
+Allow: /testimonials/
+Allow: /blog/
+Allow: /buyers/
+Allow: /sellers/
+Disallow: /admin/
+Disallow: /private/
+Disallow: /api/ 

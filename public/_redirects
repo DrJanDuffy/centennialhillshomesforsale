@@ -1,0 +1,12 @@
+# Handle SPA routing
+/* /index.html 200
+
+# Redirect www to non-www
+https://www.centennialhillshomesforsale.com/* https://centennialhillshomesforsale.com/:splat 301!
+
+# Redirect HTTP to HTTPS
+http://centennialhillshomesforsale.com/* https://centennialhillshomesforsale.com/:splat 301!
+
+# Handle old URLs if any
+/old-listings/* /listings/:splat 301
+/old-neighborhoods/* /neighborhoods/:splat 301 
