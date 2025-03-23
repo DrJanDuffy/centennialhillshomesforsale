@@ -1,4 +1,5 @@
 import Head from 'next/head';
+import Image from 'next/image';
 import { useEffect } from 'react';
 
 export default function Home() {
@@ -11,7 +12,7 @@ export default function Home() {
       <Head>
         <title>Centennial Hills Homes For Sale | Las Vegas Real Estate Expert</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <link rel="icon" type="image/png" href="/img/favicon.png" />
+        <link rel="icon" type="image/png" href="/favicon.png" />
         
         {/* Structured data for local business */}
         <script
@@ -109,7 +110,12 @@ export default function Home() {
                 <div className="listing-grid">
                   <div className="listing-card">
                     <div className="listing-image">
-                      <img src="/img/homes/home1.jpg" alt="Luxury Home in Centennial Hills" />
+                      <Image
+                        src="https://placehold.co/800x600/png?text=Luxury+Home+1"
+                        alt="Luxury Home in Centennial Hills"
+                        width={800}
+                        height={600}
+                      />
                       <div className="listing-price">$749,900</div>
                     </div>
                     <div className="listing-details">
@@ -120,7 +126,12 @@ export default function Home() {
                   </div>
                   <div className="listing-card">
                     <div className="listing-image">
-                      <img src="/img/homes/home2.jpg" alt="Estate in Providence" />
+                      <Image
+                        src="https://placehold.co/800x600/png?text=Luxury+Home+2"
+                        alt="Estate in Providence"
+                        width={800}
+                        height={600}
+                      />
                       <div className="listing-price">$899,000</div>
                     </div>
                     <div className="listing-details">
@@ -131,7 +142,12 @@ export default function Home() {
                   </div>
                   <div className="listing-card">
                     <div className="listing-image">
-                      <img src="/img/homes/home3.jpg" alt="Custom Home in Lone Mountain" />
+                      <Image
+                        src="https://placehold.co/800x600/png?text=Luxury+Home+3"
+                        alt="Custom Home in Lone Mountain"
+                        width={800}
+                        height={600}
+                      />
                       <div className="listing-price">$1,250,000</div>
                     </div>
                     <div className="listing-details">
@@ -242,7 +258,12 @@ export default function Home() {
               {/* Featured Articles */}
               <div className="article-grid">
                 <article className="article-card">
-                  <img src="/img/blog/market-trends.jpg" alt="Las Vegas Market Trends" />
+                  <Image
+                    src="https://placehold.co/800x600/png?text=Market+Trends"
+                    alt="Las Vegas Market Trends"
+                    width={800}
+                    height={600}
+                  />
                   <div className="article-content">
                     <h3>2024 Las Vegas Market Trends</h3>
                     <p>Discover the latest trends shaping the Las Vegas real estate market, from luxury home features to buyer preferences.</p>
@@ -250,7 +271,12 @@ export default function Home() {
                   </div>
                 </article>
                 <article className="article-card">
-                  <img src="/img/blog/new-developments.jpg" alt="New Developments" />
+                  <Image
+                    src="https://placehold.co/800x600/png?text=New+Developments"
+                    alt="New Developments"
+                    width={800}
+                    height={600}
+                  />
                   <div className="article-content">
                     <h3>New Developments in Centennial Hills</h3>
                     <p>Explore upcoming residential and commercial developments in the Centennial Hills area.</p>
@@ -258,7 +284,12 @@ export default function Home() {
                   </div>
                 </article>
                 <article className="article-card">
-                  <img src="/img/blog/community-guide.jpg" alt="Community Guide" />
+                  <Image
+                    src="https://placehold.co/800x600/png?text=Community+Guide"
+                    alt="Community Guide"
+                    width={800}
+                    height={600}
+                  />
                   <div className="article-content">
                     <h3>Your Guide to Master-Planned Communities</h3>
                     <p>Everything you need to know about Las Vegas's premier master-planned communities.</p>
