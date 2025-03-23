@@ -1,48 +1,72 @@
 # Centennial Hills Homes For Sale
 
-A hyperlocal real estate website focused on the Las Vegas Centennial Hills community, created by Dr. Jan Duffy, REALTOR® with Berkshire Hathaway HomeServices.
-
-## Overview
-
-This repository contains the website files for [CentennialHillsHomesForSale.com](https://www.centennialhillshomesforsale.com), a specialized real estate website focusing on the Centennial Hills neighborhood and surrounding master-planned communities in Las Vegas, Nevada.
-
-The site is designed to provide detailed, hyperlocal information to homebuyers and sellers, with a focus on voice search optimization and strong SEO practices.
+A Next.js website showcasing homes for sale in Centennial Hills, Las Vegas.
 
 ## Features
 
-- **Hyperlocal Content**: Detailed information about Centennial Hills, Skye Canyon, Providence, and other Las Vegas master-planned communities
-- **RealScout Integration**: Live MLS listing displays throughout the site
-- **Homebot Integration**: Home value tracking tool for current homeowners
-- **Voice Search Optimization**: Structured to perform well with voice search queries
-- **SEO Best Practices**: Schema.org markup, FAQ structured data, and other SEO enhancements
+- Real estate listings
+- Market analysis tools
+- Interactive maps
+- Property search functionality
+- Mobile-responsive design
 
-## Pages
+## Getting Started
 
-- `index.html` - Main homepage with featured listings and community information
-- `blog.html` - Real estate blog with SEO and voice search optimization
-- `homebot.html` - Home value tracker with Homebot widget integration
+### Prerequisites
 
-## Technology Stack
+- Node.js 18 or later
+- npm or yarn
 
-- HTML5
-- CSS3
-- JavaScript
-- RealScout API Integration
-- Homebot Widget Integration
+### Installation
 
-## About the Creator
+1. Clone the repository:
+```bash
+git clone https://github.com/geneb/centennialhillshomesforsale.git
+cd centennialhillshomesforsale
+```
 
-This website was created by Dr. Jan Duffy, a top 1% Las Vegas REALTOR® with Berkshire Hathaway HomeServices, specializing in master-planned communities in Northwest Las Vegas. With over 20 years of experience, Dr. Duffy provides expert guidance to buyers, sellers, and investors in the Las Vegas real estate market.
+2. Install dependencies:
+```bash
+npm install
+```
+
+3. Create a `.env.local` file in the root directory and add your environment variables:
+```env
+NEXT_PUBLIC_REALSCOUT_OFFICE_ID=your_office_id
+NEXT_PUBLIC_REALSCOUT_MARKET_AREA=your_market_area
+# Add other required environment variables
+```
+
+4. Run the development server:
+```bash
+npm run dev
+```
+
+Open [http://localhost:3000](http://localhost:3000) to view the site.
+
+## Deployment
+
+The site is automatically deployed to GitHub Pages when changes are pushed to the main branch.
+
+### Manual Deployment
+
+To deploy manually:
+
+```bash
+npm run build
+npm run deploy
+```
+
+The site will be available at: https://geneb.github.io/centennialhillshomesforsale
+
+## Contributing
+
+1. Fork the repository
+2. Create your feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit your changes (`git commit -m 'Add some amazing feature'`)
+4. Push to the branch (`git push origin feature/amazing-feature`)
+5. Open a Pull Request
 
 ## License
 
-All rights reserved. This code is not open-source and may not be reproduced without permission.
-
-## Contact
-
-For questions or inquiries, please contact:
-
-Dr. Jan Duffy, REALTOR®  
-Berkshire Hathaway HomeServices  
-(702) 903-1952  
-DrJan@CentennialHillsHomesForSale.com
+This project is licensed under the MIT License - see the LICENSE file for details.
