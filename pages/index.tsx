@@ -1,10 +1,25 @@
 import Head from 'next/head';
 import Image from 'next/image';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
+import { fetchRealEstateImages, getRandomFeaturedImage } from '../utils/unsplash';
+import { UnsplashImage } from '../types/unsplash';
 
 export default function Home() {
+  const [featuredImages, setFeaturedImages] = useState<UnsplashImage[]>([]);
+  const [articleImages, setArticleImages] = useState<UnsplashImage[]>([]);
+
   useEffect(() => {
-    // Add any client-side initialization here
+    const loadImages = async () => {
+      // Fetch featured property images
+      const images = await fetchRealEstateImages('luxury home', 3);
+      setFeaturedImages(images);
+
+      // Fetch article images
+      const articleImgs = await fetchRealEstateImages('real estate market', 3);
+      setArticleImages(articleImgs);
+    };
+
+    loadImages();
   }, []);
 
   return (
@@ -108,54 +123,38 @@ export default function Home() {
               {/* Featured Listings */}
               <div className="featured-listings">
                 <div className="listing-grid">
-                  <div className="listing-card">
-                    <div className="listing-image">
-                      <Image
-                        src="https://placehold.co/800x600/png?text=Luxury+Home+1"
-                        alt="Luxury Home in Centennial Hills"
-                        width={800}
-                        height={600}
-                      />
-                      <div className="listing-price">$749,900</div>
+                  {featuredImages.map((image, index) => (
+                    <div key={image.id} className="listing-card">
+                      <div className="listing-image">
+                        <Image
+                          src={image.urls.regular}
+                          alt={image.alt_description || 'Luxury Home'}
+                          width={800}
+                          height={600}
+                        />
+                        <div className="listing-price">
+                          {index === 0 ? '$749,900' : index === 1 ? '$899,000' : '$1,250,000'}
+                        </div>
+                      </div>
+                      <div className="listing-details">
+                        <h3>
+                          {index === 0 ? 'Modern Luxury in Centennial Hills' : 
+                           index === 1 ? 'Providence Estate with Views' : 
+                           'Custom Lone Mountain Retreat'}
+                        </h3>
+                        <p>
+                          {index === 0 ? '4 bed • 3.5 bath • 3,245 sqft' :
+                           index === 1 ? '5 bed • 4 bath • 4,120 sqft' :
+                           '6 bed • 5.5 bath • 5,340 sqft'}
+                        </p>
+                        <p>
+                          {index === 0 ? '10234 Skye Canyon Drive' :
+                           index === 1 ? '8756 Providence Heights Street' :
+                           '6543 Lone Mountain View Court'}
+                        </p>
+                      </div>
                     </div>
-                    <div className="listing-details">
-                      <h3>Modern Luxury in Centennial Hills</h3>
-                      <p>4 bed • 3.5 bath • 3,245 sqft</p>
-                      <p>10234 Skye Canyon Drive</p>
-                    </div>
-                  </div>
-                  <div className="listing-card">
-                    <div className="listing-image">
-                      <Image
-                        src="https://placehold.co/800x600/png?text=Luxury+Home+2"
-                        alt="Estate in Providence"
-                        width={800}
-                        height={600}
-                      />
-                      <div className="listing-price">$899,000</div>
-                    </div>
-                    <div className="listing-details">
-                      <h3>Providence Estate with Views</h3>
-                      <p>5 bed • 4 bath • 4,120 sqft</p>
-                      <p>8756 Providence Heights Street</p>
-                    </div>
-                  </div>
-                  <div className="listing-card">
-                    <div className="listing-image">
-                      <Image
-                        src="https://placehold.co/800x600/png?text=Luxury+Home+3"
-                        alt="Custom Home in Lone Mountain"
-                        width={800}
-                        height={600}
-                      />
-                      <div className="listing-price">$1,250,000</div>
-                    </div>
-                    <div className="listing-details">
-                      <h3>Custom Lone Mountain Retreat</h3>
-                      <p>6 bed • 5.5 bath • 5,340 sqft</p>
-                      <p>6543 Lone Mountain View Court</p>
-                    </div>
-                  </div>
+                  ))}
                 </div>
               </div>
               
@@ -257,45 +256,29 @@ export default function Home() {
               
               {/* Featured Articles */}
               <div className="article-grid">
-                <article className="article-card">
-                  <Image
-                    src="https://placehold.co/800x600/png?text=Market+Trends"
-                    alt="Las Vegas Market Trends"
-                    width={800}
-                    height={600}
-                  />
-                  <div className="article-content">
-                    <h3>2024 Las Vegas Market Trends</h3>
-                    <p>Discover the latest trends shaping the Las Vegas real estate market, from luxury home features to buyer preferences.</p>
-                    <a href="/blog/2024-market-trends" className="read-more">Read More →</a>
-                  </div>
-                </article>
-                <article className="article-card">
-                  <Image
-                    src="https://placehold.co/800x600/png?text=New+Developments"
-                    alt="New Developments"
-                    width={800}
-                    height={600}
-                  />
-                  <div className="article-content">
-                    <h3>New Developments in Centennial Hills</h3>
-                    <p>Explore upcoming residential and commercial developments in the Centennial Hills area.</p>
-                    <a href="/blog/new-developments" className="read-more">Read More →</a>
-                  </div>
-                </article>
-                <article className="article-card">
-                  <Image
-                    src="https://placehold.co/800x600/png?text=Community+Guide"
-                    alt="Community Guide"
-                    width={800}
-                    height={600}
-                  />
-                  <div className="article-content">
-                    <h3>Your Guide to Master-Planned Communities</h3>
-                    <p>Everything you need to know about Las Vegas's premier master-planned communities.</p>
-                    <a href="/blog/community-guide" className="read-more">Read More →</a>
-                  </div>
-                </article>
+                {articleImages.map((image, index) => (
+                  <article key={image.id} className="article-card">
+                    <Image
+                      src={image.urls.regular}
+                      alt={image.alt_description || 'Real Estate Article'}
+                      width={800}
+                      height={600}
+                    />
+                    <div className="article-content">
+                      <h3>
+                        {index === 0 ? '2024 Las Vegas Market Trends' :
+                         index === 1 ? 'New Developments in Centennial Hills' :
+                         'Your Guide to Master-Planned Communities'}
+                      </h3>
+                      <p>
+                        {index === 0 ? 'Discover the latest trends shaping the Las Vegas real estate market, from luxury home features to buyer preferences.' :
+                         index === 1 ? 'Explore upcoming residential and commercial developments in the Centennial Hills area.' :
+                         'Everything you need to know about Las Vegas\'s premier master-planned communities.'}
+                      </p>
+                      <a href={`/blog/${index === 0 ? '2024-market-trends' : index === 1 ? 'new-developments' : 'community-guide'}`} className="read-more">Read More →</a>
+                    </div>
+                  </article>
+                ))}
               </div>
             </div>
           </section>
