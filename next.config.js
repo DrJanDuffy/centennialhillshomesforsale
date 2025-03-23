@@ -1,8 +1,9 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
+  output: 'standalone',
   images: {
-    domains: ['images.unsplash.com', 'via.placeholder.com'], // For Unsplash and placeholder images
+    domains: ['images.unsplash.com', 'via.placeholder.com', 'randomuser.me'],
     deviceSizes: [640, 750, 828, 1080, 1200, 1920, 2048], // Optimize image sizes
     imageSizes: [16, 32, 48, 64, 96, 128, 256], // Additional image sizes
   },
