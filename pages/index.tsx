@@ -1,10 +1,36 @@
+import React from 'react';
 import Head from 'next/head';
-import Image from 'next/image';
+import Hero from '../components/home/Hero';
+import { motion } from 'framer-motion';
+import { HomeIcon, ChartBarIcon, UserGroupIcon, MapIcon } from '@heroicons/react/24/outline';
 import { useEffect, useState } from 'react';
 import { fetchRealEstateImages, getRandomFeaturedImage } from '../utils/unsplash';
 import { UnsplashImage } from '../types/unsplash';
 
-export default function Home() {
+const features = [
+  {
+    name: 'Extensive Property Listings',
+    description: 'Browse through our carefully curated selection of homes in Centennial Hills.',
+    icon: HomeIcon,
+  },
+  {
+    name: 'Market Analysis',
+    description: 'Get detailed market insights and property valuations.',
+    icon: ChartBarIcon,
+  },
+  {
+    name: 'Expert Guidance',
+    description: 'Work with experienced real estate professionals who know the area.',
+    icon: UserGroupIcon,
+  },
+  {
+    name: 'Neighborhood Insights',
+    description: 'Discover detailed information about local amenities and community features.',
+    icon: MapIcon,
+  },
+];
+
+const HomePage = () => {
   const [featuredImages, setFeaturedImages] = useState<UnsplashImage[]>([]);
   const [articleImages, setArticleImages] = useState<UnsplashImage[]>([]);
 
@@ -25,265 +51,128 @@ export default function Home() {
   return (
     <>
       <Head>
-        <title>Centennial Hills Homes For Sale | Las Vegas Real Estate Expert</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <link rel="icon" type="image/png" href="/favicon.png" />
-        
-        {/* Structured data for local business */}
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify({
-              "@context": "https://schema.org",
-              "@type": "RealEstateAgent",
-              "name": "Centennial Hills Homes For Sale | Las Vegas Real Estate Expert",
-              "founder": {
-                "@type": "Person",
-                "name": "Dr. Jan Duffy",
-                "jobTitle": "REALTOR®",
-                "worksFor": {
-                  "@type": "Organization",
-                  "name": "Berkshire Hathaway HomeServices"
-                }
-              },
-              "description": "Find Centennial Hills homes for sale with Dr. Jan Duffy, a trusted expert in luxury and new-build Las Vegas homes with 20+ years experience in master-planned communities.",
-              "address": {
-                "@type": "PostalAddress",
-                "streetAddress": "1490 Center Crossing Rd",
-                "addressLocality": "Las Vegas",
-                "addressRegion": "NV",
-                "postalCode": "89144"
-              },
-              "areaServed": ["Centennial Hills", "Skye Canyon", "Providence", "Lone Mountain", "North Las Vegas", "Summerlin", "Tule Springs", "Aliante"],
-              "openingHoursSpecification": [
-                {
-                  "@type": "OpeningHoursSpecification",
-                  "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
-                  "opens": "06:00",
-                  "closes": "21:00"
-                }
-              ],
-              "telephone": "(702) 903-1952",
-              "url": "https://www.centennialhillshomesforsale.com/",
-              "sameAs": [
-                "https://www.linkedin.com/company/california-to-vegas-homes",
-                "https://www.instagram.com/drjanduffy/",
-                "https://www.facebook.com/SummerlinNewHomesBHHS",
-                "https://www.youtube.com/@DrDuffy",
-                "https://www.pinterest.com/DrJanDuffy/"
-              ],
-              "priceRange": "$$$",
-              "hasMap": "https://www.google.com/maps/place/1490+Center+Crossing+Rd,+Las+Vegas,+NV+89144",
-              "award": "Top 1% of Las Vegas REALTORS®",
-              "knowsLanguage": ["English", "American Sign Language", "Filipino", "French", "Korean", "Mandarin", "Russian", "Ukrainian"]
-            })
-          }}
+        <title>Centennial Hills Homes For Sale | Las Vegas Real Estate</title>
+        <meta
+          name="description"
+          content="Find your dream home in Centennial Hills, Las Vegas. Browse our exclusive listings of houses, condos, and luxury properties."
         />
       </Head>
 
-      <div className="wrapper">
-        {/* Sticky neighborhood identifier */}
-        <div className="neighborhood-bar">
-          <p>Currently browsing: <strong>Centennial Hills</strong> <span className="change-neighborhood">Change</span></p>
+      <Hero />
+
+      {/* Features Section */}
+      <section className="py-16">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div className="text-center">
+            <motion.h2
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5 }}
+              viewport={{ once: true }}
+              className="text-3xl font-bold tracking-tight text-[#0A2540] sm:text-4xl"
+            >
+              Why Choose Centennial Hills Homes
+            </motion.h2>
+            <motion.p
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.2 }}
+              viewport={{ once: true }}
+              className="mx-auto mt-4 max-w-2xl text-lg text-gray-600"
+            >
+              Experience the best in Las Vegas real estate with our comprehensive services
+              and local expertise.
+            </motion.p>
+          </div>
+
+          <div className="mt-16">
+            <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-4">
+              {features.map((feature, index) => (
+                <motion.div
+                  key={feature.name}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5, delay: index * 0.1 }}
+                  viewport={{ once: true }}
+                  className="card relative flex flex-col items-center p-6 text-center"
+                >
+                  <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-[#F7F9FC] text-[#3A8DDE]">
+                    <feature.icon className="h-6 w-6" />
+                  </div>
+                  <h3 className="mt-4 text-lg font-semibold text-[#0A2540]">{feature.name}</h3>
+                  <p className="mt-2 text-gray-600">{feature.description}</p>
+                </motion.div>
+              ))}
+            </div>
+          </div>
         </div>
-        
-        <main className="page">
-          <section className="page__main main">
-            <div className="main__container">
-              <h3 className="main__caption">Las Vegas Master-Planned Community Expert</h3>
-              <h1 className="main__title">Luxury & New Homes in Centennial Hills & Providence</h1>
-              <div className="main__text">
-                Looking for homes for sale in North Las Vegas, Centennial Hills, or Lone Mountain? Dr. Jan Duffy, REALTOR® with Berkshire Hathaway HomeServices, is your trusted expert with 20+ years of experience in Las Vegas master-planned communities.
+      </section>
+
+      {/* CTA Section */}
+      <section className="bg-[#0A2540] py-16">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div className="grid items-center gap-8 lg:grid-cols-2">
+            <motion.div
+              initial={{ opacity: 0, x: -20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.5 }}
+              viewport={{ once: true }}
+            >
+              <h2 className="text-3xl font-bold tracking-tight text-white sm:text-4xl">
+                Ready to Find Your Dream Home?
+              </h2>
+              <p className="mt-4 text-lg text-gray-300">
+                Let us help you navigate the Centennial Hills real estate market. Our experts
+                are ready to guide you through every step of your home buying journey.
+              </p>
+              <div className="mt-8 flex flex-wrap gap-4">
+                <button className="btn-primary bg-[#3A8DDE] hover:bg-[#16B286]">
+                  Schedule a Viewing
+                </button>
+                <button className="btn-secondary border-2 border-white bg-transparent text-white hover:bg-white hover:text-[#0A2540]">
+                  Contact Us
+                </button>
               </div>
-              <div className="neighborhood-stats">
-                <div className="stat">
-                  <span className="stat-number">4.9/5</span>
-                  <span className="stat-label">Client Rating</span>
-                </div>
-                <div className="stat">
-                  <span className="stat-number">20+</span>
-                  <span className="stat-label">Years Experience</span>
-                </div>
-                <div className="stat">
-                  <span className="stat-number">Top 1%</span>
-                  <span className="stat-label">of Las Vegas REALTORS®</span>
-                </div>
+            </motion.div>
+            <motion.div
+              initial={{ opacity: 0, x: 20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.5 }}
+              viewport={{ once: true }}
+              className="relative hidden lg:block"
+            >
+              <div className="aspect-w-3 aspect-h-2 overflow-hidden rounded-lg">
+                <img
+                  src="/images/luxury-home.jpg"
+                  alt="Luxury Home Interior"
+                  className="h-full w-full object-cover"
+                />
               </div>
-              <div className="main__buttons">
-                <a href="#featured-properties" className="main__button">View Featured Homes</a>
-                <a href="#neighborhood-guide" className="main__button button_secondary">Explore Neighborhoods</a>
-              </div>
+            </motion.div>
+          </div>
+        </div>
+      </section>
+
+      {/* Homebot Valuation Widget */}
+      <section className="py-16">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div className="text-center">
+            <h2 className="text-3xl font-bold tracking-tight text-[#0A2540] sm:text-4xl">
+              Get Your Home's Value
+            </h2>
+            <p className="mx-auto mt-4 max-w-2xl text-lg text-gray-600">
+              Discover what your home is worth with our advanced valuation tool.
+            </p>
+          </div>
+          <div className="mt-8">
+            <div className="homebot-widget">
+              {/* Homebot widget will be loaded here */}
             </div>
-          </section>
-          
-          <section id="featured-properties" className="page__services services">
-            <div className="services__container">
-              <h2 className="services__title title">Featured Las Vegas Luxury Homes</h2>
-              
-              {/* Featured Listings */}
-              <div className="featured-listings">
-                <div className="listing-grid">
-                  {featuredImages.map((image, index) => (
-                    <div key={image.id} className="listing-card">
-                      <div className="listing-image">
-                        <Image
-                          src={image.urls.regular}
-                          alt={image.alt_description || 'Luxury Home'}
-                          width={800}
-                          height={600}
-                        />
-                        <div className="listing-price">
-                          {index === 0 ? '$749,900' : index === 1 ? '$899,000' : '$1,250,000'}
-                        </div>
-                      </div>
-                      <div className="listing-details">
-                        <h3>
-                          {index === 0 ? 'Modern Luxury in Centennial Hills' : 
-                           index === 1 ? 'Providence Estate with Views' : 
-                           'Custom Lone Mountain Retreat'}
-                        </h3>
-                        <p>
-                          {index === 0 ? '4 bed • 3.5 bath • 3,245 sqft' :
-                           index === 1 ? '5 bed • 4 bath • 4,120 sqft' :
-                           '6 bed • 5.5 bath • 5,340 sqft'}
-                        </p>
-                        <p>
-                          {index === 0 ? '10234 Skye Canyon Drive' :
-                           index === 1 ? '8756 Providence Heights Street' :
-                           '6543 Lone Mountain View Court'}
-                        </p>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </div>
-              
-              <form className="valuation-form">
-                <div className="form-group">
-                  <label htmlFor="address">Street Address</label>
-                  <input type="text" id="address" name="address" placeholder="123 Skye Canyon Street" required />
-                </div>
-                
-                <div className="form-group">
-                  <label htmlFor="email">Email</label>
-                  <input type="email" id="email" name="email" placeholder="yourname@example.com" required />
-                </div>
-                
-                <div className="form-group">
-                  <label htmlFor="phone">Phone</label>
-                  <input type="tel" id="phone" name="phone" placeholder="(702) 555-1234" />
-                </div>
-                
-                <button type="submit" className="outro__button button">Get Your Free Market Analysis</button>
-              </form>
-              
-              {/* Market Stats */}
-              <div className="market-stats">
-                <h3>Current Market Statistics</h3>
-                <div className="stats-grid">
-                  <div className="stat-card">
-                    <h4>Average Sale Price</h4>
-                    <p className="stat-value">$725,000</p>
-                    <p className="stat-change">+12% from last year</p>
-                  </div>
-                  <div className="stat-card">
-                    <h4>Days on Market</h4>
-                    <p className="stat-value">28</p>
-                    <p className="stat-change">-15% from last month</p>
-                  </div>
-                  <div className="stat-card">
-                    <h4>Available Homes</h4>
-                    <p className="stat-value">142</p>
-                    <p className="stat-change">New listings daily</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </section>
-          
-          {/* Community Events Calendar Section */}
-          <section className="page__events events">
-            <div className="events__container">
-              <h2 className="events__title title">Community Happenings</h2>
-              <div className="events__row">
-                <div className="events__column">
-                  <div className="events__item item-events">
-                    <div className="event-date">
-                      <span className="month">MAR</span>
-                      <span className="day">28</span>
-                    </div>
-                    <h3 className="item-events__title">Providence Spring Festival</h3>
-                    <div className="item-events__text">
-                      Providence Master Planned Community, 10am-3pm. Family-friendly event with local vendors, food trucks, and entertainment.
-                    </div>
-                  </div>
-                </div>
-                <div className="events__column">
-                  <div className="events__item item-events">
-                    <div className="event-date">
-                      <span className="month">APR</span>
-                      <span className="day">15</span>
-                    </div>
-                    <h3 className="item-events__title">Skye Canyon Chalk & Cheers</h3>
-                    <div className="item-events__text">
-                      Skye Canyon Park, 11am-6pm. Annual art festival with live music, local food, and activities for the whole family.
-                    </div>
-                  </div>
-                </div>
-                <div className="events__column">
-                  <div className="events__item item-events">
-                    <div className="event-date">
-                      <span className="month">APR</span>
-                      <span className="day">22</span>
-                    </div>
-                    <h3 className="item-events__title">Centennial Hills Home & Garden Expo</h3>
-                    <div className="item-events__text">
-                      Centennial Hills Community Center, 9am-4pm. Expert advice, local vendors, and inspiration for your home improvement projects.
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div className="view-all-container">
-                <a href="/events" className="view-all button">View Full Community Calendar</a>
-              </div>
-            </div>
-          </section>
-          
-          {/* Market Update Section */}
-          <section className="page__market market">
-            <div className="market__container">
-              <h2 className="market__title title">Las Vegas Real Estate Insider</h2>
-              
-              {/* Featured Articles */}
-              <div className="article-grid">
-                {articleImages.map((image, index) => (
-                  <article key={image.id} className="article-card">
-                    <Image
-                      src={image.urls.regular}
-                      alt={image.alt_description || 'Real Estate Article'}
-                      width={800}
-                      height={600}
-                    />
-                    <div className="article-content">
-                      <h3>
-                        {index === 0 ? '2024 Las Vegas Market Trends' :
-                         index === 1 ? 'New Developments in Centennial Hills' :
-                         'Your Guide to Master-Planned Communities'}
-                      </h3>
-                      <p>
-                        {index === 0 ? 'Discover the latest trends shaping the Las Vegas real estate market, from luxury home features to buyer preferences.' :
-                         index === 1 ? 'Explore upcoming residential and commercial developments in the Centennial Hills area.' :
-                         'Everything you need to know about Las Vegas\'s premier master-planned communities.'}
-                      </p>
-                      <a href={`/blog/${index === 0 ? '2024-market-trends' : index === 1 ? 'new-developments' : 'community-guide'}`} className="read-more">Read More →</a>
-                    </div>
-                  </article>
-                ))}
-              </div>
-            </div>
-          </section>
-        </main>
-      </div>
+          </div>
+        </div>
+      </section>
     </>
   );
-} 
+};
+
+export default HomePage; 
