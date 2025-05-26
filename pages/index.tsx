@@ -1,6 +1,8 @@
 import Head from 'next/head';
 import Image from 'next/image';
 import { useEffect, useState } from 'react';
+import { motion } from 'framer-motion';
+import Layout from '../components/Layout';
 import { fetchRealEstateImages, getRandomFeaturedImage } from '../utils/unsplash';
 import { UnsplashImage } from '../types/unsplash';
 
@@ -282,8 +284,42 @@ export default function Home() {
               </div>
             </div>
           </section>
+
+          {/* Call to Action Section */}
+          <motion.section 
+            className="cta-section"
+            initial={{ opacity: 0, y: 50 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 1.2, duration: 0.8 }}
+          >
+            <div className="cta-container">
+              <h2>Ready to Find Your Dream Home in Centennial Hills?</h2>
+              <p>Let Dr. Jan Duffy guide you through your home buying or selling journey with expert knowledge of Las Vegas real estate.</p>
+              <div className="cta-buttons">
+                <motion.a 
+                  href="/contact" 
+                  className="btn btn-primary"
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                >
+                  Contact Dr. Jan Duffy
+                </motion.a>
+                <motion.a 
+                  href="/listings" 
+                  className="btn btn-secondary"
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                >
+                  View Current Listings
+                </motion.a>
+              </div>
+            </div>
+          </motion.section>
         </main>
-      </div>
+      </Layout>
+    </>
+  );
+}iv>
     </>
   );
 } 
