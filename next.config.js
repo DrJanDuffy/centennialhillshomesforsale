@@ -1,14 +1,20 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  output: 'export',
+  // Remove static export for development
+  // output: 'export',
   images: {
     unoptimized: true,
   },
-  basePath: '/centennialhillshomesforsale',
-  assetPrefix: '/centennialhillshomesforsale/',
+  // Remove basePath and assetPrefix for development
+  // basePath: '/centennialhillshomesforsale',
+  // assetPrefix: '/centennialhillshomesforsale/',
   trailingSlash: true,
   typescript: {
     ignoreBuildErrors: true,
+  },
+  // Add proper port configuration
+  experimental: {
+    appDir: false,
   },
 };
 
