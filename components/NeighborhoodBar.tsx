@@ -22,17 +22,20 @@ export default function NeighborhoodBar({ currentNeighborhood, onNeighborhoodCha
   return (
     <div className="neighborhood-bar">
       <div className="container">
-        <p>
-          Currently browsing: <strong>{currentNeighborhood}</strong>
+        <div className="neighborhood-content">
+          <span className="neighborhood-label">
+            📍 Currently browsing: <strong>{currentNeighborhood}</strong>
+          </span>
           <button 
             className="change-neighborhood"
             onClick={() => setIsOpen(!isOpen)}
           >
-            Change
+            {isOpen ? '✕' : 'Change Area'}
           </button>
-        </p>
+        </div>
         {isOpen && (
           <div className="neighborhood-dropdown">
+            <div className="dropdown-header">Select Neighborhood:</div>
             {neighborhoods.map((neighborhood) => (
               <button
                 key={neighborhood}
@@ -43,6 +46,7 @@ export default function NeighborhoodBar({ currentNeighborhood, onNeighborhoodCha
                 }}
               >
                 {neighborhood}
+                {neighborhood === currentNeighborhood && <span className="check">✓</span>}
               </button>
             ))}
           </div>
