@@ -9,7 +9,7 @@ run = ["sh", "-c", "npm start"]
 build = ["sh", "-c", "npm run build"]
 
 [workflows]
-runButton = "Run"
+runButton = "Dev Server"
 
 [[workflows.workflow]]
 name = "Run"
@@ -20,10 +20,19 @@ mode = "sequential"
 task = "shell.exec"
 args = "npm run dev"
 
-[[ports]]
-localPort = 3001
-externalPort = 80
+[[workflows.workflow]]
+name = "Dev Server"
+author = 22930014
+mode = "sequential"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "npm run dev -- -H 0.0.0.0"
 
 [[ports]]
 localPort = 3000
-externalPort = 3000
+externalPort = 80
+
+[[ports]]
+localPort = 3001
+externalPort = 3001
