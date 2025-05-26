@@ -55,3 +55,37 @@ export default function NeighborhoodBar({ currentNeighborhood, onNeighborhoodCha
     </div>
   );
 }
+import React from 'react';
+
+interface NeighborhoodBarProps {
+  neighborhoods: string[];
+  currentNeighborhood: string;
+  onNeighborhoodChange: (neighborhood: string) => void;
+}
+
+const NeighborhoodBar: React.FC<NeighborhoodBarProps> = ({
+  neighborhoods,
+  currentNeighborhood,
+  onNeighborhoodChange
+}) => {
+  return (
+    <div className="neighborhood-bar">
+      <div className="container">
+        <h3>Explore Neighborhoods</h3>
+        <div className="neighborhood-tabs">
+          {neighborhoods.map((neighborhood) => (
+            <button
+              key={neighborhood}
+              className={`neighborhood-tab ${currentNeighborhood === neighborhood ? 'active' : ''}`}
+              onClick={() => onNeighborhoodChange(neighborhood)}
+            >
+              {neighborhood}
+            </button>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default NeighborhoodBar;
