@@ -7,6 +7,7 @@ import PropertyCalculator from '../components/PropertyCalculator';
 import MarketTrendChart from '../components/MarketTrendChart';
 import AdvancedSearch from '../components/AdvancedSearch';
 import NeighborhoodBar from '../components/NeighborhoodBar';
+import SchoolInfo from '../components/SchoolInfo';
 import { searchImages } from '../utils/unsplash';
 
 interface Property {
@@ -26,22 +27,33 @@ export default function Home() {
 
   useEffect(() => {
     const loadImages = async () => {
+      // Use fallback images immediately for better UX
+      const fallbackImages = [
+        '/images/agent1.jpg',
+        '/images/agent2.jpg', 
+        '/images/agent3.jpg',
+        '/images/agent1.jpg',
+        '/images/agent2.jpg',
+        '/images/agent3.jpg',
+        '/images/agent1.jpg',
+        '/images/agent2.jpg',
+        '/images/agent3.jpg',
+        '/images/agent1.jpg',
+        '/images/agent2.jpg',
+        '/images/agent3.jpg'
+      ];
+      
+      setImages(fallbackImages);
+      
+      // Try to load Unsplash images in background
       try {
         const fetchedImages = await searchImages('real estate homes centennial hills luxury', 12);
-        setImages(fetchedImages);
+        if (fetchedImages && fetchedImages.length > 0) {
+          setImages(fetchedImages);
+        }
       } catch (error) {
-        console.error('Error loading images:', error);
-        // Fallback to placeholder images
-        setImages([
-          '/images/agent1.jpg',
-          '/images/agent2.jpg', 
-          '/images/agent3.jpg',
-          '/images/agent1.jpg',
-          '/images/agent2.jpg',
-          '/images/agent3.jpg',
-          '/images/agent1.jpg',
-          '/images/agent2.jpg'
-        ]);
+        // Silently fail and keep fallback images
+        console.log('Using local images for better performance');
       }
     };
     loadImages();
@@ -203,6 +215,13 @@ export default function Home() {
         <section className="calculator-section">
           <div className="container">
             <PropertyCalculator />
+          </div>
+        </section>
+
+        {/* School Information */}
+        <section className="schools-section">
+          <div className="container">
+            <SchoolInfo neighborhood={currentNeighborhood} />
           </div>
         </section>
 
