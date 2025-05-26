@@ -3,7 +3,10 @@ import { useState, useEffect } from 'react';
 import Head from 'next/head';
 import Layout from '../components/Layout';
 import RealScoutWidget from '../components/widgets/RealScoutWidget';
-import { fetchUnsplashImages } from '../utils/unsplash';
+import PropertyCalculator from '../components/PropertyCalculator';
+import MarketTrendChart from '../components/MarketTrendChart';
+import AdvancedSearch from '../components/AdvancedSearch';
+import { searchImages } from '../utils/unsplash';
 
 interface Property {
   id: string;
@@ -22,7 +25,8 @@ export default function Home() {
   useEffect(() => {
     const loadImages = async () => {
       try {
-        const fetchedImages = await fetchUnsplashImages('real estate homes', 12);
+        const fetchedImages = await searchImages('real estate homes centennial hills luxury', 12);
+        setImages(fetchedImages.map(img => img.url));
         setImages(fetchedImages);
       } catch (error) {
         console.error('Error loading images:', error);
@@ -91,42 +95,10 @@ export default function Home() {
           </div>
         </section>
 
-        {/* Quick Search */}
-        <section className="quick-search">
+        {/* Advanced Search */}
+        <section className="search-section">
           <div className="container">
-            <div className="search-form">
-              <h2>Quick Property Search</h2>
-              <form className="search-filters">
-                <div className="filter-group">
-                  <label>Property Type</label>
-                  <select>
-                    <option>All Types</option>
-                    <option>Single Family</option>
-                    <option>Townhome</option>
-                    <option>Condo</option>
-                  </select>
-                </div>
-                <div className="filter-group">
-                  <label>Price Range</label>
-                  <select>
-                    <option>Any Price</option>
-                    <option>$400K - $600K</option>
-                    <option>$600K - $800K</option>
-                    <option>$800K+</option>
-                  </select>
-                </div>
-                <div className="filter-group">
-                  <label>Bedrooms</label>
-                  <select>
-                    <option>Any</option>
-                    <option>2+</option>
-                    <option>3+</option>
-                    <option>4+</option>
-                  </select>
-                </div>
-                <button type="submit" className="btn btn-primary">Search</button>
-              </form>
-            </div>
+            <AdvancedSearch />
           </div>
         </section>
 
@@ -174,28 +146,42 @@ export default function Home() {
         <section className="page__market market-stats">
           <div className="container">
             <h2 className="section-title">Centennial Hills Market Insights</h2>
-            <div className="stats-grid">
-              <div className="stat-card">
-                <h3>Median Home Price</h3>
-                <p className="stat-value">$725,000</p>
-                <span className="stat-change positive">+5.2% from last year</span>
+            <div className="market-dashboard">
+              <div className="stats-section">
+                <div className="stats-grid">
+                  <div className="stat-card">
+                    <h3>Median Home Price</h3>
+                    <p className="stat-value">$725,000</p>
+                    <span className="stat-change positive">+5.2% from last year</span>
+                  </div>
+                  <div className="stat-card">
+                    <h3>Average Days on Market</h3>
+                    <p className="stat-value">28 days</p>
+                    <span className="stat-change neutral">Same as last month</span>
+                  </div>
+                  <div className="stat-card">
+                    <h3>Properties Sold (30 days)</h3>
+                    <p className="stat-value">47</p>
+                    <span className="stat-change positive">+12% from last month</span>
+                  </div>
+                  <div className="stat-card">
+                    <h3>Price per Sq Ft</h3>
+                    <p className="stat-value">$245</p>
+                    <span className="stat-change positive">+3.8% from last year</span>
+                  </div>
+                </div>
               </div>
-              <div className="stat-card">
-                <h3>Average Days on Market</h3>
-                <p className="stat-value">28 days</p>
-                <span className="stat-change neutral">Same as last month</span>
-              </div>
-              <div className="stat-card">
-                <h3>Properties Sold (30 days)</h3>
-                <p className="stat-value">47</p>
-                <span className="stat-change positive">+12% from last month</span>
-              </div>
-              <div className="stat-card">
-                <h3>Price per Sq Ft</h3>
-                <p className="stat-value">$245</p>
-                <span className="stat-change positive">+3.8% from last year</span>
+              <div className="charts-section">
+                <MarketTrendChart />
               </div>
             </div>
+          </div>
+        </section>
+
+        {/* Mortgage Calculator */}
+        <section className="calculator-section">
+          <div className="container">
+            <PropertyCalculator />
           </div>
         </section>
 
