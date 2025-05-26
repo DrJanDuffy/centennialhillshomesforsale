@@ -6,6 +6,7 @@ import RealScoutWidget from '../components/widgets/RealScoutWidget';
 import PropertyCalculator from '../components/PropertyCalculator';
 import MarketTrendChart from '../components/MarketTrendChart';
 import AdvancedSearch from '../components/AdvancedSearch';
+import NeighborhoodBar from '../components/NeighborhoodBar';
 import { searchImages } from '../utils/unsplash';
 
 interface Property {
@@ -21,15 +22,26 @@ interface Property {
 
 export default function Home() {
   const [images, setImages] = useState<string[]>([]);
+  const [currentNeighborhood, setCurrentNeighborhood] = useState('Centennial Hills');
 
   useEffect(() => {
     const loadImages = async () => {
       try {
         const fetchedImages = await searchImages('real estate homes centennial hills luxury', 12);
-        setImages(fetchedImages.map(img => img.url));
         setImages(fetchedImages);
       } catch (error) {
         console.error('Error loading images:', error);
+        // Fallback to placeholder images
+        setImages([
+          '/images/agent1.jpg',
+          '/images/agent2.jpg', 
+          '/images/agent3.jpg',
+          '/images/agent1.jpg',
+          '/images/agent2.jpg',
+          '/images/agent3.jpg',
+          '/images/agent1.jpg',
+          '/images/agent2.jpg'
+        ]);
       }
     };
     loadImages();
@@ -65,9 +77,10 @@ export default function Home() {
 
       <div className="wrapper">
         {/* Sticky neighborhood identifier */}
-        <div className="neighborhood-bar">
-          <p>Currently browsing: <strong>Centennial Hills</strong> <span className="change-neighborhood">Change</span></p>
-        </div>
+        <NeighborhoodBar 
+          currentNeighborhood={currentNeighborhood}
+          onNeighborhoodChange={setCurrentNeighborhood}
+        />
 
         {/* Hero Section */}
         <section className="page__main hero-section">
@@ -332,6 +345,55 @@ export default function Home() {
                     className="agent-photo"
                   />
                 )}
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Local Business Directory */}
+        <section className="local-business-section">
+          <div className="container">
+            <h2 className="section-title">Local Centennial Hills Businesses</h2>
+            <div className="business-categories">
+              <div className="business-category">
+                <h3>🍽️ Dining</h3>
+                <ul>
+                  <li>Red Rock Casino Resort Buffet</li>
+                  <li>Brio Tuscan Grille (Downtown Summerlin)</li>
+                  <li>Yard House (Downtown Summerlin)</li>
+                  <li>In-N-Out Burger (Fort Apache)</li>
+                  <li>Flemings Prime Steakhouse</li>
+                </ul>
+              </div>
+              <div className="business-category">
+                <h3>🛍️ Shopping</h3>
+                <ul>
+                  <li>Downtown Summerlin</li>
+                  <li>Red Rock Casino Gift Shop</li>
+                  <li>Boca Park Fashion Village</li>
+                  <li>Trader Joe's (Centennial)</li>
+                  <li>Whole Foods Market</li>
+                </ul>
+              </div>
+              <div className="business-category">
+                <h3>🏥 Healthcare</h3>
+                <ul>
+                  <li>Summerlin Hospital Medical Center</li>
+                  <li>Desert Springs Hospital</li>
+                  <li>Centennial Hills Animal Hospital</li>
+                  <li>Southwest Medical Associates</li>
+                  <li>CVS Pharmacy (Multiple locations)</li>
+                </ul>
+              </div>
+              <div className="business-category">
+                <h3>💼 Services</h3>
+                <ul>
+                  <li>Wells Fargo Bank</li>
+                  <li>Bank of America</li>
+                  <li>UPS Store</li>
+                  <li>FedEx Office</li>
+                  <li>Jiffy Lube</li>
+                </ul>
               </div>
             </div>
           </div>

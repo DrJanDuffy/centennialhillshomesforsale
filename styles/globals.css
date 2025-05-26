@@ -331,12 +331,12 @@ a {
     flex-direction: column;
     gap: 0.5rem;
   }
-  
+
   .neighborhoods-grid,
   .amenities-grid {
     grid-template-columns: 1fr;
   }
-  
+
   .neighborhood-card {
     padding: 1.5rem;
   }
@@ -678,7 +678,7 @@ h2 {
 .chart-grid {
   display: flex;
   justify-content: space-between;
-  align-items: end;
+  align-items: flex-end;
   height: 100%;
   padding: 1rem 0;
 }
@@ -789,7 +789,7 @@ h2 {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   gap: 1.5rem;
-  align-items: end;
+  align-items: flex-end;
 }
 
 .search-field {
