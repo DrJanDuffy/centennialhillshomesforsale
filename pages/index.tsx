@@ -4,22 +4,26 @@ import Image from 'next/image';
 import { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import Layout from '../components/Layout';
-import { fetchRealEstateImages, getRandomFeaturedImage } from '../utils/unsplash';
-import { UnsplashImage } from '../types/unsplash';
+import { searchImages } from '../utils/unsplash';
+import { PropertyImage } from '../types/unsplash';
 
 export default function Home() {
-  const [featuredImages, setFeaturedImages] = useState<UnsplashImage[]>([]);
-  const [articleImages, setArticleImages] = useState<UnsplashImage[]>([]);
+  const [featuredImages, setFeaturedImages] = useState<PropertyImage[]>([]);
+  const [articleImages, setArticleImages] = useState<PropertyImage[]>([]);
 
   useEffect(() => {
     const loadImages = async () => {
-      // Fetch featured property images
-      const images = await fetchRealEstateImages('luxury home', 3);
-      setFeaturedImages(images);
+      try {
+        // Fetch featured property images
+        const images = await searchImages('luxury home centennial hills', 3);
+        setFeaturedImages(images);
 
-      // Fetch article images
-      const articleImgs = await fetchRealEstateImages('real estate market', 3);
-      setArticleImages(articleImgs);
+        // Fetch article images
+        const articleImgs = await searchImages('real estate market las vegas', 3);
+        setArticleImages(articleImgs);
+      } catch (error) {
+        console.error('Error loading images:', error);
+      }
     };
 
     loadImages();
@@ -30,9 +34,9 @@ export default function Home() {
       <Head>
         <title>Centennial Hills Homes For Sale | Las Vegas Real Estate Expert</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta name="description" content="Find luxury Centennial Hills homes for sale with Dr. Jan Duffy, a trusted Las Vegas real estate expert with 20+ years experience in master-planned communities." />
         <link rel="icon" type="image/png" href="/favicon.png" />
         
-        {/* Structured data for local business */}
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
@@ -86,7 +90,6 @@ export default function Home() {
 
       <Layout>
         <div className="wrapper">
-          {/* Sticky neighborhood identifier */}
           <div className="neighborhood-bar">
             <p>Currently browsing: <strong>Centennial Hills</strong> <span className="change-neighborhood">Change</span></p>
           </div>
@@ -124,17 +127,17 @@ export default function Home() {
               <div className="services__container">
                 <h2 className="services__title title">Featured Las Vegas Luxury Homes</h2>
                 
-                {/* Featured Listings */}
                 <div className="featured-listings">
                   <div className="listing-grid">
                     {featuredImages.map((image, index) => (
                       <div key={image.id} className="listing-card">
                         <div className="listing-image">
                           <Image
-                            src={image.urls.regular}
-                            alt={image.alt_description || 'Luxury Home'}
+                            src={image.url}
+                            alt={image.alt}
                             width={800}
                             height={600}
+                            priority={index === 0}
                           />
                           <div className="listing-price">
                             {index === 0 ? '$749,900' : index === 1 ? '$899,000' : '$1,250,000'}
@@ -181,7 +184,6 @@ export default function Home() {
                   <button type="submit" className="outro__button button">Get Your Free Market Analysis</button>
                 </form>
                 
-                {/* Market Stats */}
                 <div className="market-stats">
                   <h3>Current Market Statistics</h3>
                   <div className="stats-grid">
@@ -205,7 +207,6 @@ export default function Home() {
               </div>
             </section>
             
-            {/* Community Events Calendar Section */}
             <section className="page__events events">
               <div className="events__container">
                 <h2 className="events__title title">Community Happenings</h2>
@@ -253,18 +254,16 @@ export default function Home() {
               </div>
             </section>
             
-            {/* Market Update Section */}
             <section className="page__market market">
               <div className="market__container">
                 <h2 className="market__title title">Las Vegas Real Estate Insider</h2>
                 
-                {/* Featured Articles */}
                 <div className="article-grid">
                   {articleImages.map((image, index) => (
                     <article key={image.id} className="article-card">
                       <Image
-                        src={image.urls.regular}
-                        alt={image.alt_description || 'Real Estate Article'}
+                        src={image.url}
+                        alt={image.alt}
                         width={800}
                         height={600}
                       />
@@ -287,7 +286,6 @@ export default function Home() {
               </div>
             </section>
 
-            {/* Call to Action Section */}
             <motion.section 
               className="cta-section"
               initial={{ opacity: 0, y: 50 }}
