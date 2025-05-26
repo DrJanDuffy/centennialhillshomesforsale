@@ -66,22 +66,27 @@ export async function fetchRealEstateImages(query = 'real estate', count = 10): 
   try {
     const searchQuery = `${query} house property interior`;
     const url = `https://api.unsplash.com/search/photos?query=${encodeURIComponent(searchQuery)}&per_page=${count}&orientation=landscape`;
-    
+
     const response = await fetch(url, {
       headers: {
         'Authorization': `Client-ID ${config.accessKey}`
       }
     });
-    
+
     if (!response.ok) {
       console.warn(`Unsplash API error: ${response.status}, using fallback images`);
       return fallbackImages.slice(0, Math.min(count, fallbackImages.length));
     }
-    
+
     const data = await response.json();
     return data.results || fallbackImages.slice(0, Math.min(count, fallbackImages.length));
   } catch (error) {
-    console.warn('Error fetching images from Unsplash, using fallback images:', error);
+    if (error instanceof Error && error.message.includes('401')) {
+      console.log('Unsplash API key invalid or missing, using fallback images');
+    } else {
+      console.error('Error fetching images from Unsplash:', error);
+    }
+    console.log('Using fallback property images');
     return fallbackImages.slice(0, Math.min(count, fallbackImages.length));
   }
 }
@@ -95,18 +100,18 @@ export async function getRandomFeaturedImage(propertyType: string): Promise<Unsp
 
   try {
     const url = `https://api.unsplash.com/photos/random?query=${encodeURIComponent(propertyType)}&orientation=landscape`;
-    
+
     const response = await fetch(url, {
       headers: {
         'Authorization': `Client-ID ${config.accessKey}`
       }
     });
-    
+
     if (!response.ok) {
       console.warn(`Unsplash API error: ${response.status}, using fallback image`);
       return fallbackImages[Math.floor(Math.random() * fallbackImages.length)];
     }
-    
+
     return await response.json();
   } catch (error) {
     console.warn('Error fetching random image, using fallback:', error);
@@ -132,4 +137,4 @@ export function getPropertyTypeQuery(propertyType: string): string {
     default:
       return `${propertyType} home`;
   }
-} 
+}
