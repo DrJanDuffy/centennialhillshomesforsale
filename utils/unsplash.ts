@@ -1,109 +1,109 @@
-import { UnsplashImage } from '../types/unsplash';
 
-// Unsplash API Configuration
-const config = {
+import { UnsplashPhoto, UnsplashSearchResponse, UnsplashConfig, PropertyImage } from '../types/unsplash';
+
+const config: UnsplashConfig = {
   accessKey: process.env.NEXT_PUBLIC_UNSPLASH_ACCESS_KEY || '',
-  appName: 'Centennial Hills Homes For Sale',
+  fallbackEnabled: true,
 };
 
-// Fallback images for when API fails
-const fallbackImages: UnsplashImage[] = [
+const fallbackImages: PropertyImage[] = [
   {
     id: 'fallback-1',
-    urls: {
-      regular: 'https://images.unsplash.com/photo-1564013799919-ab600027ffc6?w=800&h=600&fit=crop',
-      thumb: 'https://images.unsplash.com/photo-1564013799919-ab600027ffc6?w=200&h=150&fit=crop'
-    },
-    alt_description: 'Beautiful modern home',
-    user: {
-      name: 'Unsplash',
-      links: {
-        html: 'https://unsplash.com'
-      }
-    },
-    location: null
+    url: 'https://images.unsplash.com/photo-1564013799919-ab600027ffc6?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80',
+    alt: 'Beautiful modern home exterior',
+    description: 'Modern family home with landscaping',
+    photographer: 'Unsplash Stock'
   },
   {
     id: 'fallback-2',
-    urls: {
-      regular: 'https://images.unsplash.com/photo-1570129477492-45c003edd2be?w=800&h=600&fit=crop',
-      thumb: 'https://images.unsplash.com/photo-1570129477492-45c003edd2be?w=200&h=150&fit=crop'
-    },
-    alt_description: 'Luxury house exterior',
-    user: {
-      name: 'Unsplash',
-      links: {
-        html: 'https://unsplash.com'
-      }
-    },
-    location: null
+    url: 'https://images.unsplash.com/photo-1605146769289-440113cc3d00?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80',
+    alt: 'Luxury home with pool',
+    description: 'Luxury home with swimming pool',
+    photographer: 'Unsplash Stock'
   },
   {
     id: 'fallback-3',
-    urls: {
-      regular: 'https://images.unsplash.com/photo-1568605114967-8130f3a36994?w=800&h=600&fit=crop',
-      thumb: 'https://images.unsplash.com/photo-1568605114967-8130f3a36994?w=200&h=150&fit=crop'
-    },
-    alt_description: 'Modern home interior',
-    user: {
-      name: 'Unsplash',
-      links: {
-        html: 'https://unsplash.com'
-      }
-    },
-    location: null
+    url: 'https://images.unsplash.com/photo-1613977257363-707ba9348227?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80',
+    alt: 'Contemporary house design',
+    description: 'Contemporary architectural design',
+    photographer: 'Unsplash Stock'
+  },
+  {
+    id: 'fallback-4',
+    url: 'https://images.unsplash.com/photo-1512917774080-9991f1c4c750?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80',
+    alt: 'Family home with garden',
+    description: 'Family home with beautiful garden',
+    photographer: 'Unsplash Stock'
+  },
+  {
+    id: 'fallback-5',
+    url: 'https://images.unsplash.com/photo-1571055107559-3e67626fa8be?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80',
+    alt: 'Desert home architecture',
+    description: 'Desert contemporary home design',
+    photographer: 'Unsplash Stock'
   }
 ];
 
-// Function to fetch real estate images
-export async function fetchRealEstateImages(query = 'real estate', count = 10): Promise<UnsplashImage[]> {
-  // If no access key, return fallback images
-  if (!config.accessKey || config.accessKey.length < 10) {
-    console.log('Using fallback images - no valid Unsplash API key');
+const isValidAccessKey = (): boolean => {
+  return config.accessKey && config.accessKey.length > 10 && config.accessKey !== 'your_valid_unsplash_access_key_here';
+};
+
+export const searchImages = async (query: string, count: number = 6): Promise<PropertyImage[]> => {
+  if (!isValidAccessKey()) {
+    console.log('Unsplash API key not configured, using fallback images');
     return fallbackImages.slice(0, Math.min(count, fallbackImages.length));
   }
 
   try {
-    const searchQuery = `${query} house property interior`;
-    const url = `https://api.unsplash.com/search/photos?query=${encodeURIComponent(searchQuery)}&per_page=${count}&orientation=landscape`;
+    const searchQuery = `${query} house property interior exterior`;
+    const url = `https://api.unsplash.com/search/photos?query=${encodeURIComponent(searchQuery)}&per_page=${count}&orientation=landscape&order_by=relevant`;
 
     const response = await fetch(url, {
       headers: {
-        'Authorization': `Client-ID ${config.accessKey}`
+        'Authorization': `Client-ID ${config.accessKey}`,
+        'Accept-Version': 'v1'
       }
     });
 
     if (!response.ok) {
-      console.warn(`Unsplash API error: ${response.status}, using fallback images`);
+      console.warn(`Unsplash API error: ${response.status} ${response.statusText}, using fallback images`);
       return fallbackImages.slice(0, Math.min(count, fallbackImages.length));
     }
 
-    const data = await response.json();
-    return data.results || fallbackImages.slice(0, Math.min(count, fallbackImages.length));
-  } catch (error) {
-    if (error instanceof Error && error.message.includes('401')) {
-      console.log('Unsplash API key invalid or missing, using fallback images');
-    } else {
-      console.error('Error fetching images from Unsplash:', error);
+    const data: UnsplashSearchResponse = await response.json();
+    
+    if (!data.results || data.results.length === 0) {
+      console.log('No Unsplash results found, using fallback images');
+      return fallbackImages.slice(0, Math.min(count, fallbackImages.length));
     }
+
+    return data.results.map((photo: UnsplashPhoto): PropertyImage => ({
+      id: photo.id,
+      url: photo.urls.regular,
+      alt: photo.alt_description || photo.description || `Property image by ${photo.user.name}`,
+      description: photo.description,
+      photographer: photo.user.name
+    }));
+  } catch (error) {
+    console.error('Error fetching images from Unsplash:', error);
     console.log('Using fallback property images');
     return fallbackImages.slice(0, Math.min(count, fallbackImages.length));
   }
-}
+};
 
-// Function to get a single random featured image
-export async function getRandomFeaturedImage(propertyType: string): Promise<UnsplashImage | null> {
-  // If no access key, return a fallback image
-  if (!config.accessKey || config.accessKey.length < 10) {
+export const getRandomImage = async (propertyType: string = 'house'): Promise<PropertyImage> => {
+  if (!isValidAccessKey()) {
     return fallbackImages[Math.floor(Math.random() * fallbackImages.length)];
   }
 
   try {
-    const url = `https://api.unsplash.com/photos/random?query=${encodeURIComponent(propertyType)}&orientation=landscape`;
+    const query = getQueryForPropertyType(propertyType);
+    const url = `https://api.unsplash.com/photos/random?query=${encodeURIComponent(query)}&orientation=landscape`;
 
     const response = await fetch(url, {
       headers: {
-        'Authorization': `Client-ID ${config.accessKey}`
+        'Authorization': `Client-ID ${config.accessKey}`,
+        'Accept-Version': 'v1'
       }
     });
 
@@ -112,29 +112,35 @@ export async function getRandomFeaturedImage(propertyType: string): Promise<Unsp
       return fallbackImages[Math.floor(Math.random() * fallbackImages.length)];
     }
 
-    return await response.json();
+    const photo: UnsplashPhoto = await response.json();
+    return {
+      id: photo.id,
+      url: photo.urls.regular,
+      alt: photo.alt_description || photo.description || `${propertyType} by ${photo.user.name}`,
+      description: photo.description,
+      photographer: photo.user.name
+    };
   } catch (error) {
     console.warn('Error fetching random image, using fallback:', error);
     return fallbackImages[Math.floor(Math.random() * fallbackImages.length)];
   }
-}
+};
 
-// Function to get property type specific query
-export function getPropertyTypeQuery(propertyType: string): string {
-  switch(propertyType.toLowerCase()) {
-    case 'luxury':
-      return 'luxury home mansion interior';
-    case 'apartment':
-      return 'modern apartment condo interior';
-    case 'rural':
-      return 'farm ranch countryside home';
-    case 'commercial':
-      return 'commercial property office building';
-    case 'beachfront':
-      return 'beach house ocean view';
-    case 'mountain':
-      return 'mountain cabin home retreat';
-    default:
-      return `${propertyType} home`;
-  }
-}
+const getQueryForPropertyType = (propertyType: string): string => {
+  const queries: Record<string, string> = {
+    'single-family': 'single family house home',
+    'condo': 'condominium apartment modern',
+    'townhouse': 'townhouse row house',
+    'villa': 'villa luxury house',
+    'apartment': 'apartment building modern',
+    'luxury': 'luxury mansion estate',
+  };
+  
+  return queries[propertyType.toLowerCase()] || `${propertyType} house home`;
+};
+
+export default {
+  searchImages,
+  getRandomImage,
+  isValidAccessKey
+};

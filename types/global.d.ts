@@ -1,11 +1,20 @@
-declare namespace JSX {
-  interface IntrinsicElements {
-    'realscout-office-listings': React.DetailedHTMLProps<React.HTMLAttributes<HTMLElement> & {
-      'agent-encoded-id': string;
-      'sort-order': string;
-      'listing-status': string;
-      'property-types': string;
-      'price-min': string;
-    }, HTMLElement>;
+
+declare global {
+  interface Window {
+    gtag?: (...args: any[]) => void;
+    dataLayer?: any[];
+    RealScout?: any;
   }
-} 
+}
+
+declare module '*.module.css' {
+  const classes: { [key: string]: string };
+  export default classes;
+}
+
+declare module '*.scss' {
+  const classes: { [key: string]: string };
+  export default classes;
+}
+
+export {};
