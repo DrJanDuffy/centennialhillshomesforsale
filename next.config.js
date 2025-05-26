@@ -1,19 +1,13 @@
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  // Remove static export for development
-  // output: 'export',
   images: {
     unoptimized: true,
   },
-  // Remove basePath and assetPrefix for development
-  // basePath: '/centennialhillshomesforsale',
-  // assetPrefix: '/centennialhillshomesforsale/',
   trailingSlash: true,
   typescript: {
     ignoreBuildErrors: true,
   },
-  // Remove deprecated experimental.appDir
-  swcMinify: true,
 };
 
-module.exports = nextConfig; 
+module.exports = nextConfig;
