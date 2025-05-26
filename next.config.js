@@ -12,10 +12,8 @@ const nextConfig = {
   typescript: {
     ignoreBuildErrors: true,
   },
-  // Add proper port configuration
-  experimental: {
-    appDir: false,
-  },
+  // Remove deprecated experimental.appDir
+  swcMinify: true,
 };
 
 module.exports = nextConfig; 
