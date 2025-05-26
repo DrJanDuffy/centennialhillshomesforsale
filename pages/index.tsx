@@ -73,14 +73,21 @@ export default function Home() {
         <section className="page__main hero-section">
           <div className="container">
             <div className="hero-content">
-              <h1 className="hero-title">Find Your Dream Home in Centennial Hills</h1>
+              <h1 className="hero-title">Centennial Hills: Where Desert Luxury Meets Family Living</h1>
               <p className="hero-subtitle">
-                Discover luxury living in one of Las Vegas's most prestigious neighborhoods. 
-                From stunning single-family homes to modern condos, find your perfect property today.
+                Just 20 minutes from the Strip, discover master-planned communities like Providence, 
+                Skye Canyon, and The Trails. Award-winning schools, championship golf courses, 
+                and Red Rock Canyon at your doorstep.
               </p>
+              <div className="local-highlights">
+                <span className="highlight">🏫 Top-rated CCSD schools</span>
+                <span className="highlight">⛰️ Red Rock Canyon views</span>
+                <span className="highlight">🏌️ TPC Las Vegas nearby</span>
+                <span className="highlight">🛍️ Downtown Summerlin 5 min</span>
+              </div>
               <div className="hero-buttons">
-                <button className="btn btn-primary">Browse Properties</button>
-                <button className="btn btn-secondary">Schedule Tour</button>
+                <button className="btn btn-primary">Browse Local Homes</button>
+                <button className="btn btn-secondary">Neighborhood Tour</button>
               </div>
             </div>
             <div className="hero-image">
@@ -108,12 +115,12 @@ export default function Home() {
             <h2 className="section-title">Featured Properties</h2>
             <div className="properties-grid">
               {[
-                { id: '1', address: '123 Desert Vista Dr', price: '$675,000', beds: 4, baths: 3, sqft: 2850, status: 'For Sale' },
-                { id: '2', address: '456 Canyon Ridge Ct', price: '$825,000', beds: 5, baths: 4, sqft: 3200, status: 'New Listing' },
-                { id: '3', address: '789 Mountain View Ln', price: '$750,000', beds: 4, baths: 3.5, sqft: 3100, status: 'Price Reduced' },
-                { id: '4', address: '321 Sunset Hills Ave', price: '$950,000', beds: 6, baths: 5, sqft: 4200, status: 'Luxury' },
-                { id: '5', address: '654 Providence Dr', price: '$695,000', beds: 4, baths: 3, sqft: 2900, status: 'For Sale' },
-                { id: '6', address: '987 Skye Canyon Blvd', price: '$580,000', beds: 3, baths: 2.5, sqft: 2400, status: 'Open House' }
+                { id: '1', address: '8421 Providence Ranch Ave', price: '$675,000', beds: 4, baths: 3, sqft: 2850, status: 'For Sale', community: 'Providence' },
+                { id: '2', address: '10115 Skye Ridge Park Ave', price: '$825,000', beds: 5, baths: 4, sqft: 3200, status: 'New Listing', community: 'Skye Canyon' },
+                { id: '3', address: '9823 Canyon Vista Dr', price: '$750,000', beds: 4, baths: 3.5, sqft: 3100, status: 'Price Reduced', community: 'The Canyons' },
+                { id: '4', address: '7654 Trails Village Cir', price: '$950,000', beds: 6, baths: 5, sqft: 4200, status: 'Luxury', community: 'The Trails' },
+                { id: '5', address: '9156 Tournament Canyon Dr', price: '$695,000', beds: 4, baths: 3, sqft: 2900, status: 'For Sale', community: 'Tournament Hills' },
+                { id: '6', address: '8877 Desert Foothills Dr', price: '$580,000', beds: 3, baths: 2.5, sqft: 2400, status: 'Open House', community: 'Desert Foothills' }
               ].map((property, index) => (
                 <div key={property.id} className="property-card">
                   <div className="property-image">
@@ -127,6 +134,7 @@ export default function Home() {
                     <div className="property-status">{property.status}</div>
                   </div>
                   <div className="property-details">
+                    <div className="property-community">{property.community}</div>
                     <h3 className="property-address">{property.address}</h3>
                     <p className="property-price">{property.price}</p>
                     <div className="property-features">
@@ -185,34 +193,142 @@ export default function Home() {
           </div>
         </section>
 
+        {/* Neighborhood Spotlight */}
+        <section className="neighborhoods-section">
+          <div className="container">
+            <h2 className="section-title">Centennial Hills Communities</h2>
+            <div className="neighborhoods-grid">
+              <div className="neighborhood-card">
+                <h3>Providence</h3>
+                <p className="price-range">$450K - $800K</p>
+                <div className="neighborhood-features">
+                  <span>🏫 Centennial High School</span>
+                  <span>🏊 Community pools & parks</span>
+                  <span>🚶 Walkable neighborhoods</span>
+                  <span>🛍️ Near Downtown Summerlin</span>
+                </div>
+                <button className="btn btn-outline">Explore Providence</button>
+              </div>
+              
+              <div className="neighborhood-card">
+                <h3>Skye Canyon</h3>
+                <p className="price-range">$550K - $1.2M</p>
+                <div className="neighborhood-features">
+                  <span>🏫 Coral Academy Charter</span>
+                  <span>⛰️ Mountain & valley views</span>
+                  <span>🏞️ Skye Canyon Park</span>
+                  <span>🏠 Custom & semi-custom homes</span>
+                </div>
+                <button className="btn btn-outline">Explore Skye Canyon</button>
+              </div>
+              
+              <div className="neighborhood-card">
+                <h3>The Trails</h3>
+                <p className="price-range">$600K - $2M+</p>
+                <div className="neighborhood-features">
+                  <span>🏫 Palo Verde High School</span>
+                  <span>🏌️ TPC Las Vegas Golf</span>
+                  <span>🏘️ Gated communities</span>
+                  <span>⛰️ Red Rock Canyon access</span>
+                </div>
+                <button className="btn btn-outline">Explore The Trails</button>
+              </div>
+              
+              <div className="neighborhood-card">
+                <h3>Tournament Hills</h3>
+                <p className="price-range">$500K - $1.5M</p>
+                <div className="neighborhood-features">
+                  <span>🏫 Shadow Ridge High</span>
+                  <span>🏌️ Bear's Best Golf Course</span>
+                  <span>🏠 Semi-custom homes</span>
+                  <span>🌲 Desert landscaping</span>
+                </div>
+                <button className="btn btn-outline">Explore Tournament Hills</button>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Local Amenities */}
+        <section className="amenities-section">
+          <div className="container">
+            <h2 className="section-title">Why Centennial Hills?</h2>
+            <div className="amenities-grid">
+              <div className="amenity-category">
+                <h3>🏫 Top Schools</h3>
+                <ul>
+                  <li>Centennial High School (9/10 rating)</li>
+                  <li>Palo Verde High School (8/10 rating)</li>
+                  <li>Shadow Ridge High School (8/10 rating)</li>
+                  <li>Coral Academy Charter Schools</li>
+                  <li>Multiple A-rated elementary schools</li>
+                </ul>
+              </div>
+              
+              <div className="amenity-category">
+                <h3>🛍️ Shopping & Dining</h3>
+                <ul>
+                  <li>Downtown Summerlin (5 minutes)</li>
+                  <li>Red Rock Casino Resort</li>
+                  <li>Boca Park Fashion Village</li>
+                  <li>Local restaurants & cafes</li>
+                  <li>Trader Joe's, Whole Foods nearby</li>
+                </ul>
+              </div>
+              
+              <div className="amenity-category">
+                <h3>🏞️ Recreation</h3>
+                <ul>
+                  <li>Red Rock Canyon (15 minutes)</li>
+                  <li>TPC Las Vegas Golf Course</li>
+                  <li>Bear's Best Golf Course</li>
+                  <li>Angel Park Golf Club</li>
+                  <li>Floyd Lamb Park</li>
+                </ul>
+              </div>
+              
+              <div className="amenity-category">
+                <h3>🚗 Transportation</h3>
+                <ul>
+                  <li>US-95 & 215 Beltway access</li>
+                  <li>20 minutes to Las Vegas Strip</li>
+                  <li>15 minutes to McCarran Airport</li>
+                  <li>Walking/biking trails</li>
+                  <li>RTC bus routes</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </section>
+
         {/* About Section */}
         <section className="page__about about-section">
           <div className="container">
             <div className="about-content">
               <div className="about-text">
-                <h2>Your Trusted Centennial Hills Real Estate Expert</h2>
+                <h2>Your Centennial Hills Neighborhood Specialist</h2>
                 <p>
-                  With over 15 years of experience in Las Vegas real estate, I specialize in helping 
-                  families find their perfect home in Centennial Hills. Known for its excellent schools, 
-                  family-friendly neighborhoods, and stunning mountain views, Centennial Hills offers 
-                  the perfect blend of suburban comfort and urban convenience.
+                  Born and raised in Las Vegas, I've watched Centennial Hills transform from desert 
+                  to one of the valley's premier family destinations. I know every master-planned 
+                  community, every school boundary, and every hidden gem this area offers.
                 </p>
                 <p>
-                  Whether you're a first-time buyer, looking to upgrade, or investing in property, 
-                  I'm here to guide you through every step of the process with personalized service 
-                  and deep local market knowledge.
+                  From Providence's family-friendly atmosphere to The Trails' luxury golf course living, 
+                  I'll help you find the perfect Centennial Hills community that matches your lifestyle, 
+                  budget, and dreams.
                 </p>
-                <div className="credentials">
-                  <span className="credential">Licensed Nevada Realtor</span>
-                  <span className="credential">Certified Luxury Home Specialist</span>
-                  <span className="credential">Top 1% Agent in Las Vegas</span>
+                <div className="local-expertise">
+                  <span className="expertise">📍 Native Las Vegan</span>
+                  <span className="expertise">🏠 500+ CH homes sold</span>
+                  <span className="expertise">🎓 School district expert</span>
+                  <span className="expertise">⭐ 5-star local reviews</span>
                 </div>
               </div>
               <div className="about-image">
                 {images[7] && (
                   <img 
                     src={images[7]} 
-                    alt="Professional real estate agent" 
+                    alt="Local Centennial Hills real estate expert" 
                     className="agent-photo"
                   />
                 )}
@@ -236,7 +352,8 @@ export default function Home() {
                       </div>
                       <h3 className="item-events__title">Providence Spring Festival</h3>
                       <div className="item-events__text">
-                        Providence Master Planned Community, 10am-3pm. Family-friendly event with local vendors, food trucks, and entertainment.
+                        Providence Community Center, 9am-4pm. Bounce houses, face painting, food trucks, 
+                        and live music. Free admission for Providence residents.
                       </div>
                     </div>
                   </div>
@@ -246,21 +363,23 @@ export default function Home() {
                         <span className="month">APR</span>
                         <span className="day">15</span>
                       </div>
-                      <h3 className="item-events__title">Skye Canyon Chalk & Cheers</h3>
+                      <h3 className="item-events__title">Skye Canyon Chalk Art Festival</h3>
                       <div className="item-events__text">
-                        Skye Canyon Park, 11am-6pm. Annual art festival with live music, local food, and activities for the whole family.
+                        Skye Canyon Park, 10am-3pm. Family chalk art competition, local artists, 
+                        food vendors, and kids activities. Prizes for best neighborhood chalk art!
                       </div>
                     </div>
                   </div>
                   <div className="events__column">
                     <div className="events__item item-events">
                       <div className="event-date">
-                        <span className="month">MAY</span>
-                        <span className="day">20</span>
+                        <span className="month">SAT</span>
+                        <span className="day">Weekly</span>
                       </div>
-                      <h3 className="item-events__title">Centennial Hills Farmers Market</h3>
+                      <h3 className="item-events__title">Downtown Summerlin Farmers Market</h3>
                       <div className="item-events__text">
-                        Every Saturday at Downtown Summerlin, 9am-2pm. Fresh produce, artisanal goods, and community connections.
+                        Every Saturday 9am-2pm. Local produce, artisan goods, live music. 
+                        Just 5 minutes from Centennial Hills - walk or bike via the trails!
                       </div>
                     </div>
                   </div>
