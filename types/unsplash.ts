@@ -1,5 +1,5 @@
 
-export interface UnsplashPhoto {
+export interface UnsplashImage {
   id: string;
   urls: {
     regular: string;
@@ -17,21 +17,8 @@ export interface UnsplashPhoto {
   height: number;
 }
 
-export interface UnsplashSearchResponse {
-  results: UnsplashPhoto[];
+export interface UnsplashResponse {
+  results: UnsplashImage[];
   total: number;
   total_pages: number;
-}
-
-export interface UnsplashConfig {
-  accessKey: string;
-  fallbackEnabled: boolean;
-}
-
-export interface PropertyImage {
-  id: string;
-  url: string;
-  alt: string;
-  description?: string;
-  photographer?: string;
 }

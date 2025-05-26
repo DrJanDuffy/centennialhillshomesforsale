@@ -2,8 +2,6 @@
 declare global {
   interface Window {
     gtag?: (...args: any[]) => void;
-    dataLayer?: any[];
-    RealScout?: any;
   }
 }
 
@@ -12,7 +10,7 @@ declare module '*.module.css' {
   export default classes;
 }
 
-declare module '*.scss' {
+declare module '*.module.scss' {
   const classes: { [key: string]: string };
   export default classes;
 }
