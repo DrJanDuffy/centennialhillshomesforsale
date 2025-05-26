@@ -1,4 +1,3 @@
-
 import { UnsplashPhoto, UnsplashSearchResponse, UnsplashConfig, PropertyImage } from '../types/unsplash';
 
 const config: UnsplashConfig = {
@@ -71,7 +70,7 @@ export const searchImages = async (query: string, count: number = 6): Promise<Pr
     }
 
     const data: UnsplashSearchResponse = await response.json();
-    
+
     if (!data.results || data.results.length === 0) {
       console.log('No Unsplash results found, using fallback images');
       return fallbackImages.slice(0, Math.min(count, fallbackImages.length));
@@ -135,7 +134,7 @@ const getQueryForPropertyType = (propertyType: string): string => {
     'apartment': 'apartment building modern',
     'luxury': 'luxury mansion estate',
   };
-  
+
   return queries[propertyType.toLowerCase()] || `${propertyType} house home`;
 };
 
