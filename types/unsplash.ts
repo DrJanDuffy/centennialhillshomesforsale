@@ -1,73 +1,37 @@
-export interface UnsplashImage {
+
+export interface UnsplashPhoto {
   id: string;
-  created_at: string;
-  updated_at: string;
-  promoted_at: string | null;
-  width: number;
-  height: number;
-  color: string;
-  blur_hash: string;
-  description: string | null;
-  alt_description: string | null;
   urls: {
-    raw: string;
-    full: string;
     regular: string;
     small: string;
     thumb: string;
-    small_s3: string;
+    full: string;
   };
-  links: {
-    self: string;
-    html: string;
-    download: string;
-    download_location: string;
-  };
-  likes: number;
-  liked_by_user: boolean;
-  current_user_collections: any[];
-  sponsorship: any;
-  topic_submissions: any;
+  alt_description: string | null;
+  description: string | null;
   user: {
-    id: string;
-    updated_at: string;
-    username: string;
     name: string;
-    first_name: string;
-    last_name: string | null;
-    twitter_username: string | null;
-    portfolio_url: string | null;
-    bio: string | null;
-    location: string | null;
-    links: {
-      self: string;
-      html: string;
-      photos: string;
-      likes: string;
-      portfolio: string;
-      following: string;
-      followers: string;
-    };
-    profile_image: {
-      small: string;
-      medium: string;
-      large: string;
-    };
-    instagram_username: string | null;
-    total_collections: number;
-    total_likes: number;
-    total_photos: number;
-    accepted_tos: boolean;
-    for_hire: boolean;
-    social: {
-      instagram_username: string | null;
-      portfolio_url: string | null;
-      twitter_username: string | null;
-      paypal_email: string | null;
-    };
+    username: string;
   };
-  tags: Array<{
-    type: string;
-    title: string;
-  }>;
-} 
+  width: number;
+  height: number;
+}
+
+export interface UnsplashSearchResponse {
+  results: UnsplashPhoto[];
+  total: number;
+  total_pages: number;
+}
+
+export interface UnsplashConfig {
+  accessKey: string;
+  fallbackEnabled: boolean;
+}
+
+export interface PropertyImage {
+  id: string;
+  url: string;
+  alt: string;
+  description?: string;
+  photographer?: string;
+}
