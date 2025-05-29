@@ -1,5 +1,5 @@
 
-import { useState } from 'react';
+import React, { useState } from 'react';
 
 interface NeighborhoodBarProps {
   currentNeighborhood: string;
@@ -8,11 +8,9 @@ interface NeighborhoodBarProps {
 
 const neighborhoods = [
   'Centennial Hills',
-  'Providence', 
+  'Providence',
   'Skye Canyon',
-  'The Trails',
-  'Tournament Hills',
-  'Desert Foothills',
+  'Northwest Las Vegas',
   'The Canyons'
 ];
 
@@ -30,27 +28,25 @@ export default function NeighborhoodBar({ currentNeighborhood, onNeighborhoodCha
             className="change-neighborhood"
             onClick={() => setIsOpen(!isOpen)}
           >
-            {isOpen ? '✕' : 'Change Area'}
+            Change Area
           </button>
+          {isOpen && (
+            <div className="neighborhood-dropdown">
+              {neighborhoods.map((neighborhood) => (
+                <button
+                  key={neighborhood}
+                  className={`neighborhood-option ${neighborhood === currentNeighborhood ? 'active' : ''}`}
+                  onClick={() => {
+                    onNeighborhoodChange(neighborhood);
+                    setIsOpen(false);
+                  }}
+                >
+                  {neighborhood}
+                </button>
+              ))}
+            </div>
+          )}
         </div>
-        {isOpen && (
-          <div className="neighborhood-dropdown">
-            <div className="dropdown-header">Select Neighborhood:</div>
-            {neighborhoods.map((neighborhood) => (
-              <button
-                key={neighborhood}
-                className={`neighborhood-option ${neighborhood === currentNeighborhood ? 'active' : ''}`}
-                onClick={() => {
-                  onNeighborhoodChange(neighborhood);
-                  setIsOpen(false);
-                }}
-              >
-                {neighborhood}
-                {neighborhood === currentNeighborhood && <span className="check">✓</span>}
-              </button>
-            ))}
-          </div>
-        )}
       </div>
     </div>
   );
