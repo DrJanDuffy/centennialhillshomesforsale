@@ -1280,3 +1280,370 @@ h2 {
   height: 100%;
   padding: 1rem 0;
 }
+
+/* Neighborhood page styles */
+.neighborhood-details {
+  padding: 2rem 0;
+}
+
+.neighborhood-header h2 {
+  color: #1e40af;
+  margin-bottom: 1rem;
+}
+
+.neighborhood-description {
+  font-size: 1.1rem;
+  color: #4b5563;
+  margin-bottom: 2rem;
+}
+
+.neighborhood-stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.stat-card {
+  background: white;
+  padding: 1.5rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+.stat-card h3 {
+  color: #6b7280;
+  font-size: 0.9rem;
+  margin-bottom: 0.5rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.stat-value {
+  font-size: 1.8rem;
+  font-weight: bold;
+  color: #1e40af;
+  margin: 0;
+}
+
+.neighborhood-highlights ul {
+  list-style: none;
+  padding: 0;
+}
+
+.neighborhood-highlights li {
+  padding: 0.5rem 0;
+  border-bottom: 1px solid #e5e7eb;
+  color: #374151;
+}
+
+.neighborhood-highlights li:before {
+  content: "✓ ";
+  color: #059669;
+  font-weight: bold;
+  margin-right: 0.5rem;
+}
+
+/* Market update styles */
+.market-overview {
+  background: #f8fafc;
+  padding: 3rem 0;
+  margin: 2rem 0;
+  border-radius: 12px;
+}
+
+.market-stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 2rem;
+  margin-top: 2rem;
+}
+
+.market-stat {
+  background: white;
+  padding: 2rem;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  text-align: center;
+}
+
+.market-stat h3 {
+  color: #6b7280;
+  font-size: 0.9rem;
+  margin-bottom: 1rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.market-stat .stat-value {
+  font-size: 2.2rem;
+  font-weight: bold;
+  color: #1e40af;
+  margin-bottom: 0.5rem;
+}
+
+.stat-change.positive {
+  color: #059669;
+  font-weight: 600;
+}
+
+.stat-note {
+  color: #9ca3af;
+  font-size: 0.9rem;
+}
+
+.zip-stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.5rem;
+  margin-top: 2rem;
+}
+
+.zip-stat-card {
+  background: white;
+  padding: 1.5rem;
+  border-radius: 8px;
+  border-left: 4px solid #3b82f6;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.zip-stat-card h3 {
+  color: #1e40af;
+  margin-bottom: 1rem;
+}
+
+.insights-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+  margin-top: 2rem;
+}
+
+.insight-card {
+  background: white;
+  padding: 2rem;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+.insight-card h3 {
+  color: #1e40af;
+  margin-bottom: 1rem;
+}
+
+/* Listings page styles */
+.quick-search-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.5rem;
+  margin-top: 2rem;
+}
+
+.quick-search-card {
+  background: white;
+  padding: 1.5rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  transition: transform 0.2s ease;
+}
+
+.quick-search-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+}
+
+.quick-search-card h3 {
+  color: #1e40af;
+  margin-bottom: 0.5rem;
+}
+
+.quick-search-card p {
+  color: #6b7280;
+  margin-bottom: 1rem;
+}
+
+.neighborhood-links {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
+.neighborhood-link {
+  display: block;
+  background: white;
+  padding: 1.5rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  text-decoration: none;
+  transition: transform 0.2s ease;
+}
+
+.neighborhood-link:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+}
+
+.neighborhood-link h3 {
+  color: #1e40af;
+  margin-bottom: 0.5rem;
+}
+
+.neighborhood-link p {
+  color: #6b7280;
+  margin: 0;
+}
+
+/* Contact page styles */
+.contact-content {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3rem;
+  margin: 2rem 0;
+}
+
+.contact-methods {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.contact-method {
+  display: flex;
+  gap: 1rem;
+  align-items: flex-start;
+}
+
+.contact-icon {
+  font-size: 1.5rem;
+  color: #3b82f6;
+  margin-top: 0.25rem;
+}
+
+.contact-method h3 {
+  margin-bottom: 0.5rem;
+  color: #1f2937;
+}
+
+.contact-note {
+  font-size: 0.9rem;
+  color: #6b7280;
+  margin: 0;
+}
+
+.service-areas {
+  margin-top: 2rem;
+}
+
+.service-area-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 1rem;
+}
+
+.area-tag {
+  background: #dbeafe;
+  color: #1e40af;
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+.contact-form {
+  background: #f8fafc;
+  padding: 2rem;
+  border-radius: 12px;
+}
+
+.form-group {
+  margin-bottom: 1.5rem;
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+  color: #374151;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+  width: 100%;
+  padding: 0.75rem;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  font-size: 1rem;
+  transition: border-color 0.2s ease;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+  outline: none;
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+.btn-full {
+  width: 100%;
+}
+
+.form-disclaimer {
+  font-size: 0.9rem;
+  color: #6b7280;
+  text-align: center;
+  margin-top: 1rem;
+}
+
+.knowledge-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 2rem;
+  margin-top: 2rem;
+}
+
+.knowledge-item {
+  background: white;
+  padding: 2rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.knowledge-item h3 {
+  margin-bottom: 1rem;
+  color: #1e40af;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .contact-content {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+  
+  .form-row {
+    grid-template-columns: 1fr;
+  }
+  
+  .neighborhood-stats,
+  .market-stats-grid,
+  .zip-stats-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .quick-search-grid,
+  .neighborhood-links {
+    grid-template-columns: 1fr;
+  }
+}

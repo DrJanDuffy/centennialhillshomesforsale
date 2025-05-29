@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from 'react';
 import Head from 'next/head';
 import Layout from '../components/Layout';
@@ -8,6 +7,7 @@ import MarketTrendChart from '../components/MarketTrendChart';
 import AdvancedSearch from '../components/AdvancedSearch';
 import NeighborhoodBar from '../components/NeighborhoodBar';
 import SchoolInfo from '../components/SchoolInfo';
+import LocalAmenities from '../components/LocalAmenities';
 import { searchImages } from '../utils/unsplash';
 
 interface Property {
@@ -42,9 +42,9 @@ export default function Home() {
         '/images/agent2.jpg',
         '/images/agent3.jpg'
       ];
-      
+
       setImages(fallbackImages);
-      
+
       // Try to load Unsplash images in background
       try {
         const fetchedImages = await searchImages('real estate homes centennial hills luxury', 12);
@@ -241,7 +241,7 @@ export default function Home() {
                 </div>
                 <button className="btn btn-outline">Explore Providence</button>
               </div>
-              
+
               <div className="neighborhood-card">
                 <h3>Skye Canyon</h3>
                 <p className="price-range">$550K - $1.2M</p>
@@ -253,7 +253,7 @@ export default function Home() {
                 </div>
                 <button className="btn btn-outline">Explore Skye Canyon</button>
               </div>
-              
+
               <div className="neighborhood-card">
                 <h3>The Trails</h3>
                 <p className="price-range">$600K - $2M+</p>
@@ -265,7 +265,7 @@ export default function Home() {
                 </div>
                 <button className="btn btn-outline">Explore The Trails</button>
               </div>
-              
+
               <div className="neighborhood-card">
                 <h3>Tournament Hills</h3>
                 <p className="price-range">$500K - $1.5M</p>
@@ -284,52 +284,7 @@ export default function Home() {
         {/* Local Amenities */}
         <section className="amenities-section">
           <div className="container">
-            <h2 className="section-title">Why Centennial Hills?</h2>
-            <div className="amenities-grid">
-              <div className="amenity-category">
-                <h3>🏫 Top Schools</h3>
-                <ul>
-                  <li>Centennial High School (9/10 rating)</li>
-                  <li>Palo Verde High School (8/10 rating)</li>
-                  <li>Shadow Ridge High School (8/10 rating)</li>
-                  <li>Coral Academy Charter Schools</li>
-                  <li>Multiple A-rated elementary schools</li>
-                </ul>
-              </div>
-              
-              <div className="amenity-category">
-                <h3>🛍️ Shopping & Dining</h3>
-                <ul>
-                  <li>Downtown Summerlin (5 minutes)</li>
-                  <li>Red Rock Casino Resort</li>
-                  <li>Boca Park Fashion Village</li>
-                  <li>Local restaurants & cafes</li>
-                  <li>Trader Joe's, Whole Foods nearby</li>
-                </ul>
-              </div>
-              
-              <div className="amenity-category">
-                <h3>🏞️ Recreation</h3>
-                <ul>
-                  <li>Red Rock Canyon (15 minutes)</li>
-                  <li>TPC Las Vegas Golf Course</li>
-                  <li>Bear's Best Golf Course</li>
-                  <li>Angel Park Golf Club</li>
-                  <li>Floyd Lamb Park</li>
-                </ul>
-              </div>
-              
-              <div className="amenity-category">
-                <h3>🚗 Transportation</h3>
-                <ul>
-                  <li>US-95 & 215 Beltway access</li>
-                  <li>20 minutes to Las Vegas Strip</li>
-                  <li>15 minutes to McCarran Airport</li>
-                  <li>Walking/biking trails</li>
-                  <li>RTC bus routes</li>
-                </ul>
-              </div>
-            </div>
+            <LocalAmenities />
           </div>
         </section>
 
