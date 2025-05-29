@@ -2,6 +2,9 @@
 declare global {
   interface Window {
     gtag?: (...args: any[]) => void;
+    RealScout?: {
+      init: (config: any) => void;
+    };
   }
 }
 
