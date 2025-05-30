@@ -24,9 +24,6 @@ const nextConfig = {
     ignoreDuringBuilds: false,
   },
   poweredByHeader: false,
-  experimental: {
-    allowedDevOrigins: ['*.replit.dev', '*.repl.co']
-  },
 };
 
 module.exports = nextConfig;
