@@ -76,7 +76,7 @@ export default function CentennialHills() {
           </div>
         </motion.section>
 
-        <SchoolInfo selectedNeighborhood="Centennial Hills" />
+        <SchoolInfo neighborhood="Centennial Hills" />
         
         <LocalAmenities />
 

@@ -106,7 +106,7 @@ export default function ProvidenceLasVegas() {
           </div>
         </motion.section>
 
-        <SchoolInfo selectedNeighborhood="Providence" />
+        <SchoolInfo neighborhood="Providence" />
 
         <motion.section 
           className="listings-section"
