@@ -7,7 +7,7 @@ import MarketTrendChart from '../components/MarketTrendChart';
 import AdvancedSearch from '../components/AdvancedSearch';
 import NeighborhoodBar from '../components/NeighborhoodBar';
 import SchoolInfo from '../components/SchoolInfo';
-import LocalAmenities from '../components/LocalAmenities';
+import LocalBusinessSchema from '../components/LocalBusinessSchema';
 import { searchImages } from '../utils/unsplash';
 
 interface Property {
@@ -102,6 +102,7 @@ export default function Home() {
                   "addressCountry": "US"
                 },
                 "aggregateRating": {
+                  "@type": "AggregateRating",
                   "@type": "AggregateRating",
                   "ratingValue": "4.9",
                   "reviewCount": "127",
@@ -548,6 +549,10 @@ export default function Home() {
           </div>
         </section>
       </div>
+      <LocalBusinessSchema 
+        pageType="home" 
+        additionalServices={["Luxury Home Sales", "New Construction", "Master-Planned Communities"]}
+      />
     </Layout>
   );
 }
