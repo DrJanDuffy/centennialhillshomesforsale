@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 
 interface RealScoutListingsProps {
   agentId?: string;
+  agentEncodedId?: string;
   sortOrder?: string;
   listingStatus?: string;
   propertyTypes?: string;
@@ -11,12 +12,14 @@ interface RealScoutListingsProps {
 
 const RealScoutListings = ({
   agentId = "QWdlbnQtMjI1MDUw",
+  agentEncodedId,
   sortOrder = "STATUS_AND_SIGNIFICANT_CHANGE",
   listingStatus = "For Sale",
   propertyTypes = "SFR,MF,TC",
   priceMin = "450000",
   className = ""
 }) => {
+  const finalAgentId = agentEncodedId || agentId;
   const [isLoading, setIsLoading] = useState(true);
   const [hasError, setHasError] = useState(false);
   const [scriptLoaded, setScriptLoaded] = useState(false);
@@ -137,7 +140,7 @@ const RealScoutListings = ({
       }}
     >
       <realscout-office-listings 
-        agent-encoded-id={agentId}
+        agent-encoded-id={finalAgentId}
         sort-order={sortOrder}
         listing-status={listingStatus}
         property-types={propertyTypes}
