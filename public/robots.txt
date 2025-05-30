@@ -1,7 +1,26 @@
-
 # Enhanced robots.txt for AI search optimization
 User-agent: *
 Allow: /
+
+# Allow AI crawlers and research bots
+User-agent: GPTBot
+Allow: /
+User-agent: PerplexityBot
+Allow: /
+User-agent: ClaudeBot
+Allow: /
+User-agent: anthropic-ai
+Allow: /
+User-agent: Claude-Web
+Allow: /
+
+# Sitemaps for AI discovery
+Sitemap: https://centennialhillshomesforsale.com/sitemap.xml
+Sitemap: https://centennialhillshomesforsale.com/geo-sitemap.xml
+
+# API endpoints for AI access
+Allow: /api/geo-data
+Allow: /api/market-data
 
 # Priority content for AI crawlers
 Allow: /listings/
@@ -14,10 +33,6 @@ Allow: /testimonials/
 Allow: /blog/
 Allow: /buyers/
 Allow: /sellers/
-
-# Sitemap locations
-Sitemap: https://centennialhillshomesforsale.com/sitemap.xml
-Sitemap: https://centennialhillshomesforsale.com/sitemap-news.xml
 
 # Disallow admin and private areas
 Disallow: /admin/
@@ -39,28 +54,8 @@ Disallow: /search/
 Disallow: /page/
 Disallow: /wp-login.php
 Disallow: /wp-register.php
-
-# AI-specific crawlers optimization
-User-agent: GPTBot
-Allow: /
-Allow: /faq/
-Allow: /market-update/
-Allow: /neighborhoods/
-Crawl-delay: 5
-
-User-agent: Claude-Web
-Allow: /
-Allow: /faq/
-Allow: /market-update/
-Allow: /neighborhoods/
-Crawl-delay: 5
-
-User-agent: PerplexityBot
-Allow: /
-Allow: /faq/
-Allow: /market-update/
-Allow: /neighborhoods/
-Crawl-delay: 5
+Disallow: /_next/
+Disallow: /scripts/
 
 # Crawl-delay for search engine bots
 User-agent: AhrefsBot
@@ -107,19 +102,6 @@ Allow: /sellers/
 Disallow: /admin/
 Disallow: /private/
 Disallow: /api/
-User-agent: *
-Allow: /
-
-# Sitemaps
-Sitemap: https://centennialhillshomesforsale.com/sitemap.xml
-Sitemap: https://centennialhillshomesforsale.com/sitemap-news.xml
-
-# Disallow admin and private areas
-Disallow: /admin/
-Disallow: /private/
-Disallow: /api/
-Disallow: /_next/
-Disallow: /scripts/
 
 # Allow important pages
 Allow: /listings
