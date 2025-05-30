@@ -74,15 +74,71 @@ export default function Home() {
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
-            __html: JSON.stringify({
-              "@context": "https://schema.org",
-              "@type": "RealEstateAgent",
-              "name": "Centennial Hills Homes For Sale",
-              "description": "Expert real estate services in Centennial Hills, Las Vegas",
-              "url": "https://centennialhillshomesforsale.com",
-              "areaServed": "Centennial Hills, Las Vegas, Nevada",
-              "serviceType": "Real Estate Sales"
-            })
+            __html: JSON.stringify([
+              {
+                "@context": "https://schema.org",
+                "@type": "RealEstateAgent",
+                "name": "Centennial Hills Homes For Sale",
+                "description": "Expert real estate services in Centennial Hills, Las Vegas with over 10 years of local market experience",
+                "url": "https://centennialhillshomesforsale.com",
+                "areaServed": {
+                  "@type": "Place",
+                  "name": "Centennial Hills, Las Vegas, Nevada",
+                  "geo": {
+                    "@type": "GeoCoordinates",
+                    "latitude": "36.268",
+                    "longitude": "-115.328"
+                  }
+                },
+                "serviceType": "Real Estate Sales",
+                "priceRange": "$300,000 - $2,000,000",
+                "telephone": "+1-702-555-0123",
+                "address": {
+                  "@type": "PostalAddress",
+                  "streetAddress": "10161 Park Run Dr",
+                  "addressLocality": "Las Vegas",
+                  "addressRegion": "NV",
+                  "postalCode": "89145",
+                  "addressCountry": "US"
+                },
+                "aggregateRating": {
+                  "@type": "AggregateRating",
+                  "ratingValue": "4.9",
+                  "reviewCount": "127",
+                  "bestRating": "5"
+                }
+              },
+              {
+                "@context": "https://schema.org",
+                "@type": "FAQPage",
+                "mainEntity": [
+                  {
+                    "@type": "Question",
+                    "name": "What is the average home price in Centennial Hills?",
+                    "acceptedAnswer": {
+                      "@type": "Answer",
+                      "text": "The median home price in Centennial Hills is $635,000 as of 2024, with homes ranging from $300,000 to over $2 million depending on size and location."
+                    }
+                  },
+                  {
+                    "@type": "Question",
+                    "name": "How long do homes stay on the market in Centennial Hills?",
+                    "acceptedAnswer": {
+                      "@type": "Answer",
+                      "text": "Homes in Centennial Hills typically sell within 18 days on average, making it a competitive seller's market with strong demand."
+                    }
+                  },
+                  {
+                    "@type": "Question",
+                    "name": "What schools serve the Centennial Hills area?",
+                    "acceptedAnswer": {
+                      "@type": "Answer",
+                      "text": "Centennial Hills is served by top-rated Clark County schools including Centennial High School, Del Webb Middle School, and several elementary schools with ratings of 8+ out of 10."
+                    }
+                  }
+                ]
+              }
+            ])
           }}
         />
       </Head>

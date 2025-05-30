@@ -19,8 +19,11 @@
     "backup": "bash scripts/backup-projects.sh"
   },
   "dependencies": {
+    "@types/jsdom": "^21.1.7",
+    "cheerio": "^1.0.0",
     "dotenv": "^16.3.1",
     "framer-motion": "^10.18.0",
+    "jsdom": "^26.1.0",
     "next": "^14.2.5",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
