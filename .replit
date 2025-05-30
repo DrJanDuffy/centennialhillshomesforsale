@@ -10,7 +10,7 @@ deploymentTarget = "cloudrun"
 run = ["sh", "-c", "npx serve out -s -l 5000"]
 
 [workflows]
-runButton = "Dev Server"
+runButton = "Emergency Deploy Fix"
 
 [[workflows.workflow]]
 name = "Run"
@@ -239,6 +239,120 @@ args = "echo \"✅ Build completed - testing all fixes\""
 [[workflows.workflow.tasks]]
 task = "shell.exec"
 args = "npm run dev"
+
+[[workflows.workflow]]
+name = "Complete Deployment Check"
+author = 22930014
+mode = "sequential"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "echo \"🚨 Starting comprehensive deployment check...\""
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "echo \"1. Killing existing processes\""
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "pkill -f \"next dev\" || true"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "pkill -f \"serve\" || true"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "sleep 2"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "echo \"2. Installing dependencies with legacy peer deps\""
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "npm install --legacy-peer-deps"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "echo \"3. Running build test\""
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "npm run build"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "echo \"4. Testing static export\""
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "npm run build-static"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "echo \"5. Testing serve functionality\""
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "timeout 10s npx serve out -s -l 5000 || echo \"Serve test completed\""
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "echo \"6. Starting development server for final check\""
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "npm run dev"
+
+[[workflows.workflow]]
+name = "Emergency Deploy Fix"
+author = 22930014
+mode = "sequential"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "echo \"🚨 EMERGENCY DEPLOYMENT FIX\""
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "echo \"Stopping all processes...\""
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "pkill -f \"next\" || true"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "sleep 3"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "echo \"Fresh dependency install...\""
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "npm install --legacy-peer-deps --force"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "echo \"Building for static deployment...\""
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "npm run build-static"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "echo \"✅ Build completed successfully!\""
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "echo \"🚀 Starting production-ready server...\""
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "npx serve out -s -l 5000"
 
 [[ports]]
 localPort = 5000

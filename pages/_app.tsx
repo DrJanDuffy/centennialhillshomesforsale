@@ -1,4 +1,3 @@
-
 import '../styles/globals.css';
 import '../styles/realscout.css';
 import type { AppProps } from 'next/app';
@@ -14,7 +13,7 @@ export default function App({ Component, pageProps }: AppProps) {
   useEffect(() => {
     // Ensure we're on the client side
     setIsClient(true);
-    
+
     // Remove server-side injected CSS
     const jssStyles = document.querySelector('#jss-server-side');
     if (jssStyles && jssStyles.parentElement) {
@@ -55,12 +54,22 @@ export default function App({ Component, pageProps }: AppProps) {
 
     // Apply fixes after a short delay
     setTimeout(fixHydrationIssues, 100);
-    
+
   }, []);
 
   // Prevent hydration mismatches by not rendering until client-side
   if (!isClient) {
-    return null;
+    return (
+      <div style={{ 
+        display: 'flex', 
+        justifyContent: 'center', 
+        alignItems: 'center', 
+        height: '100vh',
+        fontFamily: 'Arial, sans-serif'
+      }}>
+        Loading...
+      </div>
+    );
   }
 
   return (
