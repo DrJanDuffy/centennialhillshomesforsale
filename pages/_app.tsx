@@ -23,12 +23,7 @@ export default function App({ Component, pageProps }: AppProps) {
     // Setup global error handling
     setupGlobalErrorHandling();
 
-    // Initialize enterprise analytics
-    if (typeof window !== 'undefined') {
-      const EnterpriseAnalytics = require('../utils/enterpriseAnalytics').default;
-      const analytics = EnterpriseAnalytics.getInstance();
-      analytics.initialize(process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID);
-    }
+    
   }, []);
 
   return (
