@@ -1,12 +1,10 @@
-
-import React from 'react';
 import Link from 'next/link';
 
 interface NavigationProps {
   className?: string;
 }
 
-const Navigation: React.FC<NavigationProps> = ({ className = '' }) => {
+const Navigation = ({ className = '' }: NavigationProps) => {
   const navItems = [
     { href: '/', label: 'Home' },
     { href: '/about', label: 'About' },
