@@ -1,70 +1,100 @@
 
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
-        xmlns:geo="http://www.google.com/geo/schemas/sitemap/1.0">
-  
-  <!-- Centennial Hills -->
+        xmlns:news="http://www.google.com/schemas/sitemap-news/0.9"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
+        http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
+
+  <!-- Homepage - Primary authority page -->
+  <url>
+    <loc>https://centennialhillshomesforsale.com/</loc>
+    <lastmod>2024-12-30T00:00:00+00:00</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>1.0</priority>
+  </url>
+
+  <!-- Neighborhood pages - High priority for local search -->
   <url>
     <loc>https://centennialhillshomesforsale.com/centennial-hills</loc>
-    <geo:geo>
-      <geo:format>kml</geo:format>
-      <geo:lat>36.2680</geo:lat>
-      <geo:lon>-115.3280</geo:lon>
-    </geo:geo>
-    <lastmod>2024-01-28</lastmod>
+    <lastmod>2024-12-30T00:00:00+00:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
-  
-  <!-- Providence -->
+
   <url>
     <loc>https://centennialhillshomesforsale.com/providence-las-vegas</loc>
-    <geo:geo>
-      <geo:format>kml</geo:format>
-      <geo:lat>36.2650</geo:lat>
-      <geo:lon>-115.3100</geo:lon>
-    </geo:geo>
-    <lastmod>2024-01-28</lastmod>
+    <lastmod>2024-12-30T00:00:00+00:00</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.9</priority>
   </url>
-  
-  <!-- Skye Canyon -->
+
   <url>
     <loc>https://centennialhillshomesforsale.com/skye-canyon</loc>
-    <geo:geo>
-      <geo:format>kml</geo:format>
-      <geo:lat>36.2570</geo:lat>
-      <geo:lon>-115.3250</geo:lon>
-    </geo:geo>
-    <lastmod>2024-01-28</lastmod>
+    <lastmod>2024-12-30T00:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <!-- ZIP code pages for local authority -->
+  <url>
+    <loc>https://centennialhillshomesforsale.com/las-vegas-89149</loc>
+    <lastmod>2024-12-30T00:00:00+00:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
-  
-  <!-- ZIP Code Areas -->
-  <url>
-    <loc>https://centennialhillshomesforsale.com/las-vegas-89149</loc>
-    <geo:geo>
-      <geo:format>kml</geo:format>
-      <geo:lat>36.2680</geo:lat>
-      <geo:lon>-115.3280</geo:lon>
-    </geo:geo>
-    <lastmod>2024-01-28</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  
+
   <url>
     <loc>https://centennialhillshomesforsale.com/las-vegas-89166</loc>
-    <geo:geo>
-      <geo:format>kml</geo:format>
-      <geo:lat>36.2650</geo:lat>
-      <geo:lon>-115.3100</geo:lon>
-    </geo:geo>
-    <lastmod>2024-01-28</lastmod>
+    <lastmod>2024-12-30T00:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Service pages -->
+  <url>
+    <loc>https://centennialhillshomesforsale.com/listings</loc>
+    <lastmod>2024-12-30T00:00:00+00:00</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://centennialhillshomesforsale.com/market-update</loc>
+    <lastmod>2024-12-30T00:00:00+00:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
-  
+
+  <!-- About and contact pages -->
+  <url>
+    <loc>https://centennialhillshomesforsale.com/about</loc>
+    <lastmod>2024-12-30T00:00:00+00:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
+  <url>
+    <loc>https://centennialhillshomesforsale.com/contact</loc>
+    <lastmod>2024-12-30T00:00:00+00:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
+  <!-- FAQ page - important for AI queries -->
+  <url>
+    <loc>https://centennialhillshomesforsale.com/faq</loc>
+    <lastmod>2024-12-30T00:00:00+00:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <!-- API endpoints for AI access -->
+  <url>
+    <loc>https://centennialhillshomesforsale.com/api/geo-data</loc>
+    <lastmod>2024-12-30T00:00:00+00:00</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.5</priority>
+  </url>
+
 </urlset>
