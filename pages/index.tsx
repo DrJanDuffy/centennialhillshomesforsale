@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import Head from 'next/head';
 import Layout from '../components/Layout';
 import RealScoutWidget from '../components/widgets/RealScoutWidget';
@@ -11,7 +11,6 @@ import LocalAmenities from '../components/LocalAmenities';
 import LocalBusinessSchema from '../components/LocalBusinessSchema';
 import GoogleBusinessOptimization from '../components/GoogleBusinessOptimization';
 import LocalCitationWidget from '../components/LocalCitationWidget';
-import { searchImages } from '../utils/unsplash';
 
 interface Property {
   id: string;
@@ -25,42 +24,7 @@ interface Property {
 }
 
 export default function Home() {
-  const [images, setImages] = useState<string[]>([]);
   const [currentNeighborhood, setCurrentNeighborhood] = useState('Centennial Hills');
-
-  useEffect(() => {
-    const loadImages = async () => {
-      // Use fallback images immediately for better UX
-      const fallbackImages = [
-        '/images/agent1.jpg',
-        '/images/agent2.jpg', 
-        '/images/agent3.jpg',
-        '/images/agent1.jpg',
-        '/images/agent2.jpg',
-        '/images/agent3.jpg',
-        '/images/agent1.jpg',
-        '/images/agent2.jpg',
-        '/images/agent3.jpg',
-        '/images/agent1.jpg',
-        '/images/agent2.jpg',
-        '/images/agent3.jpg'
-      ];
-
-      setImages(fallbackImages);
-
-      // Try to load Unsplash images in background
-      try {
-        const fetchedImages = await searchImages('real estate homes centennial hills luxury', 12);
-        if (fetchedImages && fetchedImages.length > 0) {
-          setImages(fetchedImages);
-        }
-      } catch (error) {
-        // Silently fail and keep fallback images
-        console.log('Using local images for better performance');
-      }
-    };
-    loadImages();
-  }, []);
 
   return (
     <Layout>
@@ -214,13 +178,13 @@ export default function Home() {
               </div>
             </div>
             <div className="hero-image">
-              {images[0] && (
-                <img 
-                  src={images[0]} 
-                  alt="Beautiful Centennial Hills home" 
-                  className="hero-img"
-                />
-              )}
+              {/* Hero Image Placeholder */}
+              <img 
+                src="/images/centennial-hills/centennial-hills-hero.jpg" 
+                alt="Beautiful Centennial Hills home" 
+                className="hero-img"
+                loading="lazy"
+              />
             </div>
           </div>
         </section>
@@ -247,13 +211,12 @@ export default function Home() {
               ].map((property, index) => (
                 <div key={property.id} className="property-card">
                   <div className="property-image">
-                    {images[index + 1] && (
-                      <img 
-                        src={images[index + 1]} 
-                        alt={`Property at ${property.address}`}
-                        loading="lazy"
-                      />
-                    )}
+                    {/* Property Image Placeholders */}
+                    <img 
+                      src={`/images/centennial-hills/property${index + 1}.jpg`} 
+                      alt={`Property at ${property.address}`}
+                      loading="lazy"
+                    />
                     <div className="property-status">{property.status}</div>
                   </div>
                   <div className="property-details">
@@ -323,12 +286,19 @@ export default function Home() {
           </div>
         </section>
 
-        {/* Neighborhood Spotlight */}
+        {/* Featured Neighborhoods */}
         <section className="neighborhoods-section">
           <div className="container">
-            <h2 className="section-title">Centennial Hills Communities</h2>
+            <h2 className="section-title">Premier Centennial Hills Communities</h2>
             <div className="neighborhoods-grid">
               <div className="neighborhood-card">
+                <div className="neighborhood-image">
+                  <img 
+                    src="/images/centennial-hills/providence-community.jpg" 
+                    alt="Providence community homes in Centennial Hills"
+                    loading="lazy"
+                  />
+                </div>
                 <h3>Providence</h3>
                 <p className="price-range">$450K - $800K</p>
                 <div className="neighborhood-features">
@@ -341,6 +311,13 @@ export default function Home() {
               </div>
 
               <div className="neighborhood-card">
+                <div className="neighborhood-image">
+                  <img 
+                    src="/images/centennial-hills/skye-canyon-homes.jpg" 
+                    alt="Skye Canyon luxury homes with desert landscaping"
+                    loading="lazy"
+                  />
+                </div>
                 <h3>Skye Canyon</h3>
                 <p className="price-range">$550K - $1.2M</p>
                 <div className="neighborhood-features">
@@ -353,6 +330,13 @@ export default function Home() {
               </div>
 
               <div className="neighborhood-card">
+                <div className="neighborhood-image">
+                  <img 
+                    src="/images/centennial-hills/tpc-las-vegas-golf.jpg" 
+                    alt="TPC Las Vegas Golf Course in Centennial Hills"
+                    loading="lazy"
+                  />
+                </div>
                 <h3>The Trails</h3>
                 <p className="price-range">$600K - $2M+</p>
                 <div className="neighborhood-features">
@@ -365,6 +349,13 @@ export default function Home() {
               </div>
 
               <div className="neighborhood-card">
+                <div className="neighborhood-image">
+                  <img 
+                    src="/images/centennial-hills/tournament-hills.jpg"
+                    alt="Homes in Tournament Hills, Las Vegas"
+                    loading="lazy"
+                  />
+                </div>
                 <h3>Tournament Hills</h3>
                 <p className="price-range">$500K - $1.5M</p>
                 <div className="neighborhood-features">
@@ -400,6 +391,69 @@ export default function Home() {
           </div>
         </section>
 
+        {/* Why Choose Centennial Hills */}
+        <section className="lifestyle-section">
+          <div className="container">
+            <div className="lifestyle-grid">
+              <div className="lifestyle-content">
+                <h2>Why Choose Centennial Hills?</h2>
+                <ul className="lifestyle-benefits">
+                  <li>🏌️ Championship golf at TPC Las Vegas</li>
+                  <li>🏫 Top-rated Clark County schools (8-10/10 ratings)</li>
+                  <li>🏔️ Stunning Red Rock Canyon proximity</li>
+                  <li>🛍️ Downtown Summerlin shopping (5 minutes)</li>
+                  <li>🏥 Centennial Hills Hospital nearby</li>
+                  <li>🎯 20 minutes to Las Vegas Strip</li>
+                </ul>
+              </div>
+              <div className="lifestyle-image">
+                <img 
+                  src="/images/centennial-hills/red-rock-canyon-view.jpg" 
+                  alt="Red Rock Canyon view from Centennial Hills"
+                  className="lifestyle-img"
+                  loading="lazy"
+                />
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Property Showcase */}
+        <section className="property-showcase">
+          <div className="container">
+            <h2 className="section-title">Featured Centennial Hills Properties</h2>
+            <div className="properties-grid">
+              <div className="property-card">
+                <div className="property-image">
+                  <img 
+                    src="/images/centennial-hills/luxury-pool-home.jpg" 
+                    alt="Luxury home with pool in Centennial Hills"
+                    loading="lazy"
+                  />
+                </div>
+              </div>
+              <div className="property-card">
+                <div className="property-image">
+                  <img 
+                    src="/images/centennial-hills/modern-kitchen.jpg" 
+                    alt="Modern kitchen in Centennial Hills home"
+                    loading="lazy"
+                  />
+                </div>
+              </div>
+              <div className="property-card">
+                <div className="property-image">
+                  <img 
+                    src="/images/centennial-hills/master-bedroom.jpg" 
+                    alt="Master bedroom in Centennial Hills luxury home"
+                    loading="lazy"
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
         {/* About Section */}
         <section className="page__about about-section">
           <div className="container">
@@ -429,24 +483,13 @@ export default function Home() {
                 </div>
               </div>
               <div className="about-image">
-                {images[7] && (
-                  <img 
-                    src={images[7]} 
-                    alt="Dr. Jan Duffy, REALTOR® - Centennial Hills Expert" 
-                    className="agent-photo"
-                  />
-                )}
+                <img 
+                  src="/images/dr-jan-duffy-realtor.jpg"
+                  alt="Dr. Jan Duffy, REALTOR® - Centennial Hills Expert"
+                  className="agent-photo"
+                  loading="lazy"
+                />
               </div>
-            </div>
-          </div>
-        </section>
-
-        {/* Centennial Hills Photo Gallery */}
-        <section className="photo-gallery-section">
-          <div className="container">
-            <h2 className="section-title">Centennial Hills Luxury Homes</h2>
-            <div id="hero-images" className="property-images-grid">
-              <div className="loading-placeholder">Loading local property images...</div>
             </div>
           </div>
         </section>
