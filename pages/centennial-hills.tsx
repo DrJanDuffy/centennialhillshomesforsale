@@ -8,8 +8,10 @@ import SchoolInfo from '../components/SchoolInfo';
 import LocalAmenities from '../components/LocalAmenities';
 import RealScoutWidget from '../components/widgets/RealScoutWidget';
 
+type NeighborhoodName = 'Centennial Hills' | 'The Trails' | 'Tournament Hills' | 'Skye Canyon' | 'Sun City Aliante';
+
 export default function CentennialHills() {
-  const [currentNeighborhood, setCurrentNeighborhood] = useState('Centennial Hills');
+  const [currentNeighborhood, setCurrentNeighborhood] = useState<NeighborhoodName>('Centennial Hills');
 
   return (
     <Layout>
