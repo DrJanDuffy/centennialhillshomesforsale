@@ -126,7 +126,6 @@ const RealScoutListings = ({
         </div>
       </div>
     );
-    );
   }
 
   return (
