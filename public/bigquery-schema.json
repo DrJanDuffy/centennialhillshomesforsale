@@ -1,0 +1,94 @@
+{
+  "property_views": {
+    "fields": [
+      {
+        "name": "event_timestamp",
+        "type": "TIMESTAMP"
+      },
+      {
+        "name": "property_id",
+        "type": "STRING"
+      },
+      {
+        "name": "user_id",
+        "type": "STRING"
+      },
+      {
+        "name": "session_id",
+        "type": "STRING"
+      },
+      {
+        "name": "property_type",
+        "type": "STRING"
+      },
+      {
+        "name": "price",
+        "type": "NUMERIC"
+      },
+      {
+        "name": "location",
+        "type": "STRING"
+      },
+      {
+        "name": "page_path",
+        "type": "STRING"
+      }
+    ]
+  },
+  "searches": {
+    "fields": [
+      {
+        "name": "event_timestamp",
+        "type": "TIMESTAMP"
+      },
+      {
+        "name": "search_query",
+        "type": "STRING"
+      },
+      {
+        "name": "filters_applied",
+        "type": "JSON"
+      },
+      {
+        "name": "results_count",
+        "type": "INTEGER"
+      },
+      {
+        "name": "user_id",
+        "type": "STRING"
+      },
+      {
+        "name": "session_id",
+        "type": "STRING"
+      }
+    ]
+  },
+  "leads": {
+    "fields": [
+      {
+        "name": "event_timestamp",
+        "type": "TIMESTAMP"
+      },
+      {
+        "name": "lead_id",
+        "type": "STRING"
+      },
+      {
+        "name": "contact_method",
+        "type": "STRING"
+      },
+      {
+        "name": "property_interest",
+        "type": "STRING"
+      },
+      {
+        "name": "lead_score",
+        "type": "NUMERIC"
+      },
+      {
+        "name": "source",
+        "type": "STRING"
+      }
+    ]
+  }
+}

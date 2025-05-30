@@ -1,0 +1,38 @@
+{
+  "property_recommendation": {
+    "model_type": "collaborative_filtering",
+    "features": [
+      "price",
+      "location",
+      "property_type",
+      "bedrooms",
+      "bathrooms"
+    ],
+    "training_data": "user_property_interactions",
+    "update_frequency": "daily"
+  },
+  "price_prediction": {
+    "model_type": "regression",
+    "features": [
+      "location",
+      "square_feet",
+      "bedrooms",
+      "bathrooms",
+      "lot_size",
+      "year_built"
+    ],
+    "training_data": "historical_sales",
+    "update_frequency": "weekly"
+  },
+  "lead_scoring": {
+    "model_type": "classification",
+    "features": [
+      "page_views",
+      "time_on_site",
+      "property_searches",
+      "contact_attempts"
+    ],
+    "training_data": "converted_leads",
+    "update_frequency": "daily"
+  }
+}
