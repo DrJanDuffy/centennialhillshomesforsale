@@ -1,4 +1,3 @@
-
 import React from 'react';
 import Head from 'next/head';
 import Script from 'next/script';
@@ -35,21 +34,21 @@ const Layout: React.FC<LayoutProps> = ({
         <meta name="keywords" content={keywords} />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta name="robots" content="index, follow" />
-        
+
         {/* Open Graph Meta Tags */}
         <meta property="og:title" content={title} />
         <meta property="og:description" content={description} />
         <meta property="og:type" content="website" />
         <meta property="og:site_name" content="Centennial Hills Homes For Sale" />
-        
+
         {/* Twitter Card Meta Tags */}
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content={title} />
         <meta name="twitter:description" content={description} />
-        
+
         {/* Canonical URL */}
         {canonicalUrl && <link rel="canonical" href={canonicalUrl} />}
-        
+
         {/* Favicon and Icons */}
         <link rel="icon" href="/favicon.ico" />
         <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
@@ -60,10 +59,10 @@ const Layout: React.FC<LayoutProps> = ({
 
       {/* Performance Monitoring */}
       <PerformanceMonitor />
-      
+
       {/* Google Analytics */}
       <SafeGoogleAnalytics measurementId={process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID} />
-      
+
       {/* Local Business Schema */}
       <LocalBusinessSchema />
 
@@ -73,7 +72,12 @@ const Layout: React.FC<LayoutProps> = ({
           <main className="main-content">
             {children}
           </main>
-          <Footer />
+          {/* Debug tools only in development */}
+          {process.env.NODE_ENV === 'development' && (
+            <div style={{ position: 'fixed', bottom: '10px', right: '10px', zIndex: 1000 }}>
+              {/* Development tools would go here */}
+            </div>
+          )}
         </div>
       </ErrorBoundaryWrapper>
     </>

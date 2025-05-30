@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import EnterpriseAnalytics from '../utils/enterpriseAnalytics';
 
@@ -14,7 +13,7 @@ const AnalyticsDashboard: React.FC<AnalyticsDashboardProps> = ({ isAdmin = false
     if (isAdmin) {
       const analytics = EnterpriseAnalytics.getInstance();
       setMetrics(analytics.getMetrics());
-      
+
       // Update metrics every 30 seconds
       const interval = setInterval(() => {
         setMetrics(analytics.getMetrics());
@@ -38,7 +37,10 @@ const AnalyticsDashboard: React.FC<AnalyticsDashboardProps> = ({ isAdmin = false
     }
   };
 
-  if (!isAdmin) return null;
+  // Only show dashboard if user is admin AND in development
+  if (!isAdmin || process.env.NODE_ENV === 'production') {
+    return null;
+  }
 
   return (
     <div className="analytics-dashboard">
@@ -78,7 +80,7 @@ const AnalyticsDashboard: React.FC<AnalyticsDashboardProps> = ({ isAdmin = false
           }}
         >
           <h3 style={{ margin: '0 0 15px 0', fontSize: '16px' }}>Real Estate Analytics</h3>
-          
+
           {metrics && (
             <div style={{ fontSize: '14px' }}>
               <div style={{ marginBottom: '8px' }}>
@@ -96,7 +98,7 @@ const AnalyticsDashboard: React.FC<AnalyticsDashboardProps> = ({ isAdmin = false
               <div style={{ marginBottom: '15px' }}>
                 <strong>Listing Clicks:</strong> {metrics.listingClicks}
               </div>
-              
+
               <button 
                 onClick={exportData}
                 style={{
