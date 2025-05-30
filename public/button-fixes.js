@@ -134,9 +134,49 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   }
   
+  // Fix RealScout appearance issues
+  function fixRealScoutAppearance() {
+    const realscoutWidgets = document.querySelectorAll('realscout-office-listings');
+    realscoutWidgets.forEach(widget => {
+      // Force light theme
+      widget.style.backgroundColor = '#ffffff';
+      widget.style.color = '#1f2937';
+      
+      // Apply styles to all child elements
+      const allElements = widget.querySelectorAll('*');
+      allElements.forEach(el => {
+        // Don't override images or specific styled elements
+        if (el.tagName !== 'IMG' && el.tagName !== 'SVG') {
+          el.style.backgroundColor = 'inherit';
+          el.style.color = 'inherit';
+        }
+        
+        // Make sure links are visible
+        if (el.tagName === 'A') {
+          el.style.color = '#2563eb';
+          el.style.textDecoration = 'underline';
+        }
+        
+        // Style buttons properly
+        if (el.tagName === 'BUTTON') {
+          el.style.backgroundColor = '#2563eb';
+          el.style.color = '#ffffff';
+          el.style.border = 'none';
+          el.style.padding = '0.5rem 1rem';
+          el.style.borderRadius = '4px';
+          el.style.cursor = 'pointer';
+        }
+      });
+    });
+  }
+  
   // Run initially and on interval to catch dynamically loaded content
   fixRealScoutInteractions();
-  setInterval(fixRealScoutInteractions, 2000);
+  fixRealScoutAppearance();
+  setInterval(() => {
+    fixRealScoutInteractions();
+    fixRealScoutAppearance();
+  }, 2000);
   
   // Fix all clickable elements
   const clickableElements = document.querySelectorAll('button, .btn, [role="button"], a[href]');
