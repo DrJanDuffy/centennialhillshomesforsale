@@ -1131,7 +1131,7 @@ a[href] {
 
   /* Prevent text selection issues */
   -webkit-tap-highlight-color: rgba(0,0,0,0.1);
-Ensure button and link styles are complete, including hover and focus states, and correct mobile touch targets./* Disabled states */
+Ensure buttonand link styles are complete, including hover and focus states, and correct mobile touch targets./* Disabled states */
 .btn:disabled,
 button:disabled,
 .button:disabled,
