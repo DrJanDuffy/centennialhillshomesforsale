@@ -207,6 +207,39 @@ args = "echo \"✅ Build completed - testing fixes\""
 task = "shell.exec"
 args = "npm run dev"
 
+[[workflows.workflow]]
+name = "Critical Error Fixes"
+author = 22930014
+mode = "sequential"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "echo \"🚨 Fixing critical errors...\""
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "echo \"1. CSS syntax error fixed\""
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "echo \"2. JavaScript try-catch error fixed\" "
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "echo \"3. Double Layout hydration issue fixed\""
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "npm run build"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "echo \"✅ Build completed - testing all fixes\""
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "npm run dev"
+
 [[ports]]
 localPort = 5000
 externalPort = 80
