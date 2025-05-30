@@ -7,7 +7,7 @@ channel = "stable-24_05"
 [deployment]
 build = ["sh", "-c", "npm run build"]
 deploymentTarget = "cloudrun"
-run = ["sh", "-c", "npm run start"]
+run = ["sh", "-c", "npm start"]
 
 [workflows]
 runButton = "Dev Server"
@@ -42,6 +42,19 @@ args = "npm run build"
 [[workflows.workflow.tasks]]
 task = "shell.exec"
 args = "npm run start"
+
+[[workflows.workflow]]
+name = "Deploy to Production"
+author = 22930014
+mode = "sequential"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "npm run build"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "echo \"✅ Build completed - ready for deployment\""
 
 [[ports]]
 localPort = 5000
