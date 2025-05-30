@@ -161,10 +161,11 @@ const RealScoutListings = ({
             if (widget) {
               const interactiveElements = widget.querySelectorAll('a, button, [role="button"], .listing-card, .property-card');
               interactiveElements.forEach(el => {
-                el.style.pointerEvents = 'auto';
-                el.style.cursor = 'pointer';
-                el.style.userSelect = 'auto';
-                el.style.touchAction = 'manipulation';
+                const htmlEl = el as HTMLElement;
+                htmlEl.style.pointerEvents = 'auto';
+                htmlEl.style.cursor = 'pointer';
+                htmlEl.style.userSelect = 'auto';
+                htmlEl.style.touchAction = 'manipulation';
               });
             }
           }, 1000);

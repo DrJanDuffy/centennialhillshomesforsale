@@ -50,7 +50,7 @@ const PageErrorChecker: React.FC = () => {
       // Check for missing keys in lists
       const listElements = document.querySelectorAll('ul li, ol li');
       listElements.forEach((li, index) => {
-        if (!li.getAttribute('key') && li.parentElement?.children.length > 1) {
+        if (!li.getAttribute('key') && li.parentElement && li.parentElement.children.length > 1) {
           errors.push({
             page: router.pathname,
             error: `Missing key prop on list item at index ${index}`,
@@ -77,7 +77,7 @@ const PageErrorChecker: React.FC = () => {
     } catch (error) {
       errors.push({
         page: router.pathname,
-        error: `React error check failed: ${error.message}`,
+        error: `React error check failed: ${error instanceof Error ? error.message : String(error)}`,
         severity: 'high',
         timestamp: new Date().toISOString()
       });
@@ -136,7 +136,7 @@ const PageErrorChecker: React.FC = () => {
     } catch (error) {
       errors.push({
         page: router.pathname,
-        error: `Accessibility check failed: ${error.message}`,
+        error: `Accessibility check failed: ${error instanceof Error ? error.message : String(error)}`,
         severity: 'medium',
         timestamp: new Date().toISOString()
       });
@@ -185,7 +185,7 @@ const PageErrorChecker: React.FC = () => {
     } catch (error) {
       errors.push({
         page: router.pathname,
-        error: `SEO check failed: ${error.message}`,
+        error: `SEO check failed: ${error instanceof Error ? error.message : String(error)}`,
         severity: 'medium',
         timestamp: new Date().toISOString()
       });
@@ -225,7 +225,7 @@ const PageErrorChecker: React.FC = () => {
     } catch (error) {
       errors.push({
         page: router.pathname,
-        error: `Performance check failed: ${error.message}`,
+        error: `Performance check failed: ${error instanceof Error ? error.message : String(error)}`,
         severity: 'low',
         timestamp: new Date().toISOString()
       });
