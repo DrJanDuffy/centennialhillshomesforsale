@@ -5,13 +5,6 @@ import { useEffect } from 'react';
 import { usePathname } from 'next/navigation';
 import Script from 'next/script';
 
-declare global {
-  interface Window {
-    gtag: (...args: any[]) => void;
-    dataLayer: any[];
-  }
-}
-
 interface GoogleAnalyticsProps {
   measurementId?: string;
 }
