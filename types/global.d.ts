@@ -4,6 +4,10 @@ declare global {
     gtag: (...args: any[]) => void;
     dataLayer: any[];
     GoogleAnalytics: any;
+    RealScout?: {
+      init: (config: any) => void;
+      [key: string]: any;
+    };
   }
 
   namespace JSX {
