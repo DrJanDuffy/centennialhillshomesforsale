@@ -1,11 +1,10 @@
-
 // Enhanced button fixes with proper error handling
 (function() {
   'use strict';
-  
+
   let retryCount = 0;
   const maxRetries = 3;
-  
+
   function applyButtonFixes() {
     try {
       // Fix button hover states
@@ -14,7 +13,7 @@
         if (!button.style.cursor) {
           button.style.cursor = 'pointer';
         }
-        
+
         // Add hover effect if missing
         if (!button.classList.contains('hover-fixed')) {
           button.classList.add('hover-fixed');
@@ -54,7 +53,7 @@
       return true;
     } catch (error) {
       console.error('Error applying button fixes:', error);
-      
+
       // Retry mechanism
       if (retryCount < maxRetries) {
         retryCount++;
@@ -89,7 +88,7 @@
         });
       }
     });
-    
+
     if (shouldApplyFixes) {
       setTimeout(applyButtonFixes, 100);
     }
