@@ -124,7 +124,7 @@ export default function LasVegas89149() {
           </div>
         </motion.section>
 
-        <SchoolInfo selectedNeighborhood="Centennial Hills" />
+        <SchoolInfo neighborhood="Centennial Hills" />
 
         <motion.section 
           className="listings-section"

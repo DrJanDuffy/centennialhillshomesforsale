@@ -117,7 +117,7 @@ export default function NorthwestLasVegas() {
           </div>
         </motion.section>
 
-        <SchoolInfo selectedNeighborhood="Centennial Hills" />
+        <SchoolInfo neighborhood="Centennial Hills" />
 
         <motion.section 
           className="why-northwest"
