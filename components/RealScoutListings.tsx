@@ -23,6 +23,9 @@ const RealScoutListings: React.FC<RealScoutListingsProps> = ({
   const [scriptLoaded, setScriptLoaded] = useState(false);
 
   useEffect(() => {
+    let retryCount = 0;
+    const maxRetries = 3;
+    
     // Check if script is already loaded
     const checkScript = () => {
       if (typeof window !== 'undefined') {
@@ -39,13 +42,25 @@ const RealScoutListings: React.FC<RealScoutListingsProps> = ({
               setIsLoading(false);
             });
             script.addEventListener('error', () => {
-              setHasError(true);
-              setIsLoading(false);
+              if (retryCount < maxRetries) {
+                retryCount++;
+                console.log(`RealScout script failed, retry ${retryCount}/${maxRetries}`);
+                setTimeout(checkScript, 2000);
+              } else {
+                setHasError(true);
+                setIsLoading(false);
+              }
             });
           }
         } else {
           // Script not found, try again in a moment
-          setTimeout(checkScript, 1000);
+          if (retryCount < maxRetries) {
+            retryCount++;
+            setTimeout(checkScript, 1000);
+          } else {
+            setHasError(true);
+            setIsLoading(false);
+          }
         }
       }
     };
@@ -53,13 +68,13 @@ const RealScoutListings: React.FC<RealScoutListingsProps> = ({
     // Initial check
     checkScript();
 
-    // Set timeout to stop loading after 8 seconds
+    // Set timeout to stop loading after 12 seconds (increased for retry attempts)
     const timeout = setTimeout(() => {
       if (isLoading) {
         setHasError(true);
         setIsLoading(false);
       }
-    }, 8000);
+    }, 12000);
 
     return () => clearTimeout(timeout);
   }, [isLoading]);

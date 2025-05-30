@@ -56,11 +56,13 @@
 realscout-office-listings {
   display: block;
   min-height: 400px;
-  background: var(--background-color);
-  color: var(--text-color);
+  background: #ffffff !important;
+  color: #1f2937 !important;
   pointer-events: auto !important;
   position: relative;
   z-index: 2;
+  border-radius: 8px;
+  overflow: hidden;
 }
 
 /* Ensure all interactive elements in RealScout are clickable */
@@ -87,6 +89,57 @@ realscout-office-listings .listing-item {
 realscout-office-listings::before,
 realscout-office-listings::after {
   display: none !important;
+}
+
+/* Fix dark appearance issues */
+realscout-office-listings,
+realscout-office-listings * {
+  background-color: #ffffff !important;
+  color: #1f2937 !important;
+}
+
+/* Ensure proper text colors for listings */
+realscout-office-listings .listing-title,
+realscout-office-listings .property-title,
+realscout-office-listings h1,
+realscout-office-listings h2,
+realscout-office-listings h3,
+realscout-office-listings h4,
+realscout-office-listings h5,
+realscout-office-listings h6 {
+  color: #1f2937 !important;
+}
+
+/* Fix price and address text */
+realscout-office-listings .price,
+realscout-office-listings .address,
+realscout-office-listings .property-details {
+  color: #374151 !important;
+}
+
+/* Make sure links are visible and clickable */
+realscout-office-listings a {
+  color: #2563eb !important;
+  text-decoration: underline !important;
+}
+
+realscout-office-listings a:hover {
+  color: #1d4ed8 !important;
+  background-color: #f3f4f6 !important;
+}
+
+/* Ensure buttons are properly styled */
+realscout-office-listings button {
+  background-color: #2563eb !important;
+  color: #ffffff !important;
+  border: none !important;
+  padding: 0.5rem 1rem !important;
+  border-radius: 4px !important;
+  cursor: pointer !important;
+}
+
+realscout-office-listings button:hover {
+  background-color: #1d4ed8 !important;
 }
 
 /* Local Image Gallery Styles */

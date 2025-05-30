@@ -54,13 +54,17 @@ export default function Document() {
           __html: `
             realscout-office-listings {
               --rs-listing-divider-color: #4a90e2;
+              --rs-background-color: #ffffff;
+              --rs-text-color: #1f2937;
+              --rs-primary-color: #2563eb;
               width: 100%;
               min-height: 400px;
               display: block;
               border: 1px solid #e5e7eb;
               border-radius: 8px;
               padding: 20px;
-              background: #ffffff;
+              background: #ffffff !important;
+              color: #1f2937 !important;
               pointer-events: auto !important;
               z-index: 1;
               position: relative;
