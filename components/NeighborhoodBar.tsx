@@ -8,10 +8,10 @@ interface NeighborhoodBarProps {
 
 const neighborhoods = [
   'Centennial Hills',
-  'Providence',
+  'The Trails',
+  'Tournament Hills', 
   'Skye Canyon',
-  'Northwest Las Vegas',
-  'The Canyons'
+  'Sun City Aliante'
 ];
 
 export default function NeighborhoodBar({ currentNeighborhood, onNeighborhoodChange }: NeighborhoodBarProps) {
