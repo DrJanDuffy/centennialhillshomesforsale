@@ -23,7 +23,6 @@ const nextConfig = {
   eslint: {
     ignoreDuringBuilds: false,
   },
-  swcMinify: true,
   poweredByHeader: false,
 };
 
