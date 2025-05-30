@@ -4,6 +4,14 @@ import type { AppProps } from 'next/app';
 import { useEffect } from 'react';
 import ErrorBoundary from '../components/ErrorBoundary';
 import { setupGlobalErrorHandling } from '../utils/errorTracking';
+// Add error dashboard to app
+import AnalyticsDashboard from '../components/AnalyticsDashboard';
+// Add error dashboard to app
+import ErrorDashboard from '../components/ErrorDashboard';
+
+function Layout({ children }) {
+  return <>{children}</>;
+}
 
 export default function App({ Component, pageProps }: AppProps) {
   useEffect(() => {
@@ -24,7 +32,12 @@ export default function App({ Component, pageProps }: AppProps) {
 
   return (
     <ErrorBoundary>
-      <Component {...pageProps} />
+      {/* Include error dashboard in app */}
+      <Layout>
+        <Component {...pageProps} />
+      </Layout>
+      <AnalyticsDashboard isAdmin={false} />
+      <ErrorDashboard />
     </ErrorBoundary>
   );
 }
