@@ -417,7 +417,7 @@
     });
 
     // Special fixes for common issues
-    fixNavigationElements();
+    fixNavigationMenus();
     fixFormElements();
     fixRealScoutInteractions();
     fixOverlayIssues();
@@ -523,12 +523,11 @@
     console.log('✅ Comprehensive button fixes completed');
   }
 
-  // Start when DOM is ready
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', initialize);
-  } else {
-    initialize();
-  }
+  // Initialize fixes when DOM is ready
+  document.addEventListener('DOMContentLoaded', () => {
+    console.log('🔧 Loading comprehensive button fixes...');
+    initializeAllButtons();
+  });
 
   // Also run on window load for any late-loading content
   window.addEventListener('load', () => {
