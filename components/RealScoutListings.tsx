@@ -112,13 +112,21 @@ const RealScoutListings: React.FC<RealScoutListingsProps> = ({
   }
 
   return (
-    <div className={`realscout-widget-container ${className}`}>
+    <div className={`realscout-widget-container ${className}`} style={{ pointerEvents: 'auto', position: 'relative', zIndex: 1 }}>
       <realscout-office-listings 
         agent-encoded-id={agentId}
         sort-order={sortOrder}
         listing-status={listingStatus}
         property-types={propertyTypes}
         price-min={priceMin}
+        style={{ 
+          pointerEvents: 'auto',
+          cursor: 'auto',
+          userSelect: 'auto',
+          touchAction: 'manipulation',
+          position: 'relative',
+          zIndex: 2
+        }}
       />
     </div>
   );

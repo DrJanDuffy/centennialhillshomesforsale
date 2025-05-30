@@ -97,6 +97,47 @@
 document.addEventListener('DOMContentLoaded', function() {
   console.log('🔧 Button fixes loading...');
   
+  // Fix RealScout widget interactions
+  function fixRealScoutInteractions() {
+    const realscoutWidgets = document.querySelectorAll('realscout-office-listings');
+    realscoutWidgets.forEach(widget => {
+      widget.style.pointerEvents = 'auto';
+      widget.style.userSelect = 'auto';
+      widget.style.touchAction = 'manipulation';
+      widget.style.position = 'relative';
+      widget.style.zIndex = '2';
+      
+      // Enable all child elements
+      const observer = new MutationObserver(function(mutations) {
+        mutations.forEach(function(mutation) {
+          if (mutation.addedNodes.length > 0) {
+            mutation.addedNodes.forEach(node => {
+              if (node.nodeType === 1) { // Element node
+                node.style.pointerEvents = 'auto';
+                node.style.cursor = 'pointer';
+                
+                // Fix specific elements
+                const interactiveElements = node.querySelectorAll('a, button, [role="button"], .listing-card, .property-card');
+                interactiveElements.forEach(el => {
+                  el.style.pointerEvents = 'auto';
+                  el.style.cursor = 'pointer';
+                  el.style.userSelect = 'auto';
+                  el.style.touchAction = 'manipulation';
+                });
+              }
+            });
+          }
+        });
+      });
+      
+      observer.observe(widget, { childList: true, subtree: true });
+    });
+  }
+  
+  // Run initially and on interval to catch dynamically loaded content
+  fixRealScoutInteractions();
+  setInterval(fixRealScoutInteractions, 2000);
+  
   // Fix all clickable elements
   const clickableElements = document.querySelectorAll('button, .btn, [role="button"], a[href]');
   

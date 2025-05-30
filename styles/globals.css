@@ -45,10 +45,12 @@
 .realscout-widget-container {
   margin: 2rem 0;
   border-radius: 12px;
-  overflow: hidden;
+  overflow: visible;
   box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
   background: var(--background-color);
   border: 1px solid var(--border-color);
+  position: relative;
+  z-index: 1;
 }
 
 realscout-office-listings {
@@ -56,6 +58,35 @@ realscout-office-listings {
   min-height: 400px;
   background: var(--background-color);
   color: var(--text-color);
+  pointer-events: auto !important;
+  position: relative;
+  z-index: 2;
+}
+
+/* Ensure all interactive elements in RealScout are clickable */
+realscout-office-listings *,
+realscout-office-listings::part(*) {
+  pointer-events: auto !important;
+}
+
+realscout-office-listings a,
+realscout-office-listings button,
+realscout-office-listings [role="button"],
+realscout-office-listings .listing-card,
+realscout-office-listings .property-card,
+realscout-office-listings .listing-item {
+  cursor: pointer !important;
+  pointer-events: auto !important;
+  user-select: auto !important;
+  touch-action: manipulation !important;
+  position: relative;
+  z-index: 3;
+}
+
+/* Remove any overlay that might block clicks */
+realscout-office-listings::before,
+realscout-office-listings::after {
+  display: none !important;
 }
 
 /* Local Image Gallery Styles */

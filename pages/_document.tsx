@@ -61,6 +61,25 @@ export default function Document() {
               border-radius: 8px;
               padding: 20px;
               background: #ffffff;
+              pointer-events: auto !important;
+              z-index: 1;
+              position: relative;
+            }
+            
+            realscout-office-listings * {
+              pointer-events: auto !important;
+              cursor: pointer;
+            }
+            
+            realscout-office-listings a,
+            realscout-office-listings button,
+            realscout-office-listings [role="button"],
+            realscout-office-listings .listing-card,
+            realscout-office-listings .property-link {
+              pointer-events: auto !important;
+              cursor: pointer !important;
+              user-select: auto !important;
+              touch-action: manipulation !important;
             }
 
             .realscout-loading {
