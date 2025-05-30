@@ -6,10 +6,7 @@ import { useEffect } from 'react';
 import ErrorBoundary from '../components/ErrorBoundary';
 import { setupGlobalErrorHandling } from '../utils/errorTracking';
 
-// Only import these components in development
-const isDevelopment = process.env.NODE_ENV === 'development';
-const AnalyticsDashboard = isDevelopment ? require('../components/AnalyticsDashboard').default : null;
-const ErrorDashboard = isDevelopment ? require('../components/ErrorDashboard').default : null;
+// Analytics and error dashboards are removed from production builds
 
 function Layout({ children }) {
   return <>{children}</>;
@@ -39,9 +36,6 @@ export default function App({ Component, pageProps }: AppProps) {
       <Layout>
         <Component {...pageProps} />
       </Layout>
-      {/* Only render these components in development */}
-      {isDevelopment && AnalyticsDashboard && <AnalyticsDashboard isAdmin={true} />}
-      {isDevelopment && ErrorDashboard && <ErrorDashboard />}
     </ErrorBoundary>
   );
 }
