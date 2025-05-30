@@ -6,9 +6,12 @@ import Footer from './Footer';
 import ErrorBoundary from './ErrorBoundary';
 import LocalBusinessSchema from './LocalBusinessSchema';
 import PerformanceMonitor from './PerformanceMonitor';
-import GoogleAnalytics from './GoogleAnalytics';
 import ErrorHandler from './ErrorHandler'; // Added import for ErrorHandler
 import AnalyticsDashboard from './AnalyticsDashboard'; // Import the AnalyticsDashboard
+import SafeGoogleAnalytics from './SafeGoogleAnalytics';
+import EnterpriseAnalytics from '../utils/enterpriseAnalytics';
+import ErrorBoundaryWrapper from './ErrorBoundaryWrapper';
+import ErrorReportingSystem from '../utils/errorReporting';
 
 interface LayoutProps {
   children: React.ReactNode;
@@ -36,7 +39,7 @@ const Layout: React.FC<LayoutProps> = ({
           <meta name="viewport" content="width=device-width, initial-scale=1" />
           <link rel="icon" href="/favicon.ico" />
         </Head>
-        <GoogleAnalytics />
+        <SafeGoogleAnalytics measurementId={process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID} />
         <LocalBusinessSchema 
           pageType={pageType}
           neighborhood={neighborhood}
@@ -49,7 +52,7 @@ const Layout: React.FC<LayoutProps> = ({
             {children}
           </main>
           <Footer />
-          <GoogleAnalytics />
+          <SafeGoogleAnalytics measurementId={process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID} />
           <AnalyticsDashboard isAdmin={true} />
         </div>
 
