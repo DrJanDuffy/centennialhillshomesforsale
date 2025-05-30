@@ -7,7 +7,7 @@ channel = "stable-24_05"
 [deployment]
 build = ["sh", "-c", "npm install --legacy-peer-deps && npm run build"]
 deploymentTarget = "cloudrun"
-run = ["sh", "-c", "npm start"]
+run = ["sh", "-c", "npx serve out -s -l 5000"]
 
 [workflows]
 runButton = "Dev Server"
@@ -76,6 +76,36 @@ args = "echo \"✅ Build completed successfully\""
 [[workflows.workflow.tasks]]
 task = "shell.exec"
 args = "echo \"🚀 Ready for automatic deployment\""
+
+[[workflows.workflow]]
+name = "Static Build & Deploy"
+author = 22930014
+mode = "sequential"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "npm install --legacy-peer-deps"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "npm run build-static"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "echo \"✅ Static build completed - ready for Replit deployment\""
+
+[[workflows.workflow]]
+name = "Deploy Ready"
+author = 22930014
+mode = "sequential"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "npm run build-static"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "npx serve out -s -l 5000"
 
 [[ports]]
 localPort = 5000
