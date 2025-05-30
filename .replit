@@ -10,7 +10,7 @@ deploymentTarget = "cloudrun"
 run = ["sh", "-c", "npx serve out -s -l 5000"]
 
 [workflows]
-runButton = "Critical Fix Deploy"
+runButton = "EMERGENCY SITE RECOVERY"
 
 [[workflows.workflow]]
 name = "Run"
@@ -418,6 +418,91 @@ args = "echo \"✅ Starting production server...\""
 [[workflows.workflow.tasks]]
 task = "shell.exec"
 args = "npx serve out -s -l 5000"
+
+[[workflows.workflow]]
+name = "EMERGENCY SITE RECOVERY"
+author = 22930014
+mode = "sequential"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "echo \"🚨 EMERGENCY SITE RECOVERY - CRITICAL FIXES\""
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "echo \"=== STEP 1: Kill all processes ===\""
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "pkill -f \"next\" || true"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "pkill -f \"serve\" || true"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "pkill -f \"node\" || true"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "sleep 5"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "echo \"=== STEP 2: Clear all cache ===\""
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "rm -rf .next || true"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "rm -rf out || true"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "rm -rf node_modules/.cache || true"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "rm -rf .swc || true"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "echo \"=== STEP 3: Fresh dependency install ===\""
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "npm install --legacy-peer-deps --force --no-audit"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "echo \"=== STEP 4: Build with recovery ===\""
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "NODE_ENV=production npm run build-static --verbose"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "echo \"=== STEP 5: Verify build output ===\""
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "ls -la out/ || echo \"Build output missing - continuing anyway\""
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "echo \"=== STEP 6: Start production server ===\""
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "echo \"🚀 Starting server on port 5000...\""
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "npx serve out -s -l 5000 -C"
 
 [[ports]]
 localPort = 5000
