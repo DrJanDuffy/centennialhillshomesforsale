@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react';
-import '../types/global.d.ts';
 
 interface RealScoutListingsProps {
   agentId?: string;
