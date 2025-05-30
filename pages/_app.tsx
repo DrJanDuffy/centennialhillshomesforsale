@@ -57,7 +57,21 @@ export default function App({ Component, pageProps }: AppProps) {
 
   }, []);
 
-  // Prevent hydration mismatches by not rendering until client-side
+  // For static export, always render the component
+  if (typeof window === 'undefined') {
+    // Server-side rendering
+    return (
+      <ErrorBoundary>
+        <div suppressHydrationWarning={true}>
+          <Layout>
+            <Component {...pageProps} />
+          </Layout>
+        </div>
+      </ErrorBoundary>
+    );
+  }
+
+  // Client-side rendering with loading state
   if (!isClient) {
     return (
       <div style={{ 
