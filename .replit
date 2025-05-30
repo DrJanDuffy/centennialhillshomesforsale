@@ -504,6 +504,43 @@ args = "echo \"🚀 Starting server on port 5000...\""
 task = "shell.exec"
 args = "npx serve out -s -l 5000 -C"
 
+[[workflows.workflow]]
+name = "Quick Deploy Test"
+author = 22930014
+mode = "sequential"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "echo \"🔧 Quick deployment test...\""
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = 'pkill -f "next\|serve" || true'
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "npm run build"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "echo \"✅ Build successful!\""
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "npx serve out -s -l 5000 &"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "echo \"🚀 Server starting on http://localhost:5000\""
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "sleep 3"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "curl -s -o /dev/null -w \"%{http_code}\" http://localhost:5000 || echo \"Testing server response...\""
+
 [[ports]]
 localPort = 5000
 externalPort = 80
