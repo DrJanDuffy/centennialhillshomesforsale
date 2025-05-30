@@ -13,9 +13,19 @@ const neighborhoods = [
   'Tournament Hills',
   'Skye Canyon',
   'Sun City Aliante'
-];
+] as const;
 
-const neighborhoodData = {
+type NeighborhoodName = typeof neighborhoods[number];
+
+const neighborhoodData: Record<NeighborhoodName, {
+  description: string;
+  medianPrice: string;
+  avgSqft: string;
+  yearBuilt: string;
+  highlights: string[];
+  zipCodes: string[];
+  coordinates: { lat: number; lng: number };
+}> = {
   'Centennial Hills': {
     description: 'Master-planned community with luxury homes, championship golf, and family amenities',
     medianPrice: '$650,000',
@@ -64,7 +74,7 @@ const neighborhoodData = {
 };
 
 export default function Neighborhoods() {
-  const [selectedNeighborhood, setSelectedNeighborhood] = useState('Centennial Hills');
+  const [selectedNeighborhood, setSelectedNeighborhood] = useState<NeighborhoodName>('Centennial Hills');
   const currentData = neighborhoodData[selectedNeighborhood];
 
   return (
@@ -91,7 +101,6 @@ export default function Neighborhoods() {
         </motion.section>
 
         <NeighborhoodBar 
-          neighborhoods={neighborhoods}
           currentNeighborhood={selectedNeighborhood}
           onNeighborhoodChange={setSelectedNeighborhood}
         />
@@ -136,7 +145,7 @@ export default function Neighborhoods() {
             </ul>
           </div>
 
-          <SchoolInfo selectedNeighborhood={selectedNeighborhood} />
+          <SchoolInfo neighborhood={selectedNeighborhood} />
 
           <div className="listings-section">
             <h3>Available Homes in {selectedNeighborhood}</h3>
