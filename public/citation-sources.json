@@ -1,0 +1,160 @@
+
+{
+  "primaryCitations": [
+    {
+      "platform": "Google Business Profile",
+      "status": "claimed",
+      "url": "https://business.google.com/",
+      "nap": "consistent",
+      "rating": 4.9,
+      "reviews": 127
+    },
+    {
+      "platform": "Yelp",
+      "status": "pending",
+      "url": "https://yelp.com/biz/",
+      "nap": "needs_update",
+      "rating": 0,
+      "reviews": 0
+    },
+    {
+      "platform": "Facebook Business",
+      "status": "pending",
+      "url": "https://facebook.com/",
+      "nap": "needs_creation",
+      "rating": 0,
+      "reviews": 0
+    }
+  ],
+  "realEstateCitations": [
+    {
+      "platform": "Zillow",
+      "status": "claimed",
+      "url": "https://zillow.com/profile/",
+      "profileComplete": true
+    },
+    {
+      "platform": "Realtor.com",
+      "status": "claimed",
+      "url": "https://realtor.com/agent/",
+      "profileComplete": true
+    },
+    {
+      "platform": "Trulia",
+      "status": "needs_update",
+      "url": "https://trulia.com/profile/",
+      "profileComplete": false
+    },
+    {
+      "platform": "Homes.com",
+      "status": "pending",
+      "url": "https://homes.com/",
+      "profileComplete": false
+    },
+    {
+      "platform": "Redfin",
+      "status": "pending",
+      "url": "https://redfin.com/",
+      "profileComplete": false
+    }
+  ],
+  "localDirectories": [
+    {
+      "platform": "Yellow Pages",
+      "status": "pending",
+      "category": "Real Estate Agents"
+    },
+    {
+      "platform": "Superpages",
+      "status": "pending",
+      "category": "Real Estate Services"
+    },
+    {
+      "platform": "Whitepages",
+      "status": "pending",
+      "category": "Professional Services"
+    },
+    {
+      "platform": "Manta",
+      "status": "pending",
+      "category": "Real Estate"
+    },
+    {
+      "platform": "Foursquare",
+      "status": "pending",
+      "category": "Professional Services"
+    }
+  ],
+  "industrySpecific": [
+    {
+      "platform": "National Association of REALTORS®",
+      "status": "member",
+      "membershipNumber": "active"
+    },
+    {
+      "platform": "Las Vegas REALTORS®",
+      "status": "member",
+      "membershipNumber": "active"
+    },
+    {
+      "platform": "Better Business Bureau",
+      "status": "pending",
+      "rating": "A+"
+    },
+    {
+      "platform": "HomeAdvisor",
+      "status": "pending",
+      "serviceArea": "Las Vegas"
+    },
+    {
+      "platform": "Angie's List",
+      "status": "pending",
+      "category": "Real Estate"
+    }
+  ],
+  "socialPlatforms": [
+    {
+      "platform": "LinkedIn",
+      "status": "active",
+      "url": "https://linkedin.com/in/",
+      "followers": 850
+    },
+    {
+      "platform": "Instagram",
+      "status": "pending",
+      "businessAccount": false
+    },
+    {
+      "platform": "Twitter/X",
+      "status": "pending",
+      "businessAccount": false
+    },
+    {
+      "platform": "YouTube",
+      "status": "pending",
+      "channelType": "business"
+    },
+    {
+      "platform": "TikTok",
+      "status": "pending",
+      "businessAccount": false
+    }
+  ],
+  "localChambers": [
+    {
+      "organization": "Las Vegas Chamber of Commerce",
+      "status": "pending",
+      "membershipType": "business"
+    },
+    {
+      "organization": "Henderson Chamber of Commerce",
+      "status": "pending",
+      "membershipType": "associate"
+    },
+    {
+      "organization": "North Las Vegas Chamber",
+      "status": "pending",
+      "membershipType": "business"
+    }
+  ]
+}
