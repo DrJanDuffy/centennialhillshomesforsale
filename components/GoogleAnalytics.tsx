@@ -1,13 +1,14 @@
+
 'use client';
 
 import { useEffect } from 'react';
-import { useRouter } from 'next/router';
+import { usePathname } from 'next/navigation';
 import Script from 'next/script';
 
 declare global {
   interface Window {
-    gtag?: (...args: any[]) => void;
-    dataLayer?: any[];
+    gtag: (...args: any[]) => void;
+    dataLayer: any[];
   }
 }
 
@@ -18,25 +19,18 @@ interface GoogleAnalyticsProps {
 const GoogleAnalytics: React.FC<GoogleAnalyticsProps> = ({ 
   measurementId = 'G-PLACEHOLDER' 
 }) => {
-  const router = useRouter();
+  const pathname = usePathname();
 
   useEffect(() => {
-    // Track page views on route change
-    const handleRouteChange = (url: string) => {
-      if (typeof window !== 'undefined' && window.gtag) {
-        window.gtag('config', measurementId, {
-          page_path: url,
-          page_title: document.title,
-          page_location: window.location.href
-        });
-      }
-    };
-
-    router.events.on('routeChangeComplete', handleRouteChange);
-    return () => {
-      router.events.off('routeChangeComplete', handleRouteChange);
-    };
-  }, [router.events, measurementId]);
+    // Track page views on pathname change
+    if (typeof window !== 'undefined' && window.gtag) {
+      window.gtag('config', measurementId, {
+        page_path: pathname,
+        page_title: document.title,
+        page_location: window.location.href
+      });
+    }
+  }, [pathname, measurementId]);
 
   // Don't render in development or if no measurement ID
   if (process.env.NODE_ENV === 'development' || !measurementId || measurementId === 'G-PLACEHOLDER') {
