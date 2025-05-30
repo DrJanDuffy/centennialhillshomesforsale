@@ -35,6 +35,55 @@ export default function Document() {
           type="module"
           onError="console.error('Failed to load RealScout widget script')"
         ></script>
+        <script dangerouslySetInnerHTML={{
+          __html: `
+            // Ensure buttons work on page load
+            document.addEventListener('DOMContentLoaded', function() {
+              // Add click handlers for all buttons
+              const buttons = document.querySelectorAll('.btn, button, [role="button"]');
+              buttons.forEach(button => {
+                if (!button.onclick && !button.href) {
+                  button.style.cursor = 'pointer';
+                  button.addEventListener('click', function(e) {
+                    console.log('Button clicked:', this);
+                  });
+                }
+              });
+
+              // Handle phone number links
+              const phoneLinks = document.querySelectorAll('a[href^="tel:"]');
+              phoneLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                  console.log('Phone link clicked:', this.href);
+                });
+              });
+
+              // Handle contact form buttons
+              const contactButtons = document.querySelectorAll('.btn-primary, .btn-secondary');
+              contactButtons.forEach(button => {
+                button.addEventListener('click', function(e) {
+                  if (this.tagName === 'A') return; // Let links work normally
+                  console.log('Contact button clicked');
+                });
+              });
+            });
+          `
+        }} />
+        <script dangerouslySetInnerHTML={{
+          __html: `
+            // RealScout widget fallback
+            window.addEventListener('load', function() {
+              setTimeout(function() {
+                const widgets = document.querySelectorAll('realscout-office-listings');
+                widgets.forEach(widget => {
+                  if (!widget.innerHTML.trim()) {
+                    widget.innerHTML = '<p>Loading property listings... <a href="tel:+17029031952">Call (702) 903-1952</a> for immediate assistance.</p>';
+                  }
+                });
+              }, 5000);
+            });
+          `
+        }} />
         <style dangerouslySetInnerHTML={{
           __html: `
             realscout-office-listings {
@@ -47,7 +96,7 @@ export default function Document() {
               padding: 20px;
               background: #ffffff;
             }
-            
+
             .realscout-loading {
               display: flex;
               flex-direction: column;
@@ -58,7 +107,7 @@ export default function Document() {
               text-align: center;
               color: #6b7280;
             }
-            
+
             .realscout-error {
               padding: 20px;
               background: #fef2f2;
@@ -67,7 +116,7 @@ export default function Document() {
               color: #dc2626;
               text-align: center;
             }
-            
+
             .loading-spinner {
               width: 40px;
               height: 40px;
@@ -77,7 +126,7 @@ export default function Document() {
               animation: spin 1s linear infinite;
               margin-bottom: 16px;
             }
-            
+
             @keyframes spin {
               0% { transform: rotate(0deg); }
               100% { transform: rotate(360deg); }

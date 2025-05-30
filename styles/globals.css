@@ -1044,6 +1044,26 @@ h2 {
   font-size: 1.1rem;
   transition: all 0.3s ease;
   border: 2px solid transparent;
+  cursor: pointer;
+  pointer-events: auto;
+  user-select: none;
+  text-align: center;
+  line-height: 1.2;
+}
+
+.btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+.btn:focus {
+  outline: 2px solid #2563eb;
+  outline-offset: 2px;
+}
+
+.btn:active {
+  transform: translateY(1px);
 }
 
 .btn-primary {
@@ -1077,6 +1097,27 @@ h2 {
   border: 1px solid #fca5a5;
   color: #dc2626;
   text-align: center;
+}
+
+.realscout-error {
+  padding: 2rem;
+  border-radius: 8px;
+  background: #fef7f7;
+  border: 1px solid #f87171;
+  text-align: center;
+  margin: 2rem 0;
+}
+
+.fallback-buttons {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-top: 1.5rem;
+}
+
+.fallback-buttons .btn {
+  min-width: 150px;
 }
 
 @media (max-width: 768px) {
