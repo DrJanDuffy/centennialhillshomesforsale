@@ -33,42 +33,8 @@ export default function Document() {
         <script 
           src="https://em.realscout.com/widgets/realscout-web-components.umd.js" 
           type="module"
-          onError="console.error('Failed to load RealScout widget script')"
         ></script>
-        <script dangerouslySetInnerHTML={{
-          __html: `
-            // Ensure buttons work on page load
-            document.addEventListener('DOMContentLoaded', function() {
-              // Add click handlers for all buttons
-              const buttons = document.querySelectorAll('.btn, button, [role="button"]');
-              buttons.forEach(button => {
-                if (!button.onclick && !button.href) {
-                  button.style.cursor = 'pointer';
-                  button.addEventListener('click', function(e) {
-                    console.log('Button clicked:', this);
-                  });
-                }
-              });
-
-              // Handle phone number links
-              const phoneLinks = document.querySelectorAll('a[href^="tel:"]');
-              phoneLinks.forEach(link => {
-                link.addEventListener('click', function(e) {
-                  console.log('Phone link clicked:', this.href);
-                });
-              });
-
-              // Handle contact form buttons
-              const contactButtons = document.querySelectorAll('.btn-primary, .btn-secondary');
-              contactButtons.forEach(button => {
-                button.addEventListener('click', function(e) {
-                  if (this.tagName === 'A') return; // Let links work normally
-                  console.log('Contact button clicked');
-                });
-              });
-            });
-          `
-        }} />
+        <script src="/button-fixes.js" defer></script>
         <script dangerouslySetInnerHTML={{
           __html: `
             // RealScout widget fallback

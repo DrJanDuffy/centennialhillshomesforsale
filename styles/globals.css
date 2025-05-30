@@ -44,15 +44,18 @@
 /* RealScout Widget Styles */
 .realscout-widget-container {
   margin: 2rem 0;
-  border-radius: 8px;
+  border-radius: 12px;
   overflow: hidden;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  background: white;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+  background: var(--background-color);
+  border: 1px solid var(--border-color);
 }
 
 realscout-office-listings {
   display: block;
   min-height: 400px;
+  background: var(--background-color);
+  color: var(--text-color);
 }
 
 /* Local Image Gallery Styles */
@@ -197,8 +200,11 @@ img {
 :root {
   --primary-color: #2563eb;
   --secondary-color: #1e40af;
+  --accent-color: #059669;
   --text-color: #1f2937;
+  --text-light: #6b7280;
   --background-color: #ffffff;
+  --background-light: #f8fafc;
   --border-color: #e5e7eb;
   --font-family: system-ui, -apple-system, sans-serif;
   --border-radius: 0.5rem;
@@ -219,6 +225,7 @@ body {
   font-family: var(--font-family);
   color: var(--text-color);
   background: var(--background-color);
+  line-height: 1.6;
 }
 
 body {
@@ -765,6 +772,14 @@ a {
   padding: 4rem 0;
 }
 
+.section:nth-child(even) {
+  background: var(--background-light);
+}
+
+.section:nth-child(odd) {
+  background: var(--background-color);
+}
+
 /* Hyperlocal Centennial Hills Styles */
 .local-highlights {
   display: flex;
@@ -1101,11 +1116,22 @@ h2 {
 
 .realscout-error {
   padding: 2rem;
-  border-radius: 8px;
-  background: #fef7f7;
-  border: 1px solid #f87171;
+  border-radius: 12px;
+  background: #fef2f2;
+  border: 1px solid #fecaca;
+  color: #dc2626;
   text-align: center;
   margin: 2rem 0;
+}
+
+.realscout-loading {
+  padding: 2rem;
+  border-radius: 12px;
+  background: var(--background-light);
+  border: 1px solid var(--border-color);
+  text-align: center;
+  margin: 2rem 0;
+  color: var(--text-light);
 }
 
 .fallback-buttons {
