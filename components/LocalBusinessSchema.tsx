@@ -115,9 +115,13 @@ export default function LocalBusinessSchema({
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
-          __html: JSON.stringify(finalSchema)
+          __html: JSON.stringify(finalSchema, null, 0)
         }}
       />
+      {/* Additional verification meta tags */}
+      <meta name="google-site-verification" content="centennial-hills-homes-verification" />
+      <meta name="business-verification" content="dr-jan-duffy-realtor" />
+      <link rel="canonical" href={`https://centennialhillshomesforsale.com${pageType === 'home' ? '' : `/${pageType}`}`} />
     </Head>
   );
 }
