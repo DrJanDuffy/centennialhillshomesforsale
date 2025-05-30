@@ -10,7 +10,7 @@ deploymentTarget = "cloudrun"
 run = ["sh", "-c", "npx serve out -s -l 5000 -C"]
 
 [workflows]
-runButton = "DEPLOY NOW"
+runButton = "Deploy Ready"
 
 [[workflows.workflow]]
 name = "Run"
