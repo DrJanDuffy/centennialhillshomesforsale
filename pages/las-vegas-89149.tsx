@@ -21,7 +21,7 @@ export default function LasVegas89149() {
 
       <main>
         <NeighborhoodBar 
-          currentNeighborhood={currentNeighborhood}
+          currentNeighborhood={currentNeighborhood as any}
           onNeighborhoodChange={setCurrentNeighborhood}
         />
 

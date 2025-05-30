@@ -1,20 +1,20 @@
 
 declare global {
   interface Window {
-    gtag: (...args: any[]) => void;
-    dataLayer: any[];
-    GoogleAnalytics: any;
-    RealScout?: {
-      init: (config: any) => void;
-      [key: string]: any;
-    };
-  }
-
-  namespace JSX {
-    interface IntrinsicElements {
-      [elemName: string]: any;
-    }
+    gtag?: (...args: any[]) => void;
   }
 }
+
+export interface NeighborhoodName {
+  value: string;
+  label: string;
+}
+
+export type NeighborhoodType = 
+  | 'centennial-hills' 
+  | 'providence' 
+  | 'skye-canyon' 
+  | 'northwest-las-vegas'
+  | string;
 
 export {};
