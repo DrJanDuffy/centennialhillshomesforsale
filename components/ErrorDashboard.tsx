@@ -40,8 +40,8 @@ const ErrorDashboard: React.FC = () => {
     URL.revokeObjectURL(url);
   };
 
-  // Only show in development or if there are errors
-  if (process.env.NODE_ENV === 'production' && errors.length === 0) {
+  // Only show in development
+  if (process.env.NODE_ENV === 'production') {
     return null;
   }
 
