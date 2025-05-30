@@ -21,7 +21,9 @@ export default function PerformanceMonitor() {
           };
           
           // Log metrics for monitoring
-          console.log('Performance Metrics:', metrics);
+          if (process.env.NODE_ENV === 'development') {
+            console.log('Performance Metrics:', metrics);
+          }
           
           // Store in localStorage for analytics
           localStorage.setItem('performance-metrics', JSON.stringify(metrics));
