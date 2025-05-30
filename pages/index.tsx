@@ -179,38 +179,62 @@ export default function Home() {
         />
 
         {/* Hero Section */}
-        <section className="hero-section">
-          <div className="container">
-            <div className="hero-content">
-              <div className="hero-text">
-                <h1 className="hero-title">Centennial Hills: Where Desert Luxury Meets Family Living</h1>
-                <p className="hero-subtitle">
-                  Just 20 minutes from the Strip, discover master-planned communities like Providence, 
-                  Skye Canyon, and The Trails. Award-winning schools, championship golf courses, 
-                  and Red Rock Canyon at your doorstep.
-                </p>
-                <div className="local-highlights">
-                  <span className="highlight">🏫 Top-rated CCSD schools</span>
-                  <span className="highlight">⛰️ Red Rock Canyon views</span>
-                  <span className="highlight">🏌️ TPC Las Vegas nearby</span>
-                  <span className="highlight">🛍️ Downtown Summerlin 5 min</span>
-                </div>
-                <div className="hero-buttons">
-                  <button className="btn btn-primary">Browse Local Homes</button>
-                  <button className="btn btn-secondary">Neighborhood Tour</button>
-                </div>
+      <section className="hero-section">
+        <div className="hero-background">
+          <img 
+            src="/images/centennial-hills/centennial-hills-hero.jpg" 
+            alt="Luxury Centennial Hills Home"
+            className="hero-bg-image"
+          />
+          <div className="hero-overlay"></div>
+        </div>
+        <div className="hero-content">
+          <div className="hero-text">
+            <h1 className="hero-title">Find Your Dream Home in Centennial Hills</h1>
+            <p className="hero-subtitle">
+              Discover luxury living in Northwest Las Vegas with exclusive access to Centennial Hills, Providence, and Skye Canyon properties. Expert local knowledge since 2009.
+            </p>
+            <div className="hero-features">
+              <div className="feature">
+                <span className="feature-icon">🏡</span>
+                <span>Luxury Communities</span>
               </div>
-              <div className="hero-image">
-                <img 
-                  src="/images/centennial-hills/centennial-hills-hero.jpg" 
-                  alt="Beautiful Centennial Hills home with desert landscape and mountain views" 
-                  className="hero-img"
-                  loading="eager"
-                />
+              <div className="feature">
+                <span className="feature-icon">🎯</span>
+                <span>Local Expert</span>
+              </div>
+              <div className="feature">
+                <span className="feature-icon">⭐</span>
+                <span>5-Star Service</span>
               </div>
             </div>
+            <div className="hero-stats">
+              <div className="stat">
+                <span className="stat-number">500+</span>
+                <span className="stat-label">Homes Sold</span>
+              </div>
+              <div className="stat">
+                <span className="stat-number">15+</span>
+                <span className="stat-label">Years Experience</span>
+              </div>
+              <div className="stat">
+                <span className="stat-number">98%</span>
+                <span className="stat-label">Client Satisfaction</span>
+              </div>
+            </div>
+            <div className="hero-buttons">
+              <Link href="/listings" className="btn btn-primary">
+                <span>View Properties</span>
+                <span className="btn-arrow">→</span>
+              </Link>
+              <Link href="/contact" className="btn btn-secondary">
+                <span>Free Consultation</span>
+                <span className="btn-arrow">→</span>
+              </Link>
+            </div>
           </div>
-        </section>
+        </div>
+      </section>
 
         {/* Advanced Search */}
         <section className="search-section">
