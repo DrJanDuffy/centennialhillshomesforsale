@@ -1647,3 +1647,131 @@ h2 {
     grid-template-columns: 1fr;
   }
 }
+
+/* Business branding styles */
+.header-brand {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.header-brand .logo {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #1e40af;
+  text-decoration: none;
+}
+
+.header-brand .tagline {
+  font-size: 0.9rem;
+  color: #6b7280;
+  margin-top: 0.25rem;
+}
+
+.header-contact {
+  margin-left: auto;
+}
+
+.header-contact .phone-number {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: #059669;
+  text-decoration: none;
+  padding: 0.5rem 1rem;
+  border: 2px solid #059669;
+  border-radius: 6px;
+  transition: all 0.3s ease;
+}
+
+.header-contact .phone-number:hover {
+  background-color: #059669;
+  color: white;
+}
+
+.hero-about .about-hero-content {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3rem;
+  align-items: center;
+}
+
+.agent-profile h1 {
+  font-size: 2.5rem;
+  color: #1e40af;
+  margin-bottom: 0.5rem;
+}
+
+.agent-profile h2 {
+  font-size: 1.5rem;
+  color: #059669;
+  margin-bottom: 1.5rem;
+}
+
+.credentials {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.credential {
+  display: flex;
+  align-items: center;
+  font-size: 1.1rem;
+  color: #374151;
+  padding: 0.5rem 0;
+}
+
+.contact-buttons {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
+.contact-buttons .btn {
+  padding: 0.75rem 1.5rem;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.contact-buttons .btn-primary {
+  background-color: #1e40af;
+  color: white;
+  border: 2px solid #1e40af;
+}
+
+.contact-buttons .btn-primary:hover {
+  background-color: #1e3a8a;
+  border-color: #1e3a8a;
+}
+
+.contact-buttons .btn-secondary {
+  background-color: transparent;
+  color: #1e40af;
+  border: 2px solid #1e40af;
+}
+
+.contact-buttons .btn-secondary:hover {
+  background-color: #1e40af;
+  color: white;
+}
+
+@media (max-width: 768px) {
+  .hero-about .about-hero-content {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+  
+  .contact-buttons {
+    flex-direction: column;
+  }
+  
+  .header-brand .logo {
+    font-size: 1.2rem;
+  }
+  
+  .header-brand .tagline {
+    font-size: 0.8rem;
+  }
+}

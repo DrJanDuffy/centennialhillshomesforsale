@@ -1,12 +1,11 @@
-
 const fs = require('fs');
 const path = require('path');
 
 const siteConfig = {
   baseUrl: 'https://centennialhillshomesforsale.com',
   companyName: 'Centennial Hills Homes | Providence & Skye Canyon | Dr. Jan Duffy, REALTOR®',
+  agentName: 'Dr. Jan Duffy',
   phone: '+1-702-903-1952',
-  website: 'https://www.searchforhomeslasvegas.com/',
   address: {
     streetAddress: 'Providence Skye Canyon Dr',
     addressLocality: 'Las Vegas',
@@ -23,21 +22,21 @@ const siteConfig = {
     reviewCount: '127',
     bestRating: '5'
   },
-  businessHours: {
-    monday: '06:00-21:00',
-    tuesday: '06:00-21:00',
-    wednesday: '06:00-21:00',
-    thursday: '06:00-21:00',
-    friday: '06:00-21:00',
-    saturday: '06:00-21:00',
-    sunday: '06:00-21:00'
-  },
   socialProfiles: {
-    website: 'https://www.searchforhomeslasvegas.com/',
     pinterest: 'https://www.pinterest.com/DrJanDuffy/',
     linkedin: 'https://www.linkedin.com/company/california-to-vegas-homes',
-    youtube: 'https://www.youtube.com/@DrDuffy'
-  }
+    youtube: 'https://www.youtube.com/@DrDuffy',
+    website: 'https://www.searchforhomeslasvegas.com/'
+  },
+  businessSince: '1993-09-01',
+  specialties: [
+    'Luxury Property Buying & Sales',
+    'New Construction Sales & Leasing', 
+    'Building Lot Sales',
+    'First-time Home Buyer Services',
+    'Commercial Property Buying & Sales',
+    'Buying Agent Services'
+  ]
 };
 
 const marketData = {
