@@ -106,6 +106,20 @@ export default function CentennialHills() {
         </motion.section>
 
         <motion.section 
+          className="photo-gallery-section"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.7, duration: 0.6 }}
+        >
+          <div className="container">
+            <h2>Centennial Hills Property Gallery</h2>
+            <div id="centennial-images" className="property-images-grid">
+              <div className="loading-placeholder">Loading Centennial Hills property images...</div>
+            </div>
+          </div>
+        </motion.section>
+
+        <motion.section 
           className="listings-section"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}

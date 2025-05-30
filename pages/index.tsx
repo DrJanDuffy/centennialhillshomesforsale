@@ -441,6 +441,16 @@ export default function Home() {
           </div>
         </section>
 
+        {/* Centennial Hills Photo Gallery */}
+        <section className="photo-gallery-section">
+          <div className="container">
+            <h2 className="section-title">Centennial Hills Luxury Homes</h2>
+            <div id="hero-images" className="property-images-grid">
+              <div className="loading-placeholder">Loading local property images...</div>
+            </div>
+          </div>
+        </section>
+
         {/* Local Business Directory */}
         <section className="local-business-section">
           <div className="container">
