@@ -2232,10 +2232,11 @@ realscout-office-listings::part(*) {
     padding: 1.5rem;
   }
 }
+
 /* Correcting autoprefixer warnings by changing align-items and justify-content values to flex-end */
 .chart-grid {
   display: flex;
-  justify-content: space-between;```text
+  justify-content: space-between;
   align-items: flex-end;
   height: 100%;
   padding: 1rem 0;
