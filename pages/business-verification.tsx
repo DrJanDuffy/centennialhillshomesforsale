@@ -36,7 +36,7 @@ export default function BusinessVerification() {
       <SEOOptimized
         title="Google Business Profile Verification | Dr. Jan Duffy REALTOR®"
         description="Verified Google Business Profile for Dr. Jan Duffy, REALTOR® specializing in Centennial Hills, Providence, and Skye Canyon real estate since 1993."
-        pageType="business-verification"
+        pageType="local-business"
         localBusiness={true}
       />
       
