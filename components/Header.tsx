@@ -45,7 +45,7 @@ export default function Header() {
       <div className="container">
         <div className="header-content">
           <div className="header-brand">
-            <Link href="/" onClick={closeMenu}>
+            <Link href="/" onClick={closeMenu} className="logo-link">
               <div className="logo">
                 <h1>Dr. Jan Duffy</h1>
                 <span className="subtitle">REALTOR® | Centennial Hills Expert</span>

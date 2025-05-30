@@ -179,34 +179,35 @@ export default function Home() {
         />
 
         {/* Hero Section */}
-        <section className="page__main hero-section">
+        <section className="hero-section">
           <div className="container">
             <div className="hero-content">
-              <h1 className="hero-title">Centennial Hills: Where Desert Luxury Meets Family Living</h1>
-              <p className="hero-subtitle">
-                Just 20 minutes from the Strip, discover master-planned communities like Providence, 
-                Skye Canyon, and The Trails. Award-winning schools, championship golf courses, 
-                and Red Rock Canyon at your doorstep.
-              </p>
-              <div className="local-highlights">
-                <span className="highlight">🏫 Top-rated CCSD schools</span>
-                <span className="highlight">⛰️ Red Rock Canyon views</span>
-                <span className="highlight">🏌️ TPC Las Vegas nearby</span>
-                <span className="highlight">🛍️ Downtown Summerlin 5 min</span>
+              <div className="hero-text">
+                <h1 className="hero-title">Centennial Hills: Where Desert Luxury Meets Family Living</h1>
+                <p className="hero-subtitle">
+                  Just 20 minutes from the Strip, discover master-planned communities like Providence, 
+                  Skye Canyon, and The Trails. Award-winning schools, championship golf courses, 
+                  and Red Rock Canyon at your doorstep.
+                </p>
+                <div className="local-highlights">
+                  <span className="highlight">🏫 Top-rated CCSD schools</span>
+                  <span className="highlight">⛰️ Red Rock Canyon views</span>
+                  <span className="highlight">🏌️ TPC Las Vegas nearby</span>
+                  <span className="highlight">🛍️ Downtown Summerlin 5 min</span>
+                </div>
+                <div className="hero-buttons">
+                  <button className="btn btn-primary">Browse Local Homes</button>
+                  <button className="btn btn-secondary">Neighborhood Tour</button>
+                </div>
               </div>
-              <div className="hero-buttons">
-                <button className="btn btn-primary">Browse Local Homes</button>
-                <button className="btn btn-secondary">Neighborhood Tour</button>
+              <div className="hero-image">
+                <img 
+                  src="/images/centennial-hills/centennial-hills-hero.jpg" 
+                  alt="Beautiful Centennial Hills home with desert landscape and mountain views" 
+                  className="hero-img"
+                  loading="eager"
+                />
               </div>
-            </div>
-            <div className="hero-image">
-              {/* Hero Image Placeholder */}
-              <img 
-                src="/images/centennial-hills/centennial-hills-hero.jpg" 
-                alt="Beautiful Centennial Hills home" 
-                className="hero-img"
-                loading="lazy"
-              />
             </div>
           </div>
         </section>
