@@ -29,8 +29,10 @@ interface Property {
   status: string;
 }
 
+type NeighborhoodName = 'Centennial Hills' | 'The Trails' | 'Tournament Hills' | 'Skye Canyon' | 'Sun City Aliante';
+
 export default function Home() {
-  const [currentNeighborhood, setCurrentNeighborhood] = useState('Centennial Hills');
+  const [currentNeighborhood, setCurrentNeighborhood] = useState<NeighborhoodName>('Centennial Hills');
 
   try {
     return (
