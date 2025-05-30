@@ -2231,7 +2231,6 @@ realscout-office-listings::part(*) {
   .nav-link,
   .menu-toggle {
     min-height: 48px !important;
-```text
     min-width: 48px !important;
     padding: 0.75rem 1rem !important;
   }
