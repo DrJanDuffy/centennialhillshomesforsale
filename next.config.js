@@ -1,3 +1,4 @@
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
@@ -18,6 +19,9 @@ const nextConfig = {
   },
   experimental: {
     esmExternals: false
+  },
+  async rewrites() {
+    return [];
   }
 }
 

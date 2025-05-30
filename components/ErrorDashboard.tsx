@@ -56,4 +56,4 @@ const ErrorDashboard: React.FC = () => {
   );
 };
 
-export default ErrorDashboard;d;
+export default ErrorDashboard;
