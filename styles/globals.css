@@ -439,10 +439,14 @@ a {
   height: 30px;
   background: none;
   border: none;
-  cursor: pointer;
+  cursor: pointer !important;
   padding: 0;
-  position: relative;
-  z-index: 1001;
+  position: relative !important;
+  z-index: 1001 !important;
+  pointer-events: auto !important;
+  user-select: none !important;
+  touch-action: manipulation !important;
+  -webkit-tap-highlight-color: transparent;
 }
 
 .menu-toggle span {
@@ -1028,19 +1032,40 @@ h2 {
   font-size: 2rem;
 }
 
-/* Button styles */
-.btn,
+/* Universal Button and Interactive Element Styles */
 button,
+.btn,
 .button,
-[role="button"] {
+[role="button"],
+input[type="submit"],
+input[type="button"],
+.contact-button,
+.cta-buttons a,
+.fallback-buttons a,
+.contact-buttons a,
+.area-tag,
+.neighborhood-link,
+.quick-search-card,
+.menu-toggle,
+.nav-link,
+.phone-number,
+a[href] {
+  /* Core interaction properties */
+  pointer-events: auto !important;
+  cursor: pointer !important;
+  user-select: auto !important;
+  touch-action: manipulation !important;
+  
+  /* Layout and positioning */
+  position: relative !important;
+  z-index: 1 !important;
+  
+  /* Visual styling */
   display: inline-block;
   padding: 0.75rem 1.5rem;
-  border-radius: var(--border-radius);
+  border-radius: var(--border-radius, 6px);
   font-weight: 500;
-  transition: all 0.2s ease;
-  cursor: pointer !important;
-  pointer-events: auto !important;
-  user-select: none;
+  transition: all 0.2s ease !important;
   text-decoration: none;
   border: none;
   background: transparent;
@@ -1048,17 +1073,94 @@ button,
   font-size: inherit;
   line-height: 1.5;
   text-align: center;
-  touch-action: manipulation;
-  position: relative;
-  z-index: 1;
+  
+  /* Remove browser defaults that might interfere */
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  outline: none;
+  
+  /* Ensure interactions work on all devices */
+  -webkit-touch-callout: default;
+  -webkit-user-select: auto;
+  -moz-user-select: auto;
+  -ms-user-select: auto;
+  
+  /* Prevent text selection issues */
+  -webkit-tap-highlight-color: rgba(0,0,0,0.1);
 }
 
+/* Disabled states */
 .btn:disabled,
 button:disabled,
-.button:disabled {
-  opacity: 0.6;
+.button:disabled,
+[disabled],
+.disabled {
+  opacity: 0.6 !important;
   cursor: not-allowed !important;
   pointer-events: none !important;
+  user-select: none !important;
+  transform: none !important;
+}
+
+/* Active and hover states for all interactive elements */
+button:not(:disabled):hover,
+.btn:not(:disabled):hover,
+.button:not(:disabled):hover,
+[role="button"]:not(.disabled):hover,
+input[type="submit"]:not(:disabled):hover,
+input[type="button"]:not(:disabled):hover,
+.contact-button:hover,
+.nav-link:hover,
+.phone-number:hover,
+a[href]:hover {
+  transform: translateY(-1px) !important;
+  transition: all 0.2s ease !important;
+  opacity: 0.9;
+}
+
+/* Click/Active states */
+button:not(:disabled):active,
+.btn:not(:disabled):active,
+.button:not(:disabled):active,
+[role="button"]:not(.disabled):active,
+input[type="submit"]:not(:disabled):active,
+input[type="button"]:not(:disabled):active {
+  transform: translateY(0) !important;
+  transition: all 0.1s ease !important;
+}
+
+/* Focus states for accessibility */
+button:focus,
+.btn:focus,
+.button:focus,
+[role="button"]:focus,
+input[type="submit"]:focus,
+input[type="button"]:focus {
+  outline: 2px solid var(--primary-color, #2563eb) !important;
+  outline-offset: 2px !important;
+}
+
+/* Processing state */
+.processing {
+  opacity: 0.8 !important;
+  pointer-events: none !important;
+  cursor: wait !important;
+}
+
+/* Mobile specific fixes */
+@media (max-width: 768px) {
+  button,
+  .btn,
+  .button,
+  [role="button"],
+  input[type="submit"],
+  input[type="button"] {
+    min-height: 44px !important; /* iOS minimum touch target */
+    min-width: 44px !important;
+    padding: 0.75rem 1rem !important;
+    font-size: 16px !important; /* Prevent zoom on iOS */
+  }
 }
 
 .btn:not(:disabled):hover,
@@ -1185,25 +1287,44 @@ button:not(:disabled):active,
 
 .cta-buttons .btn,
 .cta-buttons a,
-.cta-buttons button {
-  display: inline-block;
-  padding: 1rem 2rem;
-  border-radius: 8px;
-  text-decoration: none;
-  font-weight: 600;
-  font-size: 1.1rem;
-  transition: all 0.3s ease;
-  border: 2px solid transparent;
-  cursor: pointer !important;
+.cta-buttons button,
+.contact-button,
+.contact-buttons a,
+.contact-buttons button,
+.fallback-buttons a,
+.fallback-buttons button {
+  /* Core interactivity */
+  display: inline-block !important;
   pointer-events: auto !important;
-  user-select: none;
-  text-align: center;
-  line-height: 1.2;
-  background: transparent;
-  font-family: inherit;
-  position: relative;
-  z-index: 10;
-  min-width: 150px;
+  cursor: pointer !important;
+  user-select: auto !important;
+  touch-action: manipulation !important;
+  
+  /* Layout */
+  padding: 1rem 2rem !important;
+  border-radius: 8px !important;
+  text-decoration: none !important;
+  font-weight: 600 !important;
+  font-size: 1.1rem !important;
+  transition: all 0.3s ease !important;
+  border: 2px solid transparent !important;
+  text-align: center !important;
+  line-height: 1.2 !important;
+  background: transparent !important;
+  font-family: inherit !important;
+  position: relative !important;
+  z-index: 10 !important;
+  min-width: 150px !important;
+  
+  /* Device compatibility */
+  -webkit-appearance: none !important;
+  -moz-appearance: none !important;
+  appearance: none !important;
+  -webkit-tap-highlight-color: rgba(0,0,0,0.1) !important;
+  
+  /* Ensure visibility */
+  opacity: 1 !important;
+  visibility: visible !important;
 }
 
 .btn:disabled {
@@ -1999,6 +2120,49 @@ button:not(:disabled):active,
   font-weight: bold;
 }
 
+/* Prevent overlay conflicts and ensure button accessibility */
+* {
+  /* Ensure no global pointer-events blocking */
+  box-sizing: border-box;
+}
+
+/* Remove any potential blocking overlays */
+*::before,
+*::after {
+  pointer-events: none !important;
+}
+
+/* Ensure all clickable elements are above potential overlays */
+button,
+.btn,
+.button,
+[role="button"],
+a[href],
+input[type="submit"],
+input[type="button"],
+.contact-button,
+.cta-buttons *,
+.contact-buttons *,
+.fallback-buttons *,
+.nav-link,
+.menu-toggle {
+  /* Force above any potential overlays */
+  position: relative !important;
+  z-index: 99 !important;
+  
+  /* Ensure no interference from pseudo-elements */
+  isolation: isolate;
+}
+
+/* RealScout widget specific interaction fixes */
+realscout-office-listings,
+realscout-office-listings *,
+realscout-office-listings::part(*) {
+  pointer-events: auto !important;
+  user-select: auto !important;
+  touch-action: manipulation !important;
+}
+
 /* Responsive Design */
 @media (max-width: 768px) {
   .neighborhood-content {
@@ -2011,6 +2175,22 @@ button:not(:disabled):active,
     right: 1rem;
     min-width: auto;
   }
+  
+  /* Ensure mobile touch targets are adequate */
+  button,
+  .btn,
+  .button,
+  [role="button"],
+  input[type="submit"],
+  input[type="button"],
+  .contact-button,
+  .nav-link,
+  .menu-toggle {
+    min-height: 48px !important;
+    min-width: 48px !important;
+    padding: 0.75rem 1rem !important;
+  }
+}
 
   .market-dashboard {
     grid-template-columns: 1fr;

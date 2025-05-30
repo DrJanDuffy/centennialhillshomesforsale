@@ -1,199 +1,445 @@
+
 // Enhanced button and interaction fixes
 (function() {
   'use strict';
 
-  function initializeButtons() {
-    console.log('🔧 Initializing button functionality...');
+  console.log('🔧 Loading comprehensive button fixes...');
 
-    // Fix all buttons and clickable elements
-    const clickableSelectors = [
+  // Global button fix configuration
+  const BUTTON_CONFIG = {
+    selectors: [
       'button',
       '.btn',
+      '.button',
       '[role="button"]',
       'a[href]',
-      '.button',
       '.btn-primary',
       '.btn-secondary',
       '.btn-outline',
       '.cta-buttons a',
       '.contact-button',
       '.nav-link',
-      '.menu__link'
-    ];
+      '.menu__link',
+      '.phone-number',
+      '.contact-buttons a',
+      '.fallback-buttons a',
+      '.area-tag',
+      '.neighborhood-link',
+      '.quick-search-card',
+      '.menu-toggle',
+      'input[type="submit"]',
+      'input[type="button"]',
+      '.form-button',
+      '.search-button',
+      '.submit-button'
+    ],
+    excludeSelectors: [
+      '.disabled',
+      '[disabled]',
+      '.non-interactive'
+    ]
+  };
 
-    clickableSelectors.forEach(selector => {
-      const elements = document.querySelectorAll(selector);
+  // Universal button fixer
+  function makeElementClickable(element) {
+    if (!element || element.dataset.buttonFixed === 'true') return;
 
-      elements.forEach(element => {
-        // Ensure elements are clickable
-        element.style.pointerEvents = 'auto';
-        element.style.cursor = 'pointer';
-        element.style.userSelect = 'auto';
-        element.style.touchAction = 'manipulation';
+    // Skip if explicitly excluded
+    const isExcluded = BUTTON_CONFIG.excludeSelectors.some(selector => 
+      element.matches(selector) || element.closest(selector)
+    );
+    if (isExcluded) return;
 
-        // Remove any existing click handlers to avoid conflicts
-        element.removeEventListener('click', handleButtonClick);
+    // Core interaction properties
+    element.style.pointerEvents = 'auto';
+    element.style.cursor = 'pointer';
+    element.style.userSelect = 'auto';
+    element.style.touchAction = 'manipulation';
+    element.style.position = element.style.position || 'relative';
+    element.style.zIndex = element.style.zIndex || '1';
 
-        // Add universal click handler
-        element.addEventListener('click', handleButtonClick, { passive: false });
+    // Remove conflicting CSS that might block interactions
+    element.style.webkitTouchCallout = 'default';
+    element.style.webkitUserSelect = 'auto';
+    element.style.mozUserSelect = 'auto';
+    element.style.msUserSelect = 'auto';
 
-        // Add hover effects
-        element.addEventListener('mouseenter', function() {
-          if (!this.disabled) {
-            this.style.transform = 'translateY(-1px)';
-            this.style.transition = 'all 0.2s ease';
-          }
-        });
-
-        element.addEventListener('mouseleave', function() {
-          this.style.transform = 'translateY(0)';
-        });
-      });
-    });
-
-    console.log('✅ Button fixes applied to all clickable elements');
-  }
-
-  function handleButtonClick(e) {
-    console.log('Button clicked:', this.textContent?.trim() || this.className);
-
-    // Don't interfere with normal link navigation
-    if (this.tagName === 'A' && this.href && !this.href.includes('javascript:')) {
-      return true;
+    // Ensure the element is not behind overlays
+    const computedStyle = window.getComputedStyle(element);
+    if (computedStyle.position === 'static') {
+      element.style.position = 'relative';
     }
 
-    // Prevent double clicks
-    if (this.disabled || this.classList.contains('processing')) {
+    // Mark as fixed
+    element.dataset.buttonFixed = 'true';
+
+    // Add event listener if not already present
+    if (!element.dataset.clickHandlerAdded) {
+      element.addEventListener('click', handleUniversalClick, { passive: false });
+      element.dataset.clickHandlerAdded = 'true';
+    }
+
+    // Add hover effects for better UX
+    if (!element.dataset.hoverAdded) {
+      element.addEventListener('mouseenter', function() {
+        if (!this.disabled && !this.classList.contains('disabled')) {
+          this.style.transform = 'translateY(-1px)';
+          this.style.transition = 'all 0.2s ease';
+        }
+      });
+
+      element.addEventListener('mouseleave', function() {
+        this.style.transform = 'translateY(0)';
+      });
+
+      element.dataset.hoverAdded = 'true';
+    }
+  }
+
+  // Universal click handler
+  function handleUniversalClick(e) {
+    const element = e.currentTarget;
+    
+    console.log('🖱️ Button clicked:', {
+      element: element.tagName,
+      text: element.textContent?.trim().substring(0, 50) || 'No text',
+      className: element.className,
+      href: element.href,
+      type: element.type
+    });
+
+    // Prevent double clicks on disabled elements
+    if (element.disabled || element.classList.contains('disabled') || element.classList.contains('processing')) {
       e.preventDefault();
       e.stopPropagation();
       return false;
     }
 
-    // Add visual feedback
-    this.classList.add('processing');
-    this.style.opacity = '0.8';
+    // Handle different element types appropriately
+    const tagName = element.tagName.toLowerCase();
+    const elementType = element.type?.toLowerCase();
+    const href = element.href;
+    const buttonText = element.textContent?.toLowerCase().trim() || '';
 
-    setTimeout(() => {
-      this.classList.remove('processing');
-      this.style.opacity = '';
-    }, 500);
-
-    // Handle specific button types
-    const buttonText = this.textContent?.toLowerCase() || '';
-    const buttonClass = this.className?.toLowerCase() || '';
-
-    // Phone call buttons
-    if (buttonText.includes('call') || buttonText.includes('phone') || this.href?.includes('tel:')) {
-      if (!this.href?.includes('tel:')) {
-        window.location.href = 'tel:+17029031952';
-        e.preventDefault();
+    // Handle form submissions
+    if (elementType === 'submit' || element.closest('form')) {
+      if (tagName === 'button' && elementType === 'submit') {
+        // Let form handle submission naturally
+        return true;
       }
-      return;
     }
 
-    // Contact buttons
+    // Handle navigation links
+    if (tagName === 'a' && href) {
+      // Phone links
+      if (href.includes('tel:')) {
+        window.location.href = href;
+        return true;
+      }
+      
+      // Email links
+      if (href.includes('mailto:')) {
+        window.location.href = href;
+        return true;
+      }
+      
+      // External links
+      if (href.startsWith('http') && !href.includes(window.location.hostname)) {
+        window.open(href, '_blank', 'noopener,noreferrer');
+        e.preventDefault();
+        return false;
+      }
+      
+      // Internal navigation - let Next.js handle it
+      if (href.startsWith('/') || href.includes(window.location.hostname)) {
+        return true;
+      }
+    }
+
+    // Handle special button actions based on text content
+    if (buttonText.includes('call') || buttonText.includes('phone')) {
+      window.location.href = 'tel:+17029031952';
+      e.preventDefault();
+      return false;
+    }
+
     if (buttonText.includes('contact') || buttonText.includes('get in touch')) {
       window.location.href = '/contact';
       e.preventDefault();
-      return;
+      return false;
     }
 
-    // Listings buttons
-    if (buttonText.includes('browse') || buttonText.includes('view') || buttonText.includes('listing')) {
+    if (buttonText.includes('listing') || buttonText.includes('browse') || buttonText.includes('view properties')) {
       window.location.href = '/listings';
       e.preventDefault();
-      return;
+      return false;
     }
 
-    // Schedule buttons
     if (buttonText.includes('schedule') || buttonText.includes('appointment')) {
       window.location.href = '/contact';
       e.preventDefault();
-      return;
+      return false;
     }
 
-    // Form submit buttons
-    if (this.type === 'submit' || buttonClass.includes('submit')) {
-      // Let form handle submission
-      return true;
+    // Handle refresh buttons
+    if (buttonText.includes('refresh') || buttonText.includes('reload')) {
+      window.location.reload();
+      e.preventDefault();
+      return false;
     }
+
+    // Add visual feedback for any button click
+    addClickFeedback(element);
+
+    return true;
   }
 
-  // Fix RealScout widget interactions
-  function fixRealScoutInteractions() {
-    const realscoutWidgets = document.querySelectorAll('realscout-office-listings');
+  // Add visual feedback for button clicks
+  function addClickFeedback(element) {
+    if (element.classList.contains('processing')) return;
 
-    realscoutWidgets.forEach(widget => {
+    element.classList.add('processing');
+    element.style.opacity = '0.8';
+    element.style.transform = 'scale(0.98)';
+
+    setTimeout(() => {
+      element.classList.remove('processing');
+      element.style.opacity = '';
+      element.style.transform = '';
+    }, 200);
+  }
+
+  // Fix all buttons on the page
+  function initializeAllButtons() {
+    console.log('🔧 Initializing all button interactions...');
+
+    // Get all potential clickable elements
+    const allElements = [];
+    
+    BUTTON_CONFIG.selectors.forEach(selector => {
+      try {
+        const elements = document.querySelectorAll(selector);
+        allElements.push(...elements);
+      } catch (error) {
+        console.warn('Invalid selector:', selector, error);
+      }
+    });
+
+    // Remove duplicates
+    const uniqueElements = [...new Set(allElements)];
+
+    console.log(`🎯 Found ${uniqueElements.length} potential clickable elements`);
+
+    // Fix each element
+    uniqueElements.forEach(element => {
+      try {
+        makeElementClickable(element);
+      } catch (error) {
+        console.warn('Error fixing element:', element, error);
+      }
+    });
+
+    console.log('✅ All button interactions initialized');
+  }
+
+  // RealScout widget specific fixes
+  function fixRealScoutWidgets() {
+    const widgets = document.querySelectorAll('realscout-office-listings');
+    
+    widgets.forEach(widget => {
+      // Make the widget container interactive
       widget.style.pointerEvents = 'auto';
       widget.style.userSelect = 'auto';
       widget.style.touchAction = 'manipulation';
       widget.style.position = 'relative';
       widget.style.zIndex = '2';
 
-      // Monitor for dynamically added content
-      const observer = new MutationObserver(function(mutations) {
-        mutations.forEach(function(mutation) {
-          if (mutation.addedNodes.length > 0) {
-            mutation.addedNodes.forEach(node => {
-              if (node.nodeType === 1) {
-                fixElementInteractions(node);
+      // Monitor for dynamic content
+      const observer = new MutationObserver(mutations => {
+        mutations.forEach(mutation => {
+          mutation.addedNodes.forEach(node => {
+            if (node.nodeType === 1) { // Element node
+              makeElementClickable(node);
+              
+              // Fix all interactive elements within the node
+              const interactiveElements = node.querySelectorAll('a, button, [role="button"], .listing-card, .property-card');
+              interactiveElements.forEach(makeElementClickable);
+            }
+          });
+        });
+      });
+
+      observer.observe(widget, { 
+        childList: true, 
+        subtree: true,
+        attributes: true,
+        attributeFilter: ['style', 'class']
+      });
+
+      // Initial fix for existing content
+      const existingInteractives = widget.querySelectorAll('a, button, [role="button"], .listing-card, .property-card');
+      existingInteractives.forEach(makeElementClickable);
+    });
+  }
+
+  // Navigation menu fixes
+  function fixNavigationMenus() {
+    // Mobile menu toggle
+    const menuToggles = document.querySelectorAll('.menu-toggle');
+    menuToggles.forEach(toggle => {
+      makeElementClickable(toggle);
+      
+      // Ensure menu toggle functionality
+      if (!toggle.dataset.menuHandlerAdded) {
+        toggle.addEventListener('click', function(e) {
+          e.preventDefault();
+          const nav = document.querySelector('.nav');
+          const overlay = document.querySelector('.nav-overlay');
+          
+          if (nav) {
+            nav.classList.toggle('nav--open');
+            this.classList.toggle('active');
+            
+            if (overlay) {
+              overlay.style.display = nav.classList.contains('nav--open') ? 'block' : 'none';
+            }
+          }
+        });
+        toggle.dataset.menuHandlerAdded = 'true';
+      }
+    });
+
+    // Navigation links
+    const navLinks = document.querySelectorAll('.nav-link');
+    navLinks.forEach(makeElementClickable);
+
+    // Close mobile menu when clicking overlay
+    const overlays = document.querySelectorAll('.nav-overlay');
+    overlays.forEach(overlay => {
+      overlay.addEventListener('click', function() {
+        const nav = document.querySelector('.nav');
+        const toggle = document.querySelector('.menu-toggle');
+        
+        if (nav) nav.classList.remove('nav--open');
+        if (toggle) toggle.classList.remove('active');
+        this.style.display = 'none';
+      });
+    });
+  }
+
+  // Fix form elements
+  function fixFormElements() {
+    const forms = document.querySelectorAll('form');
+    forms.forEach(form => {
+      const submitButtons = form.querySelectorAll('button[type="submit"], input[type="submit"], .submit-button');
+      submitButtons.forEach(button => {
+        makeElementClickable(button);
+        
+        // Ensure form submission works
+        if (!button.dataset.formHandlerAdded) {
+          button.addEventListener('click', function(e) {
+            if (this.type === 'submit' || this.classList.contains('submit-button')) {
+              // Let the browser handle form submission
+              return true;
+            }
+          });
+          button.dataset.formHandlerAdded = 'true';
+        }
+      });
+    });
+  }
+
+  // Monitor for dynamically added content
+  function setupDynamicContentMonitoring() {
+    const observer = new MutationObserver(mutations => {
+      let hasNewButtons = false;
+
+      mutations.forEach(mutation => {
+        mutation.addedNodes.forEach(node => {
+          if (node.nodeType === 1) { // Element node
+            // Check if the node itself is a button
+            const isButton = BUTTON_CONFIG.selectors.some(selector => {
+              try {
+                return node.matches && node.matches(selector);
+              } catch (e) {
+                return false;
+              }
+            });
+
+            if (isButton) {
+              makeElementClickable(node);
+              hasNewButtons = true;
+            }
+
+            // Check for buttons within the node
+            BUTTON_CONFIG.selectors.forEach(selector => {
+              try {
+                const buttons = node.querySelectorAll ? node.querySelectorAll(selector) : [];
+                if (buttons.length > 0) {
+                  buttons.forEach(makeElementClickable);
+                  hasNewButtons = true;
+                }
+              } catch (e) {
+                console.warn('Error selecting with:', selector, e);
               }
             });
           }
         });
       });
 
-      observer.observe(widget, { childList: true, subtree: true });
-    });
-  }
-
-  function fixElementInteractions(element) {
-    // Make sure the element and its children are interactive
-    element.style.pointerEvents = 'auto';
-
-    const interactiveElements = element.querySelectorAll('a, button, [role="button"], .listing-card, .property-card');
-    interactiveElements.forEach(el => {
-      el.style.pointerEvents = 'auto';
-      el.style.cursor = 'pointer';
-      el.style.userSelect = 'auto';
-      el.style.touchAction = 'manipulation';
-    });
-  }
-
-  // Initialize when DOM is ready
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', function() {
-      initializeButtons();
-      fixRealScoutInteractions();
-    });
-  } else {
-    initializeButtons();
-    fixRealScoutInteractions();
-  }
-
-  // Re-initialize for dynamic content
-  const observer = new MutationObserver(function(mutations) {
-    let shouldReinitialize = false;
-
-    mutations.forEach(function(mutation) {
-      if (mutation.addedNodes.length > 0) {
-        mutation.addedNodes.forEach(node => {
-          if (node.nodeType === 1 && (node.querySelector('button, .btn, a') || node.matches('button, .btn, a'))) {
-            shouldReinitialize = true;
-          }
-        });
+      if (hasNewButtons) {
+        console.log('🔄 Fixed newly added buttons');
       }
     });
 
-    if (shouldReinitialize) {
-      setTimeout(initializeButtons, 100);
-    }
+    observer.observe(document.body, {
+      childList: true,
+      subtree: true,
+      attributes: true,
+      attributeFilter: ['style', 'class', 'disabled']
+    });
+
+    console.log('👀 Dynamic content monitoring active');
+  }
+
+  // Main initialization function
+  function initialize() {
+    console.log('🚀 Starting comprehensive button fixes...');
+
+    // Initial fixes
+    initializeAllButtons();
+    fixRealScoutWidgets();
+    fixNavigationMenus();
+    fixFormElements();
+
+    // Setup monitoring for dynamic content
+    setupDynamicContentMonitoring();
+
+    // Re-run fixes periodically to catch any missed elements
+    setInterval(() => {
+      const unfixedButtons = document.querySelectorAll(BUTTON_CONFIG.selectors.join(','));
+      const needsFixing = [...unfixedButtons].filter(btn => !btn.dataset.buttonFixed);
+      
+      if (needsFixing.length > 0) {
+        console.log(`🔧 Fixing ${needsFixing.length} missed buttons`);
+        needsFixing.forEach(makeElementClickable);
+      }
+    }, 3000);
+
+    console.log('✅ Comprehensive button fixes completed');
+  }
+
+  // Start when DOM is ready
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initialize);
+  } else {
+    initialize();
+  }
+
+  // Also run on window load for any late-loading content
+  window.addEventListener('load', () => {
+    setTimeout(initialize, 1000);
   });
 
-  observer.observe(document.body, {
-    childList: true,
-    subtree: true
-  });
-
-  console.log('🚀 Enhanced button fixes loaded successfully!');
+  console.log('🔧 Button fixes script loaded successfully');
 })();
