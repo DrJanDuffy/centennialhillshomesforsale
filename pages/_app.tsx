@@ -5,6 +5,7 @@ import type { AppProps } from 'next/app';
 import { useEffect } from 'react';
 import ErrorBoundary from '../components/ErrorBoundary';
 import { setupGlobalErrorHandling } from '../utils/errorTracking';
+import { useRouter } from 'next/router';
 
 // Analytics and error dashboards are removed from production builds
 
