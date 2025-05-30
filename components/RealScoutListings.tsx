@@ -80,7 +80,20 @@ const RealScoutListings: React.FC<RealScoutListingsProps> = ({
       <div className="realscout-error">
         <h3>Unable to Load Property Listings</h3>
         <p>We're experiencing technical difficulties loading the property listings widget.</p>
-        <p>Please try refreshing the page or contact us at (702) 903-1952 for current listings.</p>
+        <div className="fallback-buttons">
+          <a href="tel:+17029031952" className="btn btn-primary">
+            📞 Call (702) 903-1952
+          </a>
+          <a href="/listings" className="btn btn-secondary">
+            View All Listings
+          </a>
+          <button 
+            onClick={() => window.location.reload()} 
+            className="btn btn-outline"
+          >
+            🔄 Refresh Page
+          </button>
+        </div>
       </div>
     );
   }
