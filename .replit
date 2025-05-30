@@ -6,8 +6,8 @@ channel = "stable-24_05"
 
 [deployment]
 build = ["sh", "-c", "npm install --legacy-peer-deps && npm run build"]
-deploymentTarget = "cloudrun"
-run = ["sh", "-c", "npx serve out -s -l 5000 -C"]
+deploymentTarget = "static"
+publicDir = "public"
 
 [workflows]
 runButton = "Deploy Ready"
