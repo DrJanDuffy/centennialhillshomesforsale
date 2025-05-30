@@ -129,11 +129,15 @@ export default function Listings() {
           transition={{ delay: 0.8, duration: 0.6 }}
         >
           <h2>All Available Properties</h2>
-          <RealScoutWidget 
-            filters={searchFilters}
-            showMap={true}
-            showFilters={false}
-          />
+          <div className="realscout-widget-container">
+            <realscout-office-listings 
+              agent-encoded-id="QWdlbnQtMjI1MDUw" 
+              sort-order="STATUS_AND_SIGNIFICANT_CHANGE" 
+              listing-status="For Sale" 
+              property-types="SFR,MF,TC" 
+              price-min="450000">
+            </realscout-office-listings>
+          </div>
         </motion.section>
 
         <motion.section 

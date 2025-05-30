@@ -127,10 +127,15 @@ export default function CentennialHills() {
         >
           <div className="container">
             <h2>Current Homes for Sale in Centennial Hills</h2>
-            <RealScoutWidget 
-              filterByZip="89149,89166"
-              neighborhood="Centennial Hills"
-            />
+            <div className="realscout-widget-container">
+              <realscout-office-listings 
+                agent-encoded-id="QWdlbnQtMjI1MDUw" 
+                sort-order="STATUS_AND_SIGNIFICANT_CHANGE" 
+                listing-status="For Sale" 
+                property-types="SFR,MF,TC" 
+                price-min="450000">
+              </realscout-office-listings>
+            </div>
           </div>
         </motion.section>
       </main>

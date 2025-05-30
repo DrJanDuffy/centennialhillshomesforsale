@@ -221,38 +221,14 @@ export default function Home() {
         <section className="page__services featured-properties">
           <div className="container">
             <h2 className="section-title">Featured Properties</h2>
-            <div className="properties-grid">
-              {[
-                { id: '1', address: '8421 Providence Ranch Ave', price: '$675,000', beds: 4, baths: 3, sqft: 2850, status: 'For Sale', community: 'Providence' },
-                { id: '2', address: '10115 Skye Ridge Park Ave', price: '$825,000', beds: 5, baths: 4, sqft: 3200, status: 'New Listing', community: 'Skye Canyon' },
-                { id: '3', address: '9823 Canyon Vista Dr', price: '$750,000', beds: 4, baths: 3.5, sqft: 3100, status: 'Price Reduced', community: 'The Canyons' },
-                { id: '4', address: '7654 Trails Village Cir', price: '$950,000', beds: 6, baths: 5, sqft: 4200, status: 'Luxury', community: 'The Trails' },
-                { id: '5', address: '9156 Tournament Canyon Dr', price: '$695,000', beds: 4, baths: 3, sqft: 2900, status: 'For Sale', community: 'Tournament Hills' },
-                { id: '6', address: '8877 Desert Foothills Dr', price: '$580,000', beds: 3, baths: 2.5, sqft: 2400, status: 'Open House', community: 'Desert Foothills' }
-              ].map((property, index) => (
-                <div key={property.id} className="property-card">
-                  <div className="property-image">
-                    {/* Property Image Placeholders */}
-                    <img 
-                      src={`/images/centennial-hills/property${index + 1}.jpg`} 
-                      alt={`Property at ${property.address}`}
-                      loading="lazy"
-                    />
-                    <div className="property-status">{property.status}</div>
-                  </div>
-                  <div className="property-details">
-                    <div className="property-community">{property.community}</div>
-                    <h3 className="property-address">{property.address}</h3>
-                    <p className="property-price">{property.price}</p>
-                    <div className="property-features">
-                      <span>{property.beds} beds</span>
-                      <span>{property.baths} baths</span>
-                      <span>{property.sqft.toLocaleString()} sqft</span>
-                    </div>
-                    <button className="btn btn-outline">View Details</button>
-                  </div>
-                </div>
-              ))}
+            <div className="realscout-widget-container">
+              <realscout-office-listings 
+                agent-encoded-id="QWdlbnQtMjI1MDUw" 
+                sort-order="STATUS_AND_SIGNIFICANT_CHANGE" 
+                listing-status="For Sale" 
+                property-types="SFR,MF,TC" 
+                price-min="450000">
+              </realscout-office-listings>
             </div>
           </div>
         </section>

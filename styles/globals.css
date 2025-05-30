@@ -41,6 +41,20 @@
   background-color: #b91c1c;
 }
 
+/* RealScout Widget Styles */
+.realscout-widget-container {
+  margin: 2rem 0;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  background: white;
+}
+
+realscout-office-listings {
+  display: block;
+  min-height: 400px;
+}
+
 /* Local Image Gallery Styles */
 .photo-gallery-section {
   padding: 60px 0;

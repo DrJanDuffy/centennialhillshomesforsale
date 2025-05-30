@@ -116,10 +116,15 @@ export default function ProvidenceLasVegas() {
         >
           <div className="container">
             <h2>Current Homes for Sale in Providence</h2>
-            <RealScoutWidget 
-              filterByZip="89149"
-              neighborhood="Providence"
-            />
+            <div className="realscout-widget-container">
+              <realscout-office-listings 
+                agent-encoded-id="QWdlbnQtMjI1MDUw" 
+                sort-order="STATUS_AND_SIGNIFICANT_CHANGE" 
+                listing-status="For Sale" 
+                property-types="SFR,MF,TC" 
+                price-min="450000">
+              </realscout-office-listings>
+            </div>
           </div>
         </motion.section>
       </main>
