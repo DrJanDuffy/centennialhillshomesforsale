@@ -5,9 +5,23 @@ const config = {
 };
 
 // Function to fetch real estate images
-async function fetchRealEstateImages(query = 'real estate', count = 10) {
+async function fetchRealEstateImages(query = 'Las Vegas real estate', count = 10) {
   try {
-    const searchQuery = `${query} house property interior`;
+    const localQueries = [
+      'Las Vegas luxury homes',
+      'Nevada desert homes',
+      'Las Vegas golf course homes',
+      'Southwest architecture homes',
+      'Las Vegas master planned community',
+      'Nevada suburban homes',
+      'Desert landscape homes Las Vegas',
+      'Modern Las Vegas homes',
+      'Las Vegas mountain view homes',
+      'Southwest style real estate'
+    ];
+    
+    const randomQuery = localQueries[Math.floor(Math.random() * localQueries.length)];
+    const searchQuery = query.includes('Las Vegas') ? query : `${randomQuery} ${query}`;
     const url = `https://api.unsplash.com/search/photos?query=${encodeURIComponent(searchQuery)}&per_page=${count}&orientation=landscape`;
     
     const response = await fetch(url, {
@@ -24,6 +38,41 @@ async function fetchRealEstateImages(query = 'real estate', count = 10) {
     return data.results;
   } catch (error) {
     console.error('Error fetching images from Unsplash:', error);
+    return [];
+  }
+}
+
+// Function to fetch Centennial Hills specific images
+async function fetchCentennialHillsImages(count = 12) {
+  const centennialHillsQueries = [
+    'Las Vegas TPC golf course homes',
+    'Nevada luxury gated community',
+    'Las Vegas Red Rock Canyon homes',
+    'Desert oasis luxury homes',
+    'Las Vegas championship golf homes',
+    'Southwest luxury real estate',
+    'Nevada master planned community homes',
+    'Las Vegas mountain view luxury homes',
+    'Desert modern architecture homes',
+    'Las Vegas upscale neighborhood',
+    'Nevada golf course real estate',
+    'Las Vegas premium homes'
+  ];
+  
+  try {
+    const results = [];
+    const queries = centennialHillsQueries.slice(0, Math.min(count, centennialHillsQueries.length));
+    
+    for (const query of queries) {
+      const images = await fetchRealEstateImages(query, 1);
+      if (images.length > 0) {
+        results.push(images[0]);
+      }
+    }
+    
+    return results;
+  } catch (error) {
+    console.error('Error fetching Centennial Hills images:', error);
     return [];
   }
 }
@@ -54,6 +103,8 @@ function displayRealEstateImages(images, containerId) {
     let locationText = '';
     if (image.location && image.location.name) {
       locationText = `<div class="location-info">${image.location.name}</div>`;
+    } else {
+      locationText = `<div class="location-info">Centennial Hills Style Home</div>`;
     }
     
     const attribution = document.createElement('div');

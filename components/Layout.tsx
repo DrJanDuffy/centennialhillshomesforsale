@@ -27,10 +27,11 @@ const Layout: React.FC<LayoutProps> = ({
   return (
     <ErrorBoundary>
       <Head>
-        <title>{title}</title>
-        <meta name="description" content={description} />
+        <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
+        <script src="/js/unsplash.js" defer></script>
+        <script src="/js/centennial-hills-images.js" defer></script>
       </Head>
       <GoogleAnalytics />
       <LocalBusinessSchema 
