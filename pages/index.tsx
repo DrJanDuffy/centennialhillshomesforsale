@@ -2,6 +2,7 @@ import { useState } from 'react';
 import Head from 'next/head';
 import Layout from '../components/Layout';
 import RealScoutWidget from '../components/widgets/RealScoutWidget';
+import RealScoutListings from '../components/RealScoutListings';
 import PropertyCalculator from '../components/PropertyCalculator';
 import MarketTrendChart from '../components/MarketTrendChart';
 import AdvancedSearch from '../components/AdvancedSearch';
@@ -221,15 +222,7 @@ export default function Home() {
         <section className="page__services featured-properties">
           <div className="container">
             <h2 className="section-title">Featured Properties</h2>
-            <div className="realscout-widget-container">
-              <realscout-office-listings 
-                agent-encoded-id="QWdlbnQtMjI1MDUw" 
-                sort-order="STATUS_AND_SIGNIFICANT_CHANGE" 
-                listing-status="For Sale" 
-                property-types="SFR,MF,TC" 
-                price-min="450000">
-              </realscout-office-listings>
-            </div>
+            <RealScoutListings />
           </div>
         </section>
 

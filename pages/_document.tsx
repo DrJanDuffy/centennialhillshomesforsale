@@ -30,12 +30,57 @@ export default function Document() {
           href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
           rel="stylesheet"
         />
-        <script src="https://em.realscout.com/widgets/realscout-web-components.umd.js" type="module"></script>
+        <script 
+          src="https://em.realscout.com/widgets/realscout-web-components.umd.js" 
+          type="module"
+          onError="console.error('Failed to load RealScout widget script')"
+        ></script>
         <style dangerouslySetInnerHTML={{
           __html: `
             realscout-office-listings {
               --rs-listing-divider-color: #4a90e2;
               width: 100%;
+              min-height: 400px;
+              display: block;
+              border: 1px solid #e5e7eb;
+              border-radius: 8px;
+              padding: 20px;
+              background: #ffffff;
+            }
+            
+            .realscout-loading {
+              display: flex;
+              flex-direction: column;
+              align-items: center;
+              justify-content: center;
+              min-height: 300px;
+              padding: 40px;
+              text-align: center;
+              color: #6b7280;
+            }
+            
+            .realscout-error {
+              padding: 20px;
+              background: #fef2f2;
+              border: 1px solid #fecaca;
+              border-radius: 8px;
+              color: #dc2626;
+              text-align: center;
+            }
+            
+            .loading-spinner {
+              width: 40px;
+              height: 40px;
+              border: 4px solid #e5e7eb;
+              border-top: 4px solid #3b82f6;
+              border-radius: 50%;
+              animation: spin 1s linear infinite;
+              margin-bottom: 16px;
+            }
+            
+            @keyframes spin {
+              0% { transform: rotate(0deg); }
+              100% { transform: rotate(360deg); }
             }
           `
         }} />
