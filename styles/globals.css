@@ -689,12 +689,17 @@ a {
   }
 
   .neighborhoods-grid,
-  .amenities-grid {
+  .amenities-grid,
+  .offices-grid {
     grid-template-columns: 1fr;
   }
 
   .neighborhood-card {
     padding: 1.5rem;
+  }
+
+  .office {
+    padding: 1rem;
   }
 }
 
@@ -2258,6 +2263,7 @@ h2 {
 
 .business-details p {
   margin: 10px 0;
+```text
   font-size: 16px;
 }
 
