@@ -20,6 +20,9 @@ export default function LocalBusinessSchema({
     "alternateName": "Centennial Hills Homes | Providence & Skye Canyon | Dr. Jan Duffy, REALTOR®",
     "url": "https://centennialhillshomesforsale.com",
     "telephone": "(702) 903-1952",
+    "sameAs": [
+      "https://g.co/kgs/4qQ8DsY"
+    ],
     "address": {
       "@type": "PostalAddress",
       "streetAddress": "Providence Skye Canyon Dr",
