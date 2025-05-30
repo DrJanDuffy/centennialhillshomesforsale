@@ -15,6 +15,11 @@ export default function App({ Component, pageProps }: AppProps) {
 
     // Setup global error handling
     setupGlobalErrorHandling();
+
+    // Initialize enterprise analytics
+    const EnterpriseAnalytics = require('../utils/enterpriseAnalytics').default;
+    const analytics = EnterpriseAnalytics.getInstance();
+    analytics.initialize(process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID);
   }, []);
 
   return (
@@ -22,4 +27,4 @@ export default function App({ Component, pageProps }: AppProps) {
       <Component {...pageProps} />
     </ErrorBoundary>
   );
-} 
+}
