@@ -8,6 +8,7 @@ import LocalBusinessSchema from './LocalBusinessSchema';
 import PerformanceMonitor from './PerformanceMonitor';
 import GoogleAnalytics from './GoogleAnalytics';
 import ErrorHandler from './ErrorHandler'; // Added import for ErrorHandler
+import AnalyticsDashboard from './AnalyticsDashboard'; // Import the AnalyticsDashboard
 
 interface LayoutProps {
   children: React.ReactNode;
@@ -48,6 +49,8 @@ const Layout: React.FC<LayoutProps> = ({
             {children}
           </main>
           <Footer />
+          <GoogleAnalytics />
+          <AnalyticsDashboard isAdmin={true} />
         </div>
 
         <Script 
@@ -63,8 +66,4 @@ const Layout: React.FC<LayoutProps> = ({
   );
 };
 
-export default Layout;
-```
-
-```text
-</replit_final_file>
+    export default Layout;
