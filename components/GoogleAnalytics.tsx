@@ -4,7 +4,7 @@ import { useRouter } from 'next/router';
 
 declare global {
   interface Window {
-    gtag: (...args: any[]) => void;
+    gtag?: (...args: any[]) => void;
   }
 }
 
@@ -47,7 +47,7 @@ export default function GoogleAnalytics() {
 
     // Track page views on route change
     const handleRouteChange = (url: string) => {
-      if (typeof window.gtag !== 'undefined') {
+      if (window.gtag) {
         window.gtag('config', 'GA_MEASUREMENT_ID', {
           page_path: url,
           page_title: document.title,
@@ -76,7 +76,7 @@ export default function GoogleAnalytics() {
     if (typeof window !== 'undefined') {
       // Property search tracking
       const trackPropertySearch = (searchTerm: string, filters: any) => {
-        window.gtag('event', 'search', {
+        window.gtag && window.gtag('event', 'search', {
           search_term: searchTerm,
           event_category: 'Property Search',
           event_label: `${searchTerm} - ${JSON.stringify(filters)}`,
@@ -87,7 +87,7 @@ export default function GoogleAnalytics() {
 
       // Contact form tracking
       const trackContactForm = (formType: string) => {
-        window.gtag('event', 'generate_lead', {
+        window.gtag && window.gtag('event', 'generate_lead', {
           event_category: 'Contact',
           event_label: formType,
           value: 1,
@@ -97,7 +97,7 @@ export default function GoogleAnalytics() {
 
       // Property view tracking
       const trackPropertyView = (propertyId: string, price: number, neighborhood: string) => {
-        window.gtag('event', 'view_item', {
+        window.gtag && window.gtag('event', 'view_item', {
           event_category: 'Property',
           event_label: `Property ${propertyId}`,
           value: price,
