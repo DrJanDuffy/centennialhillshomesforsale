@@ -9,10 +9,14 @@ export default function Footer() {
           <div className="footer-section">
             <h3>Dr. Jan Duffy, REALTOR®</h3>
             <p><strong>Berkshire Hathaway HomeServices</strong></p>
-            <p>Phone: (702) 903-1952</p>
-            <p>Website: <a href="https://www.searchforhomeslasvegas.com/" target="_blank" rel="noopener">searchforhomeslasvegas.com</a></p>
-            <p>Serving: Centennial Hills, Providence, Skye Canyon</p>
+            <p>📞 Phone: (702) 903-1952</p>
+            <p>🌐 Website: <a href="https://www.searchforhomeslasvegas.com/" target="_blank" rel="noopener">searchforhomeslasvegas.com</a></p>
+            <p>📍 Serving: Centennial Hills, Providence, Skye Canyon</p>
             <p>⭐ Top 1% Las Vegas REALTOR® | 4.9/5 Rating</p>
+            <p>🏢 Licensed Since September 1993</p>
+            <div className="business-verification">
+              <p><small>Verified Google Business Profile</small></p>
+            </div>
           </div>
           
           <div className="footer-section">
