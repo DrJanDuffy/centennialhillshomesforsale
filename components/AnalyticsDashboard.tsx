@@ -5,6 +5,17 @@ interface AnalyticsDashboardProps {
   isAdmin?: boolean;
 }
 
+export default function AnalyticsDashboard({ isAdmin = false }: AnalyticsDashboardProps) {
+  // Never show in production, regardless of isAdmin prop
+  if (process.env.NODE_ENV === 'production') {
+    return null;
+  }
+
+  // Only show in development if explicitly admin
+  if (!isAdmin) {
+    return null;
+  }
+
 const AnalyticsDashboard: React.FC<AnalyticsDashboardProps> = ({ isAdmin = false }) => {
   const [metrics, setMetrics] = useState<any>(null);
   const [isVisible, setIsVisible] = useState(false);
