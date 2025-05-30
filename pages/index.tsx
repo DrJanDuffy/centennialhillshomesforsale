@@ -65,86 +65,124 @@ export default function Home() {
   return (
     <Layout>
       <Head>
-        <title>Centennial Hills Homes For Sale | Las Vegas Real Estate Expert</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <meta name="description" content="Find your dream home in Centennial Hills, Las Vegas. Browse luxury homes, condos, and townhomes for sale with expert real estate guidance." />
-        <meta name="keywords" content="Centennial Hills homes, Las Vegas real estate, homes for sale, luxury homes, Nevada properties" />
-        <meta property="og:title" content="Centennial Hills Homes For Sale | Las Vegas Real Estate Expert" />
-        <meta property="og:description" content="Find your dream home in Centennial Hills, Las Vegas. Browse luxury homes, condos, and townhomes for sale." />
-        <meta property="og:type" content="website" />
+        <title>Centennial Hills Homes For Sale | Las Vegas Real Estate Expert Dr. Jan Duffy | Berkshire Hathaway HomeServices Nevada Properties</title>
+        <meta name="description" content="Find luxury homes for sale in Centennial Hills, Providence, and Skye Canyon with Dr. Jan Duffy, top-rated REALTOR® at Berkshire Hathaway HomeServices Nevada Properties. 30+ years experience in Las Vegas real estate market. Current median home price $635,000." />
+        <meta name="keywords" content="Centennial Hills homes for sale, Providence Las Vegas real estate, Skye Canyon luxury homes, Las Vegas REALTOR, Dr. Jan Duffy, Berkshire Hathaway HomeServices, Nevada Properties, 89149 homes, 89166 homes, Northwest Las Vegas real estate" />
+
+        {/* Enhanced Open Graph Tags */}
+        <meta property="og:title" content="Centennial Hills Homes For Sale | Dr. Jan Duffy REALTOR®" />
+        <meta property="og:description" content="Discover luxury homes in Centennial Hills, Providence, and Skye Canyon with expert REALTOR® Dr. Jan Duffy. Median price $635,000. Call (702) 903-1952 today!" />
+        <meta property="og:image" content="https://centennialhillshomesforsale.com/images/centennial-hills-hero.jpg" />
         <meta property="og:url" content="https://centennialhillshomesforsale.com" />
-        <link rel="canonical" href="https://centennialhillshomesforsale.com" />
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify([
+        <meta property="og:type" content="website" />
+        <meta property="og:locale" content="en_US" />
+        <meta property="og:site_name" content="Centennial Hills Homes For Sale" />
+
+        {/* Twitter Cards */}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Centennial Hills Homes For Sale | Dr. Jan Duffy REALTOR®" />
+        <meta name="twitter:description" content="Find luxury homes in Centennial Hills, Providence & Skye Canyon. Expert REALTOR® with 30+ years experience. Median price $635,000." />
+        <meta name="twitter:image" content="https://centennialhillshomesforsale.com/images/centennial-hills-hero.jpg" />
+
+        {/* Article/Real Estate Specific */}
+        <meta property="article:author" content="Dr. Jan Duffy" />
+        <meta property="article:publisher" content="Berkshire Hathaway HomeServices Nevada Properties" />
+        <meta name="author" content="Dr. Jan Duffy, REALTOR®" />
+
+        {/* Local Business Schema in Head */}
+        <script type="application/ld+json" dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": ["RealEstateAgent", "LocalBusiness"],
+            "name": "Dr. Jan Duffy - Centennial Hills Real Estate Expert",
+            "alternateName": "Centennial Hills Homes For Sale",
+            "description": "Premier real estate services in Centennial Hills, Providence, and Skye Canyon with Dr. Jan Duffy, experienced REALTOR® at Berkshire Hathaway HomeServices Nevada Properties.",
+            "url": "https://centennialhillshomesforsale.com",
+            "telephone": "(702) 903-1952",
+            "priceRange": "$450,000 - $1,200,000",
+            "address": {
+              "@type": "PostalAddress",
+              "streetAddress": "Providence Skye Canyon Dr",
+              "addressLocality": "Las Vegas",
+              "addressRegion": "NV",
+              "postalCode": "89166",
+              "addressCountry": "US"
+            },
+            "geo": {
+              "@type": "GeoCoordinates",
+              "latitude": "36.268",
+              "longitude": "-115.328"
+            },
+            "areaServed": [
               {
-                "@context": "https://schema.org",
-                "@type": "RealEstateAgent",
-                "name": "Centennial Hills Homes For Sale",
-                "description": "Expert real estate services in Centennial Hills, Las Vegas with over 10 years of local market experience",
-                "url": "https://centennialhillshomesforsale.com",
-                "areaServed": {
-                  "@type": "Place",
-                  "name": "Centennial Hills, Las Vegas, Nevada",
-                  "geo": {
-                    "@type": "GeoCoordinates",
-                    "latitude": "36.268",
-                    "longitude": "-115.328"
-                  }
-                },
-                "serviceType": "Real Estate Sales",
-                "priceRange": "$300,000 - $2,000,000",
-                "telephone": "+1-702-555-0123",
-                "address": {
-                  "@type": "PostalAddress",
-                  "streetAddress": "10161 Park Run Dr",
-                  "addressLocality": "Las Vegas",
-                  "addressRegion": "NV",
-                  "postalCode": "89145",
-                  "addressCountry": "US"
-                },
-                "aggregateRating": {
-                  "@type": "AggregateRating",
-                  "@type": "AggregateRating",
-                  "ratingValue": "4.9",
-                  "reviewCount": "127",
-                  "bestRating": "5"
-                }
+                "@type": "City",
+                "name": "Las Vegas",
+                "sameAs": "https://en.wikipedia.org/wiki/Las_Vegas"
               },
               {
-                "@context": "https://schema.org",
-                "@type": "FAQPage",
-                "mainEntity": [
-                  {
-                    "@type": "Question",
-                    "name": "What is the average home price in Centennial Hills?",
-                    "acceptedAnswer": {
-                      "@type": "Answer",
-                      "text": "The median home price in Centennial Hills is $635,000 as of 2024, with homes ranging from $300,000 to over $2 million depending on size and location."
-                    }
-                  },
-                  {
-                    "@type": "Question",
-                    "name": "How long do homes stay on the market in Centennial Hills?",
-                    "acceptedAnswer": {
-                      "@type": "Answer",
-                      "text": "Homes in Centennial Hills typically sell within 18 days on average, making it a competitive seller's market with strong demand."
-                    }
-                  },
-                  {
-                    "@type": "Question",
-                    "name": "What schools serve the Centennial Hills area?",
-                    "acceptedAnswer": {
-                      "@type": "Answer",
-                      "text": "Centennial Hills is served by top-rated Clark County schools including Centennial High School, Del Webb Middle School, and several elementary schools with ratings of 8+ out of 10."
-                    }
-                  }
-                ]
+                "@type": "Neighborhood",
+                "name": "Centennial Hills",
+                "containedInPlace": "Las Vegas, NV"
+              },
+              {
+                "@type": "Neighborhood", 
+                "name": "Providence",
+                "containedInPlace": "Las Vegas, NV"
+              },
+              {
+                "@type": "Neighborhood",
+                "name": "Skye Canyon", 
+                "containedInPlace": "Las Vegas, NV"
               }
-            ])
-          }}
-        />
+            ],
+            "serviceType": [
+              "Real Estate Sales",
+              "Property Search",
+              "Market Analysis",
+              "Buyer Representation",
+              "Seller Representation",
+              "Luxury Home Sales",
+              "Investment Properties"
+            ],
+            "aggregateRating": {
+              "@type": "AggregateRating",
+              "ratingValue": "4.9",
+              "reviewCount": "127",
+              "bestRating": "5",
+              "worstRating": "1"
+            },
+            "image": "https://centennialhillshomesforsale.com/images/dr-jan-duffy-realtor.jpg",
+            "openingHours": "Mo-Su 06:00-21:00",
+            "paymentAccepted": "Cash, Check, Financing",
+            "currenciesAccepted": "USD",
+            "memberOf": {
+              "@type": "Organization",
+              "name": "Berkshire Hathaway HomeServices Nevada Properties"
+            },
+            "hasCredential": [
+              {
+                "@type": "EducationalOccupationalCredential",
+                "credentialCategory": "Professional License",
+                "recognizedBy": {
+                  "@type": "Organization",
+                  "name": "Nevada Real Estate Division"
+                }
+              }
+            ],
+            "knowsAbout": [
+              "Centennial Hills Real Estate Market",
+              "Providence Las Vegas Properties",
+              "Skye Canyon Luxury Homes", 
+              "Northwest Las Vegas Neighborhoods",
+              "Las Vegas Investment Properties"
+            ],
+            "sameAs": [
+              "https://g.co/kgs/4qQ8DsY",
+              "https://www.facebook.com/CentennialHillsHomes",
+              "https://www.linkedin.com/in/drjanduffy"
+            ]
+          })
+        }} />
       </Head>
 
       <div className="wrapper">

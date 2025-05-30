@@ -6,8 +6,9 @@
   "scripts": {
     "dev": "next dev -H 0.0.0.0 -p 5000",
     "build": "next build",
-    "start": "next start",
+    "start": "next start -H 0.0.0.0 -p 5000",
     "lint": "next lint",
+    "postbuild": "node scripts/generate-sitemap.js && node scripts/monitor-local-seo.js",
     "predeploy": "npm run build",
     "deploy": "gh-pages -d out",
     "configure-domains": "node scripts/configure-domains.js",
