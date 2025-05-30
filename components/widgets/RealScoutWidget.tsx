@@ -1,16 +1,6 @@
 import { useEffect, useState } from 'react';
 import styles from './RealScoutWidget.module.css';
 
-// Declare custom elements for TypeScript
-declare global {
-  namespace JSX {
-    interface IntrinsicElements {
-      'realscout-market-analysis': React.DetailedHTMLProps<React.HTMLAttributes<HTMLElement>, HTMLElement>;
-      'realscout-market-trends': React.DetailedHTMLProps<React.HTMLAttributes<HTMLElement>, HTMLElement>;
-    }
-  }
-}
-
 interface RealScoutWidgetProps {
   type?: string;
   propertyId?: string;
