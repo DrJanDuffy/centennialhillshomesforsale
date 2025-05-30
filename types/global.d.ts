@@ -1,4 +1,6 @@
 
+import * as React from 'react';
+
 declare global {
   interface Window {
     gtag?: (...args: any[]) => void;
@@ -16,7 +18,6 @@ declare global {
           'property-types'?: string;
           'price-min'?: string;
           onLoad?: () => void;
-          style?: React.CSSProperties;
         },
         HTMLElement
       >;

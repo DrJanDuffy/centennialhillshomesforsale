@@ -1,11 +1,10 @@
-
 import { useState } from 'react';
 import Head from 'next/head';
-import { motion } from 'framer-motion';
 import Layout from '../components/Layout';
 import NeighborhoodBar from '../components/NeighborhoodBar';
 import SchoolInfo from '../components/SchoolInfo';
-import RealScoutWidget from '../components/widgets/RealScoutWidget';
+import RealScoutListings from '../components/RealScoutListings';
+import { motion } from 'framer-motion';
 
 export default function SkyeCanyon() {
   const [currentNeighborhood, setCurrentNeighborhood] = useState('Skye Canyon');
@@ -116,13 +115,13 @@ export default function SkyeCanyon() {
           <div className="container">
             <h2>Current Homes for Sale in Skye Canyon</h2>
             <div className="realscout-widget-container">
-              <realscout-office-listings 
-                agent-encoded-id="QWdlbnQtMjI1MDUw" 
-                sort-order="STATUS_AND_SIGNIFICANT_CHANGE" 
-                listing-status="For Sale" 
-                property-types="SFR,MF,TC" 
-                price-min="450000">
-              </realscout-office-listings>
+              <RealScoutListings
+                agent-encoded-id="QWdlbnQtMjI1MDUw"
+                sort-order="STATUS_AND_SIGNIFICANT_CHANGE"
+                listing-status="For Sale"
+                property-types="SFR,MF,TC"
+                price-min="450000"
+              />
             </div>
           </div>
         </motion.section>

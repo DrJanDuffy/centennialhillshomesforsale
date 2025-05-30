@@ -1,10 +1,11 @@
-
 import { useState } from 'react';
 import Head from 'next/head';
-import { motion } from 'framer-motion';
 import Layout from '../components/Layout';
+import SEOOptimized from '../components/SEOOptimized';
 import NeighborhoodBar from '../components/NeighborhoodBar';
 import SchoolInfo from '../components/SchoolInfo';
+import RealScoutListings from '../components/RealScoutListings';
+import { motion } from 'framer-motion';
 import RealScoutWidget from '../components/widgets/RealScoutWidget';
 
 export default function LasVegas89149() {
@@ -96,7 +97,7 @@ export default function LasVegas89149() {
                 </ul>
                 <a href="/centennial-hills" className="btn btn-primary">Explore Centennial Hills</a>
               </div>
-              
+
               <div className="neighborhood-card">
                 <h3>Tournament Hills</h3>
                 <p className="price-range">$500K - $1.8M</p>
@@ -108,7 +109,7 @@ export default function LasVegas89149() {
                 </ul>
                 <a href="/tournament-hills" className="btn btn-primary">Explore Tournament Hills</a>
               </div>
-              
+
               <div className="neighborhood-card">
                 <h3>The Trails</h3>
                 <p className="price-range">$550K - $1.5M</p>
@@ -135,13 +136,13 @@ export default function LasVegas89149() {
           <div className="container">
             <h2>Current Homes for Sale in 89149</h2>
             <div className="realscout-widget-container">
-              <realscout-office-listings 
+              <RealScoutListings 
                 agent-encoded-id="QWdlbnQtMjI1MDUw" 
                 sort-order="STATUS_AND_SIGNIFICANT_CHANGE" 
                 listing-status="For Sale" 
                 property-types="SFR,MF,TC" 
-                price-min="450000">
-              </realscout-office-listings>
+                price-min="450000"
+              />
             </div>
           </div>
         </motion.section>
