@@ -1,257 +1,199 @@
-
-// Universal button fix script
+// Enhanced button and interaction fixes
 (function() {
   'use strict';
-  
+
   function initializeButtons() {
-    console.log('Initializing button functionality...');
-    
-    // Fix all buttons
-    const buttons = document.querySelectorAll('button, .btn, [role="button"]');
-    buttons.forEach(button => {
-      // Ensure buttons are clickable
-      button.style.cursor = 'pointer';
-      button.style.pointerEvents = 'auto';
-      
-      // Add click handler if none exists
-      if (!button.onclick && !button.getAttribute('href')) {
-        button.addEventListener('click', function(e) {
-          console.log('Button clicked:', this.textContent || this.className);
-          
-          // Handle specific button types
-          if (this.textContent.includes('Call') || this.textContent.includes('📞')) {
-            window.location.href = 'tel:+17029031952';
-          } else if (this.textContent.includes('Contact')) {
-            window.location.href = '/contact';
-          } else if (this.textContent.includes('Browse') || this.textContent.includes('View')) {
-            window.location.href = '/listings';
-          } else if (this.textContent.includes('Schedule')) {
-            window.location.href = '/contact';
+    console.log('🔧 Initializing button functionality...');
+
+    // Fix all buttons and clickable elements
+    const clickableSelectors = [
+      'button',
+      '.btn',
+      '[role="button"]',
+      'a[href]',
+      '.button',
+      '.btn-primary',
+      '.btn-secondary',
+      '.btn-outline',
+      '.cta-buttons a',
+      '.contact-button',
+      '.nav-link',
+      '.menu__link'
+    ];
+
+    clickableSelectors.forEach(selector => {
+      const elements = document.querySelectorAll(selector);
+
+      elements.forEach(element => {
+        // Ensure elements are clickable
+        element.style.pointerEvents = 'auto';
+        element.style.cursor = 'pointer';
+        element.style.userSelect = 'auto';
+        element.style.touchAction = 'manipulation';
+
+        // Remove any existing click handlers to avoid conflicts
+        element.removeEventListener('click', handleButtonClick);
+
+        // Add universal click handler
+        element.addEventListener('click', handleButtonClick, { passive: false });
+
+        // Add hover effects
+        element.addEventListener('mouseenter', function() {
+          if (!this.disabled) {
+            this.style.transform = 'translateY(-1px)';
+            this.style.transition = 'all 0.2s ease';
           }
         });
-      }
-    });
-    
-    // Fix navigation buttons
-    const navButtons = document.querySelectorAll('.btn-primary, .btn-secondary, .btn-outline');
-    navButtons.forEach(button => {
-      button.addEventListener('click', function(e) {
-        if (this.tagName === 'A') return; // Let anchor tags work normally
-        
-        // Prevent double-clicks
-        if (this.disabled) return;
-        this.disabled = true;
-        setTimeout(() => this.disabled = false, 1000);
-        
-        console.log('Navigation button clicked:', this.textContent);
+
+        element.addEventListener('mouseleave', function() {
+          this.style.transform = 'translateY(0)';
+        });
       });
     });
-    
-    // Fix phone links
-    const phoneLinks = document.querySelectorAll('a[href^="tel:"], [href*="903-1952"]');
-    phoneLinks.forEach(link => {
-      link.addEventListener('click', function(e) {
-        console.log('Phone link clicked:', this.href);
-        // Force the call action
-        window.location.href = this.href;
-      });
-    });
-    
-    // Fix form buttons
-    const formButtons = document.querySelectorAll('form button, form .btn');
-    formButtons.forEach(button => {
-      button.addEventListener('click', function(e) {
-        console.log('Form button clicked:', this.type || 'button');
-        if (this.type === 'submit') {
-          // Let form handle submission
-          return;
-        }
-      });
-    });
-    
-    console.log('Button initialization complete!');
+
+    console.log('✅ Button fixes applied to all clickable elements');
   }
-  
-  // Initialize when DOM is ready
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', initializeButtons);
-  } else {
-    initializeButtons();
-  }
-  
-  // Re-initialize for dynamic content
-  const observer = new MutationObserver(function(mutations) {
-    mutations.forEach(function(mutation) {
-      if (mutation.addedNodes.length > 0) {
-        initializeButtons();
+
+  function handleButtonClick(e) {
+    console.log('Button clicked:', this.textContent?.trim() || this.className);
+
+    // Don't interfere with normal link navigation
+    if (this.tagName === 'A' && this.href && !this.href.includes('javascript:')) {
+      return true;
+    }
+
+    // Prevent double clicks
+    if (this.disabled || this.classList.contains('processing')) {
+      e.preventDefault();
+      e.stopPropagation();
+      return false;
+    }
+
+    // Add visual feedback
+    this.classList.add('processing');
+    this.style.opacity = '0.8';
+
+    setTimeout(() => {
+      this.classList.remove('processing');
+      this.style.opacity = '';
+    }, 500);
+
+    // Handle specific button types
+    const buttonText = this.textContent?.toLowerCase() || '';
+    const buttonClass = this.className?.toLowerCase() || '';
+
+    // Phone call buttons
+    if (buttonText.includes('call') || buttonText.includes('phone') || this.href?.includes('tel:')) {
+      if (!this.href?.includes('tel:')) {
+        window.location.href = 'tel:+17029031952';
+        e.preventDefault();
       }
-    });
-  });
-  
-  observer.observe(document.body, {
-    childList: true,
-    subtree: true
-  });
-})();
-// Enhanced button and interaction fixes
-document.addEventListener('DOMContentLoaded', function() {
-  console.log('🔧 Button fixes loading...');
-  
+      return;
+    }
+
+    // Contact buttons
+    if (buttonText.includes('contact') || buttonText.includes('get in touch')) {
+      window.location.href = '/contact';
+      e.preventDefault();
+      return;
+    }
+
+    // Listings buttons
+    if (buttonText.includes('browse') || buttonText.includes('view') || buttonText.includes('listing')) {
+      window.location.href = '/listings';
+      e.preventDefault();
+      return;
+    }
+
+    // Schedule buttons
+    if (buttonText.includes('schedule') || buttonText.includes('appointment')) {
+      window.location.href = '/contact';
+      e.preventDefault();
+      return;
+    }
+
+    // Form submit buttons
+    if (this.type === 'submit' || buttonClass.includes('submit')) {
+      // Let form handle submission
+      return true;
+    }
+  }
+
   // Fix RealScout widget interactions
   function fixRealScoutInteractions() {
     const realscoutWidgets = document.querySelectorAll('realscout-office-listings');
+
     realscoutWidgets.forEach(widget => {
       widget.style.pointerEvents = 'auto';
       widget.style.userSelect = 'auto';
       widget.style.touchAction = 'manipulation';
       widget.style.position = 'relative';
       widget.style.zIndex = '2';
-      
-      // Enable all child elements
+
+      // Monitor for dynamically added content
       const observer = new MutationObserver(function(mutations) {
         mutations.forEach(function(mutation) {
           if (mutation.addedNodes.length > 0) {
             mutation.addedNodes.forEach(node => {
-              if (node.nodeType === 1) { // Element node
-                node.style.pointerEvents = 'auto';
-                node.style.cursor = 'pointer';
-                
-                // Fix specific elements
-                const interactiveElements = node.querySelectorAll('a, button, [role="button"], .listing-card, .property-card');
-                interactiveElements.forEach(el => {
-                  el.style.pointerEvents = 'auto';
-                  el.style.cursor = 'pointer';
-                  el.style.userSelect = 'auto';
-                  el.style.touchAction = 'manipulation';
-                });
+              if (node.nodeType === 1) {
+                fixElementInteractions(node);
               }
             });
           }
         });
       });
-      
+
       observer.observe(widget, { childList: true, subtree: true });
     });
   }
-  
-  // Fix RealScout appearance issues
-  function fixRealScoutAppearance() {
-    const realscoutWidgets = document.querySelectorAll('realscout-office-listings');
-    realscoutWidgets.forEach(widget => {
-      // Force light theme
-      widget.style.backgroundColor = '#ffffff';
-      widget.style.color = '#1f2937';
-      
-      // Apply styles to all child elements
-      const allElements = widget.querySelectorAll('*');
-      allElements.forEach(el => {
-        // Don't override images or specific styled elements
-        if (el.tagName !== 'IMG' && el.tagName !== 'SVG') {
-          el.style.backgroundColor = 'inherit';
-          el.style.color = 'inherit';
-        }
-        
-        // Make sure links are visible
-        if (el.tagName === 'A') {
-          el.style.color = '#2563eb';
-          el.style.textDecoration = 'underline';
-        }
-        
-        // Style buttons properly
-        if (el.tagName === 'BUTTON') {
-          el.style.backgroundColor = '#2563eb';
-          el.style.color = '#ffffff';
-          el.style.border = 'none';
-          el.style.padding = '0.5rem 1rem';
-          el.style.borderRadius = '4px';
-          el.style.cursor = 'pointer';
-        }
-      });
-    });
-  }
-  
-  // Run initially and on interval to catch dynamically loaded content
-  fixRealScoutInteractions();
-  fixRealScoutAppearance();
-  setInterval(() => {
-    fixRealScoutInteractions();
-    fixRealScoutAppearance();
-  }, 2000);
-  
-  // Fix all clickable elements
-  const clickableElements = document.querySelectorAll('button, .btn, [role="button"], a[href]');
-  
-  clickableElements.forEach(element => {
-    // Ensure proper cursor
-    if (!element.style.cursor) {
-      element.style.cursor = 'pointer';
-    }
-    
-    // Add ripple effect for better feedback
-    element.addEventListener('click', function(e) {
-      const ripple = document.createElement('span');
-      ripple.classList.add('ripple');
-      this.appendChild(ripple);
-      
-      setTimeout(() => {
-        ripple.remove();
-      }, 600);
-    });
-    
-    // Prevent double clicks
-    element.addEventListener('click', function(e) {
-      if (this.disabled) {
-        e.preventDefault();
-        e.stopPropagation();
-        return false;
-      }
-      
-      this.disabled = true;
-      setTimeout(() => {
-        this.disabled = false;
-      }, 300);
-    });
-  });
-  
-  // Phone number click tracking
-  const phoneLinks = document.querySelectorAll('a[href^="tel:"]');
-  phoneLinks.forEach(link => {
-    link.addEventListener('click', function() {
-      console.log('📞 Phone call initiated:', this.href);
-    });
-  });
-  
-  console.log('✅ Button fixes applied to', clickableElements.length, 'elements');
-});
 
-// Add ripple CSS
-const style = document.createElement('style');
-style.textContent = `
-  .ripple {
-    position: absolute;
-    border-radius: 50%;
-    transform: scale(0);
-    animation: ripple 0.6s linear;
-    background-color: rgba(255, 255, 255, 0.7);
-    pointer-events: none;
+  function fixElementInteractions(element) {
+    // Make sure the element and its children are interactive
+    element.style.pointerEvents = 'auto';
+
+    const interactiveElements = element.querySelectorAll('a, button, [role="button"], .listing-card, .property-card');
+    interactiveElements.forEach(el => {
+      el.style.pointerEvents = 'auto';
+      el.style.cursor = 'pointer';
+      el.style.userSelect = 'auto';
+      el.style.touchAction = 'manipulation';
+    });
   }
-  
-  @keyframes ripple {
-    to {
-      transform: scale(4);
-      opacity: 0;
+
+  // Initialize when DOM is ready
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', function() {
+      initializeButtons();
+      fixRealScoutInteractions();
+    });
+  } else {
+    initializeButtons();
+    fixRealScoutInteractions();
+  }
+
+  // Re-initialize for dynamic content
+  const observer = new MutationObserver(function(mutations) {
+    let shouldReinitialize = false;
+
+    mutations.forEach(function(mutation) {
+      if (mutation.addedNodes.length > 0) {
+        mutation.addedNodes.forEach(node => {
+          if (node.nodeType === 1 && (node.querySelector('button, .btn, a') || node.matches('button, .btn, a'))) {
+            shouldReinitialize = true;
+          }
+        });
+      }
+    });
+
+    if (shouldReinitialize) {
+      setTimeout(initializeButtons, 100);
     }
-  }
-  
-  button, .btn, [role="button"] {
-    position: relative;
-    overflow: hidden;
-    transition: all 0.3s ease !important;
-  }
-  
-  button:hover, .btn:hover, [role="button"]:hover {
-    transform: translateY(-1px);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-  }
-`;
-document.head.appendChild(style);
+  });
+
+  observer.observe(document.body, {
+    childList: true,
+    subtree: true
+  });
+
+  console.log('🚀 Enhanced button fixes loaded successfully!');
+})();
