@@ -2231,7 +2231,6 @@ realscout-office-listings::part(*) {
     margin: 1rem;
     padding: 1.5rem;
   }
-}
 
 /* Correcting autoprefixer warnings by changing align-items and justify-content values to flex-end */
 .chart-grid {
