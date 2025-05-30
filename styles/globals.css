@@ -2335,6 +2335,9 @@ Adding styles for local image galleries by replacing a section in the CSS file.`
     font-size: 0.8rem;
   }
 }
+
+/* Import SEO Improvements Styles */
+@import url('./seo-improvements.css');
 /* Testimonials Page */
 .testimonials-page {
   padding: 0;
