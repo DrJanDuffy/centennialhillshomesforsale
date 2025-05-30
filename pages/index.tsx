@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import Head from 'next/head';
+import Link from 'next/link';
 import Layout from '../components/Layout';
 import RealScoutWidget from '../components/widgets/RealScoutWidget';
 import RealScoutListings from '../components/RealScoutListings';
