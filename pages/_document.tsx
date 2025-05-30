@@ -69,12 +69,12 @@ export default function Document() {
               z-index: 1;
               position: relative;
             }
-            
+
             realscout-office-listings * {
               pointer-events: auto !important;
               cursor: pointer;
             }
-            
+
             realscout-office-listings a,
             realscout-office-listings button,
             realscout-office-listings [role="button"],
@@ -87,23 +87,37 @@ export default function Document() {
             }
 
             .realscout-loading {
-              display: flex;
-              flex-direction: column;
-              align-items: center;
-              justify-content: center;
-              min-height: 300px;
-              padding: 40px;
+              padding: 2rem;
               text-align: center;
               color: #6b7280;
+              border-radius: 8px;
+              background: #f9fafb;
+              border: 1px solid #e5e7eb;
             }
 
-            .realscout-error {
-              padding: 20px;
-              background: #fef2f2;
-              border: 1px solid #fecaca;
-              border-radius: 8px;
-              color: #dc2626;
-              text-align: center;
+            /* Critical button fixes */
+            button, .btn, .button, [role="button"], a {
+              pointer-events: auto !important;
+              cursor: pointer !important;
+              user-select: auto !important;
+              touch-action: manipulation !important;
+              position: relative;
+              z-index: 1;
+            }
+
+            button:disabled, .btn:disabled, .button:disabled {
+              pointer-events: none !important;
+              cursor: not-allowed !important;
+              opacity: 0.6;
+            }
+
+            .cta-buttons a, .cta-buttons button, .contact-button {
+              display: inline-block !important;
+              pointer-events: auto !important;
+              cursor: pointer !important;
+              text-decoration: none;
+              position: relative;
+              z-index: 10;
             }
 
             .loading-spinner {
