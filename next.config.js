@@ -1,3 +1,4 @@
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
@@ -5,14 +6,6 @@ const nextConfig = {
   trailingSlash: true,
   images: {
     unoptimized: true
-  },
-  async rewrites() {
-    return [
-      {
-        source: '/js/:path*',
-        destination: '/public/js/:path*'
-      }
-    ];
   },
   async headers() {
     return [
