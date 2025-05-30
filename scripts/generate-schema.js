@@ -6,11 +6,12 @@ const siteConfig = {
   baseUrl: 'https://centennialhillshomesforsale.com',
   companyName: 'Centennial Hills Homes | Providence & Skye Canyon | Dr. Jan Duffy, REALTOR®',
   phone: '+1-702-903-1952',
+  website: 'https://www.searchforhomeslasvegas.com/',
   address: {
-    streetAddress: '1490 Center Crossing Rd',
+    streetAddress: 'Providence Skye Canyon Dr',
     addressLocality: 'Las Vegas',
     addressRegion: 'NV',
-    postalCode: '89144',
+    postalCode: '89166',
     addressCountry: 'US'
   },
   geo: {
@@ -32,11 +33,10 @@ const siteConfig = {
     sunday: '06:00-21:00'
   },
   socialProfiles: {
-    facebook: 'https://www.facebook.com/SummerlinNewHomesBHHS',
-    instagram: 'https://www.instagram.com/drjanduffy/',
+    website: 'https://www.searchforhomeslasvegas.com/',
+    pinterest: 'https://www.pinterest.com/DrJanDuffy/',
     linkedin: 'https://www.linkedin.com/company/california-to-vegas-homes',
-    youtube: 'https://www.youtube.com/@DrDuffy',
-    pinterest: 'https://www.pinterest.com/DrJanDuffy/'
+    youtube: 'https://www.youtube.com/@DrDuffy'
   }
 };
 
@@ -54,7 +54,7 @@ function generateRealEstateAgentSchema() {
     "@context": "https://schema.org",
     "@type": "RealEstateAgent",
     "name": "Dr. Jan Duffy, REALTOR®",
-    "description": "Top 1% Las Vegas REALTOR® with 20+ years experience specializing in luxury and new-build homes in Centennial Hills, Providence, Skye Canyon, Summerlin, and master-planned communities.",
+    "description": "Looking for homes for sale in North Las Vegas, Centennial Hills, or Lone Mountain? Dr. Jan Duffy, REALTOR® with Berkshire Hathaway HomeServices, is your trusted expert in luxury and new-build Las Vegas homes. With 20+ years of experience in master-planned communities, specializing in Skye Canyon, Providence, Aliante, Centennial Hills, Tule Springs, El Dorado, Lone Mountain, and Summerlin. Ranked in the Top 1% of Las Vegas REALTORS®, offering expert guidance, same-day showings, and free market analysis. Available 24/7 with personalized service. 4.9/5 star rating.",
     "url": siteConfig.baseUrl,
     "telephone": siteConfig.phone,
     "address": {
@@ -92,13 +92,16 @@ function generateRealEstateAgentSchema() {
       }
     ],
     "serviceType": [
-      "Real Estate Sales",
-      "Luxury Property Sales",
-      "New Construction Sales",
+      "Real Estate Agent",
+      "Real Estate Agency", 
+      "Real Estate Consultant",
+      "Property Management Company",
+      "Building Lot Sales",
+      "Buying Agent Services",
+      "Commercial Property Buying & Sales",
       "First-time Home Buyer Services",
-      "Relocation Assistance",
-      "Property Management",
-      "Real Estate Investing"
+      "Luxury Property Buying & Sales",
+      "New Construction Sales"
     ],
     "priceRange": "$300,000 - $5,000,000",
     "aggregateRating": {
