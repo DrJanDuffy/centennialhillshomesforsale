@@ -5,13 +5,13 @@ run = "npm run dev"
 channel = "stable-24_05"
 
 [deployment]
-build = ["sh", "-c", "npm install --legacy-peer-deps && npm run build-static"]
+build = ["sh", "-c", "npm install --legacy-peer-deps && NODE_ENV=production npm run build-static"]
 deploymentTarget = "static"
 publicDir = "public"
 run = ["sh", "-c", "npx serve out -s -l 5000 -C"]
 
 [workflows]
-runButton = "OPTIMIZED DEPLOY"
+runButton = "PRODUCTION DEPLOY"
 
 [[workflows.workflow]]
 name = "Run"
@@ -762,6 +762,67 @@ args = "ls -la out/ && echo \"✅ Build successful!\" || echo \"❌ Build failed
 [[workflows.workflow.tasks]]
 task = "shell.exec"
 args = "echo \"🌐 Starting production server on port 5000...\""
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "npx serve out -s -l 5000 -C"
+
+[[workflows.workflow]]
+name = "PRODUCTION DEPLOY"
+author = 22930014
+mode = "sequential"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "echo \"🚀 PRODUCTION DEPLOYMENT - CENTENNIAL HILLS WEBSITE\""
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "echo \"=== Stopping existing processes ===\""
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = 'pkill -f "next\|serve\|node" || true'
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "sleep 3"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "echo \"=== Clearing build cache ===\""
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "rm -rf .next out node_modules/.cache .swc || true"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "echo \"=== Installing dependencies ===\""
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "npm install --legacy-peer-deps --production=false"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "echo \"=== Building static site ===\""
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "NODE_ENV=production npm run build-static"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "echo \"=== Verifying build output ===\""
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "ls -la out/ && echo \"✅ Build successful!\" || echo \"❌ Build failed\""
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "echo \"=== Starting production server on port 5000 ===\""
 
 [[workflows.workflow.tasks]]
 task = "shell.exec"

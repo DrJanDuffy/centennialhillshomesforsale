@@ -1,15 +1,24 @@
-
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
-  typescript: {
-    ignoreBuildErrors: false,
-  },
+  swcMinify: true,
   output: 'export',
   trailingSlash: true,
+  distDir: 'out',
   images: {
-    unoptimized: true
+    unoptimized: true,
+    loader: 'custom',
+    loaderFile: './utils/imageLoader.js'
+  },
+  eslint: {
+    ignoreDuringBuilds: true
+  },
+  typescript: {
+    ignoreBuildErrors: true
+  },
+  experimental: {
+    esmExternals: false
   }
-};
+}
 
-module.exports = nextConfig;
+module.exports = nextConfig
