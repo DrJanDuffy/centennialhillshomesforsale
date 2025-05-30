@@ -651,8 +651,8 @@ export default function Home() {
               With personalized service and expert local knowledge, your home buying journey starts here.
             </p>
             <div className="cta-buttons">
-              <a href="#contact" className="btn btn-primary">Get Started Today</a>
-              <a href="tel:+1234567890" className="btn btn-secondary">Call Now</a>
+              <button className="btn btn-primary">Get Started Today</button>
+              <button className="btn btn-outline">Schedule Consultation</button>
             </div>
           </div>
         </section>

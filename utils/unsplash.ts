@@ -79,7 +79,9 @@ export async function searchUnsplashImages(
 ): Promise<UnsplashImage[]> {
   // Return fallback images if no API key is configured
   if (!UNSPLASH_ACCESS_KEY) {
-    console.log('Using fallback images - no Unsplash API key configured');
+    if (process.env.NODE_ENV === 'development') {
+      console.log('Using fallback images - no Unsplash API key configured');
+    }
     return FALLBACK_IMAGES.slice(0, perPage);
   }
 
