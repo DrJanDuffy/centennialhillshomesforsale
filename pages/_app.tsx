@@ -38,8 +38,6 @@ export default function App({ Component, pageProps }: AppProps) {
       <Layout>
         <Component {...pageProps} />
       </Layout>
-      <AnalyticsDashboard isAdmin={process.env.NODE_ENV === 'development'} />
-      {process.env.NODE_ENV === 'development' && <ErrorDashboard />}
     </ErrorBoundary>
   );
 }

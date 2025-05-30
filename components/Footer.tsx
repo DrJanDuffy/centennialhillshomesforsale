@@ -1,4 +1,3 @@
-
 import Link from 'next/link';
 
 export default function Footer() {
@@ -14,7 +13,7 @@ export default function Footer() {
             <p>📍 Serving: Centennial Hills, Providence, Skye Canyon</p>
             <p>⭐ Top 1% Las Vegas REALTOR® | 4.9/5 Rating</p>
             <p>🏢 Licensed Since September 1993</p>
-            
+
             <div className="business-verification">
               <p><small>✅ Verified Google Business Profile</small></p>
               <p><small>📋 Nevada RE License: Active</small></p>
@@ -31,37 +30,37 @@ export default function Footer() {
                 <p>9406 Del Webb Boulevard,<br/>Las Vegas, NV 89134</p>
                 <p><strong>(702) 718-0043</strong></p>
               </div>
-              
+
               <div className="office">
                 <h4>Henderson</h4>
                 <p>3185 St Rose Pkwy, Suite 101,<br/>Henderson, NV 89052</p>
                 <p><strong>(702) 500-1955</strong></p>
               </div>
-              
+
               <div className="office">
                 <h4>Sahara</h4>
                 <p>7475 W Sahara Ave #100,<br/>Las Vegas, NV 89117</p>
                 <p><strong>(702) 299-6607</strong></p>
               </div>
-              
+
               <div className="office">
                 <h4>Sunset</h4>
                 <p>8850 W Sunset Rd UNIT 200,<br/>Las Vegas, NV 89148</p>
                 <p><strong>(702) 500-1942</strong></p>
               </div>
-              
+
               <div className="office">
                 <h4>Lone Mountain</h4>
                 <p>10777 W Twain Ave #333,<br/>Las Vegas, NV 89129</p>
                 <p><strong>(702) 678-9012</strong></p>
               </div>
-              
+
               <div className="office">
                 <h4>Summerlin</h4>
                 <p>1490 Center Crossing Rd,<br/>Las Vegas, NV 89144</p>
                 <p><strong>(702) 903-1952</strong></p>
               </div>
-              
+
               <div className="office">
                 <h4>North Las Vegas</h4>
                 <p>921 South Main Street,<br/>Las Vegas, NV 89101</p>
@@ -69,7 +68,7 @@ export default function Footer() {
               </div>
             </div>
           </div>
-          
+
           <div className="footer-section">
             <h3>🌟 Discover the Finest Neighborhoods in Las Vegas</h3>
             <nav className="service-areas">
@@ -96,7 +95,7 @@ export default function Footer() {
               <a href="/market-update">Market Analysis</a>
             </nav>
           </div>
-          
+
           <div className="footer-section">
             <h3>Quick Links</h3>
             <nav>
@@ -111,7 +110,7 @@ export default function Footer() {
             </nav>
           </div>
         </div>
-        
+
         <div className="footer-bottom">
           <div className="business-info">
             <p><strong>Dr. Jan Duffy, REALTOR® | Berkshire Hathaway HomeServices Nevada Properties</strong></p>
@@ -124,4 +123,6 @@ export default function Footer() {
       </div>
     </footer>
   );
-} 
+};
+
+export default Footer;

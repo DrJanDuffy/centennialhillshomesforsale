@@ -72,12 +72,6 @@ const Layout: React.FC<LayoutProps> = ({
           <main className="main-content">
             {children}
           </main>
-          {/* Debug tools only in development */}
-          {process.env.NODE_ENV === 'development' && (
-            <div style={{ position: 'fixed', bottom: '10px', right: '10px', zIndex: 1000 }}>
-              {/* Development tools would go here */}
-            </div>
-          )}
         </div>
       </ErrorBoundaryWrapper>
     </>

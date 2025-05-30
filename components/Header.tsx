@@ -19,7 +19,7 @@ export default function Header() {
   const toggleMenu = () => {
     const newState = !isMenuOpen;
     setIsMenuOpen(newState);
-    
+
     // Prevent body scroll when menu is open
     if (newState) {
       document.body.style.overflow = 'hidden';
@@ -57,7 +57,7 @@ export default function Header() {
             </Link>
             <span className="tagline">Centennial Hills | Providence | Skye Canyon</span>
           </div>
-          
+
           <div className="header-contact">
             <a href="tel:+17029031952" className="phone-number">(702) 903-1952</a>
           </div>
@@ -131,4 +131,6 @@ export default function Header() {
       </div>
     </header>
   );
-}
+};
+
+export default Header;
