@@ -5,6 +5,7 @@ import { motion } from 'framer-motion';
 import Layout from '../components/Layout';
 import AdvancedSearch from '../components/AdvancedSearch';
 import RealScoutWidget from '../components/widgets/RealScoutWidget';
+import RealScoutListings from '../components/RealScoutListings';
 
 export default function Listings() {
   const [searchFilters, setSearchFilters] = useState({
@@ -129,15 +130,7 @@ export default function Listings() {
           transition={{ delay: 0.8, duration: 0.6 }}
         >
           <h2>All Available Properties</h2>
-          <div className="realscout-widget-container">
-            <realscout-office-listings 
-              agent-encoded-id="QWdlbnQtMjI1MDUw" 
-              sort-order="STATUS_AND_SIGNIFICANT_CHANGE" 
-              listing-status="For Sale" 
-              property-types="SFR,MF,TC" 
-              price-min="450000">
-            </realscout-office-listings>
-          </div>
+          <RealScoutListings />
         </motion.section>
 
         <motion.section 
