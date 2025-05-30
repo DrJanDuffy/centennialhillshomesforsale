@@ -127,7 +127,16 @@ const RealScoutListings: React.FC<RealScoutListingsProps> = ({
   }
 
   return (
-    <div className={`realscout-widget-container ${className}`} style={{ pointerEvents: 'auto', position: 'relative', zIndex: 1 }}>
+    <div 
+      className={`realscout-widget-container ${className}`} 
+      style={{ 
+        pointerEvents: 'auto',
+        position: 'relative',
+        zIndex: 1,
+        isolation: 'isolate',
+        minHeight: '400px'
+      }}
+    >
       <realscout-office-listings 
         agent-encoded-id={agentId}
         sort-order={sortOrder}
@@ -140,7 +149,25 @@ const RealScoutListings: React.FC<RealScoutListingsProps> = ({
           userSelect: 'auto',
           touchAction: 'manipulation',
           position: 'relative',
-          zIndex: 2
+          zIndex: 2,
+          width: '100%',
+          minHeight: '400px',
+          display: 'block'
+        }}
+        onLoad={() => {
+          // Ensure all interactive elements within are clickable
+          setTimeout(() => {
+            const widget = document.querySelector('realscout-office-listings');
+            if (widget) {
+              const interactiveElements = widget.querySelectorAll('a, button, [role="button"], .listing-card, .property-card');
+              interactiveElements.forEach(el => {
+                el.style.pointerEvents = 'auto';
+                el.style.cursor = 'pointer';
+                el.style.userSelect = 'auto';
+                el.style.touchAction = 'manipulation';
+              });
+            }
+          }, 1000);
         }}
       />
     </div>
