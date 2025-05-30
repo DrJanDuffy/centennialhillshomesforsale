@@ -1,12 +1,14 @@
 
 import React, { useState } from 'react';
 
+type NeighborhoodName = 'Centennial Hills' | 'The Trails' | 'Tournament Hills' | 'Skye Canyon' | 'Sun City Aliante';
+
 interface NeighborhoodBarProps {
-  currentNeighborhood: string;
-  onNeighborhoodChange: (neighborhood: string) => void;
+  currentNeighborhood: NeighborhoodName;
+  onNeighborhoodChange: (neighborhood: NeighborhoodName) => void;
 }
 
-const neighborhoods = [
+const neighborhoods: NeighborhoodName[] = [
   'Centennial Hills',
   'The Trails',
   'Tournament Hills', 
