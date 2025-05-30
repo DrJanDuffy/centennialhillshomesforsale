@@ -11,6 +11,9 @@ const businessData = {
   "url": "https://centennialhillshomesforsale.com",
   "telephone": "(702) 903-1952",
   "email": "jan@centennialhillshomes.com",
+  "sameAs": [
+    "https://g.co/kgs/4qQ8DsY"
+  ],
   "address": {
     "@type": "PostalAddress",
     "streetAddress": "Providence Skye Canyon Dr",

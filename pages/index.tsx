@@ -7,6 +7,7 @@ import MarketTrendChart from '../components/MarketTrendChart';
 import AdvancedSearch from '../components/AdvancedSearch';
 import NeighborhoodBar from '../components/NeighborhoodBar';
 import SchoolInfo from '../components/SchoolInfo';
+import LocalAmenities from '../components/LocalAmenities';
 import LocalBusinessSchema from '../components/LocalBusinessSchema';
 import { searchImages } from '../utils/unsplash';
 
