@@ -1,0 +1,86 @@
+
+{
+  "marketStatistics": {
+    "centennialHills": {
+      "medianHomePrice": "$635,000",
+      "averageDaysOnMarket": 18,
+      "priceAppreciationYoY": "8.2%",
+      "inventoryLevel": "1.8 months",
+      "averageHomeSize": "2,850 sq ft",
+      "populationGrowth5Year": "12%",
+      "schoolRatingAverage": 8.5,
+      "walkabilityScore": 72,
+      "crimeRateIndex": 85,
+      "employmentGrowth": "4.3%"
+    },
+    "providence": {
+      "medianHomePrice": "$580,000",
+      "averageDaysOnMarket": 22,
+      "priceAppreciationYoY": "7.8%",
+      "inventoryLevel": "2.1 months",
+      "averageHomeSize": "2,650 sq ft",
+      "populationGrowth5Year": "15%",
+      "schoolRatingAverage": 8.2,
+      "walkabilityScore": 68,
+      "crimeRateIndex": 88,
+      "employmentGrowth": "3.9%"
+    },
+    "skyeCanyon": {
+      "medianHomePrice": "$595,000",
+      "averageDaysOnMarket": 20,
+      "priceAppreciationYoY": "8.5%",
+      "inventoryLevel": "1.9 months",
+      "averageHomeSize": "2,750 sq ft",
+      "populationGrowth5Year": "18%",
+      "schoolRatingAverage": 8.7,
+      "walkabilityScore": 75,
+      "crimeRateIndex": 90,
+      "employmentGrowth": "5.1%"
+    },
+    "summerlin": {
+      "medianHomePrice": "$750,000",
+      "averageDaysOnMarket": 15,
+      "priceAppreciationYoY": "6.9%",
+      "inventoryLevel": "1.5 months",
+      "averageHomeSize": "3,200 sq ft",
+      "populationGrowth5Year": "8%",
+      "schoolRatingAverage": 9.1,
+      "walkabilityScore": 82,
+      "crimeRateIndex": 92,
+      "employmentGrowth": "3.2%"
+    }
+  },
+  "demographicData": {
+    "medianAge": 38,
+    "medianHouseholdIncome": "$89,500",
+    "collegeEducated": "67%",
+    "homeownershipRate": "73%",
+    "averageCommuteTime": "24 minutes",
+    "familiesWithChildren": "42%"
+  },
+  "economicIndicators": {
+    "unemploymentRate": "3.2%",
+    "jobGrowthRate": "4.1%",
+    "costOfLivingIndex": 108,
+    "taxRate": "8.25%",
+    "businessGrowthRate": "6.2%"
+  },
+  "housingMarketTrends": {
+    "monthlyPriceChange": "+1.2%",
+    "yearOverYearSales": "+15.3%",
+    "newConstructionPermits": 847,
+    "foreclosureRate": "0.8%",
+    "cashSalesPercentage": "28%",
+    "firstTimeBuyerPercentage": "35%"
+  },
+  "qualityOfLife": {
+    "airQualityIndex": 78,
+    "walkabilityScore": 72,
+    "bikeabilityScore": 65,
+    "publicTransitScore": 42,
+    "parksPerCapita": 12.5,
+    "recreationCenters": 8,
+    "golfCourses": 15,
+    "shoppingCenters": 23
+  }
+}

@@ -14,6 +14,7 @@ import LocalCitationWidget from '../components/LocalCitationWidget';
 import SEOOptimized from '../components/SEOOptimized';
 import GEOOptimized from '../components/GEOOptimized';
 import AIContentOptimizer from '../components/AIContentOptimizer';
+import StatisticalWidget from '../components/StatisticalWidget';
 
 interface Property {
   id: string;
@@ -152,7 +153,7 @@ export default function Home() {
         }} />
       </Head>
 
-      
+
       <SEOOptimized 
         title="Centennial Hills Homes For Sale | Dr. Jan Duffy REALTOR®"
         description="Find luxury homes in Centennial Hills, Providence & Skye Canyon with Dr. Jan Duffy, top-rated REALTOR® at Berkshire Hathaway HomeServices Nevada Properties."
@@ -164,10 +165,10 @@ export default function Home() {
         pageType="homepage"
         priceRange="$450,000 - $1,200,000"
       />
-      
+
       <AIContentOptimizer pageType="homepage">
       <main className="main-content">
-      
+
 
       <div className="wrapper">
         {/* Sticky neighborhood identifier */}
@@ -679,7 +680,7 @@ export default function Home() {
       </div>
       </main>
       </AIContentOptimizer>
-      
+
       <LocalBusinessSchema 
         pageType="home" 
         additionalServices={["Luxury Home Sales", "New Construction", "Master-Planned Communities"]}
