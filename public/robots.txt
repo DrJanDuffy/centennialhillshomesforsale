@@ -1,9 +1,23 @@
-# Allow all crawlers
+
+# Enhanced robots.txt for AI search optimization
 User-agent: *
 Allow: /
 
-# Sitemap location
+# Priority content for AI crawlers
+Allow: /listings/
+Allow: /neighborhoods/
+Allow: /market-update/
+Allow: /faq/
+Allow: /about/
+Allow: /contact/
+Allow: /testimonials/
+Allow: /blog/
+Allow: /buyers/
+Allow: /sellers/
+
+# Sitemap locations
 Sitemap: https://centennialhillshomesforsale.com/sitemap.xml
+Sitemap: https://centennialhillshomesforsale.com/sitemap-news.xml
 
 # Disallow admin and private areas
 Disallow: /admin/
@@ -26,7 +40,29 @@ Disallow: /page/
 Disallow: /wp-login.php
 Disallow: /wp-register.php
 
-# Crawl-delay for specific bots
+# AI-specific crawlers optimization
+User-agent: GPTBot
+Allow: /
+Allow: /faq/
+Allow: /market-update/
+Allow: /neighborhoods/
+Crawl-delay: 5
+
+User-agent: Claude-Web
+Allow: /
+Allow: /faq/
+Allow: /market-update/
+Allow: /neighborhoods/
+Crawl-delay: 5
+
+User-agent: PerplexityBot
+Allow: /
+Allow: /faq/
+Allow: /market-update/
+Allow: /neighborhoods/
+Crawl-delay: 5
+
+# Crawl-delay for search engine bots
 User-agent: AhrefsBot
 Crawl-delay: 10
 
@@ -34,26 +70,15 @@ User-agent: Baiduspider
 Crawl-delay: 10
 
 User-agent: Bingbot
-Crawl-delay: 10
+Crawl-delay: 5
 
 User-agent: Googlebot
-Crawl-delay: 10
+Crawl-delay: 2
 
 User-agent: YandexBot
 Crawl-delay: 10
 
-# Allow specific paths for all bots
-Allow: /listings/
-Allow: /neighborhoods/
-Allow: /market-update/
-Allow: /about/
-Allow: /contact/
-Allow: /testimonials/
-Allow: /blog/
-Allow: /buyers/
-Allow: /sellers/
-
-# Block specific bots
+# Block specific problematic bots
 User-agent: MJ12bot
 Disallow: /
 
@@ -72,6 +97,7 @@ Allow: /
 Allow: /listings/
 Allow: /neighborhoods/
 Allow: /market-update/
+Allow: /faq/
 Allow: /about/
 Allow: /contact/
 Allow: /testimonials/
@@ -80,4 +106,4 @@ Allow: /buyers/
 Allow: /sellers/
 Disallow: /admin/
 Disallow: /private/
-Disallow: /api/ 
+Disallow: /api/
