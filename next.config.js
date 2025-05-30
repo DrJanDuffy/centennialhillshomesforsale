@@ -17,6 +17,8 @@ const nextConfig = {
     formats: ['image/webp', 'image/avif'],
   },
   trailingSlash: true,
+  output: 'export',
+  distDir: 'out',
   typescript: {
     ignoreBuildErrors: false,
   },
@@ -24,6 +26,9 @@ const nextConfig = {
     ignoreDuringBuilds: false,
   },
   poweredByHeader: false,
+  experimental: {
+    optimizeCss: true,
+  },
 };
 
 module.exports = nextConfig;
