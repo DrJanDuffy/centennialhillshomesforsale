@@ -65,6 +65,7 @@
       return false;
     }
   }
+  }
 
   // Apply fixes when DOM is ready
   if (document.readyState === 'loading') {

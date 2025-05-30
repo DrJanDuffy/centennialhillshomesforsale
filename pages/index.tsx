@@ -648,6 +648,13 @@ export default function Home() {
         </section>
       </div>
       </main>
+      </AIContentOptimizer>
+
+      <LocalBusinessSchema 
+        pageType="home" 
+        additionalServices={["Luxury Home Sales", "New Construction", "Master-Planned Communities"]}
+      />
+      <GoogleBusinessOptimization pageType="home" />
     </React.Fragment>
   );
 }
