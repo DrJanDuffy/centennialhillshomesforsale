@@ -12,7 +12,29 @@ declare global {
 }
 
 interface RealScoutWidgetProps {
+  type?: string;
   propertyId?: string;
+  agentId?: string;
+  brokerId?: string;
+  clientId?: string;
+  clientName?: string;
+  clientEmail?: string;
+  clientPhone?: string;
+  clientAddress?: string;
+  clientCity?: string;
+  clientState?: string;
+  clientZip?: string;
+  clientBudget?: string;
+  clientTimeline?: string;
+  clientPreferences?: string;
+  agentEncodedId?: string;
+  sortOrder?: string;
+  listingStatus?: string;
+  propertyTypes?: string;
+  priceMin?: number;
+  className?: string;
+  filterByZip?: string;
+  neighborhood?: string;
   searchParams?: {
     minPrice?: number;
     maxPrice?: number;
@@ -25,7 +47,29 @@ interface RealScoutWidgetProps {
 }
 
 const RealScoutWidget: React.FC<RealScoutWidgetProps> = ({
+  type,
   propertyId,
+  agentId,
+  brokerId,
+  clientId,
+  clientName,
+  clientEmail,
+  clientPhone,
+  clientAddress,
+  clientCity,
+  clientState,
+  clientZip,
+  clientBudget,
+  clientTimeline,
+  clientPreferences,
+  agentEncodedId,
+  sortOrder,
+  listingStatus,
+  propertyTypes,
+  priceMin,
+  className,
+  filterByZip,
+  neighborhood,
   searchParams = {}
 }) => {
   const [isLoading, setIsLoading] = useState(true);
@@ -41,7 +85,28 @@ const RealScoutWidget: React.FC<RealScoutWidgetProps> = ({
       // Initialize RealScout widget
       if (typeof window !== 'undefined' && (window as any).RealScout) {
         (window as any).RealScout.init({
+          type,
           propertyId,
+          agentId,
+          brokerId,
+          clientId,
+          clientName,
+          clientEmail,
+          clientPhone,
+          clientAddress,
+          clientCity,
+          clientState,
+          clientZip,
+          clientBudget,
+          clientTimeline,
+          clientPreferences,
+          agentEncodedId,
+          sortOrder,
+          listingStatus,
+          propertyTypes,
+          priceMin,
+          filterByZip,
+          neighborhood,
           searchParams,
         });
       } else {
@@ -60,7 +125,7 @@ const RealScoutWidget: React.FC<RealScoutWidgetProps> = ({
   }, [propertyId, searchParams]);
 
   return (
-    <div className={styles.container}>
+    <div className={`${styles.container} ${className || ''}`}>
       {isLoading && (
         <div className={styles.loading}>
           <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary"></div>
