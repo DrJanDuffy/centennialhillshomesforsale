@@ -15,7 +15,10 @@ export default function Footer() {
             <p>⭐ Top 1% Las Vegas REALTOR® | 4.9/5 Rating</p>
             <p>🏢 Licensed Since September 1993</p>
             <div className="business-verification">
-              <p><small>Verified Google Business Profile</small></p>
+              <p><small>✅ Verified Google Business Profile</small></p>
+              <p><small>📋 Nevada RE License: Active</small></p>
+              <p><small>🏢 Berkshire Hathaway HomeServices</small></p>
+              <p><small>🏆 Las Vegas Board of REALTORS® Member</small></p>
             </div>
           </div>
           
