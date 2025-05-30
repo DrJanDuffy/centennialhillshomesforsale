@@ -44,9 +44,11 @@ class EnterpriseAnalytics {
       document.head.appendChild(script);
 
       window.dataLayer = window.dataLayer || [];
-      window.gtag = function(...args) {
-        window.dataLayer.push(args);
-      };
+      if (!window.gtag) {
+        window.gtag = function(...args) {
+          window.dataLayer.push(args);
+        };
+      }
 
       window.gtag('js', new Date());
       window.gtag('config', measurementId, {
