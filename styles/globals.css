@@ -141,7 +141,96 @@ a {
   color: var(--primary-color);
 }
 
-/* Footer */
+/* Verification Badge Styles */
+.verification-badge {
+  margin-top: 0.5rem;
+  font-size: 0.75rem;
+}
+
+.verification-badge .verified {
+  color: #16a34a;
+  font-weight: 600;
+  display: block;
+  margin-bottom: 0.25rem;
+}
+
+.verification-badge .rating {
+  color: #dc2626;
+  font-weight: 500;
+}
+
+.verification-page {
+  padding: 2rem 0;
+}
+
+.verification-hero {
+  background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%);
+  color: white;
+  padding: 4rem 0;
+  text-align: center;
+}
+
+.verification-badge .badge-content {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 1rem;
+  padding: 2rem;
+  margin: 2rem auto;
+  max-width: 600px;
+  text-align: left;
+}
+
+.verification-badge .badge-content h2 {
+  margin-bottom: 1rem;
+  color: #fbbf24;
+}
+
+.verification-badge .badge-content p {
+  margin-bottom: 0.5rem;
+  line-height: 1.6;
+}
+
+.services-verification,
+.areas-verification,
+.contact-verification {
+  padding: 3rem 0;
+}
+
+.services-grid,
+.areas-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
+.service-item,
+.area-item {
+  background: #f8fafc;
+  padding: 1.5rem;
+  border-radius: 0.5rem;
+  border-left: 4px solid #2563eb;
+}
+
+.contact-methods {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 2rem;
+  margin-top: 2rem;
+}
+
+.method {
+  background: #f8fafc;
+  padding: 2rem;
+  border-radius: 0.5rem;
+  text-align: center;
+}
+
+.method h3 {
+  color: #2563eb;
+  margin-bottom: 1rem;
+}
+
+/* Footer Styles */
 .footer {
   background-color: #f3f4f6;
   padding: 4rem 0 2rem;
@@ -1631,17 +1720,17 @@ h2 {
     grid-template-columns: 1fr;
     gap: 2rem;
   }
-  
+
   .form-row {
     grid-template-columns: 1fr;
   }
-  
+
   .neighborhood-stats,
   .market-stats-grid,
   .zip-stats-grid {
     grid-template-columns: 1fr;
   }
-  
+
   .quick-search-grid,
   .neighborhood-links {
     grid-template-columns: 1fr;
@@ -1762,15 +1851,15 @@ h2 {
     grid-template-columns: 1fr;
     gap: 2rem;
   }
-  
+
   .contact-buttons {
     flex-direction: column;
   }
-  
+
   .header-brand .logo {
     font-size: 1.2rem;
   }
-  
+
   .header-brand .tagline {
     font-size: 0.8rem;
   }

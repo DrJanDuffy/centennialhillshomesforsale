@@ -8,9 +8,16 @@ export default function Header() {
     <header className="header">
       <div className="container">
         <div className="header-brand">
-          <Link href="/" className="logo">
-            Dr. Jan Duffy, REALTOR®
-          </Link>
+          <div className="logo">
+            <Link href="/">
+              <h1>Dr. Jan Duffy</h1>
+              <span className="subtitle">REALTOR® | Centennial Hills Expert</span>
+              <div className="verification-badge">
+                <span className="verified">✅ Verified Google Business</span>
+                <span className="rating">⭐ 4.9/5 • Top 1% REALTOR®</span>
+              </div>
+            </Link>
+          </div>
           <span className="tagline">Centennial Hills | Providence | Skye Canyon</span>
         </div>
         <div className="header-contact">
@@ -51,4 +58,4 @@ export default function Header() {
       </div>
     </header>
   );
-} 
+}
