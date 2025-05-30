@@ -1,17 +1,14 @@
-
-import React, { Component, ReactNode } from 'react';
+import React, { Component, ReactNode, ErrorInfo } from 'react';
 import ErrorReportingSystem from '../utils/errorReporting';
 
 interface Props {
   children: ReactNode;
-  fallback?: ReactNode;
   componentName?: string;
 }
 
 interface State {
   hasError: boolean;
   error?: Error;
-  errorInfo?: any;
 }
 
 class ErrorBoundaryWrapper extends Component<Props, State> {
@@ -24,9 +21,9 @@ class ErrorBoundaryWrapper extends Component<Props, State> {
     return { hasError: true, error };
   }
 
-  componentDidCatch(error: Error, errorInfo: any) {
-    this.setState({ error, errorInfo });
-    
+  componentDidCatch(error: Error, errorInfo: ErrorInfo) {
+    this.setState({ error });
+
     // Report error to our error reporting system
     const errorReporter = ErrorReportingSystem.getInstance();
     errorReporter.reportError({
@@ -35,14 +32,14 @@ class ErrorBoundaryWrapper extends Component<Props, State> {
       severity: 'high',
       stack: error.stack
     });
+
+    if (process.env.NODE_ENV === 'development') {
+      console.error('ErrorBoundaryWrapper caught an error:', error, errorInfo);
+    }
   }
 
   render() {
     if (this.state.hasError) {
-      if (this.props.fallback) {
-        return this.props.fallback;
-      }
-
       return (
         <div className="error-boundary-fallback" style={{
           padding: '20px',

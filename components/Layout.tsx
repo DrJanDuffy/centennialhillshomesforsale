@@ -5,11 +5,11 @@ import Footer from './Footer';
 import ErrorBoundary from './ErrorBoundary';
 import LocalBusinessSchema from './LocalBusinessSchema';
 import PerformanceMonitor from './PerformanceMonitor';
-import ErrorReportingSystem from '../utils/errorReporting';
 import PageErrorChecker from './PageErrorChecker';
+import { ReactNode } from 'react';
 
 interface LayoutProps {
-  children: React.ReactNode;
+  children: ReactNode;
   title?: string;
   description?: string;
   keywords?: string;
@@ -18,8 +18,8 @@ interface LayoutProps {
 
 const Layout: React.FC<LayoutProps> = ({ 
   children, 
-  title = "Centennial Hills Homes For Sale | Jan Duff Real Estate",
-  description = "Find your dream home in Centennial Hills, Las Vegas. Expert real estate services by Jan Duff. Browse luxury homes, condos, and townhomes in this premier northwest Las Vegas community.",
+  title = 'Centennial Hills Homes for Sale | Jan Duff Real Estate',
+  description = 'Find your dream home in Centennial Hills, Las Vegas. Expert real estate services by Jan Duff. Browse luxury homes, condos, and townhomes in this premier northwest Las Vegas community.',
   keywords = "Centennial Hills homes, Las Vegas real estate, Jan Duff realtor, northwest Las Vegas, luxury homes, Providence, Skye Canyon",
   canonicalUrl
 }) => {
