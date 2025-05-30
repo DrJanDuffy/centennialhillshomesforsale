@@ -1,0 +1,63 @@
+{
+  "project": {
+    "id": "real-estate-analytics-2025",
+    "name": "Real Estate Analytics Enterprise",
+    "created": "2025-05-30T11:54:03.375Z"
+  },
+  "services": {
+    "analytics": {
+      "enabled": true,
+      "quotas": {
+        "daily_requests": 1000000,
+        "concurrent_users": 10000,
+        "custom_events": 500
+      }
+    },
+    "bigquery": {
+      "enabled": true,
+      "dataset": "real_estate_analytics",
+      "tables": [
+        "property_views",
+        "searches",
+        "leads",
+        "performance"
+      ]
+    },
+    "ai_platform": {
+      "enabled": true,
+      "models": [
+        "property_recommendation",
+        "price_prediction",
+        "lead_scoring"
+      ]
+    }
+  },
+  "real_estate_tracking": {
+    "property_events": [
+      "property_view",
+      "property_search",
+      "contact_request",
+      "calculator_usage",
+      "listing_click"
+    ],
+    "custom_dimensions": [
+      "property_type",
+      "price_range",
+      "location",
+      "agent_name",
+      "lead_source"
+    ],
+    "goals": [
+      {
+        "name": "Contact Form Submission",
+        "type": "destination",
+        "value": 100
+      },
+      {
+        "name": "Property Detail View",
+        "type": "event",
+        "value": 10
+      }
+    ]
+  }
+}
