@@ -47,8 +47,7 @@ const Layout: React.FC<LayoutProps> = ({
         </main>
         <Footer />
       </div>
-    </ErrorBoundary>
-
+      
       <Script 
         src="/js/unsplash.js" 
         strategy="lazyOnload"
@@ -57,7 +56,7 @@ const Layout: React.FC<LayoutProps> = ({
         src="/js/centennial-hills-images.js" 
         strategy="lazyOnload"
       />
-    
+    </ErrorBoundary>
   );
 };
 
