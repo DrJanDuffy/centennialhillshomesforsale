@@ -116,11 +116,11 @@ export default function SkyeCanyon() {
             <h2>Current Homes for Sale in Skye Canyon</h2>
             <div className="realscout-widget-container">
               <RealScoutListings
-                agent-encoded-id="QWdlbnQtMjI1MDUw"
-                sort-order="STATUS_AND_SIGNIFICANT_CHANGE"
-                listing-status="For Sale"
-                property-types="SFR,MF,TC"
-                price-min="450000"
+                agentId="QWdlbnQtMjI1MDUw"
+                sortOrder="STATUS_AND_SIGNIFICANT_CHANGE"
+                listingStatus="For Sale"
+                propertyTypes="SFR,MF,TC"
+                priceMin="450000"
               />
             </div>
           </div>
