@@ -44,7 +44,7 @@ export default function App({ Component, pageProps }: AppProps) {
         // Fix environment-specific content
         const envElements = document.querySelectorAll('[data-env]');
         envElements.forEach(el => {
-          el.style.display = 'block';
+          (el as HTMLElement).style.display = 'block';
         });
 
       } catch (error) {

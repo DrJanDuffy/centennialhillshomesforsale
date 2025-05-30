@@ -10,7 +10,7 @@ deploymentTarget = "cloudrun"
 run = ["sh", "-c", "npx serve out -s -l 5000"]
 
 [workflows]
-runButton = "EMERGENCY SITE RECOVERY"
+runButton = "FINAL DEPLOYMENT FIX"
 
 [[workflows.workflow]]
 name = "Run"
@@ -540,6 +540,55 @@ args = "sleep 3"
 [[workflows.workflow.tasks]]
 task = "shell.exec"
 args = "curl -s -o /dev/null -w \"%{http_code}\" http://localhost:5000 || echo \"Testing server response...\""
+
+[[workflows.workflow]]
+name = "FINAL DEPLOYMENT FIX"
+author = 22930014
+mode = "sequential"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "echo \"🚨 FINAL DEPLOYMENT - FIXING ALL ISSUES\""
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = 'pkill -f "next\|serve\|node" || true'
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "sleep 3"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "echo \"Clearing all caches...\""
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "rm -rf .next out node_modules/.cache .swc || true"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "echo \"Installing dependencies...\""
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "npm install --legacy-peer-deps --force"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "echo \"Building static site...\""
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "npm run build-static --verbose"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "echo \"Starting production server...\""
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "npx serve out -s -l 5000 -C"
 
 [[ports]]
 localPort = 3001
