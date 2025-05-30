@@ -4,14 +4,9 @@ import '../styles/realscout.css';
 import type { AppProps } from 'next/app';
 import { useEffect, useState } from 'react';
 import ErrorBoundary from '../components/ErrorBoundary';
+import Layout from '../components/Layout';
 import { setupGlobalErrorHandling } from '../utils/errorTracking';
 import { useRouter } from 'next/router';
-
-// Analytics and error dashboards are removed from production builds
-
-function Layout({ children }) {
-  return <>{children}</>;
-}
 
 export default function App({ Component, pageProps }: AppProps) {
   const [isClient, setIsClient] = useState(false);

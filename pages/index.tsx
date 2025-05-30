@@ -32,7 +32,7 @@ export default function Home() {
   const [currentNeighborhood, setCurrentNeighborhood] = useState('Centennial Hills');
 
   return (
-    <Layout>
+    <>
       <Head>
         <title>Centennial Hills Homes For Sale | Las Vegas Real Estate Expert Dr. Jan Duffy | Berkshire Hathaway HomeServices Nevada Properties</title>
         <meta name="description" content="Find luxury homes for sale in Centennial Hills, Providence, and Skye Canyon with Dr. Jan Duffy, top-rated REALTOR® at Berkshire Hathaway HomeServices Nevada Properties. 30+ years experience in Las Vegas real estate market. Current median home price $635,000." />
@@ -655,6 +655,6 @@ export default function Home() {
         additionalServices={["Luxury Home Sales", "New Construction", "Master-Planned Communities"]}
       />
       <GoogleBusinessOptimization pageType="home" />
-    </Layout>
+    </>
   );
 }
