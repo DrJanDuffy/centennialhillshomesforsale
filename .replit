@@ -7,10 +7,10 @@ channel = "stable-24_05"
 [deployment]
 build = ["sh", "-c", "npm install --legacy-peer-deps && npm run build"]
 deploymentTarget = "cloudrun"
-run = ["sh", "-c", "npx serve out -s -l 5000"]
+run = ["sh", "-c", "npx serve out -s -l 5000 -C"]
 
 [workflows]
-runButton = "FINAL DEPLOYMENT FIX"
+runButton = "DEPLOY NOW"
 
 [[workflows.workflow]]
 name = "Run"
@@ -590,6 +590,39 @@ args = "echo \"Starting production server...\""
 task = "shell.exec"
 args = "npx serve out -s -l 5000 -C"
 
+[[workflows.workflow]]
+name = "DEPLOY NOW"
+author = 22930014
+mode = "sequential"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "echo \"🚀 DEPLOYING CENTENNIAL HILLS WEBSITE\""
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = 'pkill -f "next\|serve" || true'
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "sleep 2"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "echo \"Building static site...\""
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "npm run build-static"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "echo \"✅ Build complete - starting server...\""
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "npx serve out -s -l 5000 -C"
+
 [[ports]]
 localPort = 3001
 externalPort = 3001
@@ -607,5 +640,5 @@ localPort = 5000
 externalPort = 80
 
 [[ports]]
-localPort = 39699
+localPort = 42873
 externalPort = 3000
