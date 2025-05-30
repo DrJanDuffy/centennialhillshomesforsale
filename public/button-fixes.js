@@ -4,6 +4,9 @@
 
   console.log('🔧 Loading comprehensive button fixes...');
 
+// Add error handling wrapper
+try {
+
   // Global button fix configuration
   const BUTTON_CONFIG = {
     selectors: [
@@ -410,7 +413,7 @@
       try {
         const elements = document.querySelectorAll(selector);
         elements.forEach(makeElementClickable);
-        console.log(`✅ Fixed ${elements.length} elements for selector: ${selector}`);
+        console.log('✅ Fixed', elements.length, 'elements for selector:', selector);
       } catch (error) {
         console.warn(`⚠️ Error with selector ${selector}:`, error);
       }
@@ -535,4 +538,8 @@
   });
 
   console.log('🔧 Button fixes script loaded successfully');
+
+} catch (error) {
+  console.error('❌ Error in button fixes script:', error);
+}
 })();
