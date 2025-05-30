@@ -25,10 +25,6 @@ const nextConfig = {
   },
   poweredByHeader: false,
   compress: true,
-  experimental: {
-    optimizeCss: true,
-    optimizeServerReact: true,
-  },
   env: {
     CUSTOM_KEY: 'centennial-hills-homes',
   },
