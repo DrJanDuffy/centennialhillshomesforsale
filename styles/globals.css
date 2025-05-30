@@ -3236,8 +3236,6 @@ realscout-office-listings::part(*) {
   .container {
     padding: 0 1rem;
   }
-}
-  }
 
   .hero h1 {
     font-size: 2rem;
@@ -3255,5 +3253,4 @@ realscout-office-listings::part(*) {
   .faq-category {
     padding: 1.5rem;
   }
-
-/* Correcting autoprefixer warnings by changing align-items and justify-content values to flex-end */
+}
