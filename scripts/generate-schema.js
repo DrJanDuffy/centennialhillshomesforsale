@@ -29,13 +29,24 @@ const siteConfig = {
     website: 'https://www.searchforhomeslasvegas.com/'
   },
   businessSince: '1993-09-01',
+  businessDescription: 'Looking for homes for sale in North Las Vegas, Centennial Hills, or Lone Mountain? Dr. Jan Duffy, REALTOR® with Berkshire Hathaway HomeServices, is your trusted expert in luxury and new-build Las Vegas homes. With 20+ years of experience in master-planned communities, Dr. Duffy specializes in top neighborhoods like Skye Canyon, Providence, Aliante, Centennial Hills, Tule Springs, El Dorado, Lone Mountain, and Summerlin. Ranked in the Top 1% of Las Vegas REALTORS®, Dr. Duffy offers expert guidance, same-day showings, and a free market analysis. Available 24/7, Dr. Duffy provides personalized service to make buying or selling your Las Vegas home easy.',
   specialties: [
-    'Luxury Property Buying & Sales',
-    'New Construction Sales & Leasing', 
-    'Building Lot Sales',
-    'First-time Home Buyer Services',
-    'Commercial Property Buying & Sales',
-    'Buying Agent Services'
+    'Building lot sales',
+    'Buying agent services', 
+    'Commercial property buying & sales',
+    'First-time home buyer services',
+    'Luxury property buying & sales'
+  ],
+  serviceAreas: [
+    'North Las Vegas',
+    'Centennial Hills',
+    'Lone Mountain',
+    'Skye Canyon',
+    'Providence',
+    'Aliante',
+    'Tule Springs',
+    'El Dorado',
+    'Summerlin'
   ]
 };
 
