@@ -7,6 +7,7 @@ import ErrorBoundary from './ErrorBoundary';
 import LocalBusinessSchema from './LocalBusinessSchema';
 import PerformanceMonitor from './PerformanceMonitor';
 import ErrorReportingSystem from '../utils/errorReporting';
+import PageErrorChecker from '../utils/pageErrorChecker';
 
 interface LayoutProps {
   children: React.ReactNode;
