@@ -10,7 +10,7 @@ deploymentTarget = "static"
 publicDir = "public"
 
 [workflows]
-runButton = "DEPLOY SITE"
+runButton = "WORKING DEPLOY"
 
 [[workflows.workflow]]
 name = "Run"
@@ -663,6 +663,55 @@ args = "npm run build-static"
 [[workflows.workflow.tasks]]
 task = "shell.exec"
 args = "echo \"✅ Build complete - starting production server...\""
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "npx serve out -s -l 5000 -C"
+
+[[workflows.workflow]]
+name = "WORKING DEPLOY"
+author = 22930014
+mode = "sequential"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "echo \"🚀 DEPLOYING CENTENNIAL HILLS WEBSITE\""
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = 'pkill -f "next\|serve" || true'
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "sleep 2"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "echo \"Installing dependencies...\""
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "npm install --legacy-peer-deps"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "echo \"Building static site...\""
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "npm run build-static"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "echo \"Checking build output...\""
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "ls -la out/ || echo \"Build failed - checking errors\""
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "echo \"Starting server...\""
 
 [[workflows.workflow.tasks]]
 task = "shell.exec"
