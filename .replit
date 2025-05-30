@@ -542,10 +542,6 @@ task = "shell.exec"
 args = "curl -s -o /dev/null -w \"%{http_code}\" http://localhost:5000 || echo \"Testing server response...\""
 
 [[ports]]
-localPort = 5000
-externalPort = 80
-
-[[ports]]
 localPort = 3001
 externalPort = 3001
 
@@ -559,4 +555,8 @@ externalPort = 3003
 
 [[ports]]
 localPort = 5000
-externalPort = 5000
+externalPort = 80
+
+[[ports]]
+localPort = 39699
+externalPort = 3000
