@@ -28,11 +28,12 @@ class ErrorBoundaryWrapper extends Component<Props, State> {
     this.setState({ error, errorInfo });
     
     // Report error to our error reporting system
-    ErrorReportingSystem.reportError({
+    const errorReporter = ErrorReportingSystem.getInstance();
+    errorReporter.reportError({
       error: error.message,
-      stack: error.stack,
-      componentStack: errorInfo.componentStack,
-      props: this.props.componentName
+      component: this.props.componentName || 'ErrorBoundaryWrapper',
+      severity: 'high',
+      stack: error.stack
     });
   }
 
