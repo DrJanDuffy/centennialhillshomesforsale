@@ -2571,7 +2571,7 @@ button:hover,
 }
 
 [data-hydration-fix].hydrated {
-  visibility: visible; 0;
+  visibility: visible;
 }
 
 .service-areas {

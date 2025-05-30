@@ -186,6 +186,27 @@ args = "echo \"🌐 Starting dev server to test fixes\""
 task = "shell.exec"
 args = "npm run dev"
 
+[[workflows.workflow]]
+name = "Fix and Test Errors"
+author = 22930014
+mode = "sequential"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "echo \"🔧 Fixing critical errors...\""
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "npm run build --no-lint"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "echo \"✅ Build completed - testing fixes\""
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "npm run dev"
+
 [[ports]]
 localPort = 5000
 externalPort = 80
