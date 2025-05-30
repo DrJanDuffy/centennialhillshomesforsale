@@ -462,6 +462,64 @@ try {
         button.dataset.ctaFixed = 'true';
       }
     });
+  }
+
+  // Fix contact-specific buttons
+  function fixContactButtons() {
+    const contactButtons = document.querySelectorAll('.contact-buttons a, .contact-buttons button, .contact-button, .phone-number, .email-link');
+    
+    contactButtons.forEach(button => {
+      button.style.pointerEvents = 'auto';
+      button.style.cursor = 'pointer';
+      button.style.zIndex = '100';
+      button.style.position = 'relative';
+      
+      if (!button.dataset.contactFixed) {
+        button.addEventListener('click', function(e) {
+          console.log('📞 Contact button clicked:', this.textContent);
+        }, { passive: false });
+        button.dataset.contactFixed = 'true';
+      }
+    });
+  }
+
+  // Initialize all fixes when DOM is ready
+  function initializeAllFixes() {
+    fixCTAButtons();
+    fixContactButtons();
+    fixNavigationMenus();
+    fixFormElements();
+    fixRealScoutInteractions();
+    fixOverlayIssues();
+    
+    console.log('✅ All comprehensive fixes applied');
+  }
+
+  // Run fixes immediately and on DOM changes
+  initializeAllFixes();
+  
+  // Watch for dynamic content changes
+  if (window.MutationObserver) {
+    const observer = new MutationObserver(function(mutations) {
+      let shouldRunFixes = false;
+      mutations.forEach(function(mutation) {
+        if (mutation.addedNodes.length > 0) {
+          shouldRunFixes = true;
+        }
+      });
+      
+      if (shouldRunFixes) {
+        setTimeout(initializeAllFixes, 100);
+      }
+    });
+    
+    observer.observe(document.body, {
+      childList: true,
+      subtree: true
+    });
+  }t.ctaFixed = 'true';
+      }
+    });
 
     console.log(`✅ Fixed ${ctaButtons.length} CTA/Contact buttons`);
   }

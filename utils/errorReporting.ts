@@ -161,4 +161,4 @@ class ErrorReportingSystem {
   }
 }
 
-export default ErrorReportingSystem;ystem;
+export default ErrorReportingSystem;
