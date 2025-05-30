@@ -349,29 +349,34 @@ export default function Home() {
           <div className="container">
             <div className="about-content">
               <div className="about-text">
-                <h2>Your Centennial Hills Neighborhood Specialist</h2>
+                <h2>Dr. Jan Duffy, REALTOR® - Your Centennial Hills Expert</h2>
                 <p>
-                  Born and raised in Las Vegas, I've watched Centennial Hills transform from desert 
-                  to one of the valley's premier family destinations. I know every master-planned 
-                  community, every school boundary, and every hidden gem this area offers.
+                  With over 30 years of Las Vegas real estate experience since September 1993, 
+                  Dr. Jan Duffy has watched Centennial Hills transform from desert to one of the 
+                  valley's premier family destinations. Ranked in the Top 1% of Las Vegas REALTORS®, 
+                  Dr. Duffy specializes in luxury and new-build homes in master-planned communities.
                 </p>
                 <p>
-                  From Providence's family-friendly atmosphere to The Trails' luxury golf course living, 
-                  I'll help you find the perfect Centennial Hills community that matches your lifestyle, 
-                  budget, and dreams.
+                  From Providence's family-friendly atmosphere to Skye Canyon's mountain views and 
+                  The Trails' luxury golf course living, Dr. Duffy provides expert guidance with 
+                  same-day showings and personalized service available 24/7.
                 </p>
                 <div className="local-expertise">
-                  <span className="expertise">📍 Native Las Vegan</span>
-                  <span className="expertise">🏠 500+ CH homes sold</span>
-                  <span className="expertise">🎓 School district expert</span>
-                  <span className="expertise">⭐ 5-star local reviews</span>
+                  <span className="expertise">🏢 Berkshire Hathaway HomeServices</span>
+                  <span className="expertise">📞 (702) 903-1952</span>
+                  <span className="expertise">⭐ 4.9/5 Rating - Top 1%</span>
+                  <span className="expertise">📅 Since September 1993</span>
+                </div>
+                <div className="contact-buttons">
+                  <a href="tel:+17029031952" className="btn btn-primary">Call Dr. Duffy</a>
+                  <a href="/contact" className="btn btn-secondary">Free Market Analysis</a>
                 </div>
               </div>
               <div className="about-image">
                 {images[7] && (
                   <img 
                     src={images[7]} 
-                    alt="Local Centennial Hills real estate expert" 
+                    alt="Dr. Jan Duffy, REALTOR® - Centennial Hills Expert" 
                     className="agent-photo"
                   />
                 )}

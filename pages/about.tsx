@@ -19,16 +19,36 @@ export default function About() {
 
       <main className="container">
         <motion.section 
-          className="section"
+          className="section hero-about"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
         >
-          <h1>Your Trusted Real Estate Partner in Centennial Hills</h1>
-          <p>
-            We're dedicated to helping you find the perfect home in one of Las Vegas's most desirable neighborhoods.
-            With years of experience and deep local knowledge, we make your real estate journey seamless and successful.
-          </p>
+          <div className="about-hero-content">
+            <div className="agent-profile">
+              <h1>Dr. Jan Duffy, REALTOR®</h1>
+              <h2>Top 1% Las Vegas Real Estate Expert</h2>
+              <div className="credentials">
+                <span className="credential">🏢 Berkshire Hathaway HomeServices</span>
+                <span className="credential">📅 Licensed Since September 1993</span>
+                <span className="credential">⭐ 4.9/5 Star Rating</span>
+                <span className="credential">📞 (702) 903-1952</span>
+              </div>
+            </div>
+            <div className="about-description">
+              <p>
+                With over 30 years of Las Vegas real estate experience, Dr. Jan Duffy specializes in luxury 
+                and new-build homes in North Las Vegas master-planned communities. From Centennial Hills to 
+                Providence, Skye Canyon to Summerlin, Dr. Duffy provides expert guidance with same-day showings 
+                and personalized service available 24/7.
+              </p>
+              <p>
+                Ranked in the Top 1% of Las Vegas REALTORS®, Dr. Duffy offers expert market analysis, 
+                professional photography, and comprehensive marketing strategies to help you buy or sell 
+                your Las Vegas home with confidence.
+              </p>
+            </div>
+          </div>
         </motion.section>
 
         <motion.section 

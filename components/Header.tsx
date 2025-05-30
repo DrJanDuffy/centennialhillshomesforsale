@@ -7,9 +7,15 @@ export default function Header() {
   return (
     <header className="header">
       <div className="container">
-        <Link href="/" className="logo">
-          Centennial Hills Homes For Sale
-        </Link>
+        <div className="header-brand">
+          <Link href="/" className="logo">
+            Dr. Jan Duffy, REALTOR®
+          </Link>
+          <span className="tagline">Centennial Hills | Providence | Skye Canyon</span>
+        </div>
+        <div className="header-contact">
+          <a href="tel:+17029031952" className="phone-number">(702) 903-1952</a>
+        </div>
         <nav className="nav">
           <Link 
             href="/" 
@@ -21,13 +27,19 @@ export default function Header() {
             href="/about" 
             className={router.pathname === '/about' ? 'active' : ''}
           >
-            About
+            About Dr. Duffy
           </Link>
           <Link 
             href="/listings" 
             className={router.pathname === '/listings' ? 'active' : ''}
           >
             Listings
+          </Link>
+          <Link 
+            href="/services" 
+            className={router.pathname === '/services' ? 'active' : ''}
+          >
+            Services
           </Link>
           <Link 
             href="/contact" 
