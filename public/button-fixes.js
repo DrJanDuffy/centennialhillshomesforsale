@@ -1,4 +1,3 @@
-
 // Enhanced button and interaction fixes
 (function() {
   'use strict';
@@ -99,7 +98,7 @@
   // Universal click handler
   function handleUniversalClick(e) {
     const element = e.currentTarget;
-    
+
     console.log('🖱️ Button clicked:', {
       element: element.tagName,
       text: element.textContent?.trim().substring(0, 50) || 'No text',
@@ -136,20 +135,20 @@
         window.location.href = href;
         return true;
       }
-      
+
       // Email links
       if (href.includes('mailto:')) {
         window.location.href = href;
         return true;
       }
-      
+
       // External links
       if (href.startsWith('http') && !href.includes(window.location.hostname)) {
         window.open(href, '_blank', 'noopener,noreferrer');
         e.preventDefault();
         return false;
       }
-      
+
       // Internal navigation - let Next.js handle it
       if (href.startsWith('/') || href.includes(window.location.hostname)) {
         return true;
@@ -215,7 +214,7 @@
 
     // Get all potential clickable elements
     const allElements = [];
-    
+
     BUTTON_CONFIG.selectors.forEach(selector => {
       try {
         const elements = document.querySelectorAll(selector);
@@ -245,7 +244,7 @@
   // RealScout widget specific fixes
   function fixRealScoutWidgets() {
     const widgets = document.querySelectorAll('realscout-office-listings');
-    
+
     widgets.forEach(widget => {
       // Make the widget container interactive
       widget.style.pointerEvents = 'auto';
@@ -260,7 +259,7 @@
           mutation.addedNodes.forEach(node => {
             if (node.nodeType === 1) { // Element node
               makeElementClickable(node);
-              
+
               // Fix all interactive elements within the node
               const interactiveElements = node.querySelectorAll('a, button, [role="button"], .listing-card, .property-card');
               interactiveElements.forEach(makeElementClickable);
@@ -288,18 +287,18 @@
     const menuToggles = document.querySelectorAll('.menu-toggle');
     menuToggles.forEach(toggle => {
       makeElementClickable(toggle);
-      
+
       // Ensure menu toggle functionality
       if (!toggle.dataset.menuHandlerAdded) {
         toggle.addEventListener('click', function(e) {
           e.preventDefault();
           const nav = document.querySelector('.nav');
           const overlay = document.querySelector('.nav-overlay');
-          
+
           if (nav) {
             nav.classList.toggle('nav--open');
             this.classList.toggle('active');
-            
+
             if (overlay) {
               overlay.style.display = nav.classList.contains('nav--open') ? 'block' : 'none';
             }
@@ -319,7 +318,7 @@
       overlay.addEventListener('click', function() {
         const nav = document.querySelector('.nav');
         const toggle = document.querySelector('.menu-toggle');
-        
+
         if (nav) nav.classList.remove('nav--open');
         if (toggle) toggle.classList.remove('active');
         this.style.display = 'none';
@@ -334,7 +333,7 @@
       const submitButtons = form.querySelectorAll('button[type="submit"], input[type="submit"], .submit-button');
       submitButtons.forEach(button => {
         makeElementClickable(button);
-        
+
         // Ensure form submission works
         if (!button.dataset.formHandlerAdded) {
           button.addEventListener('click', function(e) {
@@ -402,6 +401,100 @@
     console.log('👀 Dynamic content monitoring active');
   }
 
+  // Initial scan and fix
+  function runComprehensiveFixes() {
+    console.log('🔍 Running comprehensive button fixes...');
+
+    // Fix all existing elements
+    BUTTON_CONFIG.selectors.forEach(selector => {
+      try {
+        const elements = document.querySelectorAll(selector);
+        elements.forEach(makeElementClickable);
+        console.log(`✅ Fixed ${elements.length} elements for selector: ${selector}`);
+      } catch (error) {
+        console.warn(`⚠️ Error with selector ${selector}:`, error);
+      }
+    });
+
+    // Special fixes for common issues
+    fixNavigationElements();
+    fixFormElements();
+    fixRealScoutInteractions();
+    fixOverlayIssues();
+    fixCTAButtons();
+    fixContactButtons();
+
+    console.log('✅ Comprehensive fixes completed');
+  }
+
+  // Fix CTA and contact buttons specifically
+  function fixCTAButtons() {
+    const ctaButtons = document.querySelectorAll('.cta-buttons a, .cta-buttons button, .contact-button, .contact-buttons a, .contact-buttons button, .fallback-buttons a, .fallback-buttons button');
+
+    ctaButtons.forEach(button => {
+      // Remove any blocking CSS
+      button.style.pointerEvents = 'auto';
+      button.style.cursor = 'pointer';
+      button.style.userSelect = 'auto';
+      button.style.touchAction = 'manipulation';
+      button.style.position = 'relative';
+      button.style.zIndex = '99';
+      button.style.display = 'inline-block';
+      button.style.opacity = '1';
+      button.style.visibility = 'visible';
+
+      // Ensure proper sizing on mobile
+      if (window.innerWidth <= 768) {
+        button.style.minHeight = '48px';
+        button.style.minWidth = '48px';
+        button.style.padding = '0.75rem 1rem';
+      }
+
+      // Add event listener if not present
+      if (!button.dataset.ctaFixed) {
+        button.addEventListener('click', function(e) {
+          console.log('🎯 CTA button clicked:', this.textContent);
+          // Let the default behavior continue
+        }, { passive: false });
+        button.dataset.ctaFixed = 'true';
+      }
+    });
+
+    console.log(`✅ Fixed ${ctaButtons.length} CTA/Contact buttons`);
+  }
+
+  // Fix contact-specific buttons
+  function fixContactButtons() {
+    const contactSelectors = [
+      '.phone-number',
+      'a[href^="tel:"]',
+      'a[href^="mailto:"]',
+      '.btn-primary',
+      '.btn-secondary',
+      '.btn-outline'
+    ];
+
+    contactSelectors.forEach(selector => {
+      const elements = document.querySelectorAll(selector);
+      elements.forEach(element => {
+        element.style.pointerEvents = 'auto';
+        element.style.cursor = 'pointer';
+        element.style.userSelect = 'auto';
+        element.style.touchAction = 'manipulation';
+        element.style.position = 'relative';
+        element.style.zIndex = '100';
+
+        // For phone and email links, ensure proper handling
+        if (element.href && (element.href.startsWith('tel:') || element.href.startsWith('mailto:'))) {
+          element.addEventListener('click', function(e) {
+            console.log('📞 Contact link clicked:', this.href);
+            // Allow default behavior
+          });
+        }
+      });
+    });
+  }
+
   // Main initialization function
   function initialize() {
     console.log('🚀 Starting comprehensive button fixes...');
@@ -411,6 +504,7 @@
     fixRealScoutWidgets();
     fixNavigationMenus();
     fixFormElements();
+    runComprehensiveFixes();
 
     // Setup monitoring for dynamic content
     setupDynamicContentMonitoring();
@@ -419,7 +513,7 @@
     setInterval(() => {
       const unfixedButtons = document.querySelectorAll(BUTTON_CONFIG.selectors.join(','));
       const needsFixing = [...unfixedButtons].filter(btn => !btn.dataset.buttonFixed);
-      
+
       if (needsFixing.length > 0) {
         console.log(`🔧 Fixing ${needsFixing.length} missed buttons`);
         needsFixing.forEach(makeElementClickable);

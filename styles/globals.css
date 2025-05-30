@@ -1055,11 +1055,11 @@ a[href] {
   cursor: pointer !important;
   user-select: auto !important;
   touch-action: manipulation !important;
-  
+
   /* Layout and positioning */
   position: relative !important;
   z-index: 1 !important;
-  
+
   /* Visual styling */
   display: inline-block;
   padding: 0.75rem 1.5rem;
@@ -1073,19 +1073,19 @@ a[href] {
   font-size: inherit;
   line-height: 1.5;
   text-align: center;
-  
+
   /* Remove browser defaults that might interfere */
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
   outline: none;
-  
+
   /* Ensure interactions work on all devices */
   -webkit-touch-callout: default;
   -webkit-user-select: auto;
   -moz-user-select: auto;
   -ms-user-select: auto;
-  
+
   /* Prevent text selection issues */
   -webkit-tap-highlight-color: rgba(0,0,0,0.1);
 }
@@ -1299,7 +1299,7 @@ button:not(:disabled):active,
   cursor: pointer !important;
   user-select: auto !important;
   touch-action: manipulation !important;
-  
+
   /* Layout */
   padding: 1rem 2rem !important;
   border-radius: 8px !important;
@@ -1315,13 +1315,13 @@ button:not(:disabled):active,
   position: relative !important;
   z-index: 10 !important;
   min-width: 150px !important;
-  
+
   /* Device compatibility */
   -webkit-appearance: none !important;
   -moz-appearance: none !important;
   appearance: none !important;
   -webkit-tap-highlight-color: rgba(0,0,0,0.1) !important;
-  
+
   /* Ensure visibility */
   opacity: 1 !important;
   visibility: visible !important;
@@ -2149,7 +2149,7 @@ input[type="button"],
   /* Force above any potential overlays */
   position: relative !important;
   z-index: 99 !important;
-  
+
   /* Ensure no interference from pseudo-elements */
   isolation: isolate;
 }
@@ -2175,7 +2175,7 @@ realscout-office-listings::part(*) {
     right: 1rem;
     min-width: auto;
   }
-  
+
   /* Ensure mobile touch targets are adequate */
   button,
   .btn,
@@ -2235,7 +2235,7 @@ realscout-office-listings::part(*) {
 /* Correcting autoprefixer warnings by changing align-items and justify-content values to flex-end */
 .chart-grid {
   display: flex;
-  justify-content: space-between;
+  justify-content: space-between;```text
   align-items: flex-end;
   height: 100%;
   padding: 1rem 0;
@@ -3253,4 +3253,5 @@ realscout-office-listings::part(*) {
   .faq-category {
     padding: 1.5rem;
   }
-}
+
+/* Correcting autoprefixer warnings by changing align-items and justify-content values to flex-end */
