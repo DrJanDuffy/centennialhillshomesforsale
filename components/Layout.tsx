@@ -1,5 +1,6 @@
 import React from 'react';
 import Head from 'next/head';
+import Script from 'next/script';
 import Header from './Header';
 import Footer from './Footer';
 import ErrorBoundary from './ErrorBoundary';
@@ -25,13 +26,12 @@ const Layout: React.FC<LayoutProps> = ({
   additionalServices = []
 }) => {
   return (
+    
     <ErrorBoundary>
       <Head>
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
-        <script src="/js/unsplash.js" defer></script>
-        <script src="/js/centennial-hills-images.js" defer></script>
       </Head>
       <GoogleAnalytics />
       <LocalBusinessSchema 
@@ -48,6 +48,16 @@ const Layout: React.FC<LayoutProps> = ({
         <Footer />
       </div>
     </ErrorBoundary>
+
+      <Script 
+        src="/js/unsplash.js" 
+        strategy="lazyOnload"
+      />
+      <Script 
+        src="/js/centennial-hills-images.js" 
+        strategy="lazyOnload"
+      />
+    
   );
 };
 
