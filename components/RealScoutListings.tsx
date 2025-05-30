@@ -1,4 +1,3 @@
-
 import { useEffect, useState } from 'react';
 
 interface RealScoutListingsProps {
@@ -25,7 +24,7 @@ const RealScoutListings = ({
   useEffect(() => {
     let retryCount = 0;
     const maxRetries = 3;
-    
+
     // Check if script is already loaded
     const checkScript = () => {
       if (typeof window !== 'undefined') {

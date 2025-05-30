@@ -1,4 +1,3 @@
-
 import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 
@@ -45,7 +44,7 @@ const PageErrorChecker: React.FC = () => {
 
   const checkReactErrors = (): PageError[] => {
     const errors: PageError[] = [];
-    
+
     try {
       // Check for missing keys in lists
       const listElements = document.querySelectorAll('ul li, ol li');
@@ -88,7 +87,7 @@ const PageErrorChecker: React.FC = () => {
 
   const checkAccessibilityIssues = (): PageError[] => {
     const errors: PageError[] = [];
-    
+
     try {
       // Check for missing alt text
       const images = document.querySelectorAll('img');
@@ -147,7 +146,7 @@ const PageErrorChecker: React.FC = () => {
 
   const checkSEOIssues = (): PageError[] => {
     const errors: PageError[] = [];
-    
+
     try {
       // Check for missing meta description
       const metaDesc = document.querySelector('meta[name="description"]');
@@ -196,7 +195,7 @@ const PageErrorChecker: React.FC = () => {
 
   const checkPerformanceIssues = (): PageError[] => {
     const errors: PageError[] = [];
-    
+
     try {
       // Check for large images without optimization
       const images = document.querySelectorAll('img');
