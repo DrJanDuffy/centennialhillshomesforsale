@@ -3,6 +3,7 @@ import { motion } from 'framer-motion';
 import Head from 'next/head';
 import Layout from '../components/Layout';
 import SEOOptimized from '../components/SEOOptimized';
+import { generateSchemaForPage } from '../scripts/generate-schema';
 import { FaStar, FaQuoteLeft } from 'react-icons/fa';
 
 export default function Testimonials() {
@@ -68,13 +69,65 @@ export default function Testimonials() {
 
   return (
     <Layout>
-      <SEOOptimized
-        title="Client Testimonials | Dr. Jan Duffy REALTOR® | Las Vegas Real Estate Reviews"
-        description="Read real client testimonials and reviews for Dr. Jan Duffy, top-rated REALTOR® in Centennial Hills, Providence, Skye Canyon, and Summerlin. 4.9/5 star rating with 127+ reviews."
-        keywords="client testimonials, real estate reviews, Dr Jan Duffy reviews, Centennial Hills realtor reviews, Las Vegas realtor testimonials"
-        pageType="testimonials"
-        localBusiness={true}
-      />
+      <Head>
+        <title>Client Testimonials | Dr. Jan Duffy REALTOR® | Las Vegas Real Estate Reviews</title>
+        <meta name="description" content="Read real client testimonials and reviews for Dr. Jan Duffy, top-rated REALTOR® in Centennial Hills, Providence, Skye Canyon, and Summerlin. 4.9/5 star rating with 127+ reviews." />
+        <meta name="keywords" content="client testimonials, real estate reviews, Dr Jan Duffy reviews, Centennial Hills realtor reviews, Las Vegas realtor testimonials" />
+        <link rel="canonical" href="https://centennialhillshomesforsale.com/testimonials" />
+        
+        {/* Reviews Schema */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "LocalBusiness",
+              "name": "Dr. Jan Duffy, REALTOR®",
+              "aggregateRating": {
+                "@type": "AggregateRating",
+                "ratingValue": "4.9",
+                "reviewCount": "127",
+                "bestRating": "5",
+                "worstRating": "4"
+              },
+              "review": testimonials.map(testimonial => ({
+                "@type": "Review",
+                "author": {
+                  "@type": "Person",
+                  "name": testimonial.name
+                },
+                "reviewRating": {
+                  "@type": "Rating",
+                  "ratingValue": testimonial.rating,
+                  "bestRating": "5"
+                },
+                "reviewBody": testimonial.text,
+                "datePublished": testimonial.date
+              }))
+            })
+          }}
+        />
+        
+        {/* Service Area Schema */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "RealEstateAgent",
+              "name": "Dr. Jan Duffy, REALTOR®",
+              "areaServed": [
+                "Centennial Hills, Las Vegas, NV",
+                "Providence, Las Vegas, NV", 
+                "Skye Canyon, Las Vegas, NV",
+                "Summerlin, Las Vegas, NV",
+                "Lone Mountain, Las Vegas, NV",
+                "Aliante, Las Vegas, NV"
+              ]
+            })
+          }}
+        />
+      </Head>
 
       <main className="testimonials-page">
         <motion.section 
