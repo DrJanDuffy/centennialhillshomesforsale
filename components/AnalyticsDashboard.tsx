@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import EnterpriseAnalytics from '../utils/enterpriseAnalytics';
 
@@ -16,7 +17,6 @@ export default function AnalyticsDashboard({ isAdmin = false }: AnalyticsDashboa
     return null;
   }
 
-const AnalyticsDashboard: React.FC<AnalyticsDashboardProps> = ({ isAdmin = false }) => {
   const [metrics, setMetrics] = useState<any>(null);
   const [isVisible, setIsVisible] = useState(false);
 
@@ -47,11 +47,6 @@ const AnalyticsDashboard: React.FC<AnalyticsDashboardProps> = ({ isAdmin = false
       URL.revokeObjectURL(url);
     }
   };
-
-  // Only show dashboard if user is admin AND in development
-  if (!isAdmin || process.env.NODE_ENV === 'production') {
-    return null;
-  }
 
   return (
     <div className="analytics-dashboard">
@@ -131,6 +126,4 @@ const AnalyticsDashboard: React.FC<AnalyticsDashboardProps> = ({ isAdmin = false
       )}
     </div>
   );
-};
-
-export default AnalyticsDashboard;
+}
