@@ -49,10 +49,7 @@ export default function Listings() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.2, duration: 0.6 }}
         >
-          <AdvancedSearch 
-            filters={searchFilters}
-            onFiltersChange={setSearchFilters}
-          />
+          <AdvancedSearch />
         </motion.section>
 
         <motion.section 
