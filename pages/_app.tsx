@@ -3,6 +3,7 @@ import '../styles/realscout.css';
 import type { AppProps } from 'next/app';
 import { useEffect } from 'react';
 import ErrorBoundary from '../components/ErrorBoundary';
+import { setupGlobalErrorHandling } from '../utils/errorTracking';
 
 export default function App({ Component, pageProps }: AppProps) {
   useEffect(() => {
@@ -11,6 +12,9 @@ export default function App({ Component, pageProps }: AppProps) {
     if (jssStyles && jssStyles.parentElement) {
       jssStyles.parentElement.removeChild(jssStyles);
     }
+
+    // Setup global error handling
+    setupGlobalErrorHandling();
   }, []);
 
   return (

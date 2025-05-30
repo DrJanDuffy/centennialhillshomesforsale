@@ -7,6 +7,7 @@ import ErrorBoundary from './ErrorBoundary';
 import LocalBusinessSchema from './LocalBusinessSchema';
 import PerformanceMonitor from './PerformanceMonitor';
 import GoogleAnalytics from './GoogleAnalytics';
+import ErrorHandler from './ErrorHandler'; // Added import for ErrorHandler
 
 interface LayoutProps {
   children: React.ReactNode;
@@ -26,38 +27,44 @@ const Layout: React.FC<LayoutProps> = ({
   additionalServices = []
 }) => {
   return (
-    
-    <ErrorBoundary>
-      <Head>
-        <meta charSet="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
-      <GoogleAnalytics />
-      <LocalBusinessSchema 
-        pageType={pageType}
-        neighborhood={neighborhood}
-        additionalServices={additionalServices}
-      />
-      <PerformanceMonitor />
-      <div className="layout">
-        <Header />
-        <main className="main-content">
-          {children}
-        </main>
-        <Footer />
-      </div>
-      
-      <Script 
-        src="/js/unsplash.js" 
-        strategy="lazyOnload"
-      />
-      <Script 
-        src="/js/centennial-hills-images.js" 
-        strategy="lazyOnload"
-      />
-    </ErrorBoundary>
+
+    <ErrorHandler>
+      <ErrorBoundary>
+        <Head>
+          <meta charSet="utf-8" />
+          <meta name="viewport" content="width=device-width, initial-scale=1" />
+          <link rel="icon" href="/favicon.ico" />
+        </Head>
+        <GoogleAnalytics />
+        <LocalBusinessSchema 
+          pageType={pageType}
+          neighborhood={neighborhood}
+          additionalServices={additionalServices}
+        />
+        <PerformanceMonitor />
+        <div className="layout">
+          <Header />
+          <main className="main-content">
+            {children}
+          </main>
+          <Footer />
+        </div>
+
+        <Script 
+          src="/js/unsplash.js" 
+          strategy="lazyOnload"
+        />
+        <Script 
+          src="/js/centennial-hills-images.js" 
+          strategy="lazyOnload"
+        />
+      </ErrorBoundary>
+    </ErrorHandler>
   );
 };
 
 export default Layout;
+```
+
+```text
+</replit_final_file>
