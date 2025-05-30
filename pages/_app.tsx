@@ -70,9 +70,11 @@ export default function App({ Component, pageProps }: AppProps) {
 
   return (
     <ErrorBoundary>
-      <Layout>
-        <Component {...pageProps} />
-      </Layout>
+      <div suppressHydrationWarning={true}>
+        <Layout>
+          <Component {...pageProps} />
+        </Layout>
+      </div>
     </ErrorBoundary>
   );
 }

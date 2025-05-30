@@ -2536,6 +2536,44 @@ realscout-office-listings::part(*) {
   margin: 0;
 }
 
+/* Error boundary styles */
+.error-boundary {
+  padding: 20px;
+  background: #fee;
+  border: 1px solid #fcc;
+  border-radius: 4px;
+  margin: 20px 0;
+}
+
+.error-boundary h2 {
+  color: #c33;
+  margin-bottom: 10px;
+}
+
+.error-boundary pre {
+  background: #f5f5f5;
+  padding: 10px;
+  overflow: auto;
+  font-size: 12px;
+}
+
+/* Fix button hover states */
+button:hover,
+.btn:hover,
+[role="button"]:hover {
+  opacity: 0.8;
+  transition: opacity 0.2s ease;
+}
+
+/* Hydration fix styles */
+[data-hydration-fix] {
+  visibility: hidden;
+}
+
+[data-hydration-fix].hydrated {
+  visibility: visible; 0;
+}
+
 .service-areas {
   margin-top: 2rem;
 }

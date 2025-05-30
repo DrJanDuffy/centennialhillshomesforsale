@@ -63,7 +63,7 @@ const Layout: React.FC<LayoutProps> = ({
 
       <div className="app-container">
         <Header />
-        <main className="main-content">
+        <main className="main-content" suppressHydrationWarning={true}>
           {children}
         </main>
         <Footer />
