@@ -1,3 +1,4 @@
+
 import React from 'react';
 import Head from 'next/head';
 import Script from 'next/script';
@@ -6,8 +7,6 @@ import Footer from './Footer';
 import ErrorBoundary from './ErrorBoundary';
 import LocalBusinessSchema from './LocalBusinessSchema';
 import PerformanceMonitor from './PerformanceMonitor';
-import ErrorHandler from './ErrorHandler'; // Added import for ErrorHandler
-import AnalyticsDashboard from './AnalyticsDashboard'; // Import the AnalyticsDashboard
 import SafeGoogleAnalytics from './SafeGoogleAnalytics';
 import EnterpriseAnalytics from '../utils/enterpriseAnalytics';
 import ErrorBoundaryWrapper from './ErrorBoundaryWrapper';
@@ -17,56 +16,68 @@ interface LayoutProps {
   children: React.ReactNode;
   title?: string;
   description?: string;
-  pageType?: 'home' | 'about' | 'contact' | 'services' | 'neighborhood';
-  neighborhood?: string;
-  additionalServices?: string[];
+  keywords?: string;
+  canonicalUrl?: string;
 }
 
 const Layout: React.FC<LayoutProps> = ({ 
   children, 
-  title = 'Centennial Hills Homes For Sale',
-  description = 'Find your dream home in Centennial Hills, Las Vegas. Browse luxury homes, condos, and townhomes with experienced real estate agents.',
-  pageType = 'home',
-  neighborhood,
-  additionalServices = []
+  title = "Centennial Hills Homes For Sale | Jan Duff Real Estate",
+  description = "Find your dream home in Centennial Hills, Las Vegas. Expert real estate services by Jan Duff. Browse luxury homes, condos, and townhomes in this premier northwest Las Vegas community.",
+  keywords = "Centennial Hills homes, Las Vegas real estate, Jan Duff realtor, northwest Las Vegas, luxury homes, Providence, Skye Canyon",
+  canonicalUrl
 }) => {
   return (
+    <>
+      <Head>
+        <title>{title}</title>
+        <meta name="description" content={description} />
+        <meta name="keywords" content={keywords} />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta name="robots" content="index, follow" />
+        
+        {/* Open Graph Meta Tags */}
+        <meta property="og:title" content={title} />
+        <meta property="og:description" content={description} />
+        <meta property="og:type" content="website" />
+        <meta property="og:site_name" content="Centennial Hills Homes For Sale" />
+        
+        {/* Twitter Card Meta Tags */}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content={title} />
+        <meta name="twitter:description" content={description} />
+        
+        {/* Canonical URL */}
+        {canonicalUrl && <link rel="canonical" href={canonicalUrl} />}
+        
+        {/* Favicon and Icons */}
+        <link rel="icon" href="/favicon.ico" />
+        <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+        <link rel="manifest" href="/manifest.json" />
+      </Head>
 
-    <ErrorHandler>
-      <ErrorBoundary>
-        <Head>
-          <meta charSet="utf-8" />
-          <meta name="viewport" content="width=device-width, initial-scale=1" />
-          <link rel="icon" href="/favicon.ico" />
-        </Head>
-        <SafeGoogleAnalytics measurementId={process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID} />
-        <LocalBusinessSchema 
-          pageType={pageType}
-          neighborhood={neighborhood}
-          additionalServices={additionalServices}
-        />
-        <PerformanceMonitor />
-        <div className="layout">
+      {/* Performance Monitoring */}
+      <PerformanceMonitor />
+      
+      {/* Google Analytics */}
+      <SafeGoogleAnalytics measurementId={process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID} />
+      
+      {/* Local Business Schema */}
+      <LocalBusinessSchema />
+
+      <ErrorBoundaryWrapper componentName="Layout">
+        <div className="app-container">
           <Header />
           <main className="main-content">
             {children}
           </main>
           <Footer />
-          <SafeGoogleAnalytics measurementId={process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID} />
-          <AnalyticsDashboard isAdmin={true} />
         </div>
-
-        <Script 
-          src="/js/unsplash.js" 
-          strategy="lazyOnload"
-        />
-        <Script 
-          src="/js/centennial-hills-images.js" 
-          strategy="lazyOnload"
-        />
-      </ErrorBoundary>
-    </ErrorHandler>
+      </ErrorBoundaryWrapper>
+    </>
   );
 };
 
-    export default Layout;
+export default Layout;
