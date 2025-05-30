@@ -39,13 +39,10 @@ const RealScoutWidget: React.FC<RealScoutWidgetProps> = ({
     script.onload = () => {
       setIsLoading(false);
       // Initialize RealScout widget
-      if (window.RealScout) {
-        window.RealScout.init({
+      if (typeof window !== 'undefined' && (window as any).RealScout) {
+        (window as any).RealScout.init({
           propertyId,
           searchParams,
-          container: 'realscout-widget',
-          theme: 'light',
-          responsive: true
         });
       } else {
         setError('Failed to load RealScout widget');
@@ -80,4 +77,4 @@ const RealScoutWidget: React.FC<RealScoutWidgetProps> = ({
   );
 };
 
-export default RealScoutWidget; 
+export default RealScoutWidget;
