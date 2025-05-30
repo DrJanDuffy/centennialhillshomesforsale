@@ -107,3 +107,29 @@ Allow: /sellers/
 Disallow: /admin/
 Disallow: /private/
 Disallow: /api/
+User-agent: *
+Allow: /
+
+# Sitemaps
+Sitemap: https://centennialhillshomesforsale.com/sitemap.xml
+Sitemap: https://centennialhillshomesforsale.com/sitemap-news.xml
+
+# Disallow admin and private areas
+Disallow: /admin/
+Disallow: /private/
+Disallow: /api/
+Disallow: /_next/
+Disallow: /scripts/
+
+# Allow important pages
+Allow: /listings
+Allow: /neighborhoods
+Allow: /market-update
+Allow: /contact
+Allow: /about
+Allow: /services
+Allow: /faq
+Allow: /testimonials
+
+# Crawl delay for respectful crawling
+Crawl-delay: 1
