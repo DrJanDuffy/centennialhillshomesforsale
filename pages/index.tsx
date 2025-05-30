@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 import Head from 'next/head';
 import Layout from '../components/Layout';
 import RealScoutWidget from '../components/widgets/RealScoutWidget';
@@ -32,7 +32,7 @@ export default function Home() {
   const [currentNeighborhood, setCurrentNeighborhood] = useState('Centennial Hills');
 
   return (
-    <>
+    <React.Fragment>
       <Head>
         <title>Centennial Hills Homes For Sale | Las Vegas Real Estate Expert Dr. Jan Duffy | Berkshire Hathaway HomeServices Nevada Properties</title>
         <meta name="description" content="Find luxury homes for sale in Centennial Hills, Providence, and Skye Canyon with Dr. Jan Duffy, top-rated REALTOR® at Berkshire Hathaway HomeServices Nevada Properties. 30+ years experience in Las Vegas real estate market. Current median home price $635,000." />
@@ -648,6 +648,6 @@ export default function Home() {
         </section>
       </div>
       </main>
-    </>
+    </React.Fragment>
   );
 }
