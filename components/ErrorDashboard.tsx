@@ -1,6 +1,4 @@
-import React from 'react';
-
-const ErrorDashboard: React.FC = () => {
+const ErrorDashboard = () => {
   // Never render anything in production
   return null;
 };

@@ -1,5 +1,5 @@
 
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 
 interface RealScoutListingsProps {
   agentId?: string;
@@ -10,7 +10,7 @@ interface RealScoutListingsProps {
   className?: string;
 }
 
-const RealScoutListings: React.FC<RealScoutListingsProps> = ({
+const RealScoutListings = ({
   agentId = "QWdlbnQtMjI1MDUw",
   sortOrder = "STATUS_AND_SIGNIFICANT_CHANGE",
   listingStatus = "For Sale",

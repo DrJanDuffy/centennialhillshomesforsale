@@ -1,4 +1,3 @@
-import React from 'react';
 import Head from 'next/head';
 import Script from 'next/script';
 import Header from './Header';
@@ -27,27 +26,11 @@ const Layout: React.FC<LayoutProps> = ({
   return (
     <>
       <Head>
-        <title>{title}</title>
-        <meta name="description" content={description} />
+        <title>{title || 'Centennial Hills Homes For Sale | Las Vegas Real Estate'}</title>
+        <meta name="description" content={description || 'Find your dream home in Centennial Hills, Las Vegas. Expert real estate services with Dr. Jan Duffy, REALTOR®.'} />
         <meta name="keywords" content={keywords} />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <meta name="robots" content="index, follow" />
-
-        {/* Open Graph Meta Tags */}
-        <meta property="og:title" content={title} />
-        <meta property="og:description" content={description} />
-        <meta property="og:type" content="website" />
-        <meta property="og:site_name" content="Centennial Hills Homes For Sale" />
-
-        {/* Twitter Card Meta Tags */}
-        <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content={title} />
-        <meta name="twitter:description" content={description} />
-
-        {/* Canonical URL */}
         {canonicalUrl && <link rel="canonical" href={canonicalUrl} />}
-
-        {/* Favicon and Icons */}
         <link rel="icon" href="/favicon.ico" />
         <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
         <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
@@ -55,16 +38,26 @@ const Layout: React.FC<LayoutProps> = ({
         <link rel="manifest" href="/manifest.json" />
       </Head>
 
-      {/* Performance Monitoring */}
-      <PerformanceMonitor />
+      <Script
+        src="https://realscout-web-components.s3.amazonaws.com/realscout-web-components.js"
+        strategy="beforeInteractive"
+        onLoad={() => {
+          console.log('RealScout script loaded successfully');
+        }}
+        onError={(e) => {
+          console.error('Failed to load RealScout script:', e);
+        }}
+      />
 
-      {/* Local Business Schema */}
+      <PerformanceMonitor />
       <LocalBusinessSchema />
 
       <div className="app-container">
         <Header />
         <main className="main-content" suppressHydrationWarning={true}>
-          {children}
+          <ErrorBoundary>
+            {children}
+          </ErrorBoundary>
         </main>
         <Footer />
       </div>
