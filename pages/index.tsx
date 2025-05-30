@@ -31,7 +31,8 @@ interface Property {
 export default function Home() {
   const [currentNeighborhood, setCurrentNeighborhood] = useState('Centennial Hills');
 
-  return (
+  try {
+    return (
     <React.Fragment>
       <Head>
         <title>Centennial Hills Homes For Sale | Las Vegas Real Estate Expert Dr. Jan Duffy | Berkshire Hathaway HomeServices Nevada Properties</title>
@@ -681,5 +682,21 @@ export default function Home() {
       />
       <GoogleBusinessOptimization pageType="home" />
     </React.Fragment>
-  );
+    );
+  } catch (error) {
+    console.error('Home component error:', error);
+    return (
+      <div>
+        <Head>
+          <title>Centennial Hills Homes For Sale | Las Vegas Real Estate</title>
+        </Head>
+        <div className="error-fallback">
+          <h1>Welcome to Centennial Hills Homes</h1>
+          <p>Loading content...</p>
+        </div>
+      </div>
+    );
+  }
 }
+
+export default Home;
