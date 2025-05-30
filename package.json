@@ -17,7 +17,9 @@
     "setup-analytics": "node scripts/setup-analytics.js",
     "setup-backups": "node scripts/setup-backups.js",
     "setup-all": "npm run configure-domains && npm run configure-dns && npm run setup-security && npm run setup-analytics && npm run setup-backups && npm run deploy",
-    "backup": "bash scripts/backup-projects.sh"
+    "backup": "bash scripts/backup-projects.sh",
+    "git-push": "node scripts/auto-git-push.js",
+    "auto-deploy": "npm run git-push && npm run deploy"
   },
   "dependencies": {
     "@types/jsdom": "^21.1.7",
