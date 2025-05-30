@@ -25,27 +25,36 @@ export default function Document() {
         />
 
         <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link
           href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
           rel="stylesheet"
         />
+        <script src="https://em.realscout.com/widgets/realscout-web-components.umd.js" type="module"></script>
+        <style dangerouslySetInnerHTML={{
+          __html: `
+            realscout-office-listings {
+              --rs-listing-divider-color: #4a90e2;
+              width: 100%;
+            }
+          `
+        }} />
 
         {/* Google Search Console Verification */}
         <meta name="google-site-verification" content="centennial-hills-homes-verification" />
         <meta name="google-business-verification" content="centennial-hills-homes" />
-        
+
         {/* Enhanced SEO Meta Tags */}
         <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
         <meta name="googlebot" content="index, follow, max-video-preview:-1, max-image-preview:large, max-snippet:-1" />
         <meta name="bingbot" content="index, follow, max-video-preview:-1, max-image-preview:large, max-snippet:-1" />
-        
+
         {/* Geographic SEO */}
         <meta name="geo.region" content="US-NV" />
         <meta name="geo.placename" content="Las Vegas, Nevada" />
         <meta name="geo.position" content="36.268;-115.328" />
         <meta name="ICBM" content="36.268, -115.328" />
-        
+
         {/* Local Business Information */}
         <meta name="locality" content="Las Vegas" />
         <meta name="region" content="Nevada" />
