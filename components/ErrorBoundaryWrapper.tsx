@@ -80,4 +80,4 @@ class ErrorBoundaryWrapper extends Component<Props, State> {
   }
 }
 
-export default ErrorBoundaryWrapper;
+export default ErrorBoundaryWrapper;er;

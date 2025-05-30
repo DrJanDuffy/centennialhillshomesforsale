@@ -2,8 +2,9 @@ import * as React from 'react';
 
 declare global {
   interface Window {
-    gtag?: (...args: any[]) => void;
-    customElements?: CustomElementRegistry;
+    dataLayer: any[];
+    gtag: (...args: any[]) => void;
+    customElements: CustomElementRegistry;
     RealScout?: any;
   }
 
