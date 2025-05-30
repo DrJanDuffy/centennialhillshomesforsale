@@ -9,6 +9,8 @@ import NeighborhoodBar from '../components/NeighborhoodBar';
 import SchoolInfo from '../components/SchoolInfo';
 import LocalAmenities from '../components/LocalAmenities';
 import LocalBusinessSchema from '../components/LocalBusinessSchema';
+import GoogleBusinessOptimization from '../components/GoogleBusinessOptimization';
+import LocalCitationWidget from '../components/LocalCitationWidget';
 import { searchImages } from '../utils/unsplash';
 
 interface Property {
@@ -346,6 +348,20 @@ export default function Home() {
           </div>
         </section>
 
+        {/* Google Business Profile */}
+        <section className="google-business-section">
+          <div className="container">
+            <GoogleBusinessOptimization showWidget={true} pageType="home" />
+          </div>
+        </section>
+
+        {/* Local Citations */}
+        <section className="citations-section">
+          <div className="container">
+            <LocalCitationWidget />
+          </div>
+        </section>
+
         {/* About Section */}
         <section className="page__about about-section">
           <div className="container">
@@ -554,6 +570,7 @@ export default function Home() {
         pageType="home" 
         additionalServices={["Luxury Home Sales", "New Construction", "Master-Planned Communities"]}
       />
+      <GoogleBusinessOptimization pageType="home" />
     </Layout>
   );
 }

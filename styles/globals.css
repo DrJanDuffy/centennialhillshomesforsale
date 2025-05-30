@@ -1966,6 +1966,230 @@ h2 {
   font-style: italic;
 }
 
+/* Google Business Optimization Widget */
+.google-business-widget {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border-radius: 15px;
+  padding: 30px;
+  margin: 40px 0;
+  color: white;
+}
+
+.business-info-card {
+  text-align: center;
+}
+
+.business-info-card h3 {
+  font-size: 28px;
+  margin-bottom: 20px;
+  color: white;
+}
+
+.business-details {
+  margin: 20px 0;
+}
+
+.business-details p {
+  margin: 10px 0;
+  font-size: 16px;
+}
+
+.business-details a {
+  color: #ffd700;
+  text-decoration: none;
+}
+
+.business-details a:hover {
+  text-decoration: underline;
+}
+
+.status {
+  font-weight: bold;
+  padding: 4px 8px;
+  border-radius: 4px;
+}
+
+.status.open {
+  background: #48bb78;
+  color: white;
+}
+
+.status.closed {
+  background: #f56565;
+  color: white;
+}
+
+.business-actions {
+  display: flex;
+  gap: 15px;
+  justify-content: center;
+  margin-top: 25px;
+}
+
+/* Local Citation Widget */
+.citation-widget {
+  background: white;
+  border-radius: 15px;
+  padding: 30px;
+  margin: 30px 0;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+.citation-widget h3 {
+  color: #1a365d;
+  margin-bottom: 15px;
+  font-size: 24px;
+}
+
+.citation-description {
+  color: #718096;
+  margin-bottom: 25px;
+}
+
+.citations-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 20px;
+  margin: 25px 0;
+}
+
+.citation-card {
+  border: 2px solid #e2e8f0;
+  border-radius: 10px;
+  padding: 20px;
+  transition: all 0.3s ease;
+}
+
+.citation-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.citation-card.active {
+  border-color: #48bb78;
+  background: #f0fff4;
+}
+
+.citation-card.pending {
+  border-color: #ed8936;
+  background: #fffaf0;
+}
+
+.citation-card.required {
+  border-color: #f56565;
+  background: #fff5f5;
+}
+
+.citation-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 15px;
+}
+
+.citation-header h4 {
+  color: #1a365d;
+  font-size: 16px;
+  margin: 0;
+}
+
+.status-badge {
+  font-size: 12px;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+.status-badge.active {
+  background: #48bb78;
+  color: white;
+}
+
+.status-badge.pending {
+  background: #ed8936;
+  color: white;
+}
+
+.status-badge.required {
+  background: #f56565;
+  color: white;
+}
+
+.citation-details {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.importance {
+  font-size: 12px;
+  font-weight: bold;
+}
+
+.importance.critical {
+  color: #e53e3e;
+}
+
+.importance.high {
+  color: #d69e2e;
+}
+
+.importance.medium {
+  color: #38a169;
+}
+
+.citation-link {
+  color: #3182ce;
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.citation-link:hover {
+  text-decoration: underline;
+}
+
+.show-more-btn {
+  background: #3182ce;
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: background 0.3s ease;
+  display: block;
+  margin: 20px auto;
+}
+
+.show-more-btn:hover {
+  background: #2c5aa0;
+}
+
+.nap-consistency {
+  background: #f7fafc;
+  border-radius: 10px;
+  padding: 20px;
+  margin-top: 30px;
+}
+
+.nap-consistency h4 {
+  color: #1a365d;
+  margin-bottom: 15px;
+}
+
+.nap-details p {
+  margin: 8px 0;
+  color: #4a5568;
+}
+
+.consistency-status {
+  color: #38a169;
+  font-weight: bold;
+  margin-top: 15px !important;
+}
+
 .local-credentials {
   padding: 80px 0;
   background: white;
