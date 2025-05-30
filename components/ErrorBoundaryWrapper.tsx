@@ -1,3 +1,4 @@
+
 import React, { Component, ReactNode } from 'react';
 import ErrorReportingSystem from '../utils/errorReporting';
 
@@ -25,13 +26,13 @@ class ErrorBoundaryWrapper extends Component<Props, State> {
 
   componentDidCatch(error: Error, errorInfo: any) {
     this.setState({ error, errorInfo });
-
-    const errorReporter = ErrorReportingSystem.getInstance();
-    errorReporter.reportError({
+    
+    // Report error to our error reporting system
+    ErrorReportingSystem.reportError({
       error: error.message,
-      component: this.props.componentName || 'ErrorBoundaryWrapper',
-      severity: 'high',
-      stack: error.stack
+      stack: error.stack,
+      componentStack: errorInfo.componentStack,
+      props: this.props.componentName
     });
   }
 
