@@ -66,52 +66,53 @@ export default function Contact() {
               <div className="contact-method">
                 <FaPhone className="contact-icon" />
                 <div>
-                  <h3>Call Us</h3>
-                  <p>(702) 555-0123</p>
-                  <p className="contact-note">Available 7 days a week</p>
+                  <h3>Call Dr. Jan Duffy</h3>
+                  <p>(702) 903-1952</p>
+                  <p className="contact-note">Available 24/7 - Same day showings</p>
                 </div>
               </div>
 
               <div className="contact-method">
                 <FaEnvelope className="contact-icon" />
                 <div>
-                  <h3>Email Us</h3>
-                  <p>info@centennialhillshomes.com</p>
-                  <p className="contact-note">We respond within 2 hours</p>
+                  <h3>Email Dr. Duffy</h3>
+                  <p>Contact via website</p>
+                  <p className="contact-note">Visit: searchforhomeslasvegas.com</p>
                 </div>
               </div>
 
               <div className="contact-method">
                 <FaMapMarkerAlt className="contact-icon" />
                 <div>
-                  <h3>Visit Our Office</h3>
-                  <p>10200 W Charleston Blvd<br />Las Vegas, NV 89135</p>
-                  <p className="contact-note">Heart of Centennial Hills</p>
+                  <h3>Service Area</h3>
+                  <p>Providence Skye Canyon Dr<br />Las Vegas, NV 89166</p>
+                  <p className="contact-note">Berkshire Hathaway HomeServices</p>
                 </div>
               </div>
 
               <div className="contact-method">
                 <FaClock className="contact-icon" />
                 <div>
-                  <h3>Office Hours</h3>
-                  <p>Mon-Fri: 8:00 AM - 7:00 PM<br />Sat-Sun: 9:00 AM - 6:00 PM</p>
-                  <p className="contact-note">Emergency calls 24/7</p>
+                  <h3>Availability</h3>
+                  <p>Daily: 6:00 AM - 9:00 PM<br />Emergency: 24/7</p>
+                  <p className="contact-note">Since September 1993</p>
                 </div>
               </div>
             </div>
 
             <div className="service-areas">
-              <h3>We Serve These Areas</h3>
+              <h3>Dr. Duffy's Specialty Areas</h3>
               <div className="service-area-tags">
                 <span className="area-tag">Centennial Hills</span>
-                <span className="area-tag">The Trails</span>
-                <span className="area-tag">Tournament Hills</span>
+                <span className="area-tag">Providence</span>
                 <span className="area-tag">Skye Canyon</span>
-                <span className="area-tag">Sun City Aliante</span>
-                <span className="area-tag">Northwest Las Vegas</span>
-                <span className="area-tag">Zip Code 89149</span>
-                <span className="area-tag">Zip Code 89166</span>
-                <span className="area-tag">Zip Code 89084</span>
+                <span className="area-tag">Summerlin</span>
+                <span className="area-tag">Lone Mountain</span>
+                <span className="area-tag">Aliante</span>
+                <span className="area-tag">Tule Springs</span>
+                <span className="area-tag">El Dorado</span>
+                <span className="area-tag">North Las Vegas</span>
+                <span className="area-tag">Master-Planned Communities</span>
               </div>
             </div>
           </motion.section>

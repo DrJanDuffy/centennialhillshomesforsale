@@ -16,6 +16,7 @@ const siteConfig = {
     { url: '/northwest-las-vegas', priority: 0.7, changefreq: 'weekly' },
     { url: '/market-update', priority: 0.8, changefreq: 'daily' },
     { url: '/faq', priority: 0.6, changefreq: 'monthly' },
+    { url: '/services', priority: 0.7, changefreq: 'monthly' },
     { url: '/about', priority: 0.5, changefreq: 'monthly' },
     { url: '/contact', priority: 0.5, changefreq: 'monthly' }
   ]
