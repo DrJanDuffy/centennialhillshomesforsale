@@ -7,10 +7,21 @@ interface LocalBusinessSchemaProps {
   additionalServices?: string[];
 }
 
-export default function LocalBusinessSchema(): JSX.Element {
+export default function LocalBusinessSchema({ 
+  pageType = 'home', 
+  neighborhood,
+  additionalServices = []
+}: LocalBusinessSchemaProps): JSX.Element {
   useEffect(() => {
-    // Remove any existing business schema
-  });
+    // Remove any existing business schema to prevent duplicates
+    const existingSchemas = document.querySelectorAll('script[type="application/ld+json"]');
+    existingSchemas.forEach(schema => {
+      const content = schema.textContent;
+      if (content && content.includes('RealEstateAgent')) {
+        schema.remove();
+      }
+    });
+  }, []);
 
   const baseSchema = {
     "@context": "https://schema.org",
@@ -48,9 +59,26 @@ export default function LocalBusinessSchema(): JSX.Element {
   };
 
   // Add neighborhood-specific data
-  
+  if (neighborhood) {
+    const neighborhoodData = {
+      "areaServed": {
+        "@type": "Place",
+        "name": `${neighborhood}, Las Vegas, NV`
+      },
+      "serviceArea": {
+        "@type": "GeoCircle",
+        "geoMidpoint": {
+          "@type": "GeoCoordinates",
+          "latitude": "36.268",
+          "longitude": "-115.328"
+        },
+        "geoRadius": "25000"
+      }
+    };
+    Object.assign(baseSchema, neighborhoodData);
+  }
 
-  // Add neighborhood-specific data
+  // Add page-specific services
   const services = {
     home: ["Real Estate Sales", "Property Search", "Market Analysis"],
     about: ["Real Estate Consultation", "Professional Services", "Client Representation"],
@@ -59,8 +87,8 @@ export default function LocalBusinessSchema(): JSX.Element {
     neighborhood: ["Neighborhood Expertise", "Local Market Knowledge", "Area Property Search"]
   };
 
-  const pageServices = services.home;
-  const allServices = [...pageServices];
+  const pageServices = services[pageType] || services.home;
+  const allServices = [...pageServices, ...additionalServices];
 
   const serviceSchema = {
     "hasOfferCatalog": {
