@@ -6,8 +6,8 @@ channel = "stable-24_05"
 
 [deployment]
 build = ["sh", "-c", "npm run build"]
-deploymentTarget = "static"
-publicDir = "public"
+deploymentTarget = "cloudrun"
+run = ["sh", "-c", "npm start"]
 
 [workflows]
 runButton = "Dev Server"

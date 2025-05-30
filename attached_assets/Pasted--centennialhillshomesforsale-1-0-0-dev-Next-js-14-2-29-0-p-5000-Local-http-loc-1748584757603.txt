@@ -1,0 +1,95 @@
+> centennialhillshomesforsale@1.0.0 dev
+  ▲ Next.js 14.2.29.0 -p 5000
+  - Local:        http://localhost:5000
+  - Network:      http://0.0.0.0:5000
+  - Environments: .env.local
+
+ ✓ Starting...
+ ✓ Ready in 2.2s
+ ○ Compiling /_error ...
+ ✓ Compiled /_error in 3.7s (676 modules)
+ReferenceError: GoogleAnalytics is not defined
+    at Layout (webpack-internal:///./components/Layout.tsx:66:89)
+    at renderWithHooks (/home/runner/workspace/node_modules/react-dom/cjs/react-dom-server.browser.development.js:5658:16)
+    at renderIndeterminateComponent (/home/runner/workspace/node_modules/react-dom/cjs/react-dom-server.browser.development.js:5732:15)
+    at renderElement (/home/runner/workspace/node_modules/react-dom/cjs/react-dom-server.browser.development.js:5957:7)
+    at renderNodeDestructiveImpl (/home/runner/workspace/node_modules/react-dom/cjs/react-dom-server.browser.development.js:6115:11)
+    at renderNodeDestructive (/home/runner/workspace/node_modules/react-dom/cjs/react-dom-server.browser.development.js:6087:14)
+    at renderIndeterminateComponent (/home/runner/workspace/node_modules/react-dom/cjs/react-dom-server.browser.development.js:5786:7)
+    at renderElement (/home/runner/workspace/node_modules/react-dom/cjs/react-dom-server.browser.development.js:5957:7)
+    at renderNodeDestructiveImpl (/home/runner/workspace/node_modules/react-dom/cjs/react-dom-server.browser.development.js:6115:11)
+    at renderNodeDestructive (/home/runner/workspace/node_modules/react-dom/cjs/react-dom-server.browser.development.js:6087:14)
+    at finishClassComponent (/home/runner/workspace/node_modules/react-dom/cjs/react-dom-server.browser.development.js:5688:3)
+    at renderClassComponent (/home/runner/workspace/node_modules/react-dom/cjs/react-dom-server.browser.development.js:5696:3)
+    at renderElement (/home/runner/workspace/node_modules/react-dom/cjs/react-dom-server.browser.development.js:5954:7)
+    at renderNodeDestructiveImpl (/home/runner/workspace/node_modules/react-dom/cjs/react-dom-server.browser.development.js:6115:11)
+    at renderNodeDestructive (/home/runner/workspace/node_modules/react-dom/cjs/react-dom-server.browser.development.js:6087:14)
+ReferenceError: GoogleAnalytics is not defined
+    at Layout (webpack-internal:///./components/Layout.tsx:66:89)
+    at renderWithHooks (/home/runner/workspace/node_modules/react-dom/cjs/react-dom-server.browser.development.js:5658:16)
+    at renderIndeterminateComponent (/home/runner/workspace/node_modules/react-dom/cjs/react-dom-server.browser.development.js:5732:15)
+    at renderElement (/home/runner/workspace/node_modules/react-dom/cjs/react-dom-server.browser.development.js:5957:7)
+    at renderNodeDestructiveImpl (/home/runner/workspace/node_modules/react-dom/cjs/react-dom-server.browser.development.js:6115:11)
+    at renderNodeDestructive (/home/runner/workspace/node_modules/react-dom/cjs/react-dom-server.browser.development.js:6087:14)
+    at renderIndeterminateComponent (/home/runner/workspace/node_modules/react-dom/cjs/react-dom-server.browser.development.js:5786:7)
+    at renderElement (/home/runner/workspace/node_modules/react-dom/cjs/react-dom-server.browser.development.js:5957:7)
+    at renderNodeDestructiveImpl (/home/runner/workspace/node_modules/react-dom/cjs/react-dom-server.browser.development.js:6115:11)
+    at renderNodeDestructive (/home/runner/workspace/node_modules/react-dom/cjs/react-dom-server.browser.development.js:6087:14)
+    at finishClassComponent (/home/runner/workspace/node_modules/react-dom/cjs/react-dom-server.browser.development.js:5688:3)
+    at renderClassComponent (/home/runner/workspace/node_modules/react-dom/cjs/react-dom-server.browser.development.js:5696:3)
+    at renderElement (/home/runner/workspace/node_modules/react-dom/cjs/react-dom-server.browser.development.js:5954:7)
+    at renderNodeDestructiveImpl (/home/runner/workspace/node_modules/react-dom/cjs/react-dom-server.browser.development.js:6115:11)
+    at renderNodeDestructive (/home/runner/workspace/node_modules/react-dom/cjs/react-dom-server.browser.development.js:6087:14)
+ ⨯ components/Layout.tsx (34:8) @ GoogleAnalytics
+ ⨯ ReferenceError: GoogleAnalytics is not defined
+    at Layout (webpack-internal:///./components/Layout.tsx:66:89)
+    at renderWithHooks (/home/runner/workspace/node_modules/react-dom/cjs/react-dom-server.browser.development.js:5658:16)
+    at renderIndeterminateComponent (/home/runner/workspace/node_modules/react-dom/cjs/react-dom-server.browser.development.js:5732:15)
+    at renderElement (/home/runner/workspace/node_modules/react-dom/cjs/react-dom-server.browser.development.js:5957:7)
+    at renderNodeDestructiveImpl (/home/runner/workspace/node_modules/react-dom/cjs/react-dom-server.browser.development.js:6115:11)
+    at renderNodeDestructive (/home/runner/workspace/node_modules/react-dom/cjs/react-dom-server.browser.development.js:6087:14)
+    at renderIndeterminateComponent (/home/runner/workspace/node_modules/react-dom/cjs/react-dom-server.browser.development.js:5786:7)
+    at renderElement (/home/runner/workspace/node_modules/react-dom/cjs/react-dom-server.browser.development.js:5957:7)
+    at renderNodeDestructiveImpl (/home/runner/workspace/node_modules/react-dom/cjs/react-dom-server.browser.development.js:6115:11)
+    at renderNodeDestructive (/home/runner/workspace/node_modules/react-dom/cjs/react-dom-server.browser.development.js:6087:14)
+    at finishClassComponent (/home/runner/workspace/node_modules/react-dom/cjs/react-dom-server.browser.development.js:5688:3)
+    at renderClassComponent (/home/runner/workspace/node_modules/react-dom/cjs/react-dom-server.browser.development.js:5696:3)
+    at renderElement (/home/runner/workspace/node_modules/react-dom/cjs/react-dom-server.browser.development.js:5954:7)
+    at renderNodeDestructiveImpl (/home/runner/workspace/node_modules/react-dom/cjs/react-dom-server.browser.development.js:6115:11)
+    at renderNodeDestructive (/home/runner/workspace/node_modules/react-dom/cjs/react-dom-server.browser.development.js:6087:14) {
+  page: '/'
+}
+  32 |         <link rel="icon" href="/favicon.ico" />
+  33 |       </Head>
+> 34 |       <GoogleAnalytics />
+     |        ^
+  35 |       <LocalBusinessSchema 
+  36 |         pageType={pageType}
+  37 |         neighborhood={neighborhood}
+ ⨯ components/Layout.tsx (34:8) @ GoogleAnalytics
+ ⨯ ReferenceError: GoogleAnalytics is not defined
+    at Layout (webpack-internal:///./components/Layout.tsx:66:89)
+    at renderWithHooks (/home/runner/workspace/node_modules/react-dom/cjs/react-dom-server.browser.development.js:5658:16)
+    at renderIndeterminateComponent (/home/runner/workspace/node_modules/react-dom/cjs/react-dom-server.browser.development.js:5732:15)
+    at renderElement (/home/runner/workspace/node_modules/react-dom/cjs/react-dom-server.browser.development.js:5957:7)
+    at renderNodeDestructiveImpl (/home/runner/workspace/node_modules/react-dom/cjs/react-dom-server.browser.development.js:6115:11)
+    at renderNodeDestructive (/home/runner/workspace/node_modules/react-dom/cjs/react-dom-server.browser.development.js:6087:14)
+    at renderIndeterminateComponent (/home/runner/workspace/node_modules/react-dom/cjs/react-dom-server.browser.development.js:5786:7)
+    at renderElement (/home/runner/workspace/node_modules/react-dom/cjs/react-dom-server.browser.development.js:5957:7)
+    at renderNodeDestructiveImpl (/home/runner/workspace/node_modules/react-dom/cjs/react-dom-server.browser.development.js:6115:11)
+    at renderNodeDestructive (/home/runner/workspace/node_modules/react-dom/cjs/react-dom-server.browser.development.js:6087:14)
+    at finishClassComponent (/home/runner/workspace/node_modules/react-dom/cjs/react-dom-server.browser.development.js:5688:3)
+    at renderClassComponent (/home/runner/workspace/node_modules/react-dom/cjs/react-dom-server.browser.development.js:5696:3)
+    at renderElement (/home/runner/workspace/node_modules/react-dom/cjs/react-dom-server.browser.development.js:5954:7)
+    at renderNodeDestructiveImpl (/home/runner/workspace/node_modules/react-dom/cjs/react-dom-server.browser.development.js:6115:11)
+    at renderNodeDestructive (/home/runner/workspace/node_modules/react-dom/cjs/react-dom-server.browser.development.js:6087:14) {
+  page: '/'
+}
+  32 |         <link rel="icon" href="/favicon.ico" />
+  33 |       </Head>
+> 34 |       <GoogleAnalytics />
+     |        ^
+  35 |       <LocalBusinessSchema 
+  36 |         pageType={pageType}
+  37 |         neighborhood={neighborhood}
+ GET / 500 in 1217ms
