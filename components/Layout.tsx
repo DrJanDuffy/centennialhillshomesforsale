@@ -6,9 +6,6 @@ import Footer from './Footer';
 import ErrorBoundary from './ErrorBoundary';
 import LocalBusinessSchema from './LocalBusinessSchema';
 import PerformanceMonitor from './PerformanceMonitor';
-import SafeGoogleAnalytics from './SafeGoogleAnalytics';
-import EnterpriseAnalytics from '../utils/enterpriseAnalytics';
-import ErrorBoundaryWrapper from './ErrorBoundaryWrapper';
 import ErrorReportingSystem from '../utils/errorReporting';
 
 interface LayoutProps {
@@ -60,20 +57,16 @@ const Layout: React.FC<LayoutProps> = ({
       {/* Performance Monitoring */}
       <PerformanceMonitor />
 
-      {/* Google Analytics */}
-      <SafeGoogleAnalytics measurementId={process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID} />
-
       {/* Local Business Schema */}
       <LocalBusinessSchema />
 
-      <ErrorBoundaryWrapper componentName="Layout">
-        <div className="app-container">
-          <Header />
-          <main className="main-content">
-            {children}
-          </main>
-        </div>
-      </ErrorBoundaryWrapper>
+      <div className="app-container">
+        <Header />
+        <main className="main-content">
+          {children}
+        </main>
+        <Footer />
+      </div>
     </>
   );
 };
