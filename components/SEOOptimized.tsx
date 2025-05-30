@@ -1,133 +1,149 @@
 
 import Head from 'next/head';
-import { generateSchemaForPage } from '../scripts/generate-schema';
+import { useEffect } from 'react';
 
-interface SEOOptimizedProps {
-  title: string;
-  description: string;
+interface SEOProps {
+  title?: string;
+  description?: string;
   keywords?: string;
-  pageType?: string;
+  ogImage?: string;
   canonicalUrl?: string;
-  additionalSchema?: object[];
-  localBusiness?: boolean;
-  faqData?: Array<{
-    question: string;
-    answer: string;
-  }>;
-  articleData?: {
-    headline: string;
-    datePublished: string;
-    dateModified: string;
-    author: string;
-  };
+  structuredData?: object;
+  pageType?: 'website' | 'article' | 'realestate' | 'local-business';
+  neighborhood?: string;
+  priceRange?: string;
 }
 
 export default function SEOOptimized({
-  title,
-  description,
-  keywords,
-  pageType = 'home',
+  title = "Centennial Hills Homes For Sale | Dr. Jan Duffy REALTOR®",
+  description = "Find luxury homes in Centennial Hills, Providence & Skye Canyon with Dr. Jan Duffy, top-rated REALTOR® at Berkshire Hathaway HomeServices Nevada Properties.",
+  keywords = "Centennial Hills homes for sale, Providence Las Vegas, Skye Canyon real estate, Dr. Jan Duffy REALTOR",
+  ogImage = "https://centennialhillshomesforsale.com/images/centennial-hills-hero.jpg",
   canonicalUrl,
-  additionalSchema = [],
-  localBusiness = true,
-  faqData,
-  articleData
-}: SEOOptimizedProps) {
-  const baseSchema = generateSchemaForPage(pageType);
+  structuredData,
+  pageType = 'website',
+  neighborhood,
+  priceRange = "$450,000 - $1,200,000"
+}: SEOProps) {
   
-  // Add FAQ schema if provided
-  const faqSchema = faqData ? {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    "mainEntity": faqData.map(faq => ({
-      "@type": "Question",
-      "name": faq.question,
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": faq.answer
-      }
-    }))
-  } : null;
-
-  // Add Article schema if provided
-  const articleSchema = articleData ? {
-    "@context": "https://schema.org",
-    "@type": "Article",
-    "headline": articleData.headline,
-    "datePublished": articleData.datePublished,
-    "dateModified": articleData.dateModified,
-    "author": {
-      "@type": "Person",
-      "name": articleData.author
-    },
-    "publisher": {
-      "@type": "Organization",
-      "name": "Centennial Hills Homes | Providence & Skye Canyon | Dr. Jan Duffy, REALTOR®",
-      "logo": {
-        "@type": "ImageObject",
-        "url": "https://centennialhillshomesforsale.com/images/logo.png"
-      }
+  useEffect(() => {
+    // Google Analytics page view tracking
+    if (typeof window !== 'undefined' && (window as any).gtag) {
+      (window as any).gtag('config', 'GA_MEASUREMENT_ID', {
+        page_title: title,
+        page_location: window.location.href
+      });
     }
-  } : null;
 
-  const allSchema = [
-    ...baseSchema,
-    ...additionalSchema,
-    faqSchema,
-    articleSchema
-  ].filter(Boolean);
+    // Google Search Console page indexing request
+    if (navigator.serviceWorker && 'indexNow' in window) {
+      navigator.serviceWorker.ready.then(() => {
+        // Request immediate indexing for new content
+        fetch('/api/request-indexing', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ url: window.location.href })
+        });
+      });
+    }
+  }, [title]);
+
+  const defaultStructuredData = {
+    "@context": "https://schema.org",
+    "@type": pageType === 'local-business' ? 'RealEstateAgent' : 'WebPage',
+    "name": title,
+    "description": description,
+    "url": canonicalUrl || (typeof window !== 'undefined' ? window.location.href : ''),
+    ...(neighborhood && {
+      "about": {
+        "@type": "Place",
+        "name": `${neighborhood}, Las Vegas, NV`,
+        "geo": {
+          "@type": "GeoCoordinates",
+          "latitude": "36.268",
+          "longitude": "-115.328"
+        }
+      }
+    }),
+    ...(pageType === 'realestate' && {
+      "serviceType": "Real Estate Sales",
+      "areaServed": "Las Vegas, Nevada",
+      "priceRange": priceRange,
+      "provider": {
+        "@type": "RealEstateAgent",
+        "name": "Dr. Jan Duffy",
+        "telephone": "(702) 903-1952"
+      }
+    })
+  };
+
+  const finalStructuredData = structuredData || defaultStructuredData;
 
   return (
     <Head>
+      {/* Primary Meta Tags */}
       <title>{title}</title>
+      <meta name="title" content={title} />
       <meta name="description" content={description} />
-      {keywords && <meta name="keywords" content={keywords} />}
-      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-      
-      {/* Open Graph */}
-      <meta property="og:title" content={title} />
-      <meta property="og:description" content={description} />
-      <meta property="og:type" content="website" />
-      <meta property="og:site_name" content="Centennial Hills Homes | Providence & Skye Canyon | Dr. Jan Duffy, REALTOR®" />
-      <meta property="og:locale" content="en_US" />
-      
-      {/* Twitter Card */}
-      <meta name="twitter:card" content="summary_large_image" />
-      <meta name="twitter:title" content={title} />
-      <meta name="twitter:description" content={description} />
+      <meta name="keywords" content={keywords} />
       
       {/* Canonical URL */}
       {canonicalUrl && <link rel="canonical" href={canonicalUrl} />}
       
-      {/* AI Search Optimization */}
-      <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
-      <meta name="googlebot" content="index, follow" />
-      <meta name="bingbot" content="index, follow" />
+      {/* Open Graph / Facebook */}
+      <meta property="og:type" content={pageType} />
+      <meta property="og:url" content={canonicalUrl || ''} />
+      <meta property="og:title" content={title} />
+      <meta property="og:description" content={description} />
+      <meta property="og:image" content={ogImage} />
+      <meta property="og:image:width" content="1200" />
+      <meta property="og:image:height" content="630" />
+      <meta property="og:site_name" content="Centennial Hills Homes For Sale" />
+      <meta property="og:locale" content="en_US" />
       
-      {/* Local Business Markup */}
-      {localBusiness && (
-        <>
-          <meta name="geo.region" content="US-NV" />
-          <meta name="geo.placename" content="Las Vegas" />
-          <meta name="geo.position" content="36.268;-115.328" />
-          <meta name="ICBM" content="36.268, -115.328" />
-        </>
-      )}
+      {/* Twitter */}
+      <meta property="twitter:card" content="summary_large_image" />
+      <meta property="twitter:url" content={canonicalUrl || ''} />
+      <meta property="twitter:title" content={title} />
+      <meta property="twitter:description" content={description} />
+      <meta property="twitter:image" content={ogImage} />
+      
+      {/* Additional SEO Meta Tags */}
+      <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+      <meta name="googlebot" content="index, follow, max-video-preview:-1, max-image-preview:large, max-snippet:-1" />
+      <meta name="format-detection" content="telephone=no" />
+      
+      {/* Geo Tags */}
+      <meta name="geo.region" content="US-NV" />
+      <meta name="geo.placename" content="Las Vegas, Nevada" />
+      <meta name="geo.position" content="36.268;-115.328" />
+      <meta name="ICBM" content="36.268, -115.328" />
       
       {/* Structured Data */}
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
-          __html: JSON.stringify(allSchema)
+          __html: JSON.stringify(finalStructuredData)
         }}
       />
       
-      {/* AI-specific meta tags */}
-      <meta name="AI-optimized" content="true" />
-      <meta name="local-expertise" content="Centennial Hills, Providence, Skye Canyon, Summerlin Real Estate" />
-      <meta name="market-data-updated" content={new Date().toISOString().split('T')[0]} />
-      <meta name="realtor" content="Dr. Jan Duffy, Top 1% Las Vegas REALTOR®" />
-      <meta name="business-phone" content="(702) 903-1952" />
+      {/* Google Search Console */}
+      <meta name="google-site-verification" content="centennial-hills-homes-verification" />
+      
+      {/* Mobile Optimization */}
+      <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+      <meta name="format-detection" content="telephone=yes" />
+      
+      {/* Performance Hints */}
+      <link rel="preconnect" href="https://fonts.googleapis.com" />
+      <link rel="preconnect" href="https://images.unsplash.com" />
+      <link rel="dns-prefetch" href="https://www.google-analytics.com" />
+      
+      {/* Favicons */}
+      <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+      <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+      <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+      <link rel="manifest" href="/manifest.json" />
     </Head>
   );
 }
