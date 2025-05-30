@@ -1133,7 +1133,8 @@ a[href]:hover {
   transform: translateY(-1px) !important;
   transition: all 0.2s ease !important;
   opacity: 0.9;
-```text
+}
+
 /* Click/Active states */
 button:not(:disabled):active,
 .btn:not(:disabled):active,
@@ -2241,7 +2242,6 @@ realscout-office-listings::part(*) {
   }
 
   .calculator-widget,
-  ```text
   .market-trend-chart,
   .advanced-search {
     margin: 1rem;
