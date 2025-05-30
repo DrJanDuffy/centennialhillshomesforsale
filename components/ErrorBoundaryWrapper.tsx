@@ -1,4 +1,3 @@
-
 import React, { Component, ReactNode } from 'react';
 import ErrorReportingSystem from '../utils/errorReporting';
 
@@ -7,72 +6,6 @@ interface Props {
   fallback?: ReactNode;
   componentName?: string;
 }
-
-interface State {
-  hasError: boolean;
-  error?: Error;
-}
-
-class ErrorBoundaryWrapper extends Component<Props, State> {
-  constructor(props: Props) {
-    super(props);
-    this.state = { hasError: false };
-  }
-
-  static getDerivedStateFromError(error: Error): State {
-    return { hasError: true, error };
-  }
-
-  componentDidCatch(error: Error, errorInfo: React.ErrorInfo) {
-    const errorReporter = ErrorReportingSystem.getInstance();
-    errorReporter.reportError({
-      error,
-      component: this.props.componentName || 'ErrorBoundaryWrapper',
-      severity: 'high'
-    });
-
-    // Only log in development
-    if (process.env.NODE_ENV === 'development') {
-      console.error('ErrorBoundaryWrapper caught an error:', error, errorInfo);
-    }
-  }
-
-  render() {
-    if (this.state.hasError) {
-      // Show minimal error UI in production
-      if (process.env.NODE_ENV === 'production') {
-        return this.props.fallback || (
-          <div style={{ padding: '20px', textAlign: 'center' }}>
-            <h2>Something went wrong</h2>
-            <p>Please refresh the page or try again later.</p>
-            <button onClick={() => window.location.reload()}>
-              Refresh Page
-            </button>
-          </div>
-        );
-      }
-      
-      // Show detailed error in development
-      return this.props.fallback || (
-        <div style={{ padding: '20px', border: '1px solid red', margin: '10px' }}>
-          <h3>Error in {this.props.componentName}</h3>
-          <details>
-            <summary>Error Details</summary>
-            <pre>{this.state.error?.message}</pre>
-            <pre>{this.state.error?.stack}</pre>
-          </details>
-          <button onClick={() => this.setState({ hasError: false })}>
-            Try Again
-          </button>
-        </div>
-      );
-    }
-
-    return this.props.children;
-  }
-}
-
-export default ErrorBoundaryWrapper;
 
 interface State {
   hasError: boolean;
@@ -95,7 +28,7 @@ class ErrorBoundaryWrapper extends Component<Props, State> {
 
   componentDidCatch(error: Error, errorInfo: any) {
     this.setState({ errorInfo });
-    
+
     this.errorReporter.reportError({
       error: error.message,
       component: this.props.componentName || 'ErrorBoundary',
@@ -105,10 +38,29 @@ class ErrorBoundaryWrapper extends Component<Props, State> {
 
     // Try to fix common errors automatically
     this.errorReporter.fixCommonErrors();
+
+    // Only log in development
+    if (process.env.NODE_ENV === 'development') {
+      console.error('ErrorBoundaryWrapper caught an error:', error, errorInfo);
+    }
   }
 
   render() {
     if (this.state.hasError) {
+      // Show minimal error UI in production
+      if (process.env.NODE_ENV === 'production') {
+        return this.props.fallback || (
+          <div style={{ padding: '20px', textAlign: 'center' }}>
+            <h2>Something went wrong</h2>
+            <p>Please refresh the page or try again later.</p>
+            <button onClick={() => window.location.reload()}>
+              Refresh Page
+            </button>
+          </div>
+        );
+      }
+
+      // Show detailed error in development only
       if (this.props.fallback) {
         return this.props.fallback;
       }
