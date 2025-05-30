@@ -24,6 +24,14 @@ const nextConfig = {
     ignoreDuringBuilds: false,
   },
   poweredByHeader: false,
+  compress: true,
+  experimental: {
+    optimizeCss: true,
+    optimizeServerReact: true,
+  },
+  env: {
+    CUSTOM_KEY: 'centennial-hills-homes',
+  },
 };
 
 module.exports = nextConfig;
