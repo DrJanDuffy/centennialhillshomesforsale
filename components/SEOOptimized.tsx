@@ -62,7 +62,7 @@ export default function SEOOptimized({
     },
     "publisher": {
       "@type": "Organization",
-      "name": "Centennial Hills Homes For Sale",
+      "name": "Centennial Hills Homes | Providence & Skye Canyon | Dr. Jan Duffy, REALTOR®",
       "logo": {
         "@type": "ImageObject",
         "url": "https://centennialhillshomesforsale.com/images/logo.png"
@@ -88,7 +88,7 @@ export default function SEOOptimized({
       <meta property="og:title" content={title} />
       <meta property="og:description" content={description} />
       <meta property="og:type" content="website" />
-      <meta property="og:site_name" content="Centennial Hills Homes For Sale" />
+      <meta property="og:site_name" content="Centennial Hills Homes | Providence & Skye Canyon | Dr. Jan Duffy, REALTOR®" />
       <meta property="og:locale" content="en_US" />
       
       {/* Twitter Card */}
@@ -124,8 +124,10 @@ export default function SEOOptimized({
       
       {/* AI-specific meta tags */}
       <meta name="AI-optimized" content="true" />
-      <meta name="local-expertise" content="Centennial Hills, Las Vegas Real Estate" />
+      <meta name="local-expertise" content="Centennial Hills, Providence, Skye Canyon, Summerlin Real Estate" />
       <meta name="market-data-updated" content={new Date().toISOString().split('T')[0]} />
+      <meta name="realtor" content="Dr. Jan Duffy, Top 1% Las Vegas REALTOR®" />
+      <meta name="business-phone" content="(702) 903-1952" />
     </Head>
   );
 }
