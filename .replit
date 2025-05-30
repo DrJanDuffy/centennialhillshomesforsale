@@ -136,6 +136,56 @@ args = "echo \"📊 Check the bottom-right corner of each page for error reports
 task = "shell.exec"
 args = "echo \"🌐 Visit each page to see specific error reports\""
 
+[[workflows.workflow]]
+name = "Test Error Fixes"
+author = 22930014
+mode = "sequential"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "echo \"🧪 Testing error fixes...\""
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "npm run build"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "echo \"✅ Build completed - checking for errors\""
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "echo \"🌐 Starting dev server to test fixes\""
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "npm run dev"
+
+[[workflows.workflow]]
+name = "Test Error Fixes"
+author = 22930014
+mode = "sequential"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "echo \"🧪 Testing error fixes...\""
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "npm run build"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "echo \"✅ Build completed - checking for errors\""
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "echo \"🌐 Starting dev server to test fixes\""
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "npm run dev"
+
 [[ports]]
 localPort = 5000
 externalPort = 80

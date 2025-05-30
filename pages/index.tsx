@@ -492,11 +492,11 @@ export default function Home() {
               <div className="business-category">
                 <h3>🍽️ Dining</h3>
                 <ul>
-                  <li>Red Rock Casino Resort Buffet</li>
-                  <li>Brio Tuscan Grille (Downtown Summerlin)</li>
-                  <li>Yard House (Downtown Summerlin)</li>
-                  <li>In-N-Out Burger (Fort Apache)</li>
-                  <li>Flemings Prime Steakhouse</li>
+                  <li key="buffet">Red Rock Casino Resort Buffet</li>
+                  <li key="brio">Brio Tuscan Grille (Downtown Summerlin)</li>
+                  <li key="yard">Yard House (Downtown Summerlin)</li>
+                  <li key="innout">In-N-Out Burger (Fort Apache)</li>
+                  <li key="flemings">Flemings Prime Steakhouse</li>
                 </ul>
               </div>
               <div className="business-category">
