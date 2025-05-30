@@ -1,5 +1,5 @@
-
 import Head from 'next/head';
+import { useEffect } from 'react';
 
 interface LocalBusinessSchemaProps {
   pageType?: 'home' | 'about' | 'contact' | 'services' | 'neighborhood';
@@ -7,12 +7,11 @@ interface LocalBusinessSchemaProps {
   additionalServices?: string[];
 }
 
-export default function LocalBusinessSchema({ 
-  pageType = 'home', 
-  neighborhood,
-  additionalServices = []
-}: LocalBusinessSchemaProps) {
-  
+export default function LocalBusinessSchema(): JSX.Element {
+  useEffect(() => {
+    // Remove any existing business schema
+  });
+
   const baseSchema = {
     "@context": "https://schema.org",
     "@type": "RealEstateAgent",
@@ -49,26 +48,9 @@ export default function LocalBusinessSchema({
   };
 
   // Add neighborhood-specific data
-  if (neighborhood) {
-    const neighborhoodData = {
-      "areaServed": {
-        "@type": "Place",
-        "name": `${neighborhood}, Las Vegas, NV`
-      },
-      "serviceArea": {
-        "@type": "GeoCircle",
-        "geoMidpoint": {
-          "@type": "GeoCoordinates",
-          "latitude": "36.268",
-          "longitude": "-115.328"
-        },
-        "geoRadius": "25000"
-      }
-    };
-    Object.assign(baseSchema, neighborhoodData);
-  }
+  
 
-  // Add page-specific services
+  // Add neighborhood-specific data
   const services = {
     home: ["Real Estate Sales", "Property Search", "Market Analysis"],
     about: ["Real Estate Consultation", "Professional Services", "Client Representation"],
@@ -77,8 +59,8 @@ export default function LocalBusinessSchema({
     neighborhood: ["Neighborhood Expertise", "Local Market Knowledge", "Area Property Search"]
   };
 
-  const pageServices = services[pageType] || services.home;
-  const allServices = [...pageServices, ...additionalServices];
+  const pageServices = services.home;
+  const allServices = [...pageServices];
 
   const serviceSchema = {
     "hasOfferCatalog": {
