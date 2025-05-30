@@ -1,13 +1,15 @@
+
 import '../styles/globals.css';
 import '../styles/realscout.css';
 import type { AppProps } from 'next/app';
 import { useEffect } from 'react';
 import ErrorBoundary from '../components/ErrorBoundary';
 import { setupGlobalErrorHandling } from '../utils/errorTracking';
-// Add error dashboard to app
-import AnalyticsDashboard from '../components/AnalyticsDashboard';
-// Add error dashboard to app
-import ErrorDashboard from '../components/ErrorDashboard';
+
+// Only import these components in development
+const isDevelopment = process.env.NODE_ENV === 'development';
+const AnalyticsDashboard = isDevelopment ? require('../components/AnalyticsDashboard').default : null;
+const ErrorDashboard = isDevelopment ? require('../components/ErrorDashboard').default : null;
 
 function Layout({ children }) {
   return <>{children}</>;
@@ -34,10 +36,12 @@ export default function App({ Component, pageProps }: AppProps) {
 
   return (
     <ErrorBoundary>
-      {/* Include error dashboard in app */}
       <Layout>
         <Component {...pageProps} />
       </Layout>
+      {/* Only render these components in development */}
+      {isDevelopment && AnalyticsDashboard && <AnalyticsDashboard isAdmin={true} />}
+      {isDevelopment && ErrorDashboard && <ErrorDashboard />}
     </ErrorBoundary>
   );
 }
