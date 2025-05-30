@@ -28,11 +28,24 @@ const RealScoutListings: React.FC<RealScoutListingsProps> = ({
       if (typeof window !== 'undefined') {
         const script = document.querySelector('script[src*="realscout-web-components"]');
         if (script) {
-          setScriptLoaded(true);
-          setIsLoading(false);
+          // Wait for script to actually load
+          if (script.getAttribute('data-loaded') === 'true') {
+            setScriptLoaded(true);
+            setIsLoading(false);
+          } else {
+            script.addEventListener('load', () => {
+              script.setAttribute('data-loaded', 'true');
+              setScriptLoaded(true);
+              setIsLoading(false);
+            });
+            script.addEventListener('error', () => {
+              setHasError(true);
+              setIsLoading(false);
+            });
+          }
         } else {
-          setHasError(true);
-          setIsLoading(false);
+          // Script not found, try again in a moment
+          setTimeout(checkScript, 1000);
         }
       }
     };
@@ -40,13 +53,13 @@ const RealScoutListings: React.FC<RealScoutListingsProps> = ({
     // Initial check
     checkScript();
 
-    // Set timeout to stop loading after 10 seconds
+    // Set timeout to stop loading after 8 seconds
     const timeout = setTimeout(() => {
       if (isLoading) {
         setHasError(true);
         setIsLoading(false);
       }
-    }, 10000);
+    }, 8000);
 
     return () => clearTimeout(timeout);
   }, [isLoading]);
