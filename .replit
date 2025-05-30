@@ -56,6 +56,23 @@ args = "npm run build"
 task = "shell.exec"
 args = "echo \"✅ Build completed - ready for deployment\""
 
+[[workflows.workflow]]
+name = "Auto Deploy"
+author = 22930014
+mode = "sequential"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "npm run build"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "echo \"✅ Build completed successfully\""
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "echo \"🚀 Ready for automatic deployment\""
+
 [[ports]]
 localPort = 5000
 externalPort = 80
