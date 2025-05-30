@@ -5,6 +5,7 @@ import Footer from './Footer';
 import ErrorBoundary from './ErrorBoundary';
 import LocalBusinessSchema from './LocalBusinessSchema';
 import PerformanceMonitor from './PerformanceMonitor';
+import GoogleAnalytics from './GoogleAnalytics';
 
 interface LayoutProps {
   children: React.ReactNode;
