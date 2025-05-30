@@ -3236,6 +3236,8 @@ realscout-office-listings::part(*) {
   .container {
     padding: 0 1rem;
   }
+}
+  }
 
   .hero h1 {
     font-size: 2rem;

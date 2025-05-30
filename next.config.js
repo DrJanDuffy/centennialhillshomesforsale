@@ -17,8 +17,6 @@ const nextConfig = {
     formats: ['image/webp', 'image/avif'],
   },
   trailingSlash: true,
-  output: 'export',
-  distDir: 'out',
   typescript: {
     ignoreBuildErrors: false,
   },
