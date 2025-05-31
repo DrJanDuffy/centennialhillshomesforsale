@@ -5,10 +5,9 @@ run = "npm run dev"
 channel = "stable-24_05"
 
 [deployment]
-build = ["sh", "-c", "npm install --legacy-peer-deps && NODE_ENV=production npm run build-static"]
+build = ["sh", "-c", "npm run build-static"]
 deploymentTarget = "static"
 publicDir = "public"
-run = ["sh", "-c", "npx serve public -s -l 5000 -C --host 0.0.0.0"]
 
 [workflows]
 runButton = "DEPLOY WITH PUBLIC"
