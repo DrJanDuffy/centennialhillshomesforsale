@@ -7,7 +7,7 @@
     "dev": "next dev -p 5000",
     "build": "next build",
     "export": "next export",
-    "build-static": "next build",
+    "build-static": "next build && echo 'Copying files to public directory...' && cp -r out/* public/ && echo 'Files copied successfully' && ls -la public/",
     "prebuild-static": "mkdir -p public || md public",
     "start": "next start -p 5000",
     "lint": "next lint",
