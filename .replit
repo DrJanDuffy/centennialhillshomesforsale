@@ -1017,7 +1017,7 @@ mode = "sequential"
 
 [[workflows.workflow.tasks]]
 task = "shell.exec"
-args = "echo \"🚀 DEPLOYING TO OUT DIRECTORY\""
+args = "echo \"🚀 DEPLOYING TO PUBLIC DIRECTORY\""
 
 [[workflows.workflow.tasks]]
 task = "shell.exec"
