@@ -1,12 +1,12 @@
 
-import { useState } from 'react';
+import React, { useState } from 'react';
 import Head from 'next/head';
-import { motion } from 'framer-motion';
 import Layout from '../components/Layout';
 import SEOOptimized from '../components/SEOOptimized';
 import NeighborhoodBar from '../components/NeighborhoodBar';
 import SchoolInfo from '../components/SchoolInfo';
 import RealScoutListings from '../components/RealScoutListings';
+import { motion } from 'framer-motion'; // Single motion import
 
 export default function ProvidenceLasVegas() {
   const [currentNeighborhood, setCurrentNeighborhood] = useState('Providence');
