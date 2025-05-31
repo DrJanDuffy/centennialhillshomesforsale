@@ -9,18 +9,7 @@ if (fs.existsSync('public')) {
 }
 
 console.log('🔨 Building Next.js application...');
-try {
-  execSync('next build', { 
-    stdio: 'inherit',  // This will show all output
-    encoding: 'utf8'
-  });
-} catch (error) {
-  console.error('❌ Build failed with error:');
-  console.error(error.message);
-  if (error.stdout) console.error('STDOUT:', error.stdout);
-  if (error.stderr) console.error('STDERR:', error.stderr);
-  process.exit(1);
-}
+execSync('next build', { stdio: 'inherit' });
 
 console.log('📁 Copying files to public directory...');
 // Create public directory
