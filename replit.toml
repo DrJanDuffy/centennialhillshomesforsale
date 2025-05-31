@@ -1,8 +1,8 @@
 
 [deployment]
-build = ["npm", "run", "build"]
-staticFiles = "out"
-publicDir = "out"
+build = ["npm", "run", "build-static"]
+staticFiles = "public"
+publicDir = "public"
 deploymentTarget = "static"
 
 [nix]
