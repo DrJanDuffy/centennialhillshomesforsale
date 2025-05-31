@@ -7,8 +7,8 @@ channel = "stable-24_05"
 [deployment]
 build = ["sh", "-c", "npm install --legacy-peer-deps && NODE_ENV=production npm run build-static"]
 deploymentTarget = "static"
-publicDir = "public"
-run = ["sh", "-c", "npx serve public -s -l 5000 -C --host 0.0.0.0"]
+publicDir = "out"
+run = ["sh", "-c", "npx serve out -s -l 5000 -C --host 0.0.0.0"]
 
 [workflows]
 runButton = "DEPLOY WITH PUBLIC"
@@ -1017,7 +1017,7 @@ mode = "sequential"
 
 [[workflows.workflow.tasks]]
 task = "shell.exec"
-args = "echo \"🚀 DEPLOYING TO PUBLIC DIRECTORY\""
+args = "echo \"🚀 DEPLOYING TO OUT DIRECTORY\""
 
 [[workflows.workflow.tasks]]
 task = "shell.exec"
@@ -1037,7 +1037,7 @@ args = "npm install --legacy-peer-deps"
 
 [[workflows.workflow.tasks]]
 task = "shell.exec"
-args = "echo \"🔨 Building to public directory...\""
+args = "echo \"🔨 Building to out directory...\""
 
 [[workflows.workflow.tasks]]
 task = "shell.exec"
@@ -1045,19 +1045,19 @@ args = "npm run build-static"
 
 [[workflows.workflow.tasks]]
 task = "shell.exec"
-args = "echo \"📁 Verifying public directory...\""
+args = "echo \"📁 Verifying out directory...\""
 
 [[workflows.workflow.tasks]]
 task = "shell.exec"
-args = "ls -la public/ && echo \"✅ Build successful!\" || echo \"❌ Build failed\""
+args = "ls -la out/ && echo \"✅ Build successful!\" || echo \"❌ Build failed\""
 
 [[workflows.workflow.tasks]]
 task = "shell.exec"
-args = "echo \"🌐 Starting server from public directory...\""
+args = "echo \"🌐 Starting server from out directory...\""
 
 [[workflows.workflow.tasks]]
 task = "shell.exec"
-args = "npx serve public -s -l 5000 -C --host 0.0.0.0"
+args = "npx serve out -s -l 5000 -C --host 0.0.0.0"
 
 [[ports]]
 localPort = 3001
