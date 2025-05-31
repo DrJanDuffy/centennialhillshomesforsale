@@ -18,6 +18,7 @@ interface Property {
 const InteractivePropertyMap: React.FC = () => {
   const [properties, setProperties] = useState<Property[]>([]);
   const [selectedProperty, setSelectedProperty] = useState<Property | null>(null);
+  const [searchTerm, setSearchTerm] = useState('');
   const [filters, setFilters] = useState({
     minPrice: 0,
     maxPrice: 2000000,
@@ -70,7 +71,12 @@ const InteractivePropertyMap: React.FC = () => {
   }, []);
 
   const filteredProperties = properties.filter(property => {
-    return property.price >= filters.minPrice &&
+    const matchesSearch = searchTerm === '' || 
+      property.address.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      property.price.toString().includes(searchTerm);
+    
+    return matchesSearch &&
+           property.price >= filters.minPrice &&
            property.price <= filters.maxPrice &&
            property.bedrooms >= filters.minBedrooms &&
            (filters.status === 'all' || property.status === filters.status);
@@ -89,6 +95,46 @@ const InteractivePropertyMap: React.FC = () => {
       <div className={styles.header}>
         <h2>🏡 Interactive Property Map</h2>
         <p>Explore available homes in Centennial Hills & surrounding areas</p>
+        <div className={styles.mapStats}>
+          <div className={styles.statItem}>
+            <span className={styles.statNumber}>{filteredProperties.length}</span>
+            <span className={styles.statLabel}>Properties</span>
+          </div>
+          <div className={styles.statItem}>
+            <span className={styles.statNumber}>
+              {filteredProperties.length > 0 ? 
+                formatPrice(filteredProperties.reduce((avg, p) => avg + p.price, 0) / filteredProperties.length) : 
+                '$0'
+              }
+            </span>
+            <span className={styles.statLabel}>Avg Price</span>
+          </div>
+          <div className={styles.statItem}>
+            <span className={styles.statNumber}>
+              {filteredProperties.filter(p => p.status === 'for-sale').length}
+            </span>
+            <span className={styles.statLabel}>Available</span>
+          </div>
+        </div>
+      </div>
+
+      {/* Search Bar */}
+      <div className={styles.searchContainer}>
+        <input
+          type="text"
+          placeholder="🔍 Search by address, price, or neighborhood..."
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
+          className={styles.searchInput}
+        />
+        {searchTerm && (
+          <button 
+            className={styles.clearSearch}
+            onClick={() => setSearchTerm('')}
+          >
+            ✕
+          </button>
+        )}
       </div>
 
       {/* Filters */}
@@ -194,9 +240,46 @@ const InteractivePropertyMap: React.FC = () => {
               </div>
 
               <div className={styles.actions}>
-                <button className={styles.viewBtn}>View Details</button>
-                <button className={styles.tourBtn}>Virtual Tour</button>
-                <button className={styles.contactBtn}>Contact Agent</button>
+                <button 
+                  className={styles.viewBtn}
+                  onClick={() => window.open(`/property/${selectedProperty.id}`, '_blank')}
+                >
+                  🏠 View Details
+                </button>
+                <button 
+                  className={styles.tourBtn}
+                  onClick={() => {
+                    // Simulate virtual tour
+                    alert(`🎥 Virtual tour starting for ${selectedProperty.address}!\n\nFeatures:\n• 360° room views\n• Interactive floor plans\n• Neighborhood walkthrough\n\nContact Dr. Jan Duffy for a live virtual tour!`);
+                  }}
+                >
+                  🎥 Virtual Tour
+                </button>
+                <button 
+                  className={styles.contactBtn}
+                  onClick={() => {
+                    const message = `Hi Dr. Jan Duffy! I'm interested in the property at ${selectedProperty.address} listed at ${formatPrice(selectedProperty.price)}. Can we schedule a showing?`;
+                    window.open(`mailto:info@centennialhillshomesforsale.com?subject=Property Inquiry - ${selectedProperty.address}&body=${encodeURIComponent(message)}`, '_blank');
+                  }}
+                >
+                  📞 Contact Agent
+                </button>
+                <button 
+                  className={styles.favoriteBtn}
+                  onClick={() => {
+                    // Add to favorites functionality
+                    const favorites = JSON.parse(localStorage.getItem('favoriteProperties') || '[]');
+                    if (!favorites.includes(selectedProperty.id)) {
+                      favorites.push(selectedProperty.id);
+                      localStorage.setItem('favoriteProperties', JSON.stringify(favorites));
+                      alert('❤️ Property added to favorites!');
+                    } else {
+                      alert('❤️ Property is already in your favorites!');
+                    }
+                  }}
+                >
+                  ❤️ Save
+                </button>
               </div>
             </div>
           </div>
@@ -208,11 +291,35 @@ const InteractivePropertyMap: React.FC = () => {
         <h3>Property Listings ({filteredProperties.length})</h3>
         <div className={styles.propertyGrid}>
           {filteredProperties.map((property) => (
-            <div key={property.id} className={styles.propertyCard}>
+            <div 
+              key={property.id} 
+              className={styles.propertyCard}
+              onClick={() => setSelectedProperty(property)}
+            >
               <div className={styles.cardImage}>
                 <img src={property.image} alt={property.address} />
                 <div className={`${styles.statusBadge} ${styles[property.status]}`}>
                   {property.status.replace('-', ' ').toUpperCase()}
+                </div>
+                <div className={styles.cardOverlay}>
+                  <button 
+                    className={styles.quickViewBtn}
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      setSelectedProperty(property);
+                    }}
+                  >
+                    👁️ Quick View
+                  </button>
+                  <button 
+                    className={styles.tourBtn}
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      alert(`🎥 Virtual tour for ${property.address}!\n\nContact Dr. Jan Duffy for full virtual tour access.`);
+                    }}
+                  >
+                    🎥 Tour
+                  </button>
                 </div>
               </div>
               
@@ -220,9 +327,32 @@ const InteractivePropertyMap: React.FC = () => {
                 <h4>{formatPrice(property.price)}</h4>
                 <p>{property.address}</p>
                 <div className={styles.features}>
-                  <span>{property.bedrooms} bed</span>
-                  <span>{property.bathrooms} bath</span>
-                  <span>{property.sqft.toLocaleString()} sqft</span>
+                  <span>🛏️ {property.bedrooms} bed</span>
+                  <span>🚿 {property.bathrooms} bath</span>
+                  <span>📐 {property.sqft.toLocaleString()} sqft</span>
+                </div>
+                <div className={styles.cardActions}>
+                  <button 
+                    className={styles.pricePerSqft}
+                    title="Price per square foot"
+                  >
+                    💰 ${Math.round(property.price / property.sqft)}/sqft
+                  </button>
+                  <button 
+                    className={styles.favoriteBtn}
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      const favorites = JSON.parse(localStorage.getItem('favoriteProperties') || '[]');
+                      if (!favorites.includes(property.id)) {
+                        favorites.push(property.id);
+                        localStorage.setItem('favoriteProperties', JSON.stringify(favorites));
+                        e.currentTarget.innerHTML = '❤️ Saved';
+                        e.currentTarget.style.background = '#10b981';
+                      }
+                    }}
+                  >
+                    🤍 Save
+                  </button>
                 </div>
               </div>
             </div>
