@@ -1,12 +1,10 @@
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  reactStrictMode: true,
-  output: 'export',
-  trailingSlash: true,
-  distDir: 'out',
+  output: 'export', // Enable static export
+  trailingSlash: true, // Recommended for static hosting
   images: {
-    unoptimized: true,
+    unoptimized: true, // Required for static export
     loader: 'custom',
     loaderFile: './utils/imageLoader.js'
   },
@@ -15,9 +13,6 @@ const nextConfig = {
   },
   typescript: {
     ignoreBuildErrors: true
-  },
-  async rewrites() {
-    return [];
   },
   async exportPathMap() {
     return {
