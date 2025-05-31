@@ -11,6 +11,7 @@ import LocalBusinessSchema from './LocalBusinessSchema';
 import PerformanceMonitor from './PerformanceMonitor';
 import PageErrorChecker from './PageErrorChecker';
 import { ReactNode } from 'react';
+import { motion } from 'framer-motion';
 
 interface LayoutProps {
   children: ReactNode;
@@ -56,15 +57,26 @@ const Layout: React.FC<LayoutProps> = ({
       <PerformanceMonitor />
       <LocalBusinessSchema />
 
-      <div className="app-container">
+      <motion.div 
+        className="app-container"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.6 }}
+      >
         <Header />
-        <main className="main-content" suppressHydrationWarning={true}>
+        <motion.main 
+          className="main-content" 
+          suppressHydrationWarning={true}
+          initial={{ y: 20, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          transition={{ duration: 0.8, delay: 0.2 }}
+        >
           <ErrorBoundary>
             {children}
           </ErrorBoundary>
-        </main>
+        </motion.main>
         <Footer />
-      </div>
+      </motion.div>
     </>
   );
 };

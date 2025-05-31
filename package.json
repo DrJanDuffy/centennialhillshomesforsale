@@ -17,6 +17,7 @@
     "deploy": "gh-pages -d out",
     "configure-domains": "node scripts/configure-domains.js",
     "configure-dns": "node scripts/configure-dns.js",
+    "framer-motion": "^10.16.4",
     "setup-security": "node scripts/setup-security.js",
     "setup-analytics": "node scripts/setup-analytics.js",
     "setup-backups": "node scripts/setup-backups.js",

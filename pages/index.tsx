@@ -6,6 +6,7 @@ import React, { useState } from 'react';
 import Head from 'next/head';
 import Link from 'next/link';
 import Layout from '../components/Layout';
+import AwesomeFeatures from '../components/AwesomeFeatures';
 import RealScoutWidget from '../components/widgets/RealScoutWidget';
 import RealScoutListings from '../components/RealScoutListings';
 import PropertyCalculator from '../components/PropertyCalculator';
@@ -177,100 +178,34 @@ export default function Home() {
       />
 
       <AIContentOptimizer pageType="homepage">
-      <motion.div
-        initial={{ opacity: 0, y: 50 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8 }}
-        className="text-center"
-      >
-        <h1 className="text-5xl md:text-7xl font-bold mb-8 float-animation">
-          🌟 Centennial Hills Homes For Sale ✨
-        </h1>
-
-        <p className="awesome-text text-xl md:text-2xl mb-12 max-w-4xl mx-auto pulse-animation">
-          🏡 Discover your <span className="awesome-highlight">dream home</span> in the prestigious Centennial Hills community! 
-          From luxury estates to family-friendly neighborhoods, find the perfect 
-          property in Las Vegas's most <span className="awesome-highlight">sought-after area</span>. 🌴
-        </p>
-
-        <div className="mb-12">
-          <Link href="/listings" className="awesome-btn mr-4 mb-4 inline-block">
-            🔍 Browse Homes
-          </Link>
-          <Link href="/contact" className="awesome-btn mb-4 inline-block">
-            📞 Get Started
-          </Link>
-        </div>
-
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mt-12">
-          <motion.div 
-            className="awesome-card"
-            whileHover={{ scale: 1.08, rotate: -2 }}
-            transition={{ duration: 0.3 }}
-          >
-            <div className="text-4xl mb-4">🏘️</div>
-            <h3 className="text-2xl font-semibold mb-4">Premium Locations</h3>
-            <p className="awesome-text">
-              Explore stunning homes in <span className="awesome-highlight">Providence</span>, 
-              <span className="awesome-highlight">Skye Canyon</span>, and other premier neighborhoods 
-              with resort-style amenities!
-            </p>
-          </motion.div>
-
-          <motion.div 
-            className="awesome-card"
-            whileHover={{ scale: 1.08, rotate: 2 }}
-            transition={{ duration: 0.3 }}
-          >
-            <div className="text-4xl mb-4">⭐</div>
-            <h3 className="text-2xl font-semibold mb-4">Expert Service</h3>
-            <p className="awesome-text">
-              Professional real estate guidance from <span className="awesome-highlight">local market experts</span> 
-              who know Centennial Hills inside and out!
-            </p>
-          </motion.div>
-
-          <motion.div 
-            className="awesome-card"
-            whileHover={{ scale: 1.08, rotate: -1 }}
-            transition={{ duration: 0.3 }}
-          >
-            <div className="text-4xl mb-4">📊</div>
-            <h3 className="text-2xl font-semibold mb-4">Market Insights</h3>
-            <p className="awesome-text">
-              Stay informed with the <span className="awesome-highlight">latest market trends</span> 
-              and property values in real-time!
-            </p>
-          </motion.div>
-        </div>
-
-        {/* Awesome stats section */}
-        <motion.div 
-          className="awesome-card mt-12"
-          initial={{ opacity: 0, y: 30 }}
+      <div className="container mx-auto px-6">
+        <motion.div
+          initial={{ opacity: 0, y: 50 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.5, duration: 0.8 }}
+          transition={{ duration: 0.8 }}
+          className="text-center mb-16"
         >
-          <h2 className="text-3xl font-bold mb-8">🎯 Why Choose Centennial Hills?</h2>
-          <div className="grid md:grid-cols-4 gap-6">
-            <div className="pulse-animation">
-              <div className="text-3xl font-bold awesome-highlight">15+</div>
-              <div className="awesome-text">Years Experience</div>
-            </div>
-            <div className="pulse-animation">
-              <div className="text-3xl font-bold awesome-highlight">500+</div>
-              <div className="awesome-text">Happy Families</div>
-            </div>
-            <div className="pulse-animation">
-              <div className="text-3xl font-bold awesome-highlight">A+</div>
-              <div className="awesome-text">Schools Nearby</div>
-            </div>
-            <div className="pulse-animation">
-              <div className="text-3xl font-bold awesome-highlight">5★</div>
-              <div className="awesome-text">Client Reviews</div>
-            </div>
+          <h1 className="text-5xl md:text-7xl font-bold mb-8 gradient-text float-animation">
+            🌟 Centennial Hills Homes For Sale ✨
+          </h1>
+
+          <p className="awesome-text text-xl md:text-2xl mb-12 max-w-4xl mx-auto">
+            🏡 Discover your <span className="awesome-highlight">dream home</span> in the prestigious Centennial Hills community! 
+            From luxury estates to family-friendly neighborhoods, find the perfect 
+            property in Las Vegas's most <span className="awesome-highlight">sought-after area</span>. 🌴
+          </p>
+
+          <div className="mb-12">
+            <Link href="/listings" className="awesome-btn mr-4 mb-4">
+              🔍 Browse Homes
+            </Link>
+            <Link href="/contact" className="awesome-btn mb-4">
+              📞 Get Started
+            </Link>
           </div>
         </motion.div>
+
+        <AwesomeFeatures />
 
         {/* Call to action */}
         <motion.div 
