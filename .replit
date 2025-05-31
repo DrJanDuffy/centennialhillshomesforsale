@@ -1037,7 +1037,7 @@ args = "npm install --legacy-peer-deps"
 
 [[workflows.workflow.tasks]]
 task = "shell.exec"
-args = "echo \"🔨 Building to out directory...\""
+args = "echo \"🔨 Building to public directory...\""
 
 [[workflows.workflow.tasks]]
 task = "shell.exec"
@@ -1045,19 +1045,19 @@ args = "npm run build-static"
 
 [[workflows.workflow.tasks]]
 task = "shell.exec"
-args = "echo \"📁 Verifying out directory...\""
+args = "echo \"📁 Verifying public directory...\""
 
 [[workflows.workflow.tasks]]
 task = "shell.exec"
-args = "ls -la out/ && echo \"✅ Build successful!\" || echo \"❌ Build failed\""
+args = "ls -la public/ && echo \"✅ Build successful!\" || echo \"❌ Build failed\""
 
 [[workflows.workflow.tasks]]
 task = "shell.exec"
-args = "echo \"🌐 Starting server from out directory...\""
+args = "echo \"🌐 Starting server from public directory...\""
 
 [[workflows.workflow.tasks]]
 task = "shell.exec"
-args = "npx serve out -s -l 5000 -C --host 0.0.0.0"
+args = "npx serve public -s -l 5000 -C --host 0.0.0.0"
 
 [[ports]]
 localPort = 3001
