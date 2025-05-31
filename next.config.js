@@ -2,11 +2,9 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
-  swcMinify: true,
   output: 'export',
   trailingSlash: true,
   distDir: 'out',
-  generateStaticParams: true,
   images: {
     unoptimized: true,
     loader: 'custom',
@@ -17,9 +15,6 @@ const nextConfig = {
   },
   typescript: {
     ignoreBuildErrors: true
-  },
-  experimental: {
-    esmExternals: false
   },
   async rewrites() {
     return [];
