@@ -1,0 +1,120 @@
+The error occurs because the shell is trying all fallback commands, including Windows-specific `robocopy` on a Unix system. Let's use a simpler, more robust approach:
+
+## Simple Cross-Platform Solution
+
+### **Option 1: Basic Copy with Directory Creation**
+
+Update your `package.json`:
+
+```json
+{
+  "scripts": {
+    "build-static": "next build && mkdir -p public && cp -r out/* public/"
+  }
+}
+```
+
+### **Option 2: Use Node.js Script (Most Reliable)**
+
+Create `scripts/build.js`:
+
+```javascript
+const fs = require('fs');
+const path = require('path');
+const { execSync } = require('child_process');
+
+console.log('Building Next.js application...');
+execSync('next build', { stdio: 'inherit' });
+
+console.log('Copying files to public directory...');
+
+// Remove existing public directory
+if (fs.existsSync('public')) {
+  fs.rmSync('public', { recursive: true, force: true });
+}
+
+// Create public directory
+fs.mkdirSync('public', { recursive: true });
+
+// Copy files from out to public
+function copyDir(src, dest) {
+  if (!fs.existsSync(src)) {
+    console.error(`Source directory ${src} does not exist`);
+    return;
+  }
+  
+  fs.mkdirSync(dest, { recursive: true });
+  const entries = fs.readdirSync(src, { withFileTypes: true });
+  
+  for (let entry of entries) {
+    const srcPath = path.join(src, entry.name);
+    const destPath = path.join(dest, entry.name);
+    
+    if (entry.isDirectory()) {
+      copyDir(srcPath, destPath);
+    } else {
+      fs.copyFileSync(srcPath, destPath);
+    }
+  }
+}
+
+copyDir('out', 'public');
+console.log('Build complete! Files ready in public/ directory');
+```
+
+Update `package.json`:
+```json
+{
+  "scripts": {
+    "build-static": "node scripts/build.js"
+  }
+}
+```
+
+### **Option 3: Simple Unix Solution (Immediate Fix)**
+
+For your current Unix environment, use this simpler command:
+
+```json
+{
+  "scripts": {
+    "build-static": "next build && mkdir -p public && rm -rf public/* && cp -r out/* public/"
+  }
+}
+```
+
+## Quick Fix for Right Now
+
+**Replace your current build script with this:**
+
+```json
+{
+  "scripts": {
+    "build-static": "next build && mkdir -p public && rm -rf public/* && cp -r out/* public/"
+  }
+}
+```
+
+This will:
+1. ✅ Build your Next.js app (creates `out/` directory)
+2. ✅ Create `public/` directory if it doesn't exist
+3. ✅ Clear any existing files in `public/`
+4. ✅ Copy all files from `out/` to `public/`
+
+## Test the Fix
+
+```bash
+# Clean up first
+rm -rf out public .next
+
+# Run the fixed build
+npm run build-static
+
+# Verify both directories exist with content
+ls -la out/
+ls -la public/
+```
+
+You should see identical content in both directories, with `public/index.html` confirming the hosting platform will find your files.
+
+The Node.js script (Option 2) is the most robust long-term solution, but the simple Unix command (Option 3) will fix your immediate deployment issue.
