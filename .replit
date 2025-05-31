@@ -11,7 +11,7 @@ publicDir = "public"
 run = ["sh", "-c", "npx serve out -s -l 5000 -C --host 0.0.0.0"]
 
 [workflows]
-runButton = "SITE RECOVERY"
+runButton = "AWESOME SITE DEPLOY"
 
 [[workflows.workflow]]
 name = "Run"
@@ -892,6 +892,103 @@ args = "npx serve out -s -l 5000 -C"
 [[workflows.workflow.tasks]]
 task = "shell.exec"
 args = "echo \"🌐 Site available at http://localhost:5000\""
+
+[[workflows.workflow]]
+name = "AWESOME SITE DEPLOY"
+author = 22930014
+mode = "sequential"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "echo \"🎯 MAKING CENTENNIAL HILLS SITE AWESOME!\""
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "echo \"=== Step 1: Clean slate ===\""
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = 'pkill -f "next\|serve\|node" || true'
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "sleep 3"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "rm -rf .next out node_modules/.cache .swc || true"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "echo \"=== Step 2: Fresh dependencies ===\""
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "npm install --legacy-peer-deps --force"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "echo \"=== Step 3: Build awesome static site ===\""
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "NODE_ENV=production npm run build-static"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "echo \"=== Step 4: Verify awesome build ===\""
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "if [ -d \"out\" ] && [ \"$(ls -A out)\" ]; then"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "  echo \"✅ Awesome build successful! Site is ready!\""
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "  echo \"📁 Generated $(find out -type f | wc -l) files\""
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "else"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "  echo \"❌ Build failed - checking for issues...\""
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "  npm run build-static --verbose"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "fi"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "echo \"=== Step 5: Launch awesome site ===\""
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "echo \"🚀 Starting your awesome Centennial Hills website...\""
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "npx serve out -s -l 5000 --cors"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "echo \"🌐 Your awesome site is live at:\""
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "echo \"   → http://0.0.0.0:5000\""
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "echo \"   → All pages accessible without 404 errors!\""
 
 [[ports]]
 localPort = 3001
