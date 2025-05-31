@@ -11,7 +11,7 @@ publicDir = "public"
 run = ["sh", "-c", "npx serve out -s -l 5000 -C --host 0.0.0.0"]
 
 [workflows]
-runButton = "PRODUCTION DEPLOY"
+runButton = "SITE RECOVERY"
 
 [[workflows.workflow]]
 name = "Run"
@@ -827,6 +827,71 @@ args = "echo \"=== Starting production server on port 5000 ===\""
 [[workflows.workflow.tasks]]
 task = "shell.exec"
 args = "npx serve out -s -l 5000 -C"
+
+[[workflows.workflow]]
+name = "SITE RECOVERY"
+author = 22930014
+mode = "sequential"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "echo \"🚀 RECOVERING CENTENNIAL HILLS WEBSITE\""
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "echo \"=== Stopping all processes ===\""
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = 'pkill -f "next\|serve\|node" || true'
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "sleep 3"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "echo \"=== Clearing all caches ===\""
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "rm -rf .next out node_modules/.cache .swc || true"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "echo \"=== Fresh dependency install ===\""
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "npm install --legacy-peer-deps --force"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "echo \"=== Building static site ===\""
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "NODE_ENV=production npm run build-static --verbose"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "echo \"=== Verifying build ===\""
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "ls -la out/ && echo \"✅ Build successful!\" || echo \"❌ Build failed\""
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "echo \"=== Starting production server ===\""
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "npx serve out -s -l 5000 -C"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "echo \"🌐 Site available at http://localhost:5000\""
 
 [[ports]]
 localPort = 3001
