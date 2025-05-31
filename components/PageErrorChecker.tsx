@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useRouter } from 'next/router';
+import { useRouterSafe } from '../utils/useRouterSafe';
 
 interface PageError {
   page: string;
@@ -9,9 +9,14 @@ interface PageError {
 }
 
 const PageErrorChecker: React.FC = () => {
-  const router = useRouter();
+  const router = useRouterSafe();
   const [errors, setErrors] = useState<PageError[]>([]);
   const [isChecking, setIsChecking] = useState(false);
+
+  // Guard against static generation
+  if (!router.isReady) {
+    return null;
+  }
 
   const checkPageErrors = async () => {
     setIsChecking(true);
@@ -44,6 +49,11 @@ const PageErrorChecker: React.FC = () => {
 
   const checkReactErrors = (): PageError[] => {
     const errors: PageError[] = [];
+    
+    // Guard against static generation
+    if (!router.isReady) {
+      return errors;
+    }
 
     try {
       // Check for missing keys in lists
@@ -87,6 +97,11 @@ const PageErrorChecker: React.FC = () => {
 
   const checkAccessibilityIssues = (): PageError[] => {
     const errors: PageError[] = [];
+    
+    // Guard against static generation
+    if (!router.isReady) {
+      return errors;
+    }
 
     try {
       // Check for missing alt text
@@ -146,6 +161,11 @@ const PageErrorChecker: React.FC = () => {
 
   const checkSEOIssues = (): PageError[] => {
     const errors: PageError[] = [];
+
+    // Guard against static generation
+    if (!router.isReady) {
+      return errors;
+    }
 
     try {
       // Check for missing meta description
