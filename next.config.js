@@ -1,8 +1,8 @@
-
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  output: 'export', // Enable static export
-  trailingSlash: true, // Recommended for static hosting
+  output: 'export',
+  distDir: 'public', // Export to 'public' instead of 'out'
+  trailingSlash: true,
   images: {
     unoptimized: true, // Required for static export
     loader: 'custom',
@@ -35,4 +35,4 @@ const nextConfig = {
   }
 }
 
-module.exports = nextConfig
+module.exports = nextConfig;
