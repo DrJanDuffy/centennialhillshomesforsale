@@ -100,6 +100,70 @@ export default function Home() {
               </div>
             </motion.div>
 
+            <div className="hero-section awesome-hero">
+        <div className="hero-background">
+          <img 
+            src="/images/centennial-hills-hero.jpg" 
+            alt="Centennial Hills Las Vegas"
+            className="hero-bg-image"
+          />
+        </div>
+        <div className="hero-overlay"></div>
+        <div className="hero-content">
+          <div className="hero-text">
+            <h1 className="hero-title gradient-text pulse-animation">
+              Your <span className="awesome-highlight">Centennial Hills</span> Home Expert
+            </h1>
+            <p className="hero-subtitle slide-in-up">
+              Discover luxury homes in Las Vegas's premier master-planned community. 
+              Dr. Jan Duffy brings you exclusive access to Centennial Hills, Providence, 
+              and Skye Canyon properties with unmatched local expertise.
+            </p>
+
+            <div className="hero-features float-animation">
+              <div className="feature glass-effect">
+                <span className="feature-icon">🏆</span>
+                <span>Top 1% REALTOR®</span>
+              </div>
+              <div className="feature glass-effect">
+                <span className="feature-icon">⭐</span>
+                <span>4.9/5 Rating</span>
+              </div>
+              <div className="feature glass-effect">
+                <span className="feature-icon">🎯</span>
+                <span>Local Expert</span>
+              </div>
+            </div>
+
+            <div className="hero-stats awesome-stats">
+              <div className="stat awesome-card neon-glow">
+                <span className="stat-number gradient-text">500+</span>
+                <span className="stat-label">Homes Sold</span>
+              </div>
+              <div className="stat awesome-card neon-glow">
+                <span className="stat-number gradient-text">15+</span>
+                <span className="stat-label">Years Experience</span>
+              </div>
+              <div className="stat awesome-card neon-glow">
+                <span className="stat-number gradient-text">98%</span>
+                <span className="stat-label">Client Satisfaction</span>
+              </div>
+            </div>
+
+            <div className="hero-buttons">
+              <Link href="/listings" className="awesome-btn btn-primary bounce-animation">
+                <span>🏠 View Listings</span>
+                <span className="btn-arrow">→</span>
+              </Link>
+              <Link href="/contact" className="awesome-btn btn-secondary pulse-animation">
+                <span>💬 Get Started</span>
+                <span className="btn-arrow">→</span>
+              </Link>
+            </div>
+          </div>
+        </div>
+      </div>
+
             <AwesomeFeatures />
 
             {/* Call to action */}

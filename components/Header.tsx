@@ -46,16 +46,16 @@ export default function Header() {
         <div className="header-content">
           <div className="header-brand">
             <Link href="/" onClick={closeMenu} className="logo-link">
-              <div className="logo">
-                <h1>Dr. Jan Duffy</h1>
-                <span className="subtitle">REALTOR® | Centennial Hills Expert</span>
-                <div className="verification-badge">
+              <div className="logo awesome-logo">
+                <h1 className="gradient-text pulse-animation">Dr. Jan Duffy</h1>
+                <span className="subtitle glass-effect">REALTOR® | Centennial Hills Expert</span>
+                <div className="verification-badge awesome-badge">
                   <span className="verified">✅ Verified Google Business</span>
                   <span className="rating">⭐ 4.9/5 • Top 1% REALTOR®</span>
                 </div>
               </div>
             </Link>
-            <span className="tagline">Centennial Hills | Providence | Skye Canyon</span>
+            <span className="tagline float-animation">Centennial Hills | Providence | Skye Canyon</span>
           </div>
 
           <div className="header-contact">
