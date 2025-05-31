@@ -1,3 +1,7 @@
+The Layout component is being updated with new styling and metadata enhancements, including new fonts and open graph properties.
+```
+
+```replit_final_file
 import Head from 'next/head';
 import Script from 'next/script';
 import Header from './Header';
