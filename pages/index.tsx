@@ -3,6 +3,7 @@ import Head from 'next/head';
 import Link from 'next/link';
 import Layout from '../components/Layout';
 import AwesomeFeatures from '../components/AwesomeFeatures';
+import InteractivePropertyMap from '../components/InteractivePropertyMap';
 import RealScoutWidget from '../components/widgets/RealScoutWidget';
 import RealScoutListings from '../components/RealScoutListings';
 import PropertyCalculator from '../components/PropertyCalculator';
@@ -165,6 +166,11 @@ export default function Home() {
       </div>
 
             <AwesomeFeatures />
+
+      {/* Interactive Property Map Section */}
+      <section className="property-map-section">
+        <InteractivePropertyMap />
+      </section>
 
             {/* Call to action */}
             <motion.div 

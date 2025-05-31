@@ -3055,22 +3055,22 @@ body {
   .awesome-features-section h2 {
     font-size: 2rem;
   }
-  
+
   .awesome-features-grid {
     grid-template-columns: 1fr;
     gap: 1.5rem;
   }
-  
+
   .feature-card {
     padding: 2rem 1.5rem;
   }
-  
+
   .cta-features {
     flex-direction: column;
     align-items: center;
     gap: 1rem;
   }
-  
+
   .awesome-stats {
     flex-direction: column;
     align-items: center;
@@ -3208,7 +3208,7 @@ body {
   background: rgba(255, 255, 255, 0.95);
   border-radius: 20px;
   padding: 2rem;
-  box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+  box-shadow: 0 20px 40px rgba(0,0,0,0.1);<replit_final_file>
   backdrop-filter: blur(10px);
   border: 1px solid rgba(255,255,255,0.2);
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
@@ -3259,12 +3259,12 @@ body {
     width: 100%;
     justify-content: center;
   }
-  
+
   .awesome-card {
     padding: 1.5rem;
     margin: 1rem;
   }
-  
+
   .awesome-highlight {
     transform: rotate(0deg);
     display: inline;
@@ -4094,4 +4094,14 @@ body {
     width: 100%;
     max-width: 300px;
   }
+}
+
+.awesome-hero {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+.property-map-section {
+  padding: 60px 0;
+  background: #f8f9fa;
+  margin: 40px 0;
 }
