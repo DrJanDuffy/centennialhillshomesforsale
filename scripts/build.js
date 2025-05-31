@@ -4,13 +4,23 @@ const path = require('path');
 const { execSync } = require('child_process');
 
 console.log('🧹 Cleaning previous build...');
-// Remove existing public directory BEFORE building
 if (fs.existsSync('public')) {
   fs.rmSync('public', { recursive: true, force: true });
 }
 
 console.log('🔨 Building Next.js application...');
-execSync('next build', { stdio: 'inherit' });
+try {
+  execSync('next build', { 
+    stdio: 'inherit',  // This will show all output
+    encoding: 'utf8'
+  });
+} catch (error) {
+  console.error('❌ Build failed with error:');
+  console.error(error.message);
+  if (error.stdout) console.error('STDOUT:', error.stdout);
+  if (error.stderr) console.error('STDERR:', error.stderr);
+  process.exit(1);
+}
 
 console.log('📁 Copying files to public directory...');
 // Create public directory
