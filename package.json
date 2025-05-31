@@ -7,7 +7,7 @@
     "dev": "next dev -p 5000",
     "build": "next build",
     "export": "next export",
-    "build-static": "next build && cp -r out/* public/ 2>/dev/null || rsync -av out/ public/ || robocopy out public /E /IS",
+    "build-static": "node scripts/build.js",
     "prebuild-static": "mkdir -p public || md public",
     "start": "next start -p 5000",
     "lint": "next lint",
