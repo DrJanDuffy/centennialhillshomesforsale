@@ -1,7 +1,8 @@
 
 [deployment]
-run = ["npm", "run", "build-static"]
+build = ["npm", "run", "build-static"]
 staticFiles = "public"
+publicDir = "public"
 deploymentTarget = "static"
 
 [nix]
