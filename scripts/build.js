@@ -3,16 +3,16 @@ const fs = require('fs');
 const path = require('path');
 const { execSync } = require('child_process');
 
-console.log('🔨 Building Next.js application...');
-execSync('next build', { stdio: 'inherit' });
-
-console.log('📁 Copying files to public directory...');
-
-// Remove existing public directory
+console.log('🧹 Cleaning previous build...');
+// Remove existing public directory BEFORE building
 if (fs.existsSync('public')) {
   fs.rmSync('public', { recursive: true, force: true });
 }
 
+console.log('🔨 Building Next.js application...');
+execSync('next build', { stdio: 'inherit' });
+
+console.log('📁 Copying files to public directory...');
 // Create public directory
 fs.mkdirSync('public', { recursive: true });
 
