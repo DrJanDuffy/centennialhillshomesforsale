@@ -13,17 +13,30 @@ const { execSync } = require('child_process');
 console.log('Building Next.js app...');
 execSync('next build', { stdio: 'inherit' });
 
-console.log('Copying to public directory...');
+console.log('📁 Copying files to public directory...');
+
+// Remove existing public directory
 if (fs.existsSync('public')) {
-  fs.rmSync('public', { recursive: true });
+  fs.rmSync('public', { recursive: true, force: true });
 }
+
+// Create fresh public directory
 fs.mkdirSync('public', { recursive: true });
 
-const copyDir = (src, dest) => {
+// Copy files from out to public
+function copyDir(src, dest) {
+  if (!fs.existsSync(src)) {
+    console.error(`❌ Source directory ${src} does not exist`);
+    console.error('Make sure Next.js build completed successfully');
+    process.exit(1);
+  }
+
   const entries = fs.readdirSync(src, { withFileTypes: true });
-  for (const entry of entries) {
+
+  for (let entry of entries) {
     const srcPath = path.join(src, entry.name);
     const destPath = path.join(dest, entry.name);
+
     if (entry.isDirectory()) {
       fs.mkdirSync(destPath, { recursive: true });
       copyDir(srcPath, destPath);
@@ -31,11 +44,22 @@ const copyDir = (src, dest) => {
       fs.copyFileSync(srcPath, destPath);
     }
   }
-};
+}
 
+// Copy the built files
 copyDir('out', 'public');
-console.log('✅ Files ready in public/ directory');
-console.log('Files:', fs.readdirSync('public'));
+
+console.log('✅ Files successfully copied to public/ directory');
+console.log('📄 Files in public:', fs.readdirSync('public').slice(0, 5).join(', ') + '...');
+
+// Verify key files exist
+if (fs.existsSync('public/index.html')) {
+  console.log('🌐 index.html found - ready for deployment');
+} else {
+  console.log('⚠️  Warning: index.html not found in public directory');
+}
+
+console.log(`📊 Total files copied: ${fs.readdirSync('public').length}`);
 
 // Read the built files
 const buildDir = path.join(process.cwd(), 'public');
