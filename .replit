@@ -940,7 +940,7 @@ args = "echo \"=== Step 4: Verify awesome build ===\""
 
 [[workflows.workflow.tasks]]
 task = "shell.exec"
-args = "if [ -d \"out\" ] && [ \"$(ls -A out)\" ]; then"
+args = "if [ -d \"out\" ] && [ \"$(ls -A out 2>/dev/null)\" ]; then"
 
 [[workflows.workflow.tasks]]
 task = "shell.exec"
@@ -948,7 +948,7 @@ args = "  echo \"✅ Awesome build successful! Site is ready!\""
 
 [[workflows.workflow.tasks]]
 task = "shell.exec"
-args = "  echo \"📁 Generated $(find out -type f | wc -l) files\""
+args = "  echo \"📁 Generated $(find out -type f 2>/dev/null | wc -l) files\""
 
 [[workflows.workflow.tasks]]
 task = "shell.exec"
@@ -976,7 +976,7 @@ args = "echo \"🚀 Starting your awesome Centennial Hills website...\""
 
 [[workflows.workflow.tasks]]
 task = "shell.exec"
-args = "npx serve out -s -l 5000 --cors"
+args = "npx serve out -s -l 5000 --cors --host 0.0.0.0"
 
 [[workflows.workflow.tasks]]
 task = "shell.exec"
