@@ -1,0 +1,15 @@
+
+[deployment]
+run = ["npm", "run", "build-static"]
+staticFiles = "public"
+deploymentTarget = "static"
+
+[nix]
+channel = "stable-24_05"
+
+[env]
+NODE_ENV = "production"
+
+[[ports]]
+localPort = 5000
+externalPort = 80
