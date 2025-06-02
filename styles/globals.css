@@ -3130,13 +3130,14 @@ body {
 
 /* ✨ AWESOME NAVIGATION STYLES */
 .awesome-nav {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  padding: 1rem 0;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+  background: linear-gradient(135deg, #1e40af 0%, #3b82f6 50%, #60a5fa 100%);
+  padding: 0.5rem 0;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.1);
   position: sticky;
   top: 0;
   z-index: 1000;
   backdrop-filter: blur(10px);
+  min-height: auto;
 }
 
 /* 🎨 AWESOME TEXT STYLES */
