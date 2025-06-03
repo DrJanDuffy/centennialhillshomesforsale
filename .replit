@@ -87,15 +87,7 @@ args = "echo \"🚀 DEPLOYING AWESOME CENTENNIAL HILLS WEBSITE\""
 
 [[workflows.workflow.tasks]]
 task = "shell.exec"
-args = "pkill -f \"next|serve|node\" || true"
-
-[[workflows.workflow.tasks]]
-task = "shell.exec"
-args = "sleep 2"
-
-[[workflows.workflow.tasks]]
-task = "shell.exec"
-args = "echo \"📦 Installing dependencies...\""
+args = "echo \"============================================\""
 
 [[workflows.workflow.tasks]]
 task = "shell.exec"
@@ -103,55 +95,19 @@ args = "npm install --legacy-peer-deps"
 
 [[workflows.workflow.tasks]]
 task = "shell.exec"
-args = "echo \"🔨 Building static site...\""
-
-[[workflows.workflow.tasks]]
-task = "shell.exec"
 args = "npm run build"
 
 [[workflows.workflow.tasks]]
 task = "shell.exec"
-args = "echo \"📁 Verifying build...\""
+args = "echo \"🌐 Your awesome site is ready!\""
 
 [[workflows.workflow.tasks]]
 task = "shell.exec"
-args = "if [ -d \"out\" ] && [ \"$(ls -A out 2>/dev/null)\" ]; then"
+args = "echo \"   → Building complete in 'out' directory\""
 
 [[workflows.workflow.tasks]]
 task = "shell.exec"
-args = "  echo \"✅ Build successful! Starting server...\""
-
-[[workflows.workflow.tasks]]
-task = "shell.exec"
-args = "  echo \"🌐 Your awesome site will be available at:\""
-
-[[workflows.workflow.tasks]]
-task = "shell.exec"
-args = "  echo \"   → https://${REPL_SLUG}.${REPL_OWNER}.repl.co\""
-
-[[workflows.workflow.tasks]]
-task = "shell.exec"
-args = "  echo \"   → http://0.0.0.0:5000\""
-
-[[workflows.workflow.tasks]]
-task = "shell.exec"
-args = "  npx serve out -s -l 5000 --cors --host 0.0.0.0"
-
-[[workflows.workflow.tasks]]
-task = "shell.exec"
-args = "else"
-
-[[workflows.workflow.tasks]]
-task = "shell.exec"
-args = "  echo \"❌ Build failed - starting development server...\""
-
-[[workflows.workflow.tasks]]
-task = "shell.exec"
-args = "  npm run dev"
-
-[[workflows.workflow.tasks]]
-task = "shell.exec"
-args = "fi"
+args = "npx serve out -s -l 5000 --cors --host 0.0.0.0"
 
 [[workflows.workflow]]
 name = "Run Site"

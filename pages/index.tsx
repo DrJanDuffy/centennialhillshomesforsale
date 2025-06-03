@@ -1,17 +1,25 @@
-
 import React from 'react';
 import Layout from '../components/Layout';
 import AwesomeHero from '../components/AwesomeHero';
 import AwesomeFeatures from '../components/AwesomeFeatures';
 import PropertyCard from '../components/PropertyCard';
 import SmartPropertyRecommendations from '../components/SmartPropertyRecommendations';
-import InteractivePropertyMap from '../components/InteractivePropertyMap';
-import LocalAmenities from '../components/LocalAmenities';
-import MarketTrendChart from '../components/MarketTrendChart';
-import AIRealEstateChat from '../components/AIRealEstateChat';
-import LeadCaptureForm from '../components/LeadCaptureForm';
 import { motion } from 'framer-motion';
-import { Star, MapPin, TrendingUp, Users, Award, Phone } from 'lucide-react';
+import { Star, MapPin, TrendingUp, Users, Award, Phone, Home } from 'lucide-react';
+import { GetStaticProps } from 'next';
+import { Suspense } from 'react';
+import dynamic from 'next/dynamic';
+
+// Lazy load heavy components for better performance
+const AIAssistant = dynamic(() => import('../components/AIAssistant'), {
+  loading: () => <div className="animate-pulse bg-gray-200 h-64 rounded-lg"></div>,
+  ssr: false
+});
+
+const InteractivePropertyMap = dynamic(() => import('../components/InteractivePropertyMap'), {
+  loading: () => <div className="animate-pulse bg-gray-200 h-96 rounded-lg"></div>,
+  ssr: false
+});
 
 const HomePage: React.FC = () => {
   const featuredProperties = [
@@ -309,7 +317,7 @@ const HomePage: React.FC = () => {
       <LeadCaptureForm />
 
       {/* AI Chat Widget */}
-      <AIRealEstateChat />
+      <AIAssistant />
     </Layout>
   );
 };
