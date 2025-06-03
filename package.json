@@ -11,6 +11,7 @@
     "deploy": "npm run build-static && npx serve public -s -l 5000 --host 0.0.0.0",
     "lint": "next lint --fix",
     "test": "jest",
+    "type-check": "tsc --noEmit",
     "analyze": "cross-env ANALYZE=true next build"
   },
   "dependencies": {
