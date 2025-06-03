@@ -92,12 +92,12 @@ export default function AIAssistant() {
 
     try {
       // Use the mcpClient's sendMessage method
-      const response = await mcpClient?.sendMessage(inputValue);
+      const response = await mcpClient.sendMessage(inputValue);
 
       const assistantMessage: Message = {
         id: (Date.now() + 1).toString(),
         type: 'assistant',
-        content: response?.content || 'No response received',
+        content: response.content || 'No response received',
         timestamp: new Date(),
         suggestions: ['Property search', 'Home valuation', 'Market trends', 'Contact agent']
       };
@@ -122,7 +122,7 @@ export default function AIAssistant() {
     setInputValue(suggestion);
   };
 
-  if (!isConnected && !mcpError) {
+  if (!isConnected && !mcpError && !mcpLoading) {
     return null; // Don't show if MCP client isn't connected and no error
   }
 
@@ -273,7 +273,7 @@ export default function AIAssistant() {
                 </div>
                 <button
                   onClick={handleSendMessage}
-                  disabled={!inputValue.trim() || isTyping || !isConnected || mcpLoading || !mcpClient}
+                  disabled={!inputValue.trim() || isTyping || !isConnected || mcpLoading}
                   className="px-3 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed"
                 >
                   <PaperAirplaneIcon className="w-4 h-4" />

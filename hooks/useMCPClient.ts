@@ -20,7 +20,24 @@ export const useMCPClient = (): MCPClientHook => {
   const [error, setError] = useState<Error | null>(null);
 
   useEffect(() => {
-    setIsConnected(mcpClient.connected);
+    // Auto-connect on mount
+    const initializeConnection = async () => {
+      setIsLoading(true);
+      try {
+        const success = await mcpClient.connect();
+        setIsConnected(success);
+        if (!success) {
+          setError(new Error('Failed to connect to MCP server'));
+        }
+      } catch (err) {
+        setError(err instanceof Error ? err : new Error(String(err)));
+        setIsConnected(false);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    initializeConnection();
   }, []);
 
   const wrappedClient: MCPClient = {
@@ -49,6 +66,10 @@ export const useMCPClient = (): MCPClientHook => {
     },
 
     sendMessage: async (message: any) => {
+      if (!isConnected) {
+        return { content: 'Not connected to MCP server. Please wait for connection.' };
+      }
+      
       try {
         const response = await mcpClient.sendMessage(message);
         return { content: response.data?.message || 'Response from AI assistant' };
@@ -59,7 +80,7 @@ export const useMCPClient = (): MCPClientHook => {
   };
 
   return {
-    mcpClient: isConnected ? wrappedClient : null,
+    mcpClient: wrappedClient,
     isConnected,
     isLoading,
     error
