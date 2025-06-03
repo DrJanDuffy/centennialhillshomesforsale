@@ -1,5 +1,7 @@
+import React, { useState, useEffect, useMemo, useCallback } from 'react';
+import { MapPinIcon, StarIcon, ClockIcon, PhoneIcon } from '@heroicons/react/24/outline';
+import { GlobeAltIcon } from '@heroicons/react/24/solid';
 
-import React from 'react';
 import { motion } from 'framer-motion';
 
 const amenitiesData = {
@@ -51,7 +53,7 @@ export default function LocalAmenities() {
           Centennial Hills offers convenient access to shopping, dining, recreation, and essential services. 
           Discover what makes this Las Vegas community so desirable.
         </p>
-        
+
         <div className="amenities-grid">
           {Object.entries(amenitiesData).map(([category, items], index) => (
             <motion.div 
@@ -70,7 +72,7 @@ export default function LocalAmenities() {
             </motion.div>
           ))}
         </div>
-        
+
         <div className="distance-note">
           <p>
             <strong>Note:</strong> Drive times are approximate and may vary based on traffic conditions. 
@@ -135,7 +137,7 @@ const LocalAmenities: React.FC = () => {
             Everything you need is nearby in Centennial Hills
           </p>
         </div>
-        
+
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
           {amenities.map((amenity, index) => (
             <div key={index} className="bg-white p-6 rounded-2xl shadow-lg hover:shadow-xl transition-shadow duration-300">

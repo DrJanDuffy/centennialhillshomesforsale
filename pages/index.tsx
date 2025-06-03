@@ -1,13 +1,20 @@
+import dynamic from 'next/dynamic';
+import Head from 'next/head';
+import { useState, useEffect } from 'react';
+import Layout from '@/components/Layout';
+import AwesomeHero from '@/components/AwesomeHero';
+import AwesomeFeatures from '@/components/AwesomeFeatures';
+import LeadCaptureForm from '@/components/LeadCaptureForm';
+import LocalAmenities from '@/components/LocalAmenities';
+import MarketTrendChart from '@/components/MarketTrendChart';
+import SmartPropertyRecommendations from '@/components/SmartPropertyRecommendations';
+import SEOOptimized from '@/components/SEOOptimized';
+import ErrorBoundaryWrapper from '@/components/ErrorBoundaryWrapper';
 import React from 'react';
-import Layout from '../components/Layout';
-import AwesomeHero from '../components/AwesomeHero';
-import AwesomeFeatures from '../components/AwesomeFeatures';
 import PropertyCard from '../components/PropertyCard';
-import SmartPropertyRecommendations from '../components/SmartPropertyRecommendations';
 import { motion } from 'framer-motion';
 import { Star, MapPin, TrendingUp, Users, Award, Phone, Home } from 'lucide-react';
 import { Suspense } from 'react';
-import dynamic from 'next/dynamic';
 
 // Lazy load heavy components for better performance
 const AIAssistant = dynamic(() => import('../components/AIAssistant'), {
