@@ -11,7 +11,7 @@ publicDir = "out"
 run = ["sh", "-c", "npx serve out -s -l 5000 --cors --host 0.0.0.0"]
 
 [workflows]
-runButton = "LAUNCH SITE"
+runButton = "FIXED DEPLOY"
 
 [[workflows.workflow]]
 name = "Run"
@@ -1311,6 +1311,55 @@ args = "  npm run dev"
 [[workflows.workflow.tasks]]
 task = "shell.exec"
 args = "fi"
+
+[[workflows.workflow]]
+name = "FIXED DEPLOY"
+author = 22930014
+mode = "sequential"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "echo \"🚀 DEPLOYING CENTENNIAL HILLS WEBSITE - FIXED VERSION\""
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "pkill -f \"next|serve|node\" || true"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "sleep 2"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "echo \"📦 Installing dependencies...\""
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "npm install --legacy-peer-deps"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "echo \"🔨 Building to public directory...\""
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "npm run build-static"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "echo \"📁 Verifying build...\""
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "ls -la public/ && echo \"✅ Build successful!\" || echo \"❌ Build failed\""
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "echo \"🌐 Starting server from public directory...\""
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "npx serve public -s -l 5000 --cors --host 0.0.0.0"
 
 [[ports]]
 localPort = 3001
