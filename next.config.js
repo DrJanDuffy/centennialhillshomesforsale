@@ -33,6 +33,8 @@ const withPWA = require('next-pwa')({
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   trailingSlash: true,
+  output: 'export',
+  distDir: 'out',
   
   // Keep images unoptimized for compatibility
   images: {
@@ -41,7 +43,7 @@ const nextConfig = {
     loaderFile: './utils/imageLoader.js'
   },
   
-  // Ignore build errors temporarily to get site working
+  // Optimize for production deployment
   eslint: {
     ignoreDuringBuilds: true
   },
