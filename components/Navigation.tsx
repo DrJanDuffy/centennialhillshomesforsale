@@ -52,13 +52,14 @@ const Navigation: React.FC = () => {
         .awesome-nav-link {
           color: white;
           text-decoration: none;
-          padding: 6px 12px;
-          margin: 0 1px;
-          border-radius: 18px;
+          padding: 8px 16px;
+          margin: 0 4px;
+          border-radius: 20px;
           transition: all 0.3s ease;
           font-weight: 500;
           display: inline-block;
-          font-size: 0.9rem;
+          font-size: 0.95rem;
+          white-space: nowrap;
         }
 
         .awesome-nav-link:hover {

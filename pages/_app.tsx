@@ -57,6 +57,15 @@ export default function App({ Component, pageProps }: AppProps) {
           body.style.visibility = 'visible';
         }
 
+        // Ensure all interactive elements are properly initialized
+        const buttons = document.querySelectorAll('button, .btn, [role="button"]');
+        buttons.forEach(btn => {
+          if (btn instanceof HTMLElement) {
+            btn.style.pointerEvents = 'auto';
+            btn.style.cursor = 'pointer';
+          }
+        });
+
       } catch (error) {
         console.error('Error fixing hydration issues:', error);
       }
