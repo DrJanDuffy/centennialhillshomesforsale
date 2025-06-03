@@ -1,3 +1,4 @@
+
 'use client';
 
 import React, { useState, useRef, useEffect, useCallback } from 'react';
@@ -27,8 +28,14 @@ export default function AIAssistant() {
   const [isTyping, setIsTyping] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
-  // Use the hooks with proper interfaces
-  const { mcpClient, isConnected, error: mcpError } = useMCPClient();
+  // Use the hooks with proper interfaces - now includes isLoading property
+  const { 
+    mcpClient, 
+    isConnected, 
+    isLoading: mcpLoading, 
+    error: mcpError 
+  } = useMCPClient();
+  
   const { 
     isListening, 
     startListening, 
@@ -70,7 +77,7 @@ export default function AIAssistant() {
   }, [isOpen]);
 
   const handleSendMessage = async () => {
-    if (!inputValue.trim() || !isConnected) return;
+    if (!inputValue.trim() || !isConnected || mcpLoading) return;
 
     const userMessage: Message = {
       id: Date.now().toString(),
@@ -168,7 +175,10 @@ export default function AIAssistant() {
                 <div>
                   <h3 className="font-semibold">AI Real Estate Assistant</h3>
                   <p className="text-sm text-blue-100">
-                    {isConnected ? 'Connected' : mcpError ? 'Connection Error' : 'Connecting...'}
+                    {isConnected ? 
+                      (mcpLoading ? 'Loading...' : 'Connected') : 
+                      mcpError ? 'Connection Error' : 'Connecting...'
+                    }
                   </p>
                 </div>
               </div>
@@ -218,7 +228,7 @@ export default function AIAssistant() {
                 </div>
               ))}
 
-              {isTyping && (
+              {(isTyping || mcpLoading) && (
                 <div className="flex justify-start">
                   <div className="bg-gray-100 p-3 rounded-2xl">
                     <div className="flex gap-1">
@@ -244,16 +254,16 @@ export default function AIAssistant() {
                     onKeyDown={(e) => e.key === 'Enter' && handleSendMessage()}
                     placeholder="Ask about homes, valuations, or market trends..."
                     className="w-full px-3 py-2 pr-10 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500"
-                    disabled={isTyping}
+                    disabled={isTyping || mcpLoading}
                   />
                   {hasPermission && (
                     <button
                       onClick={startListening}
-                      disabled={!hasPermission}
+                      disabled={!hasPermission || mcpLoading}
                       title={voiceError || 'Click to speak'}
                       className={`absolute right-2 top-1/2 -translate-y-1/2 p-1 rounded ${
                         isListening ? 'text-red-500 animate-pulse' : 
-                        !hasPermission ? 'text-gray-300 cursor-not-allowed' :
+                        (!hasPermission || mcpLoading) ? 'text-gray-300 cursor-not-allowed' :
                         'text-gray-400 hover:text-gray-600'
                       }`}
                     >
@@ -263,7 +273,7 @@ export default function AIAssistant() {
                 </div>
                 <button
                   onClick={handleSendMessage}
-                  disabled={!inputValue.trim() || isTyping || !isConnected}
+                  disabled={!inputValue.trim() || isTyping || !isConnected || mcpLoading}
                   className="px-3 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed"
                 >
                   <PaperAirplaneIcon className="w-4 h-4" />
