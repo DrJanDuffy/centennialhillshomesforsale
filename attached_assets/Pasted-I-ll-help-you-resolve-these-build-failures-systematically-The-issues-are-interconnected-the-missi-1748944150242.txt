@@ -1,0 +1,185 @@
+I'll help you resolve these build failures systematically. The issues are interconnected - the missing Heroicons dependency is blocking TypeScript compilation, which prevents the static build from completing.
+Immediate Resolution Steps
+Step 1: Install Missing Heroicons Dependency
+Update package.json:
+json{
+  "dependencies": {
+    "next": "14.2.29",
+    "react": "^18.0.0",
+    "react-dom": "^18.0.0",
+    "@heroicons/react": "^2.0.18"
+  }
+}
+Install the dependency:
+bashnpm install @heroicons/react@^2.0.18
+Step 2: Fix Import Paths in Components
+Update components/AIAssistant.tsx:
+typescript// Replace any incorrect import paths with:
+import { 
+  MicrophoneIcon,
+  StopIcon,
+  PaperAirplaneIcon,
+  ExclamationTriangleIcon 
+} from '@heroicons/react/24/outline';
+
+// Or for solid icons:
+import { 
+  MicrophoneIcon as MicrophoneIconSolid 
+} from '@heroicons/react/24/solid';
+Step 3: Configure Next.js Static Export Properly
+Update next.config.js:
+javascript/** @type {import('next').NextConfig} */
+const nextConfig = {
+  output: 'export',
+  trailingSlash: true,
+  skipTrailingSlashRedirect: true,
+  distDir: 'out',
+  images: {
+    unoptimized: true
+  },
+  // Ensure proper static export
+  experimental: {
+    esmExternals: false
+  }
+}
+
+module.exports = nextConfig
+Step 4: Update Build Scripts
+Update package.json build configuration:
+json{
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "build-static": "next build",
+    "start": "next start",
+    "lint": "next lint",
+    "type-check": "tsc --noEmit"
+  }
+}
+Complete Dependency Resolution
+Full package.json dependencies section:
+json{
+  "dependencies": {
+    "next": "14.2.29",
+    "react": "^18.0.0",
+    "react-dom": "^18.0.0",
+    "@heroicons/react": "^2.0.18",
+    "@types/node": "^20.0.0",
+    "@types/react": "^18.0.0",
+    "@types/react-dom": "^18.0.0",
+    "typescript": "^5.0.0"
+  }
+}
+TypeScript Configuration Fix
+Ensure tsconfig.json is properly configured:
+json{
+  "compilerOptions": {
+    "target": "es5",
+    "lib": ["dom", "dom.iterable", "es6"],
+    "allowJs": true,
+    "skipLibCheck": true,
+    "strict": true,
+    "noEmit": true,
+    "esModuleInterop": true,
+    "module": "esnext",
+    "moduleResolution": "bundler",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "jsx": "preserve",
+    "incremental": true,
+    "plugins": [
+      {
+        "name": "next"
+      }
+    ],
+    "paths": {
+      "@/*": ["./*"]
+    }
+  },
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
+  "exclude": ["node_modules"]
+}
+Heroicons Usage Examples
+Common icon imports and usage:
+typescript// In your AIAssistant component
+import React, { useState } from 'react';
+import {
+  MicrophoneIcon,
+  StopIcon,
+  PaperAirplaneIcon,
+  ExclamationTriangleIcon,
+  SparklesIcon
+} from '@heroicons/react/24/outline';
+
+const AIAssistant = () => {
+  const [isListening, setIsListening] = useState(false);
+
+  return (
+    <div className="ai-assistant">
+      <button onClick={() => setIsListening(!isListening)}>
+        {isListening ? (
+          <StopIcon className="h-6 w-6" />
+        ) : (
+          <MicrophoneIcon className="h-6 w-6" />
+        )}
+      </button>
+      
+      <button type="submit">
+        <PaperAirplaneIcon className="h-5 w-5" />
+      </button>
+    </div>
+  );
+};
+
+export default AIAssistant;
+Build Verification Steps
+bash# 1. Clean install
+rm -rf node_modules package-lock.json
+npm install
+
+# 2. Type check
+npm run type-check
+
+# 3. Build static site
+npm run build-static
+
+# 4. Verify output directory
+ls -la out/
+Directory Structure Validation
+Expected output structure after successful build:
+out/
+├── _next/
+│   ├── static/
+│   └── ...
+├── index.html
+├── 404.html
+└── [other pages].html
+Troubleshooting TypeScript Compilation
+If TypeScript issues persist, add these compiler options temporarily:
+json// tsconfig.json
+{
+  "compilerOptions": {
+    "skipLibCheck": true,
+    "noImplicitAny": false,
+    "strict": false
+  }
+}
+Success Parameters
+Build should succeed when:
+
+✅ @heroicons/react installs without errors
+✅ TypeScript compilation passes
+✅ Static files generated in out/ directory
+✅ All icon imports resolve correctly
+✅ Next.js export completes successfully
+
+Alternative Icon Solution (Fallback)
+If Heroicons continues causing issues, use SVG icons directly:
+typescript// Replace Heroicons with inline SVG
+const MicrophoneIcon = ({ className }: { className?: string }) => (
+  <svg className={className} fill="none" viewBox="0 0 24 24" stroke="currentColor">
+    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} 
+          d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 01-3-3V5a3 3 0 116 0v6a3 3 0 01-3 3z" />
+  </svg>
+);
+Try these fixes in order, and let me know if you encounter any specific error messages during the build process. The combination of adding the missing dependency and fixing the export configuration should resolve your deployment issues.
