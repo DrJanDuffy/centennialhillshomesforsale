@@ -2,7 +2,7 @@ import { useState, useEffect, useCallback } from 'react';
 import { mcpClient, MCPResponse, MCPClient } from '../lib/mcp-client';
 
 interface MCPClientHook {
-  mcpClient: {
+  mcpClient: MCPClient & {
     sendMessage: (message: any) => Promise<{ content: string }>;
   };
   isConnected: boolean;
