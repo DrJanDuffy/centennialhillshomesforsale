@@ -1,410 +1,457 @@
+
 import React, { useState, useEffect, useMemo, useCallback } from 'react';
-import { motion } from 'framer-motion';
-import { MapPinIcon, HomeIcon, TrendingUpIcon, EyeIcon, HeartIcon } from '@heroicons/react/24/outline';
-import styles from './InteractivePropertyMap.module.css';
+
+// Import icons with fallback handling
+let MapPinIcon, HomeIcon, ArrowTrendingUpIcon, EyeIcon, HeartIcon, MagnifyingGlassIcon, FilterIcon;
+
+try {
+  const icons = require('@heroicons/react/24/outline');
+  MapPinIcon = icons.MapPinIcon;
+  HomeIcon = icons.HomeIcon;
+  ArrowTrendingUpIcon = icons.ArrowTrendingUpIcon; // Correct icon name in v2
+  EyeIcon = icons.EyeIcon;
+  HeartIcon = icons.HeartIcon;
+  MagnifyingGlassIcon = icons.MagnifyingGlassIcon;
+  FilterIcon = icons.FunnelIcon; // Filter icon is called FunnelIcon in v2
+} catch (e) {
+  // Fallback SVG icons
+  MapPinIcon = ({ className }: { className?: string }) => (
+    <svg className={className} fill="none" viewBox="0 0 24 24" stroke="currentColor">
+      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+    </svg>
+  );
+  
+  HomeIcon = ({ className }: { className?: string }) => (
+    <svg className={className} fill="none" viewBox="0 0 24 24" stroke="currentColor">
+      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+    </svg>
+  );
+  
+  ArrowTrendingUpIcon = ({ className }: { className?: string }) => (
+    <svg className={className} fill="none" viewBox="0 0 24 24" stroke="currentColor">
+      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M2.25 18L9 11.25l4.306 4.307a11.95 11.95 0 015.814-5.519l2.74-1.22m0 0l-5.94-2.28m5.94 2.28l-2.28 5.941" />
+    </svg>
+  );
+  
+  EyeIcon = ({ className }: { className?: string }) => (
+    <svg className={className} fill="none" viewBox="0 0 24 24" stroke="currentColor">
+      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+    </svg>
+  );
+  
+  HeartIcon = ({ className }: { className?: string }) => (
+    <svg className={className} fill="none" viewBox="0 0 24 24" stroke="currentColor">
+      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+    </svg>
+  );
+  
+  MagnifyingGlassIcon = ({ className }: { className?: string }) => (
+    <svg className={className} fill="none" viewBox="0 0 24 24" stroke="currentColor">
+      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+    </svg>
+  );
+  
+  FilterIcon = ({ className }: { className?: string }) => (
+    <svg className={className} fill="none" viewBox="0 0 24 24" stroke="currentColor">
+      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z" />
+    </svg>
+  );
+}
 
 interface Property {
   id: string;
-  address: string;
+  title: string;
   price: number;
+  address: string;
+  coordinates: { lat: number; lng: number };
   bedrooms: number;
   bathrooms: number;
   sqft: number;
-  lat: number;
-  lng: number;
-  image: string;
+  imageUrl: string;
+  pricePerSqft: number;
+  yearBuilt: number;
+  propertyType: 'single-family' | 'condo' | 'townhouse' | 'luxury';
   status: 'for-sale' | 'sold' | 'pending';
+  marketTrend: 'up' | 'down' | 'stable';
+}
+
+interface PropertyFilters {
+  priceRange: [number, number];
+  bedrooms: number | null;
+  bathrooms: number | null;
+  propertyType: string;
+  status: string;
 }
 
 const InteractivePropertyMap: React.FC = () => {
-  const [properties, setProperties] = useState<Property[]>([]);
   const [selectedProperty, setSelectedProperty] = useState<Property | null>(null);
-  const [searchTerm, setSearchTerm] = useState('');
-  const [filters, setFilters] = useState({
-    minPrice: 0,
-    maxPrice: 2000000,
-    minBedrooms: 0,
+  const [hoveredProperty, setHoveredProperty] = useState<Property | null>(null);
+  const [filters, setFilters] = useState<PropertyFilters>({
+    priceRange: [200000, 1000000],
+    bedrooms: null,
+    bathrooms: null,
+    propertyType: 'all',
     status: 'all'
   });
-  const [selectedNeighborhood, setSelectedNeighborhood] = useState<string | null>(null);
-  const [hoveredNeighborhood, setHoveredNeighborhood] = useState<string | null>(null);
+  const [favorites, setFavorites] = useState<Set<string>>(new Set());
+  const [showFilters, setShowFilters] = useState(false);
 
-  const neighborhoods = useMemo(() => [
-    {
-      id: 'centennial-hills',
-      name: 'Centennial Hills',
-      lat: 36.2759,
-      lng: -115.3285,
-      propertyCount: 150,
-      avgPrice: 550000
-    },
-    {
-      id: 'skye-canyon',
-      name: 'Skye Canyon',
-      lat: 36.3423,
-      lng: -115.3602,
-      propertyCount: 120,
-      avgPrice: 620000
-    },
-    {
-      id: 'providence',
-      name: 'Providence',
-      lat: 36.2857,
-      lng: -115.2442,
-      propertyCount: 180,
-      avgPrice: 490000
-    },
-  ], []);
-
-  // Sample properties in Centennial Hills area
-  const sampleProperties: Property[] = [
+  // Mock property data for Centennial Hills area
+  const mockProperties: Property[] = [
     {
       id: '1',
-      address: '8324 Providence Ranch Ave, Las Vegas, NV 89166',
-      price: 485000,
+      title: 'Luxury Modern Home',
+      price: 750000,
+      address: '123 Desert Vista Dr, Las Vegas, NV',
+      coordinates: { lat: 36.2845, lng: -115.1969 },
       bedrooms: 4,
       bathrooms: 3,
-      sqft: 2150,
-      lat: 36.2741,
-      lng: -115.3294,
-      image: '/images/property1.jpg',
-      status: 'for-sale'
+      sqft: 2800,
+      imageUrl: '/api/placeholder/400/300',
+      pricePerSqft: 268,
+      yearBuilt: 2020,
+      propertyType: 'single-family',
+      status: 'for-sale',
+      marketTrend: 'up'
     },
     {
       id: '2',
-      address: '9876 Skye Canyon Dr, Las Vegas, NV 89166',
-      price: 525000,
-      bedrooms: 3,
-      bathrooms: 2,
-      sqft: 1950,
-      lat: 36.2756,
-      lng: -115.3312,
-      image: '/images/property2.jpg',
-      status: 'for-sale'
+      title: 'Centennial Hills Estate',
+      price: 925000,
+      address: '456 Canyon Ridge Ln, Las Vegas, NV',
+      coordinates: { lat: 36.2851, lng: -115.1975 },
+      bedrooms: 5,
+      bathrooms: 4,
+      sqft: 3500,
+      imageUrl: '/api/placeholder/400/300',
+      pricePerSqft: 264,
+      yearBuilt: 2019,
+      propertyType: 'luxury',
+      status: 'for-sale',
+      marketTrend: 'up'
     },
     {
       id: '3',
-      address: '7543 Centennial Hills Blvd, Las Vegas, NV 89149',
-      price: 675000,
-      bedrooms: 5,
-      bathrooms: 4,
-      sqft: 2890,
-      lat: 36.2789,
-      lng: -115.3275,
-      image: '/images/property3.jpg',
-      status: 'sold'
+      title: 'Golf Course View Home',
+      price: 680000,
+      address: '789 Fairway Circle, Las Vegas, NV',
+      coordinates: { lat: 36.2839, lng: -115.1963 },
+      bedrooms: 4,
+      bathrooms: 3,
+      sqft: 3100,
+      imageUrl: '/api/placeholder/400/300',
+      pricePerSqft: 219,
+      yearBuilt: 2018,
+      propertyType: 'single-family',
+      status: 'for-sale',
+      marketTrend: 'stable'
+    },
+    {
+      id: '4',
+      title: 'Contemporary Townhome',
+      price: 485000,
+      address: '321 Mountain View Ct, Las Vegas, NV',
+      coordinates: { lat: 36.2857, lng: -115.1981 },
+      bedrooms: 3,
+      bathrooms: 2.5,
+      sqft: 2200,
+      imageUrl: '/api/placeholder/400/300',
+      pricePerSqft: 220,
+      yearBuilt: 2021,
+      propertyType: 'townhouse',
+      status: 'for-sale',
+      marketTrend: 'up'
     }
   ];
 
-  useEffect(() => {
-    setProperties(sampleProperties);
+  // Filter properties based on current filters
+  const filteredProperties = useMemo(() => {
+    return mockProperties.filter(property => {
+      const { priceRange, bedrooms, bathrooms, propertyType, status } = filters;
+      
+      if (property.price < priceRange[0] || property.price > priceRange[1]) return false;
+      if (bedrooms && property.bedrooms !== bedrooms) return false;
+      if (bathrooms && property.bathrooms < bathrooms) return false;
+      if (propertyType !== 'all' && property.propertyType !== propertyType) return false;
+      if (status !== 'all' && property.status !== status) return false;
+      
+      return true;
+    });
+  }, [filters]);
+
+  const toggleFavorite = useCallback((propertyId: string) => {
+    setFavorites(prev => {
+      const newFavorites = new Set(prev);
+      if (newFavorites.has(propertyId)) {
+        newFavorites.delete(propertyId);
+      } else {
+        newFavorites.add(propertyId);
+      }
+      return newFavorites;
+    });
   }, []);
-
-  const filteredProperties = properties.filter(property => {
-    const matchesSearch = searchTerm === '' || 
-      property.address.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      property.price.toString().includes(searchTerm);
-
-    return matchesSearch &&
-           property.price >= filters.minPrice &&
-           property.price <= filters.maxPrice &&
-           property.bedrooms >= filters.minBedrooms &&
-           (filters.status === 'all' || property.status === filters.status);
-  });
 
   const formatPrice = (price: number) => {
     return new Intl.NumberFormat('en-US', {
       style: 'currency',
       currency: 'USD',
-      minimumFractionDigits: 0
+      minimumFractionDigits: 0,
+      maximumFractionDigits: 0,
     }).format(price);
   };
 
-  const handleNeighborhoodClick = useCallback((id: string) => {
-    setSelectedNeighborhood(id);
-  }, []);
-
-  const handleNeighborhoodHover = useCallback((id: string | null) => {
-    setHoveredNeighborhood(id);
-  }, []);
-
-  useEffect(() => {
-    // Simulate loading neighborhoods
-    const timer = setTimeout(() => {
-      setSelectedNeighborhood('centennial-hills');
-    }, 1000);
-
-    return () => clearTimeout(timer);
-  }, []);
+  const getTrendIcon = (trend: string) => {
+    switch (trend) {
+      case 'up':
+        return <ArrowTrendingUpIcon className="h-4 w-4 text-green-500" />;
+      case 'down':
+        return <ArrowTrendingUpIcon className="h-4 w-4 text-red-500 transform rotate-180" />;
+      default:
+        return <div className="h-4 w-4 bg-gray-400 rounded-full"></div>;
+    }
+  };
 
   return (
-    <div className={styles.mapContainer}>
-      <div className={styles.header}>
-        <h2>🏡 Interactive Property Map</h2>
-        <p>Explore available homes in Centennial Hills & surrounding areas</p>
-        <div className={styles.mapStats}>
-          <div className={styles.statItem}>
-            <span className={styles.statNumber}>{filteredProperties.length}</span>
-            <span className={styles.statLabel}>Properties</span>
+    <div className="relative w-full h-screen bg-gray-100">
+      {/* Map Container */}
+      <div className="absolute inset-0 bg-gradient-to-br from-blue-50 to-green-50">
+        {/* Simulated Map Background */}
+        <div className="w-full h-full relative overflow-hidden">
+          <div className="absolute inset-0 opacity-20">
+            <div className="grid grid-cols-12 gap-4 h-full p-8">
+              {Array.from({ length: 48 }).map((_, i) => (
+                <div key={i} className="bg-gray-300 rounded opacity-30"></div>
+              ))}
+            </div>
           </div>
-          <div className={styles.statItem}>
-            <span className={styles.statNumber}>
-              {filteredProperties.length > 0 ? 
-                formatPrice(filteredProperties.reduce((avg, p) => avg + p.price, 0) / filteredProperties.length) : 
-                '$0'
-              }
-            </span>
-            <span className={styles.statLabel}>Avg Price</span>
-          </div>
-          <div className={styles.statItem}>
-            <span className={styles.statNumber}>
-              {filteredProperties.filter(p => p.status === 'for-sale').length}
-            </span>
-            <span className={styles.statLabel}>Available</span>
-          </div>
-        </div>
-      </div>
-
-      {/* Search Bar */}
-      <div className={styles.searchContainer}>
-        <input
-          type="text"
-          placeholder="🔍 Search by address, price, or neighborhood..."
-          value={searchTerm}
-          onChange={(e) => setSearchTerm(e.target.value)}
-          className={styles.searchInput}
-        />
-        {searchTerm && (
-          <button 
-            className={styles.clearSearch}
-            onClick={() => setSearchTerm('')}
-          >
-            ✕
-          </button>
-        )}
-      </div>
-
-      {/* Filters */}
-      <div className={styles.filters}>
-        <div className={styles.filterGroup}>
-          <label>Price Range:</label>
-          <input
-            type="range"
-            min="0"
-            max="2000000"
-            step="50000"
-            value={filters.maxPrice}
-            onChange={(e) => setFilters({...filters, maxPrice: Number(e.target.value)})}
-          />
-          <span>Up to {formatPrice(filters.maxPrice)}</span>
-        </div>
-
-        <div className={styles.filterGroup}>
-          <label>Min Bedrooms:</label>
-          <select
-            value={filters.minBedrooms}
-            onChange={(e) => setFilters({...filters, minBedrooms: Number(e.target.value)})}
-          >
-            <option value={0}>Any</option>
-            <option value={2}>2+</option>
-            <option value={3}>3+</option>
-            <option value={4}>4+</option>
-            <option value={5}>5+</option>
-          </select>
-        </div>
-
-        <div className={styles.filterGroup}>
-          <label>Status:</label>
-          <select
-            value={filters.status}
-            onChange={(e) => setFilters({...filters, status: e.target.value})}
-          >
-            <option value="all">All</option>
-            <option value="for-sale">For Sale</option>
-            <option value="sold">Recently Sold</option>
-            <option value="pending">Pending</option>
-          </select>
-        </div>
-      </div>
-
-      {/* Map Placeholder (In real implementation, integrate with Google Maps or Mapbox) */}
-      <div className={styles.mapArea}>
-        <div className={styles.mapPlaceholder}>
-          <div className={styles.mapInfo}>
-            <h3>🗺️ Interactive Map View</h3>
-            <p>Showing {filteredProperties.length} properties</p>
-            <small>Click on markers to view property details</small>
-          </div>
-
+          
           {/* Property Markers */}
-          <div className={styles.markers}>
-            {filteredProperties.map((property) => (
-              <div
-                key={property.id}
-                className={`${styles.marker} ${styles[property.status]}`}
-                style={{
-                  left: `${(property.lng + 115.35) * 1000}px`,
-                  top: `${(36.28 - property.lat) * 2000}px`
-                }}
-                onClick={() => setSelectedProperty(property)}
-              >
-                <div className={styles.markerPin}>📍</div>
-                <div className={styles.priceTag}>
-                  {formatPrice(property.price)}
+          {filteredProperties.map((property) => (
+            <div
+              key={property.id}
+              className="absolute transform -translate-x-1/2 -translate-y-1/2 cursor-pointer transition-all duration-200 hover:scale-110 z-10"
+              style={{
+                left: `${20 + (filteredProperties.indexOf(property) * 15)}%`,
+                top: `${30 + (filteredProperties.indexOf(property) * 10)}%`
+              }}
+              onClick={() => setSelectedProperty(property)}
+              onMouseEnter={() => setHoveredProperty(property)}
+              onMouseLeave={() => setHoveredProperty(null)}
+            >
+              <div className={`relative p-2 rounded-full shadow-lg transition-all ${
+                selectedProperty?.id === property.id 
+                  ? 'bg-blue-600 text-white scale-110' 
+                  : 'bg-white text-gray-700 hover:bg-blue-50'
+              }`}>
+                <HomeIcon className="h-6 w-6" />
+                <div className="absolute -top-2 -right-2">
+                  {getTrendIcon(property.marketTrend)}
                 </div>
               </div>
-            ))}
-          </div>
+              
+              {/* Price Badge */}
+              <div className="absolute top-full left-1/2 transform -translate-x-1/2 mt-1 bg-white px-2 py-1 rounded shadow text-xs font-semibold text-gray-900 whitespace-nowrap">
+                {formatPrice(property.price)}
+              </div>
+            </div>
+          ))}
         </div>
       </div>
 
       {/* Property Details Panel */}
       {selectedProperty && (
-        <div className={styles.propertyPanel}>
-          <div className={styles.propertyCard}>
-            <button 
-              className={styles.closeBtn}
-              onClick={() => setSelectedProperty(null)}
+        <div className="absolute top-4 right-4 w-80 bg-white rounded-lg shadow-xl z-20 overflow-hidden">
+          <div className="relative">
+            <img
+              src={selectedProperty.imageUrl}
+              alt={selectedProperty.title}
+              className="w-full h-48 object-cover"
+            />
+            <button
+              onClick={() => toggleFavorite(selectedProperty.id)}
+              className="absolute top-3 right-3 p-2 bg-white bg-opacity-90 rounded-full hover:bg-opacity-100 transition-all"
             >
-              ×
+              <HeartIcon 
+                className={`h-5 w-5 ${
+                  favorites.has(selectedProperty.id) 
+                    ? 'text-red-500 fill-current' 
+                    : 'text-gray-600'
+                }`} 
+              />
             </button>
-
-            <div className={styles.propertyImage}>
-              <img src={selectedProperty.image} alt={selectedProperty.address} />
-              <div className={`${styles.statusBadge} ${styles[selectedProperty.status]}`}>
-                {selectedProperty.status.replace('-', ' ').toUpperCase()}
+          </div>
+          
+          <div className="p-4">
+            <h3 className="text-lg font-semibold text-gray-900 mb-1">
+              {selectedProperty.title}
+            </h3>
+            <p className="text-sm text-gray-600 mb-3 flex items-center">
+              <MapPinIcon className="h-4 w-4 mr-1" />
+              {selectedProperty.address}
+            </p>
+            
+            <div className="flex items-center justify-between mb-3">
+              <span className="text-2xl font-bold text-blue-600">
+                {formatPrice(selectedProperty.price)}
+              </span>
+              <div className="flex items-center text-sm text-gray-500">
+                {getTrendIcon(selectedProperty.marketTrend)}
+                <span className="ml-1">
+                  ${selectedProperty.pricePerSqft}/sqft
+                </span>
               </div>
             </div>
-
-            <div className={styles.propertyInfo}>
-              <h3>{formatPrice(selectedProperty.price)}</h3>
-              <p className={styles.address}>{selectedProperty.address}</p>
-
-              <div className={styles.features}>
-                <span>🛏️ {selectedProperty.bedrooms} bed</span>
-                <span>🚿 {selectedProperty.bathrooms} bath</span>
-                <span>📐 {selectedProperty.sqft.toLocaleString()} sqft</span>
+            
+            <div className="grid grid-cols-3 gap-3 mb-4 text-center">
+              <div className="bg-gray-50 rounded-lg p-2">
+                <div className="text-lg font-semibold text-gray-900">
+                  {selectedProperty.bedrooms}
+                </div>
+                <div className="text-xs text-gray-600">Bedrooms</div>
               </div>
-
-              <div className={styles.actions}>
-                <button 
-                  className={styles.viewBtn}
-                  onClick={() => window.open(`/property/${selectedProperty.id}`, '_blank')}
-                >
-                  🏠 View Details
-                </button>
-                <button 
-                  className={styles.tourBtn}
-                  onClick={() => {
-                    // Simulate virtual tour
-                    alert(`🎥 Virtual tour starting for ${selectedProperty.address}!\n\nFeatures:\n• 360° room views\n• Interactive floor plans\n• Neighborhood walkthrough\n\nContact Dr. Jan Duffy for a live virtual tour!`);
-                  }}
-                >
-                  🎥 Virtual Tour
-                </button>
-                <button 
-                  className={styles.contactBtn}
-                  onClick={() => {
-                    const message = `Hi Dr. Jan Duffy! I'm interested in the property at ${selectedProperty.address} listed at ${formatPrice(selectedProperty.price)}. Can we schedule a showing?`;
-                    window.open(`mailto:info@centennialhillshomesforsale.com?subject=Property Inquiry - ${selectedProperty.address}&body=${encodeURIComponent(message)}`, '_blank');
-                  }}
-                >
-                  📞 Contact Agent
-                </button>
-                <button 
-                  className={styles.favoriteBtn}
-                  onClick={() => {
-                    // Add to favorites functionality
-                    const favorites = JSON.parse(localStorage.getItem('favoriteProperties') || '[]');
-                    if (!favorites.includes(selectedProperty.id)) {
-                      favorites.push(selectedProperty.id);
-                      localStorage.setItem('favoriteProperties', JSON.stringify(favorites));
-                      alert('❤️ Property added to favorites!');
-                    } else {
-                      alert('❤️ Property is already in your favorites!');
-                    }
-                  }}
-                >
-                  ❤️ Save
-                </button>
+              <div className="bg-gray-50 rounded-lg p-2">
+                <div className="text-lg font-semibold text-gray-900">
+                  {selectedProperty.bathrooms}
+                </div>
+                <div className="text-xs text-gray-600">Bathrooms</div>
               </div>
+              <div className="bg-gray-50 rounded-lg p-2">
+                <div className="text-lg font-semibold text-gray-900">
+                  {selectedProperty.sqft.toLocaleString()}
+                </div>
+                <div className="text-xs text-gray-600">Sq Ft</div>
+              </div>
+            </div>
+            
+            <div className="flex space-x-2">
+              <button className="flex-1 bg-blue-600 text-white py-2 px-4 rounded-lg hover:bg-blue-700 transition-colors flex items-center justify-center">
+                <EyeIcon className="h-4 w-4 mr-2" />
+                View Details
+              </button>
+              <button 
+                onClick={() => setSelectedProperty(null)}
+                className="px-4 py-2 border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors"
+              >
+                Close
+              </button>
             </div>
           </div>
         </div>
       )}
 
-      {/* Property Grid View */}
-      <div className={styles.gridView}>
-        <h3>Property Listings ({filteredProperties.length})</h3>
-        <div className={styles.propertyGrid}>
-          {filteredProperties.map((property) => (
-            <div 
-              key={property.id} 
-              className={styles.propertyCard}
-              onClick={() => setSelectedProperty(property)}
-            >
-              <div className={styles.cardImage}>
-                <img src={property.image} alt={property.address} />
-                <div className={`${styles.statusBadge} ${styles[property.status]}`}>
-                  {property.status.replace('-', ' ').toUpperCase()}
-                </div>
-                <div className={styles.cardOverlay}>
-                  <button 
-                    className={styles.quickViewBtn}
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      setSelectedProperty(property);
-                    }}
-                  >
-                    👁️ Quick View
-                  </button>
-                  <button 
-                    className={styles.tourBtn}
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      alert(`🎥 Virtual tour for ${property.address}!\n\nContact Dr. Jan Duffy for full virtual tour access.`);
-                    }}
-                  >
-                    🎥 Tour
-                  </button>
-                </div>
-              </div>
+      {/* Hover Tooltip */}
+      {hoveredProperty && !selectedProperty && (
+        <div className="absolute z-30 bg-white p-3 rounded-lg shadow-lg pointer-events-none transform -translate-x-1/2 -translate-y-full"
+             style={{
+               left: `${20 + (filteredProperties.indexOf(hoveredProperty) * 15)}%`,
+               top: `${30 + (filteredProperties.indexOf(hoveredProperty) * 10)}%`
+             }}>
+          <div className="text-sm font-semibold">{hoveredProperty.title}</div>
+          <div className="text-lg font-bold text-blue-600">
+            {formatPrice(hoveredProperty.price)}
+          </div>
+          <div className="text-xs text-gray-600">
+            {hoveredProperty.bedrooms} bed • {hoveredProperty.bathrooms} bath
+          </div>
+        </div>
+      )}
 
-              <div className={styles.cardContent}>
-                <h4>{formatPrice(property.price)}</h4>
-                <p>{property.address}</p>
-                <div className={styles.features}>
-                  <span>🛏️ {property.bedrooms} bed</span>
-                  <span>🚿 {property.bathrooms} bath</span>
-                  <span>📐 {property.sqft.toLocaleString()} sqft</span>
-                </div>
-                <div className={styles.cardActions}>
-                  <button 
-                    className={styles.pricePerSqft}
-                    title="Price per square foot"
-                  >
-                    💰 ${Math.round(property.price / property.sqft)}/sqft
-                  </button>
-                  <button 
-                    className={styles.favoriteBtn}
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      const favorites = JSON.parse(localStorage.getItem('favoriteProperties') || '[]');
-                      if (!favorites.includes(property.id)) {
-                        favorites.push(property.id);
-                        localStorage.setItem('favoriteProperties', JSON.stringify(favorites));
-                        e.currentTarget.innerHTML = '❤️ Saved';
-                        e.currentTarget.style.background = '#10b981';
-                      }
-                    }}
-                  >
-                    🤍 Save
-                  </button>
-                </div>
+      {/* Filter Panel */}
+      <div className="absolute top-4 left-4 z-20">
+        <button
+          onClick={() => setShowFilters(!showFilters)}
+          className="bg-white px-4 py-2 rounded-lg shadow-lg hover:shadow-xl transition-all flex items-center"
+        >
+          <FilterIcon className="h-5 w-5 mr-2" />
+          Filters
+        </button>
+        
+        {showFilters && (
+          <div className="mt-2 bg-white rounded-lg shadow-xl p-4 w-64">
+            <h3 className="font-semibold mb-3">Property Filters</h3>
+            
+            {/* Price Range */}
+            <div className="mb-4">
+              <label className="block text-sm font-medium text-gray-700 mb-2">
+                Price Range
+              </label>
+              <div className="flex space-x-2">
+                <input
+                  type="number"
+                  placeholder="Min"
+                  value={filters.priceRange[0]}
+                  onChange={(e) => setFilters(prev => ({
+                    ...prev,
+                    priceRange: [parseInt(e.target.value) || 0, prev.priceRange[1]]
+                  }))}
+                  className="w-full px-3 py-2 border border-gray-300 rounded text-sm"
+                />
+                <input
+                  type="number"
+                  placeholder="Max"
+                  value={filters.priceRange[1]}
+                  onChange={(e) => setFilters(prev => ({
+                    ...prev,
+                    priceRange: [prev.priceRange[0], parseInt(e.target.value) || 1000000]
+                  }))}
+                  className="w-full px-3 py-2 border border-gray-300 rounded text-sm"
+                />
               </div>
             </div>
-          ))}
-        </div>
+            
+            {/* Bedrooms */}
+            <div className="mb-4">
+              <label className="block text-sm font-medium text-gray-700 mb-2">
+                Bedrooms
+              </label>
+              <select
+                value={filters.bedrooms || ''}
+                onChange={(e) => setFilters(prev => ({
+                  ...prev,
+                  bedrooms: e.target.value ? parseInt(e.target.value) : null
+                }))}
+                className="w-full px-3 py-2 border border-gray-300 rounded text-sm"
+              >
+                <option value="">Any</option>
+                <option value="1">1+</option>
+                <option value="2">2+</option>
+                <option value="3">3+</option>
+                <option value="4">4+</option>
+                <option value="5">5+</option>
+              </select>
+            </div>
+            
+            {/* Property Type */}
+            <div className="mb-4">
+              <label className="block text-sm font-medium text-gray-700 mb-2">
+                Property Type
+              </label>
+              <select
+                value={filters.propertyType}
+                onChange={(e) => setFilters(prev => ({
+                  ...prev,
+                  propertyType: e.target.value
+                }))}
+                className="w-full px-3 py-2 border border-gray-300 rounded text-sm"
+              >
+                <option value="all">All Types</option>
+                <option value="single-family">Single Family</option>
+                <option value="condo">Condo</option>
+                <option value="townhouse">Townhouse</option>
+                <option value="luxury">Luxury</option>
+              </select>
+            </div>
+          </div>
+        )}
+      </div>
+
+      {/* Property Count */}
+      <div className="absolute bottom-4 left-4 bg-white px-4 py-2 rounded-lg shadow-lg z-20">
+        <span className="text-sm font-medium">
+          Showing {filteredProperties.length} of {mockProperties.length} properties
+        </span>
       </div>
     </div>
   );
