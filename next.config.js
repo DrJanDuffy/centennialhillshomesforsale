@@ -35,6 +35,7 @@ const nextConfig = {
   trailingSlash: true,
   skipTrailingSlashRedirect: true,
   distDir: 'out',
+  basePath: '',
   reactStrictMode: true,
   swcMinify: true,
   poweredByHeader: false,
@@ -104,6 +105,14 @@ const nextConfig = {
             value: 'public, max-age=31536000, immutable'
           }
         ]
+      }
+    ];
+  },
+  async rewrites() {
+    return [
+      {
+        source: '/sitemap.xml',
+        destination: '/api/sitemap'
       }
     ];
   }
