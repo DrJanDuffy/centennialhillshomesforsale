@@ -191,15 +191,23 @@ args = "echo \"============================================\""
 
 [[workflows.workflow.tasks]]
 task = "shell.exec"
+args = "pkill -f \"next|serve|node\" || true"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "sleep 2"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
 args = "echo \"📦 Installing dependencies...\""
 
 [[workflows.workflow.tasks]]
 task = "shell.exec"
-args = "npm install --legacy-peer-deps --quiet"
+args = "npm install --legacy-peer-deps"
 
 [[workflows.workflow.tasks]]
 task = "shell.exec"
-args = "echo \"🔨 Building production site...\""
+args = "echo \"🔨 Building static site...\""
 
 [[workflows.workflow.tasks]]
 task = "shell.exec"
@@ -215,19 +223,49 @@ args = "ls -la out/ | head -10"
 
 [[workflows.workflow.tasks]]
 task = "shell.exec"
-args = "echo \"🌐 Your awesome site is ready!\""
-
-[[workflows.workflow.tasks]]
-task = "shell.exec"
-args = "echo \"   → Files built in 'out' directory\""
-
-[[workflows.workflow.tasks]]
-task = "shell.exec"
 args = "echo \"✅ Starting production server...\""
 
 [[workflows.workflow.tasks]]
 task = "shell.exec"
 args = "npx serve out -s -l 5000 --cors --host 0.0.0.0"
+
+[[workflows.workflow]]
+name = "Development Mode"
+author = 22930014
+mode = "sequential"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "echo \"🛠️ Starting development server...\""
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "npm run dev"
+
+[[workflows.workflow]]
+name = "Quick Build Test"
+author = 22930014
+mode = "sequential"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "echo \"🔨 Testing build process...\""
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "npm install --legacy-peer-deps"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "npm run build"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "echo \"✅ Build completed successfully!\""
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "ls -la out/"
 
 [[ports]]
 localPort = 3001

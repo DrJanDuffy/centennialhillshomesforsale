@@ -162,4 +162,15 @@ const nextConfigModified = {
   }
 }
 
-module.exports = withPWA(nextConfig);
+module.exports = withPWA({
+  ...nextConfig,
+  ...nextConfigModified,
+  output: 'export',
+  trailingSlash: true,
+  distDir: 'out',
+  images: {
+    unoptimized: true,
+    domains: ['images.unsplash.com', 'cdn.pixabay.com', 'source.unsplash.com'],
+    formats: ['image/webp', 'image/avif']
+  }
+});
