@@ -1,0 +1,41 @@
+{
+  "napConsistency": {
+    "businessName": "Dr. Jan Duffy, REALTOR®",
+    "alternateName": "Centennial Hills Homes | Providence & Skye Canyon | Dr. Jan Duffy, REALTOR®",
+    "address": "Providence Skye Canyon Dr, Las Vegas, NV 89166",
+    "phone": "(702) 903-1952",
+    "website": "https://centennialhillshomesforsale.com"
+  },
+  "citationSources": [
+    {
+      "platform": "Google My Business",
+      "url": "https://g.co/kgs/4qQ8DsY",
+      "status": "Active",
+      "category": "Real Estate Agent"
+    },
+    {
+      "platform": "Yelp",
+      "url": "https://www.yelp.com/biz/dr-jan-duffy-realtor-las-vegas",
+      "status": "Pending",
+      "category": "Real Estate Services"
+    },
+    {
+      "platform": "Better Business Bureau",
+      "url": "https://www.bbb.org/us/nv/las-vegas/profile/real-estate-agents/dr-jan-duffy-realtor",
+      "status": "Pending",
+      "category": "Real Estate Agent"
+    },
+    {
+      "platform": "Zillow",
+      "url": "https://www.zillow.com/profile/drjanduffy",
+      "status": "Active",
+      "category": "Real Estate Professional"
+    },
+    {
+      "platform": "Realtor.com",
+      "url": "https://www.realtor.com/realestateagents/dr-jan-duffy",
+      "status": "Active",
+      "category": "REALTOR®"
+    }
+  ]
+}
