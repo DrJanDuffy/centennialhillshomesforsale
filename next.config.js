@@ -1,5 +1,5 @@
 const withPWA = require('next-pwa')({
-  dest: 'public',
+  dest: 'out',
   register: true,
   skipWaiting: true,
   disable: process.env.NODE_ENV === 'development',
@@ -35,7 +35,7 @@ const nextConfig = {
   swcMinify: true,
   output: 'export',
   trailingSlash: true,
-  distDir: 'public',
+  distDir: 'out',
   images: {
     unoptimized: true,
     domains: ['images.unsplash.com', 'cdn.pixabay.com']

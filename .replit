@@ -7,11 +7,11 @@ channel = "stable-24_05"
 [deployment]
 build = ["sh", "-c", "npm run build-static"]
 deploymentTarget = "static"
-publicDir = "public"
-run = ["sh", "-c", "npx serve public -s -l 5000 --cors --host 0.0.0.0"]
+publicDir = "out"
+run = ["sh", "-c", "npx serve out -s -l 5000 --cors --host 0.0.0.0"]
 
 [workflows]
-runButton = "SIMPLE DEPLOY"
+runButton = "WORKING SITE"
 
 [[workflows.workflow]]
 name = "Run"
@@ -1393,6 +1393,136 @@ args = "echo \"✅ Build complete - serving from public directory\""
 [[workflows.workflow.tasks]]
 task = "shell.exec"
 args = "npx serve public -s -l 5000 --cors --host 0.0.0.0"
+
+[[workflows.workflow]]
+name = "WORKING SITE"
+author = 22930014
+mode = "sequential"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "echo \"🚀 LAUNCHING CENTENNIAL HILLS WEBSITE\""
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "pkill -f \"next|serve|node\" || true"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "sleep 2"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "echo \"📦 Installing dependencies...\""
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "npm install --legacy-peer-deps"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "echo \"🔨 Building static site to 'out' directory...\""
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "npm run build-static"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "echo \"📁 Verifying build...\""
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "if [ -d \"out\" ] && [ \"$(ls -A out 2>/dev/null)\" ]; then"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "  echo \"✅ Build successful! Starting server...\""
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "  npx serve out -s -l 5000 --cors --host 0.0.0.0"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "else"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "  echo \"❌ Build failed - starting development server...\""
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "  npm run dev"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "fi"
+
+[[workflows.workflow]]
+name = "WORKING SITE"
+author = 22930014
+mode = "sequential"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "echo \"🚀 LAUNCHING CENTENNIAL HILLS WEBSITE\""
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "pkill -f \"next|serve|node\" || true"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "sleep 2"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "echo \"📦 Installing dependencies...\""
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "npm install --legacy-peer-deps"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "echo \"🔨 Building static site...\""
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "npm run build-static"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "echo \"📁 Verifying build output...\""
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "if [ -d \"out\" ] && [ \"$(ls -A out 2>/dev/null)\" ]; then"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "  echo \"✅ Build successful! Starting server...\""
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "  npx serve out -s -l 5000 --cors --host 0.0.0.0"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "else"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "  echo \"❌ Build failed - starting development server...\""
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "  npm run dev"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "fi"
 
 [[ports]]
 localPort = 3001
