@@ -11,7 +11,7 @@ publicDir = "out"
 run = ["sh", "-c", "npx serve public -s -l 5000 --cors --host 0.0.0.0"]
 
 [workflows]
-runButton = "AWESOME SITE"
+runButton = "Run Site"
 
 [[workflows.workflow]]
 name = "Run"
@@ -152,6 +152,73 @@ args = "  npm run dev"
 [[workflows.workflow.tasks]]
 task = "shell.exec"
 args = "fi"
+
+[[workflows.workflow]]
+name = "Run Site"
+author = 22930014
+mode = "sequential"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "echo \"🚀 Starting Centennial Hills Website...\""
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "npm install --legacy-peer-deps"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "npm run build-static"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "if [ -d \"public\" ] && [ \"$(ls -A public 2>/dev/null)\" ]; then"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "  echo \"✅ Build successful! Starting production server...\""
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "  npx serve public -s -l 5000 --cors --host 0.0.0.0"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "else"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "  echo \"⚠️ Build failed, starting development server...\""
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "  npm run dev"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "fi"
+
+[[workflows.workflow]]
+name = "Development"
+author = 22930014
+mode = "sequential"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "npm run dev"
+
+[[workflows.workflow]]
+name = "Build Only"
+author = 22930014
+mode = "sequential"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "npm install --legacy-peer-deps"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "npm run build-static"
 
 [[ports]]
 localPort = 3001
