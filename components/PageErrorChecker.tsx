@@ -1,6 +1,5 @@
-
 import { useEffect, useState } from 'react';
-import { useRouterSafe } from '../utils/useRouterSafe';
+import { useRouter } from 'next/router';
 
 interface PageError {
   page: string;
@@ -9,201 +8,60 @@ interface PageError {
   timestamp: string;
 }
 
-const PageErrorChecker: React.FC = () => {
-  const router = useRouterSafe();
+interface ErrorStats {
+  totalErrors: number;
+  criticalErrors: number;
+  lastCheck: string;
+}
+
+export default function PageErrorChecker() {
+  const router = useRouter();
   const [errors, setErrors] = useState<PageError[]>([]);
-  const [isChecking, setIsChecking] = useState(false);
+  const [stats, setStats] = useState<ErrorStats>({ totalErrors: 0, criticalErrors: 0, lastCheck: '' });
   const [isClient, setIsClient] = useState(false);
 
   useEffect(() => {
     setIsClient(true);
   }, []);
 
-  // Only render on client side and when router is ready
-  if (!isClient || !router?.isReady) {
-    return null;
-  }
+  const checkPageErrors = () => {
+    if (!isClient || typeof window === 'undefined') return;
 
-  const checkPageErrors = async () => {
-    if (!router?.pathname) return;
-    
-    setIsChecking(true);
-    const pageErrors: PageError[] = [];
+    const newErrors: PageError[] = [];
 
     try {
-      // Check for common React errors
-      const reactErrors = checkReactErrors();
-      pageErrors.push(...reactErrors);
-
-      // Check for accessibility issues
-      const a11yErrors = checkAccessibilityIssues();
-      pageErrors.push(...a11yErrors);
-
-      // Check for SEO issues
-      const seoErrors = checkSEOIssues();
-      pageErrors.push(...seoErrors);
-
-      // Check for performance issues
-      const perfErrors = checkPerformanceIssues();
-      pageErrors.push(...perfErrors);
-
-      setErrors(pageErrors);
-    } catch (error) {
-      console.error('Error checking page:', error);
-    } finally {
-      setIsChecking(false);
-    }
-  };
-
-  const checkReactErrors = (): PageError[] => {
-    const errors: PageError[] = [];
-    
-    try {
-      // Check for missing keys in lists
-      const listElements = document.querySelectorAll('ul li, ol li');
-      listElements.forEach((li, index) => {
-        if (!li.getAttribute('key') && li.parentElement && li.parentElement.children.length > 1) {
-          errors.push({
+      // Check for missing images
+      const images = document.querySelectorAll('img');
+      images.forEach((img, index) => {
+        if (img.naturalWidth === 0 && img.complete) {
+          newErrors.push({
             page: router.pathname,
-            error: `Missing key prop on list item at index ${index}`,
+            error: `Missing image: ${img.src || img.alt || `Image ${index + 1}`}`,
             severity: 'medium',
             timestamp: new Date().toISOString()
           });
         }
-      });
 
-    } catch (error) {
-      errors.push({
-        page: router.pathname,
-        error: `React error check failed: ${error instanceof Error ? error.message : String(error)}`,
-        severity: 'high',
-        timestamp: new Date().toISOString()
-      });
-    }
-
-    return errors;
-  };
-
-  const checkAccessibilityIssues = (): PageError[] => {
-    const errors: PageError[] = [];
-    
-    try {
-      // Check for missing alt text
-      const images = document.querySelectorAll('img');
-      images.forEach((img, index) => {
-        if (!img.alt) {
-          errors.push({
-            page: router.pathname,
-            error: `Image ${index + 1} missing alt text`,
-            severity: 'medium',
-            timestamp: new Date().toISOString()
-          });
-        }
-      });
-
-      // Check for missing form labels
-      const inputs = document.querySelectorAll('input, textarea, select');
-      inputs.forEach((input, index) => {
-        const id = input.id;
-        const label = id ? document.querySelector(`label[for="${id}"]`) : null;
-        if (!label && !input.getAttribute('aria-label')) {
-          errors.push({
-            page: router.pathname,
-            error: `Form input ${index + 1} missing label or aria-label`,
-            severity: 'high',
-            timestamp: new Date().toISOString()
-          });
-        }
-      });
-
-      // Check for missing headings hierarchy
-      const headings = document.querySelectorAll('h1, h2, h3, h4, h5, h6');
-      let hasH1 = false;
-      headings.forEach(heading => {
-        if (heading.tagName === 'H1') hasH1 = true;
-      });
-      if (!hasH1) {
-        errors.push({
-          page: router.pathname,
-          error: 'Page missing H1 heading',
-          severity: 'high',
-          timestamp: new Date().toISOString()
-        });
-      }
-
-    } catch (error) {
-      errors.push({
-        page: router.pathname,
-        error: `Accessibility check failed: ${error instanceof Error ? error.message : String(error)}`,
-        severity: 'medium',
-        timestamp: new Date().toISOString()
-      });
-    }
-
-    return errors;
-  };
-
-  const checkSEOIssues = (): PageError[] => {
-    const errors: PageError[] = [];
-
-    try {
-      // Check for missing meta description
-      const metaDesc = document.querySelector('meta[name="description"]');
-      if (!metaDesc || !metaDesc.getAttribute('content')) {
-        errors.push({
-          page: router.pathname,
-          error: 'Missing meta description',
-          severity: 'high',
-          timestamp: new Date().toISOString()
-        });
-      }
-
-      // Check for missing title
-      const title = document.querySelector('title');
-      if (!title || !title.textContent) {
-        errors.push({
-          page: router.pathname,
-          error: 'Missing page title',
-          severity: 'critical',
-          timestamp: new Date().toISOString()
-        });
-      }
-
-      // Check for duplicate H1s
-      const h1s = document.querySelectorAll('h1');
-      if (h1s.length > 1) {
-        errors.push({
-          page: router.pathname,
-          error: `Multiple H1 tags found (${h1s.length})`,
-          severity: 'medium',
-          timestamp: new Date().toISOString()
-        });
-      }
-
-    } catch (error) {
-      errors.push({
-        page: router.pathname,
-        error: `SEO check failed: ${error instanceof Error ? error.message : String(error)}`,
-        severity: 'medium',
-        timestamp: new Date().toISOString()
-      });
-    }
-
-    return errors;
-  };
-
-  const checkPerformanceIssues = (): PageError[] => {
-    const errors: PageError[] = [];
-
-    try {
-      // Check for large images without optimization
-      const images = document.querySelectorAll('img');
-      images.forEach((img, index) => {
+        // Check for large unoptimized images
         if (img.naturalWidth > 2000 || img.naturalHeight > 2000) {
-          errors.push({
+          newErrors.push({
             page: router.pathname,
-            error: `Large unoptimized image ${index + 1} (${img.naturalWidth}x${img.naturalHeight})`,
+            error: `Large unoptimized image: ${img.naturalWidth}x${img.naturalHeight}`,
             severity: 'medium',
+            timestamp: new Date().toISOString()
+          });
+        }
+      });
+
+      // Check for broken links
+      const links = document.querySelectorAll('a[href^="/"], a[href^="http"]');
+      links.forEach((link, index) => {
+        const href = link.getAttribute('href');
+        if (href && href.includes('undefined') || href === '#') {
+          newErrors.push({
+            page: router.pathname,
+            error: `Broken link: ${href}`,
+            severity: 'high',
             timestamp: new Date().toISOString()
           });
         }
@@ -212,7 +70,7 @@ const PageErrorChecker: React.FC = () => {
       // Check for excessive DOM nodes
       const allElements = document.querySelectorAll('*');
       if (allElements.length > 1500) {
-        errors.push({
+        newErrors.push({
           page: router.pathname,
           error: `Excessive DOM nodes: ${allElements.length} (recommended: <1500)`,
           severity: 'low',
@@ -220,87 +78,74 @@ const PageErrorChecker: React.FC = () => {
         });
       }
 
+      // Check for console errors
+      const originalError = console.error;
+      console.error = (...args) => {
+        newErrors.push({
+          page: router.pathname,
+          error: `Console error: ${args.join(' ')}`,
+          severity: 'high',
+          timestamp: new Date().toISOString()
+        });
+        originalError.apply(console, args);
+      };
+
     } catch (error) {
-      errors.push({
+      newErrors.push({
         page: router.pathname,
-        error: `Performance check failed: ${error instanceof Error ? error.message : String(error)}`,
+        error: `Error checking failed: ${error instanceof Error ? error.message : String(error)}`,
         severity: 'low',
         timestamp: new Date().toISOString()
       });
     }
 
-    return errors;
+    setErrors(newErrors);
+    setStats({
+      totalErrors: newErrors.length,
+      criticalErrors: newErrors.filter(e => e.severity === 'critical').length,
+      lastCheck: new Date().toISOString()
+    });
+
+    // Store in localStorage for debugging
+    if (typeof localStorage !== 'undefined') {
+      localStorage.setItem('page-errors', JSON.stringify(newErrors));
+      localStorage.setItem('error-stats', JSON.stringify(stats));
+    }
   };
 
   useEffect(() => {
     if (isClient && router?.isReady) {
-      // Debounce error checking to improve performance
       const timeout = setTimeout(() => {
         checkPageErrors();
-      }, 1000);
-      
+      }, 2000); // Increased delay for better stability
+
       return () => clearTimeout(timeout);
     }
   }, [isClient, router?.pathname]);
 
+  // Only show errors in development
+  if (process.env.NODE_ENV === 'production') {
+    return null;
+  }
+
   return (
-    <div style={{
-      position: 'fixed',
-      bottom: '10px',
-      right: '10px',
-      background: 'white',
-      border: '1px solid #ccc',
-      borderRadius: '5px',
-      padding: '10px',
-      maxWidth: '300px',
-      maxHeight: '200px',
-      overflow: 'auto',
-      fontSize: '12px',
-      zIndex: 9999,
-      boxShadow: '0 2px 10px rgba(0,0,0,0.1)'
-    }}>
-      <div style={{ fontWeight: 'bold', marginBottom: '5px' }}>
-        Page Errors ({errors.length})
-        {isChecking && ' (Checking...)'}
-      </div>
-      {errors.length === 0 ? (
-        <div style={{ color: 'green' }}>✅ No errors found</div>
-      ) : (
-        errors.map((error, index) => (
-          <div key={index} style={{
-            marginBottom: '5px',
-            padding: '3px',
-            background: error.severity === 'critical' ? '#ffebee' : 
-                       error.severity === 'high' ? '#fff3e0' :
-                       error.severity === 'medium' ? '#f3e5f5' : '#e8f5e8',
-            borderLeft: `3px solid ${
-              error.severity === 'critical' ? '#f44336' :
-              error.severity === 'high' ? '#ff9800' :
-              error.severity === 'medium' ? '#9c27b0' : '#4caf50'
-            }`
-          }}>
-            <div style={{ fontWeight: 'bold' }}>{error.severity.toUpperCase()}</div>
-            <div>{error.error}</div>
+    <div className="fixed bottom-4 right-4 bg-red-50 border border-red-200 rounded-lg p-4 max-w-sm z-50 shadow-lg">
+      <div className="text-sm">
+        <div className="font-semibold text-red-800 mb-2">Page Health Check</div>
+        <div className="text-red-600">
+          Total Issues: {stats.totalErrors}
+          {stats.criticalErrors > 0 && (
+            <span className="text-red-800 font-semibold ml-2">
+              Critical: {stats.criticalErrors}
+            </span>
+          )}
+        </div>
+        {errors.slice(0, 3).map((error, index) => (
+          <div key={index} className="text-xs text-red-500 mt-1 truncate">
+            {error.error}
           </div>
-        ))
-      )}
-      <button 
-        onClick={checkPageErrors}
-        style={{
-          marginTop: '5px',
-          padding: '2px 5px',
-          background: '#007cba',
-          color: 'white',
-          border: 'none',
-          borderRadius: '3px',
-          cursor: 'pointer',
-          fontSize: '11px'
-        }}
-      >
-        Recheck
-      </button>
+        ))}
+      </div>
     </div>
   );
-};
-
-export default PageErrorChecker;
+}

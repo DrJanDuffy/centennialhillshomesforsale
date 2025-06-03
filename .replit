@@ -5,7 +5,7 @@ run = "npm run dev"
 channel = "stable-24_05"
 
 [deployment]
-run = ["sh", "-c", "npx serve out -s -l 5000 --host 0.0.0.0"]
+run = ["sh", "-c", "npx serve out -s -l 80 --cors --host 0.0.0.0"]
 deploymentTarget = "static"
 publicDir = "out"
 build = ["sh", "-c", "npm run build"]
@@ -60,7 +60,7 @@ args = "ls -la out/ | head -10"
 
 [[workflows.workflow.tasks]]
 task = "shell.exec"
-args = "echo \"✅ Starting production server...\""
+args = "echo \"✅ Starting production server from out directory...\""
 
 [[workflows.workflow.tasks]]
 task = "shell.exec"

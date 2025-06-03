@@ -1,6 +1,7 @@
 import dynamic from 'next/dynamic';
 import Head from 'next/head';
 import { useState, useEffect } from 'react';
+import Layout from '@/components/Layout';
 import AwesomeHero from '@/components/AwesomeHero';
 import AwesomeFeatures from '@/components/AwesomeFeatures';
 import LeadCaptureForm from '@/components/LeadCaptureForm';
@@ -83,12 +84,11 @@ const HomePage: React.FC = () => {
   }, []);
 
   return (
-    <>
-      <Head>
-        <title>Centennial Hills Homes For Sale | AI-Powered Property Search | Dr. Jan Duff</title>
-        <meta name="description" content="Discover your dream home in Centennial Hills, Providence, and Skye Canyon with AI-powered search technology. Expert real estate services by Dr. Jan Duff - Northwest Las Vegas specialist." />
-        <link rel="canonical" href="https://centennialhillshomesforsale.com" />
-      </Head>
+    <Layout
+      title="Centennial Hills Homes For Sale | AI-Powered Property Search | Dr. Jan Duff"
+      description="Discover your dream home in Centennial Hills, Providence, and Skye Canyon with AI-powered search technology. Expert real estate services by Dr. Jan Duff - Northwest Las Vegas specialist."
+      canonical="https://centennialhillshomesforsale.com"
+    >
       {/* Hero Section */}
       <motion.div
         initial={{ opacity: 0, y: 20 }}
@@ -336,7 +336,7 @@ const HomePage: React.FC = () => {
 
       {/* AI Chat Widget */}
       <AIAssistant />
-    </>
+    </Layout>
   );
 };
 

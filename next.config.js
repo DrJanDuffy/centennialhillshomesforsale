@@ -48,9 +48,7 @@ const nextConfig = {
     formats: ['image/webp', 'image/avif']
   },
 
-  experimental: {
-    esmExternals: false
-  },
+  
 
   compiler: {
     removeConsole: process.env.NODE_ENV === 'production'
