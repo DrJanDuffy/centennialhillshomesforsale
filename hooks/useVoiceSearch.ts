@@ -15,8 +15,16 @@ export const useVoiceSearch = (
   const [isListening, setIsListening] = useState(false);
   const [isSupported, setIsSupported] = useState(false);
   const [recognition, setRecognition] = useState<SpeechRecognition | null>(null);
+  const [hasPermission, setHasPermission] = useState(false);
 
   useEffect(() => {
+    // Check microphone permissions first
+    if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+      navigator.mediaDevices.getUserMedia({ audio: true })
+        .then(() => setHasPermission(true))
+        .catch(() => setHasPermission(false));
+    }
+
     // Check for native browser support
     const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
     
@@ -78,7 +86,10 @@ export const useVoiceSearch = (
   return {
     isListening,
     isSupported,
+    hasPermission,
     startListening,
-    stopListening
+    stopListening,
+    error: !isSupported ? 'Speech recognition not supported' : 
+           !hasPermission ? 'Microphone permission required' : null
   };
 };
