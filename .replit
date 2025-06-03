@@ -10,7 +10,7 @@ deploymentTarget = "static"
 publicDir = "public"
 
 [workflows]
-runButton = "DEPLOY WITH PUBLIC"
+runButton = "DEPLOY AWESOME AI SITE"
 
 [[workflows.workflow]]
 name = "Run"
@@ -1057,6 +1057,75 @@ args = "echo \"🌐 Starting server from public directory...\""
 [[workflows.workflow.tasks]]
 task = "shell.exec"
 args = "npx serve public -s -l 5000 -C --host 0.0.0.0"
+
+[[workflows.workflow]]
+name = "DEPLOY AWESOME AI SITE"
+author = 22930014
+mode = "sequential"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "echo \"🚀 DEPLOYING AWESOME AI-POWERED CENTENNIAL HILLS SITE\""
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "pkill -f \"next|serve|node\" || true"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "sleep 2"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "echo \"📦 Installing dependencies...\""
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "npm install --legacy-peer-deps"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "echo \"🤖 Building AI-enhanced static site...\""
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "npm run build-static"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "echo \"📁 Verifying build...\""
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "ls -la public/ && echo \"✅ AI site ready!\" || echo \"❌ Build issue\""
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "echo \"🌐 Starting awesome AI-powered server...\""
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "npx serve public -s -l 5000 --cors --host 0.0.0.0"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "echo \"🎯 Your AI-powered Centennial Hills site is live!\""
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "echo \"   → AI Chat available on every page\""
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "echo \"   → Smart property recommendations\""
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "echo \"   → MCP server integration\""
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "echo \"   → Visit: http://0.0.0.0:5000\""
 
 [[ports]]
 localPort = 3001

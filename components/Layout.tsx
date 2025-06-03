@@ -6,6 +6,7 @@ import ErrorBoundary from './ErrorBoundary';
 import LocalBusinessSchema from './LocalBusinessSchema';
 import PerformanceMonitor from './PerformanceMonitor';
 import PageErrorChecker from './PageErrorChecker';
+import AIRealEstateChat from './AIRealEstateChat';
 import { ReactNode } from 'react';
 import { motion } from 'framer-motion';
 
@@ -72,6 +73,7 @@ const Layout: React.FC<LayoutProps> = ({
           </ErrorBoundary>
         </motion.main>
         <Footer />
+        <AIRealEstateChat />
       </motion.div>
     </>
   );
