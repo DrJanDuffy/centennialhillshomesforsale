@@ -7,11 +7,11 @@ channel = "stable-24_05"
 [deployment]
 build = ["sh", "-c", "npm run build-static"]
 deploymentTarget = "static"
-publicDir = "out"
-run = ["sh", "-c", "npx serve out -s -l 5000 --cors --host 0.0.0.0"]
+publicDir = "public"
+run = ["sh", "-c", "npx serve public -s -l 5000 --cors --host 0.0.0.0"]
 
 [workflows]
-runButton = "FIXED DEPLOY"
+runButton = "SIMPLE DEPLOY"
 
 [[workflows.workflow]]
 name = "Run"
@@ -1356,6 +1356,39 @@ args = "ls -la public/ && echo \"✅ Build successful!\" || echo \"❌ Build fai
 [[workflows.workflow.tasks]]
 task = "shell.exec"
 args = "echo \"🌐 Starting server from public directory...\""
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "npx serve public -s -l 5000 --cors --host 0.0.0.0"
+
+[[workflows.workflow]]
+name = "SIMPLE DEPLOY"
+author = 22930014
+mode = "sequential"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "echo \"🚀 STARTING CENTENNIAL HILLS WEBSITE\""
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "pkill -f \"next|serve|node\" || true"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "sleep 2"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "npm install --legacy-peer-deps"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "npm run build-static"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "echo \"✅ Build complete - serving from public directory\""
 
 [[workflows.workflow.tasks]]
 task = "shell.exec"
