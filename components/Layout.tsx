@@ -7,6 +7,7 @@ import LocalBusinessSchema from './LocalBusinessSchema';
 import PerformanceMonitor from './PerformanceMonitor';
 import PageErrorChecker from './PageErrorChecker';
 import AIRealEstateChat from './AIRealEstateChat';
+import MortgageCalculator from './MortgageCalculator';
 import { ReactNode } from 'react';
 import { motion } from 'framer-motion';
 
