@@ -5,6 +5,12 @@ declare global {
     customElements?: CustomElementRegistry;
     RealScout?: any;
   }
+  
+  namespace JSX {
+    interface IntrinsicElements {
+      'realscout-office-listings': any;
+    }
+  }
 }
 
 export {};
