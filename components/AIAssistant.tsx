@@ -188,7 +188,7 @@ export default function AIAssistant() {
             {(mcpError || voiceError) && (
               <div className="p-3 bg-red-50 border-b border-red-200">
                 {mcpError && (
-                  <p className="text-sm text-red-600 mb-1">MCP: {mcpError}</p>
+                  <p className="text-sm text-red-600 mb-1">MCP: {mcpError.message}</p>
                 )}
                 {voiceError && (
                   <p className="text-sm text-amber-600">Voice: {voiceError}</p>
