@@ -35,7 +35,7 @@ const nextConfig = {
   swcMinify: true,
   output: 'export',
   trailingSlash: true,
-  distDir: 'public',
+  distDir: 'out',
   images: {
     unoptimized: true,
     domains: ['images.unsplash.com', 'cdn.pixabay.com']
