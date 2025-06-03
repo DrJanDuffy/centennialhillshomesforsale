@@ -1,5 +1,136 @@
 
+import React from 'react';
 import Head from 'next/head';
+
+// Define proper interfaces for different schema types
+interface LocalBusinessSchema {
+  "@context": string;
+  "@type": string | string[];
+  "@id": string;
+  name: string;
+  alternateName?: string;
+  description: string;
+  url: string;
+  telephone: string;
+  email: string;
+  foundingDate?: string;
+  address: {
+    "@type": string;
+    streetAddress: string;
+    addressLocality: string;
+    addressRegion: string;
+    postalCode: string;
+    addressCountry: string;
+  };
+  geo: {
+    "@type": string;
+    latitude: number;
+    longitude: number;
+  };
+  openingHours?: string[];
+  openingHoursSpecification?: Array<{
+    "@type": string;
+    dayOfWeek: string[];
+    opens: string;
+    closes: string;
+  }>;
+  priceRange?: string;
+  aggregateRating?: {
+    "@type": string;
+    ratingValue: string;
+    reviewCount: string;
+    bestRating: string;
+    worstRating: string;
+  };
+  areaServed?: Array<{
+    "@type": string;
+    name: string;
+    geo?: {
+      "@type": string;
+      latitude: string;
+      longitude: string;
+    };
+  }>;
+  serviceType?: string[];
+  hasCredential?: Array<{
+    "@type": string;
+    credentialCategory: string;
+    name: string;
+  }>;
+  memberOf?: Array<{
+    "@type": string;
+    name: string;
+  }>;
+  affiliation?: {
+    "@type": string;
+    name: string;
+    url: string;
+  };
+  knowsAbout?: string[];
+  hasOfferCatalog?: {
+    "@type": string;
+    name: string;
+    itemListElement: Array<{
+      "@type": string;
+      name: string;
+      description: string;
+      price?: string;
+      priceCurrency?: string;
+      availability?: string;
+    }>;
+  };
+  sameAs: string[];
+}
+
+interface OrganizationSchema {
+  "@context": string;
+  "@type": string;
+  "@id": string;
+  name: string;
+  alternateName?: string;
+  description?: string;
+  url: string;
+  logo: string;
+  contactPoint: {
+    "@type": string;
+    telephone: string;
+    contactType: string;
+    areaServed?: string;
+    availableLanguage: string;
+  };
+  address: {
+    "@type": string;
+    streetAddress: string;
+    addressLocality: string;
+    addressRegion: string;
+    postalCode: string;
+    addressCountry: string;
+  };
+  foundingDate?: string;
+  numberOfEmployees?: string;
+  slogan?: string;
+}
+
+interface DatasetSchema {
+  "@context": string;
+  "@type": string;
+  "@id": string;
+  name: string;
+  description: string;
+  dateModified: string;
+  creator: {
+    "@type": string;
+    name: string;
+  };
+  keywords: string;
+  variableMeasured: Array<{
+    "@type": string;
+    name: string;
+    value: number;
+    unitCode: string;
+    description: string;
+  }>;
+}
 
 interface LocalBusinessSchemaProps {
   name?: string;
@@ -34,7 +165,7 @@ export default function LocalBusinessSchema({
 }: LocalBusinessSchemaProps) {
   
   // Enhanced Real Estate Agent Schema
-  const realEstateAgentSchema = {
+  const realEstateAgentSchema: LocalBusinessSchema = {
     "@context": "https://schema.org",
     "@type": ["RealEstateAgent", "LocalBusiness"],
     "@id": `${website}/#realestateagent`,
@@ -55,8 +186,8 @@ export default function LocalBusinessSchema({
     },
     "geo": {
       "@type": "GeoCoordinates",
-      "latitude": "36.268",
-      "longitude": "-115.328"
+      "latitude": 36.268,
+      "longitude": -115.328
     },
     "areaServed": serviceArea.map(area => ({
       "@type": "Place",
@@ -172,7 +303,7 @@ export default function LocalBusinessSchema({
   };
 
   // Market Data Schema
-  const marketDataSchema = {
+  const marketDataSchema: DatasetSchema = {
     "@context": "https://schema.org",
     "@type": "Dataset",
     "@id": `${website}/#marketdata`,
@@ -217,7 +348,7 @@ export default function LocalBusinessSchema({
   };
 
   // Organization Schema
-  const organizationSchema = {
+  const organizationSchema: OrganizationSchema = {
     "@context": "https://schema.org",
     "@type": "Organization",
     "@id": `${website}/#organization`,
@@ -245,17 +376,35 @@ export default function LocalBusinessSchema({
     "slogan": "Your Trusted Real Estate Expert in Centennial Hills"
   };
 
-  const schemas = [realEstateAgentSchema, organizationSchema];
-  
-  if (pageType === 'home') {
-    schemas.push(marketDataSchema);
-  }
+  // Separate schema arrays by type
+  const businessSchemas = [realEstateAgentSchema];
+  const organizationSchemas = [organizationSchema];
+  const dataSchemas = pageType === 'home' ? [marketDataSchema] : [];
 
   return (
     <Head>
-      {schemas.map((schema, index) => (
+      {/* Business Schemas */}
+      {businessSchemas.map((schema, index) => (
         <script
-          key={index}
+          key={`business-${index}`}
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
+        />
+      ))}
+      
+      {/* Organization Schemas */}
+      {organizationSchemas.map((schema, index) => (
+        <script
+          key={`org-${index}`}
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
+        />
+      ))}
+      
+      {/* Data Schemas */}
+      {dataSchemas.map((schema, index) => (
+        <script
+          key={`data-${index}`}
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
         />
