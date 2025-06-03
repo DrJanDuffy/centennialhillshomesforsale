@@ -5,13 +5,13 @@ run = "npm run dev"
 channel = "stable-24_05"
 
 [deployment]
-build = ["sh", "-c", "npm run build-static"]
+run = ["sh", "-c", "npx serve out -s -l 5000 --host 0.0.0.0"]
 deploymentTarget = "static"
 publicDir = "out"
-run = ["sh", "-c", "npx serve public -s -l 5000 --cors --host 0.0.0.0"]
+build = ["sh", "-c", "npm run build"]
 
 [workflows]
-runButton = "Run Site"
+runButton = "AWESOME SITE"
 
 [[workflows.workflow]]
 name = "Run"
@@ -107,7 +107,7 @@ args = "echo \"🔨 Building static site...\""
 
 [[workflows.workflow.tasks]]
 task = "shell.exec"
-args = "npm run build-static"
+args = "npm run build"
 
 [[workflows.workflow.tasks]]
 task = "shell.exec"
@@ -115,7 +115,7 @@ args = "echo \"📁 Verifying build...\""
 
 [[workflows.workflow.tasks]]
 task = "shell.exec"
-args = "if [ -d \"public\" ] && [ \"$(ls -A public 2>/dev/null)\" ]; then"
+args = "if [ -d \"out\" ] && [ \"$(ls -A out 2>/dev/null)\" ]; then"
 
 [[workflows.workflow.tasks]]
 task = "shell.exec"
@@ -135,7 +135,7 @@ args = "  echo \"   → http://0.0.0.0:5000\""
 
 [[workflows.workflow.tasks]]
 task = "shell.exec"
-args = "  npx serve public -s -l 5000 --cors --host 0.0.0.0"
+args = "  npx serve out -s -l 5000 --cors --host 0.0.0.0"
 
 [[workflows.workflow.tasks]]
 task = "shell.exec"

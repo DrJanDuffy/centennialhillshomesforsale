@@ -32,24 +32,26 @@ const withPWA = require('next-pwa')({
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   output: 'export',
-  distDir: 'out',
   trailingSlash: true,
+  skipTrailingSlashRedirect: true,
+  distDir: 'out',
   images: {
     unoptimized: true
   },
-  assetPrefix: process.env.NODE_ENV === 'production' ? '' : '',
-  basePath: '',
   experimental: {
-    optimizePackageImports: ['lucide-react']
+    esmExternals: false
+  },
+  compiler: {
+    removeConsole: process.env.NODE_ENV === 'production'
   }
-};
+}
 
 // 🚀 AWESOME PERFORMANCE OPTIMIZATIONS
 const nextConfigModified = {
   reactStrictMode: true,
   swcMinify: true,
   trailingSlash: true,
-  
+
 
   // 🚀 AWESOME PERFORMANCE OPTIMIZATIONS
   poweredByHeader: false,
@@ -160,4 +162,4 @@ const nextConfigModified = {
   }
 }
 
-module.exports = withPWA(nextConfigModified);
+module.exports = withPWA(nextConfig);
