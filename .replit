@@ -11,7 +11,7 @@ publicDir = "public"
 run = ["sh", "-c", "npx serve public -s -l 5000 --cors --host 0.0.0.0"]
 
 [workflows]
-runButton = "LAUNCH AWESOME SITE"
+runButton = "DEV SERVER"
 
 [[workflows.workflow]]
 name = "Run"
@@ -1172,6 +1172,39 @@ args = "echo \"   → http://0.0.0.0:5000\""
 [[workflows.workflow.tasks]]
 task = "shell.exec"
 args = "npx serve out -s -l 5000 --cors --host 0.0.0.0"
+
+[[workflows.workflow]]
+name = "DEV SERVER"
+author = 22930014
+mode = "sequential"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "echo \"🚀 Starting Centennial Hills Development Server\""
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "pkill -f \"next|serve|node\" || true"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "sleep 2"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "echo \"📦 Installing dependencies...\""
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "npm install --legacy-peer-deps"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "echo \"🔨 Starting development server on port 5000...\""
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "npm run dev"
 
 [[ports]]
 localPort = 3001
