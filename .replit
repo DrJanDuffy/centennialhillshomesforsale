@@ -11,7 +11,7 @@ publicDir = "public"
 run = ["sh", "-c", "npx serve public -s -l 5000 --cors --host 0.0.0.0"]
 
 [workflows]
-runButton = "DEPLOY AWESOME AI SITE"
+runButton = "LAUNCH AWESOME SITE"
 
 [[workflows.workflow]]
 name = "Run"
@@ -1127,6 +1127,51 @@ args = "echo \"   → MCP server integration\""
 [[workflows.workflow.tasks]]
 task = "shell.exec"
 args = "echo \"   → Visit: http://0.0.0.0:5000\""
+
+[[workflows.workflow]]
+name = "LAUNCH AWESOME SITE"
+author = 22930014
+mode = "sequential"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "echo \"🚀 LAUNCHING YOUR AWESOME CENTENNIAL HILLS WEBSITE\""
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "pkill -f \"next|serve|node\" || true"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "sleep 2"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "echo \"🔨 Building static site...\""
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "npm run build-static"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "echo \"✅ Build complete! Starting server...\""
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "echo \"🌐 Your awesome site will be available at:\""
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "echo \"   → https://${REPL_SLUG}.${REPL_OWNER}.repl.co\""
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "echo \"   → http://0.0.0.0:5000\""
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "npx serve out -s -l 5000 --cors --host 0.0.0.0"
 
 [[ports]]
 localPort = 3001
