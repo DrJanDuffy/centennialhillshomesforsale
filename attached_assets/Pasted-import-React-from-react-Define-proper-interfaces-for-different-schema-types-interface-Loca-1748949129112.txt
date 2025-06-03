@@ -1,0 +1,366 @@
+import React from 'react';
+
+// Define proper interfaces for different schema types
+interface LocalBusinessSchema {
+  "@context": string;
+  "@type": string[];
+  "@id": string;
+  name: string;
+  alternateName: string;
+  description: string;
+  url: string;
+  telephone: string;
+  email: string;
+  foundingDate: string;
+  address: {
+    "@type": string;
+    streetAddress: string;
+    addressLocality: string;
+    addressRegion: string;
+    postalCode: string;
+    addressCountry: string;
+  };
+  geo: {
+    "@type": string;
+    latitude: number;
+    longitude: number;
+  };
+  openingHoursSpecification: Array<{
+    "@type": string;
+    dayOfWeek: string[];
+    opens: string;
+    closes: string;
+  }>;
+  priceRange: string;
+  servesCuisine?: string[];
+  acceptsReservations?: boolean;
+  hasMenu?: string;
+  image: string[];
+  logo: string;
+  sameAs: string[];
+}
+
+interface OrganizationSchema {
+  "@context": string;
+  "@type": string;
+  "@id": string;
+  name: string;
+  description: string;
+  url: string;
+  logo: string;
+  contactPoint: {
+    "@type": string;
+    telephone: string;
+    contactType: string;
+    availableLanguage: string;
+  };
+  address: {
+    "@type": string;
+    streetAddress: string;
+    addressLocality: string;
+    addressRegion: string;
+    postalCode: string;
+    addressCountry: string;
+  };
+  sameAs: string[];
+}
+
+interface DatasetSchema {
+  "@context": string;
+  "@type": string;
+  "@id": string;
+  name: string;
+  description: string;
+  dateModified: string;
+  creator: {
+    "@type": string;
+    name: string;
+  };
+  keywords: string;
+  variableMeasured: Array<{
+    "@type": string;
+    name: string;
+    value: number;
+    unitCode: string;
+    description: string;
+  }>;
+}
+
+interface PropertySchema {
+  "@context": string;
+  "@type": string;
+  "@id": string;
+  name: string;
+  description: string;
+  url: string;
+  address: {
+    "@type": string;
+    streetAddress: string;
+    addressLocality: string;
+    addressRegion: string;
+    postalCode: string;
+    addressCountry: string;
+  };
+  geo: {
+    "@type": string;
+    latitude: number;
+    longitude: number;
+  };
+  floorSize: {
+    "@type": string;
+    value: number;
+    unitCode: string;
+  };
+  numberOfRooms: number;
+  numberOfBedrooms: number;
+  numberOfBathroomsTotal: number;
+  yearBuilt: number;
+  image: string[];
+  offers: {
+    "@type": string;
+    price: number;
+    priceCurrency: string;
+    availability: string;
+    validFrom: string;
+  };
+}
+
+// Union type for all possible schemas
+type SchemaType = LocalBusinessSchema | OrganizationSchema | DatasetSchema | PropertySchema;
+
+interface LocalBusinessSchemaProps {
+  business?: {
+    name: string;
+    description: string;
+    address: string;
+    phone: string;
+    email: string;
+    website: string;
+    hours?: string;
+    priceRange?: string;
+    coordinates?: { lat: number; lng: number };
+  };
+  pageType?: 'home' | 'about' | 'contact' | 'properties' | 'property-detail';
+  propertyData?: {
+    title: string;
+    description: string;
+    address: string;
+    price: number;
+    bedrooms: number;
+    bathrooms: number;
+    sqft: number;
+    yearBuilt: number;
+    images: string[];
+    coordinates?: { lat: number; lng: number };
+  };
+}
+
+const LocalBusinessSchema: React.FC<LocalBusinessSchemaProps> = ({ 
+  business,
+  pageType = 'home',
+  propertyData 
+}) => {
+  // Default business information for Centennial Hills Homes
+  const defaultBusiness = {
+    name: "Centennial Hills Homes",
+    description: "Premier real estate services in Centennial Hills, Las Vegas. Specializing in luxury homes, family residences, and investment properties with over 15 years of experience.",
+    address: "1234 Desert Vista Drive, Las Vegas, NV 89149",
+    phone: "+1-702-555-0123",
+    email: "info@centennialhillshomes.com",
+    website: "https://centennialhillshomes.com",
+    hours: "Monday-Sunday 8:00 AM - 8:00 PM",
+    priceRange: "$200,000 - $2,000,000",
+    coordinates: { lat: 36.2845, lng: -115.1969 }
+  };
+
+  const businessInfo = { ...defaultBusiness, ...business };
+  
+  // Create different schemas based on page type
+  const schemas: SchemaType[] = [];
+
+  // Main real estate business schema
+  const realEstateBusinessSchema: LocalBusinessSchema = {
+    "@context": "https://schema.org",
+    "@type": ["RealEstateAgent", "LocalBusiness"],
+    "@id": `${businessInfo.website}#business`,
+    name: businessInfo.name,
+    alternateName: "Centennial Hills Real Estate",
+    description: businessInfo.description,
+    url: businessInfo.website,
+    telephone: businessInfo.phone,
+    email: businessInfo.email,
+    foundingDate: "2008",
+    address: {
+      "@type": "PostalAddress",
+      streetAddress: "1234 Desert Vista Drive",
+      addressLocality: "Las Vegas",
+      addressRegion: "NV",
+      postalCode: "89149",
+      addressCountry: "US"
+    },
+    geo: {
+      "@type": "GeoCoordinates",
+      latitude: businessInfo.coordinates?.lat || 36.2845,
+      longitude: businessInfo.coordinates?.lng || -115.1969
+    },
+    openingHoursSpecification: [
+      {
+        "@type": "OpeningHoursSpecification",
+        dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
+        opens: "08:00",
+        closes: "20:00"
+      }
+    ],
+    priceRange: businessInfo.priceRange,
+    image: [
+      `${businessInfo.website}/images/office-exterior.jpg`,
+      `${businessInfo.website}/images/team-photo.jpg`,
+      `${businessInfo.website}/images/luxury-home-1.jpg`
+    ],
+    logo: `${businessInfo.website}/images/logo.png`,
+    sameAs: [
+      "https://www.facebook.com/centennialhillshomes",
+      "https://www.instagram.com/centennialhillshomes",
+      "https://www.linkedin.com/company/centennial-hills-homes",
+      "https://www.zillow.com/professionals/centennial-hills-homes/",
+      "https://www.realtor.com/realestateagents/centennial-hills-homes"
+    ]
+  };
+
+  schemas.push(realEstateBusinessSchema);
+
+  // Organization schema for better SEO
+  const organizationSchema: OrganizationSchema = {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "@id": `${businessInfo.website}#organization`,
+    name: businessInfo.name,
+    description: businessInfo.description,
+    url: businessInfo.website,
+    logo: `${businessInfo.website}/images/logo.png`,
+    contactPoint: {
+      "@type": "ContactPoint",
+      telephone: businessInfo.phone,
+      contactType: "customer service",
+      availableLanguage: "English"
+    },
+    address: {
+      "@type": "PostalAddress",
+      streetAddress: "1234 Desert Vista Drive",
+      addressLocality: "Las Vegas",
+      addressRegion: "NV",
+      postalCode: "89149",
+      addressCountry: "US"
+    },
+    sameAs: [
+      "https://www.facebook.com/centennialhillshomes",
+      "https://www.instagram.com/centennialhillshomes",
+      "https://www.linkedin.com/company/centennial-hills-homes"
+    ]
+  };
+
+  schemas.push(organizationSchema);
+
+  // Market data schema for home page
+  const marketDataSchema: DatasetSchema = {
+    "@context": "https://schema.org",
+    "@type": "Dataset",
+    "@id": `${businessInfo.website}#market-data`,
+    name: "Centennial Hills Real Estate Market Data",
+    description: "Current market statistics and trends for Centennial Hills, Las Vegas real estate market",
+    dateModified: new Date().toISOString().split('T')[0],
+    creator: {
+      "@type": "Organization",
+      name: businessInfo.name
+    },
+    keywords: "real estate, market data, Centennial Hills, Las Vegas, home prices, market trends",
+    variableMeasured: [
+      {
+        "@type": "PropertyValue",
+        name: "Average Home Price",
+        value: 675000,
+        unitCode: "USD",
+        description: "Average home price in Centennial Hills area"
+      },
+      {
+        "@type": "PropertyValue", 
+        name: "Properties Available",
+        value: 500,
+        unitCode: "C62",
+        description: "Number of properties currently available for sale"
+      },
+      {
+        "@type": "PropertyValue",
+        name: "Market Trend",
+        value: 8.5,
+        unitCode: "P1",
+        description: "Market trend percentage (positive indicates growth)"
+      }
+    ]
+  };
+
+  // Add market data schema only for home page
+  if (pageType === 'home') {
+    schemas.push(marketDataSchema);
+  }
+
+  // Property-specific schema for property detail pages
+  if (pageType === 'property-detail' && propertyData) {
+    const propertySchema: PropertySchema = {
+      "@context": "https://schema.org",
+      "@type": "SingleFamilyResidence",
+      "@id": `${businessInfo.website}/property/${propertyData.title.toLowerCase().replace(/\s+/g, '-')}`,
+      name: propertyData.title,
+      description: propertyData.description,
+      url: `${businessInfo.website}/property/${propertyData.title.toLowerCase().replace(/\s+/g, '-')}`,
+      address: {
+        "@type": "PostalAddress",
+        streetAddress: propertyData.address.split(',')[0],
+        addressLocality: "Las Vegas",
+        addressRegion: "NV",
+        postalCode: "89149",
+        addressCountry: "US"
+      },
+      geo: {
+        "@type": "GeoCoordinates",
+        latitude: propertyData.coordinates?.lat || 36.2845,
+        longitude: propertyData.coordinates?.lng || -115.1969
+      },
+      floorSize: {
+        "@type": "QuantitativeValue",
+        value: propertyData.sqft,
+        unitCode: "FTK"
+      },
+      numberOfRooms: propertyData.bedrooms + propertyData.bathrooms,
+      numberOfBedrooms: propertyData.bedrooms,
+      numberOfBathroomsTotal: propertyData.bathrooms,
+      yearBuilt: propertyData.yearBuilt,
+      image: propertyData.images,
+      offers: {
+        "@type": "Offer",
+        price: propertyData.price,
+        priceCurrency: "USD",
+        availability: "https://schema.org/InStock",
+        validFrom: new Date().toISOString().split('T')[0]
+      }
+    };
+
+    schemas.push(propertySchema);
+  }
+
+  return (
+    <>
+      {schemas.map((schema, index) => (
+        <script
+          key={index}
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(schema, null, 2)
+          }}
+        />
+      ))}
+    </>
+  );
+};
+
+export default LocalBusinessSchema;
