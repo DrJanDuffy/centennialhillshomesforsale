@@ -1078,7 +1078,7 @@ args = "sleep 2"
 
 [[workflows.workflow.tasks]]
 task = "shell.exec"
-args = "echo \"📦 Installing dependencies...\""
+args = "echo \"📦 Installing latest dependencies...\""
 
 [[workflows.workflow.tasks]]
 task = "shell.exec"
