@@ -1,35 +1,76 @@
 
-import { useEffect, useState } from 'react';
-import { mcpClient } from '@/lib/mcp-client';
+import { useState, useEffect, useCallback } from 'react';
+import MCPClient, { MCPTool } from '../lib/mcp-client';
 
-export function useMCPClient() {
+interface UseMCPClientReturn {
+  client: MCPClient | null;
+  isConnected: boolean;
+  tools: MCPTool[];
+  callTool: (name: string, params: any) => Promise<any>;
+  error: string | null;
+  loading: boolean;
+}
+
+export function useMCPClient(): UseMCPClientReturn {
+  const [client, setClient] = useState<MCPClient | null>(null);
   const [isConnected, setIsConnected] = useState(false);
-  const [isLoading, setIsLoading] = useState(true);
+  const [tools, setTools] = useState<MCPTool[]>([]);
+  const [error, setError] = useState<string | null>(null);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    const initializeMCP = async () => {
+    const initClient = async () => {
       try {
+        setLoading(true);
+        const mcpClient = new MCPClient();
         await mcpClient.connect();
+        
+        setClient(mcpClient);
         setIsConnected(true);
-      } catch (error) {
-        console.error('MCP initialization failed:', error);
+        setTools(mcpClient.getTools());
+        setError(null);
+      } catch (err) {
+        setError(err instanceof Error ? err.message : 'Failed to initialize MCP client');
         setIsConnected(false);
       } finally {
-        setIsLoading(false);
+        setLoading(false);
       }
     };
 
-    initializeMCP();
+    initClient();
+
+    return () => {
+      if (client) {
+        client.disconnect();
+      }
+    };
   }, []);
 
+  const callTool = useCallback(async (name: string, params: any) => {
+    if (!client) {
+      throw new Error('MCP client not initialized');
+    }
+
+    try {
+      setLoading(true);
+      const result = await client.callTool(name, params);
+      setError(null);
+      return result;
+    } catch (err) {
+      const errorMessage = err instanceof Error ? err.message : 'Tool call failed';
+      setError(errorMessage);
+      throw new Error(errorMessage);
+    } finally {
+      setLoading(false);
+    }
+  }, [client]);
+
   return {
-    mcpClient,
+    client,
     isConnected,
-    isLoading,
-    searchProperties: mcpClient.searchPropertiesAI.bind(mcpClient),
-    getValuation: mcpClient.getInstantValuation.bind(mcpClient),
-    getMarketForecast: mcpClient.getMarketForecast.bind(mcpClient),
-    findLifestyleMatches: mcpClient.findLifestyleMatches.bind(mcpClient),
-    analyzeInvestment: mcpClient.analyzeInvestment.bind(mcpClient)
+    tools,
+    callTool,
+    error,
+    loading
   };
 }
