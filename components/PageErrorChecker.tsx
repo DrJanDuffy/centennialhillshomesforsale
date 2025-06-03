@@ -234,7 +234,12 @@ const PageErrorChecker: React.FC = () => {
 
   useEffect(() => {
     if (isClient && router?.isReady) {
-      checkPageErrors();
+      // Debounce error checking to improve performance
+      const timeout = setTimeout(() => {
+        checkPageErrors();
+      }, 1000);
+      
+      return () => clearTimeout(timeout);
     }
   }, [isClient, router?.pathname]);
 
