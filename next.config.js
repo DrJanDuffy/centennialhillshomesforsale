@@ -54,7 +54,7 @@ const nextConfig = {
     removeConsole: process.env.NODE_ENV === 'production'
   },
 
-  webpack: (config, { isServer }) => {
+  webpack: (config, { isServer, dev }) => {
     if (!isServer) {
       config.resolve.fallback = {
         ...config.resolve.fallback,
@@ -70,6 +70,25 @@ const nextConfig = {
         assert: false,
         os: false,
         path: false
+      };
+    }
+
+    // Production optimizations
+    if (!dev) {
+      config.optimization = {
+        ...config.optimization,
+        splitChunks: {
+          chunks: 'all',
+          cacheGroups: {
+            default: false,
+            vendors: false,
+            vendor: {
+              name: 'vendor',
+              chunks: 'all',
+              test: /node_modules/
+            }
+          }
+        }
       };
     }
 
