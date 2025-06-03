@@ -71,6 +71,12 @@ const HomePage: React.FC = () => {
     { icon: TrendingUp, label: 'Average Days on Market', value: '12', color: 'text-orange-600' }
   ];
 
+  const [isLoaded, setIsLoaded] = React.useState(false);
+
+  React.useEffect(() => {
+    setIsLoaded(true);
+  }, []);
+
   return (
     <Layout
       title="Centennial Hills Homes For Sale | AI-Powered Property Search | Dr. Jan Duff"
@@ -78,7 +84,13 @@ const HomePage: React.FC = () => {
       canonical="https://centennialhillshomesforsale.com"
     >
       {/* Hero Section */}
-      <AwesomeHero />
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: isLoaded ? 1 : 0, y: isLoaded ? 0 : 20 }}
+        transition={{ duration: 0.6, ease: "easeOut" }}
+      >
+        <AwesomeHero />
+      </motion.div>
 
       {/* Stats Section */}
       <section className="py-16 bg-white">
