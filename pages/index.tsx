@@ -1,218 +1,317 @@
-import React, { useState } from 'react';
-import Head from 'next/head';
-import Link from 'next/link';
+
+import React from 'react';
 import Layout from '../components/Layout';
+import AwesomeHero from '../components/AwesomeHero';
 import AwesomeFeatures from '../components/AwesomeFeatures';
+import PropertyCard from '../components/PropertyCard';
+import SmartPropertyRecommendations from '../components/SmartPropertyRecommendations';
 import InteractivePropertyMap from '../components/InteractivePropertyMap';
-import RealScoutWidget from '../components/widgets/RealScoutWidget';
-import RealScoutListings from '../components/RealScoutListings';
-import PropertyCalculator from '../components/PropertyCalculator';
-import MarketTrendChart from '../components/MarketTrendChart';
-import AdvancedSearch from '../components/AdvancedSearch';
-import NeighborhoodBar from '../components/NeighborhoodBar';
-import SchoolInfo from '../components/SchoolInfo';
 import LocalAmenities from '../components/LocalAmenities';
-import LocalBusinessSchema from '../components/LocalBusinessSchema';
-import GoogleBusinessOptimization from '../components/GoogleBusinessOptimization';
-import LocalCitationWidget from '../components/LocalCitationWidget';
-import SEOOptimized from '../components/SEOOptimized';
-import GEOOptimized from '../components/GEOOptimized';
-import AIContentOptimizer from '../components/AIContentOptimizer';
-import StatisticalWidget from '../components/StatisticalWidget';
+import MarketTrendChart from '../components/MarketTrendChart';
+import AIRealEstateChat from '../components/AIRealEstateChat';
+import LeadCaptureForm from '../components/LeadCaptureForm';
 import { motion } from 'framer-motion';
+import { Star, MapPin, TrendingUp, Users, Award, Phone } from 'lucide-react';
 
-interface Property {
-  id: string;
-  address: string;
-  price: string;
-  beds: number;
-  baths: number;
-  sqft: number;
-  image: string;
-  status: string;
-}
+const HomePage: React.FC = () => {
+  const featuredProperties = [
+    {
+      id: '1',
+      title: 'Luxury Home in Providence',
+      price: 850000,
+      beds: 4,
+      baths: 3.5,
+      sqft: 3200,
+      image: '/images/providence-luxury-home.jpg',
+      neighborhood: 'Providence',
+      status: 'Active',
+      daysOnMarket: 12,
+      features: ['Pool', 'Mountain Views', 'Gourmet Kitchen', 'Smart Home']
+    },
+    {
+      id: '2',
+      title: 'Modern Estate in Centennial Hills',
+      price: 1200000,
+      beds: 5,
+      baths: 4,
+      sqft: 4100,
+      image: '/images/centennial-hills-modern-estate.jpg',
+      neighborhood: 'Centennial Hills',
+      status: 'Active',
+      daysOnMarket: 5,
+      features: ['Guest House', 'Wine Cellar', 'Home Theater', 'Casita']
+    },
+    {
+      id: '3',
+      title: 'Family Home in Skye Canyon',
+      price: 650000,
+      beds: 4,
+      baths: 3,
+      sqft: 2800,
+      image: '/images/skye-canyon-family-home.jpg',
+      neighborhood: 'Skye Canyon',
+      status: 'Active',
+      daysOnMarket: 8,
+      features: ['Open Floor Plan', 'Mountain Views', 'Upgraded Kitchen', 'Large Yard']
+    }
+  ];
 
-type NeighborhoodName = 'Centennial Hills' | 'The Trails' | 'Tournament Hills' | 'Skye Canyon' | 'Sun City Aliante';
+  const stats = [
+    { icon: Home, label: 'Homes Sold', value: '500+', color: 'text-blue-600' },
+    { icon: Users, label: 'Happy Families', value: '500+', color: 'text-green-600' },
+    { icon: Award, label: 'Years Experience', value: '15+', color: 'text-purple-600' },
+    { icon: TrendingUp, label: 'Average Days on Market', value: '12', color: 'text-orange-600' }
+  ];
 
-export default function Home() {
-  const [currentNeighborhood, setCurrentNeighborhood] = useState<NeighborhoodName>('Centennial Hills');
+  return (
+    <Layout
+      title="Centennial Hills Homes For Sale | AI-Powered Property Search | Dr. Jan Duff"
+      description="Discover your dream home in Centennial Hills, Providence, and Skye Canyon with AI-powered search technology. Expert real estate services by Dr. Jan Duff - Northwest Las Vegas specialist."
+      canonical="https://centennialhillshomesforsale.com"
+    >
+      {/* Hero Section */}
+      <AwesomeHero />
 
-  try {
-    return (
-      <Layout>
-        <Head>
-          <title>Centennial Hills Homes For Sale | Las Vegas Real Estate Expert Dr. Jan Duffy | Berkshire Hathaway HomeServices Nevada Properties</title>
-          <meta name="description" content="Find luxury homes for sale in Centennial Hills, Providence, and Skye Canyon with Dr. Jan Duffy, top-rated REALTOR® at Berkshire Hathaway HomeServices Nevada Properties. 30+ years experience in Las Vegas real estate market. Current median home price $635,000." />
-          <meta name="keywords" content="Centennial Hills homes for sale, Providence Las Vegas real estate, Skye Canyon luxury homes, Las Vegas REALTOR, Dr. Jan Duffy, Berkshire Hathaway HomeServices, Nevada Properties, 89149 homes, 89166 homes, Northwest Las Vegas real estate" />
-
-          {/* Enhanced Open Graph Tags */}
-          <meta property="og:title" content="Centennial Hills Homes For Sale | Dr. Jan Duffy REALTOR®" />
-          <meta property="og:description" content="Discover luxury homes in Centennial Hills, Providence, and Skye Canyon with expert REALTOR® Dr. Jan Duffy. Median price $635,000. Call (702) 903-1952 today!" />
-          <meta property="og:image" content="https://centennialhillshomesforsale.com/images/centennial-hills-hero.jpg" />
-          <meta property="og:url" content="https://centennialhillshomesforsale.com" />
-          <meta property="og:type" content="website" />
-          <meta property="og:locale" content="en_US" />
-          <meta property="og:site_name" content="Centennial Hills Homes For Sale" />
-
-          {/* Twitter Cards */}
-          <meta name="twitter:card" content="summary_large_image" />
-          <meta name="twitter:title" content="Centennial Hills Homes For Sale | Dr. Jan Duffy REALTOR®" />
-          <meta name="twitter:description" content="Find luxury homes in Centennial Hills, Providence & Skye Canyon. Expert REALTOR® with 30+ years experience. Median price $635,000." />
-          <meta name="twitter:image" content="https://centennialhillshomesforsale.com/images/centennial-hills-hero.jpg" />
-        </Head>
-
-        <SEOOptimized 
-          title="Centennial Hills Homes For Sale | Dr. Jan Duffy REALTOR®"
-          description="Find luxury homes in Centennial Hills, Providence & Skye Canyon with Dr. Jan Duffy, top-rated REALTOR® at Berkshire Hathaway HomeServices Nevada Properties."
-          keywords="Centennial Hills homes for sale, Providence Las Vegas, Skye Canyon real estate, Dr. Jan Duffy REALTOR"
-        />
-        <GEOOptimized 
-          title="Centennial Hills Homes For Sale | Dr. Jan Duffy REALTOR®"
-          description="Find luxury homes in Centennial Hills, Providence & Skye Canyon with Dr. Jan Duffy, experienced REALTOR® with 30+ years in Las Vegas real estate. Specializing in Providence family communities ($450K-$800K) and Skye Canyon luxury homes ($550K-$1.2M)."
-          pageType="homepage"
-          priceRange="$450,000 - $1,200,000"
-        />
-
-        <AIContentOptimizer pageType="homepage">
-          <div className="container mx-auto px-6">
-            <motion.div
-              initial={{ opacity: 0, y: 50 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8 }}
-              className="text-center mb-16"
-            >
-              <h1 className="text-5xl md:text-7xl font-bold mb-8 gradient-text float-animation">
-                🌟 Centennial Hills Homes For Sale ✨
-              </h1>
-
-              <p className="awesome-text text-xl md:text-2xl mb-12 max-w-4xl mx-auto">
-                🏡 Discover your <span className="awesome-highlight">dream home</span> in the prestigious Centennial Hills community! 
-                From luxury estates to family-friendly neighborhoods, find the perfect 
-                property in Las Vegas's most <span className="awesome-highlight">sought-after area</span>. 🌴
-              </p>
-
-              <div className="mb-12">
-                <Link href="/listings" className="awesome-btn mr-4 mb-4">
-                  🔍 Browse Homes
-                </Link>
-                <Link href="/contact" className="awesome-btn mb-4">
-                  📞 Get Started
-                </Link>
+      {/* Stats Section */}
+      <section className="py-16 bg-white">
+        <div className="max-w-7xl mx-auto px-6">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            viewport={{ once: true }}
+            className="grid grid-cols-2 md:grid-cols-4 gap-8"
+          >
+            {stats.map((stat, index) => (
+              <div key={index} className="text-center">
+                <div className={`inline-flex items-center justify-center w-16 h-16 rounded-full bg-gray-100 mb-4 ${stat.color}`}>
+                  <stat.icon className="w-8 h-8" />
+                </div>
+                <div className="text-3xl font-bold text-gray-900 mb-2">{stat.value}</div>
+                <div className="text-gray-600">{stat.label}</div>
               </div>
-            </motion.div>
-
-            <div className="hero-section awesome-hero">
-        <div className="hero-background">
-          <img 
-            src="/images/centennial-hills-hero.jpg" 
-            alt="Centennial Hills Las Vegas"
-            className="hero-bg-image"
-          />
+            ))}
+          </motion.div>
         </div>
-        <div className="hero-overlay"></div>
-        <div className="hero-content">
-          <div className="hero-text">
-            <h1 className="hero-title gradient-text pulse-animation">
-              Your <span className="awesome-highlight">Centennial Hills</span> Home Expert
-            </h1>
-            <p className="hero-subtitle slide-in-up">
-              Discover luxury homes in Las Vegas's premier master-planned community. 
-              Dr. Jan Duffy brings you exclusive access to Centennial Hills, Providence, 
-              and Skye Canyon properties with unmatched local expertise.
-            </p>
-
-            <div className="hero-features float-animation">
-              <div className="feature glass-effect">
-                <span className="feature-icon">🏆</span>
-                <span>Top 1% REALTOR®</span>
-              </div>
-              <div className="feature glass-effect">
-                <span className="feature-icon">⭐</span>
-                <span>4.9/5 Rating</span>
-              </div>
-              <div className="feature glass-effect">
-                <span className="feature-icon">🎯</span>
-                <span>Local Expert</span>
-              </div>
-            </div>
-
-            <div className="hero-stats awesome-stats">
-              <div className="stat awesome-card neon-glow">
-                <span className="stat-number gradient-text">500+</span>
-                <span className="stat-label">Homes Sold</span>
-              </div>
-              <div className="stat awesome-card neon-glow">
-                <span className="stat-number gradient-text">15+</span>
-                <span className="stat-label">Years Experience</span>
-              </div>
-              <div className="stat awesome-card neon-glow">
-                <span className="stat-number gradient-text">98%</span>
-                <span className="stat-label">Client Satisfaction</span>
-              </div>
-            </div>
-
-            <div className="hero-buttons">
-              <Link href="/listings" className="awesome-btn btn-primary bounce-animation">
-                <span>🏠 View Listings</span>
-                <span className="btn-arrow">→</span>
-              </Link>
-              <Link href="/contact" className="awesome-btn btn-secondary pulse-animation">
-                <span>💬 Get Started</span>
-                <span className="btn-arrow">→</span>
-              </Link>
-            </div>
-          </div>
-        </div>
-      </div>
-
-            <AwesomeFeatures />
-
-      {/* Interactive Property Map Section */}
-      <section className="property-map-section">
-        <InteractivePropertyMap />
       </section>
 
-            {/* Call to action */}
-            <motion.div 
-              className="awesome-card mt-12 text-center"
-              whileHover={{ scale: 1.02 }}
-              transition={{ duration: 0.3 }}
-            >
-              <h2 className="text-3xl font-bold mb-6">🚀 Ready to Find Your Dream Home?</h2>
-              <p className="awesome-text text-xl mb-8">
-                Join hundreds of satisfied homeowners who found their perfect property in Centennial Hills!
-              </p>
-              <div className="space-x-4">
-                <Link href="/neighborhoods" className="awesome-btn">
-                  🗺️ Explore Areas
-                </Link>
-                <Link href="/market-update" className="awesome-btn">
-                  📈 Market Report
-                </Link>
-              </div>
-            </motion.div>
-          </div>
-        </AIContentOptimizer>
+      {/* Awesome Features */}
+      <AwesomeFeatures />
 
-        <LocalBusinessSchema 
-          pageType="home" 
-          additionalServices={["Luxury Home Sales", "New Construction", "Master-Planned Communities"]}
-        />
-        <GoogleBusinessOptimization pageType="home" />
-      </Layout>
-    );
-  } catch (error) {
-    console.error('Home component error:', error);
-    return (
-      <Layout>
-        <Head>
-          <title>Centennial Hills Homes For Sale | Las Vegas Real Estate</title>
-        </Head>
-        <div className="error-fallback">
-          <h1>Welcome to Centennial Hills Homes</h1>
-          <p>Loading content...</p>
+      {/* Featured Properties */}
+      <section className="py-20 bg-gray-50">
+        <div className="max-w-7xl mx-auto px-6">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            viewport={{ once: true }}
+            className="text-center mb-16"
+          >
+            <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
+              Featured Properties
+            </h2>
+            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+              Discover exceptional homes in Centennial Hills' most desirable neighborhoods
+            </p>
+          </motion.div>
+
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {featuredProperties.map((property, index) => (
+              <motion.div
+                key={property.id}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: index * 0.1 }}
+                viewport={{ once: true }}
+              >
+                <PropertyCard property={property} />
+              </motion.div>
+            ))}
+          </div>
+
+          <motion.div
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            transition={{ duration: 0.8, delay: 0.4 }}
+            viewport={{ once: true }}
+            className="text-center mt-12"
+          >
+            <button className="bg-gradient-to-r from-blue-600 to-purple-600 text-white px-8 py-4 rounded-xl font-semibold text-lg hover:from-blue-700 hover:to-purple-700 transition-all duration-300 transform hover:scale-105">
+              View All Properties
+            </button>
+          </motion.div>
         </div>
-      </Layout>
-    );
-  }
-}
+      </section>
+
+      {/* Smart Property Recommendations */}
+      <SmartPropertyRecommendations />
+
+      {/* Interactive Map */}
+      <section className="py-20 bg-white">
+        <div className="max-w-7xl mx-auto px-6">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            viewport={{ once: true }}
+            className="text-center mb-16"
+          >
+            <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
+              Explore Neighborhoods
+            </h2>
+            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+              Interactive map of Centennial Hills, Providence, and Skye Canyon communities
+            </p>
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, scale: 0.95 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+            viewport={{ once: true }}
+          >
+            <InteractivePropertyMap />
+          </motion.div>
+        </div>
+      </section>
+
+      {/* Market Trends */}
+      <section className="py-20 bg-gradient-to-br from-blue-50 to-purple-50">
+        <div className="max-w-7xl mx-auto px-6">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            viewport={{ once: true }}
+            className="text-center mb-16"
+          >
+            <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
+              Market Insights
+            </h2>
+            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+              Stay informed with real-time market data and trends
+            </p>
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+            viewport={{ once: true }}
+          >
+            <MarketTrendChart />
+          </motion.div>
+        </div>
+      </section>
+
+      {/* Local Amenities */}
+      <LocalAmenities />
+
+      {/* Testimonials */}
+      <section className="py-20 bg-white">
+        <div className="max-w-7xl mx-auto px-6">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            viewport={{ once: true }}
+            className="text-center mb-16"
+          >
+            <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
+              What Clients Say
+            </h2>
+            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+              Real experiences from satisfied homeowners
+            </p>
+          </motion.div>
+
+          <div className="grid md:grid-cols-3 gap-8">
+            {[
+              {
+                name: "Sarah & Mike Johnson",
+                location: "Providence",
+                text: "Dr. Jan helped us find our dream home in Providence. Her knowledge of the area and AI-powered search tools made the process seamless!",
+                rating: 5
+              },
+              {
+                name: "Robert Chen",
+                location: "Centennial Hills",
+                text: "Exceptional service! Jan's expertise in luxury homes and market analysis was invaluable. Highly recommend for anyone buying in Northwest Las Vegas.",
+                rating: 5
+              },
+              {
+                name: "Maria Rodriguez",
+                location: "Skye Canyon",
+                text: "Professional, knowledgeable, and caring. Jan went above and beyond to help us find the perfect family home. The AI search feature saved us so much time!",
+                rating: 5
+              }
+            ].map((testimonial, index) => (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: index * 0.1 }}
+                viewport={{ once: true }}
+                className="bg-gradient-to-br from-blue-50 to-purple-50 p-8 rounded-2xl shadow-lg"
+              >
+                <div className="flex items-center mb-4">
+                  {[...Array(testimonial.rating)].map((_, i) => (
+                    <Star key={i} className="w-5 h-5 text-yellow-400 fill-current" />
+                  ))}
+                </div>
+                <p className="text-gray-700 mb-6 italic">"{testimonial.text}"</p>
+                <div>
+                  <div className="font-semibold text-gray-900">{testimonial.name}</div>
+                  <div className="text-gray-600 flex items-center">
+                    <MapPin className="w-4 h-4 mr-1" />
+                    {testimonial.location}
+                  </div>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* CTA Section */}
+      <section className="py-20 bg-gradient-to-r from-blue-600 to-purple-600 text-white">
+        <div className="max-w-4xl mx-auto px-6 text-center">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            viewport={{ once: true }}
+          >
+            <h2 className="text-4xl md:text-5xl font-bold mb-6">
+              Ready to Find Your Dream Home?
+            </h2>
+            <p className="text-xl mb-8 opacity-90">
+              Let's start your home buying journey with AI-powered search and expert guidance
+            </p>
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+              <a
+                href="tel:+17029031952"
+                className="bg-white text-blue-600 px-8 py-4 rounded-xl font-semibold text-lg hover:bg-gray-100 transition-all duration-300 flex items-center transform hover:scale-105"
+              >
+                <Phone className="w-5 h-5 mr-2" />
+                Call (702) 903-1952
+              </a>
+              <button className="bg-transparent border-2 border-white text-white px-8 py-4 rounded-xl font-semibold text-lg hover:bg-white hover:text-blue-600 transition-all duration-300 transform hover:scale-105">
+                Start AI Search
+              </button>
+            </div>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* Lead Capture Form */}
+      <LeadCaptureForm />
+
+      {/* AI Chat Widget */}
+      <AIRealEstateChat />
+    </Layout>
+  );
+};
+
+export default HomePage;
