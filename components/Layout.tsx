@@ -4,6 +4,8 @@ import Header from './Header';
 import Footer from './Footer';
 import Navigation from './Navigation';
 import ErrorBoundaryWrapper from './ErrorBoundaryWrapper';
+import EnhancedSEO from './EnhancedSEO';
+import LocalBusinessSchema from './LocalBusinessSchema';
 
 interface LayoutProps {
   children: ReactNode;
@@ -65,6 +67,13 @@ const Layout: React.FC<LayoutProps> = ({
         <Header />
         <Navigation />
         <main className="flex-1">
+          <EnhancedSEO
+          title={title}
+          description={description}
+          keywords={keywords}
+          canonicalUrl={canonical}
+          ogImage={ogImage}
+        />
           {children}
         </main>
         <Footer />
