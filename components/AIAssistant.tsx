@@ -1,4 +1,3 @@
-
 'use client';
 
 import { useState, useEffect, useRef } from 'react';
@@ -107,7 +106,7 @@ export default function AIAssistant() {
       }
 
       const data = JSON.parse(response.content[0].text);
-      
+
       let assistantContent = '';
       let suggestions: string[] = [];
 
