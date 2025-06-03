@@ -1421,7 +1421,7 @@ args = "npm install --legacy-peer-deps"
 
 [[workflows.workflow.tasks]]
 task = "shell.exec"
-args = "echo \"🔨 Building static site to 'out' directory...\""
+args = "echo \"🔨 Building static site...\""
 
 [[workflows.workflow.tasks]]
 task = "shell.exec"
@@ -1429,7 +1429,7 @@ args = "npm run build-static"
 
 [[workflows.workflow.tasks]]
 task = "shell.exec"
-args = "echo \"📁 Verifying build...\""
+args = "echo \"📁 Verifying build output...\""
 
 [[workflows.workflow.tasks]]
 task = "shell.exec"
