@@ -44,24 +44,18 @@ const nextConfig = {
   images: {
     unoptimized: true,
     domains: ['images.unsplash.com', 'cdn.pixabay.com', 'source.unsplash.com'],
-    formats: ['image/webp', 'image/avif'],
-    deviceSizes: [640, 750, 828, 1080, 1200, 1920, 2048, 3840],
-    imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
-    loader: 'default'
+    formats: ['image/webp', 'image/avif']
   },
 
   experimental: {
-    esmExternals: false,
-    optimizeCss: true,
-    scrollRestoration: true,
-    optimizePackageImports: ['lucide-react']
+    esmExternals: false
   },
 
   compiler: {
     removeConsole: process.env.NODE_ENV === 'production'
   },
 
-  webpack: (config, { isServer, dev }) => {
+  webpack: (config, { isServer }) => {
     if (!isServer) {
       config.resolve.fallback = {
         ...config.resolve.fallback,
@@ -80,34 +74,7 @@ const nextConfig = {
       };
     }
 
-    if (!dev) {
-      config.optimization = {
-        ...config.optimization,
-        moduleIds: 'deterministic',
-        runtimeChunk: 'single',
-        splitChunks: {
-          chunks: 'all',
-          cacheGroups: {
-            vendor: {
-              test: /[\\/]node_modules[\\/]/,
-              name: 'vendors',
-              chunks: 'all',
-            },
-          },
-        }
-      };
-    }
-
     return config;
-  },
-
-  async rewrites() {
-    return [
-      {
-        source: '/sitemap.xml',
-        destination: '/api/sitemap'
-      }
-    ];
   },
 
   async headers() {
@@ -137,6 +104,14 @@ const nextConfig = {
             value: 'public, max-age=31536000, immutable'
           }
         ]
+      }
+    ];
+  },
+  async rewrites() {
+    return [
+      {
+        source: '/sitemap.xml',
+        destination: '/api/sitemap'
       }
     ];
   }

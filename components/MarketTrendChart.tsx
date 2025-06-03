@@ -1,3 +1,14 @@
+import {
+  Chart as ChartJS,
+  CategoryScale,
+  LinearScale,
+  PointElement,
+  LineElement,
+  Title,
+  Tooltip,
+  Legend
+} from 'chart.js';
+import type { ChartOptions } from 'chart.js';
 
 import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
@@ -73,14 +84,14 @@ const MarketTrendChart: React.FC = () => {
           </button>
         </div>
       </div>
-      
+
       <div className="chart-container">
         <div className="chart-grid">
           {trendData.map((data, index) => {
             const maxValue = getMaxValue(activeMetric === 'price' ? 'averagePrice' : 
                                        activeMetric === 'volume' ? 'salesVolume' : 'daysOnMarket');
             const height = (getMetricValue(data) / maxValue) * 100;
-            
+
             return (
               <div key={data.month} className="chart-bar-container">
                 <motion.div 
@@ -97,7 +108,7 @@ const MarketTrendChart: React.FC = () => {
           })}
         </div>
       </div>
-      
+
       <div className="chart-insights">
         <div className="insight-item">
           <span className="insight-label">6-Month Trend</span>
