@@ -1,5 +1,6 @@
-
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo, useCallback } from 'react';
+import { motion } from 'framer-motion';
+import { MapPinIcon, HomeIcon, TrendingUpIcon, EyeIcon, HeartIcon } from '@heroicons/react/24/outline';
 import styles from './InteractivePropertyMap.module.css';
 
 interface Property {
@@ -25,6 +26,35 @@ const InteractivePropertyMap: React.FC = () => {
     minBedrooms: 0,
     status: 'all'
   });
+  const [selectedNeighborhood, setSelectedNeighborhood] = useState<string | null>(null);
+  const [hoveredNeighborhood, setHoveredNeighborhood] = useState<string | null>(null);
+
+  const neighborhoods = useMemo(() => [
+    {
+      id: 'centennial-hills',
+      name: 'Centennial Hills',
+      lat: 36.2759,
+      lng: -115.3285,
+      propertyCount: 150,
+      avgPrice: 550000
+    },
+    {
+      id: 'skye-canyon',
+      name: 'Skye Canyon',
+      lat: 36.3423,
+      lng: -115.3602,
+      propertyCount: 120,
+      avgPrice: 620000
+    },
+    {
+      id: 'providence',
+      name: 'Providence',
+      lat: 36.2857,
+      lng: -115.2442,
+      propertyCount: 180,
+      avgPrice: 490000
+    },
+  ], []);
 
   // Sample properties in Centennial Hills area
   const sampleProperties: Property[] = [
@@ -74,7 +104,7 @@ const InteractivePropertyMap: React.FC = () => {
     const matchesSearch = searchTerm === '' || 
       property.address.toLowerCase().includes(searchTerm.toLowerCase()) ||
       property.price.toString().includes(searchTerm);
-    
+
     return matchesSearch &&
            property.price >= filters.minPrice &&
            property.price <= filters.maxPrice &&
@@ -89,6 +119,23 @@ const InteractivePropertyMap: React.FC = () => {
       minimumFractionDigits: 0
     }).format(price);
   };
+
+  const handleNeighborhoodClick = useCallback((id: string) => {
+    setSelectedNeighborhood(id);
+  }, []);
+
+  const handleNeighborhoodHover = useCallback((id: string | null) => {
+    setHoveredNeighborhood(id);
+  }, []);
+
+  useEffect(() => {
+    // Simulate loading neighborhoods
+    const timer = setTimeout(() => {
+      setSelectedNeighborhood('centennial-hills');
+    }, 1000);
+
+    return () => clearTimeout(timer);
+  }, []);
 
   return (
     <div className={styles.mapContainer}>
@@ -188,7 +235,7 @@ const InteractivePropertyMap: React.FC = () => {
             <p>Showing {filteredProperties.length} properties</p>
             <small>Click on markers to view property details</small>
           </div>
-          
+
           {/* Property Markers */}
           <div className={styles.markers}>
             {filteredProperties.map((property) => (
@@ -221,7 +268,7 @@ const InteractivePropertyMap: React.FC = () => {
             >
               ×
             </button>
-            
+
             <div className={styles.propertyImage}>
               <img src={selectedProperty.image} alt={selectedProperty.address} />
               <div className={`${styles.statusBadge} ${styles[selectedProperty.status]}`}>
@@ -232,7 +279,7 @@ const InteractivePropertyMap: React.FC = () => {
             <div className={styles.propertyInfo}>
               <h3>{formatPrice(selectedProperty.price)}</h3>
               <p className={styles.address}>{selectedProperty.address}</p>
-              
+
               <div className={styles.features}>
                 <span>🛏️ {selectedProperty.bedrooms} bed</span>
                 <span>🚿 {selectedProperty.bathrooms} bath</span>
@@ -322,7 +369,7 @@ const InteractivePropertyMap: React.FC = () => {
                   </button>
                 </div>
               </div>
-              
+
               <div className={styles.cardContent}>
                 <h4>{formatPrice(property.price)}</h4>
                 <p>{property.address}</p>

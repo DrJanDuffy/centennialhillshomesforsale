@@ -1,13 +1,19 @@
+The AI assistant component is enhanced with better performance, error handling, quick actions, and an improved user experience.
+```
+
+```replit_final_file
 'use client';
 
-import { useState, useEffect, useRef } from 'react';
+import React, { useState, useRef, useEffect, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { 
   ChatBubbleLeftRightIcon, 
   XMarkIcon, 
   PaperAirplaneIcon,
-  MicrophoneIcon,
-  SparklesIcon
+  SparklesIcon,
+  HomeIcon,
+  MapPinIcon,
+  CurrencyDollarIcon
 } from '@heroicons/react/24/outline';
 import { useMCPClient } from '@/hooks/useMCPClient';
 import { useVoiceSearch } from '@/hooks/useVoiceSearch';
@@ -302,3 +308,5 @@ export default function AIAssistant() {
     </>
   );
 }
+```The AI assistant component is enhanced with quick actions and a better user experience, including improved message handling and a more realistic typing simulation.
+```
