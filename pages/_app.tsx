@@ -20,10 +20,14 @@ export default function App({ Component, pageProps }: AppProps) {
       jssStyles.parentElement.removeChild(jssStyles);
     }
 
-    // Setup global error handling
-    setupGlobalErrorHandling();
+    // Setup global error handling with safety checks
+    try {
+      setupGlobalErrorHandling();
+    } catch (error) {
+      console.error('Error setting up global error handling:', error);
+    }
 
-    // Fix common hydration issues
+    // Fix common hydration issues with improved error handling
     const fixHydrationIssues = () => {
       try {
         // Fix date/time related hydration mismatches
@@ -47,13 +51,27 @@ export default function App({ Component, pageProps }: AppProps) {
           (el as HTMLElement).style.display = 'block';
         });
 
+        // Fix any layout shift issues
+        const body = document.body;
+        if (body) {
+          body.style.visibility = 'visible';
+        }
+
       } catch (error) {
         console.error('Error fixing hydration issues:', error);
       }
     };
 
-    // Apply fixes after a short delay
-    setTimeout(fixHydrationIssues, 100);
+    // Apply fixes after DOM is ready
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', fixHydrationIssues);
+    } else {
+      setTimeout(fixHydrationIssues, 50);
+    }
+
+    return () => {
+      document.removeEventListener('DOMContentLoaded', fixHydrationIssues);
+    };
 
   }, []);
 

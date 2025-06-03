@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from 'react';
+
+import { useEffect, useState } from 'react';
 import { useRouterSafe } from '../utils/useRouterSafe';
 
 interface PageError {
@@ -12,13 +13,20 @@ const PageErrorChecker: React.FC = () => {
   const router = useRouterSafe();
   const [errors, setErrors] = useState<PageError[]>([]);
   const [isChecking, setIsChecking] = useState(false);
+  const [isClient, setIsClient] = useState(false);
 
-  // Guard against static generation
-  if (!router.isReady) {
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
+
+  // Only render on client side and when router is ready
+  if (!isClient || !router?.isReady) {
     return null;
   }
 
   const checkPageErrors = async () => {
+    if (!router?.pathname) return;
+    
     setIsChecking(true);
     const pageErrors: PageError[] = [];
 
@@ -50,11 +58,6 @@ const PageErrorChecker: React.FC = () => {
   const checkReactErrors = (): PageError[] => {
     const errors: PageError[] = [];
     
-    // Guard against static generation
-    if (!router.isReady) {
-      return errors;
-    }
-
     try {
       // Check for missing keys in lists
       const listElements = document.querySelectorAll('ul li, ol li');
@@ -67,20 +70,6 @@ const PageErrorChecker: React.FC = () => {
             timestamp: new Date().toISOString()
           });
         }
-      });
-
-      // Check for deprecated attributes
-      const deprecatedAttrs = ['autoplay', 'autoComplete'];
-      deprecatedAttrs.forEach(attr => {
-        const elements = document.querySelectorAll(`[${attr}]`);
-        elements.forEach(el => {
-          errors.push({
-            page: router.pathname,
-            error: `Deprecated attribute '${attr}' found`,
-            severity: 'low',
-            timestamp: new Date().toISOString()
-          });
-        });
       });
 
     } catch (error) {
@@ -98,11 +87,6 @@ const PageErrorChecker: React.FC = () => {
   const checkAccessibilityIssues = (): PageError[] => {
     const errors: PageError[] = [];
     
-    // Guard against static generation
-    if (!router.isReady) {
-      return errors;
-    }
-
     try {
       // Check for missing alt text
       const images = document.querySelectorAll('img');
@@ -161,11 +145,6 @@ const PageErrorChecker: React.FC = () => {
 
   const checkSEOIssues = (): PageError[] => {
     const errors: PageError[] = [];
-
-    // Guard against static generation
-    if (!router.isReady) {
-      return errors;
-    }
 
     try {
       // Check for missing meta description
@@ -254,18 +233,10 @@ const PageErrorChecker: React.FC = () => {
   };
 
   useEffect(() => {
-    // Check for errors when page loads or changes
-    const timer = setTimeout(() => {
+    if (isClient && router?.isReady) {
       checkPageErrors();
-    }, 1000);
-
-    return () => clearTimeout(timer);
-  }, [router.pathname]);
-
-  // Only show in development
-  if (process.env.NODE_ENV !== 'development') {
-    return null;
-  }
+    }
+  }, [isClient, router?.pathname]);
 
   return (
     <div style={{
@@ -313,8 +284,12 @@ const PageErrorChecker: React.FC = () => {
         style={{
           marginTop: '5px',
           padding: '2px 5px',
-          fontSize: '10px',
-          cursor: 'pointer'
+          background: '#007cba',
+          color: 'white',
+          border: 'none',
+          borderRadius: '3px',
+          cursor: 'pointer',
+          fontSize: '11px'
         }}
       >
         Recheck
