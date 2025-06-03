@@ -35,7 +35,7 @@ const nextConfig = {
   swcMinify: true,
   output: 'export',
   trailingSlash: true,
-  distDir: 'out',
+  distDir: 'public',
   
   // 🚀 AWESOME PERFORMANCE OPTIMIZATIONS
   poweredByHeader: false,
