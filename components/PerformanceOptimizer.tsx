@@ -62,3 +62,54 @@ const PerformanceOptimizer: React.FC = () => {
 };
 
 export default PerformanceOptimizer;
+import React, { useEffect } from 'react';
+
+const PerformanceOptimizer: React.FC = () => {
+  useEffect(() => {
+    // Preload critical resources
+    const preloadCriticalResources = () => {
+      const criticalResources = [
+        '/icon-192x192.png',
+        '/icon-512x512.png',
+        '/manifest.json'
+      ];
+
+      criticalResources.forEach(resource => {
+        const link = document.createElement('link');
+        link.rel = 'preload';
+        link.as = resource.endsWith('.png') ? 'image' : 'fetch';
+        link.href = resource;
+        document.head.appendChild(link);
+      });
+    };
+
+    // Optimize images with intersection observer
+    const optimizeImages = () => {
+      const images = document.querySelectorAll('img[data-src]');
+      const imageObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            const img = entry.target as HTMLImageElement;
+            img.src = img.dataset.src || '';
+            img.classList.remove('lazy');
+            imageObserver.unobserve(img);
+          }
+        });
+      });
+
+      images.forEach(img => imageObserver.observe(img));
+    };
+
+    preloadCriticalResources();
+    optimizeImages();
+
+    // Clean up function
+    return () => {
+      // Cleanup if needed
+    };
+  }, []);
+
+  return null; // This component doesn't render anything
+};
+
+export default PerformanceOptimizer;
