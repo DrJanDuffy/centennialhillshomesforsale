@@ -1,4 +1,3 @@
-
 const withPWA = require('next-pwa')({
   dest: 'public',
   register: true,
@@ -32,40 +31,30 @@ const withPWA = require('next-pwa')({
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  trailingSlash: true,
+  reactStrictMode: true,
+  swcMinify: true,
   output: 'export',
-  distDir: 'out',
-  
-  // Keep images unoptimized for compatibility
+  trailingSlash: true,
+  distDir: 'public',
   images: {
     unoptimized: true,
-    loader: 'custom',
-    loaderFile: './utils/imageLoader.js'
+    domains: ['images.unsplash.com', 'cdn.pixabay.com']
   },
-  
-  // Optimize for production deployment
-  eslint: {
-    ignoreDuringBuilds: true
-  },
-  typescript: {
-    ignoreBuildErrors: true
-  },
-  
-  env: {
-    NODE_ENV: process.env.NODE_ENV || 'production'
-  },
-
-  // Optimize bundle
   experimental: {
-    optimizeCss: true,
-    optimizePackageImports: ['@heroicons/react', 'lucide-react']
+    esmExternals: false,
+    typedRoutes: false
   },
-
-  // Compress output
-  compress: true,
-
-  // Enable SWC minification
-  swcMinify: true
+  webpack: (config, { isServer }) => {
+    if (!isServer) {
+      config.resolve.fallback = {
+        ...config.resolve.fallback,
+        fs: false,
+        net: false,
+        tls: false,
+      };
+    }
+    return config;
+  }
 }
 
 module.exports = withPWA(nextConfig);
