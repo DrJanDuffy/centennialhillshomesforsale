@@ -11,7 +11,7 @@ publicDir = "out"
 run = ["sh", "-c", "npx serve out -s -l 5000 --cors --host 0.0.0.0"]
 
 [workflows]
-runButton = "WORKING SITE"
+runButton = "MAKE SITE AWESOME"
 
 [[workflows.workflow]]
 name = "Run"
@@ -1523,6 +1523,51 @@ args = "  npm run dev"
 [[workflows.workflow.tasks]]
 task = "shell.exec"
 args = "fi"
+
+[[workflows.workflow]]
+name = "MAKE SITE AWESOME"
+author = 22930014
+mode = "sequential"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "echo \"🎯 MAKING CENTENNIAL HILLS SITE ABSOLUTELY AWESOME!\""
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "echo \"======================================================\""
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "pkill -f \"next|serve|node\" || true"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "sleep 3"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "echo \"🧹 Step 1: Clean slate for awesome build...\""
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "rm -rf .next out node_modules/.cache .swc || true"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "echo \"📦 Step 2: Installing awesome dependencies...\""
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "npm install --legacy-peer-deps"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "echo \"🚀 Step 3: Running awesome deployment script...\""
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "node scripts/deploy.js"
 
 [[ports]]
 localPort = 3001
