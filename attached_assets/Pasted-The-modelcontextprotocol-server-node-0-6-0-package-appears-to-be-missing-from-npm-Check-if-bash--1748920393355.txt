@@ -1,0 +1,89 @@
+The @modelcontextprotocol/server-node@^0.6.0 package appears to be missing from npm. Check if:
+bash# Verify package existence
+npm view @modelcontextprotocol/server-node versions --json
+
+# Alternative: Check if it's a scoped package access issue
+npm login  # If using private registry
+Likely solutions:
+
+Package may have been unpublished or renamed
+Check official documentation for correct package name
+Consider using alternative MCP implementation
+
+Step 2: Fix React Type Conflicts
+bash# Clear dependency cache
+rm -rf node_modules package-lock.json
+
+# Check dependency tree
+npm ls @types/react
+
+# Force resolution (package.json)
+{
+  "overrides": {
+    "@types/react": "^18.3.12"
+  }
+}
+Step 3: Progressive Build Recovery
+bash# 1. Clean install with legacy peer deps
+npm install --legacy-peer-deps
+
+# 2. If still failing, use force flag cautiously
+npm install --force
+
+# 3. Verify build process
+npm run build-static
+Alternative Mitigation Approaches
+Option A: Dependency Substitution
+If MCP package is unavailable, temporarily remove or replace:
+json// package.json - comment out problematic dependency
+// "@modelcontextprotocol/server-node": "^0.6.0",
+Option B: Version Pinning Strategy
+json{
+  "dependencies": {
+    "@types/react": "18.3.12"
+  },
+  "resolutions": {
+    "@types/react": "18.3.12"
+  }
+}
+Option C: Docker-based Build Environment
+dockerfileFROM node:18-alpine
+WORKDIR /app
+COPY package*.json ./
+RUN npm ci --only=production
+COPY . .
+RUN npm run build-static
+Diagnostic Commands for Root Cause
+bash# Check npm configuration
+npm config list
+
+# Verify registry access
+npm config get registry
+
+# Check for proxy/firewall issues
+npm ping
+
+# Examine specific package availability
+npm search @modelcontextprotocol
+Success Parameters
+Build should succeed when:
+
+All packages install without registry errors
+No version conflicts in dependency tree
+npm run build-static completes successfully
+Generated build artifacts are present
+
+Next Steps Based on Results
+If MCP package issue persists:
+
+Contact package maintainers
+Explore alternative MCP libraries
+Implement custom MCP client if critical
+
+If React conflicts continue:
+
+Audit all React-dependent packages
+Consider upgrading to React 19 ecosystem
+Use npm audit for additional dependency insights
+
+What's your current npm version and Node.js version? This will help me provide more targeted resolution steps.
