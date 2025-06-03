@@ -1,5 +1,5 @@
 import { useState, useEffect, useCallback } from 'react';
-import { mcpClient, MCPResponse } from '../lib/mcp-client';
+import { mcpClient, MCPResponse, MCPClient } from '../lib/mcp-client';
 
 interface MCPClientHook {
   mcpClient: {
@@ -7,7 +7,7 @@ interface MCPClientHook {
   };
   isConnected: boolean;
   isLoading: boolean;
-  error: string | null;
+  error: Error | null;
   connected: boolean;
   loading: boolean;
   connect: () => Promise<void>;
@@ -18,7 +18,7 @@ interface MCPClientHook {
 export const useMCPClient = (): MCPClientHook => {
   const [connected, setConnected] = useState(false);
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState<string | null>(null);
+  const [error, setError] = useState<Error | null>(null);
 
   useEffect(() => {
     setConnected(mcpClient.connected);
@@ -32,10 +32,10 @@ export const useMCPClient = (): MCPClientHook => {
       const success = await mcpClient.connect();
       setConnected(success);
       if (!success) {
-        setError('Failed to connect to MCP server');
+        setError(new Error('Failed to connect to MCP server'));
       }
     } catch (err) {
-      setError(String(err));
+      setError(err instanceof Error ? err : new Error(String(err)));
       setConnected(false);
     } finally {
       setLoading(false);
