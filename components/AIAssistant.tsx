@@ -28,7 +28,11 @@ export default function AIAssistant() {
   const [isTyping, setIsTyping] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const { mcpClient, isConnected } = useMCPClient();
-  const { isListening, startListening } = useVoiceSearch(setInputValue);
+  const { isListening, startListening, hasPermission, error } = useVoiceSearch(setInputValue, {
+    onError: (error) => console.warn('Voice search error:', error),
+    continuous: false,
+    interimResults: true
+  });
 
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
@@ -273,8 +277,12 @@ export default function AIAssistant() {
                   />
                   <button
                     onClick={startListening}
+                    disabled={!hasPermission}
+                    title={error || 'Click to speak'}
                     className={`absolute right-2 top-1/2 -translate-y-1/2 p-1 rounded ${
-                      isListening ? 'text-red-500 animate-pulse' : 'text-gray-400 hover:text-gray-600'
+                      isListening ? 'text-red-500 animate-pulse' : 
+                      !hasPermission ? 'text-gray-300 cursor-not-allowed' :
+                      'text-gray-400 hover:text-gray-600'
                     }`}
                   >
                     <MicrophoneIcon className="w-4 h-4" />
