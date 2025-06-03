@@ -81,3 +81,78 @@ export default function LocalAmenities() {
     </motion.section>
   );
 }
+import React from 'react';
+import { MapPin, GraduationCap, ShoppingBag, Coffee, TreePine, Car } from 'lucide-react';
+
+const LocalAmenities: React.FC = () => {
+  const amenities = [
+    {
+      icon: GraduationCap,
+      title: 'Top-Rated Schools',
+      description: 'Centennial High School, Desert Pines Elementary',
+      distance: '0.5-2 miles'
+    },
+    {
+      icon: ShoppingBag,
+      title: 'Shopping Centers',
+      description: 'Downtown Summerlin, Las Vegas North Premium Outlets',
+      distance: '5-10 miles'
+    },
+    {
+      icon: TreePine,
+      title: 'Parks & Recreation',
+      description: 'Centennial Hills Park, Desert Breeze Park',
+      distance: '1-3 miles'
+    },
+    {
+      icon: Coffee,
+      title: 'Dining & Entertainment',
+      description: 'Red Rock Casino, Local restaurants',
+      distance: '3-7 miles'
+    },
+    {
+      icon: Car,
+      title: 'Transportation',
+      description: 'Easy access to US-95, I-215 Beltway',
+      distance: '2-5 miles'
+    },
+    {
+      icon: MapPin,
+      title: 'Medical Facilities',
+      description: 'Centennial Hills Hospital, UMC',
+      distance: '3-8 miles'
+    }
+  ];
+
+  return (
+    <section className="py-20 bg-gray-50">
+      <div className="max-w-7xl mx-auto px-6">
+        <div className="text-center mb-16">
+          <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
+            Local Amenities
+          </h2>
+          <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+            Everything you need is nearby in Centennial Hills
+          </p>
+        </div>
+        
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {amenities.map((amenity, index) => (
+            <div key={index} className="bg-white p-6 rounded-2xl shadow-lg hover:shadow-xl transition-shadow duration-300">
+              <div className="flex items-center mb-4">
+                <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mr-4">
+                  <amenity.icon className="w-6 h-6 text-blue-600" />
+                </div>
+                <h3 className="text-xl font-semibold text-gray-900">{amenity.title}</h3>
+              </div>
+              <p className="text-gray-600 mb-3">{amenity.description}</p>
+              <p className="text-sm text-blue-600 font-medium">{amenity.distance}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+};
+
+export default LocalAmenities;

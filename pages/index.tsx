@@ -6,7 +6,6 @@ import PropertyCard from '../components/PropertyCard';
 import SmartPropertyRecommendations from '../components/SmartPropertyRecommendations';
 import { motion } from 'framer-motion';
 import { Star, MapPin, TrendingUp, Users, Award, Phone, Home } from 'lucide-react';
-import { GetStaticProps } from 'next';
 import { Suspense } from 'react';
 import dynamic from 'next/dynamic';
 
