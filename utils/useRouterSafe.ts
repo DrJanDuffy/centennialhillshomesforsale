@@ -2,25 +2,25 @@
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 
-export function useRouterSafe() {
+export const useRouterSafe = () => {
+  const [isClient, setIsClient] = useState(false);
   const router = useRouter();
-  const [isReady, setIsReady] = useState(false);
 
   useEffect(() => {
-    if (router.isReady) {
-      setIsReady(true);
-    }
-  }, [router.isReady]);
+    setIsClient(true);
+  }, []);
+
+  // Return null during SSR or before hydration
+  if (!isClient) {
+    return null;
+  }
 
   // Return safe router object
   return {
     ...router,
-    isReady,
-    pathname: isReady ? router.pathname : '',
-    query: isReady ? router.query : {},
-    asPath: isReady ? router.asPath : '',
-    // Safe methods that check readiness
-    push: isReady ? router.push : () => Promise.resolve(true),
-    replace: isReady ? router.replace : () => Promise.resolve(true),
+    isReady: router.isReady && isClient,
+    pathname: router.pathname || '/',
+    asPath: router.asPath || '/',
+    query: router.query || {}
   };
-}
+};
