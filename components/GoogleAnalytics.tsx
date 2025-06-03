@@ -10,7 +10,7 @@ interface GoogleAnalyticsProps {
 }
 
 const GoogleAnalytics: React.FC<GoogleAnalyticsProps> = ({ 
-  measurementId = 'G-PLACEHOLDER' 
+  measurementId = process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID || 'G-PLACEHOLDER' 
 }) => {
   const pathname = usePathname();
 
