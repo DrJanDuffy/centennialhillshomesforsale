@@ -2,9 +2,14 @@ import { useState, useEffect, useCallback } from 'react';
 import { mcpClient, MCPResponse } from '../lib/mcp-client';
 
 interface MCPClientHook {
+  mcpClient: {
+    sendMessage: (message: any) => Promise<{ content: string }>;
+  };
+  isConnected: boolean;
+  isLoading: boolean;
+  error: string | null;
   connected: boolean;
   loading: boolean;
-  error: string | null;
   connect: () => Promise<void>;
   disconnect: () => void;
   sendMessage: (message: any) => Promise<MCPResponse>;
@@ -51,12 +56,26 @@ export const useMCPClient = (): MCPClientHook => {
     }
   }, []);
 
-  return {
+  const result = {
+    mcpClient: {
+      sendMessage: async (message: any) => {
+        try {
+          const response = await mcpClient.sendMessage(message);
+          return { content: response.data?.message || 'Response from AI assistant' };
+        } catch (err) {
+          return { content: 'Sorry, I encountered an error processing your request.' };
+        }
+      }
+    },
+    isConnected: connected,
+    isLoading: loading,
+    error,
     connected,
     loading,
-    error,
     connect,
     disconnect,
     sendMessage
   };
+  
+  return result;
 };

@@ -10,7 +10,7 @@ const AwesomeHero: React.FC = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [isSearchFocused, setIsSearchFocused] = useState(false);
   
-  const { searchProperties, isLoading, properties, isConnected } = useMCPClient();
+  const { isConnected, isLoading } = useMCPClient();
   const { isListening, startListening, stopListening, isSupported } = useVoiceSearch(setSearchQuery, {
     onResult: (transcript) => setSearchQuery(transcript),
     continuous: false,

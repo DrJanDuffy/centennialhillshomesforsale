@@ -28,7 +28,7 @@ export default function AIAssistant() {
   const [isTyping, setIsTyping] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
-  // Use the hooks with proper interfaces - now includes isLoading property
+  // Use the hooks with proper interfaces
   const { 
     mcpClient, 
     isConnected, 
