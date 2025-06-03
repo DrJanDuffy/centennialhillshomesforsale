@@ -1,130 +1,46 @@
-
-// Lightweight MCP Client Implementation
-// Replaces missing @modelcontextprotocol packages
-
-interface MCPMessage {
-  id: string;
-  type: 'request' | 'response' | 'notification';
-  method?: string;
-  params?: any;
-  result?: any;
-  error?: any;
+export interface MCPResponse {
+  success: boolean;
+  data?: any;
+  error?: string;
 }
 
-interface MCPTool {
-  name: string;
-  description: string;
-  inputSchema: any;
+export interface MCPClient {
+  connected: boolean;
+  connect: () => Promise<boolean>;
+  disconnect: () => void;
+  sendMessage: (message: any) => Promise<MCPResponse>;
 }
 
-class MCPClient {
-  private tools: MCPTool[] = [];
-  private connected = false;
-
-  constructor(private serverUrl?: string) {
-    this.initializeDefaultTools();
-  }
-
-  private initializeDefaultTools() {
-    this.tools = [
-      {
-        name: 'property_search',
-        description: 'Search for properties in Las Vegas area',
-        inputSchema: {
-          type: 'object',
-          properties: {
-            location: { type: 'string' },
-            priceRange: { type: 'string' },
-            propertyType: { type: 'string' }
-          }
-        }
-      },
-      {
-        name: 'market_analysis',
-        description: 'Get market analysis for specific areas',
-        inputSchema: {
-          type: 'object',
-          properties: {
-            neighborhood: { type: 'string' },
-            timeframe: { type: 'string' }
-          }
-        }
-      }
-    ];
-  }
+export class SimpleMCPClient implements MCPClient {
+  connected: boolean = false;
 
   async connect(): Promise<boolean> {
-    // Simulate connection for now
-    this.connected = true;
-    return true;
+    try {
+      // Simulate connection
+      this.connected = true;
+      return true;
+    } catch (error) {
+      console.error('MCP connection failed:', error);
+      return false;
+    }
   }
 
-  async disconnect(): Promise<void> {
+  disconnect(): void {
     this.connected = false;
   }
 
-  async callTool(name: string, params: any): Promise<any> {
+  async sendMessage(message: any): Promise<MCPResponse> {
     if (!this.connected) {
-      throw new Error('MCP client not connected');
+      return { success: false, error: 'Not connected' };
     }
 
-    // Simulate tool responses based on Las Vegas real estate data
-    switch (name) {
-      case 'property_search':
-        return this.simulatePropertySearch(params);
-      case 'market_analysis':
-        return this.simulateMarketAnalysis(params);
-      default:
-        throw new Error(`Unknown tool: ${name}`);
+    try {
+      // Simulate message processing
+      return { success: true, data: { message: 'Response from MCP server' } };
+    } catch (error) {
+      return { success: false, error: String(error) };
     }
-  }
-
-  private simulatePropertySearch(params: any) {
-    return {
-      properties: [
-        {
-          id: '1',
-          address: '123 Centennial Hills Blvd, Las Vegas, NV 89149',
-          price: '$850,000',
-          bedrooms: 4,
-          bathrooms: 3,
-          sqft: 2800,
-          neighborhood: 'Centennial Hills'
-        },
-        {
-          id: '2',
-          address: '456 Providence Way, Las Vegas, NV 89166',
-          price: '$725,000',
-          bedrooms: 3,
-          bathrooms: 2.5,
-          sqft: 2400,
-          neighborhood: 'Providence'
-        }
-      ],
-      total: 2,
-      searchParams: params
-    };
-  }
-
-  private simulateMarketAnalysis(params: any) {
-    return {
-      neighborhood: params.neighborhood || 'Centennial Hills',
-      averagePrice: '$775,000',
-      marketTrend: 'stable',
-      daysOnMarket: 35,
-      priceGrowth: '3.2%',
-      inventory: 'balanced'
-    };
-  }
-
-  getTools(): MCPTool[] {
-    return [...this.tools];
-  }
-
-  isConnected(): boolean {
-    return this.connected;
   }
 }
 
-export default MCPClient;
-export type { MCPMessage, MCPTool };
+export const mcpClient = new SimpleMCPClient();

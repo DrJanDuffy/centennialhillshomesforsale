@@ -11,7 +11,7 @@ const withPWA = require('next-pwa')({
         cacheName: 'api-cache',
         expiration: {
           maxEntries: 50,
-          maxAgeSeconds: 60 * 60 * 24 // 24 hours
+          maxAgeSeconds: 60 * 60 * 24
         }
       }
     },
@@ -22,7 +22,7 @@ const withPWA = require('next-pwa')({
         cacheName: 'images',
         expiration: {
           maxEntries: 100,
-          maxAgeSeconds: 60 * 60 * 24 * 30 // 30 days
+          maxAgeSeconds: 60 * 60 * 24 * 30
         }
       }
     }
@@ -35,30 +35,12 @@ const nextConfig = {
   trailingSlash: true,
   skipTrailingSlashRedirect: true,
   distDir: 'out',
-  images: {
-    unoptimized: true
-  },
-  experimental: {
-    esmExternals: false
-  },
-  compiler: {
-    removeConsole: process.env.NODE_ENV === 'production'
-  }
-}
-
-// 🚀 AWESOME PERFORMANCE OPTIMIZATIONS
-const nextConfigModified = {
   reactStrictMode: true,
   swcMinify: true,
-  trailingSlash: true,
-
-
-  // 🚀 AWESOME PERFORMANCE OPTIMIZATIONS
   poweredByHeader: false,
   generateEtags: false,
   compress: true,
 
-  // 🎯 PERFECT IMAGE HANDLING
   images: {
     unoptimized: true,
     domains: ['images.unsplash.com', 'cdn.pixabay.com', 'source.unsplash.com'],
@@ -67,18 +49,18 @@ const nextConfigModified = {
     imageSizes: [16, 32, 48, 64, 96, 128, 256, 384]
   },
 
-  // 🔥 AWESOME BUILD OPTIMIZATIONS
   experimental: {
     esmExternals: false,
-    typedRoutes: false,
     optimizeCss: true,
     scrollRestoration: true,
     optimizePackageImports: ['lucide-react']
   },
 
-  // 🌟 PERFECT WEBPACK CONFIG
+  compiler: {
+    removeConsole: process.env.NODE_ENV === 'production'
+  },
+
   webpack: (config, { isServer, dev }) => {
-    // Client-side optimizations
     if (!isServer) {
       config.resolve.fallback = {
         ...config.resolve.fallback,
@@ -97,7 +79,6 @@ const nextConfigModified = {
       };
     }
 
-    // Production optimizations
     if (!dev) {
       config.optimization = {
         ...config.optimization,
@@ -119,7 +100,6 @@ const nextConfigModified = {
     return config;
   },
 
-  // 🎨 AWESOME REDIRECTS & REWRITES
   async rewrites() {
     return [
       {
@@ -129,7 +109,6 @@ const nextConfigModified = {
     ];
   },
 
-  // 📈 PERFORMANCE HEADERS
   async headers() {
     return [
       {
@@ -160,17 +139,6 @@ const nextConfigModified = {
       }
     ];
   }
-}
+};
 
-module.exports = withPWA({
-  ...nextConfig,
-  ...nextConfigModified,
-  output: 'export',
-  trailingSlash: true,
-  distDir: 'out',
-  images: {
-    unoptimized: true,
-    domains: ['images.unsplash.com', 'cdn.pixabay.com', 'source.unsplash.com'],
-    formats: ['image/webp', 'image/avif']
-  }
-});
+module.exports = withPWA(nextConfig);
