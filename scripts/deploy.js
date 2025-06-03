@@ -241,13 +241,19 @@ const emergencyHTML = `
 function createAwesomeEmergencyDeploy() {
   console.log('🚨 Creating awesome emergency fallback site...');
   
-  // Remove existing out directory
-  if (fs.existsSync('out')) {
-    fs.rmSync('out', { recursive: true, force: true });
+  // Remove existing public directory build files
+  if (fs.existsSync('public')) {
+    // Preserve static assets, remove generated files
+    const preserveFiles = ['robots.txt', 'manifest.json', 'sitemap.xml', 'icon-192x192.png', 'icon-512x512.png', 'apple-touch-icon.png'];
+    const files = fs.readdirSync('public');
+    files.forEach(file => {
+      if (!preserveFiles.includes(file) && file.endsWith('.html')) {
+        fs.rmSync(`public/${file}`, { force: true });
+      }
+    });
+  } else {
+    fs.mkdirSync('public', { recursive: true });
   }
-  
-  // Create fresh out directory
-  fs.mkdirSync('out', { recursive: true });
   
   // Write emergency HTML to all possible routes
   const routes = [
@@ -272,46 +278,50 @@ function createAwesomeEmergencyDeploy() {
   routes.forEach(route => {
     const dir = path.dirname(route);
     if (dir !== '.') {
-      fs.mkdirSync(path.join('out', dir), { recursive: true });
+      fs.mkdirSync(path.join('public', dir), { recursive: true });
     }
-    fs.writeFileSync(path.join('out', route), emergencyHTML);
+    fs.writeFileSync(path.join('public', route), emergencyHTML);
   });
   
-  // Create manifest.json for PWA
-  const manifest = {
-    name: "Centennial Hills Homes For Sale",
-    short_name: "CentennialHills",
-    description: "Las Vegas Real Estate with Dr. Jan Duff",
-    start_url: "/",
-    display: "standalone",
-    background_color: "#ffffff",
-    theme_color: "#3182ce",
-    icons: [
-      {
-        src: "/icon-192x192.png",
-        sizes: "192x192",
-        type: "image/png"
-      },
-      {
-        src: "/icon-512x512.png",
-        sizes: "512x512", 
-        type: "image/png"
-      }
-    ]
-  };
+  // Create manifest.json for PWA (if not exists)
+  if (!fs.existsSync('public/manifest.json')) {
+    const manifest = {
+      name: "Centennial Hills Homes For Sale",
+      short_name: "CentennialHills",
+      description: "Las Vegas Real Estate with Dr. Jan Duff",
+      start_url: "/",
+      display: "standalone",
+      background_color: "#ffffff",
+      theme_color: "#3182ce",
+      icons: [
+        {
+          src: "/icon-192x192.png",
+          sizes: "192x192",
+          type: "image/png"
+        },
+        {
+          src: "/icon-512x512.png",
+          sizes: "512x512", 
+          type: "image/png"
+        }
+      ]
+    };
+    
+    fs.writeFileSync('public/manifest.json', JSON.stringify(manifest, null, 2));
+  }
   
-  fs.writeFileSync('out/manifest.json', JSON.stringify(manifest, null, 2));
-  
-  // Create robots.txt
-  const robots = `User-agent: *
+  // Create robots.txt (if not exists)
+  if (!fs.existsSync('public/robots.txt')) {
+    const robots = `User-agent: *
 Allow: /
 
 Sitemap: https://centennialhillshomesforsale.com/sitemap.xml`;
-  
-  fs.writeFileSync('out/robots.txt', robots);
+    
+    fs.writeFileSync('public/robots.txt', robots);
+  }
   
   console.log('✅ Awesome emergency site created successfully!');
-  console.log('📁 Files in out:', fs.readdirSync('out'));
+  console.log('📁 Files in public:', fs.readdirSync('public'));
   
   return true;
 }
@@ -325,8 +335,15 @@ function attemptAwesomeBuild() {
     if (fs.existsSync('.next')) {
       fs.rmSync('.next', { recursive: true, force: true });
     }
-    if (fs.existsSync('out')) {
-      fs.rmSync('out', { recursive: true, force: true });
+    // Don't remove public entirely, just clear generated files
+    if (fs.existsSync('public')) {
+      const preserveFiles = ['robots.txt', 'manifest.json', 'sitemap.xml', 'icon-192x192.png', 'icon-512x512.png', 'apple-touch-icon.png'];
+      const files = fs.readdirSync('public');
+      files.forEach(file => {
+        if (!preserveFiles.includes(file) && (file.endsWith('.html') || fs.statSync(`public/${file}`).isDirectory())) {
+          fs.rmSync(`public/${file}`, { recursive: true, force: true });
+        }
+      });
     }
     
     // Install dependencies
@@ -338,14 +355,14 @@ function attemptAwesomeBuild() {
     execSync('npm run build-static', { stdio: 'inherit' });
     
     // Check if build output exists
-    if (fs.existsSync('out') && fs.readdirSync('out').length > 0) {
+    if (fs.existsSync('public') && fs.readdirSync('public').length > 0) {
       console.log('✅ Awesome build successful!');
       
       // Create .nojekyll for GitHub Pages compatibility
-      fs.writeFileSync('out/.nojekyll', '');
+      fs.writeFileSync('public/.nojekyll', '');
       
       // Create CNAME if needed
-      // fs.writeFileSync('out/CNAME', 'centennialhillshomesforsale.com');
+      // fs.writeFileSync('public/CNAME', 'centennialhillshomesforsale.com');
       
       console.log('🎯 Enhanced build with awesome optimizations!');
       return true;
@@ -369,15 +386,15 @@ if (!buildSuccess) {
 }
 
 // Verify deployment is ready
-if (fs.existsSync('out/index.html')) {
+if (fs.existsSync('public/index.html')) {
   console.log('🌐 Awesome site is ready for deployment!');
-  console.log('📊 Total files:', fs.readdirSync('out').length);
+  console.log('📊 Total files:', fs.readdirSync('public').length);
   
   // Start awesome local server
   console.log('🚀 Starting awesome local server...');
   try {
     const { spawn } = require('child_process');
-    const server = spawn('npx', ['serve', 'out', '-s', '-l', '5000', '--cors', '--host', '0.0.0.0'], {
+    const server = spawn('npx', ['serve', 'public', '-s', '-l', '5000', '--cors', '--host', '0.0.0.0'], {
       stdio: 'inherit'
     });
     
@@ -391,7 +408,7 @@ if (fs.existsSync('out/index.html')) {
     console.log('   → PWA ready');
   } catch (serverError) {
     console.log('⚠️ Could not start server automatically');
-    console.log('Run: npx serve out -s -l 5000 --cors --host 0.0.0.0');
+    console.log('Run: npx serve public -s -l 5000 --cors --host 0.0.0.0');
   }
 } else {
   console.log('❌ Deployment failed completely');
