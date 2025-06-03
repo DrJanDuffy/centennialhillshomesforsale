@@ -1,81 +1,67 @@
 import { useState, useEffect, useCallback } from 'react';
-import { mcpClient, MCPResponse, MCPClient } from '../lib/mcp-client';
+import { mcpClient, MCPResponse } from '../lib/mcp-client';
+
+interface MCPClient {
+  connect(): Promise<void>;
+  disconnect(): void;
+  sendMessage(message: any): Promise<any>;
+}
 
 interface MCPClientHook {
-  mcpClient: MCPClient & {
-    sendMessage: (message: any) => Promise<{ content: string }>;
-  };
+  mcpClient: MCPClient | null;
   isConnected: boolean;
   isLoading: boolean;
   error: Error | null;
-  connected: boolean;
-  loading: boolean;
-  connect: () => Promise<void>;
-  disconnect: () => void;
-  sendMessage: (message: any) => Promise<MCPResponse>;
 }
 
 export const useMCPClient = (): MCPClientHook => {
-  const [connected, setConnected] = useState(false);
-  const [loading, setLoading] = useState(false);
+  const [isConnected, setIsConnected] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<Error | null>(null);
 
   useEffect(() => {
-    setConnected(mcpClient.connected);
+    setIsConnected(mcpClient.connected);
   }, []);
 
-  const connect = useCallback(async () => {
-    setLoading(true);
-    setError(null);
+  const wrappedClient: MCPClient = {
+    connect: async () => {
+      setIsLoading(true);
+      setError(null);
 
-    try {
-      const success = await mcpClient.connect();
-      setConnected(success);
-      if (!success) {
-        setError(new Error('Failed to connect to MCP server'));
-      }
-    } catch (err) {
-      setError(err instanceof Error ? err : new Error(String(err)));
-      setConnected(false);
-    } finally {
-      setLoading(false);
-    }
-  }, []);
-
-  const disconnect = useCallback(() => {
-    mcpClient.disconnect();
-    setConnected(false);
-    setError(null);
-  }, []);
-
-  const sendMessage = useCallback(async (message: any): Promise<MCPResponse> => {
-    try {
-      return await mcpClient.sendMessage(message);
-    } catch (err) {
-      return { success: false, error: String(err) };
-    }
-  }, []);
-
-  const result = {
-    mcpClient: {
-      sendMessage: async (message: any) => {
-        try {
-          const response = await mcpClient.sendMessage(message);
-          return { content: response.data?.message || 'Response from AI assistant' };
-        } catch (err) {
-          return { content: 'Sorry, I encountered an error processing your request.' };
+      try {
+        const success = await mcpClient.connect();
+        setIsConnected(success);
+        if (!success) {
+          setError(new Error('Failed to connect to MCP server'));
         }
+      } catch (err) {
+        setError(err instanceof Error ? err : new Error(String(err)));
+        setIsConnected(false);
+      } finally {
+        setIsLoading(false);
       }
     },
-    isConnected: connected,
-    isLoading: loading,
-    error,
-    connected,
-    loading,
-    connect,
-    disconnect,
-    sendMessage
+
+    disconnect: () => {
+      mcpClient.disconnect();
+      setIsConnected(false);
+      setError(null);
+    },
+
+    sendMessage: async (message: any) => {
+      try {
+        const response = await mcpClient.sendMessage(message);
+        return { content: response.data?.message || 'Response from AI assistant' };
+      } catch (err) {
+        return { content: 'Sorry, I encountered an error processing your request.' };
+      }
+    }
   };
-  
-  return result;
+
+  return {
+    mcpClient: isConnected ? wrappedClient : null,
+    isConnected,
+    isLoading,
+    error
+  };
 };
