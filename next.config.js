@@ -31,17 +31,31 @@ const withPWA = require('next-pwa')({
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  output: 'export',
+  distDir: 'out',
+  trailingSlash: true,
+  images: {
+    unoptimized: true
+  },
+  assetPrefix: process.env.NODE_ENV === 'production' ? '' : '',
+  basePath: '',
+  experimental: {
+    optimizePackageImports: ['lucide-react']
+  }
+};
+
+// 🚀 AWESOME PERFORMANCE OPTIMIZATIONS
+const nextConfigModified = {
   reactStrictMode: true,
   swcMinify: true,
-  output: 'export',
   trailingSlash: true,
-  distDir: 'public',
   
+
   // 🚀 AWESOME PERFORMANCE OPTIMIZATIONS
   poweredByHeader: false,
   generateEtags: false,
   compress: true,
-  
+
   // 🎯 PERFECT IMAGE HANDLING
   images: {
     unoptimized: true,
@@ -50,15 +64,16 @@ const nextConfig = {
     deviceSizes: [640, 750, 828, 1080, 1200, 1920, 2048, 3840],
     imageSizes: [16, 32, 48, 64, 96, 128, 256, 384]
   },
-  
+
   // 🔥 AWESOME BUILD OPTIMIZATIONS
   experimental: {
     esmExternals: false,
     typedRoutes: false,
     optimizeCss: true,
-    scrollRestoration: true
+    scrollRestoration: true,
+    optimizePackageImports: ['lucide-react']
   },
-  
+
   // 🌟 PERFECT WEBPACK CONFIG
   webpack: (config, { isServer, dev }) => {
     // Client-side optimizations
@@ -79,7 +94,7 @@ const nextConfig = {
         path: false
       };
     }
-    
+
     // Production optimizations
     if (!dev) {
       config.optimization = {
@@ -98,10 +113,10 @@ const nextConfig = {
         }
       };
     }
-    
+
     return config;
   },
-  
+
   // 🎨 AWESOME REDIRECTS & REWRITES
   async rewrites() {
     return [
@@ -111,7 +126,7 @@ const nextConfig = {
       }
     ];
   },
-  
+
   // 📈 PERFORMANCE HEADERS
   async headers() {
     return [
@@ -145,4 +160,4 @@ const nextConfig = {
   }
 }
 
-module.exports = withPWA(nextConfig);
+module.exports = withPWA(nextConfigModified);

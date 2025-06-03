@@ -1,127 +1,107 @@
 import Head from 'next/head';
-import { useEffect } from 'react';
 
 interface LocalBusinessSchemaProps {
-  pageType?: 'home' | 'about' | 'contact' | 'services' | 'neighborhood';
-  neighborhood?: string;
-  additionalServices?: string[];
+  name?: string;
+  description?: string;
+  address?: {
+    streetAddress: string;
+    addressLocality: string;
+    addressRegion: string;
+    postalCode: string;
+  };
+  phone?: string;
+  email?: string;
+  website?: string;
+  serviceArea?: string[];
 }
 
-export default function LocalBusinessSchema({ 
-  pageType = 'home', 
-  neighborhood,
-  additionalServices = []
-}: LocalBusinessSchemaProps): JSX.Element {
-  useEffect(() => {
-    // Remove any existing business schema to prevent duplicates
-    const existingSchemas = document.querySelectorAll('script[type="application/ld+json"]');
-    existingSchemas.forEach(schema => {
-      const content = schema.textContent;
-      if (content && content.includes('RealEstateAgent')) {
-        schema.remove();
-      }
-    });
-  }, []);
-
-  const baseSchema = {
+export default function LocalBusinessSchema({
+  name = "Dr. Jan Duff - Centennial Hills Real Estate",
+  description = "Expert real estate services in Centennial Hills, Providence, Skye Canyon, and Northwest Las Vegas. Trusted local agent with proven results.",
+  address = {
+    streetAddress: "Centennial Hills",
+    addressLocality: "Las Vegas",
+    addressRegion: "NV",
+    postalCode: "89149"
+  },
+  phone = "(702) 903-1952",
+  email = "jan@centennialhillshomesforsale.com",
+  website = "https://centennialhillshomesforsale.com",
+  serviceArea = ["Centennial Hills", "Providence", "Skye Canyon", "Northwest Las Vegas", "89149", "89166"]
+}: LocalBusinessSchemaProps) {
+  const schemaData = {
     "@context": "https://schema.org",
     "@type": "RealEstateAgent",
-    "name": "Dr. Jan Duffy, REALTOR®",
-    "alternateName": "Centennial Hills Homes | Providence & Skye Canyon | Dr. Jan Duffy, REALTOR®",
-    "url": "https://centennialhillshomesforsale.com",
-    "telephone": "(702) 903-1952",
-    "sameAs": [
-      "https://g.co/kgs/4qQ8DsY"
-    ],
+    "name": name,
+    "description": description,
+    "url": website,
+    "telephone": phone,
+    "email": email,
     "address": {
       "@type": "PostalAddress",
-      "streetAddress": "Providence Skye Canyon Dr",
-      "addressLocality": "Las Vegas", 
-      "addressRegion": "NV",
-      "postalCode": "89166",
+      "streetAddress": address.streetAddress,
+      "addressLocality": address.addressLocality,
+      "addressRegion": address.addressRegion,
+      "postalCode": address.postalCode,
       "addressCountry": "US"
     },
-    "geo": {
-      "@type": "GeoCoordinates",
-      "latitude": "36.268",
-      "longitude": "-115.328"
-    },
-    "openingHours": "Mo-Su 06:00-21:00",
-    "aggregateRating": {
-      "@type": "AggregateRating",
-      "ratingValue": "4.9",
-      "reviewCount": "127",
-      "bestRating": "5"
-    },
-    "priceRange": "$$$$",
-    "currenciesAccepted": "USD",
-    "paymentAccepted": "Cash, Check, Credit Card, Wire Transfer"
-  };
-
-  // Add neighborhood-specific data
-  if (neighborhood) {
-    const neighborhoodData = {
-      "areaServed": {
-        "@type": "Place",
-        "name": `${neighborhood}, Las Vegas, NV`
+    "areaServed": serviceArea.map(area => ({
+      "@type": "City",
+      "name": area
+    })),
+    "serviceArea": {
+      "@type": "GeoCircle",
+      "geoMidpoint": {
+        "@type": "GeoCoordinates",
+        "latitude": 36.2098,
+        "longitude": -115.2769
       },
-      "serviceArea": {
-        "@type": "GeoCircle",
-        "geoMidpoint": {
-          "@type": "GeoCoordinates",
-          "latitude": "36.268",
-          "longitude": "-115.328"
-        },
-        "geoRadius": "25000"
-      }
-    };
-    Object.assign(baseSchema, neighborhoodData);
-  }
-
-  // Add page-specific services
-  const services = {
-    home: ["Real Estate Sales", "Property Search", "Market Analysis"],
-    about: ["Real Estate Consultation", "Professional Services", "Client Representation"],
-    contact: ["Free Consultation", "Property Valuation", "Market Analysis"],
-    services: ["Buying Services", "Selling Services", "Investment Consultation", "First-Time Buyer Services"],
-    neighborhood: ["Neighborhood Expertise", "Local Market Knowledge", "Area Property Search"]
-  };
-
-  const pageServices = services[pageType] || services.home;
-  const allServices = [...pageServices, ...additionalServices];
-
-  const serviceSchema = {
+      "geoRadius": "25000"
+    },
+    "knowsAbout": [
+      "Real Estate Sales",
+      "Property Valuation", 
+      "Market Analysis",
+      "Home Buying",
+      "Home Selling",
+      "Investment Properties",
+      "Centennial Hills Neighborhoods",
+      "Las Vegas Real Estate Market"
+    ],
     "hasOfferCatalog": {
       "@type": "OfferCatalog",
       "name": "Real Estate Services",
-      "itemListElement": allServices.map((service, index) => ({
-        "@type": "Offer",
-        "itemOffered": {
-          "@type": "Service",
-          "name": service,
-          "provider": {
-            "@type": "RealEstateAgent",
-            "name": "Dr. Jan Duffy, REALTOR®"
+      "itemListElement": [
+        {
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "Service",
+            "name": "Home Buying Services",
+            "description": "Expert guidance for purchasing homes in Centennial Hills and surrounding areas"
+          }
+        },
+        {
+          "@type": "Offer", 
+          "itemOffered": {
+            "@type": "Service",
+            "name": "Home Selling Services",
+            "description": "Professional home selling services with proven marketing strategies"
           }
         }
-      }))
-    }
+      ]
+    },
+    "sameAs": [
+      website,
+      "https://www.google.com/maps/place/Centennial+Hills,+Las+Vegas,+NV"
+    ]
   };
-
-  const finalSchema = { ...baseSchema, ...serviceSchema };
 
   return (
     <Head>
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify(finalSchema, null, 0)
-        }}
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(schemaData) }}
       />
-      {/* Additional verification meta tags */}
-      <meta name="google-site-verification" content="centennial-hills-homes-verification" />
-      <meta name="business-verification" content="dr-jan-duffy-realtor" />
-      <link rel="canonical" href={`https://centennialhillshomesforsale.com${pageType === 'home' ? '' : `/${pageType}`}`} />
     </Head>
   );
 }
