@@ -1,0 +1,85 @@
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebSite",
+      "@id": "https://centennialhillshomesforsale.com/#website",
+      "url": "https://centennialhillshomesforsale.com",
+      "name": "Centennial Hills Homes For Sale",
+      "description": "Find luxury homes in Centennial Hills, Providence & Skye Canyon with Dr. Jan Duffy, top-rated REALTOR®",
+      "potentialAction": [
+        {
+          "@type": "SearchAction",
+          "target": {
+            "@type": "EntryPoint",
+            "urlTemplate": "https://centennialhillshomesforsale.com/listings?search={search_term_string}"
+          },
+          "query-input": "required name=search_term_string"
+        }
+      ],
+      "inLanguage": "en-US"
+    },
+    {
+      "@type": "Organization",
+      "@id": "https://centennialhillshomesforsale.com/#organization",
+      "name": "Dr. Jan Duffy, REALTOR®",
+      "url": "https://centennialhillshomesforsale.com",
+      "telephone": "(702) 903-1952",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Providence Skye Canyon Dr",
+        "addressLocality": "Las Vegas",
+        "addressRegion": "NV",
+        "postalCode": "89166",
+        "addressCountry": "US"
+      },
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": 36.268,
+        "longitude": -115.328
+      },
+      "areaServed": [
+        {
+          "@type": "Place",
+          "name": "Centennial Hills, Las Vegas, NV"
+        },
+        {
+          "@type": "Place",
+          "name": "Providence, Las Vegas, NV"
+        },
+        {
+          "@type": "Place",
+          "name": "Skye Canyon, Las Vegas, NV"
+        },
+        {
+          "@type": "Place",
+          "name": "Northwest Las Vegas, NV"
+        },
+        {
+          "@type": "Place",
+          "name": "Las Vegas, NV 89149"
+        },
+        {
+          "@type": "Place",
+          "name": "Las Vegas, NV 89166"
+        }
+      ],
+      "hasOfferCatalog": {
+        "@type": "OfferCatalog",
+        "name": "Real Estate Services",
+        "itemListElement": [
+          {
+            "@type": "Offer",
+            "name": "Home Buying Services",
+            "description": "Professional assistance for home buyers in Las Vegas"
+          },
+          {
+            "@type": "Offer",
+            "name": "Home Selling Services",
+            "description": "Expert home selling services with proven results"
+          }
+        ]
+      }
+    }
+  ]
+}

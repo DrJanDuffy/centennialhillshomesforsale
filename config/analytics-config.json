@@ -1,0 +1,27 @@
+{
+  "measurement_id": "G-9CKG30GVQR",
+  "enhanced_ecommerce": true,
+  "custom_dimensions": {
+    "property_type": "custom_dimension_1",
+    "neighborhood": "custom_dimension_2",
+    "price_range": "custom_dimension_3",
+    "user_type": "custom_dimension_4",
+    "search_query": "custom_dimension_5"
+  },
+  "custom_events": [
+    "property_search",
+    "property_view",
+    "contact_form_submit",
+    "phone_call_click",
+    "property_favorite",
+    "mortgage_calculator_use",
+    "map_interaction"
+  ],
+  "conversion_goals": [
+    "contact_form_completion",
+    "phone_call_initiated",
+    "property_inquiry_sent",
+    "newsletter_signup",
+    "property_tour_request"
+  ]
+}

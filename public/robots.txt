@@ -1,5 +1,22 @@
-
 User-agent: *
 Allow: /
 
+# Sitemaps
 Sitemap: https://centennialhillshomesforsale.com/sitemap.xml
+Sitemap: https://centennialhillshomesforsale.com/sitemap-news.xml
+
+# Crawl-delay for respectful crawling
+Crawl-delay: 1
+
+# Block sensitive areas
+Disallow: /api/
+Disallow: /_next/
+Disallow: /admin/
+Disallow: /private/
+
+# Allow important real estate pages
+Allow: /listings/
+Allow: /neighborhoods/
+Allow: /centennial-hills/
+Allow: /providence-las-vegas/
+Allow: /skye-canyon/
