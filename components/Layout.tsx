@@ -5,6 +5,11 @@ import Footer from './Footer';
 import Navigation from './Navigation';
 import ErrorBoundaryWrapper from './ErrorBoundaryWrapper';
 import EnhancedSEO from './EnhancedSEO';
+import SEOAdvanced from './SEOAdvanced';
+import GenerativeEngineOptimizer from './GenerativeEngineOptimizer';
+import GoogleBusinessProfileOptimizer from './GoogleBusinessProfileOptimizer';
+import GoogleAnalytics from './GoogleAnalytics';
+import GoogleSearchConsole from './GoogleSearchConsole';
 import LocalBusinessSchema from './LocalBusinessSchema';
 
 interface LayoutProps {
@@ -15,6 +20,10 @@ interface LayoutProps {
   keywords?: string;
   ogImage?: string;
   noindex?: boolean;
+  pageType?: string;
+  neighborhood?: string;
+  propertyData?: any;
+  canonicalUrl?: string;
 }
 
 const Layout: React.FC<LayoutProps> = ({
@@ -24,7 +33,11 @@ const Layout: React.FC<LayoutProps> = ({
   canonical,
   keywords = "Centennial Hills homes, Las Vegas real estate, Providence homes, Skye Canyon properties",
   ogImage = "/images/centennial-hills-og.jpg",
-  noindex = false
+  noindex = false,
+  pageType = 'website',
+  neighborhood = 'Centennial Hills',
+  propertyData = null,
+  canonicalUrl
 }) => {
   const fullTitle = title.includes('|') ? title : `${title} | Dr. Jan Duff Real Estate`;
 
@@ -67,13 +80,36 @@ const Layout: React.FC<LayoutProps> = ({
         <Header />
         <Navigation />
         <main className="flex-1">
-          <EnhancedSEO
-          title={title}
-          description={description}
-          keywords={keywords}
-          canonicalUrl={canonical}
-          ogImage={ogImage}
-        />
+          <EnhancedSEO 
+        title={title}
+        description={description}
+        keywords={keywords}
+        canonicalUrl={canonicalUrl}
+        pageType={pageType}
+        neighborhood={neighborhood}
+        propertyData={propertyData}
+      />
+      <SEOAdvanced
+        title={title}
+        description={description}
+        keywords={keywords}
+        canonicalUrl={canonicalUrl}
+        pageType={pageType}
+        neighborhood={neighborhood}
+        propertyData={propertyData}
+      />
+      <GenerativeEngineOptimizer
+        pageType={pageType}
+        neighborhood={neighborhood}
+        propertyData={propertyData}
+      />
+      <GoogleBusinessProfileOptimizer
+        pageType={pageType}
+        neighborhood={neighborhood}
+        showWidget={pageType === 'home'}
+      />
+      <GoogleAnalytics />
+      <GoogleSearchConsole />
           {children}
         </main>
         <Footer />
