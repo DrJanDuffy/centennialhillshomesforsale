@@ -1,7 +1,6 @@
-
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { 
   Sparkles, 
@@ -15,6 +14,19 @@ import {
   Phone,
   Mail
 } from 'lucide-react';
+
+// Enhanced icon imports with better fallbacks
+const FaRocket = React.lazy(() => 
+  import('react-icons/fa').then(module => ({ default: module.FaRocket })).catch(() => ({ default: () => <span style={{fontSize: '1.5em'}}>🚀</span> }))
+);
+
+const FaLightbulb = React.lazy(() => 
+  import('react-icons/fa').then(module => ({ default: module.FaLightbulb })).catch(() => ({ default: () => <span style={{fontSize: '1.5em'}}>💡</span> }))
+);
+
+const FaMagic = React.lazy(() => 
+  import('react-icons/fa').then(module => ({ default: module.FaMagic })).catch(() => ({ default: () => <span style={{fontSize: '1.5em'}}>✨</span> }))
+);
 
 interface AwesomeStats {
   homesSold: number;
@@ -32,6 +44,13 @@ export default function AwesomeEnhancements() {
   });
 
   const [isVisible, setIsVisible] = useState(false);
+
+  // Mock performance metrics (replace with actual metrics)
+  const performanceMetrics = useMemo(() => ({
+    lcp: Math.random() * 2 + 1,       // Example LCP between 1-3 seconds
+    fid: Math.random() * 80 + 20,      // Example FID between 20-100 ms
+    cls: Math.random() * 0.05         // Example CLS under 0.05
+  }), []);
 
   // Awesome animated counters
   useEffect(() => {
@@ -100,32 +119,34 @@ export default function AwesomeEnhancements() {
     }, 40);
   };
 
-  const awesomeFeatures = [
+  const awesomeFeatures = useMemo(() => [
     {
-      icon: <Sparkles className="w-8 h-8" />,
-      title: "AI-Powered Search",
-      description: "Advanced property matching using artificial intelligence",
-      color: "from-purple-500 to-pink-500"
+      id: 'performance',
+      title: 'Lightning Fast Performance',
+      description: 'Optimized for Core Web Vitals with advanced caching and lazy loading',
+      icon: FaRocket,
+      color: '#FF6B6B',
+      metrics: performanceMetrics,
+      highlights: ['< 2.5s LCP', '< 100ms FID', '< 0.1 CLS']
     },
     {
-      icon: <Zap className="w-8 h-8" />,
-      title: "Instant Valuations",
-      description: "Real-time property valuations and market analysis",
-      color: "from-blue-500 to-cyan-500"
+      id: 'ai-powered',
+      title: 'AI-Powered Intelligence',
+      description: 'Smart property recommendations with machine learning',
+      icon: FaLightbulb,
+      color: '#4ECDC4',
+      features: ['Voice Search', 'Smart Recommendations', 'AI Chat', 'Predictive Analytics']
     },
     {
-      icon: <TrendingUp className="w-8 h-8" />,
-      title: "Market Insights",
-      description: "Live market trends and investment opportunities",
-      color: "from-green-500 to-emerald-500"
-    },
-    {
-      icon: <Award className="w-8 h-8" />,
-      title: "Expert Guidance",
-      description: "30+ years of real estate expertise at your service",
-      color: "from-orange-500 to-red-500"
+      id: 'awesome-ux',
+      title: 'Awesome User Experience',
+      description: 'Smooth animations, PWA support, and responsive design',
+      icon: FaMagic,
+      color: '#FFE066',
+      animations: true,
+      features: ['PWA Install', 'Offline Support', 'Push Notifications']
     }
-  ];
+  ], [performanceMetrics]);
 
   return (
     <section className="py-20 bg-gradient-to-br from-gray-50 via-white to-blue-50 relative overflow-hidden">
@@ -154,11 +175,11 @@ export default function AwesomeEnhancements() {
               <Sparkles className="w-10 h-10 text-white" />
             </div>
           </motion.div>
-          
+
           <h2 className="text-5xl font-bold bg-gradient-to-r from-purple-600 via-blue-600 to-cyan-600 bg-clip-text text-transparent mb-6">
             Absolutely Awesome Real Estate Experience
           </h2>
-          
+
           <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
             Experience the future of real estate with Dr. Jan Duffy's innovative approach, 
             combining decades of expertise with cutting-edge technology for unparalleled results.
@@ -245,7 +266,7 @@ export default function AwesomeEnhancements() {
                 <p className="text-gray-600 text-center leading-relaxed">
                   {feature.description}
                 </p>
-                
+
                 {/* Awesome hover effect */}
                 <div className="absolute inset-0 bg-gradient-to-r from-purple-500/10 to-blue-500/10 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
               </div>
@@ -270,16 +291,16 @@ export default function AwesomeEnhancements() {
             >
               <Award className="w-16 h-16 text-yellow-300" />
             </motion.div>
-            
+
             <h3 className="text-4xl font-bold mb-6">
               Ready for an Awesome Real Estate Experience?
             </h3>
-            
+
             <p className="text-xl mb-8 opacity-90 max-w-2xl mx-auto">
               Join hundreds of satisfied clients who've experienced the difference of working 
               with Las Vegas' most innovative real estate professional.
             </p>
-            
+
             <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
               <motion.a
                 href="tel:702-903-1952"
@@ -290,7 +311,7 @@ export default function AwesomeEnhancements() {
                 <Phone className="w-5 h-5" />
                 Call (702) 903-1952
               </motion.a>
-              
+
               <motion.a
                 href="mailto:jan@centennialhillshomes.com"
                 whileHover={{ scale: 1.05 }}

@@ -4,7 +4,8 @@ import { useState, useEffect } from 'react';
 import Layout from '@/components/Layout';
 import AwesomeHero from '@/components/AwesomeHero';
 import AwesomeFeatures from '@/components/AwesomeFeatures';
-import AwesomeEnhancements from '@/components/AwesomeEnhancements';
+import { AwesomeEnhancements } from '@/components/AwesomeEnhancements';
+import { SlideUpSection, FadeInSection, BounceSection, StaggeredList } from '../components/AwesomeScrollAnimations';
 import LeadCaptureForm from '@/components/LeadCaptureForm';
 import LocalAmenities from '@/components/LocalAmenities';
 import MarketTrendChart from '@/components/MarketTrendChart';
@@ -91,40 +92,26 @@ const HomePage: React.FC = () => {
       canonical="https://centennialhillshomesforsale.com"
     >
       {/* Hero Section */}
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: isLoaded ? 1 : 0, y: isLoaded ? 0 : 20 }}
-        transition={{ duration: 0.6, ease: "easeOut" }}
-      >
+      <BounceSection>
         <AwesomeHero />
-      </motion.div>
+      </BounceSection>
 
-      {/* Stats Section */}
-      <section className="py-16 bg-white">
-        <div className="max-w-7xl mx-auto px-6">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            viewport={{ once: true }}
-            className="grid grid-cols-2 md:grid-cols-4 gap-8"
-          >
-            {stats.map((stat, index) => (
-              <div key={index} className="text-center">
-                <div className={`inline-flex items-center justify-center w-16 h-16 rounded-full bg-gray-100 mb-4 ${stat.color}`}>
-                  <stat.icon className="w-8 h-8" />
-                </div>
-                <div className="text-3xl font-bold text-gray-900 mb-2">{stat.value}</div>
-                <div className="text-gray-600">{stat.label}</div>
-              </div>
-            ))}
-          </motion.div>
-        </div>
-      </section>
+      {/* About Section */}
+      <SlideUpSection delay={200}>
+        <section className="about-section">
+          <div className="container">
+            <div className="section-header">
+              <h2>Your Centennial Hills Real Estate Expert</h2>
+              <p className="section-subtitle">30+ Years of Local Expertise</p>
+            </div>
+          </div>
+        </section>
+      </SlideUpSection>
 
-      {/* Awesome Features */}
-      <AwesomeFeatures />
-      <AwesomeEnhancements />
+      {/* Features Section */}
+      <FadeInSection delay={400}>
+        <AwesomeEnhancements />
+      </FadeInSection>
 
       {/* Featured Properties */}
       <section className="py-20 bg-gray-50">

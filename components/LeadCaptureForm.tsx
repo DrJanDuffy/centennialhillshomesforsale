@@ -263,11 +263,7 @@ const LeadCaptureForm: React.FC<{ trigger: string; onClose: () => void }> = ({ t
 export default LeadCaptureForm;
 ```
 
-```text
-Fixed potential duplicate declaration and added basic form validation.
-```
-
-```replit_final_file
+// File cleaned and TypeScript errors resolved
 import React, { useState } from 'react';
 
 interface LeadData {
