@@ -2,6 +2,7 @@
 import React from 'react';
 import Layout from '../components/Layout';
 import TaskMasterDashboard from '../components/TaskMasterDashboard';
+import TaskMasterStatus from '../components/TaskMasterStatus';
 import { Activity, Settings, TrendingUp, Zap } from 'lucide-react';
 
 const TaskMasterPage: React.FC = () => {
@@ -38,6 +39,8 @@ const TaskMasterPage: React.FC = () => {
             </div>
           </div>
 
+          <TaskMasterStatus />
+          
           <TaskMasterDashboard />
 
           <div className="workflow-status">
