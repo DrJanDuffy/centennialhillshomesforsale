@@ -9,6 +9,7 @@ interface VoiceSearchHook {
   isListening: boolean;
   transcript: string;
   error: string | null;
+  hasPermission: boolean;
   startListening: () => void;
   stopListening: () => void;
   resetTranscript: () => void;
@@ -18,6 +19,7 @@ export const useVoiceSearch = (): VoiceSearchHook => {
   const [isListening, setIsListening] = useState(false);
   const [transcript, setTranscript] = useState('');
   const [error, setError] = useState<string | null>(null);
+  const [hasPermission, setHasPermission] = useState(false);
   const recognitionRef = useRef<any>(null);
 
   useEffect(() => {
@@ -25,6 +27,7 @@ export const useVoiceSearch = (): VoiceSearchHook => {
       const SpeechRecognition = (window as any).SpeechRecognition || (window as any).webkitSpeechRecognition;
 
       if (SpeechRecognition) {
+        setHasPermission(true);
         recognitionRef.current = new SpeechRecognition();
         recognitionRef.current.continuous = true;
         recognitionRef.current.interimResults = true;
@@ -81,6 +84,7 @@ export const useVoiceSearch = (): VoiceSearchHook => {
     isListening,
     transcript,
     error,
+    hasPermission,
     startListening,
     stopListening,
     resetTranscript
