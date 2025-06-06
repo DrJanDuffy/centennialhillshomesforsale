@@ -11,6 +11,8 @@ import GoogleBusinessProfileOptimizer from './GoogleBusinessProfileOptimizer';
 import GoogleAnalytics from './GoogleAnalytics';
 import GoogleSearchConsole from './GoogleSearchConsole';
 import LocalBusinessSchema from './LocalBusinessSchema';
+import { PerformanceMonitor } from './PerformanceMonitor';
+import { AwesomePerformanceBar } from './AwesomePerformanceBar';
 
 interface LayoutProps {
   children: ReactNode;
@@ -113,7 +115,12 @@ const Layout: React.FC<LayoutProps> = ({
           {children}
         </main>
         <Footer />
-      </div>
+
+      <PerformanceMonitor />
+      <AwesomePerformanceBar />
+      <PWAInstallPrompt />
+      <SafeGoogleAnalytics />
+    </div>
     </ErrorBoundaryWrapper>
   );
 };
