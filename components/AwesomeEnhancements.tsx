@@ -35,7 +35,7 @@ interface AwesomeStats {
   clientSatisfaction: number;
 }
 
-export default function AwesomeEnhancements() {
+function AwesomeEnhancements() {
   const [stats, setStats] = useState<AwesomeStats>({
     homesSold: 0,
     avgSalePrice: '$0',
@@ -328,3 +328,5 @@ export default function AwesomeEnhancements() {
     </section>
   );
 }
+
+export default AwesomeEnhancements;
