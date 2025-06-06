@@ -13,6 +13,8 @@ import GoogleSearchConsole from './GoogleSearchConsole';
 import LocalBusinessSchema from './LocalBusinessSchema';
 import { PerformanceMonitor } from './PerformanceMonitor';
 import { AwesomePerformanceBar } from './AwesomePerformanceBar';
+import PWAInstallPrompt from './PWAInstallPrompt';
+import SafeGoogleAnalytics from './SafeGoogleAnalytics';
 
 interface LayoutProps {
   children: ReactNode;

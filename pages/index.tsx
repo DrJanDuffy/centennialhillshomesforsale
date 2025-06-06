@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react';
 import Layout from '@/components/Layout';
 import AwesomeHero from '@/components/AwesomeHero';
 import AwesomeFeatures from '@/components/AwesomeFeatures';
-import { AwesomeEnhancements } from '@/components/AwesomeEnhancements';
+import AwesomeEnhancements from '@/components/AwesomeEnhancements';
 import { SlideUpSection, FadeInSection, BounceSection, StaggeredList } from '../components/AwesomeScrollAnimations';
 import LeadCaptureForm from '@/components/LeadCaptureForm';
 import LocalAmenities from '@/components/LocalAmenities';
