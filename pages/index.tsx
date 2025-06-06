@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import Layout from '@/components/Layout';
 import AwesomeHero from '@/components/AwesomeHero';
 import AwesomeFeatures from '@/components/AwesomeFeatures';
+import AwesomeEnhancements from '@/components/AwesomeEnhancements';
 import LeadCaptureForm from '@/components/LeadCaptureForm';
 import LocalAmenities from '@/components/LocalAmenities';
 import MarketTrendChart from '@/components/MarketTrendChart';
@@ -123,6 +124,7 @@ const HomePage: React.FC = () => {
 
       {/* Awesome Features */}
       <AwesomeFeatures />
+      <AwesomeEnhancements />
 
       {/* Featured Properties */}
       <section className="py-20 bg-gray-50">
