@@ -1,9 +1,11 @@
-import '../styles/globals.css';
-import type { AppProps } from 'next/app';
-import Layout from '../components/Layout';
-import ErrorBoundaryWrapper from '../components/ErrorBoundaryWrapper';
-import GlobalErrorHandler from '../utils/globalErrorHandler';
-import { useEffect } from 'react';
+import '../styles/globals.css'
+import type { AppProps } from 'next/app'
+import { ErrorBoundary } from 'react-error-boundary'
+import ErrorHandler from '../components/ErrorHandler'
+import GoogleAnalytics from '../components/GoogleAnalytics'
+import AdvancedSEOOptimizer from '../components/AdvancedSEOOptimizer'
+import LocalSEOBooster from '../components/LocalSEOBooster'
+import { useEffect } from 'react'
 
 export default function App({ Component, pageProps }: AppProps) {
   useEffect(() => {
@@ -13,10 +15,13 @@ export default function App({ Component, pageProps }: AppProps) {
   }, []);
 
   return (
-    <ErrorBoundaryWrapper>
-      <Layout>
+    
+      <ErrorBoundary FallbackComponent={ErrorHandler}>
+        <GoogleAnalytics />
+        <AdvancedSEOOptimizer />
+        <LocalSEOBooster />
         <Component {...pageProps} />
-      </Layout>
-    </ErrorBoundaryWrapper>
+      </ErrorBoundary>
+    
   );
 }
