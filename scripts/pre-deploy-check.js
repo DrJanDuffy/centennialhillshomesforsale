@@ -1,4 +1,3 @@
-
 #!/usr/bin/env node
 
 const fs = require('fs');
@@ -55,7 +54,7 @@ try {
   const hasEssentialDeps = packageJson.dependencies && 
                           packageJson.dependencies.next && 
                           packageJson.dependencies.react;
-  
+
   if (hasEssentialDeps) {
     healthChecks.dependencies = true;
     console.log('✅ Essential dependencies present');
