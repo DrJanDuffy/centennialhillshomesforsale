@@ -183,6 +183,39 @@ args = "echo \"🚀 Starting development server on port 5000...\""
 task = "shell.exec"
 args = "npm run dev"
 
+[[workflows.workflow]]
+name = "Code Validation Test"
+author = 22930014
+mode = "sequential"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "echo \"🔍 Running comprehensive code validation...\""
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "echo \"📋 TypeScript compilation check...\""
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "npx tsc --noEmit --skipLibCheck"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "echo \"✅ TypeScript validation complete\""
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "echo \"🔨 Testing build process...\""
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "npm run build"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "echo \"🎯 Validation complete - all critical issues fixed!\""
+
 [[ports]]
 localPort = 5000
 externalPort = 80

@@ -1,46 +1,35 @@
-
 {
   "compilerOptions": {
-    "target": "es2017",
-    "lib": [
-      "dom",
-      "dom.iterable",
-      "esnext"
-    ],
+    "target": "es5",
+    "lib": ["dom", "dom.iterable", "es6", "webrtc"],
     "allowJs": true,
     "skipLibCheck": true,
     "strict": true,
-    "noUnusedLocals": false,
-    "noUnusedParameters": false,
     "forceConsistentCasingInFileNames": true,
     "noEmit": true,
-    "incremental": true,
     "esModuleInterop": true,
     "module": "esnext",
     "moduleResolution": "node",
     "resolveJsonModule": true,
     "isolatedModules": true,
     "jsx": "preserve",
+    "incremental": true,
     "baseUrl": ".",
     "paths": {
-      "@/*": ["./*"]
-    },
-    "plugins": [
-      {
-        "name": "next"
-      }
-    ]
+      "@/*": ["./src/*"],
+      "@/components/*": ["./components/*"],
+      "@/hooks/*": ["./hooks/*"],
+      "@/utils/*": ["./utils/*"],
+      "@/lib/*": ["./lib/*"],
+      "@/types/*": ["./types/*"]
+    }
   },
   "include": [
-    "next-env.d.ts",
-    "types/**/*.d.ts",
-    "**/*.ts",
+    "next-env.d.ts", 
+    "**/*.ts", 
     "**/*.tsx",
-    ".next/types/**/*.ts"
+    "types/**/*.ts",
+    "lib/**/*.ts"
   ],
-  "exclude": [
-    "node_modules",
-    "out",
-    "public"
-  ]
+  "exclude": ["node_modules", "out", "build"]
 }
