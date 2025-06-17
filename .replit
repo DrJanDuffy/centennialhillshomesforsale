@@ -11,7 +11,7 @@ publicDir = "out"
 build = ["sh", "-c", "npm run build"]
 
 [workflows]
-runButton = "AWESOME DEPLOY"
+runButton = "Simple Dev Server"
 
 [[workflows.workflow]]
 name = "AWESOME DEPLOY"
@@ -140,6 +140,23 @@ args = "echo \"✅ Deployment test completed successfully!\""
 [[workflows.workflow.tasks]]
 task = "shell.exec"
 args = "ls -la out/ | head -5"
+
+[[workflows.workflow]]
+name = "Simple Dev Server"
+author = 22930014
+mode = "sequential"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "echo \"🛠️ Starting Centennial Hills Website...\""
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "npm install --legacy-peer-deps"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "npm run dev"
 
 [[ports]]
 localPort = 5000
