@@ -15,6 +15,7 @@ import { PerformanceMonitor } from './PerformanceMonitor';
 import { AwesomePerformanceBar } from './AwesomePerformanceBar';
 import PWAInstallPrompt from './PWAInstallPrompt';
 import SafeGoogleAnalytics from './SafeGoogleAnalytics';
+import SystemHealthMonitor from './SystemHealthMonitor';
 
 interface LayoutProps {
   children: ReactNode;
@@ -122,6 +123,7 @@ const Layout: React.FC<LayoutProps> = ({
       <AwesomePerformanceBar />
       <PWAInstallPrompt />
       <SafeGoogleAnalytics />
+      <SystemHealthMonitor />
     </div>
     </ErrorBoundaryWrapper>
   );
