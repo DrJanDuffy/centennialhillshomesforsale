@@ -1,125 +1,22 @@
 import '../styles/globals.css';
-import '../styles/realscout.css';
 import type { AppProps } from 'next/app';
-import { useEffect, useState } from 'react';
-import ErrorBoundary from '../components/ErrorBoundary';
 import Layout from '../components/Layout';
-import { setupGlobalErrorHandling } from '../utils/errorTracking';
-import { useRouter } from 'next/router';
+import ErrorBoundaryWrapper from '../components/ErrorBoundaryWrapper';
+import GlobalErrorHandler from '../utils/globalErrorHandler';
+import { useEffect } from 'react';
 
 export default function App({ Component, pageProps }: AppProps) {
-  const [isClient, setIsClient] = useState(false);
-
   useEffect(() => {
-    // Ensure we're on the client side
-    setIsClient(true);
-
-    // Remove server-side injected CSS
-    const jssStyles = document.querySelector('#jss-server-side');
-    if (jssStyles && jssStyles.parentElement) {
-      jssStyles.parentElement.removeChild(jssStyles);
-    }
-
-    // Setup global error handling with safety checks
-    try {
-      setupGlobalErrorHandling();
-    } catch (error) {
-      console.error('Error setting up global error handling:', error);
-    }
-
-    // Fix common hydration issues with improved error handling
-    const fixHydrationIssues = () => {
-      try {
-        // Fix date/time related hydration mismatches
-        const dateElements = document.querySelectorAll('[data-date], .date-display');
-        dateElements.forEach(el => {
-          if (el.textContent && el.textContent.includes('Invalid Date')) {
-            el.textContent = new Date().toLocaleDateString();
-          }
-        });
-
-        // Fix random number hydration mismatches
-        const randomElements = document.querySelectorAll('[data-random]');
-        randomElements.forEach(el => {
-          const seed = el.getAttribute('data-seed') || '12345';
-          el.textContent = seed;
-        });
-
-        // Fix environment-specific content
-        const envElements = document.querySelectorAll('[data-env]');
-        envElements.forEach(el => {
-          (el as HTMLElement).style.display = 'block';
-        });
-
-        // Fix any layout shift issues
-        const body = document.body;
-        if (body) {
-          body.style.visibility = 'visible';
-        }
-
-        // Ensure all interactive elements are properly initialized
-        const buttons = document.querySelectorAll('button, .btn, [role="button"]');
-        buttons.forEach(btn => {
-          if (btn instanceof HTMLElement) {
-            btn.style.pointerEvents = 'auto';
-            btn.style.cursor = 'pointer';
-          }
-        });
-
-      } catch (error) {
-        console.error('Error fixing hydration issues:', error);
-      }
-    };
-
-    // Apply fixes after DOM is ready
-    if (document.readyState === 'loading') {
-      document.addEventListener('DOMContentLoaded', fixHydrationIssues);
-    } else {
-      setTimeout(fixHydrationIssues, 50);
-    }
-
-    return () => {
-      document.removeEventListener('DOMContentLoaded', fixHydrationIssues);
-    };
-
+    // Initialize global error handling
+    const globalErrorHandler = GlobalErrorHandler.getInstance();
+    globalErrorHandler.initialize();
   }, []);
 
-  // For static export, always render the component
-  if (typeof window === 'undefined') {
-    // Server-side rendering
-    return (
-      <ErrorBoundary>
-        <div suppressHydrationWarning={true}>
-          <Layout>
-            <Component {...pageProps} />
-          </Layout>
-        </div>
-      </ErrorBoundary>
-    );
-  }
-
-  // Client-side rendering with loading state
-  if (!isClient) {
-    return (
-      <div style={{ 
-        display: 'flex', 
-        justifyContent: 'center', 
-        alignItems: 'center', 
-        height: '100vh',
-        fontFamily: 'Arial, sans-serif'
-      }}>
-        Loading...
-      </div>
-    );
-  }
-
   return (
-    <ErrorBoundary>
-      <div suppressHydrationWarning={true}>
-        <Layout>
-          <Component {...pageProps} />
-        </Layout>
-      </div>
-    </ErrorBoundary>
+    <ErrorBoundaryWrapper>
+      <Layout>
+        <Component {...pageProps} />
+      </Layout>
+    </ErrorBoundaryWrapper>
   );
 }
