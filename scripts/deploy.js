@@ -1,57 +1,87 @@
+
 #!/usr/bin/env node
 
 const { execSync } = require('child_process');
 const fs = require('fs');
 const path = require('path');
 
-console.log('🚀 DEPLOYING AWESOME CENTENNIAL HILLS WEBSITE');
-console.log('============================================');
+console.log('🚀 AWESOME CENTENNIAL HILLS DEPLOYMENT');
+console.log('=====================================');
+
+const deploymentConfig = {
+  buildDir: 'out',
+  port: 5000,
+  host: '0.0.0.0'
+};
 
 try {
   // Step 1: Clean previous builds
   console.log('🧹 Cleaning previous builds...');
-  if (fs.existsSync('public')) {
-    execSync('rm -rf public/*', { stdio: 'inherit' });
-  }
-  if (fs.existsSync('out')) {
-    execSync('rm -rf out', { stdio: 'inherit' });
-  }
-  if (fs.existsSync('.next')) {
-    execSync('rm -rf .next', { stdio: 'inherit' });
-  }
+  ['out', '.next', 'public'].forEach(dir => {
+    if (fs.existsSync(dir)) {
+      execSync(`rm -rf ${dir}`, { stdio: 'inherit' });
+    }
+  });
 
-  // Step 2: Install dependencies
+  // Step 2: Install dependencies with optimization
   console.log('📦 Installing dependencies...');
-  execSync('npm install --legacy-peer-deps', { stdio: 'inherit' });
+  execSync('npm ci --production=false --silent', { stdio: 'inherit' });
 
-  // Step 3: Build static site
-  console.log('🔨 Building static site...');
-  execSync('npm run build-static', { stdio: 'inherit' });
+  // Step 3: Build with optimizations
+  console.log('🔨 Building optimized production site...');
+  process.env.NODE_ENV = 'production';
+  execSync('npm run build', { stdio: 'inherit' });
 
-  // Step 4: Verify build
-  console.log('📁 Verifying build...');
-  if (fs.existsSync('public') && fs.readdirSync('public').length > 0) {
-    const fileCount = fs.readdirSync('public').length;
-    console.log(`✅ Build successful! Generated ${fileCount} files in public directory`);
-
-    // List key files
-    const keyFiles = ['index.html', 'manifest.json', 'robots.txt'];
-    keyFiles.forEach(file => {
-      const filePath = path.join('public', file);
-      if (fs.existsSync(filePath)) {
-        const stats = fs.statSync(filePath);
-        console.log(`📄 ${file}: ${Math.round(stats.size / 1024)}KB`);
-      }
-    });
-
-    console.log('🌐 Starting production server...');
-    execSync('npx serve public -s -l 5000 --cors --host 0.0.0.0', { stdio: 'inherit' });
-  } else {
-    throw new Error('Build failed - public directory empty or missing');
+  // Step 4: Verify critical files
+  console.log('📊 Verifying deployment assets...');
+  const criticalFiles = ['index.html', 'manifest.json', 'robots.txt', 'sitemap.xml'];
+  const buildPath = deploymentConfig.buildDir;
+  
+  if (!fs.existsSync(buildPath)) {
+    throw new Error(`Build directory ${buildPath} not found`);
   }
+
+  const fileCount = fs.readdirSync(buildPath).length;
+  console.log(`✅ Build successful: ${fileCount} files generated`);
+
+  criticalFiles.forEach(file => {
+    const filePath = path.join(buildPath, file);
+    if (fs.existsSync(filePath)) {
+      const size = Math.round(fs.statSync(filePath).size / 1024);
+      console.log(`📄 ${file}: ${size}KB ✅`);
+    } else {
+      console.log(`⚠️  ${file}: Missing`);
+    }
+  });
+
+  // Step 5: Performance audit
+  console.log('⚡ Running performance audit...');
+  const indexPath = path.join(buildPath, 'index.html');
+  if (fs.existsSync(indexPath)) {
+    const indexSize = fs.statSync(indexPath).size;
+    if (indexSize < 500000) { // 500KB threshold
+      console.log(`✅ Index.html size optimized: ${Math.round(indexSize/1024)}KB`);
+    } else {
+      console.log(`⚠️  Index.html is large: ${Math.round(indexSize/1024)}KB - consider optimization`);
+    }
+  }
+
+  // Step 6: Start production server
+  console.log('🌐 Starting production server...');
+  console.log(`🔗 Server will be available at: http://${deploymentConfig.host}:${deploymentConfig.port}`);
+  
+  execSync(`npx serve ${buildPath} -s -l ${deploymentConfig.port} --cors --host ${deploymentConfig.host}`, { 
+    stdio: 'inherit' 
+  });
 
 } catch (error) {
   console.error('❌ Deployment failed:', error.message);
-  console.log('🔄 Falling back to development server...');
-  execSync('npm run dev', { stdio: 'inherit' });
+  console.log('🔄 Attempting emergency fallback...');
+  
+  try {
+    execSync('npm run dev', { stdio: 'inherit' });
+  } catch (fallbackError) {
+    console.error('❌ Emergency fallback failed:', fallbackError.message);
+    process.exit(1);
+  }
 }
