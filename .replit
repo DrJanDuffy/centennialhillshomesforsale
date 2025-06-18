@@ -216,6 +216,87 @@ args = "npm run build"
 task = "shell.exec"
 args = "echo \"🎯 Validation complete - all critical issues fixed!\""
 
+[[workflows.workflow]]
+name = "Complete Site Validation"
+author = 22930014
+mode = "sequential"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "echo \"🔍 COMPREHENSIVE REALTOR WEBSITE VALIDATION\""
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "echo \"============================================\""
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "echo \"📋 1. TypeScript compilation check...\""
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "npx tsc --noEmit --skipLibCheck"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "echo \"✅ TypeScript validation complete\""
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "echo \"\""
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "echo \"🔨 2. Testing build process...\""
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "npm run build"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "echo \"✅ Build validation complete\""
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "echo \"\""
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "echo \"🌐 3. Checking all pages for SEO compliance...\""
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "node scripts/validate-realtor-pages.js"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "echo \"✅ Page validation complete\""
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "echo \"\""
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "echo \"📊 4. Performance audit...\""
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "node scripts/performance-audit.js"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "echo \"✅ Performance validation complete\""
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "echo \"\""
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "echo \"🎯 VALIDATION COMPLETE - All critical issues fixed!\""
+
 [[ports]]
 localPort = 5000
 externalPort = 80

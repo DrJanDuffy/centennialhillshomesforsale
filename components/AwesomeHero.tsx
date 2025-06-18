@@ -15,7 +15,7 @@ const AwesomeHero: React.FC<AwesomeHeroProps> = ({
 }) => {
   const [isVisible, setIsVisible] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
-  const { sendMessage, loading: mcpLoading } = useMCPClient();
+  const { sendMessage, isConnected, error, connect } = useMCPClient();
   const { 
     isListening, 
     transcript, 

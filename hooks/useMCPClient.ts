@@ -7,20 +7,21 @@ interface MCPClientResponse {
 }
 
 interface MCPClientHook {
-  connected: boolean;
-  loading: boolean;
-  error: string | null;
   sendMessage: (message: string) => Promise<MCPClientResponse>;
+  isConnected: boolean;
+  isLoading: boolean;
+  error: string | null;
+  connect: () => Promise<void>;
   disconnect: () => void;
 }
 
 export function useMCPClient(): MCPClientHook {
-  const [connected, setConnected] = useState(false);
-  const [loading, setLoading] = useState(false);
+  const [isConnected, setIsConnected] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
   const sendMessage = useCallback(async (message: string): Promise<MCPClientResponse> => {
-    setLoading(true);
+    setIsLoading(true);
     setError(null);
 
     try {
@@ -43,26 +44,34 @@ export function useMCPClient(): MCPClientHook {
       setError(errorMessage);
       return { success: false, error: errorMessage };
     } finally {
-      setLoading(false);
+      setIsLoading(false);
     }
   }, []);
 
+  const connect = useCallback(async () => {
+    if (!isConnected) {
+      setIsConnected(true);
+      setError(null);
+    }
+  }, [isConnected]);
+
   const disconnect = useCallback(() => {
-    setConnected(false);
+    setIsConnected(false);
     setError(null);
   }, []);
 
   useEffect(() => {
     // Initialize connection
-    setConnected(true);
+    setIsConnected(true);
   }, []);
 
   return {
-    connected,
-    loading,
-    error,
     sendMessage,
-    disconnect,
+    isConnected,
+    isLoading,
+    error,
+    connect,
+    disconnect
   };
 }
 
