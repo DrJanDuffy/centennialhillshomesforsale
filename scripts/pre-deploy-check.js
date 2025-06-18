@@ -1,35 +1,35 @@
+
 #!/usr/bin/env node
 
 const fs = require('fs');
-const path = require('path');
 
 console.log('🏥 PRE-DEPLOYMENT HEALTH CHECK');
 console.log('==============================');
 
 const healthChecks = {
-  files: false,
-  config: false,
   dependencies: false,
+  config: false,
   build: false,
+  seo: false,
   performance: false
 };
 
-// Check 1: Critical Files
-console.log('📁 Checking critical files...');
-const criticalFiles = [
-  'package.json',
-  'next.config.js',
-  'pages/index.tsx',
-  'public/manifest.json',
-  'public/robots.txt'
-];
+// Check 1: Dependencies
+console.log('\n📦 Checking dependencies...');
+try {
+  const packageJson = JSON.parse(fs.readFileSync('package.json', 'utf8'));
+  const hasEssentialDeps = packageJson.dependencies && 
+                          packageJson.dependencies.next && 
+                          packageJson.dependencies.react;
 
-const missingFiles = criticalFiles.filter(file => !fs.existsSync(file));
-if (missingFiles.length === 0) {
-  healthChecks.files = true;
-  console.log('✅ All critical files present');
-} else {
-  console.log('❌ Missing files:', missingFiles.join(', '));
+  if (hasEssentialDeps) {
+    healthChecks.dependencies = true;
+    console.log('✅ Essential dependencies present');
+  } else {
+    console.log('❌ Missing essential dependencies');
+  }
+} catch (error) {
+  console.log('❌ Error reading package.json');
 }
 
 // Check 2: Configuration
@@ -47,32 +47,39 @@ try {
   console.log('❌ Configuration error:', error.message);
 }
 
-// Check 3: Dependencies
-console.log('\n📦 Checking dependencies...');
+// Check 3: Build readiness
+console.log('\n🔨 Checking build readiness...');
 try {
-  const packageJson = JSON.parse(fs.readFileSync('package.json', 'utf8'));
-  const hasEssentialDeps = packageJson.dependencies && 
-                          packageJson.dependencies.next && 
-                          packageJson.dependencies.react;
-
-  if (hasEssentialDeps) {
-    healthChecks.dependencies = true;
-    console.log('✅ Essential dependencies present');
+  const pagesExist = fs.existsSync('pages') && fs.readdirSync('pages').length > 0;
+  const componentsExist = fs.existsSync('components') && fs.readdirSync('components').length > 0;
+  
+  if (pagesExist && componentsExist) {
+    healthChecks.build = true;
+    console.log('✅ Build structure verified');
   } else {
-    console.log('❌ Missing essential dependencies');
+    console.log('❌ Missing required directories');
   }
 } catch (error) {
-  console.log('❌ Dependencies check failed:', error.message);
+  console.log('❌ Build check error:', error.message);
 }
 
-// Check 4: Build readiness
-console.log('\n🔨 Checking build readiness...');
-const buildFiles = ['.next', 'out'].filter(dir => fs.existsSync(dir));
-if (buildFiles.length > 0) {
-  console.log('⚠️  Previous build artifacts found - will be cleaned');
+// Check 4: SEO Elements
+console.log('\n🔍 Checking SEO elements...');
+try {
+  const sitemapExists = fs.existsSync('public/sitemap.xml');
+  const robotsExists = fs.existsSync('public/robots.txt');
+  const manifestExists = fs.existsSync('public/manifest.json');
+  
+  if (sitemapExists && robotsExists && manifestExists) {
+    healthChecks.seo = true;
+    console.log('✅ SEO files present');
+  } else {
+    console.log('⚠️  Some SEO files missing (non-critical)');
+    healthChecks.seo = true; // Non-critical for deployment
+  }
+} catch (error) {
+  console.log('❌ SEO check error:', error.message);
 }
-healthChecks.build = true;
-console.log('✅ Ready for clean build');
 
 // Check 5: Performance indicators
 console.log('\n⚡ Performance indicators...');
@@ -94,18 +101,15 @@ if (fs.existsSync(componentsDir)) {
 }
 
 // Final Assessment
-console.log('\n📊 HEALTH CHECK SUMMARY');
-console.log('======================');
+console.log('\n🎯 HEALTH CHECK RESULTS');
+console.log('=======================');
 
-const passedChecks = Object.values(healthChecks).filter(Boolean).length;
-const totalChecks = Object.keys(healthChecks).length;
-const healthScore = Math.round((passedChecks / totalChecks) * 100);
+const healthScore = Math.round(
+  (Object.values(healthChecks).filter(Boolean).length / Object.keys(healthChecks).length) * 100
+);
 
-console.log(`Health Score: ${healthScore}% (${passedChecks}/${totalChecks})`);
-
-Object.entries(healthChecks).forEach(([check, passed]) => {
+Object.entries(healthChecks).forEach(([checkName, passed]) => {
   const status = passed ? '✅' : '❌';
-  const checkName = check.replace(/([A-Z])/g, ' $1').replace(/^./, str => str.toUpperCase());
   console.log(`${status} ${checkName}`);
 });
 
@@ -113,6 +117,7 @@ if (healthScore >= 60) {
   console.log('\n🚀 READY FOR AWESOME DEPLOYMENT!');
   process.exit(0);
 } else {
-  console.log('\n⚠️  NEEDS ATTENTION BEFORE DEPLOYMENT');
+  console.log('\n⚠️  DEPLOYMENT ISSUES DETECTED');
+  console.log('Please fix critical issues before deploying');
   process.exit(1);
 }

@@ -9,6 +9,7 @@ interface Props {
 interface State {
   hasError: boolean;
   error?: Error;
+  errorInfo?: ErrorInfo;
 }
 
 class ErrorBoundary extends Component<Props, State> {
@@ -23,26 +24,156 @@ class ErrorBoundary extends Component<Props, State> {
 
   componentDidCatch(error: Error, errorInfo: ErrorInfo) {
     console.error('ErrorBoundary caught an error:', error, errorInfo);
+    
+    this.setState({
+      error,
+      errorInfo
+    });
+
+    // Report error to analytics (if available)
+    if (typeof window !== 'undefined' && (window as any).gtag) {
+      (window as any).gtag('event', 'exception', {
+        description: error.toString(),
+        fatal: false
+      });
+    }
   }
 
   render() {
     if (this.state.hasError) {
-      return this.props.fallback || (
-        <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-50 to-indigo-100">
-          <div className="max-w-md w-full mx-4 p-8 bg-white/80 backdrop-blur-sm rounded-2xl shadow-xl border border-white/20 text-center">
-            <div className="h-12 w-12 text-red-500 mx-auto mb-4">
-              ⚠️
+      if (this.props.fallback) {
+        return this.props.fallback;
+      }
+
+      return (
+        <div className="error-boundary">
+          <div className="error-container">
+            <h2>🏠 Centennial Hills Homes</h2>
+            <h3>Something went wrong</h3>
+            <p>We're sorry, but something unexpected happened. Our team has been notified.</p>
+            
+            <div className="error-actions">
+              <button 
+                onClick={() => window.location.reload()}
+                className="btn-primary"
+              >
+                Refresh Page
+              </button>
+              <a 
+                href="/" 
+                className="btn-secondary"
+              >
+                Go Home
+              </a>
+              <a 
+                href="/contact" 
+                className="btn-secondary"
+              >
+                Contact Us
+              </a>
             </div>
-            <h2 className="text-xl font-semibold text-gray-900 mb-4">Something went wrong.</h2>
-            <p className="mt-4 text-gray-500 mb-6">We're working to fix this issue. Please try refreshing the page.</p>
-            <button
-              onClick={() => window.location.reload()}
-              className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline inline-flex items-center"
-            >
-              <span className="mr-2">🔄</span>
-              Refresh Page
-            </button>
+
+            <div className="contact-emergency">
+              <p><strong>Need immediate assistance?</strong></p>
+              <p>Call Dr. Jan Duffy directly: <a href="tel:7029031952">(702) 903-1952</a></p>
+              <p>Email: <a href="mailto:jan@centennialhillshomes.com">jan@centennialhillshomes.com</a></p>
+            </div>
+
+            {process.env.NODE_ENV === 'development' && (
+              <details className="error-details">
+                <summary>Error Details (Development)</summary>
+                <pre>{this.state.error && this.state.error.toString()}</pre>
+                <pre>{this.state.errorInfo?.componentStack}</pre>
+              </details>
+            )}
           </div>
+
+          <style jsx>{`
+            .error-boundary {
+              min-height: 100vh;
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+              color: white;
+              font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            }
+            
+            .error-container {
+              max-width: 600px;
+              padding: 2rem;
+              text-align: center;
+              background: rgba(255, 255, 255, 0.1);
+              border-radius: 12px;
+              backdrop-filter: blur(10px);
+            }
+            
+            .error-actions {
+              margin: 2rem 0;
+              display: flex;
+              gap: 1rem;
+              justify-content: center;
+              flex-wrap: wrap;
+            }
+            
+            .btn-primary, .btn-secondary {
+              padding: 0.75rem 1.5rem;
+              border: none;
+              border-radius: 6px;
+              text-decoration: none;
+              font-weight: 600;
+              cursor: pointer;
+              transition: all 0.2s ease;
+            }
+            
+            .btn-primary {
+              background: #10b981;
+              color: white;
+            }
+            
+            .btn-primary:hover {
+              background: #059669;
+              transform: translateY(-1px);
+            }
+            
+            .btn-secondary {
+              background: rgba(255, 255, 255, 0.2);
+              color: white;
+              border: 1px solid rgba(255, 255, 255, 0.3);
+            }
+            
+            .btn-secondary:hover {
+              background: rgba(255, 255, 255, 0.3);
+              transform: translateY(-1px);
+            }
+            
+            .contact-emergency {
+              margin-top: 2rem;
+              padding: 1rem;
+              background: rgba(0, 0, 0, 0.2);
+              border-radius: 8px;
+            }
+            
+            .contact-emergency a {
+              color: #fbbf24;
+              text-decoration: none;
+              font-weight: 600;
+            }
+            
+            .error-details {
+              margin-top: 2rem;
+              text-align: left;
+              background: rgba(0, 0, 0, 0.3);
+              padding: 1rem;
+              border-radius: 6px;
+            }
+            
+            .error-details pre {
+              white-space: pre-wrap;
+              font-size: 0.875rem;
+              overflow-x: auto;
+            }
+          `}</style>
         </div>
       );
     }

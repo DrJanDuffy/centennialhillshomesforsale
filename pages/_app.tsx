@@ -15,13 +15,11 @@ export default function App({ Component, pageProps }: AppProps) {
   }, []);
 
   return (
-    
-      <ErrorBoundary FallbackComponent={ErrorHandler}>
-        <GoogleAnalytics />
-        <AdvancedSEOOptimizer />
-        <LocalSEOBooster />
-        <Component {...pageProps} />
-      </ErrorBoundary>
-    
+    <ErrorBoundary FallbackComponent={ErrorHandler}>
+      <GoogleAnalytics />
+      <AdvancedSEOOptimizer />
+      <LocalSEOBooster />
+      <Component {...pageProps} />
+    </ErrorBoundary>
   );
 }
