@@ -1,6 +1,6 @@
 
 import React, { useEffect, useState } from 'react';
-import Head from 'next/Head';
+import Head from 'next/head';
 
 interface GoogleBusinessProfileOptimizerProps {
   pageType?: 'home' | 'about' | 'contact' | 'services' | 'neighborhood';

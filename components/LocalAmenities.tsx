@@ -83,7 +83,6 @@ export default function LocalAmenities() {
     </motion.section>
   );
 }
-import React from 'react';
 import { MapPin, GraduationCap, ShoppingBag, Coffee, TreePine, Car } from 'lucide-react';
 
 const LocalAmenities: React.FC = () => {
