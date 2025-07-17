@@ -30,7 +30,6 @@ export default function AIAssistant() {
 
   // Use the hooks with proper interfaces
   const { 
-    mcpClient, 
     isConnected, 
     isLoading: mcpLoading, 
     error: mcpError 
@@ -39,16 +38,8 @@ export default function AIAssistant() {
   const { 
     isListening, 
     startListening, 
-    hasPermission, 
     error: voiceError 
-  } = useVoiceSearch(
-    (transcript) => setInputValue(transcript),
-    {
-      onError: (error) => console.warn('Voice search error:', error),
-      continuous: false,
-      interimResults: true
-    }
-  );
+  } = useVoiceSearch();
 
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
@@ -91,8 +82,8 @@ export default function AIAssistant() {
     setIsTyping(true);
 
     try {
-      // Use the mcpClient's sendMessage method
-      const response = await mcpClient.sendMessage(inputValue);
+      // Simulate AI response for now
+      const response = { content: `I understand you're asking about: "${inputValue}". I'm here to help with Centennial Hills real estate. Let me provide you with relevant information about homes, market trends, or property values in the area.` };
 
       const assistantMessage: Message = {
         id: (Date.now() + 1).toString(),
@@ -256,10 +247,9 @@ export default function AIAssistant() {
                     className="w-full px-3 py-2 pr-10 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500"
                     disabled={isTyping || mcpLoading}
                   />
-                  {hasPermission && (
-                    <button
+                  <button
                       onClick={startListening}
-                      disabled={!hasPermission || mcpLoading}
+                      disabled={mcpLoading}
                       title={voiceError || 'Click to speak'}
                       className={`absolute right-2 top-1/2 -translate-y-1/2 p-1 rounded ${
                         isListening ? 'text-red-500 animate-pulse' : 

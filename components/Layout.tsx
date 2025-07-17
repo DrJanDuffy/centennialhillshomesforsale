@@ -11,7 +11,7 @@ import GoogleBusinessProfileOptimizer from './GoogleBusinessProfileOptimizer';
 import GoogleAnalytics from './GoogleAnalytics';
 import GoogleSearchConsole from './GoogleSearchConsole';
 import LocalBusinessSchema from './LocalBusinessSchema';
-import { PerformanceMonitor } from './PerformanceMonitor';
+import PerformanceMonitor from './PerformanceMonitor';
 import { AwesomePerformanceBar } from './AwesomePerformanceBar';
 import PWAInstallPrompt from './PWAInstallPrompt';
 import SafeGoogleAnalytics from './SafeGoogleAnalytics';
