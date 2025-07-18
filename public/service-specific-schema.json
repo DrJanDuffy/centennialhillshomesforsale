@@ -1,0 +1,184 @@
+
+{
+  "realEstateServices": {
+    "@context": "https://schema.org",
+    "@type": "RealEstateAgent",
+    "name": "Dr. Jan Duffy",
+    "jobTitle": "REALTOR®",
+    "worksFor": {
+      "@type": "RealEstateAgency",
+      "name": "Berkshire Hathaway HomeServices Nevada Properties"
+    },
+    "telephone": "(702) 903-1952",
+    "url": "https://centennialhillshomesforsale.com",
+    "areaServed": [
+      {
+        "@type": "City",
+        "name": "Las Vegas",
+        "addressRegion": "NV"
+      },
+      {
+        "@type": "Neighborhood",
+        "name": "Centennial Hills"
+      },
+      {
+        "@type": "Neighborhood", 
+        "name": "Providence"
+      },
+      {
+        "@type": "Neighborhood",
+        "name": "Skye Canyon"
+      },
+      {
+        "@type": "Neighborhood",
+        "name": "Summerlin"
+      }
+    ],
+    "hasOfferCatalog": {
+      "@type": "OfferCatalog",
+      "name": "Real Estate Services",
+      "itemListElement": [
+        {
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "Service",
+            "name": "Luxury Home Sales",
+            "description": "Specialized service for luxury properties $500K+",
+            "serviceType": "Residential Real Estate"
+          }
+        },
+        {
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "Service",
+            "name": "New Construction Sales",
+            "description": "Expert guidance through new home building process",
+            "serviceType": "New Construction"
+          }
+        },
+        {
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "Service",
+            "name": "First-Time Home Buyer Services",
+            "description": "Comprehensive support for first-time buyers",
+            "serviceType": "Buyer Representation"
+          }
+        },
+        {
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "Service",
+            "name": "Relocation Services",
+            "description": "Full-service relocation assistance",
+            "serviceType": "Relocation"
+          }
+        },
+        {
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "Service",
+            "name": "Investment Property Guidance",
+            "description": "Investment analysis and property selection",
+            "serviceType": "Investment Real Estate"
+          }
+        },
+        {
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "Service",
+            "name": "Building Lot Sales",
+            "description": "Custom home building lot selection and sales",
+            "serviceType": "Land Sales"
+          }
+        }
+      ]
+    },
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": "4.9",
+      "reviewCount": "127",
+      "bestRating": "5"
+    },
+    "review": [
+      {
+        "@type": "Review",
+        "reviewRating": {
+          "@type": "Rating",
+          "ratingValue": "5"
+        },
+        "author": {
+          "@type": "Person",
+          "name": "Sarah M."
+        },
+        "reviewBody": "Dr. Duffy helped us find our dream home in Providence. Her knowledge of the area and negotiation skills were exceptional."
+      }
+    ]
+  },
+  "localBusinessSchema": {
+    "@context": "https://schema.org",
+    "@type": "LocalBusiness",
+    "name": "Dr. Jan Duffy Real Estate",
+    "image": "https://centennialhillshomesforsale.com/images/dr-jan-duffy.jpg",
+    "telephone": "(702) 903-1952",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "Providence Skye Canyon Dr",
+      "addressLocality": "Las Vegas",
+      "addressRegion": "NV",
+      "postalCode": "89166"
+    },
+    "geo": {
+      "@type": "GeoCoordinates",
+      "latitude": "36.268",
+      "longitude": "-115.328"
+    },
+    "openingHours": "Mo-Su 06:00-21:00",
+    "priceRange": "$$",
+    "paymentAccepted": "Cash, Check, Financing",
+    "currenciesAccepted": "USD"
+  },
+  "professionalServiceSchema": {
+    "@context": "https://schema.org",
+    "@type": "ProfessionalService",
+    "name": "Dr. Jan Duffy REALTOR®",
+    "serviceType": "Real Estate Services",
+    "provider": {
+      "@type": "Person",
+      "name": "Dr. Jan Duffy",
+      "jobTitle": "REALTOR®",
+      "hasCredential": [
+        {
+          "@type": "EducationalOccupationalCredential",
+          "name": "REALTOR® License",
+          "credentialCategory": "Professional License"
+        },
+        {
+          "@type": "EducationalOccupationalCredential",
+          "name": "Top 1% Las Vegas REALTOR®",
+          "credentialCategory": "Professional Achievement"
+        }
+      ]
+    },
+    "areaServed": {
+      "@type": "GeoCircle",
+      "geoMidpoint": {
+        "@type": "GeoCoordinates",
+        "latitude": "36.268",
+        "longitude": "-115.328"
+      },
+      "geoRadius": "25000"
+    },
+    "availableChannel": {
+      "@type": "ServiceChannel",
+      "servicePhone": "(702) 903-1952",
+      "availableLanguage": "English",
+      "hoursAvailable": {
+        "@type": "OpeningHoursSpecification",
+        "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
+        "opens": "06:00",
+        "closes": "21:00"
+      }
+    }
+  }
+}

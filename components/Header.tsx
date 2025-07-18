@@ -41,6 +41,9 @@ export default function Header() {
     };
   }, []);
 
+  // Compute ARIA expanded value
+  const ariaExpanded = isMenuOpen ? 'true' : 'false';
+
   return (
     <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
       isScrolled 
@@ -48,16 +51,16 @@ export default function Header() {
         : 'bg-transparent'
     }`}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-20">
+        <div className="flex items-center justify-between h-16 sm:h-20">
           
           {/* Logo and Brand Section */}
           <div className="flex-shrink-0">
             <Link href="/" onClick={closeMenu} className="block">
               <div className="flex flex-col">
-                <h1 className="text-2xl sm:text-3xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+                <h1 className="text-xl sm:text-2xl lg:text-3xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent leading-tight">
                   Dr. Jan Duffy
                 </h1>
-                <span className="text-sm text-gray-600 font-medium">
+                <span className="text-xs sm:text-sm text-gray-600 font-medium">
                   REALTOR® | Centennial Hills Expert
                 </span>
                 <div className="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-3 mt-1">
@@ -83,7 +86,7 @@ export default function Header() {
           <div className="hidden md:block">
             <a 
               href="tel:+17029031952" 
-              className="inline-flex items-center px-4 py-2 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 transition-colors duration-200"
+              className="inline-flex items-center px-4 py-2 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 transition-colors duration-200 text-sm"
             >
               📞 (702) 903-1952
             </a>
@@ -91,26 +94,26 @@ export default function Header() {
 
           {/* Mobile Menu Button */}
           <button 
-            className={`md:hidden relative w-8 h-8 flex flex-col justify-center items-center space-y-1 ${
+            className={`md:hidden relative w-8 h-8 flex flex-col justify-center items-center space-y-1.5 ${
               isMenuOpen ? 'open' : ''
             }`}
             onClick={toggleMenu}
             aria-label="Toggle menu"
-            aria-expanded={isMenuOpen}
+            aria-expanded={ariaExpanded}
           >
             <span className={`w-6 h-0.5 bg-gray-700 transition-all duration-300 ${
-              isMenuOpen ? 'rotate-45 translate-y-1.5' : ''
+              isMenuOpen ? 'rotate-45 translate-y-2' : ''
             }`}></span>
             <span className={`w-6 h-0.5 bg-gray-700 transition-all duration-300 ${
               isMenuOpen ? 'opacity-0' : ''
             }`}></span>
             <span className={`w-6 h-0.5 bg-gray-700 transition-all duration-300 ${
-              isMenuOpen ? '-rotate-45 -translate-y-1.5' : ''
+              isMenuOpen ? '-rotate-45 -translate-y-2' : ''
             }`}></span>
           </button>
 
           {/* Desktop Navigation */}
-          <nav className="hidden md:flex items-center space-x-8">
+          <nav className="hidden md:flex items-center space-x-6 lg:space-x-8">
             <Link 
               href="/" 
               className={`text-sm font-medium transition-colors duration-200 ${
@@ -176,15 +179,15 @@ export default function Header() {
       </div>
 
       {/* Mobile Navigation Menu */}
-      <div className={`md:hidden transition-all duration-300 ${
+      <div className={`md:hidden transition-all duration-300 ease-in-out ${
         isMenuOpen ? 'max-h-screen opacity-100' : 'max-h-0 opacity-0'
-      } overflow-hidden bg-white border-t border-gray-200`}>
+      } overflow-hidden bg-white border-t border-gray-200 shadow-lg`}>
         <div className="px-4 py-6 space-y-4">
           {/* Mobile Contact */}
           <div className="pb-4 border-b border-gray-200">
             <a 
               href="tel:+17029031952" 
-              className="inline-flex items-center justify-center w-full px-4 py-3 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 transition-colors duration-200"
+              className="inline-flex items-center justify-center w-full px-4 py-3 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 transition-colors duration-200 text-base"
               onClick={closeMenu}
             >
               📞 (702) 903-1952
@@ -197,84 +200,93 @@ export default function Header() {
           </div>
 
           {/* Mobile Navigation Links */}
-          <div className="space-y-3">
+          <div className="space-y-2">
             <Link 
               href="/" 
-              className={`block px-4 py-3 text-lg font-medium rounded-lg transition-colors duration-200 ${
+              className={`block px-4 py-3 text-base font-medium rounded-lg transition-colors duration-200 ${
                 router.pathname === '/' 
                   ? 'bg-blue-50 text-blue-600 border-l-4 border-blue-600' 
                   : 'text-gray-700 hover:bg-gray-50'
               }`}
               onClick={closeMenu}
             >
-              Home
+              🏠 Home
             </Link>
             <Link 
               href="/about" 
-              className={`block px-4 py-3 text-lg font-medium rounded-lg transition-colors duration-200 ${
+              className={`block px-4 py-3 text-base font-medium rounded-lg transition-colors duration-200 ${
                 router.pathname === '/about' 
                   ? 'bg-blue-50 text-blue-600 border-l-4 border-blue-600' 
                   : 'text-gray-700 hover:bg-gray-50'
               }`}
               onClick={closeMenu}
             >
-              About Dr. Duffy
+              👋 About Dr. Duffy
             </Link>
             <Link 
               href="/listings" 
-              className={`block px-4 py-3 text-lg font-medium rounded-lg transition-colors duration-200 ${
+              className={`block px-4 py-3 text-base font-medium rounded-lg transition-colors duration-200 ${
                 router.pathname === '/listings' 
                   ? 'bg-blue-50 text-blue-600 border-l-4 border-blue-600' 
                   : 'text-gray-700 hover:bg-gray-50'
               }`}
               onClick={closeMenu}
             >
-              Listings
+              🏡 Listings
             </Link>
             <Link 
               href="/neighborhoods" 
-              className={`block px-4 py-3 text-lg font-medium rounded-lg transition-colors duration-200 ${
+              className={`block px-4 py-3 text-base font-medium rounded-lg transition-colors duration-200 ${
                 router.pathname === '/neighborhoods' 
                   ? 'bg-blue-50 text-blue-600 border-l-4 border-blue-600' 
                   : 'text-gray-700 hover:bg-gray-50'
               }`}
               onClick={closeMenu}
             >
-              Neighborhoods
+              🏘️ Neighborhoods
             </Link>
             <Link 
               href="/services" 
-              className={`block px-4 py-3 text-lg font-medium rounded-lg transition-colors duration-200 ${
+              className={`block px-4 py-3 text-base font-medium rounded-lg transition-colors duration-200 ${
                 router.pathname === '/services' 
                   ? 'bg-blue-50 text-blue-600 border-l-4 border-blue-600' 
                   : 'text-gray-700 hover:bg-gray-50'
               }`}
               onClick={closeMenu}
             >
-              Services
+              ⭐ Services
             </Link>
             <Link 
               href="/market-update" 
-              className={`block px-4 py-3 text-lg font-medium rounded-lg transition-colors duration-200 ${
+              className={`block px-4 py-3 text-base font-medium rounded-lg transition-colors duration-200 ${
                 router.pathname === '/market-update' 
                   ? 'bg-blue-50 text-blue-600 border-l-4 border-blue-600' 
                   : 'text-gray-700 hover:bg-gray-50'
               }`}
               onClick={closeMenu}
             >
-              Market Update
+              📊 Market Update
             </Link>
             <Link 
               href="/contact" 
-              className={`block px-4 py-3 text-lg font-medium rounded-lg transition-colors duration-200 ${
+              className={`block px-4 py-3 text-base font-medium rounded-lg transition-colors duration-200 ${
                 router.pathname === '/contact' 
                   ? 'bg-blue-50 text-blue-600 border-l-4 border-blue-600' 
                   : 'text-gray-700 hover:bg-gray-50'
               }`}
               onClick={closeMenu}
             >
-              Contact
+              📞 Contact
             </Link>
+          </div>
+
+          {/* Mobile Additional Info */}
+          <div className="pt-4 border-t border-gray-200">
+            <div className="text-center text-xs text-gray-500 space-y-1">
+              <p>✅ Verified Google Business</p>
+              <p>⭐ 4.9/5 • Top 1% REALTOR®</p>
+              <p>🏆 30+ Years of Experience</p>
+            </div>
           </div>
         </div>
       </div>

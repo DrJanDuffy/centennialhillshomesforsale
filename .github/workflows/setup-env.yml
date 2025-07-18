@@ -1,0 +1,45 @@
+name: Setup Environment Variables
+
+on:
+  workflow_dispatch:
+    inputs:
+      realscout_office_id:
+        description: 'RealScout Office ID'
+        required: true
+        type: string
+      realscout_market_area:
+        description: 'RealScout Market Area'
+        required: true
+        type: string
+      homebot_api_key:
+        description: 'Homebot API Key'
+        required: true
+        type: string
+      cloudcma_api_key:
+        description: 'CloudCMA API Key'
+        required: true
+        type: string
+      percy_api_key:
+        description: 'Percy.ai API Key'
+        required: true
+        type: string
+
+jobs:
+  setup:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Set RealScout Office ID
+        run: |
+          echo "NEXT_PUBLIC_REALSCOUT_OFFICE_ID=${{ github.event.inputs.realscout_office_id }}" >> $GITHUB_ENV
+      - name: Set RealScout Market Area
+        run: |
+          echo "NEXT_PUBLIC_REALSCOUT_MARKET_AREA=${{ github.event.inputs.realscout_market_area }}" >> $GITHUB_ENV
+      - name: Set Homebot API Key
+        run: |
+          echo "NEXT_PUBLIC_HOMEBOT_API_KEY=${{ github.event.inputs.homebot_api_key }}" >> $GITHUB_ENV
+      - name: Set CloudCMA API Key
+        run: |
+          echo "NEXT_PUBLIC_CLOUDCMA_API_KEY=${{ github.event.inputs.cloudcma_api_key }}" >> $GITHUB_ENV
+      - name: Set Percy API Key
+        run: |
+          echo "NEXT_PUBLIC_PERCY_API_KEY=${{ github.event.inputs.percy_api_key }}" >> $GITHUB_ENV 
