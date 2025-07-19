@@ -360,6 +360,7 @@
   box-sizing: border-box;
   transition: all var(--transition-normal);
   border-bottom: 2px solid rgba(255, 255, 255, 0.1);
+  overflow: hidden; /* Prevent content overflow */
 }
 
 .header--scrolled {
@@ -599,6 +600,8 @@
   background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-dark) 100%);
   color: var(--text-white);
   overflow: hidden;
+  margin-top: 70px; /* Account for fixed header */
+  padding-top: 2rem; /* Additional top padding */
 }
 
 .hero-background {
