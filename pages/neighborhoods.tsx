@@ -147,16 +147,17 @@ export default function Neighborhoods() {
 
           <SchoolInfo neighborhood={selectedNeighborhood} />
 
+          {/* RealScout Office Listings */}
           <div className="listings-section">
             <h3>Available Homes in {selectedNeighborhood}</h3>
-            <RealScoutWidget 
-              type="office-listings"
-              title={`Homes in ${selectedNeighborhood}`}
-              description={`Discover available properties in ${selectedNeighborhood}`}
-              priceMin={400000}
-              priceMax={1500000}
-              propertyTypes="SFR,MF,TC"
-            />
+            <realscout-office-listings 
+              agent-encoded-id="QWdlbnQtMjI1MDUw" 
+              sort-order="STATUS_AND_SIGNIFICANT_CHANGE" 
+              listing-status="For Sale" 
+              property-types="SFR,MF,TC" 
+              price-min="600000" 
+              price-max="1200000">
+            </realscout-office-listings>
           </div>
         </motion.section>
       </main>

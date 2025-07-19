@@ -149,6 +149,29 @@ export default function NorthwestLasVegas() {
           </div>
         </motion.section>
 
+        {/* RealScout Office Listings */}
+        <motion.section 
+          className="section"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.7, duration: 0.6 }}
+        >
+          <div className="container">
+            <div className="text-center mb-8">
+              <h2>Current Listings</h2>
+              <p>Browse our latest properties in Northwest Las Vegas and surrounding areas</p>
+            </div>
+            <realscout-office-listings 
+              agent-encoded-id="QWdlbnQtMjI1MDUw" 
+              sort-order="STATUS_AND_SIGNIFICANT_CHANGE" 
+              listing-status="For Sale" 
+              property-types="SFR,MF,TC" 
+              price-min="600000" 
+              price-max="1200000">
+            </realscout-office-listings>
+          </div>
+        </motion.section>
+
         <motion.section 
           className="listings-section"
           initial={{ opacity: 0, y: 20 }}
