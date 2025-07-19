@@ -154,7 +154,21 @@ export const PropertyCard: React.FC<PropertyCardProps> = ({
             transition={{ duration: 0.3 }}
             className="absolute inset-0"
           >
-            <div className="w-full h-full bg-gradient-to-br from-secondary-color/80 to-accent-color/80 flex items-center justify-center">
+            {property.images && property.images.length > 0 ? (
+              <img
+                src={property.images[currentImageIndex]?.url}
+                alt={property.images[currentImageIndex]?.alt || 'Property image'}
+                className="w-full h-full object-cover"
+                onError={(e) => {
+                  // Fallback to gradient background if image fails to load
+                  e.currentTarget.style.display = 'none';
+                  e.currentTarget.nextElementSibling?.classList.remove('hidden');
+                }}
+              />
+            ) : null}
+            
+            {/* Fallback gradient background */}
+            <div className={`w-full h-full bg-gradient-to-br from-secondary-color/80 to-accent-color/80 flex items-center justify-center ${property.images && property.images.length > 0 ? 'hidden' : ''}`}>
               <Home className="w-16 h-16 text-white opacity-30" />
             </div>
           </motion.div>
