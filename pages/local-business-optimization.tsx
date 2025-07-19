@@ -3,6 +3,7 @@ import { motion } from 'framer-motion';
 import Head from 'next/head';
 import Layout from '../components/Layout';
 import { FaMapMarkerAlt, FaPhone, FaClock, FaStar, FaCheckCircle } from 'react-icons/fa';
+import Link from 'next/link';
 
 export default function LocalBusinessOptimization() {
   const serviceAreas = [
@@ -231,9 +232,9 @@ export default function LocalBusinessOptimization() {
               <a href="tel:+17029031952" className="contact-button primary">
                 📞 Call Now: (702) 903-1952
               </a>
-              <a href="/contact" className="contact-button secondary">
+              <Link href="/contact" className="contact-button secondary">
                 📧 Request Free Consultation
-              </a>
+              </Link>
             </div>
           </div>
         </motion.section>

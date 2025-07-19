@@ -9,8 +9,10 @@ export default function Document() {
         
         {/* Favicon and PWA icons */}
         <link rel="icon" href="/favicon.ico" />
-        <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
         <link rel="manifest" href="/manifest.json" />
+        
+        {/* Apple Touch Icon for iOS home screen */}
+        <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
         
         {/* PWA Meta Tags */}
         <meta name="application-name" content="Centennial Hills Homes" />
@@ -19,9 +21,20 @@ export default function Document() {
         <meta name="apple-mobile-web-app-title" content="Centennial Hills Homes" />
         <meta name="format-detection" content="telephone=no" />
         <meta name="mobile-web-app-capable" content="yes" />
-        <meta name="msapplication-TileColor" content="#1e40af" />
+        <meta name="msapplication-TileColor" content="#2563eb" />
         <meta name="msapplication-tap-highlight" content="no" />
-        <meta name="theme-color" content="#1e40af" />
+        
+        {/* 
+          theme-color: Sets browser toolbar color on supported browsers (Chrome, Safari, Edge)
+          Note: Firefox and Opera don't support this meta tag, but it's still beneficial for other browsers
+          This is a progressive enhancement - browsers that support it will use it, others will ignore it
+          Compatibility: Chrome 39+, Safari 15+, Edge 79+ (Firefox and Opera ignore this tag)
+        */}
+        <meta name="theme-color" content="#2563eb" />
+        
+        {/* Light/Dark mode theme-color variants - Progressive enhancement for supported browsers */}
+        <meta name="theme-color" content="#2563eb" media="(prefers-color-scheme: light)" />
+        <meta name="theme-color" content="#1e40af" media="(prefers-color-scheme: dark)" />
         
         {/* Performance and Security */}
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />

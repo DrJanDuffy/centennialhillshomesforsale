@@ -1,7 +1,7 @@
 
 import React, { useState } from 'react';
 
-type NeighborhoodName = 'Centennial Hills' | 'The Trails' | 'Tournament Hills' | 'Skye Canyon' | 'Sun City Aliante';
+export type NeighborhoodName = 'Centennial Hills' | 'The Trails' | 'Tournament Hills' | 'Skye Canyon' | 'Sun City Aliante';
 
 interface NeighborhoodBarProps {
   currentNeighborhood: NeighborhoodName;

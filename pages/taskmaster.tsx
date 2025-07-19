@@ -1,11 +1,25 @@
 
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import Layout from '../components/Layout';
 import TaskMasterDashboard from '../components/TaskMasterDashboard';
 import TaskMasterStatus from '../components/TaskMasterStatus';
-import { Activity, Settings, TrendingUp, Zap } from 'lucide-react';
+import { Activity, Settings, TrendingUp, Zap, Clock, CheckCircle, AlertTriangle, Lightbulb } from 'lucide-react';
 
 const TaskMasterPage: React.FC = () => {
+  const [isVisible, setIsVisible] = useState(false);
+  const [activeWorkflow, setActiveWorkflow] = useState<string | null>(null);
+
+  useEffect(() => {
+    const timer = setTimeout(() => setIsVisible(true), 100);
+    return () => clearTimeout(timer);
+  }, []);
+
+  const handleWorkflowClick = (workflowId: string) => {
+    setActiveWorkflow(activeWorkflow === workflowId ? null : workflowId);
+  };
+
+
+
   return (
     <Layout 
       title="TaskMaster AI Dashboard - Centennial Hills Homes"
@@ -13,7 +27,7 @@ const TaskMasterPage: React.FC = () => {
     >
       <div className="taskmaster-page">
         <div className="max-w-7xl mx-auto px-6 py-8">
-          <div className="taskmaster-header">
+          <div className={`taskmaster-header ${isVisible ? 'animate-slide-in-up' : ''}`}>
             <div className="header-content">
               <h1 className="text-4xl font-bold text-gray-900 mb-4">
                 🤖 TaskMaster AI Control Center
@@ -43,10 +57,16 @@ const TaskMasterPage: React.FC = () => {
           
           <TaskMasterDashboard />
 
-          <div className="workflow-status">
+          <div className={`workflow-status ${isVisible ? 'animate-fade-in-scale' : ''}`}>
             <h2 className="text-2xl font-bold mb-6">Active Workflows</h2>
             <div className="workflow-grid">
-              <div className="workflow-card running">
+              <div 
+                className={`workflow-card running ${isVisible ? 'animate-delay-1' : ''}`}
+                onClick={() => handleWorkflowClick('seo-optimization')}
+                role="button"
+                tabIndex={0}
+                aria-label="Daily SEO Optimization workflow - 75% complete"
+              >
                 <div className="workflow-header">
                   <Activity className="text-green-500" />
                   <span className="status">Running</span>
@@ -55,15 +75,31 @@ const TaskMasterPage: React.FC = () => {
                 <p>Monitoring search rankings and updating meta tags</p>
                 <div className="workflow-progress">
                   <div className="progress-bar">
-                    <div className="progress-fill" style={{width: '75%'}}></div>
+                    <div 
+                      className="progress-fill progress-fill-taskmaster"
+                      style={{ width: '75%' }}
+                    ></div>
                   </div>
                   <span>75% Complete</span>
                 </div>
+                {activeWorkflow === 'seo-optimization' && (
+                  <div className="workflow-details">
+                    <p>• Updated 12 meta descriptions</p>
+                    <p>• Fixed 3 broken internal links</p>
+                    <p>• Optimized image alt tags</p>
+                  </div>
+                )}
               </div>
 
-              <div className="workflow-card scheduled">
+              <div 
+                className={`workflow-card scheduled ${isVisible ? 'animate-delay-2' : ''}`}
+                onClick={() => handleWorkflowClick('performance-monitor')}
+                role="button"
+                tabIndex={0}
+                aria-label="Performance Monitor workflow - scheduled to run in 12 minutes"
+              >
                 <div className="workflow-header">
-                  <Activity className="text-blue-500" />
+                  <Clock className="text-blue-500" />
                   <span className="status">Scheduled</span>
                 </div>
                 <h3>Performance Monitor</h3>
@@ -71,11 +107,24 @@ const TaskMasterPage: React.FC = () => {
                 <div className="next-run">
                   Next run: In 12 minutes
                 </div>
+                {activeWorkflow === 'performance-monitor' && (
+                  <div className="workflow-details">
+                    <p>• Current LCP: 2.1s</p>
+                    <p>• FID: 45ms</p>
+                    <p>• CLS: 0.08</p>
+                  </div>
+                )}
               </div>
 
-              <div className="workflow-card completed">
+              <div 
+                className={`workflow-card completed ${isVisible ? 'animate-delay-3' : ''}`}
+                onClick={() => handleWorkflowClick('content-refresh')}
+                role="button"
+                tabIndex={0}
+                aria-label="Content Refresh workflow - completed 2 hours ago"
+              >
                 <div className="workflow-header">
-                  <Activity className="text-gray-500" />
+                  <CheckCircle className="text-gray-500" />
                   <span className="status">Completed</span>
                 </div>
                 <h3>Content Refresh</h3>
@@ -83,27 +132,43 @@ const TaskMasterPage: React.FC = () => {
                 <div className="last-run">
                   Last run: 2 hours ago
                 </div>
+                {activeWorkflow === 'content-refresh' && (
+                  <div className="workflow-details">
+                    <p>• Updated 8 property listings</p>
+                    <p>• Refreshed market statistics</p>
+                    <p>• Added 3 new neighborhood photos</p>
+                  </div>
+                )}
               </div>
             </div>
           </div>
 
-          <div className="optimization-insights">
+          <div className={`optimization-insights ${isVisible ? 'animate-fade-in-scale' : ''}`}>
             <h2 className="text-2xl font-bold mb-6">AI Insights & Recommendations</h2>
             <div className="insights-grid">
-              <div className="insight-card priority-high">
-                <h3>🚨 High Priority</h3>
+              <div className={`insight-card priority-high ${isVisible ? 'animate-delay-1' : ''}`}>
+                <div className="insight-header">
+                  <AlertTriangle className="text-red-500" />
+                  <h3>🚨 High Priority</h3>
+                </div>
                 <p>Core Web Vitals score dropped to 82. Consider optimizing images and reducing JavaScript bundle size.</p>
                 <button className="insight-action">Fix Now</button>
               </div>
               
-              <div className="insight-card priority-medium">
-                <h3>⚠️ Medium Priority</h3>
+              <div className={`insight-card priority-medium ${isVisible ? 'animate-delay-2' : ''}`}>
+                <div className="insight-header">
+                  <AlertTriangle className="text-yellow-500" />
+                  <h3>⚠️ Medium Priority</h3>
+                </div>
                 <p>3 new competitor listings detected in Centennial Hills. Update market positioning content.</p>
                 <button className="insight-action">Review</button>
               </div>
               
-              <div className="insight-card priority-low">
-                <h3>💡 Opportunity</h3>
+              <div className={`insight-card priority-low ${isVisible ? 'animate-delay-3' : ''}`}>
+                <div className="insight-header">
+                  <Lightbulb className="text-green-500" />
+                  <h3>💡 Opportunity</h3>
+                </div>
                 <p>Search volume for "Providence Nevada homes" increased 15%. Consider creating targeted content.</p>
                 <button className="insight-action">Explore</button>
               </div>
@@ -113,172 +178,50 @@ const TaskMasterPage: React.FC = () => {
       </div>
 
       <style jsx>{`
-        .taskmaster-page {
-          min-height: 100vh;
-          background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
-        }
-
-        .taskmaster-header {
-          display: flex;
-          justify-content: space-between;
-          align-items: flex-start;
-          margin-bottom: 3rem;
-          padding: 2rem;
-          background: white;
-          border-radius: 12px;
-          box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        }
-
-        .quick-actions {
-          display: flex;
-          gap: 1rem;
-        }
-
-        .action-btn {
+        .insight-header {
           display: flex;
           align-items: center;
           gap: 0.5rem;
-          padding: 0.75rem 1.5rem;
-          border-radius: 8px;
-          font-weight: 600;
-          transition: all 0.2s;
-          border: none;
-          cursor: pointer;
-        }
-
-        .action-btn.primary {
-          background: linear-gradient(135deg, #3b82f6, #1d4ed8);
-          color: white;
-        }
-
-        .action-btn.secondary {
-          background: #f3f4f6;
-          color: #374151;
-          border: 1px solid #d1d5db;
-        }
-
-        .action-btn:hover {
-          transform: translateY(-2px);
-          box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-        }
-
-        .workflow-status, .optimization-insights {
-          background: white;
-          border-radius: 12px;
-          padding: 2rem;
-          margin-bottom: 2rem;
-          box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        }
-
-        .workflow-grid, .insights-grid {
-          display: grid;
-          grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-          gap: 1.5rem;
-        }
-
-        .workflow-card, .insight-card {
-          background: #f9fafb;
-          border-radius: 8px;
-          padding: 1.5rem;
-          border-left: 4px solid;
-        }
-
-        .workflow-card.running {
-          border-left-color: #10b981;
-        }
-
-        .workflow-card.scheduled {
-          border-left-color: #3b82f6;
-        }
-
-        .workflow-card.completed {
-          border-left-color: #6b7280;
-        }
-
-        .workflow-header {
-          display: flex;
-          justify-content: space-between;
-          align-items: center;
-          margin-bottom: 1rem;
-        }
-
-        .status {
-          font-size: 0.8rem;
-          font-weight: 600;
-          text-transform: uppercase;
-          padding: 0.25rem 0.5rem;
-          border-radius: 4px;
-          background: rgba(0, 0, 0, 0.1);
-        }
-
-        .workflow-card h3 {
-          font-size: 1.1rem;
-          font-weight: 600;
           margin-bottom: 0.5rem;
-          color: #374151;
         }
 
-        .workflow-progress {
+        .workflow-details {
           margin-top: 1rem;
-        }
-
-        .progress-bar {
-          width: 100%;
-          height: 6px;
-          background: #e5e7eb;
-          border-radius: 3px;
-          overflow: hidden;
-          margin-bottom: 0.5rem;
-        }
-
-        .progress-fill {
-          height: 100%;
-          background: linear-gradient(90deg, #10b981, #059669);
-          transition: width 0.3s ease;
-        }
-
-        .insight-card.priority-high {
-          border-left-color: #dc2626;
-        }
-
-        .insight-card.priority-medium {
-          border-left-color: #f59e0b;
-        }
-
-        .insight-card.priority-low {
-          border-left-color: #10b981;
-        }
-
-        .insight-action {
-          background: #3b82f6;
-          color: white;
-          border: none;
-          padding: 0.5rem 1rem;
+          padding: 1rem;
+          background: rgba(255, 255, 255, 0.5);
           border-radius: 6px;
-          font-weight: 500;
-          cursor: pointer;
-          margin-top: 1rem;
-          transition: background 0.2s;
+          font-size: 0.875rem;
+          color: #6b7280;
+          animation: slideDown 0.3s ease-out;
         }
 
-        .insight-action:hover {
-          background: #2563eb;
+        .workflow-details p {
+          margin: 0.25rem 0;
+        }
+
+        @keyframes slideDown {
+          from {
+            opacity: 0;
+            transform: translateY(-10px);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+
+        .workflow-card {
+          cursor: pointer;
+        }
+
+        .workflow-card:focus {
+          outline: 2px solid #3b82f6;
+          outline-offset: 2px;
         }
 
         @media (max-width: 768px) {
-          .taskmaster-header {
-            flex-direction: column;
-            gap: 1.5rem;
-          }
-
-          .quick-actions {
-            flex-wrap: wrap;
-            width: 100%;
-          }
-
-          .action-btn {
-            flex: 1;
-            min-width: 120px;
+          .workflow-details {
+            font-size: 0.8rem;
           }
         }
       `}</style>

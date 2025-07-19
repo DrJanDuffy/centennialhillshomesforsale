@@ -294,7 +294,7 @@ export default function LocalBusinessSchema({
       website,
       "https://g.co/kgs/4qQ8DsY",
       "https://www.pinterest.com/DrJanDuffy/",
-      "https://www.linkedin.com/company/california-to-vegas-homes",
+      "https://www.linkedin.com/compunknown/california-to-vegas-homes",
       "https://www.youtube.com/@DrDuffy",
       "https://www.searchforhomeslasvegas.com/",
       "https://www.facebook.com/centennialhillshomes",

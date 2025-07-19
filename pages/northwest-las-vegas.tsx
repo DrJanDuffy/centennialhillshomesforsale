@@ -1,5 +1,6 @@
 
 import { useState } from 'react';
+import Link from 'next/link';
 import Head from 'next/head';
 import { motion } from 'framer-motion';
 import Layout from '../components/Layout';
@@ -8,7 +9,7 @@ import SchoolInfo from '../components/SchoolInfo';
 import RealScoutWidget from '../components/widgets/RealScoutWidget';
 
 export default function NorthwestLasVegas() {
-  const [currentNeighborhood, setCurrentNeighborhood] = useState('Centennial Hills');
+  const [currentNeighborhood, setCurrentNeighborhood] = useState<'Centennial Hills' | 'The Trails' | 'Tournament Hills' | 'Skye Canyon' | 'Sun City Aliante'>('Centennial Hills');
 
   return (
     <Layout>
@@ -90,28 +91,28 @@ export default function NorthwestLasVegas() {
                 <h3>Centennial Hills</h3>
                 <p className="price-range">$500K - $3M+</p>
                 <p>Master-planned luxury community with TPC Las Vegas golf course and custom homes.</p>
-                <a href="/centennial-hills" className="btn btn-primary">Explore</a>
+                <Link href="/centennial-hills" className="btn btn-primary">Explore</Link>
               </div>
               
               <div className="community-card">
                 <h3>Skye Canyon</h3>
                 <p className="price-range">$450K - $1.2M</p>
                 <p>Award-winning new community with recreation center and family amenities.</p>
-                <a href="/skye-canyon" className="btn btn-primary">Explore</a>
+                <Link href="/skye-canyon" className="btn btn-primary">Explore</Link>
               </div>
               
               <div className="community-card">
                 <h3>The Trails</h3>
                 <p className="price-range">$550K - $2M</p>
                 <p>Established community with mature landscaping and walking trails.</p>
-                <a href="/neighborhoods" className="btn btn-primary">Explore</a>
+                <Link href="/neighborhoods" className="btn btn-primary">Explore</Link>
               </div>
               
               <div className="community-card">
                 <h3>Tournament Hills</h3>
                 <p className="price-range">$500K - $1.8M</p>
                 <p>Golf course community with Bear's Best and mountain views.</p>
-                <a href="/neighborhoods" className="btn btn-primary">Explore</a>
+                <Link href="/neighborhoods" className="btn btn-primary">Explore</Link>
               </div>
             </div>
           </div>

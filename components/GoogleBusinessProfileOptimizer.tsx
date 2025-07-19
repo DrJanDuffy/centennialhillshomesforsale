@@ -1,6 +1,8 @@
 
 import React, { useEffect, useState } from 'react';
+import Link from 'next/link';
 import Head from 'next/head';
+import styles from './GoogleBusinessProfileOptimizer.module.css';
 
 interface GoogleBusinessProfileOptimizerProps {
   pageType?: 'home' | 'about' | 'contact' | 'services' | 'neighborhood';
@@ -189,7 +191,7 @@ export default function GoogleBusinessProfileOptimizer({
     "sameAs": [
       "https://g.co/kgs/4qQ8DsY",
       "https://www.pinterest.com/DrJanDuffy/",
-      "https://www.linkedin.com/company/california-to-vegas-homes",
+      "https://www.linkedin.com/compunknown/california-to-vegas-homes",
       "https://www.youtube.com/@DrDuffy",
       "https://www.searchforhomeslasvegas.com/",
       "https://www.facebook.com/centennialhillshomes",
@@ -243,86 +245,48 @@ export default function GoogleBusinessProfileOptimizer({
       </Head>
 
       {showWidget && (
-        <div className="gbp-widget" style={{
-          background: 'linear-gradient(135deg, #1a365d 0%, #2c5282 100%)',
-          color: 'white',
-          padding: '20px',
-          borderRadius: '12px',
-          margin: '20px 0',
-          boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)'
-        }}>
+        <div className={"gbp-widget"}>
           <div className="gbp-header">
-            <h3 style={{ margin: '0 0 15px 0', fontSize: '1.25rem' }}>
+            <h3 className="" >
               🏢 Dr. Jan Duffy, REALTOR®
             </h3>
-            <div className="gbp-rating" style={{ marginBottom: '15px' }}>
-              <span style={{ fontSize: '1.1rem' }}>⭐⭐⭐⭐⭐</span>
-              <span style={{ marginLeft: '8px' }}>4.9/5 ({reviewCount} reviews)</span>
+            <div className="gbp-rating">
+              <span className={styles.star}>⭐⭐⭐⭐⭐</span>
+              <span className={styles.reviewCount}>4.9/5 ({reviewCount} reviews)</span>
             </div>
           </div>
-          
-          <div className="gbp-info" style={{ lineHeight: '1.6' }}>
-            <p style={{ margin: '8px 0' }}>📍 Centennial Hills, Las Vegas, NV 89166</p>
-            <p style={{ margin: '8px 0' }}>
-              📞 <a href="tel:+17029031952" style={{ color: '#90cdf4', textDecoration: 'none' }}>
+          <div className="gbp-info">
+            <p>📍 Centennial Hills, Las Vegas, NV 89166</p>
+            <p>
+              📞 <a href="tel:+17029031952" className={styles.badge}>
                 (702) 903-1952
               </a>
             </p>
-            <p style={{ margin: '8px 0' }}>
-              🕒 Status: <span style={{ 
-                color: currentStatus === 'Open' ? '#68d391' : '#fc8181',
-                fontWeight: 'bold'
-              }}>
+            <p>
+              🕒 Status: <span className={currentStatus === 'Open' ? styles.statusOpen : styles.statusClosed}>
                 {currentStatus}
               </span>
             </p>
-            <p style={{ margin: '8px 0' }}>🏆 Top 1% Las Vegas REALTOR®</p>
-            <p style={{ margin: '8px 0' }}>🎯 Specialist: Luxury Homes & New Construction</p>
+            <p>🏆 Top 1% Las Vegas REALTOR®</p>
+            <p>🎯 Specialist: Luxury Homes & New Construction</p>
           </div>
-
-          <div className="gbp-actions" style={{ marginTop: '20px', display: 'flex', gap: '12px', flexWrap: 'wrap' }}>
+          <div className="gbp-actions">
             <a 
-              href="https://g.co/kgs/4qQ8DsY"
-              target="_blank"
+              href="https://g.co/kgs/4qQ8DsY" 
+              target="_blank" 
               rel="noopener noreferrer"
-              style={{
-                background: '#4285f4',
-                color: 'white',
-                padding: '10px 16px',
-                borderRadius: '6px',
-                textDecoration: 'none',
-                fontSize: '0.9rem',
-                fontWeight: '500'
-              }}
+              className={styles.badge}
             >
               View on Google
             </a>
-            <a 
-              href="/contact"
-              style={{
-                background: 'rgba(255, 255, 255, 0.1)',
-                color: 'white',
-                padding: '10px 16px',
-                borderRadius: '6px',
-                textDecoration: 'none',
-                fontSize: '0.9rem',
-                fontWeight: '500',
-                border: '1px solid rgba(255, 255, 255, 0.2)'
-              }}
+            <Link href="/contact"
+              className={styles.badge}
             >
               Contact Me
-            </a>
+            </Link>
             <a 
               href="tel:+17029031952"
-              style={{
-                background: '#38a169',
-                color: 'white', 
-                padding: '10px 16px',
-                borderRadius: '6px',
-                textDecoration: 'none',
-                fontSize: '0.9rem',
-                fontWeight: '500'
-              }}
+              className={styles.badge}
             >
               📞 Call Now
             </a>

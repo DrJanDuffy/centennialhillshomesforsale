@@ -161,13 +161,15 @@ const LeadCaptureForm: React.FC<{ trigger: string; onClose: () => void }> = ({ t
 
           <div className="grid grid-cols-2 gap-4">
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">
+              <label htmlFor="interest-select" className="block text-sm font-medium text-gray-700 mb-1">
                 I'm Interested In
               </label>
               <select
+                id="interest-select"
                 value={formData.interest}
                 onChange={(e) => setFormData(prev => ({ ...prev, interest: e.target.value }))}
                 className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                aria-label="Select your interest in real estate services"
               >
                 <option value="buying">Buying a Home</option>
                 <option value="selling">Selling My Home</option>
@@ -177,13 +179,15 @@ const LeadCaptureForm: React.FC<{ trigger: string; onClose: () => void }> = ({ t
               </select>
             </div>
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">
+              <label htmlFor="timeline-select" className="block text-sm font-medium text-gray-700 mb-1">
                 Timeline
               </label>
               <select
+                id="timeline-select"
                 value={formData.timeline}
                 onChange={(e) => setFormData(prev => ({ ...prev, timeline: e.target.value }))}
                 className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                aria-label="Select your timeline for real estate transaction"
               >
                 <option value="immediately">Immediately</option>
                 <option value="1-3 months">1-3 Months</option>
@@ -196,13 +200,15 @@ const LeadCaptureForm: React.FC<{ trigger: string; onClose: () => void }> = ({ t
 
           {formData.interest === 'buying' && (
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">
+              <label htmlFor="budget-select" className="block text-sm font-medium text-gray-700 mb-1">
                 Budget Range
               </label>
               <select
+                id="budget-select"
                 value={formData.budget}
                 onChange={(e) => setFormData(prev => ({ ...prev, budget: e.target.value }))}
                 className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                aria-label="Select your budget range for home purchase"
               >
                 <option value="Under $500K">Under $500K</option>
                 <option value="$500K-$600K">$500K - $600K</option>

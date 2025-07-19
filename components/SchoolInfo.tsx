@@ -48,12 +48,6 @@ const SchoolInfo: React.FC<SchoolInfoProps> = ({ neighborhood = 'Centennial Hill
     return '★'.repeat(rating) + '☆'.repeat(10 - rating);
   };
 
-  const getRatingColor = (rating: number) => {
-    if (rating >= 9) return '#10b981'; // Green
-    if (rating >= 7) return '#f59e0b'; // Orange
-    return '#ef4444'; // Red
-  };
-
   return (
     <div className="school-info">
       <h3>Schools Near {neighborhood}</h3>
@@ -69,8 +63,7 @@ const SchoolInfo: React.FC<SchoolInfoProps> = ({ neighborhood = 'Centennial Hill
             <div className="school-details">
               <div className="school-rating">
                 <span 
-                  className="rating-number"
-                  style={{ color: getRatingColor(school.rating) }}
+                  className={`rating-number rating-${school.rating >= 9 ? 'excellent' : school.rating >= 7 ? 'good' : 'poor'}`}
                 >
                   {school.rating}/10
                 </span>

@@ -69,98 +69,57 @@ export const AwesomePerformanceBar: React.FC = () => {
   if (!metrics || !isVisible) return null;
 
   return (
-    <div style={{
-      position: 'fixed',
-      bottom: '20px',
-      right: '20px',
-      background: 'rgba(0, 0, 0, 0.9)',
-      color: 'white',
-      padding: '12px',
-      borderRadius: '12px',
-      fontSize: '12px',
-      zIndex: 1000,
-      backdropFilter: 'blur(10px)',
-      border: '1px solid rgba(255, 255, 255, 0.1)',
-      boxShadow: '0 8px 32px rgba(0, 0, 0, 0.3)',
-      animation: 'slideInFromRight 0.5s ease-out',
-      minWidth: '200px'
-    }}>
-      <div style={{ 
-        display: 'flex', 
-        alignItems: 'center', 
-        marginBottom: '8px',
-        fontWeight: 'bold'
-      }}>
-        <span style={{ marginRight: '8px' }}>⚡</span>
+    <div className="performance-bar">
+      <div className="performance-header">
+        <span className="performance-icon">⚡</span>
         Core Web Vitals
       </div>
       
-      <div style={{ display: 'grid', gap: '4px' }}>
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+      <div className="performance-grid">
+        <div className="performance-row">
           <span>LCP:</span>
-          <span style={{ 
-            color: getScoreColor('lcp', metrics.lcp),
-            fontWeight: 'bold'
-          }}>
+          <span 
+            className="performance-value performance-value-dynamic"
+            style={{ '--performance-color': getScoreColor('lcp', metrics.lcp) } as React.CSSProperties}
+          >
             {formatMetric('lcp', metrics.lcp)}
           </span>
         </div>
         
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+        <div className="performance-row">
           <span>FID:</span>
-          <span style={{ 
-            color: getScoreColor('fid', metrics.fid),
-            fontWeight: 'bold'
-          }}>
+          <span 
+            className="performance-value performance-value-dynamic"
+            style={{ '--performance-color': getScoreColor('fid', metrics.fid) } as React.CSSProperties}
+          >
             {formatMetric('fid', metrics.fid)}
           </span>
         </div>
         
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+        <div className="performance-row">
           <span>CLS:</span>
-          <span style={{ 
-            color: getScoreColor('cls', metrics.cls),
-            fontWeight: 'bold'
-          }}>
+          <span 
+            className="performance-value performance-value-dynamic"
+            style={{ '--performance-color': getScoreColor('cls', metrics.cls) } as React.CSSProperties}
+          >
             {formatMetric('cls', metrics.cls)}
           </span>
         </div>
         
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+        <div className="performance-row">
           <span>TTFB:</span>
-          <span style={{ 
-            color: getScoreColor('ttfb', metrics.ttfb),
-            fontWeight: 'bold'
-          }}>
+          <span 
+            className="performance-value performance-value-dynamic"
+            style={{ '--performance-color': getScoreColor('ttfb', metrics.ttfb) } as React.CSSProperties}
+          >
             {formatMetric('ttfb', metrics.ttfb)}
           </span>
         </div>
       </div>
       
-      <div style={{
-        marginTop: '8px',
-        padding: '4px 8px',
-        background: 'rgba(12, 206, 107, 0.2)',
-        borderRadius: '6px',
-        textAlign: 'center',
-        fontSize: '10px',
-        color: '#0CCE6B'
-      }}>
+      <div className="performance-status">
         🚀 AWESOME PERFORMANCE
       </div>
-
-      <style jsx>{`
-        @keyframes slideInFromRight {
-          from {
-            transform: translateX(100%);
-            opacity: 0;
-          }
-          to {
-            transform: translateX(0);
-            opacity: 1;
-          }
-        }
-      `}</style>
     </div>
   );
 };

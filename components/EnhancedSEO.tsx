@@ -11,7 +11,10 @@ interface EnhancedSEOProps {
   ogImage?: string;
   pageType?: 'website' | 'article' | 'property' | 'neighborhood';
   neighborhood?: string;
-  propertyData?: any;
+  propertyData?: {
+    price?: number;
+    [key: string]: unknown;
+  };
   structuredData?: object[];
 }
 

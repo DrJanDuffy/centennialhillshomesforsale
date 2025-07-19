@@ -1,5 +1,6 @@
 
 import React, { useState, useEffect, useMemo, useCallback } from 'react';
+import styles from './InteractivePropertyMap.module.css';
 
 // Import icons with fallback handling
 let MapPinIcon, HomeIcon, ArrowTrendingUpIcon, EyeIcon, HeartIcon, MagnifyingGlassIcon, FilterIcon;
@@ -213,6 +214,20 @@ const InteractivePropertyMap: React.FC = () => {
     }
   };
 
+  // Generate dynamic CSS classes for positioning
+  const getPropertyPositionClass = (index: number) => {
+    const left = 20 + (index * 15);
+    const top = 30 + (index * 10);
+    return `${styles.propertyMarkerDynamic} ${styles[`pos-${left}-${top}`]}`;
+  };
+
+  // Generate dynamic CSS classes for tooltip positioning
+  const getTooltipPositionClass = (index: number) => {
+    const left = 20 + (index * 15);
+    const top = 30 + (index * 10);
+    return `${styles.hoverTooltipDynamic} ${styles[`tooltip-${left}-${top}`]}`;
+  };
+
   return (
     <div className="relative w-full h-screen bg-gray-100">
       {/* Map Container */}
@@ -231,11 +246,7 @@ const InteractivePropertyMap: React.FC = () => {
           {filteredProperties.map((property) => (
             <div
               key={property.id}
-              className="absolute transform -translate-x-1/2 -translate-y-1/2 cursor-pointer transition-all duration-200 hover:scale-110 z-10"
-              style={{
-                left: `${20 + (filteredProperties.indexOf(property) * 15)}%`,
-                top: `${30 + (filteredProperties.indexOf(property) * 10)}%`
-              }}
+              className={`${getPropertyPositionClass(filteredProperties.indexOf(property))} cursor-pointer transition-all duration-200 hover:scale-110 z-10`}
               onClick={() => setSelectedProperty(property)}
               onMouseEnter={() => setHoveredProperty(property)}
               onMouseLeave={() => setHoveredProperty(null)}
@@ -272,6 +283,7 @@ const InteractivePropertyMap: React.FC = () => {
             <button
               onClick={() => toggleFavorite(selectedProperty.id)}
               className="absolute top-3 right-3 p-2 bg-white bg-opacity-90 rounded-full hover:bg-opacity-100 transition-all"
+              aria-label={favorites.has(selectedProperty.id) ? 'Remove from favorites' : 'Add to favorites'}
             >
               <HeartIcon 
                 className={`h-5 w-5 ${
@@ -343,11 +355,7 @@ const InteractivePropertyMap: React.FC = () => {
 
       {/* Hover Tooltip */}
       {hoveredProperty && !selectedProperty && (
-        <div className="absolute z-30 bg-white p-3 rounded-lg shadow-lg pointer-events-none transform -translate-x-1/2 -translate-y-full"
-             style={{
-               left: `${20 + (filteredProperties.indexOf(hoveredProperty) * 15)}%`,
-               top: `${30 + (filteredProperties.indexOf(hoveredProperty) * 10)}%`
-             }}>
+        <div className={`${getTooltipPositionClass(filteredProperties.indexOf(hoveredProperty))}`}>
           <div className="text-sm font-semibold">{hoveredProperty.title}</div>
           <div className="text-lg font-bold text-blue-600">
             {formatPrice(hoveredProperty.price)}
@@ -403,16 +411,18 @@ const InteractivePropertyMap: React.FC = () => {
             
             {/* Bedrooms */}
             <div className="mb-4">
-              <label className="block text-sm font-medium text-gray-700 mb-2">
+              <label htmlFor="bedrooms-filter" className="block text-sm font-medium text-gray-700 mb-2">
                 Bedrooms
               </label>
               <select
+                id="bedrooms-filter"
                 value={filters.bedrooms || ''}
                 onChange={(e) => setFilters(prev => ({
                   ...prev,
                   bedrooms: e.target.value ? parseInt(e.target.value) : null
                 }))}
                 className="w-full px-3 py-2 border border-gray-300 rounded text-sm"
+                aria-label="Select minimum number of bedrooms"
               >
                 <option value="">Any</option>
                 <option value="1">1+</option>
@@ -425,16 +435,18 @@ const InteractivePropertyMap: React.FC = () => {
             
             {/* Property Type */}
             <div className="mb-4">
-              <label className="block text-sm font-medium text-gray-700 mb-2">
+              <label htmlFor="property-type-filter" className="block text-sm font-medium text-gray-700 mb-2">
                 Property Type
               </label>
               <select
+                id="property-type-filter"
                 value={filters.propertyType}
                 onChange={(e) => setFilters(prev => ({
                   ...prev,
                   propertyType: e.target.value
                 }))}
                 className="w-full px-3 py-2 border border-gray-300 rounded text-sm"
+                aria-label="Select property type"
               >
                 <option value="all">All Types</option>
                 <option value="single-family">Single Family</option>

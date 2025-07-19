@@ -9,7 +9,7 @@ interface SEOAdvancedProps {
   canonicalUrl?: string;
   pageType?: 'home' | 'neighborhood' | 'property' | 'service';
   neighborhood?: string;
-  propertyData?: any;
+  propertyData?: unknown;
 }
 
 export default function SEOAdvanced({
@@ -212,6 +212,13 @@ export default function SEOAdvanced({
       <meta httpEquiv="X-XSS-Protection" content="1; mode=block" />
       
       {/* Mobile and Accessibility */}
+      {/* 
+        theme-color: Sets browser toolbar color on supported browsers (Chrome, Safari, Edge)
+        Note: Firefox and Opera don't support this meta tag, but it's still beneficial for other browsers
+        This is a progressive enhancement - browsers that support it will use it, others will ignore it
+        Compatibility: Chrome 39+, Safari 15+, Edge 79+ (Firefox and Opera ignore this tag)
+        msapplication-TileColor: Windows tile color for pinned sites
+      */}
       <meta name="theme-color" content="#1a365d" />
       <meta name="msapplication-TileColor" content="#1a365d" />
       <meta name="application-name" content="Centennial Hills Homes" />

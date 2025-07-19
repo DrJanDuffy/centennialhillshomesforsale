@@ -25,9 +25,9 @@ interface LayoutProps {
   keywords?: string;
   ogImage?: string;
   noindex?: boolean;
-  pageType?: string;
+  pageType?: 'website' | 'article' | 'property' | 'neighborhood' | 'home' | 'service';
   neighborhood?: string;
-  propertyData?: any;
+  propertyData?: unknown;
   canonicalUrl?: string;
 }
 
@@ -72,13 +72,9 @@ const Layout: React.FC<LayoutProps> = ({
         {/* Robots */}
         {noindex && <meta name="robots" content="noindex,nofollow" />}
 
-        {/* Favicon */}
-        <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+        {/* App Icons */}
         <link rel="icon" type="image/png" sizes="192x192" href="/icon-192x192.png" />
         <link rel="icon" type="image/png" sizes="512x512" href="/icon-512x512.png" />
-
-        {/* Manifest */}
-        <link rel="manifest" href="/manifest.json" />
       </Head>
 
       <div className="min-h-screen flex flex-col">
@@ -86,45 +82,45 @@ const Layout: React.FC<LayoutProps> = ({
         <Navigation />
         <main className="flex-1">
           <EnhancedSEO 
-        title={title}
-        description={description}
-        keywords={keywords}
-        canonicalUrl={canonicalUrl}
-        pageType={pageType}
-        neighborhood={neighborhood}
-        propertyData={propertyData}
-      />
-      <SEOAdvanced
-        title={title}
-        description={description}
-        keywords={keywords}
-        canonicalUrl={canonicalUrl}
-        pageType={pageType}
-        neighborhood={neighborhood}
-        propertyData={propertyData}
-      />
-      <GenerativeEngineOptimizer
-        pageType={pageType}
-        neighborhood={neighborhood}
-        propertyData={propertyData}
-      />
-      <GoogleBusinessProfileOptimizer
-        pageType={pageType}
-        neighborhood={neighborhood}
-        showWidget={pageType === 'home'}
-      />
-      <GoogleAnalytics />
-      <GoogleSearchConsole />
+            title={title}
+            description={description}
+            keywords={keywords}
+            canonicalUrl={canonicalUrl}
+            pageType={pageType as 'website' | 'article' | 'property' | 'neighborhood'}
+            neighborhood={neighborhood}
+            propertyData={propertyData as { [key: string]: unknown; price?: number } | undefined}
+          />
+          <SEOAdvanced
+            title={title}
+            description={description}
+            keywords={keywords}
+            canonicalUrl={canonicalUrl}
+            pageType={pageType as 'home' | 'neighborhood' | 'property' | 'service'}
+            neighborhood={neighborhood}
+            propertyData={propertyData as { [key: string]: unknown; price?: number } | undefined}
+          />
+          <GenerativeEngineOptimizer
+            pageType={pageType as 'neighborhood' | 'property' | 'service' | 'home' | 'agent'}
+            neighborhood={neighborhood}
+            propertyData={propertyData}
+          />
+          <GoogleBusinessProfileOptimizer
+            pageType={pageType as 'home' | 'about' | 'contact' | 'services' | 'neighborhood'}
+            neighborhood={neighborhood}
+            showWidget={pageType === 'home'}
+          />
+          <GoogleAnalytics />
+          <GoogleSearchConsole />
           {children}
         </main>
         <Footer />
 
-      <PerformanceMonitor />
-      <AwesomePerformanceBar />
-      <PWAInstallPrompt />
-      <SafeGoogleAnalytics />
-      <SystemHealthMonitor />
-    </div>
+        <PerformanceMonitor />
+        <AwesomePerformanceBar />
+        <PWAInstallPrompt />
+        <SafeGoogleAnalytics />
+        <SystemHealthMonitor />
+      </div>
     </ErrorBoundaryWrapper>
   );
 };

@@ -136,7 +136,11 @@ export function PropertyCard({ property, className = '' }: PropertyCardProps) {
               <HeartIcon className="w-4 h-4 text-gray-600" />
             )}
           </button>
-          <button className="w-8 h-8 bg-white/90 rounded-full flex items-center justify-center shadow-md hover:bg-white transition-colors">
+          <button 
+            className="w-8 h-8 bg-white/90 rounded-full flex items-center justify-center shadow-md hover:bg-white transition-colors"
+            aria-label="Share property"
+            title="Share this property"
+          >
             <ShareIcon className="w-4 h-4 text-gray-600" />
           </button>
         </div>
@@ -216,7 +220,11 @@ export function PropertyCard({ property, className = '' }: PropertyCardProps) {
           >
             View Details
           </Link>
-          <button className="px-4 py-2 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors">
+          <button 
+            className="px-4 py-2 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors"
+            aria-label="Calculate mortgage"
+            title="Calculate mortgage for this property"
+          >
             <BanknotesIcon className="w-5 h-5" />
           </button>
         </div>

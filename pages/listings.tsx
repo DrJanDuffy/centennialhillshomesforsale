@@ -1,5 +1,6 @@
 
 import { useState } from 'react';
+import Link from 'next/link';
 import Head from 'next/head';
 import { motion } from 'framer-motion';
 import Layout from '../components/Layout';
@@ -11,11 +12,11 @@ export default function Listings() {
   const [searchFilters, setSearchFilters] = useState({
     priceMin: 0,
     priceMax: 2000000,
-    beds: 'any',
-    baths: 'any',
+    beds: 'unknown',
+    baths: 'unknown',
     sqftMin: 0,
     sqftMax: 10000,
-    propertyType: 'any',
+    propertyType: 'unknown',
     features: [],
     neighborhood: 'all'
   });
@@ -101,22 +102,22 @@ export default function Listings() {
         >
           <h2>Browse by Neighborhood</h2>
           <div className="neighborhood-links">
-            <a href="/neighborhoods?area=centennial-hills" className="neighborhood-link">
+            <Link href="/neighborhoods?area=centennial-hills" className="neighborhood-link">
               <h3>Centennial Hills</h3>
               <p>Master-planned luxury community</p>
-            </a>
-            <a href="/neighborhoods?area=the-trails" className="neighborhood-link">
+            </Link>
+            <Link href="/neighborhoods?area=the-trails" className="neighborhood-link">
               <h3>The Trails</h3>
               <p>Established community with mature trees</p>
-            </a>
-            <a href="/neighborhoods?area=tournament-hills" className="neighborhood-link">
+            </Link>
+            <Link href="/neighborhoods?area=tournament-hills" className="neighborhood-link">
               <h3>Tournament Hills</h3>
               <p>Golf course community with views</p>
-            </a>
-            <a href="/neighborhoods?area=skye-canyon" className="neighborhood-link">
+            </Link>
+            <Link href="/neighborhoods?area=skye-canyon" className="neighborhood-link">
               <h3>Skye Canyon</h3>
               <p>Newer master-planned community</p>
-            </a>
+            </Link>
           </div>
         </motion.section>
 
@@ -149,7 +150,7 @@ export default function Listings() {
               <span className="expertise">Negotiation Skills</span>
             </div>
             <div className="cta-buttons">
-              <a href="/contact" className="btn btn-primary">Schedule Consultation</a>
+              <Link href="/contact" className="btn btn-primary">Schedule Consultation</Link>
               <a href="tel:+1234567890" className="btn btn-secondary">Call Now</a>
             </div>
           </div>

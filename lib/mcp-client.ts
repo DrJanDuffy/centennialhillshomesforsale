@@ -1,46 +1,76 @@
-export interface MCPResponse {
+interface MCPMessage {
+  id: string;
+  type: 'user' | 'assistant';
+  content: string;
+  timestamp: Date;
+  suggestions?: string[];
+}
+
+interface MCPResponse {
   success: boolean;
-  data?: any;
+  data?: {
+    content: string;
+    suggestions?: string[];
+  };
   error?: string;
 }
 
-export interface MCPClient {
-  connected: boolean;
-  connect: () => Promise<boolean>;
-  disconnect: () => void;
-  sendMessage: (message: any) => Promise<MCPResponse>;
+interface MCPClient {
+  sendMessage: (message: string) => Promise<MCPResponse>;
+  isConnected: boolean;
+  isLoading: boolean;
+  error: string | null;
 }
 
-export class SimpleMCPClient implements MCPClient {
-  connected: boolean = false;
+class MCPClientImpl implements MCPClient {
+  public connected = false;
+  public loading = false;
+  public error: string | null = null;
 
-  async connect(): Promise<boolean> {
+  async sendMessage(message: string): Promise<MCPResponse> {
     try {
-      // Simulate connection
-      this.connected = true;
-      return true;
+      this.loading = true;
+      this.error = null;
+
+      // Mock implementation - replace with actual MCP client
+      const response = await fetch('/api/mcp-chat', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ message }),
+      });
+
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+
+      const data = await response.json();
+      return data;
     } catch (error) {
-      console.error('MCP connection failed:', error);
-      return false;
+      this.error = error instanceof Error ? error.message : 'Unknown error occurred';
+      return {
+        success: false,
+        error: this.error
+      };
+    } finally {
+      this.loading = false;
     }
   }
 
-  disconnect(): void {
-    this.connected = false;
+  get isConnected(): boolean {
+    return this.connected;
   }
 
-  async sendMessage(message: any): Promise<MCPResponse> {
-    if (!this.connected) {
-      return { success: false, error: 'Not connected' };
-    }
+  get isLoading(): boolean {
+    return this.loading;
+  }
 
-    try {
-      // Simulate message processing
-      return { success: true, data: { message: 'Response from MCP server' } };
-    } catch (error) {
-      return { success: false, error: String(error) };
-    }
+  get errorValue(): string | null {
+    return this.error;
   }
 }
 
-export const mcpClient = new SimpleMCPClient();
+// Create and export a singleton instance
+const mcpClient = new MCPClientImpl();
+export default mcpClient;

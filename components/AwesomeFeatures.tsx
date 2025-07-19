@@ -1,5 +1,5 @@
 
-import React from 'react';
+import React, { useEffect } from 'react';
 import { motion } from 'framer-motion';
 import Link from 'next/link';
 
@@ -35,6 +35,16 @@ const AwesomeFeatures: React.FC = () => {
     { number: '5★', label: 'Client Reviews', icon: '⭐' }
   ];
 
+  // Set CSS custom properties for animation delays
+  useEffect(() => {
+    features.forEach((feature, index) => {
+      const element = document.querySelector(`.awesome-card:nth-child(${index + 1}) .animate-delay-dynamic`) as HTMLElement;
+      if (element) {
+        element.style.setProperty('--animation-delay', `${index * 0.2}s`);
+      }
+    });
+  }, []);
+
   return (
     <div className="awesome-features-section">
       {/* Features Grid */}
@@ -52,7 +62,7 @@ const AwesomeFeatures: React.FC = () => {
               transition: { duration: 0.3 }
             }}
           >
-            <div className="text-6xl mb-6 bounce-animation" style={{ animationDelay: `${index * 0.2}s` }}>
+            <div className="text-6xl mb-6 bounce-animation animate-delay-dynamic">
               {feature.icon}
             </div>
             <h3 className="text-2xl font-bold mb-4 gradient-text">{feature.title}</h3>

@@ -83,30 +83,35 @@ const MortgageCalculator: React.FC = () => {
         {/* Input Section */}
         <div className="space-y-4">
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">
+            <label htmlFor="home-price-input" className="block text-sm font-medium text-gray-700 mb-2">
               Home Price
             </label>
             <input
+              id="home-price-input"
               type="number"
               value={inputs.homePrice}
               onChange={(e) => setInputs(prev => ({ ...prev, homePrice: Number(e.target.value) }))}
               className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
               min="100000"
               step="10000"
+              aria-label="Enter home price in dollars"
+              placeholder="Enter home price"
             />
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">
+            <label htmlFor="down-payment-input" className="block text-sm font-medium text-gray-700 mb-2">
               Down Payment ({inputs.downPaymentPercent}%)
             </label>
             <input
+              id="down-payment-input"
               type="range"
               min="5"
               max="30"
               value={inputs.downPaymentPercent}
               onChange={(e) => setInputs(prev => ({ ...prev, downPaymentPercent: Number(e.target.value) }))}
               className="w-full"
+              aria-label="Select down payment percentage"
             />
             <div className="flex justify-between text-sm text-gray-500">
               <span>5%</span>
@@ -118,10 +123,11 @@ const MortgageCalculator: React.FC = () => {
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">
+            <label htmlFor="interest-rate-input" className="block text-sm font-medium text-gray-700 mb-2">
               Interest Rate (%)
             </label>
             <input
+              id="interest-rate-input"
               type="number"
               value={inputs.interestRate}
               onChange={(e) => setInputs(prev => ({ ...prev, interestRate: Number(e.target.value) }))}
@@ -129,17 +135,21 @@ const MortgageCalculator: React.FC = () => {
               min="3"
               max="12"
               step="0.1"
+              aria-label="Enter interest rate percentage"
+              placeholder="Enter interest rate"
             />
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">
+            <label htmlFor="loan-term-input" className="block text-sm font-medium text-gray-700 mb-2">
               Loan Term (years)
             </label>
             <select
+              id="loan-term-input"
               value={inputs.loanTerm}
               onChange={(e) => setInputs(prev => ({ ...prev, loanTerm: Number(e.target.value) }))}
               className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              aria-label="Select loan term in years"
             >
               <option value={15}>15 years</option>
               <option value={30}>30 years</option>

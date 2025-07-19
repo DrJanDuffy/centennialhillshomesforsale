@@ -9,9 +9,9 @@ interface GEOProps {
   pageType?: 'homepage' | 'neighborhood' | 'about' | 'contact' | 'listings';
   neighborhood?: string;
   priceRange?: string;
-  factualData?: any;
+  factualData?: unknown;
   citations?: string[];
-  statistics?: any;
+  statistics?: unknown;
 }
 
 export default function GEOOptimized({
