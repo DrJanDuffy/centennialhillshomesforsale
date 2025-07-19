@@ -55,15 +55,15 @@ export default function Header() {
           {/* Logo and Brand Section */}
           <div className="flex-shrink-0 z-10">
             <Link href="/" onClick={closeMenu} className="block">
-              <div className="flex flex-col">
-                <h1 className="text-2xl sm:text-3xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+              <div className="flex flex-col justify-center py-1">
+                <h1 className="text-xl sm:text-2xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent leading-tight">
                   Dr. Jan Duffy
                 </h1>
-                <span className="text-sm text-gray-600 font-medium">
+                <span className="text-xs sm:text-sm text-gray-600 font-medium leading-tight">
                   REALTOR® | Centennial Hills Expert
                 </span>
-                <div className="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-3 mt-1">
-                  <span className="inline-flex items-center text-xs bg-green-100 text-green-800 px-2 py-1 rounded-full">
+                <div className="flex flex-col sm:flex-row sm:items-center gap-0.5 sm:gap-2 mt-0.5">
+                  <span className="inline-flex items-center text-xs bg-green-100 text-green-800 px-1.5 py-0.5 rounded-full">
                     ✅ Verified Google Business
                   </span>
                   <span className="text-xs text-amber-600 font-medium">
