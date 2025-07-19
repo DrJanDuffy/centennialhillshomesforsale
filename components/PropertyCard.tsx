@@ -1,20 +1,30 @@
 
 'use client';
 
-import { useState } from 'react';
-import { motion } from 'framer-motion';
-import Image from 'next/image';
-import Link from 'next/link';
+import React, { useState } from 'react';
 import { 
-  HeartIcon, 
-  ShareIcon, 
-  CameraIcon, 
-  MapPinIcon,
-  BanknotesIcon,
-  HomeIcon,
-  CalendarIcon
-} from '@heroicons/react/24/outline';
-import { HeartIcon as HeartSolidIcon } from '@heroicons/react/24/solid';
+  MapPin, 
+  Bed, 
+  Bath, 
+  Square, 
+  Heart, 
+  Share2, 
+  Eye, 
+  Calendar,
+  DollarSign,
+  Star,
+  TrendingUp,
+  Home
+} from 'lucide-react';
+
+interface PropertyImage {
+  url: string;
+  alt: string;
+}
+
+interface Neighborhood {
+  name: string;
+}
 
 interface Property {
   id: string;
@@ -24,187 +34,231 @@ interface Property {
   bedrooms: number;
   bathrooms: number;
   sqft: number;
-  images: { url: string; alt: string }[];
-  neighborhood: { name: string };
+  images: PropertyImage[];
+  neighborhood: Neighborhood;
   listDate: string;
   status: string;
-  features?: string[];
+  features: string[];
+  daysOnMarket?: number;
+  pricePerSqft?: number;
+  lotSize?: string;
 }
 
 interface PropertyCardProps {
   property: Property;
-  className?: string;
+  variant?: 'default' | 'featured' | 'compact';
+  showActions?: boolean;
 }
 
-export function PropertyCard({ property, className = '' }: PropertyCardProps) {
-  const [isFavorited, setIsFavorited] = useState(false);
-  const [currentImageIndex, setCurrentImageIndex] = useState(0);
+export const PropertyCard: React.FC<PropertyCardProps> = ({ 
+  property, 
+  variant = 'default',
+  showActions = true 
+}) => {
+  const [isLiked, setIsLiked] = useState(false);
+  const [imageIndex, setImageIndex] = useState(0);
 
   const formatPrice = (price: number) => {
-    return new Intl.NumberFormat('en-US', {
-      style: 'currency',
-      currency: 'USD',
-      maximumFractionDigits: 0
-    }).format(price);
+    if (price >= 1000000) {
+      return `$${(price / 1000000).toFixed(1)}M`;
+    } else if (price >= 1000) {
+      return `$${(price / 1000).toFixed(0)}K`;
+    }
+    return `$${price.toLocaleString()}`;
   };
 
-  const formatDate = (dateString: string) => {
-    return new Date(dateString).toLocaleDateString('en-US', {
-      month: 'short',
-      day: 'numeric'
-    });
+  const getStatusColor = (status: string) => {
+    switch (status.toLowerCase()) {
+      case 'active':
+        return 'bg-accent-color text-white';
+      case 'pending':
+        return 'bg-warning-color text-white';
+      case 'sold':
+        return 'bg-secondary-color text-white';
+      case 'new':
+        return 'bg-primary-color text-white';
+      default:
+        return 'bg-tertiary text-secondary';
+    }
   };
 
-  const nextImage = () => {
-    setCurrentImageIndex((prev) => 
-      prev === property.images.length - 1 ? 0 : prev + 1
-    );
+  const getDaysOnMarketColor = (days: number) => {
+    if (days <= 7) return 'bg-accent-color text-white';
+    if (days <= 14) return 'bg-warning-color text-white';
+    return 'bg-secondary-color text-white';
   };
 
-  const prevImage = () => {
-    setCurrentImageIndex((prev) => 
-      prev === 0 ? property.images.length - 1 : prev - 1
-    );
+  const handleImageClick = () => {
+    // This would typically open a modal or navigate to property details
+    console.log('Opening property details for:', property.id);
+  };
+
+  const handleLike = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    setIsLiked(!isLiked);
+  };
+
+  const handleShare = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    // Implement share functionality
+    if (navigator.share) {
+      navigator.share({
+        title: `${property.bedrooms} bed, ${property.bathrooms} bath in ${property.neighborhood.name}`,
+        text: `Check out this ${formatPrice(property.price)} home in ${property.neighborhood.name}`,
+        url: `/properties/${property.id}`
+      });
+    }
+  };
+
+  const cardClasses = {
+    default: 'bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 group hover:-translate-y-2',
+    featured: 'bg-white rounded-2xl overflow-hidden shadow-2xl border-2 border-accent-color/20 hover:shadow-3xl transition-all duration-300 group hover:-translate-y-3',
+    compact: 'bg-white rounded-xl overflow-hidden shadow-md hover:shadow-lg transition-all duration-300 group'
   };
 
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      whileHover={{ y: -5 }}
-      transition={{ duration: 0.3 }}
-      className={`bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden group ${className}`}
-    >
-      {/* Image Gallery */}
-      <div className="relative h-64 overflow-hidden">
-        <Image
-          src={property.images[currentImageIndex]?.url || '/images/placeholder-home.jpg'}
-          alt={property.images[currentImageIndex]?.alt || property.address}
-          fill
-          className="object-cover group-hover:scale-105 transition-transform duration-300"
-          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-        />
-        
-        {/* Image Navigation */}
-        {property.images.length > 1 && (
-          <>
-            <button
-              onClick={prevImage}
-              className="absolute left-2 top-1/2 -translate-y-1/2 w-8 h-8 bg-black/50 text-white rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity"
-            >
-              ←
-            </button>
-            <button
-              onClick={nextImage}
-              className="absolute right-2 top-1/2 -translate-y-1/2 w-8 h-8 bg-black/50 text-white rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity"
-            >
-              →
-            </button>
-          </>
-        )}
-
-        {/* Image Counter */}
-        {property.images.length > 1 && (
-          <div className="absolute bottom-2 left-2 bg-black/70 text-white px-2 py-1 rounded-full text-xs flex items-center gap-1">
-            <CameraIcon className="w-3 h-3" />
-            {currentImageIndex + 1}/{property.images.length}
+    <div className={cardClasses[variant]}>
+      {/* Property Image */}
+      <div className="relative h-64 bg-gradient-to-br from-secondary-color to-accent-color overflow-hidden">
+        {property.images && property.images.length > 0 ? (
+          <img
+            src={property.images[imageIndex]?.url || '/images/placeholder-home.jpg'}
+            alt={property.images[imageIndex]?.alt || 'Property image'}
+            className="w-full h-full object-cover cursor-pointer transition-transform duration-300 group-hover:scale-105"
+            onClick={handleImageClick}
+          />
+        ) : (
+          <div className="w-full h-full flex items-center justify-center">
+            <Home className="w-16 h-16 text-white opacity-20" />
           </div>
         )}
 
         {/* Status Badge */}
-        <div className="absolute top-2 left-2">
-          <span className={`px-3 py-1 rounded-full text-xs font-semibold ${
-            property.status === 'active' 
-              ? 'bg-green-500 text-white' 
-              : property.status === 'pending'
-              ? 'bg-yellow-500 text-white'
-              : 'bg-red-500 text-white'
-          }`}>
-            {property.status.toUpperCase()}
+        <div className="absolute top-4 left-4">
+          <span className={`px-3 py-1 rounded-full text-sm font-semibold ${getStatusColor(property.status)}`}>
+            {property.status}
           </span>
         </div>
 
+        {/* Days on Market */}
+        {property.daysOnMarket && (
+          <div className="absolute top-4 right-4">
+            <span className={`px-3 py-1 rounded-full text-sm font-semibold ${getDaysOnMarketColor(property.daysOnMarket)}`}>
+              {property.daysOnMarket} days
+            </span>
+          </div>
+        )}
+
         {/* Action Buttons */}
-        <div className="absolute top-2 right-2 flex gap-2">
-          <button
-            onClick={() => setIsFavorited(!isFavorited)}
-            className="w-8 h-8 bg-white/90 rounded-full flex items-center justify-center shadow-md hover:bg-white transition-colors"
-          >
-            {isFavorited ? (
-              <HeartSolidIcon className="w-4 h-4 text-red-500" />
-            ) : (
-              <HeartIcon className="w-4 h-4 text-gray-600" />
+        {showActions && (
+          <div className="absolute bottom-4 right-4 flex gap-2">
+            <button
+              onClick={handleLike}
+              className={`w-10 h-10 rounded-full backdrop-blur-md flex items-center justify-center transition-all duration-300 ${
+                isLiked 
+                  ? 'bg-accent-color text-white' 
+                  : 'bg-white/20 text-white hover:bg-white/30'
+              }`}
+              aria-label={isLiked ? 'Remove from favorites' : 'Add to favorites'}
+              title={isLiked ? 'Remove from favorites' : 'Add to favorites'}
+            >
+              <Heart className={`w-5 h-5 ${isLiked ? 'fill-current' : ''}`} />
+            </button>
+            <button
+              onClick={handleShare}
+              className="w-10 h-10 rounded-full bg-white/20 backdrop-blur-md flex items-center justify-center hover:bg-white/30 transition-all duration-300"
+              aria-label="Share property"
+              title="Share property"
+            >
+              <Share2 className="w-5 h-5 text-white" />
+            </button>
+          </div>
+        )}
+
+        {/* Image Navigation */}
+        {property.images && property.images.length > 1 && (
+          <div className="absolute bottom-4 left-4 flex gap-1">
+            {property.images.map((_, index) => (
+              <button
+                key={index}
+                onClick={(e) => {
+                  e.stopPropagation();
+                  setImageIndex(index);
+                }}
+                className={`w-2 h-2 rounded-full transition-all duration-300 ${
+                  index === imageIndex ? 'bg-white' : 'bg-white/50'
+                }`}
+                aria-label={`View image ${index + 1}`}
+              />
+            ))}
+          </div>
+        )}
+
+        {/* Price Overlay */}
+        <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-4">
+          <div className="text-white">
+            <div className="text-2xl font-bold">{formatPrice(property.price)}</div>
+            {property.pricePerSqft && (
+              <div className="text-sm opacity-80">
+                ${property.pricePerSqft}/sq ft
+              </div>
             )}
-          </button>
-          <button 
-            className="w-8 h-8 bg-white/90 rounded-full flex items-center justify-center shadow-md hover:bg-white transition-colors"
-            aria-label="Share property"
-            title="Share this property"
-          >
-            <ShareIcon className="w-4 h-4 text-gray-600" />
-          </button>
+          </div>
         </div>
       </div>
 
       {/* Property Details */}
       <div className="p-6">
-        {/* Price */}
-        <div className="flex items-center justify-between mb-3">
-          <h3 className="text-2xl font-bold text-gray-900">
-            {formatPrice(property.price)}
+        {/* Address and Neighborhood */}
+        <div className="mb-4">
+          <h3 className="text-lg font-semibold text-primary mb-2 line-clamp-1">
+            {property.address}
           </h3>
-          <div className="flex items-center gap-1 text-sm text-gray-500">
-            <CalendarIcon className="w-4 h-4" />
-            {formatDate(property.listDate)}
-          </div>
-        </div>
-
-        {/* Address */}
-        <div className="flex items-start gap-2 mb-4">
-          <MapPinIcon className="w-4 h-4 text-gray-500 mt-0.5 flex-shrink-0" />
-          <div>
-            <p className="text-gray-800 font-medium">{property.address}</p>
-            <p className="text-sm text-gray-500">{property.neighborhood.name}</p>
+          <div className="flex items-center gap-2 text-secondary">
+            <MapPin className="w-4 h-4" />
+            <span className="text-sm">{property.neighborhood.name}</span>
           </div>
         </div>
 
         {/* Property Stats */}
         <div className="grid grid-cols-3 gap-4 mb-4">
           <div className="text-center">
-            <div className="flex items-center justify-center gap-1 text-lg font-semibold text-gray-900">
-              <HomeIcon className="w-4 h-4" />
-              {property.bedrooms}
+            <div className="flex items-center justify-center gap-1 mb-1">
+              <Bed className="w-4 h-4 text-secondary" />
+              <span className="text-lg font-bold text-primary">{property.bedrooms}</span>
             </div>
-            <p className="text-xs text-gray-500">Bedrooms</p>
+            <div className="text-xs text-secondary">Beds</div>
           </div>
           <div className="text-center">
-            <div className="text-lg font-semibold text-gray-900">
-              {property.bathrooms}
+            <div className="flex items-center justify-center gap-1 mb-1">
+              <Bath className="w-4 h-4 text-secondary" />
+              <span className="text-lg font-bold text-primary">{property.bathrooms}</span>
             </div>
-            <p className="text-xs text-gray-500">Bathrooms</p>
+            <div className="text-xs text-secondary">Baths</div>
           </div>
           <div className="text-center">
-            <div className="text-lg font-semibold text-gray-900">
-              {property.sqft.toLocaleString()}
+            <div className="flex items-center justify-center gap-1 mb-1">
+              <Square className="w-4 h-4 text-secondary" />
+              <span className="text-lg font-bold text-primary">{property.sqft.toLocaleString()}</span>
             </div>
-            <p className="text-xs text-gray-500">Sq Ft</p>
+            <div className="text-xs text-secondary">Sq Ft</div>
           </div>
         </div>
 
         {/* Features */}
         {property.features && property.features.length > 0 && (
           <div className="mb-4">
-            <div className="flex flex-wrap gap-1">
+            <div className="flex flex-wrap gap-2">
               {property.features.slice(0, 3).map((feature, index) => (
-                <span
-                  key={index}
-                  className="px-2 py-1 bg-blue-50 text-blue-700 text-xs rounded-full"
+                <span 
+                  key={index} 
+                  className="bg-tertiary text-secondary px-2 py-1 rounded text-xs font-medium"
                 >
                   {feature}
                 </span>
               ))}
               {property.features.length > 3 && (
-                <span className="px-2 py-1 bg-gray-100 text-gray-600 text-xs rounded-full">
+                <span className="bg-secondary-color/10 text-secondary-color px-2 py-1 rounded text-xs font-medium">
                   +{property.features.length - 3} more
                 </span>
               )}
@@ -212,23 +266,46 @@ export function PropertyCard({ property, className = '' }: PropertyCardProps) {
           </div>
         )}
 
+        {/* Additional Info */}
+        <div className="flex items-center justify-between text-sm text-secondary mb-4">
+          <div className="flex items-center gap-2">
+            <Calendar className="w-4 h-4" />
+            <span>Listed {new Date(property.listDate).toLocaleDateString()}</span>
+          </div>
+          {property.lotSize && (
+            <div className="flex items-center gap-2">
+              <Home className="w-4 h-4" />
+              <span>{property.lotSize}</span>
+            </div>
+          )}
+        </div>
+
         {/* Action Buttons */}
         <div className="flex gap-3">
-          <Link
-            href={`/properties/${property.id}`}
-            className="flex-1 bg-blue-600 text-white py-2 px-4 rounded-lg hover:bg-blue-700 transition-colors text-center font-medium"
-          >
-            View Details
-          </Link>
           <button 
-            className="px-4 py-2 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors"
-            aria-label="Calculate mortgage"
-            title="Calculate mortgage for this property"
+            className="btn btn-primary flex-1 group"
+            onClick={handleImageClick}
           >
-            <BanknotesIcon className="w-5 h-5" />
+            <Eye className="w-4 h-4 mr-2 group-hover:scale-110 transition-transform" />
+            View Details
           </button>
+          {showActions && (
+            <button 
+              className="btn btn-outline"
+              onClick={handleShare}
+              aria-label="Share property"
+              title="Share property"
+            >
+              <Share2 className="w-4 h-4" />
+            </button>
+          )}
+        </div>
+
+        {/* MLS Number */}
+        <div className="mt-3 text-xs text-secondary text-center">
+          MLS #{property.mlsNumber}
         </div>
       </div>
-    </motion.div>
+    </div>
   );
-}
+};

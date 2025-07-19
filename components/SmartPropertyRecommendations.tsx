@@ -1,5 +1,27 @@
 
 import React, { useState, useEffect } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { 
+  Sparkles, 
+  Heart, 
+  MapPin, 
+  DollarSign, 
+  Home, 
+  Star, 
+  TrendingUp,
+  Filter,
+  Sliders,
+  Eye,
+  Share2,
+  MessageCircle,
+  Clock,
+  Users,
+  Award,
+  CheckCircle,
+  ArrowRight,
+  ChevronDown,
+  ChevronUp
+} from 'lucide-react';
 
 interface PropertyRecommendation {
   id: string;
@@ -8,371 +30,467 @@ interface PropertyRecommendation {
   bedrooms: number;
   bathrooms: number;
   sqft: number;
-  features: string[];
-  matchScore: number;
-  whyRecommended: string[];
   neighborhood: string;
-  imageUrl?: string;
+  matchPercentage: number;
+  reasons: string[];
+  features: string[];
+  daysOnMarket: number;
+  pricePerSqft: number;
+  image: string;
+  status: 'active' | 'pending' | 'sold';
 }
 
-interface UserPreferences {
-  budget: { min: number; max: number };
-  bedrooms: number;
-  bathrooms: number;
-  preferredFeatures: string[];
-  neighborhoods: string[];
+interface SmartPropertyRecommendationsProps {
+  className?: string;
 }
 
-const SmartPropertyRecommendations: React.FC = () => {
-  const [preferences, setPreferences] = useState<UserPreferences>({
-    budget: { min: 400000, max: 800000 },
-    bedrooms: 3,
-    bathrooms: 2,
-    preferredFeatures: [],
-    neighborhoods: []
-  });
-  
-  const [recommendations, setRecommendations] = useState<PropertyRecommendation[]>([]);
-  const [isLoading, setIsLoading] = useState(false);
-  const [showPreferences, setShowPreferences] = useState(false);
+const SmartPropertyRecommendations: React.FC<SmartPropertyRecommendationsProps> = ({ 
+  className = '' 
+}) => {
+  const [isEnabled, setIsEnabled] = useState(true);
+  const [selectedFilters, setSelectedFilters] = useState<string[]>([]);
+  const [showFilters, setShowFilters] = useState(false);
+  const [sortBy, setSortBy] = useState<'match' | 'price' | 'date'>('match');
 
-  const availableFeatures = [
-    'Pool', 'Golf Course View', 'Gated Community', 'Mountain View',
-    'Two-Story', 'Single Story', 'Casita', 'RV Parking', 'Three Car Garage',
-    'Upgraded Kitchen', 'Hardwood Floors', 'Fireplace', 'Outdoor Kitchen'
+  const recommendations: PropertyRecommendation[] = [
+    {
+      id: '1',
+      address: '1234 Providence Drive',
+      price: 679000,
+      bedrooms: 4,
+      bathrooms: 3,
+      sqft: 2800,
+      neighborhood: 'Providence',
+      matchPercentage: 92,
+      reasons: [
+        'Within your budget range',
+        'Recently renovated and move-in ready',
+        'Includes 3D virtual tour',
+        'Excellent school district'
+      ],
+      features: ['Pool', 'Mountain Views', 'Gourmet Kitchen', 'Smart Home'],
+      daysOnMarket: 8,
+      pricePerSqft: 243,
+      image: '/images/providence-home-1.jpg',
+      status: 'active'
+    },
+    {
+      id: '2',
+      address: '5678 Centennial Hills Blvd',
+      price: 745000,
+      bedrooms: 5,
+      bathrooms: 3.5,
+      sqft: 3200,
+      neighborhood: 'Centennial Hills',
+      matchPercentage: 88,
+      reasons: [
+        'Perfect for your growing family',
+        'Large backyard with mountain views',
+        'Recently updated kitchen',
+        'Close to shopping and amenities'
+      ],
+      features: ['Guest House', 'Wine Cellar', 'Home Theater', 'Casita'],
+      daysOnMarket: 12,
+      pricePerSqft: 233,
+      image: '/images/centennial-hills-home-1.jpg',
+      status: 'active'
+    },
+    {
+      id: '3',
+      address: '9012 Skye Canyon Road',
+      price: 595000,
+      bedrooms: 3,
+      bathrooms: 2.5,
+      sqft: 2200,
+      neighborhood: 'Skye Canyon',
+      matchPercentage: 85,
+      reasons: [
+        'Great starter home opportunity',
+        'Low maintenance community',
+        'Access to hiking trails',
+        'Modern open floor plan'
+      ],
+      features: ['Open Floor Plan', 'Mountain Views', 'Upgraded Kitchen', 'Large Yard'],
+      daysOnMarket: 15,
+      pricePerSqft: 270,
+      image: '/images/skye-canyon-home-1.jpg',
+      status: 'active'
+    }
   ];
 
-  const neighborhoods = [
-    'Centennial Hills', 'Providence', 'Skye Canyon', 'The Ridges',
-    'Red Rock Country Club', 'Canyon Gate', 'Sun City Summerlin'
+  const filters = [
+    { key: 'pool', label: 'Pool', icon: '🏊' },
+    { key: 'mountain-views', label: 'Mountain Views', icon: '🏔️' },
+    { key: 'smart-home', label: 'Smart Home', icon: '🏠' },
+    { key: 'gourmet-kitchen', label: 'Gourmet Kitchen', icon: '👨‍🍳' },
+    { key: 'guest-house', label: 'Guest House', icon: '🏡' },
+    { key: 'wine-cellar', label: 'Wine Cellar', icon: '🍷' }
   ];
 
-  useEffect(() => {
-    generateRecommendations();
-  }, [preferences]);
+  const sortOptions = [
+    { key: 'match', label: 'Best Match', icon: Star },
+    { key: 'price', label: 'Price', icon: DollarSign },
+    { key: 'date', label: 'Newest', icon: Clock }
+  ];
 
-  const generateRecommendations = async () => {
-    setIsLoading(true);
-    
-    // Simulate API call for property recommendations
-    const mockProperties: PropertyRecommendation[] = [
-      {
-        id: '1',
-        address: '123 TPC Drive, Las Vegas, NV 89149',
-        price: 679000,
-        bedrooms: 4,
-        bathrooms: 3,
-        sqft: 2850,
-        features: ['Golf Course View', 'Pool', 'Gated Community', 'Three Car Garage'],
-        matchScore: 92,
-        whyRecommended: [
-          'Within your budget range',
-          'Has your preferred golf course view',
-          'Located in Centennial Hills as requested',
-          'Extra bedroom for flexibility'
-        ],
-        neighborhood: 'Centennial Hills'
-      },
-      {
-        id: '2',
-        address: '456 Providence Way, Las Vegas, NV 89166',
-        price: 745000,
-        bedrooms: 3,
-        bathrooms: 2.5,
-        sqft: 2650,
-        features: ['Mountain View', 'Pool', 'Upgraded Kitchen', 'Casita'],
-        matchScore: 88,
-        whyRecommended: [
-          'Perfect bedroom/bathroom match',
-          'Mountain views you\'ll love',
-          'Includes casita for office/guests',
-          'Recently upgraded kitchen'
-        ],
-        neighborhood: 'Providence'
-      },
-      {
-        id: '3',
-        address: '789 Skye Vista Ave, Las Vegas, NV 89166',
-        price: 595000,
-        bedrooms: 3,
-        bathrooms: 2,
-        sqft: 2400,
-        features: ['Single Story', 'RV Parking', 'Fireplace', 'Large Lot'],
-        matchScore: 85,
-        whyRecommended: [
-          'Well under budget - room for upgrades',
-          'Single story living',
-          'RV parking for your toys',
-          'Great value in growing area'
-        ],
-        neighborhood: 'Skye Canyon'
+  const filteredRecommendations = recommendations
+    .filter(rec => {
+      if (selectedFilters.length === 0) return true;
+      return selectedFilters.some(filter => 
+        rec.features.some(feature => 
+          feature.toLowerCase().includes(filter.toLowerCase())
+        )
+      );
+    })
+    .sort((a, b) => {
+      switch (sortBy) {
+        case 'match':
+          return b.matchPercentage - a.matchPercentage;
+        case 'price':
+          return a.price - b.price;
+        case 'date':
+          return a.daysOnMarket - b.daysOnMarket;
+        default:
+          return 0;
       }
-    ];
-
-    // Filter based on preferences
-    const filtered = mockProperties.filter(property => {
-      const withinBudget = property.price >= preferences.budget.min && 
-                          property.price <= preferences.budget.max;
-      const meetsRooms = property.bedrooms >= preferences.bedrooms &&
-                        property.bathrooms >= preferences.bathrooms;
-      const inPreferredArea = preferences.neighborhoods.length === 0 ||
-                             preferences.neighborhoods.includes(property.neighborhood);
-      
-      return withinBudget && meetsRooms && inPreferredArea;
     });
-
-    setTimeout(() => {
-      setRecommendations(filtered);
-      setIsLoading(false);
-    }, 1000);
-  };
 
   const formatPrice = (price: number) => {
     return new Intl.NumberFormat('en-US', {
       style: 'currency',
       currency: 'USD',
-      minimumFractionDigits: 0,
-      maximumFractionDigits: 0,
+      maximumFractionDigits: 0
     }).format(price);
   };
 
-  const handleFeatureToggle = (feature: string) => {
-    setPreferences(prev => ({
-      ...prev,
-      preferredFeatures: prev.preferredFeatures.includes(feature)
-        ? prev.preferredFeatures.filter(f => f !== feature)
-        : [...prev.preferredFeatures, feature]
-    }));
+  const getMatchColor = (percentage: number) => {
+    if (percentage >= 90) return 'text-accent-color';
+    if (percentage >= 80) return 'text-warning-color';
+    return 'text-secondary-color';
   };
 
-  const handleNeighborhoodToggle = (neighborhood: string) => {
-    setPreferences(prev => ({
-      ...prev,
-      neighborhoods: prev.neighborhoods.includes(neighborhood)
-        ? prev.neighborhoods.filter(n => n !== neighborhood)
-        : [...prev.neighborhoods, neighborhood]
-    }));
+  const getMatchBgColor = (percentage: number) => {
+    if (percentage >= 90) return 'bg-accent-color/10';
+    if (percentage >= 80) return 'bg-warning-color/10';
+    return 'bg-secondary-color/10';
   };
 
   return (
-    <div className="bg-white rounded-xl shadow-lg p-6 mb-8">
-      <div className="flex justify-between items-center mb-6">
-        <div>
-          <h2 className="text-2xl font-bold text-gray-900">🎯 Smart Property Recommendations</h2>
-          <p className="text-gray-600">AI-powered suggestions based on your preferences</p>
-        </div>
-        <button
-          onClick={() => setShowPreferences(!showPreferences)}
-          className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors"
+    <section className={`section bg-secondary ${className}`}>
+      <div className="container">
+        {/* Header */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+          viewport={{ once: true }}
+          className="text-center mb-16"
         >
-          ⚙️ Preferences
-        </button>
-      </div>
+          <div className="flex items-center justify-center gap-3 mb-6">
+            <Sparkles className="w-8 h-8 text-accent-color" />
+            <h2 className="text-4xl md:text-5xl font-bold text-primary">
+              Smart Property Recommendations
+            </h2>
+          </div>
+          <p className="text-xl text-secondary max-w-3xl mx-auto mb-8">
+            AI-powered suggestions based on your preferences and market analysis
+          </p>
 
-      {showPreferences && (
-        <div className="bg-gray-50 rounded-lg p-4 mb-6">
-          <h3 className="font-semibold mb-4">Customize Your Preferences</h3>
-          
-          {/* Budget Range */}
-          <div className="mb-4">
-            <label className="block text-sm font-medium text-gray-700 mb-2">Budget Range</label>
-            <div className="flex gap-4">
-              <input
-                type="number"
-                value={preferences.budget.min}
-                onChange={(e) => setPreferences(prev => ({
-                  ...prev,
-                  budget: { ...prev.budget, min: Number(e.target.value) }
-                }))}
-                className="border rounded px-3 py-2 w-32"
-                placeholder="Min"
+          {/* Toggle Switch */}
+          <div className="flex items-center justify-center gap-4">
+            <span className={`text-sm font-medium ${!isEnabled ? 'text-secondary' : 'text-primary'}`}>
+              AI Recommendations
+            </span>
+            <button
+              onClick={() => setIsEnabled(!isEnabled)}
+              className={`relative inline-flex h-8 w-16 items-center rounded-full transition-colors duration-300 ${
+                isEnabled ? 'bg-accent-color' : 'bg-tertiary'
+              }`}
+            >
+              <motion.div
+                className={`h-6 w-6 rounded-full bg-white shadow-md transition-transform duration-300 ${
+                  isEnabled ? 'translate-x-9' : 'translate-x-1'
+                }`}
+                layout
               />
-              <input
-                type="number"
-                value={preferences.budget.max}
-                onChange={(e) => setPreferences(prev => ({
-                  ...prev,
-                  budget: { ...prev.budget, max: Number(e.target.value) }
-                }))}
-                className="border rounded px-3 py-2 w-32"
-                placeholder="Max"
-              />
-            </div>
+            </button>
+            <span className={`text-sm font-medium ${isEnabled ? 'text-secondary' : 'text-primary'}`}>
+              Manual Search
+            </span>
           </div>
+        </motion.div>
 
-          {/* Bedrooms/Bathrooms */}
-          <div className="grid grid-cols-2 gap-4 mb-4">
-            <div>
-              <label htmlFor="min-bedrooms" className="block text-sm font-medium text-gray-700 mb-2">Min Bedrooms</label>
-              <select
-                id="min-bedrooms"
-                value={preferences.bedrooms}
-                onChange={(e) => setPreferences(prev => ({ ...prev, bedrooms: Number(e.target.value) }))}
-                className="border rounded px-3 py-2 w-full"
-                aria-label="Select minimum number of bedrooms"
-              >
-                {[1, 2, 3, 4, 5, 6].map(num => (
-                  <option key={num} value={num}>{num}+</option>
-                ))}
-              </select>
-            </div>
-            <div>
-              <label htmlFor="min-bathrooms" className="block text-sm font-medium text-gray-700 mb-2">Min Bathrooms</label>
-              <select
-                id="min-bathrooms"
-                value={preferences.bathrooms}
-                onChange={(e) => setPreferences(prev => ({ ...prev, bathrooms: Number(e.target.value) }))}
-                className="border rounded px-3 py-2 w-full"
-                aria-label="Select minimum number of bathrooms"
-              >
-                {[1, 1.5, 2, 2.5, 3, 3.5, 4].map(num => (
-                  <option key={num} value={num}>{num}+</option>
-                ))}
-              </select>
-            </div>
-          </div>
-
-          {/* Preferred Features */}
-          <div className="mb-4">
-            <label className="block text-sm font-medium text-gray-700 mb-2">Preferred Features</label>
-            <div className="flex flex-wrap gap-2">
-              {availableFeatures.map(feature => (
-                <button
-                  key={feature}
-                  onClick={() => handleFeatureToggle(feature)}
-                  className={`px-3 py-1 rounded-full text-sm transition-colors ${
-                    preferences.preferredFeatures.includes(feature)
-                      ? 'bg-blue-600 text-white'
-                      : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
-                  }`}
-                >
-                  {feature}
-                </button>
-              ))}
-            </div>
-          </div>
-
-          {/* Neighborhoods */}
-          <div className="mb-4">
-            <label className="block text-sm font-medium text-gray-700 mb-2">Preferred Areas</label>
-            <div className="flex flex-wrap gap-2">
-              {neighborhoods.map(neighborhood => (
-                <button
-                  key={neighborhood}
-                  onClick={() => handleNeighborhoodToggle(neighborhood)}
-                  className={`px-3 py-1 rounded-full text-sm transition-colors ${
-                    preferences.neighborhoods.includes(neighborhood)
-                      ? 'bg-green-600 text-white'
-                      : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
-                  }`}
-                >
-                  {neighborhood}
-                </button>
-              ))}
-            </div>
-            {preferences.neighborhoods.length === 0 && (
-              <p className="text-xs text-gray-500 mt-1">No selection = all areas</p>
-            )}
-          </div>
-        </div>
-      )}
-
-      {/* Recommendations */}
-      {isLoading ? (
-        <div className="text-center py-8">
-          <div className="animate-spin w-8 h-8 border-4 border-blue-600 border-t-transparent rounded-full mx-auto mb-4"></div>
-          <p className="text-gray-600">Finding perfect properties for you...</p>
-        </div>
-      ) : (
-        <div className="space-y-6">
-          {recommendations.map((property) => (
-            <div key={property.id} className="border border-gray-200 rounded-lg overflow-hidden hover:shadow-md transition-shadow">
-              <div className="p-6">
-                <div className="flex justify-between items-start mb-4">
-                  <div>
-                    <h3 className="text-lg font-semibold text-gray-900">{property.address}</h3>
-                    <p className="text-2xl font-bold text-blue-600">{formatPrice(property.price)}</p>
+        {isEnabled && (
+          <>
+            {/* Filters and Sort */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+              viewport={{ once: true }}
+              className="bg-white rounded-2xl p-6 shadow-lg mb-8"
+            >
+              <div className="flex flex-col lg:flex-row justify-between items-start lg:items-center gap-4">
+                {/* Filters */}
+                <div className="flex-1">
+                  <div className="flex items-center gap-4 mb-4">
+                    <button
+                      onClick={() => setShowFilters(!showFilters)}
+                      className="flex items-center gap-2 px-4 py-2 bg-tertiary rounded-lg hover:bg-secondary-color/10 transition-colors"
+                    >
+                      <Filter className="w-4 h-4" />
+                      <span className="text-sm font-medium">Filters</span>
+                      {showFilters ? <ChevronUp className="w-4 h-4" /> : <ChevronDown className="w-4 h-4" />}
+                    </button>
+                    {selectedFilters.length > 0 && (
+                      <span className="text-sm text-secondary">
+                        {selectedFilters.length} filter{selectedFilters.length !== 1 ? 's' : ''} applied
+                      </span>
+                    )}
                   </div>
-                  <div className="text-right">
-                    <div className="bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm font-semibold">
-                      {property.matchScore}% Match
+
+                  <AnimatePresence>
+                    {showFilters && (
+                      <motion.div
+                        initial={{ opacity: 0, height: 0 }}
+                        animate={{ opacity: 1, height: 'auto' }}
+                        exit={{ opacity: 0, height: 0 }}
+                        transition={{ duration: 0.3 }}
+                        className="flex flex-wrap gap-2"
+                      >
+                        {filters.map((filter) => (
+                          <button
+                            key={filter.key}
+                            onClick={() => {
+                              setSelectedFilters(prev =>
+                                prev.includes(filter.key)
+                                  ? prev.filter(f => f !== filter.key)
+                                  : [...prev, filter.key]
+                              );
+                            }}
+                            className={`flex items-center gap-2 px-3 py-2 rounded-lg text-sm transition-all duration-300 ${
+                              selectedFilters.includes(filter.key)
+                                ? 'bg-accent-color text-white'
+                                : 'bg-tertiary text-secondary hover:bg-secondary-color/10'
+                            }`}
+                          >
+                            <span>{filter.icon}</span>
+                            <span>{filter.label}</span>
+                          </button>
+                        ))}
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+                </div>
+
+                                 {/* Sort */}
+                 <div className="flex items-center gap-2">
+                   <label htmlFor="sort-select" className="text-sm text-secondary">Sort by:</label>
+                   <select
+                     id="sort-select"
+                     value={sortBy}
+                     onChange={(e) => setSortBy(e.target.value as any)}
+                     className="px-3 py-2 bg-tertiary rounded-lg text-sm border-none focus:ring-2 focus:ring-accent-color/50"
+                     aria-label="Sort recommendations"
+                   >
+                     {sortOptions.map((option) => (
+                       <option key={option.key} value={option.key}>
+                         {option.label}
+                       </option>
+                     ))}
+                   </select>
+                 </div>
+              </div>
+            </motion.div>
+
+            {/* Recommendations Grid */}
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {filteredRecommendations.map((recommendation, index) => (
+                <motion.div
+                  key={recommendation.id}
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.6, delay: index * 0.1 }}
+                  viewport={{ once: true }}
+                  className="bg-white rounded-2xl overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-300 group hover:-translate-y-2"
+                >
+                  {/* Property Image */}
+                  <div className="relative h-48 bg-gradient-to-br from-secondary-color to-accent-color">
+                    <div className="absolute inset-0 flex items-center justify-center">
+                      <Home className="w-16 h-16 text-white opacity-20" />
+                    </div>
+                    
+                    {/* Match Badge */}
+                    <div className="absolute top-4 left-4">
+                      <div className={`px-3 py-1 rounded-full text-sm font-semibold ${getMatchBgColor(recommendation.matchPercentage)} ${getMatchColor(recommendation.matchPercentage)}`}>
+                        {recommendation.matchPercentage}% Match
+                      </div>
+                    </div>
+
+                                         {/* Action Buttons */}
+                     <div className="absolute top-4 right-4 flex gap-2">
+                       <button 
+                         className="w-8 h-8 bg-white/20 backdrop-blur-md rounded-full flex items-center justify-center hover:bg-white/30 transition-colors"
+                         aria-label="Add to favorites"
+                         title="Add to favorites"
+                       >
+                         <Heart className="w-4 h-4 text-white" />
+                       </button>
+                       <button 
+                         className="w-8 h-8 bg-white/20 backdrop-blur-md rounded-full flex items-center justify-center hover:bg-white/30 transition-colors"
+                         aria-label="Share property"
+                         title="Share property"
+                       >
+                         <Share2 className="w-4 h-4 text-white" />
+                       </button>
+                     </div>
+
+                    {/* Price Overlay */}
+                    <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-4">
+                      <div className="text-white">
+                        <div className="text-2xl font-bold">{formatPrice(recommendation.price)}</div>
+                        <div className="text-sm opacity-80">${recommendation.pricePerSqft}/sq ft</div>
+                      </div>
                     </div>
                   </div>
-                </div>
 
-                <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-4">
-                  <div className="text-center">
-                    <div className="text-xl font-bold text-gray-900">{property.bedrooms}</div>
-                    <div className="text-sm text-gray-600">Bedrooms</div>
-                  </div>
-                  <div className="text-center">
-                    <div className="text-xl font-bold text-gray-900">{property.bathrooms}</div>
-                    <div className="text-sm text-gray-600">Bathrooms</div>
-                  </div>
-                  <div className="text-center">
-                    <div className="text-xl font-bold text-gray-900">{property.sqft.toLocaleString()}</div>
-                    <div className="text-sm text-gray-600">Sq Ft</div>
-                  </div>
-                  <div className="text-center">
-                    <div className="text-xl font-bold text-gray-900">{property.neighborhood}</div>
-                    <div className="text-sm text-gray-600">Neighborhood</div>
-                  </div>
-                </div>
+                  {/* Property Details */}
+                  <div className="p-6">
+                    {/* Address and Neighborhood */}
+                    <div className="mb-4">
+                      <h3 className="text-lg font-semibold text-primary mb-2 line-clamp-1">
+                        {recommendation.address}
+                      </h3>
+                      <div className="flex items-center gap-2 text-secondary">
+                        <MapPin className="w-4 h-4" />
+                        <span className="text-sm">{recommendation.neighborhood}</span>
+                      </div>
+                    </div>
 
-                <div className="mb-4">
-                  <h4 className="font-semibold text-gray-900 mb-2">Why We Recommend This Property:</h4>
-                  <ul className="space-y-1">
-                    {property.whyRecommended.map((reason, index) => (
-                      <li key={index} className="flex items-center text-sm text-gray-700">
-                        <span className="text-green-600 mr-2">✓</span>
-                        {reason}
-                      </li>
-                    ))}
-                  </ul>
-                </div>
+                    {/* Property Stats */}
+                    <div className="grid grid-cols-3 gap-4 mb-4">
+                      <div className="text-center">
+                        <div className="text-lg font-bold text-primary">{recommendation.bedrooms}</div>
+                        <div className="text-xs text-secondary">Beds</div>
+                      </div>
+                      <div className="text-center">
+                        <div className="text-lg font-bold text-primary">{recommendation.bathrooms}</div>
+                        <div className="text-xs text-secondary">Baths</div>
+                      </div>
+                      <div className="text-center">
+                        <div className="text-lg font-bold text-primary">{recommendation.sqft.toLocaleString()}</div>
+                        <div className="text-xs text-secondary">Sq Ft</div>
+                      </div>
+                    </div>
 
-                <div className="mb-4">
-                  <div className="flex flex-wrap gap-2">
-                    {property.features.map((feature, index) => (
-                      <span
-                        key={index}
-                        className="bg-blue-50 text-blue-700 px-2 py-1 rounded text-xs"
-                      >
-                        {feature}
-                      </span>
-                    ))}
+                    {/* Why We Recommend */}
+                    <div className="mb-4">
+                      <h4 className="text-sm font-semibold text-primary mb-2 flex items-center gap-2">
+                        <CheckCircle className="w-4 h-4 text-accent-color" />
+                        Why We Recommend This Property:
+                      </h4>
+                      <ul className="space-y-1">
+                        {recommendation.reasons.slice(0, 2).map((reason, idx) => (
+                          <li key={idx} className="text-xs text-secondary flex items-start gap-2">
+                            <div className="w-1 h-1 bg-accent-color rounded-full mt-1.5 flex-shrink-0"></div>
+                            {reason}
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+
+                    {/* Features */}
+                    <div className="mb-4">
+                      <div className="flex flex-wrap gap-1">
+                        {recommendation.features.slice(0, 3).map((feature, idx) => (
+                          <span key={idx} className="bg-tertiary text-secondary px-2 py-1 rounded text-xs">
+                            {feature}
+                          </span>
+                        ))}
+                      </div>
+                    </div>
+
+                    {/* Action Buttons */}
+                    <div className="flex gap-3">
+                      <button className="btn btn-primary flex-1 group">
+                        <Eye className="w-4 h-4 mr-2 group-hover:scale-110 transition-transform" />
+                        View Details
+                        <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
+                      </button>
+                                             <button 
+                         className="btn btn-outline"
+                         aria-label="Contact about this property"
+                         title="Contact about this property"
+                       >
+                         <MessageCircle className="w-4 h-4" />
+                       </button>
+                    </div>
+
+                    {/* Days on Market */}
+                    <div className="mt-3 text-xs text-secondary text-center">
+                      {recommendation.daysOnMarket} days on market
+                    </div>
                   </div>
-                </div>
-
-                <div className="flex gap-3">
-                  <button className="flex-1 bg-blue-600 text-white py-2 px-4 rounded-lg hover:bg-blue-700 transition-colors">
-                    📸 View Photos
-                  </button>
-                  <button className="flex-1 bg-green-600 text-white py-2 px-4 rounded-lg hover:bg-green-700 transition-colors">
-                    📅 Schedule Tour
-                  </button>
-                  <button className="flex-1 bg-gray-600 text-white py-2 px-4 rounded-lg hover:bg-gray-700 transition-colors">
-                    💾 Save
-                  </button>
-                </div>
-              </div>
+                </motion.div>
+              ))}
             </div>
-          ))}
 
-          {recommendations.length === 0 && (
-            <div className="text-center py-8">
-              <p className="text-gray-600 mb-4">No properties match your current preferences.</p>
-              <button
-                onClick={() => setShowPreferences(true)}
-                className="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition-colors"
+            {/* No Results */}
+            {filteredRecommendations.length === 0 && (
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                className="text-center py-12"
               >
-                Adjust Preferences
+                <div className="w-16 h-16 bg-tertiary rounded-full flex items-center justify-center mx-auto mb-4">
+                  <Home className="w-8 h-8 text-secondary" />
+                </div>
+                <h3 className="text-lg font-semibold text-primary mb-2">No properties match your filters</h3>
+                <p className="text-secondary mb-4">Try adjusting your filters or contact us for personalized recommendations</p>
+                <button 
+                  onClick={() => setSelectedFilters([])}
+                  className="btn btn-primary"
+                >
+                  Clear Filters
+                </button>
+              </motion.div>
+            )}
+
+            {/* Load More */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              transition={{ duration: 0.6, delay: 0.4 }}
+              viewport={{ once: true }}
+              className="text-center mt-12"
+            >
+              <button className="btn btn-accent btn-lg group">
+                <Sparkles className="w-5 h-5 mr-2 group-hover:scale-110 transition-transform" />
+                Get More Recommendations
+                <ArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" />
               </button>
+            </motion.div>
+          </>
+        )}
+
+        {!isEnabled && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            className="text-center py-12"
+          >
+            <div className="w-16 h-16 bg-tertiary rounded-full flex items-center justify-center mx-auto mb-4">
+              <Sliders className="w-8 h-8 text-secondary" />
             </div>
-          )}
-        </div>
-      )}
-    </div>
+            <h3 className="text-lg font-semibold text-primary mb-2">Manual Search Mode</h3>
+            <p className="text-secondary mb-4">Use our advanced search filters to find your perfect home</p>
+            <button className="btn btn-primary">
+              Start Manual Search
+            </button>
+          </motion.div>
+        )}
+      </div>
+    </section>
   );
 };
 
