@@ -158,10 +158,12 @@ export default function NorthwestLasVegas() {
           <div className="container">
             <h2>Current Homes for Sale in Northwest Las Vegas</h2>
             <RealScoutWidget 
-              type="featured-listings"
-              neighborhood="Northwest Las Vegas"
+              type="office-listings"
               title="Homes in Northwest Las Vegas"
               description="Discover available properties in Northwest Las Vegas including Centennial Hills and Skye Canyon"
+              priceMin={400000}
+              priceMax={2000000}
+              propertyTypes="SFR,MF,TC"
             />
           </div>
         </motion.section>

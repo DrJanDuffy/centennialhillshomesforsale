@@ -1,362 +1,176 @@
-.container {
+/* RealScout Widget Container */
+.realscoutWidget {
   width: 100%;
   max-width: 1200px;
   margin: 0 auto;
-  padding: 20px;
-  background-color: #ffffff;
+  padding: 2rem;
+  background: var(--color-background);
   border-radius: 12px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  border: 1px solid #e5e7eb;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  border: 1px solid var(--color-border);
 }
 
-/* Search Widget Styles */
-.searchWidget {
-  width: 100%;
-}
-
-.searchHeader {
+/* Widget Header */
+.widgetHeader {
   text-align: center;
   margin-bottom: 2rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 2px solid var(--color-primary-light);
 }
 
 .widgetTitle {
-  font-size: 1.875rem;
+  font-size: 2rem;
   font-weight: 700;
-  color: #1f2937;
+  color: var(--color-primary);
   margin-bottom: 0.5rem;
+  line-height: 1.2;
 }
 
 .widgetDescription {
-  color: #6b7280;
-  font-size: 1.125rem;
-  line-height: 1.5;
+  font-size: 1.1rem;
+  color: var(--color-text-secondary);
+  line-height: 1.6;
+  max-width: 600px;
+  margin: 0 auto;
 }
 
-.searchForm {
-  background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
-  padding: 2rem;
-  border-radius: 8px;
-  border: 1px solid #e2e8f0;
-}
-
-.formRow {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 1rem;
-  margin-bottom: 1rem;
-}
-
-.formGroup {
-  display: flex;
-  flex-direction: column;
-}
-
-.formGroup label {
-  font-weight: 600;
-  color: #374151;
-  margin-bottom: 0.5rem;
-  font-size: 0.875rem;
-}
-
-.formGroup input,
-.formGroup select {
-  padding: 0.75rem;
-  border: 1px solid #d1d5db;
-  border-radius: 6px;
-  font-size: 0.875rem;
-  transition: all 0.2s ease;
-  background-color: white;
-}
-
-.formGroup input:focus,
-.formGroup select:focus {
-  outline: none;
-  border-color: #3b82f6;
-  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
-}
-
-.searchButton {
+/* RealScout Container */
+.realscoutContainer {
   width: 100%;
-  background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);
-  color: white;
-  padding: 1rem 2rem;
-  border: none;
-  border-radius: 8px;
-  font-weight: 600;
-  font-size: 1rem;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: all 0.2s ease;
-  margin-top: 1rem;
-}
-
-.searchButton:hover {
-  background: linear-gradient(135deg, #2563eb 0%, #1e40af 100%);
-  transform: translateY(-1px);
-  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
-}
-
-/* Listings Widget Styles */
-.listingsWidget {
-  width: 100%;
-}
-
-.listingsHeader {
-  text-align: center;
-  margin-bottom: 2rem;
-}
-
-.propertiesGrid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-  gap: 1.5rem;
-  margin-top: 1rem;
-}
-
-.propertyCard {
-  background: white;
-  border-radius: 12px;
-  overflow: hidden;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  border: 1px solid #e5e7eb;
-  transition: all 0.3s ease;
-}
-
-.propertyCard:hover {
-  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
-  transform: translateY(-4px);
-}
-
-.propertyImage {
+  min-height: 400px;
   position: relative;
-  height: 200px;
   overflow: hidden;
-}
-
-.propertyImage img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  transition: transform 0.3s ease;
-}
-
-.propertyCard:hover .propertyImage img {
-  transform: scale(1.05);
-}
-
-.propertyStatus {
-  position: absolute;
-  top: 1rem;
-  left: 1rem;
-  z-index: 2;
-}
-
-.status {
-  padding: 0.25rem 0.75rem;
-  border-radius: 20px;
-  font-size: 0.75rem;
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-}
-
-.status.active {
-  background-color: #10b981;
-  color: white;
-}
-
-.status.pending {
-  background-color: #f59e0b;
-  color: white;
-}
-
-.status.sold {
-  background-color: #ef4444;
-  color: white;
-}
-
-.propertyPrice {
-  position: absolute;
-  bottom: 1rem;
-  right: 1rem;
-  background: rgba(0, 0, 0, 0.8);
-  color: white;
-  padding: 0.5rem 1rem;
-  border-radius: 6px;
-  font-weight: 700;
-  font-size: 1.125rem;
-}
-
-.propertyDetails {
-  padding: 1.5rem;
-}
-
-.propertyAddress {
-  font-size: 1.125rem;
-  font-weight: 600;
-  color: #1f2937;
-  margin-bottom: 0.75rem;
-  line-height: 1.4;
-}
-
-.propertyStats {
-  display: flex;
-  gap: 1rem;
-  margin-bottom: 1rem;
-  flex-wrap: wrap;
-}
-
-.propertyStats span {
-  display: flex;
-  align-items: center;
-  gap: 0.25rem;
-  color: #6b7280;
-  font-size: 0.875rem;
-}
-
-.propertyDescription {
-  color: #6b7280;
-  font-size: 0.875rem;
-  line-height: 1.5;
-  margin-bottom: 1rem;
-}
-
-.propertyFeatures {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.5rem;
-  margin-bottom: 1.5rem;
-}
-
-.feature {
-  background-color: #f3f4f6;
-  color: #374151;
-  padding: 0.25rem 0.75rem;
-  border-radius: 20px;
-  font-size: 0.75rem;
-  font-weight: 500;
-}
-
-.propertyActions {
-  display: flex;
-  gap: 0.75rem;
-}
-
-.viewButton {
-  flex: 1;
-  background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);
-  color: white;
-  padding: 0.75rem 1.5rem;
-  border: none;
-  border-radius: 6px;
-  font-weight: 600;
-  font-size: 0.875rem;
-  cursor: pointer;
-  transition: all 0.2s ease;
-}
-
-.viewButton:hover {
-  background: linear-gradient(135deg, #2563eb 0%, #1e40af 100%);
-}
-
-.favoriteButton {
-  background: #f3f4f6;
-  color: #6b7280;
-  padding: 0.75rem;
-  border: none;
-  border-radius: 6px;
-  cursor: pointer;
-  transition: all 0.2s ease;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.favoriteButton:hover {
-  background: #fee2e2;
-  color: #ef4444;
-}
-
-/* Loading and Error States */
-.loading {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  min-height: 200px;
-  gap: 1rem;
-}
-
-.loading p {
-  color: #6b7280;
-  font-size: 1rem;
-}
-
-.error {
-  padding: 2rem;
-  color: #dc2626;
-  background-color: #fef2f2;
-  border: 1px solid #fecaca;
   border-radius: 8px;
-  margin: 1rem 0;
+  background: var(--color-background);
+}
+
+/* RealScout Element Styling */
+.realscoutContainer realscout-office-listings,
+.realscoutContainer realscout-search,
+.realscoutContainer realscout-property-details,
+.realscoutContainer realscout-market-analysis {
+  width: 100% !important;
+  min-height: 400px !important;
+  display: block !important;
+  border: none !important;
+  border-radius: 8px !important;
+  background: transparent !important;
+}
+
+/* Loading State */
+.realscoutContainer::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 40px;
+  height: 40px;
+  border: 3px solid var(--color-primary-light);
+  border-top: 3px solid var(--color-primary);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  z-index: 1;
+}
+
+.realscoutContainer:has(realscout-office-listings:not([style*="display: none"])),
+.realscoutContainer:has(realscout-search:not([style*="display: none"])),
+.realscoutContainer:has(realscout-property-details:not([style*="display: none"])),
+.realscoutContainer:has(realscout-market-analysis:not([style*="display: none"])) {
+  min-height: auto;
+}
+
+.realscoutContainer:has(realscout-office-listings:not([style*="display: none"]))::before,
+.realscoutContainer:has(realscout-search:not([style*="display: none"]))::before,
+.realscoutContainer:has(realscout-property-details:not([style*="display: none"]))::before,
+.realscoutContainer:has(realscout-market-analysis:not([style*="display: none"]))::before {
+  display: none;
+}
+
+/* Error State */
+.realscoutContainer:empty::after {
+  content: 'RealScout widget is loading...';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: var(--color-text-secondary);
+  font-size: 1rem;
   text-align: center;
-  font-weight: 500;
+  z-index: 2;
 }
 
 /* Responsive Design */
 @media (max-width: 768px) {
-  .container {
+  .realscoutWidget {
     padding: 1rem;
+    margin: 1rem 0;
   }
-  
-  .searchForm {
-    padding: 1.5rem;
-  }
-  
-  .formRow {
-    grid-template-columns: 1fr;
-    gap: 0.75rem;
-  }
-  
-  .propertiesGrid {
-    grid-template-columns: 1fr;
-    gap: 1rem;
-  }
-  
-  .propertyStats {
-    flex-direction: column;
-    gap: 0.5rem;
-  }
-  
-  .propertyActions {
-    flex-direction: column;
-  }
-  
+
   .widgetTitle {
     font-size: 1.5rem;
   }
-  
+
   .widgetDescription {
     font-size: 1rem;
+  }
+
+  .realscoutContainer {
+    min-height: 300px;
   }
 }
 
 @media (max-width: 480px) {
-  .container {
+  .realscoutWidget {
     padding: 0.75rem;
   }
-  
-  .searchForm {
-    padding: 1rem;
+
+  .widgetTitle {
+    font-size: 1.25rem;
   }
-  
-  .propertyDetails {
-    padding: 1rem;
+
+  .realscoutContainer {
+    min-height: 250px;
   }
-  
-  .propertyImage {
-    height: 180px;
-  }
+}
+
+/* Animation */
+@keyframes spin {
+  0% { transform: translate(-50%, -50%) rotate(0deg); }
+  100% { transform: translate(-50%, -50%) rotate(360deg); }
+}
+
+/* RealScout Element Overrides */
+.realscoutContainer realscout-office-listings *,
+.realscoutContainer realscout-search *,
+.realscoutContainer realscout-property-details *,
+.realscoutContainer realscout-market-analysis * {
+  font-family: inherit !important;
+  box-sizing: border-box !important;
+}
+
+/* Ensure RealScout elements don't break layout */
+.realscoutContainer realscout-office-listings,
+.realscoutContainer realscout-search,
+.realscoutContainer realscout-property-details,
+.realscoutContainer realscout-market-analysis {
+  max-width: 100% !important;
+  overflow: hidden !important;
+}
+
+/* Fallback for when RealScout fails to load */
+.realscoutContainer:not(:has(realscout-office-listings, realscout-search, realscout-property-details, realscout-market-analysis)) {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--color-background-light);
+  border: 2px dashed var(--color-border);
+}
+
+.realscoutContainer:not(:has(realscout-office-listings, realscout-search, realscout-property-details, realscout-market-analysis))::after {
+  content: 'RealScout widget is currently unavailable. Please try again later.';
+  color: var(--color-text-secondary);
+  font-size: 1rem;
+  text-align: center;
+  padding: 2rem;
 } 

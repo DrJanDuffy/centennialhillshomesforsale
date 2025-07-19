@@ -150,10 +150,12 @@ export default function Neighborhoods() {
           <div className="listings-section">
             <h3>Available Homes in {selectedNeighborhood}</h3>
             <RealScoutWidget 
-              neighborhood={selectedNeighborhood}
-              type="featured-listings"
+              type="office-listings"
               title={`Homes in ${selectedNeighborhood}`}
               description={`Discover available properties in ${selectedNeighborhood}`}
+              priceMin={400000}
+              priceMax={1500000}
+              propertyTypes="SFR,MF,TC"
             />
           </div>
         </motion.section>
