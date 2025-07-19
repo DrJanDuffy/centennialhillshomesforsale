@@ -120,32 +120,25 @@ export default function NorthwestLasVegas() {
 
         <SchoolInfo neighborhood="Centennial Hills" />
 
+        {/* RealScout Your Listings */}
         <motion.section 
-          className="why-northwest"
+          className="section"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.6, duration: 0.6 }}
         >
           <div className="container">
-            <h2>Why Choose Northwest Las Vegas?</h2>
-            <div className="benefits-grid">
-              <div className="benefit-card">
-                <h3>🏫 Top Schools</h3>
-                <p>Access to some of Clark County's highest-rated schools and educational programs</p>
-              </div>
-              <div className="benefit-card">
-                <h3>🏌️ Championship Golf</h3>
-                <p>Multiple world-class golf courses including TPC Las Vegas and Bear's Best</p>
-              </div>
-              <div className="benefit-card">
-                <h3>🛍️ Premium Shopping</h3>
-                <p>Downtown Summerlin offers over 125 stores, restaurants, and entertainment</p>
-              </div>
-              <div className="benefit-card">
-                <h3>🏞️ Outdoor Recreation</h3>
-                <p>Red Rock Canyon, extensive trail systems, and numerous parks nearby</p>
-              </div>
+            <div className="text-center mb-8">
+              <h2>Your Listings</h2>
+              <p>Browse our latest properties in Northwest Las Vegas and surrounding areas</p>
             </div>
+            <realscout-your-listings 
+              agent-encoded-id="QWdlbnQtMjI1MDUw" 
+              sort-order="STATUS_AND_SIGNIFICANT_CHANGE" 
+              listing-status="For Sale,Sold" 
+              property-types="SFR" 
+              price-min="500000">
+            </realscout-your-listings>
           </div>
         </motion.section>
 

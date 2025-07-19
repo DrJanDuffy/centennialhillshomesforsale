@@ -53,45 +53,24 @@ export default function Listings() {
           <AdvancedSearch />
         </motion.section>
 
+        {/* RealScout Your Listings */}
         <motion.section 
-          className="quick-searches"
+          className="section"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.4, duration: 0.6 }}
         >
-          <h2>Popular Searches in Centennial Hills</h2>
-          <div className="quick-search-grid">
-            <div className="quick-search-card">
-              <h3>Luxury Homes $800K+</h3>
-              <p>Premium properties with resort-style amenities</p>
-              <button className="btn btn-outline">View Luxury Homes</button>
-            </div>
-            <div className="quick-search-card">
-              <h3>Golf Course Properties</h3>
-              <p>Homes with golf course views and access</p>
-              <button className="btn btn-outline">View Golf Homes</button>
-            </div>
-            <div className="quick-search-card">
-              <h3>New Construction</h3>
-              <p>Brand new homes in Skye Canyon and surrounding areas</p>
-              <button className="btn btn-outline">View New Homes</button>
-            </div>
-            <div className="quick-search-card">
-              <h3>Family Homes</h3>
-              <p>3+ bedrooms near top-rated schools</p>
-              <button className="btn btn-outline">View Family Homes</button>
-            </div>
-            <div className="quick-search-card">
-              <h3>Active Adult 55+</h3>
-              <p>Sun City Aliante and similar communities</p>
-              <button className="btn btn-outline">View 55+ Homes</button>
-            </div>
-            <div className="quick-search-card">
-              <h3>Condos & Townhomes</h3>
-              <p>Low-maintenance living options</p>
-              <button className="btn btn-outline">View Condos</button>
-            </div>
+          <div className="text-center mb-8">
+            <h2>Your Listings</h2>
+            <p>Browse our latest properties in Centennial Hills and surrounding areas</p>
           </div>
+          <realscout-your-listings 
+            agent-encoded-id="QWdlbnQtMjI1MDUw" 
+            sort-order="STATUS_AND_SIGNIFICANT_CHANGE" 
+            listing-status="For Sale,Sold" 
+            property-types="SFR" 
+            price-min="500000">
+          </realscout-your-listings>
         </motion.section>
 
         <motion.section 

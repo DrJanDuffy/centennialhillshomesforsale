@@ -117,23 +117,19 @@ export default function Neighborhoods() {
             <p className="neighborhood-description">{currentData.description}</p>
           </div>
 
-          <div className="neighborhood-stats">
-            <div className="stat-card">
-              <h3>Median Home Price</h3>
-              <p className="stat-value">{currentData.medianPrice}</p>
+          {/* RealScout Your Listings */}
+          <div className="section">
+            <div className="text-center mb-8">
+              <h3>Your Listings</h3>
+              <p>Browse our latest properties in {selectedNeighborhood} and surrounding areas</p>
             </div>
-            <div className="stat-card">
-              <h3>Average Square Feet</h3>
-              <p className="stat-value">{currentData.avgSqft}</p>
-            </div>
-            <div className="stat-card">
-              <h3>Year Built</h3>
-              <p className="stat-value">{currentData.yearBuilt}</p>
-            </div>
-            <div className="stat-card">
-              <h3>Zip Codes</h3>
-              <p className="stat-value">{currentData.zipCodes.join(', ')}</p>
-            </div>
+            <realscout-your-listings 
+              agent-encoded-id="QWdlbnQtMjI1MDUw" 
+              sort-order="STATUS_AND_SIGNIFICANT_CHANGE" 
+              listing-status="For Sale,Sold" 
+              property-types="SFR" 
+              price-min="500000">
+            </realscout-your-listings>
           </div>
 
           <div className="neighborhood-highlights">

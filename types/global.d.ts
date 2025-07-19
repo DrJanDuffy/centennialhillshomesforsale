@@ -12,6 +12,7 @@ declare global {
       'realscout-search': any;
       'realscout-property-details': any;
       'realscout-market-analysis': any;
+      'realscout-your-listings': any;
     }
   }
 }
