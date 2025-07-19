@@ -45,6 +45,17 @@ export default function Document() {
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://images.unsplash.com" />
         <link rel="dns-prefetch" href="//www.google-analytics.com" />
+        
+        {/* RealScout Web Components */}
+        <script src="https://em.realscout.com/widgets/realscout-web-components.umd.js" type="module"></script>
+        <style dangerouslySetInnerHTML={{
+          __html: `
+            realscout-office-listings {
+              --rs-listing-divider-color: rgb(101, 141, 172);
+              width: 100%;
+            }
+          `
+        }} />
       </Head>
       <body>
         <Main />
