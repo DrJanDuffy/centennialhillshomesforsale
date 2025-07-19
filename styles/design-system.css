@@ -128,10 +128,8 @@
 html {
   font-family: var(--font-family-sans);
   line-height: var(--line-height-normal);
-  /* Cross-browser text size adjustment with vendor prefixes for compatibility */
+  /* Cross-browser text size adjustment for compatibility */
   -webkit-text-size-adjust: 100%;
-  -moz-text-size-adjust: 100%;
-  -ms-text-size-adjust: 100%;
   text-size-adjust: 100%;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -218,6 +216,11 @@ a:hover {
   max-width: 1200px;
   margin: 0 auto;
   padding: 0 var(--space-md);
+}
+
+/* Hero Components */
+.hero-poster-bg {
+  background-image: url('/images/hero-poster.jpg');
 }
 
 .section {

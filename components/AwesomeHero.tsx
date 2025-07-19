@@ -109,8 +109,7 @@ const AwesomeHero: React.FC = () => {
         {/* Fallback Image */}
         {!isVideoLoaded && (
           <div 
-            className="w-full h-full bg-cover bg-center"
-            style={{ backgroundImage: 'url(/images/hero-poster.jpg)' }}
+            className="w-full h-full bg-cover bg-center hero-poster-bg"
           />
         )}
         
