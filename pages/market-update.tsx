@@ -118,7 +118,13 @@ export default function MarketUpdate() {
           transition={{ delay: 0.8, duration: 0.6 }}
         >
           <h2>Current Market Listings</h2>
-          <RealScoutWidget />
+          <RealScoutWidget
+            type="featured-listings"
+            neighborhood="Centennial Hills"
+            priceRange={{ min: 400000, max: 1500000 }}
+            title="Current Market Listings"
+            description="Latest properties on the market in Centennial Hills"
+          />
         </motion.section>
 
         <motion.section 

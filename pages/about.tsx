@@ -57,24 +57,17 @@ export default function About() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.2, duration: 0.6 }}
         >
-          <h2>Market Analysis</h2>
+          <h2>Property Search</h2>
           <div className="widget-container">
             <RealScoutWidget
-              type="market-analysis"
-              propertyId="12345"
-              agentId="67890"
-              brokerId="13579"
-              clientId="24680"
-              clientName="John Doe"
-              clientEmail="john@example.com"
-              clientPhone="555-0123"
-              clientAddress="123 Main St"
-              clientCity="Las Vegas"
-              clientState="NV"
-              clientZip="89149"
-              clientBudget="500000"
-              clientTimeline="3-6 months"
-              clientPreferences="3+ beds, 2+ baths"
+              type="search"
+              neighborhood="Centennial Hills"
+              priceRange={{ min: 400000, max: 1200000 }}
+              bedrooms={3}
+              bathrooms={2}
+              propertyType="Single Family"
+              title="Find Your Dream Home"
+              description="Search properties in Centennial Hills and surrounding areas"
             />
           </div>
         </motion.section>
@@ -85,24 +78,14 @@ export default function About() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.4, duration: 0.6 }}
         >
-          <h2>Market Trends</h2>
+          <h2>Featured Properties</h2>
           <div className="widget-container">
             <RealScoutWidget
-              type="market-trends"
-              propertyId="12345"
-              agentId="67890"
-              brokerId="13579"
-              clientId="24680"
-              clientName="John Doe"
-              clientEmail="john@example.com"
-              clientPhone="555-0123"
-              clientAddress="123 Main St"
-              clientCity="Las Vegas"
-              clientState="NV"
-              clientZip="89149"
-              clientBudget="500000"
-              clientTimeline="3-6 months"
-              clientPreferences="3+ beds, 2+ baths"
+              type="featured-listings"
+              neighborhood="Centennial Hills"
+              priceRange={{ min: 500000, max: 1500000 }}
+              title="Featured Properties"
+              description="Handpicked properties in Centennial Hills and surrounding communities"
             />
           </div>
         </motion.section>
@@ -161,13 +144,14 @@ export default function About() {
           animate={{ opacity: 1 }}
           transition={{ delay: 0.6, duration: 0.6 }}
         >
-          <h2>Featured Listings</h2>
+          <h2>Luxury Properties</h2>
           <RealScoutWidget
-            agentEncodedId="QWdlbnQtMjI1MDUw"
-            sortOrder="STATUS_AND_SIGNIFICANT_CHANGE"
-            listingStatus="For Sale"
-            propertyTypes="SFR,MF,TC,OTHER"
-            priceMin={500000}
+            type="featured-listings"
+            neighborhood="Providence"
+            priceRange={{ min: 800000, max: 2000000 }}
+            propertyType="Luxury"
+            title="Luxury Properties"
+            description="Exclusive luxury homes in Providence and premium neighborhoods"
             className="featured-listings-widget"
           />
         </motion.section>

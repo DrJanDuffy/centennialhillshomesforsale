@@ -128,7 +128,13 @@ export default function Listings() {
           transition={{ delay: 0.8, duration: 0.6 }}
         >
           <h2>All Available Properties</h2>
-          <RealScoutListings />
+          <RealScoutWidget
+            type="featured-listings"
+            neighborhood="Centennial Hills"
+            priceRange={{ min: 300000, max: 2000000 }}
+            title="All Available Properties"
+            description="Browse all properties in Centennial Hills and surrounding areas"
+          />
         </motion.section>
 
         <motion.section 
