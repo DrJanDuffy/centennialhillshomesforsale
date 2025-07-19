@@ -10,13 +10,13 @@ const Navigation: React.FC = () => {
 
   return (
     <nav className="awesome-nav">
-      <div className="container mx-auto flex justify-between items-center px-6">
+      <div className="container mx-auto flex justify-between items-center px-6 h-full">
         <Link href="/" className="text-2xl font-bold text-white hover:scale-110 transition-transform duration-300">
           🏡 <span className="awesome-highlight">Centennial Hills</span> Homes
         </Link>
 
         {/* Desktop Navigation */}
-        <div className="hidden md:flex space-x-2">
+        <div className="hidden md:flex space-x-2 items-center h-full">
           <Link href="/" className="awesome-nav-link">🏠 Home</Link>
           <Link href="/about" className="awesome-nav-link">👋 About</Link>
           <Link href="/services" className="awesome-nav-link">⭐ Services</Link>
@@ -52,14 +52,19 @@ const Navigation: React.FC = () => {
         .awesome-nav-link {
           color: white;
           text-decoration: none;
-          padding: 8px 16px;
+          padding: 0 16px; /* Use horizontal padding only */
           margin: 0 4px;
           border-radius: 20px;
           transition: all 0.3s ease;
           font-weight: 500;
-          display: inline-block;
+          display: flex; /* Change to flex for better alignment */
+          align-items: center; /* Center items vertically */
+          justify-content: center; /* Center items horizontally */
           font-size: 0.95rem;
           white-space: nowrap;
+          line-height: 1.2; /* Prevent text from adding extra height */
+          height: 100%; /* Ensure link takes full height */
+          min-height: 44px; /* Minimum touch target size */
         }
 
         .awesome-nav-link:hover {
