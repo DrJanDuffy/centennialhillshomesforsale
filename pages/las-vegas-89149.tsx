@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import Link from 'next/link';
 import Head from 'next/head';
 import Layout from '../components/Layout';
 import SEOOptimized from '../components/SEOOptimized';
@@ -7,6 +8,7 @@ import SchoolInfo from '../components/SchoolInfo';
 import RealScoutListings from '../components/RealScoutListings';
 import { motion } from 'framer-motion';
 import RealScoutWidget from '../components/widgets/RealScoutWidget';
+import type { NeighborhoodName } from '../components/NeighborhoodBar';
 
 export default function LasVegas89149() {
   const [currentNeighborhood, setCurrentNeighborhood] = useState('Centennial Hills');
@@ -21,8 +23,8 @@ export default function LasVegas89149() {
       </Head>
 
       <main>
-        <NeighborhoodBar 
-          currentNeighborhood={currentNeighborhood as any}
+        <NeighborhoodBar
+          currentNeighborhood={currentNeighborhood as NeighborhoodName}
           onNeighborhoodChange={setCurrentNeighborhood}
         />
 
@@ -95,7 +97,7 @@ export default function LasVegas89149() {
                   <li>Custom and semi-custom homes</li>
                   <li>Gated sections available</li>
                 </ul>
-                <a href="/centennial-hills" className="btn btn-primary">Explore Centennial Hills</a>
+                <Link href="/centennial-hills" className="btn btn-primary">Explore Centennial Hills</Link>
               </div>
 
               <div className="neighborhood-card">
@@ -107,7 +109,7 @@ export default function LasVegas89149() {
                   <li>Established community</li>
                   <li>Premium lot locations</li>
                 </ul>
-                <a href="/tournament-hills" className="btn btn-primary">Explore Tournament Hills</a>
+                <Link href="/tournament-hills" className="btn btn-primary">Explore Tournament Hills</Link>
               </div>
 
               <div className="neighborhood-card">
@@ -119,7 +121,7 @@ export default function LasVegas89149() {
                   <li>Family-friendly environment</li>
                   <li>Close to shopping</li>
                 </ul>
-                <a href="/the-trails" className="btn btn-primary">Explore The Trails</a>
+                <Link href="/the-trails" className="btn btn-primary">Explore The Trails</Link>
               </div>
             </div>
           </div>

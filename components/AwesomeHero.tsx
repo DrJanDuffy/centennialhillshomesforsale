@@ -15,7 +15,7 @@ const AwesomeHero: React.FC<AwesomeHeroProps> = ({
 }) => {
   const [isVisible, setIsVisible] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
-  const { sendMessage, isConnected, error, connect } = useMCPClient();
+  const { sendMessage, isConnected, error, connect, isLoading: mcpLoading } = useMCPClient();
   const { 
     isListening, 
     transcript, 
@@ -59,10 +59,10 @@ const AwesomeHero: React.FC<AwesomeHeroProps> = ({
 
   return (
     <section 
-      className={`relative min-h-screen flex items-center justify-center bg-cover bg-center transition-all duration-1000 ${
+      className={`relative min-h-screen flex items-center justify-center bg-cover bg-center transition-all duration-1000 hero-background ${
         isVisible ? 'opacity-100 transform translate-y-0' : 'opacity-0 transform translate-y-10'
       }`}
-      style={{ backgroundImage: `url(${backgroundImage})` }}
+      style={{ '--hero-bg-image': `url(${backgroundImage})` } as React.CSSProperties}
     >
       <div className="absolute inset-0 bg-gradient-to-r from-blue-900/80 to-purple-900/60"></div>
 
@@ -103,6 +103,7 @@ const AwesomeHero: React.FC<AwesomeHeroProps> = ({
 
               <button
                 onClick={() => handleSearch(searchQuery)}
+                disabled={mcpLoading}
                 className="px-8 py-4 bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 text-white font-semibold rounded-xl transition-all duration-300 transform hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed"
               >
                 {mcpLoading ? 'Searching...' : 'Search'}

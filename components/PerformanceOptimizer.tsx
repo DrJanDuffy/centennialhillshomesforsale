@@ -276,7 +276,7 @@ const PerformanceOptimizer: React.FC = () => {
 
     // Cleanup on unmount
     return () => {
-      // Remove any event listeners if needed
+      // Remove unknown event listeners if needed
     };
   }, [
     preloadCriticalResources,

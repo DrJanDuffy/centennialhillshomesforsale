@@ -2,6 +2,7 @@
 import Head from 'next/head';
 import { motion } from 'framer-motion';
 import Layout from '../components/Layout';
+import Link from 'next/link';
 
 const faqs = [
   {
@@ -110,7 +111,7 @@ export default function FAQ() {
           <div className="container">
             <h2>Still Have Questions?</h2>
             <p>Our local real estate experts are here to help with personalized answers about Centennial Hills.</p>
-            <a href="/contact" className="cta-button">Contact Our Team</a>
+            <Link href="/contact" className="cta-button">Contact Our Team</Link>
           </div>
         </motion.section>
       </main>

@@ -124,36 +124,3 @@ const MarketTrendChart: React.FC = () => {
 };
 
 export default MarketTrendChart;
-import React from 'react';
-import { TrendingUp, BarChart3, DollarSign } from 'lucide-react';
-
-const MarketTrendChart: React.FC = () => {
-  const trends = [
-    { label: 'Median Home Price', value: '$725,000', change: '+5.2%', trend: 'up' },
-    { label: 'Days on Market', value: '18 days', change: '-12%', trend: 'down' },
-    { label: 'Homes Sold', value: '142', change: '+8.1%', trend: 'up' },
-    { label: 'Price per Sq Ft', value: '$265', change: '+3.8%', trend: 'up' }
-  ];
-
-  return (
-    <div className="bg-white rounded-2xl shadow-lg p-8">
-      <div className="flex items-center mb-6">
-        <BarChart3 className="w-8 h-8 text-blue-600 mr-3" />
-        <h3 className="text-2xl font-bold text-gray-900">Market Trends</h3>
-      </div>
-      <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-        {trends.map((trend, index) => (
-          <div key={index} className="text-center p-4 bg-gray-50 rounded-xl">
-            <div className="text-2xl font-bold text-gray-900 mb-2">{trend.value}</div>
-            <div className="text-sm text-gray-600 mb-2">{trend.label}</div>
-            <div className={`text-sm font-semibold ${trend.trend === 'up' ? 'text-green-600' : 'text-red-600'}`}>
-              {trend.change}
-            </div>
-          </div>
-        ))}
-      </div>
-    </div>
-  );
-};
-
-export default MarketTrendChart;

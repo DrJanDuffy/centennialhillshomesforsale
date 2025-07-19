@@ -48,45 +48,55 @@ const PropertyCalculator: React.FC<CalculatorProps> = ({ homePrice = 750000, cla
       
       <div className="calculator-inputs">
         <div className="input-group">
-          <label>Home Price</label>
+          <label htmlFor="home-price">Home Price</label>
           <input 
+            id="home-price"
             type="number" 
             value={price} 
             onChange={(e) => setPrice(Number(e.target.value))}
             className="calculator-input"
+            aria-label="Enter home price in dollars"
+            placeholder="Enter home price"
           />
         </div>
         
         <div className="input-group">
-          <label>Down Payment (%)</label>
+          <label htmlFor="down-payment">Down Payment (%)</label>
           <input 
+            id="down-payment"
             type="range" 
             min="5" 
             max="50" 
             value={downPayment}
             onChange={(e) => setDownPayment(Number(e.target.value))}
             className="slider"
+            aria-label="Select down payment percentage"
           />
-          <span className="slider-value">{downPayment}%</span>
+          <span className="slider-value" aria-live="polite">{downPayment}%</span>
         </div>
         
         <div className="input-group">
-          <label>Interest Rate (%)</label>
+          <label htmlFor="interest-rate">Interest Rate (%)</label>
           <input 
+            id="interest-rate"
             type="number" 
             step="0.1" 
             value={interestRate}
             onChange={(e) => setInterestRate(Number(e.target.value))}
             className="calculator-input"
+            aria-label="Enter interest rate percentage"
+            placeholder="Enter interest rate"
           />
         </div>
         
         <div className="input-group">
-          <label>Loan Term (years)</label>
+          <label htmlFor="loan-term">Loan Term (years)</label>
           <select 
+            id="loan-term"
             value={loanTerm}
             onChange={(e) => setLoanTerm(Number(e.target.value))}
             className="calculator-select"
+            aria-label="Select loan term in years"
           >
             <option value={15}>15 years</option>
             <option value={20}>20 years</option>

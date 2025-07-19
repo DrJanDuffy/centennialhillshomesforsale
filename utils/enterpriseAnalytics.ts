@@ -46,7 +46,9 @@ class EnterpriseAnalytics {
       window.dataLayer = window.dataLayer || [];
       if (!window.gtag) {
         window.gtag = function(...args) {
-          window.dataLayer.push(args);
+          if (window.dataLayer) {
+            window.dataLayer.push(args);
+          }
         };
       }
 

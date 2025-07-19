@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import Link from 'next/link';
 import Head from 'next/head';
 import Layout from '../components/Layout';
 import SEOOptimized from '../components/SEOOptimized';
@@ -8,7 +9,7 @@ import RealScoutListings from '../components/RealScoutListings';
 import { motion } from 'framer-motion';
 
 export default function LasVegas89166() {
-  const [currentNeighborhood, setCurrentNeighborhood] = useState('Skye Canyon');
+  const [currentNeighborhood, setCurrentNeighborhood] = useState<'Centennial Hills' | 'The Trails' | 'Tournament Hills' | 'Skye Canyon' | 'Sun City Aliante'>('Skye Canyon');
 
   return (
     <Layout>
@@ -94,7 +95,7 @@ export default function LasVegas89166() {
                   <li>New construction available</li>
                   <li>Mountain and valley views</li>
                 </ul>
-                <a href="/skye-canyon" className="btn btn-primary">Explore Skye Canyon</a>
+                <Link href="/skye-canyon" className="btn btn-primary">Explore Skye Canyon</Link>
               </div>
 
               <div className="neighborhood-card">
@@ -106,7 +107,7 @@ export default function LasVegas89166() {
                   <li>Family-friendly environment</li>
                   <li>Good school access</li>
                 </ul>
-                <a href="/centennial-hills" className="btn btn-primary">Explore Area</a>
+                <Link href="/centennial-hills" className="btn btn-primary">Explore Area</Link>
               </div>
 
               <div className="neighborhood-card">
@@ -118,7 +119,7 @@ export default function LasVegas89166() {
                   <li>Planned amenities</li>
                   <li>Future growth potential</li>
                 </ul>
-                <a href="/listings" className="btn btn-primary">View New Homes</a>
+                <Link href="/listings" className="btn btn-primary">View New Homes</Link>
               </div>
             </div>
           </div>
@@ -140,7 +141,7 @@ export default function LasVegas89166() {
                 sortOrder="STATUS_AND_SIGNIFICANT_CHANGE" 
                 listingStatus="For Sale" 
                 propertyTypes="SFR,MF,TC" 
-                priceMin="450000"
+                priceMin={450000}
               />
             </div>
           </div>

@@ -30,6 +30,7 @@ export default function AIAssistant() {
 
   // Use the hooks with proper interfaces
   const { 
+    sendMessage,
     isConnected, 
     isLoading: mcpLoading, 
     error: mcpError 
@@ -38,6 +39,7 @@ export default function AIAssistant() {
   const { 
     isListening, 
     startListening, 
+    isSupported, 
     error: voiceError 
   } = useVoiceSearch();
 
@@ -55,7 +57,7 @@ export default function AIAssistant() {
       setMessages([{
         id: '1',
         type: 'assistant',
-        content: 'Hi! I\'m your AI real estate assistant. I can help you find homes, get property valuations, analyze market trends, and answer any questions about Centennial Hills. What can I help you with today?',
+        content: 'Hi! I\'m your AI real estate assistant. I can help you find homes, get property valuations, analyze market trends, and answer unknown questions about Centennial Hills. What can I help you with today?',
         timestamp: new Date(),
         suggestions: [
           'Find homes with pools under $700k',
@@ -82,13 +84,13 @@ export default function AIAssistant() {
     setIsTyping(true);
 
     try {
-      // Simulate AI response for now
-      const response = { content: `I understand you're asking about: "${inputValue}". I'm here to help with Centennial Hills real estate. Let me provide you with relevant information about homes, market trends, or property values in the area.` };
+      // Use the sendMessage method directly
+      const response = await sendMessage(inputValue);
 
       const assistantMessage: Message = {
         id: (Date.now() + 1).toString(),
         type: 'assistant',
-        content: response.content || 'No response received',
+        content: response.success && response.data ? response.data.content || 'No response received' : 'No response received',
         timestamp: new Date(),
         suggestions: ['Property search', 'Home valuation', 'Market trends', 'Contact agent']
       };
@@ -179,7 +181,7 @@ export default function AIAssistant() {
             {(mcpError || voiceError) && (
               <div className="p-3 bg-red-50 border-b border-red-200">
                 {mcpError && (
-                  <p className="text-sm text-red-600 mb-1">MCP: {mcpError.message}</p>
+                  <p className="text-sm text-red-600 mb-1">MCP: {mcpError}</p>
                 )}
                 {voiceError && (
                   <p className="text-sm text-amber-600">Voice: {voiceError}</p>
@@ -224,8 +226,8 @@ export default function AIAssistant() {
                   <div className="bg-gray-100 p-3 rounded-2xl">
                     <div className="flex gap-1">
                       <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce" />
-                      <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style={{ animationDelay: '0.1s' }} />
-                      <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style={{ animationDelay: '0.2s' }} />
+                      <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce animate-delay-100" />
+                      <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce animate-delay-200" />
                     </div>
                   </div>
                 </div>
@@ -247,13 +249,15 @@ export default function AIAssistant() {
                     className="w-full px-3 py-2 pr-10 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500"
                     disabled={isTyping || mcpLoading}
                   />
-                  <button
+                  {isSupported && (
+                    <button
                       onClick={startListening}
                       disabled={mcpLoading}
                       title={voiceError || 'Click to speak'}
+                      aria-label={voiceError || 'Click to speak'}
                       className={`absolute right-2 top-1/2 -translate-y-1/2 p-1 rounded ${
                         isListening ? 'text-red-500 animate-pulse' : 
-                        (!hasPermission || mcpLoading) ? 'text-gray-300 cursor-not-allowed' :
+                        mcpLoading ? 'text-gray-300 cursor-not-allowed' :
                         'text-gray-400 hover:text-gray-600'
                       }`}
                     >
@@ -264,6 +268,8 @@ export default function AIAssistant() {
                 <button
                   onClick={handleSendMessage}
                   disabled={!inputValue.trim() || isTyping || !isConnected || mcpLoading}
+                  title="Send message"
+                  aria-label="Send message"
                   className="px-3 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed"
                 >
                   <PaperAirplaneIcon className="w-4 h-4" />

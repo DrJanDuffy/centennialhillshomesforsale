@@ -5,6 +5,7 @@ import Layout from '../components/Layout';
 import SEOOptimized from '../components/SEOOptimized';
 import { generateSchemaForPage } from '../scripts/generate-schema';
 import { FaStar, FaQuoteLeft } from 'react-icons/fa';
+import Link from 'next/link';
 
 export default function Testimonials() {
   const testimonials = [
@@ -244,9 +245,9 @@ export default function Testimonials() {
               <a href="tel:+17029031952" className="cta-button primary">
                 📞 Call (702) 903-1952
               </a>
-              <a href="/contact" className="cta-button secondary">
+              <Link href="/contact" className="cta-button secondary">
                 📧 Get Free Consultation
-              </a>
+              </Link>
             </div>
           </div>
         </motion.section>

@@ -35,7 +35,7 @@ const SafeGoogleAnalytics: React.FC<GoogleAnalyticsProps> = ({ measurementId }) 
       // Initialize gtag function
       window.dataLayer = window.dataLayer || [];
       if (!window.gtag) {
-        window.gtag = function(...args: any[]) {
+        window.gtag = function(...args: unknown[]) {
           // Check if window.dataLayer is defined
           if (!window.dataLayer) {
             window.dataLayer = []; // Initialize it as an empty array if not defined

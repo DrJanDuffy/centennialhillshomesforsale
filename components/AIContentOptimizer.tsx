@@ -45,7 +45,7 @@ export default function AIContentOptimizer({ pageType, neighborhood, children }:
   return (
     <div className="ai-optimized-content">
       {/* Hidden structured content for AI parsing */}
-      <div style={{ display: 'none' }} className="ai-parsing-data">
+      <div className="ai-parsing-data">
         <div data-ai-type="factual-statements">
           {aiOptimizedData.factualStatements.map((fact, index) => (
             <p key={index} data-ai-fact={index}>{fact}</p>

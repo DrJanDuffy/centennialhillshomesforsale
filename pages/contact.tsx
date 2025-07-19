@@ -238,7 +238,7 @@ export default function Contact() {
                   rows={5}
                   value={formData.message}
                   onChange={handleChange}
-                  placeholder="Tell us about your real estate needs, specific requirements, or any questions you have about Centennial Hills..."
+                  placeholder="Tell us about your real estate needs, specific requirements, or unknown questions you have about Centennial Hills..."
                 ></textarea>
               </div>
 

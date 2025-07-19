@@ -7,7 +7,7 @@ import RealScoutListings from '../components/RealScoutListings';
 import { motion } from 'framer-motion';
 
 export default function SkyeCanyon() {
-  const [currentNeighborhood, setCurrentNeighborhood] = useState('Skye Canyon');
+  const [currentNeighborhood, setCurrentNeighborhood] = useState<'Centennial Hills' | 'The Trails' | 'Tournament Hills' | 'Skye Canyon' | 'Sun City Aliante'>('Skye Canyon');
 
   return (
     <Layout>
@@ -104,7 +104,7 @@ export default function SkyeCanyon() {
           </div>
         </motion.section>
 
-        <SchoolInfo selectedNeighborhood="Skye Canyon" />
+        <SchoolInfo neighborhood="Skye Canyon" />
 
         <motion.section 
           className="listings-section"
@@ -120,7 +120,7 @@ export default function SkyeCanyon() {
                 sortOrder="STATUS_AND_SIGNIFICANT_CHANGE"
                 listingStatus="For Sale"
                 propertyTypes="SFR,MF,TC"
-                priceMin="450000"
+                priceMin={450000}
               />
             </div>
           </div>

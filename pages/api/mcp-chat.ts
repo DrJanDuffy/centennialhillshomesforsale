@@ -1,9 +1,17 @@
 
 import type { NextApiRequest, NextApiResponse } from 'next';
 
+interface ChatRequest {
+  message: string;
+  context?: string;
+}
+
 interface ChatResponse {
   success: boolean;
-  data?: any;
+  data?: {
+    content: string;
+    suggestions?: string[];
+  };
   error?: string;
 }
 
@@ -16,61 +24,27 @@ export default async function handler(
   }
 
   try {
-    const { message } = req.body;
+    const { message, context }: ChatRequest = req.body;
 
-    if (!message || typeof message !== 'string') {
+    if (!message) {
       return res.status(400).json({ success: false, error: 'Message is required' });
     }
 
-    // Simulate AI response for real estate queries
-    const response = generateRealEstateResponse(message);
+    // Mock response for now - replace with actual MCP client integration
+    const response: ChatResponse = {
+      success: true,
+      data: {
+        content: `I received your message: "${message}". This is a mock response. In production, this would connect to the MCP client.`,
+        suggestions: ['Find homes', 'Get market analysis', 'Contact agent']
+      }
+    };
 
-    res.status(200).json({ success: true, data: response });
+    res.status(200).json(response);
   } catch (error) {
-    console.error('MCP Chat API error:', error);
+    console.error('MCP Chat API Error:', error);
     res.status(500).json({ 
       success: false, 
       error: 'Internal server error' 
     });
   }
-}
-
-function generateRealEstateResponse(message: string) {
-  const lowerMessage = message.toLowerCase();
-  
-  if (lowerMessage.includes('search') || lowerMessage.includes('property') || lowerMessage.includes('home')) {
-    return {
-      type: 'property_search',
-      message: 'I found several properties matching your criteria in Centennial Hills. Would you like to see listings in Providence, Skye Canyon, or other areas?',
-      suggestions: [
-        'Show me homes under $800k',
-        'Properties with 4+ bedrooms',
-        'New construction homes',
-        'Golf course properties'
-      ]
-    };
-  }
-  
-  if (lowerMessage.includes('price') || lowerMessage.includes('value') || lowerMessage.includes('market')) {
-    return {
-      type: 'market_info',
-      message: 'Current market conditions in Centennial Hills show strong appreciation. The median home price is around $650k with properties typically selling within 15-30 days.',
-      data: {
-        medianPrice: '$650,000',
-        averageDays: '15-30 days',
-        appreciation: '8.5% YoY'
-      }
-    };
-  }
-  
-  return {
-    type: 'general',
-    message: 'I\'d be happy to help you with your real estate needs in Centennial Hills, Providence, or Skye Canyon. What specific information are you looking for?',
-    suggestions: [
-      'Search for properties',
-      'Get market analysis',
-      'Schedule a showing',
-      'Contact Dr. Jan Duffy'
-    ]
-  };
 }

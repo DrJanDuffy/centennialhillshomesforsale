@@ -7,6 +7,8 @@ export default function Header() {
   const router = useRouter();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+  
+
 
   useEffect(() => {
     const handleScroll = () => {
@@ -96,7 +98,7 @@ export default function Header() {
             }`}
             onClick={toggleMenu}
             aria-label="Toggle menu"
-            aria-expanded={isMenuOpen}
+            {...(isMenuOpen ? { 'aria-expanded': 'true' } : { 'aria-expanded': 'false' })}
           >
             <span className={`w-6 h-0.5 bg-gray-700 transition-all duration-300 ${
               isMenuOpen ? 'rotate-45 translate-y-1.5' : ''

@@ -17,15 +17,15 @@ import {
 
 // Enhanced icon imports with better fallbacks
 const FaRocket = React.lazy(() => 
-  import('react-icons/fa').then(module => ({ default: module.FaRocket })).catch(() => ({ default: () => <span style={{fontSize: '1.5em'}}>🚀</span> }))
+  import('react-icons/fa').then(module => ({ default: module.FaRocket })).catch(() => ({ default: () => <span className="fallback-icon">🚀</span> }))
 );
 
 const FaLightbulb = React.lazy(() => 
-  import('react-icons/fa').then(module => ({ default: module.FaLightbulb })).catch(() => ({ default: () => <span style={{fontSize: '1.5em'}}>💡</span> }))
+  import('react-icons/fa').then(module => ({ default: module.FaLightbulb })).catch(() => ({ default: () => <span className="fallback-icon">💡</span> }))
 );
 
 const FaMagic = React.lazy(() => 
-  import('react-icons/fa').then(module => ({ default: module.FaMagic })).catch(() => ({ default: () => <span style={{fontSize: '1.5em'}}>✨</span> }))
+  import('react-icons/fa').then(module => ({ default: module.FaMagic })).catch(() => ({ default: () => <span className="fallback-icon">✨</span> }))
 );
 
 interface AwesomeStats {
@@ -258,7 +258,7 @@ function AwesomeEnhancements() {
             >
               <div className="bg-white/90 backdrop-blur-sm p-8 rounded-2xl shadow-xl border border-white/20 h-full hover:shadow-2xl transition-all duration-300">
                 <div className={`w-16 h-16 bg-gradient-to-r ${feature.color} rounded-2xl flex items-center justify-center mb-6 mx-auto group-hover:scale-110 transition-transform duration-300`}>
-                  {feature.icon}
+                  <feature.icon className="w-8 h-8 text-white" />
                 </div>
                 <h3 className="text-xl font-bold text-gray-800 mb-4 text-center">
                   {feature.title}

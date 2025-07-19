@@ -1,6 +1,7 @@
 
 import { motion } from 'framer-motion';
 import Head from 'next/head';
+import { useEffect } from 'react';
 import Layout from '../components/Layout';
 import SEOOptimized from '../components/SEOOptimized';
 import { FaCheckCircle, FaExclamationTriangle, FaSearch, FaMapMarkerAlt, FaStar } from 'react-icons/fa';
@@ -160,6 +161,17 @@ export default function SEOImprovements() {
     }
   ];
 
+  // Set CSS custom properties for progress bars
+  useEffect(() => {
+    improvementAreas.forEach((area, index) => {
+      const progressBar = document.querySelector(`.area-card:nth-child(${index + 1}) .progress-fill-seo-improvements`) as HTMLElement;
+      if (progressBar) {
+        const width = area.current.replace('%', '');
+        progressBar.style.setProperty('--seo-progress-width', `${width}%`);
+      }
+    });
+  }, []);
+
   return (
     <Layout>
       <SEOOptimized
@@ -215,10 +227,7 @@ export default function SEOImprovements() {
                   </div>
                   
                   <div className="progress-bar">
-                    <div 
-                      className="progress-fill"
-                      style={{ width: area.current }}
-                    ></div>
+                    <div className="progress-fill progress-fill-seo-improvements"></div>
                     <span className="progress-text">
                       {area.current} → {area.target}
                     </span>

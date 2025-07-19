@@ -4,6 +4,7 @@ import { motion } from 'framer-motion';
 import Layout from '../components/Layout';
 import SEOOptimized from '../components/SEOOptimized';
 import { FaHome, FaBuilding, FaHandshake, FaChartLine, FaKey, FaUsers } from 'react-icons/fa';
+import Link from 'next/link';
 
 const services = [
   {
@@ -51,7 +52,7 @@ export default function Services() {
         title="Real Estate Services | Dr. Jan Duffy, REALTOR® | Las Vegas"
         description="Comprehensive real estate services in Las Vegas including luxury sales, commercial properties, first-time buyers, and building lots. Top 1% REALTOR® with 20+ years experience."
         keywords="Las Vegas real estate services, luxury property sales, commercial real estate, first-time home buyers, building lots, relocation services"
-        pageType="services"
+        pageType="website"
         canonicalUrl="https://centennialhillshomesforsale.com/services"
       />
 
@@ -163,8 +164,8 @@ export default function Services() {
             <p>Contact Dr. Jan Duffy today for expert real estate guidance in Las Vegas</p>
             <div className="cta-buttons">
               <a href="tel:7029031952" className="btn btn-primary">Call (702) 903-1952</a>
-              <a href="/contact" className="btn btn-secondary">Send Message</a>
-              <a href="https://www.searchforhomeslasvegas.com/" target="_blank" className="btn btn-outline">Visit Website</a>
+              <Link href="/contact" className="btn btn-secondary">Send Message</Link>
+              <a href="https://www.searchforhomeslasvegas.com/" target="_blank" rel="noopener noreferrer" className="btn btn-outline">Visit Website</a>
             </div>
           </div>
         </motion.section>

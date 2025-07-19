@@ -5,7 +5,7 @@ import Head from 'next/head';
 interface GenerativeEngineOptimizerProps {
   pageType?: 'home' | 'neighborhood' | 'property' | 'agent' | 'service';
   neighborhood?: string;
-  propertyData?: any;
+  propertyData?: unknown;
   serviceArea?: string[];
 }
 

@@ -1,7 +1,7 @@
 {
   "compilerOptions": {
     "target": "es5",
-    "lib": ["dom", "dom.iterable", "es6", "webrtc"],
+    "lib": ["dom", "dom.iterable", "es6"],
     "allowJs": true,
     "skipLibCheck": true,
     "strict": true,
@@ -15,13 +15,17 @@
     "jsx": "preserve",
     "incremental": true,
     "baseUrl": ".",
+    "types": ["node"],
+    "noImplicitAny": false,
     "paths": {
-      "@/*": ["./src/*"],
+      "@/*": ["./*"],
       "@/components/*": ["./components/*"],
       "@/hooks/*": ["./hooks/*"],
       "@/utils/*": ["./utils/*"],
       "@/lib/*": ["./lib/*"],
-      "@/types/*": ["./types/*"]
+      "@/types/*": ["./types/*"],
+      "@/styles/*": ["./styles/*"],
+      "@/public/*": ["./public/*"]
     }
   },
   "include": [
@@ -29,7 +33,19 @@
     "**/*.ts", 
     "**/*.tsx",
     "types/**/*.ts",
-    "lib/**/*.ts"
+    "lib/**/*.ts",
+    "components/**/*.ts",
+    "components/**/*.tsx",
+    "pages/**/*.ts",
+    "pages/**/*.tsx",
+    "hooks/**/*.ts",
+    "utils/**/*.ts"
   ],
-  "exclude": ["node_modules", "out", "build"]
+  "exclude": [
+    "node_modules", 
+    "out", 
+    "build",
+    ".next",
+    "dist"
+  ]
 }

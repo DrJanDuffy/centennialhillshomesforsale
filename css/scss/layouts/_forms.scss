@@ -137,6 +137,7 @@
   padding-left: $spacing-lg;
   margin-bottom: $spacing-sm;
   cursor: pointer;
+  -webkit-user-select: none;
   user-select: none;
 
   input {
@@ -205,6 +206,7 @@
   padding-left: $spacing-lg;
   margin-bottom: $spacing-sm;
   cursor: pointer;
+  -webkit-user-select: none;
   user-select: none;
 
   input {
@@ -272,6 +274,7 @@
   padding-left: $spacing-xl;
   margin-bottom: $spacing-sm;
   cursor: pointer;
+  -webkit-user-select: none;
   user-select: none;
 
   input {

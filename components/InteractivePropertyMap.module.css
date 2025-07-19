@@ -433,3 +433,99 @@
     min-width: auto;
   }
 }
+
+.propertyMarker {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  cursor: pointer;
+  transition: all 0.2s;
+  z-index: 10;
+}
+
+.propertyMarker:hover {
+  transform: translate(-50%, -50%) scale(1.1);
+}
+
+.hoverTooltip {
+  position: absolute;
+  z-index: 30;
+  background: white;
+  padding: 0.75rem;
+  border-radius: 0.5rem;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+  pointer-events: none;
+  transform: translate(-50%, -100%);
+}
+
+.propertyMarkerPosition {
+  position: absolute;
+}
+
+.tooltipPosition {
+  position: absolute;
+}
+
+.propertyMarkerDynamic {
+  position: absolute;
+  cursor: pointer;
+  transition: all 0.2s;
+  z-index: 10;
+}
+
+.propertyMarkerDynamic:hover {
+  transform: translate(-50%, -50%) scale(1.1);
+}
+
+.hoverTooltipDynamic {
+  position: absolute;
+  z-index: 30;
+  background: white;
+  padding: 0.75rem;
+  border-radius: 0.5rem;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+  pointer-events: none;
+  transform: translate(-50%, -100%);
+}
+
+/* Dynamic positioning using CSS custom properties */
+.propertyMarkerDynamic {
+  position: absolute;
+  cursor: pointer;
+  transition: all 0.2s;
+  z-index: 10;
+}
+
+.hoverTooltipDynamic {
+  position: absolute;
+  z-index: 30;
+  background: white;
+  padding: 0.75rem;
+  border-radius: 0.5rem;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+  pointer-events: none;
+  transform: translate(-50%, -100%);
+}
+
+/* Dynamic positioning classes for property markers */
+.pos-20-30 { left: 20%; top: 30%; }
+.pos-35-40 { left: 35%; top: 40%; }
+.pos-50-35 { left: 50%; top: 35%; }
+.pos-65-45 { left: 65%; top: 45%; }
+.pos-80-30 { left: 80%; top: 30%; }
+.pos-25-60 { left: 25%; top: 60%; }
+.pos-40-70 { left: 40%; top: 70%; }
+.pos-55-65 { left: 55%; top: 65%; }
+.pos-70-75 { left: 70%; top: 75%; }
+.pos-85-60 { left: 85%; top: 60%; }
+
+/* Dynamic positioning classes for tooltips */
+.tooltip-20-30 { left: 20%; top: 30%; }
+.tooltip-35-40 { left: 35%; top: 40%; }
+.tooltip-50-35 { left: 50%; top: 35%; }
+.tooltip-65-45 { left: 65%; top: 45%; }
+.tooltip-80-30 { left: 80%; top: 30%; }
+.tooltip-25-60 { left: 25%; top: 60%; }
+.tooltip-40-70 { left: 40%; top: 70%; }
+.tooltip-55-65 { left: 55%; top: 65%; }
+.tooltip-70-75 { left: 70%; top: 75%; }
+.tooltip-85-60 { left: 85%; top: 60%; }

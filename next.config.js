@@ -1,3 +1,4 @@
+const crypto = require('crypto');
 const withPWA = require('next-pwa')({
   dest: 'out',
   register: true,

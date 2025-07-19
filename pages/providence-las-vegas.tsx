@@ -9,7 +9,7 @@ import RealScoutListings from '../components/RealScoutListings';
 import { motion } from 'framer-motion'; // Single motion import
 
 export default function ProvidenceLasVegas() {
-  const [currentNeighborhood, setCurrentNeighborhood] = useState('Providence');
+  const [currentNeighborhood, setCurrentNeighborhood] = useState<'Centennial Hills' | 'The Trails' | 'Tournament Hills' | 'Skye Canyon' | 'Sun City Aliante'>('Centennial Hills');
 
   return (
     <Layout>
@@ -123,7 +123,7 @@ export default function ProvidenceLasVegas() {
                 sortOrder="STATUS_AND_SIGNIFICANT_CHANGE" 
                 listingStatus="For Sale" 
                 propertyTypes="SFR,MF,TC" 
-                priceMin="450000"
+                priceMin={450000}
               />
             </div>
           </div>

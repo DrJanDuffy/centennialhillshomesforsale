@@ -1,5 +1,6 @@
 
 import React, { useState, useEffect, useCallback } from 'react';
+import Link from 'next/link';
 
 // Define interfaces for component props
 interface RealScoutListingsProps {
@@ -338,9 +339,9 @@ const RealScoutListings: React.FC<RealScoutListingsProps> = ({
           <a href="tel:+17029031952" className="btn btn-primary">
             📞 Call (702) 903-1952
           </a>
-          <a href="/listings" className="btn btn-secondary">
+          <Link href="/listings" className="btn btn-secondary">
             View All Listings
-          </a>
+          </Link>
           <button 
             onClick={() => window.location.reload()} 
             className="btn btn-outline"
@@ -392,6 +393,7 @@ const RealScoutListings: React.FC<RealScoutListingsProps> = ({
                 <button
                   onClick={() => toggleFavorite(listing.id)}
                   className="absolute top-3 right-3 bg-white bg-opacity-90 hover:bg-opacity-100 rounded-full p-2 transition-all"
+                  aria-label={favorites.has(listing.id) ? "Remove from favorites" : "Add to favorites"}
                 >
                   <HeartIcon
                     className={`h-5 w-5 ${
@@ -461,7 +463,10 @@ const RealScoutListings: React.FC<RealScoutListingsProps> = ({
                     <EyeIcon className="h-4 w-4 mr-1" />
                     View Details
                   </button>
-                  <button className="p-2 border border-gray-300 rounded hover:bg-gray-50 transition-colors">
+                  <button 
+                    className="p-2 border border-gray-300 rounded hover:bg-gray-50 transition-colors"
+                    aria-label="Share property"
+                  >
                     <ShareIcon className="h-4 w-4 text-gray-600" />
                   </button>
                 </div>
@@ -489,16 +494,7 @@ const RealScoutListings: React.FC<RealScoutListingsProps> = ({
   }
 
   return (
-    <div 
-      className={`realscout-widget-container ${className}`} 
-      style={{ 
-        pointerEvents: 'auto',
-        position: 'relative',
-        zIndex: 1,
-        isolation: 'isolate',
-        minHeight: '400px'
-      }}
-    >
+    <div className={`realscout-widget-container ${className}`}>
       <realscout-office-listings 
         agent-encoded-id={finalAgentId}
         sort-order={sortOrder}
@@ -506,17 +502,7 @@ const RealScoutListings: React.FC<RealScoutListingsProps> = ({
         property-types={propertyTypes}
         price-min={priceMin?.toString()}
         max-results={maxResults?.toString()}
-        style={{ 
-          pointerEvents: 'auto',
-          cursor: 'auto',
-          userSelect: 'auto',
-          touchAction: 'manipulation',
-          position: 'relative',
-          zIndex: 2,
-          width: '100%',
-          minHeight: '400px',
-          display: 'block'
-        }}
+        className="realscout-widget"
         onLoad={() => {
           setTimeout(() => {
             const widget = document.querySelector('realscout-office-listings');

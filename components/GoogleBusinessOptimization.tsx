@@ -1,6 +1,7 @@
 
 import Head from 'next/head';
 import { useEffect, useState } from 'react';
+import Link from 'next/link';
 
 interface GoogleBusinessProps {
   showWidget?: boolean;
@@ -142,9 +143,9 @@ export default function GoogleBusinessOptimization({
               >
                 View on Google
               </a>
-              <a href="/contact" className="btn btn-secondary">
+              <Link href="/contact" className="btn btn-secondary">
                 Contact Me
-              </a>
+              </Link>
             </div>
           </div>
         </div>

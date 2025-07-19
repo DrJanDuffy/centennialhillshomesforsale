@@ -5,7 +5,7 @@ import GlobalErrorHandler from '../utils/globalErrorHandler';
 
 interface HealthMetrics {
   totalErrors: number;
-  recentErrors: any[];
+  recentErrors: unknown[];
   performanceScore: number;
   lastCheck: string;
 }
@@ -90,7 +90,7 @@ const SystemHealthMonitor: React.FC = () => {
             <div className="font-medium text-gray-700">Recent Issues:</div>
             {health.recentErrors.slice(0, 2).map((error, index) => (
               <div key={index} className="text-xs text-red-600 truncate">
-                {error.message}
+                {typeof error === 'object' && error && 'message' in error ? (error as { message: string }).message : String(error)}
               </div>
             ))}
           </div>

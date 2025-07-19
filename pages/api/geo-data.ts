@@ -1,29 +1,35 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
 
 interface GEOData {
-  agent: {
-    name: string;
-    experience: string;
-    license: string;
-    rating: number;
-    reviews: number;
-    specialties: string[];
-  };
-  marketData: {
-    medianPrice: string;
-    averageDays: string;
-    appreciation: string;
-    inventory: string;
-    lastUpdated: string;
-  };
-  neighborhoods: {
-    name: string;
-    priceRange: string;
-    highlights: string[];
-    schools: string[];
-  }[];
-  citations: string[];
+  latitude: number;
+  longitude: number;
+  address: string;
+  city: string;
+  state: string;
+  zipCode: string;
 }
 
-// This file is moved to utils/geoData.ts for static export compatibility
-// API routes are not compatible with static export
+export default async function handler(
+  req: NextApiRequest,
+  res: NextApiResponse<GEOData | { error: string }>
+) {
+  if (req.method !== 'GET') {
+    return res.status(405).json({ error: 'Method not allowed' });
+  }
+
+  try {
+    // Mock GEO data for Centennial Hills area
+    const geoData: GEOData = {
+      latitude: 36.2089,
+      longitude: -115.2644,
+      address: 'Centennial Hills',
+      city: 'Las Vegas',
+      state: 'NV',
+      zipCode: '89149'
+    };
+
+    res.status(200).json(geoData);
+  } catch (error) {
+    res.status(500).json({ error: 'Failed to fetch GEO data' });
+  }
+}

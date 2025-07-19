@@ -203,11 +203,13 @@ const SmartPropertyRecommendations: React.FC = () => {
           {/* Bedrooms/Bathrooms */}
           <div className="grid grid-cols-2 gap-4 mb-4">
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">Min Bedrooms</label>
+              <label htmlFor="min-bedrooms" className="block text-sm font-medium text-gray-700 mb-2">Min Bedrooms</label>
               <select
+                id="min-bedrooms"
                 value={preferences.bedrooms}
                 onChange={(e) => setPreferences(prev => ({ ...prev, bedrooms: Number(e.target.value) }))}
                 className="border rounded px-3 py-2 w-full"
+                aria-label="Select minimum number of bedrooms"
               >
                 {[1, 2, 3, 4, 5, 6].map(num => (
                   <option key={num} value={num}>{num}+</option>
@@ -215,11 +217,13 @@ const SmartPropertyRecommendations: React.FC = () => {
               </select>
             </div>
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">Min Bathrooms</label>
+              <label htmlFor="min-bathrooms" className="block text-sm font-medium text-gray-700 mb-2">Min Bathrooms</label>
               <select
+                id="min-bathrooms"
                 value={preferences.bathrooms}
                 onChange={(e) => setPreferences(prev => ({ ...prev, bathrooms: Number(e.target.value) }))}
                 className="border rounded px-3 py-2 w-full"
+                aria-label="Select minimum number of bathrooms"
               >
                 {[1, 1.5, 2, 2.5, 3, 3.5, 4].map(num => (
                   <option key={num} value={num}>{num}+</option>

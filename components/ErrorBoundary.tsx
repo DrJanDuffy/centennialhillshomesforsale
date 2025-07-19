@@ -1,5 +1,6 @@
 
 import React, { Component, ErrorInfo, ReactNode } from 'react';
+import Link from 'next/link';
 
 interface Props {
   children: ReactNode;
@@ -59,18 +60,17 @@ class ErrorBoundary extends Component<Props, State> {
               >
                 Refresh Page
               </button>
-              <a 
+              <Link 
                 href="/" 
                 className="btn-secondary"
               >
                 Go Home
-              </a>
-              <a 
-                href="/contact" 
+              </Link>
+              <Link href="/contact" 
                 className="btn-secondary"
               >
                 Contact Us
-              </a>
+              </Link>
             </div>
 
             <div className="contact-emergency">

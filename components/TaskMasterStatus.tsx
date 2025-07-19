@@ -61,6 +61,21 @@ const TaskMasterStatus: React.FC = () => {
     return () => clearInterval(interval);
   }, []);
 
+  // Set CSS custom properties for progress bars
+  useEffect(() => {
+    if (status) {
+      const seoProgressBar = document.querySelector('.progress-fill-seo') as HTMLElement;
+      const performanceProgressBar = document.querySelector('.progress-fill-performance') as HTMLElement;
+      
+      if (seoProgressBar) {
+        seoProgressBar.style.setProperty('--progress-width', `${status.seoScore}%`);
+      }
+      if (performanceProgressBar) {
+        performanceProgressBar.style.setProperty('--progress-width', `${status.performanceScore}%`);
+      }
+    }
+  }, [status]);
+
   const runOptimization = async () => {
     setIsOptimizing(true);
     // Simulate optimization process
@@ -123,10 +138,7 @@ const TaskMasterStatus: React.FC = () => {
           </div>
           <div className="metric-value">{status.seoScore}/100</div>
           <div className="metric-bar">
-            <div 
-              className="metric-fill seo"
-              style={{ width: `${status.seoScore}%` }}
-            ></div>
+            <div className="progress-fill progress-fill-seo progress-fill-dynamic"></div>
           </div>
         </div>
 
@@ -137,10 +149,7 @@ const TaskMasterStatus: React.FC = () => {
           </div>
           <div className="metric-value">{status.performanceScore}/100</div>
           <div className="metric-bar">
-            <div 
-              className="metric-fill performance"
-              style={{ width: `${status.performanceScore}%` }}
-            ></div>
+            <div className="progress-fill progress-fill-performance progress-fill-dynamic"></div>
           </div>
         </div>
 
