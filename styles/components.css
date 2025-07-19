@@ -382,6 +382,8 @@
   flex-direction: column;
   align-items: flex-start;
   flex: 1;
+  padding: 0.25rem 0; /* Minimal vertical padding */
+  justify-content: center; /* Center content vertically */
 }
 
 .header-brand a {
@@ -390,17 +392,19 @@
 }
 
 .logo h1 {
-  font-size: var(--font-size-2xl);
+  font-size: var(--font-size-xl);
   font-weight: var(--font-weight-bold);
   color: var(--primary-color);
   margin: 0;
-  line-height: var(--line-height-tight);
+  line-height: 1.1; /* Tighter line height for compact design */
 }
 
 .logo .subtitle {
-  font-size: var(--font-size-sm);
+  font-size: var(--font-size-xs);
   color: var(--text-secondary);
   font-weight: var(--font-weight-medium);
+  line-height: 1.1; /* Tighter line height for compact design */
+  margin-top: 0.125rem; /* Minimal spacing */
 }
 
 .tagline {
@@ -831,12 +835,15 @@ realscout-office-listings button:hover {
     gap: var(--space-lg);
   }
   
-  .logo h1 {
-    font-size: var(--font-size-xl);
+    .logo h1 {
+    font-size: var(--font-size-lg);
+    line-height: 1.1;
   }
-  
+
   .logo .subtitle {
     font-size: var(--font-size-xs);
+    line-height: 1.1;
+    margin-top: 0.125rem;
   }
   
   .phone-number {
@@ -927,12 +934,15 @@ realscout-office-listings button:hover {
     flex: none;
   }
   
-  .logo h1 {
-    font-size: var(--font-size-lg);
+    .logo h1 {
+    font-size: var(--font-size-base);
+    line-height: 1.1;
   }
-  
+
   .logo .subtitle {
     font-size: var(--font-size-xs);
+    line-height: 1.1;
+    margin-top: 0.125rem;
   }
   
   .phone-number {
