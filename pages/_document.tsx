@@ -29,6 +29,7 @@ export default function Document() {
           Note: Firefox and Opera don't support this meta tag, but it's still beneficial for other browsers
           This is a progressive enhancement - browsers that support it will use it, others will ignore it
           Compatibility: Chrome 39+, Safari 15+, Edge 79+ (Firefox and Opera ignore this tag)
+          These warnings are expected and can be safely ignored for cross-browser compatibility
         */}
         <meta name="theme-color" content="#2563eb" />
         

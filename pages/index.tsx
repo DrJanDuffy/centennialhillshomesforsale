@@ -729,6 +729,8 @@ const HomePage: React.FC = () => {
                     className={`w-3 h-3 rounded-full transition-colors ${
                       index === currentTestimonial ? 'bg-white' : 'bg-white/30'
                     }`}
+                    aria-label={`Go to testimonial ${index + 1}`}
+                    title={`Go to testimonial ${index + 1}`}
                   />
                 ))}
               </div>
