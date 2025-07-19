@@ -53,7 +53,7 @@ export default function Header() {
         <div className="flex items-center justify-between h-[70px] md:h-[70px] sm:h-[60px] xs:h-[55px]">
           
           {/* Logo and Brand Section */}
-          <div className="flex-shrink-0">
+          <div className="flex-shrink-0 z-10">
             <Link href="/" onClick={closeMenu} className="block">
               <div className="flex flex-col">
                 <h1 className="text-2xl sm:text-3xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
@@ -74,106 +74,109 @@ export default function Header() {
             </Link>
           </div>
 
-          {/* Service Areas - Hidden on mobile */}
-          <div className="hidden lg:block">
-            <span className="text-sm text-gray-600 font-medium">
-              Centennial Hills | Providence | Skye Canyon
-            </span>
-          </div>
-
-          {/* Contact Info - Hidden on small screens */}
-          <div className="hidden md:block">
-            <a 
-              href="tel:+17029031952" 
-              className="inline-flex items-center px-4 py-2 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 transition-colors duration-200"
-            >
-              📞 (702) 903-1952
-            </a>
-          </div>
-
-          {/* Mobile Menu Button */}
-          <button 
-            className={`md:hidden relative w-8 h-8 flex flex-col justify-center items-center space-y-1 ${
-              isMenuOpen ? 'open' : ''
-            }`}
-            onClick={toggleMenu}
-            aria-label="Toggle menu"
-            {...(isMenuOpen ? { 'aria-expanded': 'true' } : { 'aria-expanded': 'false' })}
-          >
-            <span className={`w-6 h-0.5 bg-gray-700 transition-all duration-300 ${
-              isMenuOpen ? 'rotate-45 translate-y-1.5' : ''
-            }`}></span>
-            <span className={`w-6 h-0.5 bg-gray-700 transition-all duration-300 ${
-              isMenuOpen ? 'opacity-0' : ''
-            }`}></span>
-            <span className={`w-6 h-0.5 bg-gray-700 transition-all duration-300 ${
-              isMenuOpen ? '-rotate-45 -translate-y-1.5' : ''
-            }`}></span>
-          </button>
-
-          {/* Desktop Navigation */}
-          <nav className="hidden md:flex items-center space-x-8">
+          {/* Desktop Navigation - Moved to center */}
+          <nav className="hidden md:flex items-center space-x-8 flex-1 justify-center">
             <Link 
               href="/" 
-              className={`text-sm font-medium transition-colors duration-200 ${
+              className={`text-sm font-medium transition-colors duration-200 px-3 py-2 rounded-md ${
                 router.pathname === '/' 
-                  ? 'text-blue-600 border-b-2 border-blue-600 pb-1' 
-                  : 'text-gray-700 hover:text-blue-600'
+                  ? 'text-blue-600 bg-blue-50 border-b-2 border-blue-600' 
+                  : 'text-gray-700 hover:text-blue-600 hover:bg-gray-50'
               }`}
             >
               Home
             </Link>
             <Link 
               href="/about" 
-              className={`text-sm font-medium transition-colors duration-200 ${
+              className={`text-sm font-medium transition-colors duration-200 px-3 py-2 rounded-md ${
                 router.pathname === '/about' 
-                  ? 'text-blue-600 border-b-2 border-blue-600 pb-1' 
-                  : 'text-gray-700 hover:text-blue-600'
+                  ? 'text-blue-600 bg-blue-50 border-b-2 border-blue-600' 
+                  : 'text-gray-700 hover:text-blue-600 hover:bg-gray-50'
               }`}
             >
               About
             </Link>
             <Link 
               href="/listings" 
-              className={`text-sm font-medium transition-colors duration-200 ${
+              className={`text-sm font-medium transition-colors duration-200 px-3 py-2 rounded-md ${
                 router.pathname === '/listings' 
-                  ? 'text-blue-600 border-b-2 border-blue-600 pb-1' 
-                  : 'text-gray-700 hover:text-blue-600'
+                  ? 'text-blue-600 bg-blue-50 border-b-2 border-blue-600' 
+                  : 'text-gray-700 hover:text-blue-600 hover:bg-gray-50'
               }`}
             >
               Listings
             </Link>
             <Link 
               href="/neighborhoods" 
-              className={`text-sm font-medium transition-colors duration-200 ${
+              className={`text-sm font-medium transition-colors duration-200 px-3 py-2 rounded-md ${
                 router.pathname === '/neighborhoods' 
-                  ? 'text-blue-600 border-b-2 border-blue-600 pb-1' 
-                  : 'text-gray-700 hover:text-blue-600'
+                  ? 'text-blue-600 bg-blue-50 border-b-2 border-blue-600' 
+                  : 'text-gray-700 hover:text-blue-600 hover:bg-gray-50'
               }`}
             >
               Neighborhoods
             </Link>
             <Link 
               href="/services" 
-              className={`text-sm font-medium transition-colors duration-200 ${
+              className={`text-sm font-medium transition-colors duration-200 px-3 py-2 rounded-md ${
                 router.pathname === '/services' 
-                  ? 'text-blue-600 border-b-2 border-blue-600 pb-1' 
-                  : 'text-gray-700 hover:text-blue-600'
+                  ? 'text-blue-600 bg-blue-50 border-b-2 border-blue-600' 
+                  : 'text-gray-700 hover:text-blue-600 hover:bg-gray-50'
               }`}
             >
               Services
             </Link>
             <Link 
               href="/contact" 
-              className={`text-sm font-medium transition-colors duration-200 ${
+              className={`text-sm font-medium transition-colors duration-200 px-3 py-2 rounded-md ${
                 router.pathname === '/contact' 
-                  ? 'text-blue-600 border-b-2 border-blue-600 pb-1' 
-                  : 'text-gray-700 hover:text-blue-600'
+                  ? 'text-blue-600 bg-blue-50 border-b-2 border-blue-600' 
+                  : 'text-gray-700 hover:text-blue-600 hover:bg-gray-50'
               }`}
             >
               Contact
             </Link>
           </nav>
+
+          {/* Right side elements */}
+          <div className="flex items-center space-x-4">
+            {/* Service Areas - Hidden on mobile */}
+            <div className="hidden lg:block">
+              <span className="text-sm text-gray-600 font-medium">
+                Centennial Hills | Providence | Skye Canyon
+              </span>
+            </div>
+
+            {/* Contact Info - Hidden on small screens */}
+            <div className="hidden md:block">
+              <a 
+                href="tel:+17029031952" 
+                className="inline-flex items-center px-4 py-2 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 transition-colors duration-200"
+              >
+                📞 (702) 903-1952
+              </a>
+            </div>
+
+            {/* Mobile Menu Button */}
+            <button 
+              className={`md:hidden relative w-8 h-8 flex flex-col justify-center items-center space-y-1 z-20 ${
+                isMenuOpen ? 'open' : ''
+              }`}
+              onClick={toggleMenu}
+              aria-label="Toggle menu"
+              {...(isMenuOpen ? { 'aria-expanded': 'true' } : { 'aria-expanded': 'false' })}
+            >
+              <span className={`w-6 h-0.5 bg-gray-700 transition-all duration-300 ${
+                isMenuOpen ? 'rotate-45 translate-y-1.5' : ''
+              }`}></span>
+              <span className={`w-6 h-0.5 bg-gray-700 transition-all duration-300 ${
+                isMenuOpen ? 'opacity-0' : ''
+              }`}></span>
+              <span className={`w-6 h-0.5 bg-gray-700 transition-all duration-300 ${
+                isMenuOpen ? '-rotate-45 -translate-y-1.5' : ''
+              }`}></span>
+            </button>
+          </div>
         </div>
       </div>
 
