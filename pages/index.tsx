@@ -580,80 +580,38 @@ const HomePage: React.FC = () => {
         </div>
       </section>
 
-      {/* Why Choose Us Section */}
+      {/* RealScout Your Listings */}
       <section className="section bg-secondary">
         <div className="container">
-          <div className="text-center mb-16">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8 }}
-              viewport={{ once: true }}
-            >
-              <h2 className="text-4xl md:text-5xl font-bold text-primary mb-6">
-                Why Choose Dr. Jan Duffy?
-              </h2>
-              <p className="text-xl text-secondary max-w-3xl mx-auto">
-                Experience the difference that 15+ years of local expertise and cutting-edge technology can make
-              </p>
-            </motion.div>
-          </div>
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            viewport={{ once: true }}
+            className="text-center mb-16"
+          >
+            <h2 className="text-4xl md:text-5xl font-bold text-primary mb-6">
+              Your Listings
+            </h2>
+            <p className="text-xl text-secondary max-w-3xl mx-auto">
+              Browse our latest properties in Centennial Hills and surrounding areas
+            </p>
+          </motion.div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {[
-              {
-                icon: Shield,
-                title: 'Trusted Expert',
-                description: '15+ years of experience in Northwest Las Vegas real estate with hundreds of satisfied clients.',
-                color: 'text-accent-color'
-              },
-              {
-                icon: Search,
-                title: 'AI-Powered Search',
-                description: 'Advanced algorithms help you find properties that match your exact preferences and lifestyle.',
-                color: 'text-secondary-color'
-              },
-              {
-                icon: Clock,
-                title: 'Fast Results',
-                description: 'Average 12 days on market - we get your home sold quickly and for top dollar.',
-                color: 'text-warning-color'
-              },
-              {
-                icon: DollarSign,
-                title: 'Best Value',
-                description: 'Negotiate the best deals with our expert market analysis and pricing strategies.',
-                color: 'text-accent-color'
-              },
-              {
-                icon: Users,
-                title: 'Personal Service',
-                description: 'Dedicated support throughout your entire real estate journey, from search to closing.',
-                color: 'text-secondary-color'
-              },
-              {
-                icon: Award,
-                title: 'Top 1% Realtor',
-                description: 'Consistently ranked among the top performing real estate professionals in Las Vegas.',
-                color: 'text-warning-color'
-              }
-            ].map((feature, index) => (
-              <motion.div
-                key={feature.title}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: index * 0.1 }}
-                viewport={{ once: true }}
-                className="bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-2"
-              >
-                <div className={`w-16 h-16 rounded-2xl bg-gradient-to-br from-${feature.color.split('-')[1]}/10 to-${feature.color.split('-')[1]}/20 flex items-center justify-center mb-6`}>
-                  <feature.icon className={`w-8 h-8 ${feature.color}`} />
-                </div>
-                <h3 className="text-xl font-bold text-primary mb-4">{feature.title}</h3>
-                <p className="text-secondary leading-relaxed">{feature.description}</p>
-              </motion.div>
-            ))}
-          </div>
+          <motion.div
+            initial={{ opacity: 0, scale: 0.95 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+            viewport={{ once: true }}
+          >
+            <realscout-your-listings 
+              agent-encoded-id="QWdlbnQtMjI1MDUw" 
+              sort-order="STATUS_AND_SIGNIFICANT_CHANGE" 
+              listing-status="For Sale,Sold" 
+              property-types="SFR" 
+              price-min="500000">
+            </realscout-your-listings>
+          </motion.div>
         </div>
       </section>
 

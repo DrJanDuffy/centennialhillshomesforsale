@@ -89,52 +89,24 @@ export default function About() {
           </div>
         </motion.section>
 
+        {/* RealScout Your Listings */}
         <motion.section 
-          className="content-section section"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
+          className="section"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.3, duration: 0.6 }}
         >
-          <div className="content-grid">
-            <motion.div 
-              className="content-block"
-              whileHover={{ scale: 1.03 }}
-              transition={{ type: "spring", stiffness: 300 }}
-            >
-              <FaHome className="icon" />
-              <h2>Local Expertise</h2>
-              <p>
-                Our deep understanding of Centennial Hills and the greater Las Vegas market
-                helps you make informed decisions about your real estate investments.
-              </p>
-            </motion.div>
-
-            <motion.div 
-              className="content-block"
-              whileHover={{ scale: 1.03 }}
-              transition={{ type: "spring", stiffness: 300 }}
-            >
-              <FaChartLine className="icon" />
-              <h2>Market Analysis</h2>
-              <p>
-                Stay ahead with our comprehensive market analysis tools and reports,
-                giving you the latest insights into property values and market trends.
-              </p>
-            </motion.div>
-
-            <motion.div 
-              className="content-block"
-              whileHover={{ scale: 1.03 }}
-              transition={{ type: "spring", stiffness: 300 }}
-            >
-              <FaHandshake className="icon" />
-              <h2>Personalized Service</h2>
-              <p>
-                We provide tailored solutions for every client, ensuring your specific
-                needs and goals are met throughout the buying or selling process.
-              </p>
-            </motion.div>
+          <div className="text-center mb-8">
+            <h2>Your Listings</h2>
+            <p>Browse our latest properties in Centennial Hills and surrounding areas</p>
           </div>
+          <realscout-your-listings 
+            agent-encoded-id="QWdlbnQtMjI1MDUw" 
+            sort-order="STATUS_AND_SIGNIFICANT_CHANGE" 
+            listing-status="For Sale,Sold" 
+            property-types="SFR" 
+            price-min="500000">
+          </realscout-your-listings>
         </motion.section>
 
         {/* RealScout Office Listings */}

@@ -149,36 +149,24 @@ export default function MarketUpdate() {
           />
         </motion.section>
 
+        {/* RealScout Your Listings */}
         <motion.section 
-          className="market-insights"
+          className="section"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 1, duration: 0.6 }}
         >
-          <h2>Market Insights</h2>
-          <div className="insights-grid">
-            <div className="insight-card">
-              <h3>Buyer's Market Conditions</h3>
-              <p>
-                With inventory at 1.8 months, the Centennial Hills market remains competitive 
-                favoring sellers. Buyers should be prepared to act quickly on desirable properties.
-              </p>
-            </div>
-            <div className="insight-card">
-              <h3>Price Appreciation</h3>
-              <p>
-                Year-over-year price growth of 8.2% reflects strong demand and limited inventory. 
-                New construction in Skye Canyon is helping to meet growing demand.
-              </p>
-            </div>
-            <div className="insight-card">
-              <h3>Best Time to Buy/Sell</h3>
-              <p>
-                Current market conditions favor sellers with quick sales and strong prices. 
-                Buyers have more opportunities in the fall and winter months.
-              </p>
-            </div>
+          <div className="text-center mb-8">
+            <h2>Your Listings</h2>
+            <p>Browse our latest properties in Centennial Hills and surrounding areas</p>
           </div>
+          <realscout-your-listings 
+            agent-encoded-id="QWdlbnQtMjI1MDUw" 
+            sort-order="STATUS_AND_SIGNIFICANT_CHANGE" 
+            listing-status="For Sale,Sold" 
+            property-types="SFR" 
+            price-min="500000">
+          </realscout-your-listings>
         </motion.section>
       </main>
     </Layout>
