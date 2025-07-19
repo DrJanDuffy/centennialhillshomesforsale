@@ -206,6 +206,8 @@ const SmartPropertyRecommendations: React.FC<SmartPropertyRecommendationsProps> 
               className={`relative inline-flex h-8 w-16 items-center rounded-full transition-colors duration-300 ${
                 isEnabled ? 'bg-accent-color' : 'bg-tertiary'
               }`}
+              aria-label={`${isEnabled ? 'Disable' : 'Enable'} AI recommendations`}
+              title={`${isEnabled ? 'Disable' : 'Enable'} AI recommendations`}
             >
               <motion.div
                 className={`h-6 w-6 rounded-full bg-white shadow-md transition-transform duration-300 ${

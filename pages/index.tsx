@@ -716,6 +716,8 @@ const HomePage: React.FC = () => {
               <button
                 onClick={prevTestimonial}
                 className="w-12 h-12 rounded-full bg-white/20 backdrop-blur-md flex items-center justify-center hover:bg-white/30 transition-colors"
+                aria-label="Previous testimonial"
+                title="Previous testimonial"
               >
                 <ChevronLeft className="w-6 h-6 text-white" />
               </button>
@@ -733,6 +735,8 @@ const HomePage: React.FC = () => {
               <button
                 onClick={nextTestimonial}
                 className="w-12 h-12 rounded-full bg-white/20 backdrop-blur-md flex items-center justify-center hover:bg-white/30 transition-colors"
+                aria-label="Next testimonial"
+                title="Next testimonial"
               >
                 <ChevronRight className="w-6 h-6 text-white" />
               </button>
