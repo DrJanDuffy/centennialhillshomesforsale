@@ -657,6 +657,42 @@ const HomePage: React.FC = () => {
         </div>
       </section>
 
+      {/* RealScout Office Listings */}
+      <section className="section bg-white">
+        <div className="container">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            viewport={{ once: true }}
+            className="text-center mb-16"
+          >
+            <h2 className="text-4xl md:text-5xl font-bold text-primary mb-6">
+              Current Listings
+            </h2>
+            <p className="text-xl text-secondary max-w-3xl mx-auto">
+              Browse our latest properties in Centennial Hills and surrounding areas
+            </p>
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, scale: 0.95 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+            viewport={{ once: true }}
+          >
+            <realscout-office-listings 
+              agent-encoded-id="QWdlbnQtMjI1MDUw" 
+              sort-order="STATUS_AND_SIGNIFICANT_CHANGE" 
+              listing-status="For Sale" 
+              property-types="SFR,MF,TC" 
+              price-min="600000" 
+              price-max="1200000">
+            </realscout-office-listings>
+          </motion.div>
+        </div>
+      </section>
+
       {/* Testimonials Section */}
       <section className="section bg-primary">
         <div className="container">
