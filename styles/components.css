@@ -471,23 +471,29 @@
 .nav {
   display: flex;
   align-items: center;
+  height: 100%; /* Ensure navigation takes full height */
 }
 
 .nav-menu {
   display: flex;
   gap: var(--space-xl);
   align-items: center;
+  height: 100%; /* Ensure menu takes full height */
 }
 
 .nav-link {
   color: var(--text-white);
   font-weight: var(--font-weight-semibold);
   text-decoration: none;
-  padding: var(--space-md) var(--space-lg);
+  padding: 0 var(--space-lg); /* Use horizontal padding only */
   position: relative;
   transition: all var(--transition-normal);
   border-radius: var(--radius-lg);
   text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+  line-height: 1.2; /* Prevent text from adding extra height */
+  display: flex;
+  align-items: center;
+  height: 100%; /* Ensure link takes full height */
 }
 
 .nav-link::before {

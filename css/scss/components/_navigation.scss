@@ -105,6 +105,10 @@
 
   .nav-item {
     position: relative;
+    display: flex;
+    align-items: center;
+    height: 100%; /* Ensure nav item takes full height */
+    line-height: 1.2; /* Prevent text from adding extra height */
 
     &.dropdown {
       .dropdown-toggle {
@@ -236,8 +240,10 @@
     color: $text-color;
     text-decoration: none;
     font-weight: 500;
-    padding: 0.5rem;
+    padding: 0 0.75rem; /* Use horizontal padding only */
     transition: color 0.3s ease;
+    line-height: 1.2; /* Prevent text from adding extra height */
+    height: 100%; /* Ensure link takes full height */
 
     &:hover {
       color: $primary-color;

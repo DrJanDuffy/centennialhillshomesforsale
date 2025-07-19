@@ -81,17 +81,24 @@ body {
   align-items: center;
   gap: 1.5rem;
   flex-wrap: wrap;
+  height: 100%; /* Ensure navigation takes full height */
 }
 
 .menu__body {
   display: flex;
   align-items: center;
   gap: 1.5rem;
+  height: 100%; /* Ensure menu takes full height */
 }
 
 .menu__link {
   font-weight: 600;
   position: relative;
+  line-height: 1.2; /* Prevent text from adding extra height */
+  padding: 0 0.75rem; /* Use horizontal padding only */
+  display: flex;
+  align-items: center;
+  height: 100%; /* Ensure link takes full height */
 }
 
 .actions-header {
@@ -1270,6 +1277,11 @@ iframe {
 
   .menu__item {
     text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%; /* Ensure menu item takes full height */
+    line-height: 1.2; /* Prevent text from adding extra height */
   }
 
   .menu__item:not(:last-child) {
@@ -1278,6 +1290,11 @@ iframe {
 
   .menu__link {
     font-size: 2rem;
+    line-height: 1.2; /* Prevent text from adding extra height */
+    padding: 0 0.75rem; /* Use horizontal padding only */
+    display: flex;
+    align-items: center;
+    height: 100%; /* Ensure link takes full height */
   }
 
   .actions-header__button {
