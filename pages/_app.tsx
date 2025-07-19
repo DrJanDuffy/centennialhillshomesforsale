@@ -3,6 +3,7 @@ import '../styles/design-system.css'
 import '../styles/components.css'
 import type { AppProps } from 'next/app'
 import { ErrorBoundary, FallbackProps } from 'react-error-boundary'
+import Script from 'next/script'
 import GoogleAnalytics from '../components/GoogleAnalytics'
 import AdvancedSEOOptimizer from '../components/AdvancedSEOOptimizer'
 import LocalSEOBooster from '../components/LocalSEOBooster'
@@ -47,6 +48,12 @@ export default function App({ Component, pageProps }: AppProps) {
 
   return (
     <ErrorBoundary FallbackComponent={ErrorFallback}>
+      {/* RealScout Web Components Script */}
+      <Script
+        src="https://em.realscout.com/widgets/realscout-web-components.umd.js"
+        type="module"
+        strategy="afterInteractive"
+      />
       <GoogleAnalytics />
       <AdvancedSEOOptimizer />
       <LocalSEOBooster />

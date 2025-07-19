@@ -46,8 +46,7 @@ export default function Document() {
         <link rel="preconnect" href="https://images.unsplash.com" />
         <link rel="dns-prefetch" href="//www.google-analytics.com" />
         
-        {/* RealScout Web Components */}
-        <script src="https://em.realscout.com/widgets/realscout-web-components.umd.js" type="module"></script>
+        {/* RealScout Web Components Styles */}
         <style dangerouslySetInnerHTML={{
           __html: `
             realscout-office-listings {
