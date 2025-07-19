@@ -146,7 +146,7 @@ const MarketTrendChart: React.FC<MarketTrendChartProps> = ({
                   : 'bg-tertiary text-secondary hover:bg-secondary-color/10'
               }`}
             >
-              <metric.icon className="w-4 h-4" />
+              {React.createElement(metric.icon, { className: "w-4 h-4" })}
               <span className="text-sm font-medium">{metric.label}</span>
             </button>
           ))}
@@ -163,9 +163,10 @@ const MarketTrendChart: React.FC<MarketTrendChartProps> = ({
         >
           <div className="flex items-center justify-between mb-4">
             <h4 className="text-lg font-semibold text-primary">Current {metrics.find(m => m.key === selectedMetric)?.label}</h4>
-            {metrics.find(m => m.key === selectedMetric)?.icon && (
-              <metrics.find(m => m.key === selectedMetric)!.icon className="w-6 h-6 text-accent-color" />
-            )}
+            {(() => {
+              const metric = metrics.find(m => m.key === selectedMetric);
+              return metric?.icon ? React.createElement(metric.icon, { className: "w-6 h-6 text-accent-color" }) : null;
+            })()}
           </div>
           <div className="text-3xl font-bold text-primary mb-2">
             {formatValue(getCurrentValue())}
