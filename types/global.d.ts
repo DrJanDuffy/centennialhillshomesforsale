@@ -9,6 +9,9 @@ declare global {
   namespace JSX {
     interface IntrinsicElements {
       'realscout-office-listings': any;
+      'realscout-search': any;
+      'realscout-property-details': any;
+      'realscout-market-analysis': any;
     }
   }
 }
