@@ -129,6 +129,7 @@ html {
   font-family: var(--font-family-sans);
   line-height: var(--line-height-normal);
   /* Cross-browser text size adjustment for compatibility */
+  /* Note: text-size-adjust warnings are expected for Firefox/Safari compatibility */
   -webkit-text-size-adjust: 100%;
   text-size-adjust: 100%;
   -webkit-font-smoothing: antialiased;
