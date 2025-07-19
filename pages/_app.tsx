@@ -1,4 +1,6 @@
 import '../styles/globals.css'
+import '../styles/design-system.css'
+import '../styles/components.css'
 import type { AppProps } from 'next/app'
 import { ErrorBoundary, FallbackProps } from 'react-error-boundary'
 import GoogleAnalytics from '../components/GoogleAnalytics'
