@@ -1,47 +1,64 @@
 
 'use client';
 
-import React, { useState, useRef, useEffect, useCallback } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { 
-  ChatBubbleLeftRightIcon, 
-  XMarkIcon, 
-  PaperAirplaneIcon,
-  SparklesIcon,
-  MicrophoneIcon
-} from '@heroicons/react/24/outline';
-import { useMCPClient } from '@/hooks/useMCPClient';
-import { useVoiceSearch } from '@/hooks/useVoiceSearch';
+  MessageCircle, 
+  Send, 
+  X, 
+  Bot, 
+  User, 
+  Sparkles,
+  Home,
+  Search,
+  DollarSign,
+  MapPin,
+  Clock,
+  Star,
+  Zap,
+  Mic,
+  MicOff,
+  Paperclip,
+  Smile
+} from 'lucide-react';
 
 interface Message {
   id: string;
-  type: 'user' | 'assistant';
-  content: string;
+  text: string;
+  sender: 'user' | 'ai';
   timestamp: Date;
-  suggestions?: string[];
+  type?: 'text' | 'typing' | 'suggestion';
 }
 
-export default function AIAssistant() {
+interface AIAssistantProps {
+  className?: string;
+}
+
+const AIAssistant: React.FC<AIAssistantProps> = ({ className = '' }) => {
   const [isOpen, setIsOpen] = useState(false);
-  const [messages, setMessages] = useState<Message[]>([]);
+  const [messages, setMessages] = useState<Message[]>([
+    {
+      id: '1',
+      text: "Hi! I'm your AI real estate assistant. I can help you find properties, answer questions about neighborhoods, and guide you through the home buying process. What would you like to know?",
+      sender: 'ai',
+      timestamp: new Date()
+    }
+  ]);
   const [inputValue, setInputValue] = useState('');
   const [isTyping, setIsTyping] = useState(false);
+  const [isListening, setIsListening] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
+  const inputRef = useRef<HTMLInputElement>(null);
 
-  // Use the hooks with proper interfaces
-  const { 
-    sendMessage,
-    isConnected, 
-    isLoading: mcpLoading, 
-    error: mcpError 
-  } = useMCPClient();
-  
-  const { 
-    isListening, 
-    startListening, 
-    isSupported, 
-    error: voiceError 
-  } = useVoiceSearch();
+  const quickSuggestions = [
+    "Show me homes in Centennial Hills",
+    "What's the average price in Providence?",
+    "Tell me about Skye Canyon",
+    "How do I get pre-approved?",
+    "What are closing costs?",
+    "Show me luxury homes"
+  ];
 
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
@@ -52,30 +69,18 @@ export default function AIAssistant() {
   }, [messages]);
 
   useEffect(() => {
-    if (isOpen && messages.length === 0) {
-      // Welcome message
-      setMessages([{
-        id: '1',
-        type: 'assistant',
-        content: 'Hi! I\'m your AI real estate assistant. I can help you find homes, get property valuations, analyze market trends, and answer unknown questions about Centennial Hills. What can I help you with today?',
-        timestamp: new Date(),
-        suggestions: [
-          'Find homes with pools under $700k',
-          'What\'s my home worth?',
-          'Best schools in Centennial Hills',
-          'Market trends for 2024'
-        ]
-      }]);
+    if (isOpen && inputRef.current) {
+      inputRef.current.focus();
     }
   }, [isOpen]);
 
   const handleSendMessage = async () => {
-    if (!inputValue.trim() || !isConnected || mcpLoading) return;
+    if (!inputValue.trim()) return;
 
     const userMessage: Message = {
       id: Date.now().toString(),
-      type: 'user',
-      content: inputValue,
+      text: inputValue,
+      sender: 'user',
       timestamp: new Date()
     };
 
@@ -83,202 +88,291 @@ export default function AIAssistant() {
     setInputValue('');
     setIsTyping(true);
 
-    try {
-      // Use the sendMessage method directly
-      const response = await sendMessage(inputValue);
+    // Simulate AI response
+    setTimeout(() => {
+      const aiResponses = [
+        "I'd be happy to help you with that! Let me search for properties that match your criteria.",
+        "Great question! Based on current market data, I can provide you with detailed insights.",
+        "I found several properties that might interest you. Would you like me to show you the details?",
+        "That's a common concern. Let me explain the process and what you can expect.",
+        "I can help you with that! Here's what you need to know about the local market.",
+        "Perfect! I have some great options for you. Let me share the details."
+      ];
 
-      const assistantMessage: Message = {
+      const randomResponse = aiResponses[Math.floor(Math.random() * aiResponses.length)];
+      
+      const aiMessage: Message = {
         id: (Date.now() + 1).toString(),
-        type: 'assistant',
-        content: response.success && response.data ? response.data.content || 'No response received' : 'No response received',
-        timestamp: new Date(),
-        suggestions: ['Property search', 'Home valuation', 'Market trends', 'Contact agent']
+        text: randomResponse,
+        sender: 'ai',
+        timestamp: new Date()
       };
 
-      setMessages(prev => [...prev, assistantMessage]);
-    } catch (error) {
-      console.error('AI Assistant error:', error);
-      const errorMessage: Message = {
-        id: (Date.now() + 1).toString(),
-        type: 'assistant',
-        content: 'I apologize, but I\'m having trouble processing your request right now. Please try again or contact Dr. Jan Duffy directly for assistance.',
-        timestamp: new Date(),
-        suggestions: ['Try again', 'Contact agent', 'Browse properties', 'Market insights']
-      };
-      setMessages(prev => [...prev, errorMessage]);
-    } finally {
+      setMessages(prev => [...prev, aiMessage]);
       setIsTyping(false);
-    }
+    }, 1500 + Math.random() * 1000);
   };
 
   const handleSuggestionClick = (suggestion: string) => {
     setInputValue(suggestion);
   };
 
-  if (!isConnected && !mcpError && !mcpLoading) {
-    return null; // Don't show if MCP client isn't connected and no error
-  }
+  const handleKeyPress = (e: React.KeyboardEvent) => {
+    if (e.key === 'Enter' && !e.shiftKey) {
+      e.preventDefault();
+      handleSendMessage();
+    }
+  };
+
+  const toggleListening = () => {
+    setIsListening(!isListening);
+    // Here you would implement actual voice recognition
+    if (!isListening) {
+      // Start listening
+      setTimeout(() => {
+        setInputValue("Show me homes in Centennial Hills under $800,000");
+        setIsListening(false);
+      }, 2000);
+    }
+  };
+
+  const formatTime = (date: Date) => {
+    return date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+  };
 
   return (
     <>
-      {/* Chat Toggle Button */}
+      {/* Floating AI Button */}
       <motion.button
-        onClick={() => setIsOpen(!isOpen)}
-        className={`fixed bottom-6 right-6 w-16 h-16 rounded-full shadow-2xl flex items-center justify-center z-50 transition-all duration-300 ${
-          isOpen 
-            ? 'bg-red-500 hover:bg-red-600' 
-            : 'bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800'
-        }`}
-        whileHover={{ scale: 1.1 }}
-        whileTap={{ scale: 0.95 }}
-        animate={{ 
-          rotate: isOpen ? 45 : 0,
-          scale: isOpen ? 0.9 : 1
-        }}
+        onClick={() => setIsOpen(true)}
+        className={`fixed bottom-6 left-6 z-50 w-16 h-16 bg-gradient-to-r from-accent-color to-secondary-color text-white rounded-full shadow-2xl hover:shadow-3xl transition-all duration-300 ${className}`}
+        whileHover={{ scale: 1.1, rotate: 5 }}
+        whileTap={{ scale: 0.9 }}
+        initial={{ opacity: 0, scale: 0 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{ delay: 2, duration: 0.5 }}
       >
-        {isOpen ? (
-          <XMarkIcon className="w-6 h-6 text-white" />
-        ) : (
-          <div className="relative">
-            <ChatBubbleLeftRightIcon className="w-6 h-6 text-white" />
+        <AnimatePresence mode="wait">
+          {isOpen ? (
             <motion.div
-              className="absolute -top-1 -right-1 w-3 h-3 bg-green-400 rounded-full"
-              animate={{ scale: [1, 1.2, 1] }}
-              transition={{ repeat: Infinity, duration: 2 }}
-            />
-          </div>
-        )}
+              key="close"
+              initial={{ rotate: 0 }}
+              animate={{ rotate: 180 }}
+              exit={{ rotate: 0 }}
+            >
+              <X className="w-6 h-6" />
+            </motion.div>
+          ) : (
+            <motion.div
+              key="ai"
+              initial={{ rotate: 0 }}
+              animate={{ rotate: 0 }}
+              exit={{ rotate: 180 }}
+            >
+              <Bot className="w-6 h-6" />
+            </motion.div>
+          )}
+        </AnimatePresence>
+        
+        {/* Pulse Animation */}
+        <motion.div
+          className="absolute inset-0 bg-accent-color rounded-full"
+          animate={{ scale: [1, 1.2, 1], opacity: [0.5, 0, 0.5] }}
+          transition={{ duration: 2, repeat: Infinity }}
+        />
       </motion.button>
 
-      {/* Chat Window */}
+      {/* AI Chat Modal */}
       <AnimatePresence>
         {isOpen && (
           <motion.div
-            initial={{ opacity: 0, y: 20, scale: 0.95 }}
-            animate={{ opacity: 1, y: 0, scale: 1 }}
-            exit={{ opacity: 0, y: 20, scale: 0.95 }}
-            className="fixed bottom-24 right-6 w-96 h-[600px] bg-white rounded-2xl shadow-2xl border border-gray-200 flex flex-col z-40 overflow-hidden"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 bg-black/50 backdrop-blur-sm z-40"
+            onClick={() => setIsOpen(false)}
           >
-            {/* Header */}
-            <div className="bg-gradient-to-r from-blue-600 to-blue-700 p-4 text-white">
-              <div className="flex items-center gap-3">
-                <div className="w-10 h-10 bg-white/20 rounded-full flex items-center justify-center">
-                  <SparklesIcon className="w-5 h-5" />
-                </div>
-                <div>
-                  <h3 className="font-semibold">AI Real Estate Assistant</h3>
-                  <p className="text-sm text-blue-100">
-                    {isConnected ? 
-                      (mcpLoading ? 'Loading...' : 'Connected') : 
-                      mcpError ? 'Connection Error' : 'Connecting...'
-                    }
-                  </p>
-                </div>
-              </div>
-            </div>
-
-            {/* Error Messages */}
-            {(mcpError || voiceError) && (
-              <div className="p-3 bg-red-50 border-b border-red-200">
-                {mcpError && (
-                  <p className="text-sm text-red-600 mb-1">MCP: {mcpError}</p>
-                )}
-                {voiceError && (
-                  <p className="text-sm text-amber-600">Voice: {voiceError}</p>
-                )}
-              </div>
-            )}
-
-            {/* Messages */}
-            <div className="flex-1 overflow-y-auto p-4 space-y-4">
-              {messages.map((message) => (
-                <div
-                  key={message.id}
-                  className={`flex ${message.type === 'user' ? 'justify-end' : 'justify-start'}`}
-                >
-                  <div
-                    className={`max-w-[80%] p-3 rounded-2xl ${
-                      message.type === 'user'
-                        ? 'bg-blue-600 text-white'
-                        : 'bg-gray-100 text-gray-800'
-                    }`}
-                  >
-                    <div className="whitespace-pre-wrap">{message.content}</div>
-                    {message.suggestions && (
-                      <div className="mt-3 space-y-1">
-                        {message.suggestions.map((suggestion, index) => (
-                          <button
-                            key={index}
-                            onClick={() => handleSuggestionClick(suggestion)}
-                            className="block w-full text-left px-2 py-1 text-sm bg-white/10 hover:bg-white/20 rounded transition-colors"
-                          >
-                            {suggestion}
-                          </button>
-                        ))}
-                      </div>
-                    )}
-                  </div>
-                </div>
-              ))}
-
-              {(isTyping || mcpLoading) && (
-                <div className="flex justify-start">
-                  <div className="bg-gray-100 p-3 rounded-2xl">
-                    <div className="flex gap-1">
-                      <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce" />
-                      <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce animate-delay-100" />
-                      <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce animate-delay-200" />
+            <motion.div
+              initial={{ opacity: 0, scale: 0.8, y: 50 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.8, y: 50 }}
+              transition={{ type: "spring", damping: 25, stiffness: 300 }}
+              className="absolute bottom-24 left-6 w-96 h-[500px] bg-white rounded-2xl shadow-2xl overflow-hidden"
+              onClick={(e) => e.stopPropagation()}
+            >
+              {/* Header */}
+              <div className="bg-gradient-to-r from-accent-color to-secondary-color text-white p-4">
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center gap-3">
+                    <motion.div
+                      animate={{ rotate: [0, 10, -10, 0] }}
+                      transition={{ duration: 2, repeat: Infinity }}
+                    >
+                      <Bot className="w-6 h-6" />
+                    </motion.div>
+                    <div>
+                      <h3 className="font-semibold">AI Assistant</h3>
+                      <p className="text-sm opacity-90">Powered by AI</p>
                     </div>
                   </div>
+                  <motion.button
+                    whileHover={{ scale: 1.1 }}
+                    whileTap={{ scale: 0.9 }}
+                    onClick={() => setIsOpen(false)}
+                    className="w-8 h-8 rounded-full bg-white/20 flex items-center justify-center hover:bg-white/30 transition-colors"
+                  >
+                    <X className="w-4 h-4" />
+                  </motion.button>
                 </div>
-              )}
-
-              <div ref={messagesEndRef} />
-            </div>
-
-            {/* Input */}
-            <div className="p-4 border-t border-gray-200">
-              <div className="flex gap-2">
-                <div className="flex-1 relative">
-                  <input
-                    type="text"
-                    value={inputValue}
-                    onChange={(e) => setInputValue(e.target.value)}
-                    onKeyDown={(e) => e.key === 'Enter' && handleSendMessage()}
-                    placeholder="Ask about homes, valuations, or market trends..."
-                    className="w-full px-3 py-2 pr-10 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500"
-                    disabled={isTyping || mcpLoading}
-                  />
-                  {isSupported && (
-                    <button
-                      onClick={startListening}
-                      disabled={mcpLoading}
-                      title={voiceError || 'Click to speak'}
-                      aria-label={voiceError || 'Click to speak'}
-                      className={`absolute right-2 top-1/2 -translate-y-1/2 p-1 rounded ${
-                        isListening ? 'text-red-500 animate-pulse' : 
-                        mcpLoading ? 'text-gray-300 cursor-not-allowed' :
-                        'text-gray-400 hover:text-gray-600'
-                      }`}
-                    >
-                      <MicrophoneIcon className="w-4 h-4" />
-                    </button>
-                  )}
-                </div>
-                <button
-                  onClick={handleSendMessage}
-                  disabled={!inputValue.trim() || isTyping || !isConnected || mcpLoading}
-                  title="Send message"
-                  aria-label="Send message"
-                  className="px-3 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed"
-                >
-                  <PaperAirplaneIcon className="w-4 h-4" />
-                </button>
               </div>
-            </div>
+
+              {/* Messages */}
+              <div className="h-[350px] overflow-y-auto p-4 space-y-4">
+                <AnimatePresence>
+                  {messages.map((message) => (
+                    <motion.div
+                      key={message.id}
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0, y: -20 }}
+                      className={`flex ${message.sender === 'user' ? 'justify-end' : 'justify-start'}`}
+                    >
+                      <div className={`flex items-start gap-3 max-w-[80%] ${message.sender === 'user' ? 'flex-row-reverse' : ''}`}>
+                        <div className={`w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0 ${
+                          message.sender === 'user' 
+                            ? 'bg-primary-color text-white' 
+                            : 'bg-gradient-to-r from-accent-color to-secondary-color text-white'
+                        }`}>
+                          {message.sender === 'user' ? <User className="w-4 h-4" /> : <Bot className="w-4 h-4" />}
+                        </div>
+                        <div className={`rounded-2xl px-4 py-2 ${
+                          message.sender === 'user'
+                            ? 'bg-primary-color text-white'
+                            : 'bg-tertiary text-primary'
+                        }`}>
+                          <p className="text-sm">{message.text}</p>
+                          <p className={`text-xs mt-1 ${
+                            message.sender === 'user' ? 'text-white/70' : 'text-secondary'
+                          }`}>
+                            {formatTime(message.timestamp)}
+                          </p>
+                        </div>
+                      </div>
+                    </motion.div>
+                  ))}
+                </AnimatePresence>
+
+                {/* Typing Indicator */}
+                {isTyping && (
+                  <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    className="flex justify-start"
+                  >
+                    <div className="flex items-start gap-3">
+                      <div className="w-8 h-8 rounded-full bg-gradient-to-r from-accent-color to-secondary-color text-white flex items-center justify-center">
+                        <Bot className="w-4 h-4" />
+                      </div>
+                      <div className="bg-tertiary rounded-2xl px-4 py-2">
+                        <div className="flex gap-1">
+                          <motion.div
+                            className="w-2 h-2 bg-secondary rounded-full"
+                            animate={{ scale: [1, 1.5, 1] }}
+                            transition={{ duration: 0.6, repeat: Infinity, delay: 0 }}
+                          />
+                          <motion.div
+                            className="w-2 h-2 bg-secondary rounded-full"
+                            animate={{ scale: [1, 1.5, 1] }}
+                            transition={{ duration: 0.6, repeat: Infinity, delay: 0.2 }}
+                          />
+                          <motion.div
+                            className="w-2 h-2 bg-secondary rounded-full"
+                            animate={{ scale: [1, 1.5, 1] }}
+                            transition={{ duration: 0.6, repeat: Infinity, delay: 0.4 }}
+                          />
+                        </div>
+                      </div>
+                    </div>
+                  </motion.div>
+                )}
+
+                {/* Quick Suggestions */}
+                {messages.length === 1 && (
+                  <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.5 }}
+                    className="space-y-2"
+                  >
+                    <p className="text-xs text-secondary text-center">Quick suggestions:</p>
+                    <div className="flex flex-wrap gap-2 justify-center">
+                      {quickSuggestions.slice(0, 4).map((suggestion, index) => (
+                        <motion.button
+                          key={suggestion}
+                          initial={{ opacity: 0, scale: 0.8 }}
+                          animate={{ opacity: 1, scale: 1 }}
+                          transition={{ delay: 0.6 + index * 0.1 }}
+                          whileHover={{ scale: 1.05 }}
+                          whileTap={{ scale: 0.95 }}
+                          onClick={() => handleSuggestionClick(suggestion)}
+                          className="bg-accent-color/10 text-accent-color px-3 py-1 rounded-full text-xs hover:bg-accent-color/20 transition-colors"
+                        >
+                          {suggestion}
+                        </motion.button>
+                      ))}
+                    </div>
+                  </motion.div>
+                )}
+
+                <div ref={messagesEndRef} />
+              </div>
+
+              {/* Input Area */}
+              <div className="p-4 border-t border-tertiary">
+                <div className="flex items-center gap-2">
+                  <motion.button
+                    whileHover={{ scale: 1.1 }}
+                    whileTap={{ scale: 0.9 }}
+                    onClick={toggleListening}
+                    className={`w-10 h-10 rounded-full flex items-center justify-center transition-colors ${
+                      isListening 
+                        ? 'bg-red-500 text-white' 
+                        : 'bg-tertiary text-secondary hover:bg-secondary-color/20'
+                    }`}
+                    aria-label={isListening ? "Stop listening" : "Start voice input"}
+                    title={isListening ? "Stop listening" : "Start voice input"}
+                  >
+                    {isListening ? <MicOff className="w-4 h-4" /> : <Mic className="w-4 h-4" />}
+                  </motion.button>
+                  
+                  <div className="flex-1 relative">
+                    <input
+                      ref={inputRef}
+                      type="text"
+                      value={inputValue}
+                      onChange={(e) => setInputValue(e.target.value)}
+                      onKeyPress={handleKeyPress}
+                      placeholder="Ask me anything about real estate..."
+                      className="w-full px-4 py-2 pr-12 bg-tertiary rounded-full text-sm focus:outline-none focus:ring-2 focus:ring-accent-color/50"
+                    />
+                    <motion.button
+                      whileHover={{ scale: 1.1 }}
+                      whileTap={{ scale: 0.9 }}
+                      className="absolute right-2 top-1/2 transform -translate-y-1/2 w-8 h-8 rounded-full bg-accent-color text-white flex items-center justify-center hover:bg-secondary-color transition-colors"
+                      onClick={handleSendMessage}
+                      disabled={!inputValue.trim()}
+                    >
+                      <Send className="w-4 h-4" />
+                    </motion.button>
+                  </div>
+                </div>
+              </div>
+            </motion.div>
           </motion.div>
         )}
       </AnimatePresence>
     </>
   );
-}
+};
+
+export default AIAssistant;

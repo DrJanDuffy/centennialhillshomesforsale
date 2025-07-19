@@ -8,9 +8,9 @@ import LocalAmenities from '@/components/LocalAmenities';
 import MarketTrendChart from '@/components/MarketTrendChart';
 import SmartPropertyRecommendations from '@/components/SmartPropertyRecommendations';
 
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { PropertyCard } from '../components/PropertyCard';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import { 
   Star, 
   MapPin, 
@@ -37,7 +37,13 @@ import {
   Share2,
   Bookmark,
   Eye,
-  MessageCircle
+  MessageCircle,
+  Sparkles,
+  Zap,
+  Target,
+  MousePointer,
+  Sparkle,
+  Star as StarIcon
 } from 'lucide-react';
 
 // Lazy load heavy components for better performance
@@ -52,6 +58,29 @@ const InteractivePropertyMap = dynamic(() => import('../components/InteractivePr
 });
 
 const HomePage: React.FC = () => {
+  const [isLoaded, setIsLoaded] = useState(false);
+  const [currentTestimonial, setCurrentTestimonial] = useState(0);
+  const [searchFilters, setSearchFilters] = useState({
+    location: '',
+    priceRange: '',
+    bedrooms: '',
+    propertyType: ''
+  });
+  const [showFloatingMenu, setShowFloatingMenu] = useState(false);
+  const [scrollY, setScrollY] = useState(0);
+
+  useEffect(() => {
+    setIsLoaded(true);
+    
+    const handleScroll = () => {
+      setScrollY(window.scrollY);
+      setShowFloatingMenu(window.scrollY > 500);
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
   const featuredProperties = [
     {
       id: '1',
@@ -149,13 +178,6 @@ const HomePage: React.FC = () => {
     }
   ];
 
-  const [isLoaded, setIsLoaded] = React.useState(false);
-  const [currentTestimonial, setCurrentTestimonial] = React.useState(0);
-
-  React.useEffect(() => {
-    setIsLoaded(true);
-  }, []);
-
   const nextTestimonial = () => {
     setCurrentTestimonial((prev) => (prev + 1) % testimonials.length);
   };
@@ -164,14 +186,75 @@ const HomePage: React.FC = () => {
     setCurrentTestimonial((prev) => (prev - 1 + testimonials.length) % testimonials.length);
   };
 
+  const handleSearch = () => {
+    // Implement search functionality
+    console.log('Searching with filters:', searchFilters);
+  };
+
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
   return (
     <Layout
       title="Centennial Hills Homes For Sale | AI-Powered Property Search | Dr. Jan Duff"
       description="Discover your dream home in Centennial Hills, Providence, and Skye Canyon with AI-powered search technology. Expert real estate services by Dr. Jan Duff - Northwest Las Vegas specialist."
       canonical="https://centennialhillshomesforsale.com"
     >
+      {/* Floating Action Menu */}
+      <AnimatePresence>
+        {showFloatingMenu && (
+          <motion.div
+            initial={{ opacity: 0, scale: 0.8, y: 20 }}
+            animate={{ opacity: 1, scale: 1, y: 0 }}
+            exit={{ opacity: 0, scale: 0.8, y: 20 }}
+            className="fixed bottom-6 right-6 z-50 flex flex-col gap-3"
+          >
+            <motion.button
+              whileHover={{ scale: 1.1 }}
+              whileTap={{ scale: 0.9 }}
+              className="bg-accent-color text-white p-4 rounded-full shadow-lg hover:shadow-xl transition-all duration-300"
+              onClick={() => window.location.href = 'tel:+17025551234'}
+              aria-label="Call us"
+              title="Call us"
+            >
+              <Phone className="w-6 h-6" />
+            </motion.button>
+            
+            <motion.button
+              whileHover={{ scale: 1.1 }}
+              whileTap={{ scale: 0.9 }}
+              className="bg-primary-color text-white p-4 rounded-full shadow-lg hover:shadow-xl transition-all duration-300"
+              onClick={() => window.location.href = 'mailto:jan@centennialhillshomesforsale.com'}
+              aria-label="Email us"
+              title="Email us"
+            >
+              <MessageCircle className="w-6 h-6" />
+            </motion.button>
+            
+            <motion.button
+              whileHover={{ scale: 1.1 }}
+              whileTap={{ scale: 0.9 }}
+              className="bg-secondary-color text-white p-4 rounded-full shadow-lg hover:shadow-xl transition-all duration-300"
+              onClick={scrollToTop}
+              aria-label="Back to top"
+              title="Back to top"
+            >
+              <ArrowRight className="w-6 h-6 rotate-[-90deg]" />
+            </motion.button>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
       {/* Hero Section with Video Background */}
       <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
+        {/* Animated Background Elements */}
+        <div className="absolute inset-0 z-0">
+          <div className="absolute top-20 left-20 w-32 h-32 bg-accent-color/20 rounded-full blur-3xl animate-pulse"></div>
+          <div className="absolute top-40 right-32 w-24 h-24 bg-secondary-color/20 rounded-full blur-2xl animate-pulse delay-1000"></div>
+          <div className="absolute bottom-32 left-1/3 w-40 h-40 bg-primary-color/10 rounded-full blur-3xl animate-pulse delay-2000"></div>
+        </div>
+
         {/* Video Background */}
         <div className="absolute inset-0 z-0">
           <video
@@ -194,6 +277,14 @@ const HomePage: React.FC = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
           >
+            {/* Animated Sparkles */}
+            <div className="absolute top-0 left-1/4 animate-bounce">
+              <Sparkles className="w-8 h-8 text-accent-color opacity-60" />
+            </div>
+            <div className="absolute top-10 right-1/4 animate-bounce delay-500">
+              <Sparkle className="w-6 h-6 text-secondary-color opacity-60" />
+            </div>
+
             <h1 className="text-5xl md:text-7xl font-extrabold mb-6 leading-tight">
               Find Your Dream Home in
               <span className="block bg-gradient-to-r from-accent-color to-secondary-color bg-clip-text text-transparent">
@@ -212,7 +303,8 @@ const HomePage: React.FC = () => {
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.6, delay: index * 0.1 }}
-                  className="bg-white/10 backdrop-blur-md rounded-xl p-6 border border-white/20"
+                  whileHover={{ scale: 1.05, y: -5 }}
+                  className="bg-white/10 backdrop-blur-md rounded-xl p-6 border border-white/20 hover:bg-white/20 transition-all duration-300"
                 >
                   <stat.icon className={`w-8 h-8 mx-auto mb-3 ${stat.color}`} />
                   <div className="text-3xl font-bold mb-1">{stat.value}</div>
@@ -224,15 +316,23 @@ const HomePage: React.FC = () => {
 
             {/* Hero CTA */}
             <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-              <button className="btn btn-accent btn-lg group">
+              <motion.button 
+                className="btn btn-accent btn-lg group"
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+              >
                 <Search className="w-5 h-5 mr-2 group-hover:scale-110 transition-transform" />
                 Start Your Search
                 <ArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" />
-              </button>
-              <button className="btn btn-outline btn-lg group text-white border-white hover:bg-white hover:text-primary-color">
+              </motion.button>
+              <motion.button 
+                className="btn btn-outline btn-lg group text-white border-white hover:bg-white hover:text-primary-color"
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+              >
                 <Play className="w-5 h-5 mr-2 group-hover:scale-110 transition-transform" />
                 Watch Our Story
-              </button>
+              </motion.button>
             </div>
           </motion.div>
         </div>
@@ -253,46 +353,99 @@ const HomePage: React.FC = () => {
       {/* Quick Search Section */}
       <section className="section bg-secondary -mt-20 relative z-20">
         <div className="container">
-          <div className="bg-white rounded-2xl shadow-2xl p-8">
-            <h2 className="text-3xl font-bold text-center mb-8">Find Your Perfect Home</h2>
-            <div className="grid md:grid-cols-4 gap-6">
-                             <div className="form-group">
-                 <label className="form-label" htmlFor="location-select">Location</label>
-                 <select id="location-select" className="form-input" aria-label="Select location">
-                   <option>All Areas</option>
-                   <option>Centennial Hills</option>
-                   <option>Providence</option>
-                   <option>Skye Canyon</option>
-                 </select>
-               </div>
-               <div className="form-group">
-                 <label className="form-label" htmlFor="price-select">Price Range</label>
-                 <select id="price-select" className="form-input" aria-label="Select price range">
-                   <option>Any Price</option>
-                   <option>$300K - $500K</option>
-                   <option>$500K - $750K</option>
-                   <option>$750K - $1M</option>
-                   <option>$1M+</option>
-                 </select>
-               </div>
-               <div className="form-group">
-                 <label className="form-label" htmlFor="bedrooms-select">Bedrooms</label>
-                 <select id="bedrooms-select" className="form-input" aria-label="Select number of bedrooms">
-                   <option>Any</option>
-                   <option>1+</option>
-                   <option>2+</option>
-                   <option>3+</option>
-                   <option>4+</option>
-                 </select>
-               </div>
+          <motion.div 
+            className="bg-white rounded-2xl shadow-2xl p-8"
+            initial={{ opacity: 0, y: 50 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            viewport={{ once: true }}
+          >
+            <div className="text-center mb-8">
+              <h2 className="text-3xl font-bold mb-4">Find Your Perfect Home</h2>
+              <p className="text-secondary">Use our advanced search to find properties that match your criteria</p>
+            </div>
+            
+            <div className="grid md:grid-cols-5 gap-6">
               <div className="form-group">
-                <button className="btn btn-primary w-full h-full">
+                <label className="form-label" htmlFor="location-select">Location</label>
+                <select 
+                  id="location-select" 
+                  className="form-input" 
+                  value={searchFilters.location}
+                  onChange={(e) => setSearchFilters({...searchFilters, location: e.target.value})}
+                  aria-label="Select location"
+                >
+                  <option value="">All Areas</option>
+                  <option value="centennial-hills">Centennial Hills</option>
+                  <option value="providence">Providence</option>
+                  <option value="skye-canyon">Skye Canyon</option>
+                </select>
+              </div>
+              
+              <div className="form-group">
+                <label className="form-label" htmlFor="price-select">Price Range</label>
+                <select 
+                  id="price-select" 
+                  className="form-input"
+                  value={searchFilters.priceRange}
+                  onChange={(e) => setSearchFilters({...searchFilters, priceRange: e.target.value})}
+                  aria-label="Select price range"
+                >
+                  <option value="">Any Price</option>
+                  <option value="300-500">$300K - $500K</option>
+                  <option value="500-750">$500K - $750K</option>
+                  <option value="750-1000">$750K - $1M</option>
+                  <option value="1000+">$1M+</option>
+                </select>
+              </div>
+              
+              <div className="form-group">
+                <label className="form-label" htmlFor="bedrooms-select">Bedrooms</label>
+                <select 
+                  id="bedrooms-select" 
+                  className="form-input"
+                  value={searchFilters.bedrooms}
+                  onChange={(e) => setSearchFilters({...searchFilters, bedrooms: e.target.value})}
+                  aria-label="Select number of bedrooms"
+                >
+                  <option value="">Any</option>
+                  <option value="1">1+</option>
+                  <option value="2">2+</option>
+                  <option value="3">3+</option>
+                  <option value="4">4+</option>
+                </select>
+              </div>
+              
+              <div className="form-group">
+                <label className="form-label" htmlFor="property-type-select">Property Type</label>
+                <select 
+                  id="property-type-select" 
+                  className="form-input"
+                  value={searchFilters.propertyType}
+                  onChange={(e) => setSearchFilters({...searchFilters, propertyType: e.target.value})}
+                  aria-label="Select property type"
+                >
+                  <option value="">All Types</option>
+                  <option value="single-family">Single Family</option>
+                  <option value="townhouse">Townhouse</option>
+                  <option value="condo">Condo</option>
+                  <option value="luxury">Luxury</option>
+                </select>
+              </div>
+              
+              <div className="form-group">
+                <motion.button 
+                  className="btn btn-primary w-full h-full"
+                  whileHover={{ scale: 1.02 }}
+                  whileTap={{ scale: 0.98 }}
+                  onClick={handleSearch}
+                >
                   <Search className="w-5 h-5 mr-2" />
                   Search
-                </button>
+                </motion.button>
               </div>
             </div>
-          </div>
+          </motion.div>
         </div>
       </section>
 
