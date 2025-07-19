@@ -61,13 +61,11 @@ export default function About() {
           <div className="widget-container">
             <RealScoutWidget
               type="search"
-              neighborhood="Centennial Hills"
-              priceRange={{ min: 400000, max: 1200000 }}
-              bedrooms={3}
-              bathrooms={2}
-              propertyType="Single Family"
               title="Find Your Dream Home"
               description="Search properties in Centennial Hills and surrounding areas"
+              priceMin={400000}
+              priceMax={1200000}
+              propertyTypes="SFR"
             />
           </div>
         </motion.section>
@@ -81,11 +79,12 @@ export default function About() {
           <h2>Featured Properties</h2>
           <div className="widget-container">
             <RealScoutWidget
-              type="featured-listings"
-              neighborhood="Centennial Hills"
-              priceRange={{ min: 500000, max: 1500000 }}
+              type="office-listings"
               title="Featured Properties"
               description="Handpicked properties in Centennial Hills and surrounding communities"
+              priceMin={500000}
+              priceMax={1500000}
+              propertyTypes="SFR,MF,TC"
             />
           </div>
         </motion.section>
@@ -146,12 +145,12 @@ export default function About() {
         >
           <h2>Luxury Properties</h2>
           <RealScoutWidget
-            type="featured-listings"
-            neighborhood="Providence"
-            priceRange={{ min: 800000, max: 2000000 }}
-            propertyType="Luxury"
+            type="office-listings"
             title="Luxury Properties"
             description="Exclusive luxury homes in Providence and premium neighborhoods"
+            priceMin={800000}
+            priceMax={2000000}
+            propertyTypes="SFR"
             className="featured-listings-widget"
           />
         </motion.section>

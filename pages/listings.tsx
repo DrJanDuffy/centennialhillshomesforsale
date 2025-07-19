@@ -129,11 +129,12 @@ export default function Listings() {
         >
           <h2>All Available Properties</h2>
           <RealScoutWidget
-            type="featured-listings"
-            neighborhood="Centennial Hills"
-            priceRange={{ min: 300000, max: 2000000 }}
+            type="office-listings"
             title="All Available Properties"
             description="Browse all properties in Centennial Hills and surrounding areas"
+            priceMin={300000}
+            priceMax={2000000}
+            propertyTypes="SFR,MF,TC"
           />
         </motion.section>
 
