@@ -1,12 +1,15 @@
 .header {
   background: linear-gradient(135deg, #1a365d 0%, #2d5a87 100%);
   color: white;
-  padding: 1.5rem 0;
+  height: 70px; /* Optimized height for desktop */
+  min-height: 60px; /* Minimum height for mobile */
+  padding: 0.75rem 0; /* Reduced padding for better performance */
   box-shadow: 0 4px 20px rgba(0,0,0,0.15);
   position: sticky;
   top: 0;
   z-index: 1000;
   border-bottom: 3px solid #4a90c2;
+  box-sizing: border-box;
 
   .header-content {
     max-width: 1200px;
@@ -61,7 +64,9 @@
   }
 
   @media (max-width: 768px) {
-    padding: 1rem 0;
+    height: 60px; /* Mobile optimized height */
+    min-height: 50px; /* Mobile minimum height */
+    padding: 0.5rem 0; /* Mobile optimized padding */
 
     .header-content {
       flex-direction: column;

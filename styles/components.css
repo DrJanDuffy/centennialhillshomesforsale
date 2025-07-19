@@ -354,13 +354,18 @@
   -webkit-backdrop-filter: blur(20px);
   backdrop-filter: blur(20px);
   box-shadow: var(--shadow-xl);
-  padding: var(--space-sm) 0;
+  height: 70px; /* Optimized height for desktop */
+  min-height: 60px; /* Minimum height for mobile */
+  padding: 0.75rem 0; /* Reduced padding for better performance */
+  box-sizing: border-box;
   transition: all var(--transition-normal);
   border-bottom: 2px solid rgba(255, 255, 255, 0.1);
 }
 
 .header--scrolled {
-  padding: var(--space-xs) 0;
+  height: 60px; /* Reduced height when scrolled */
+  min-height: 50px; /* Minimum height when scrolled */
+  padding: 0.5rem 0; /* Reduced padding when scrolled */
   box-shadow: var(--shadow-lg);
 }
 
@@ -808,7 +813,9 @@ realscout-office-listings button:hover {
 /* ===== RESPONSIVE DESIGN ===== */
 @media (max-width: 768px) {
   .header {
-    padding: var(--space-sm) 0;
+    height: 60px; /* Mobile optimized height */
+    min-height: 50px; /* Mobile minimum height */
+    padding: 0.5rem 0; /* Mobile optimized padding */
   }
   
   .header-content {
@@ -902,7 +909,9 @@ realscout-office-listings button:hover {
 
 @media (max-width: 480px) {
   .header {
-    padding: var(--space-sm) 0;
+    height: 55px; /* Small mobile optimized height */
+    min-height: 45px; /* Small mobile minimum height */
+    padding: 0.375rem 0; /* Small mobile optimized padding */
   }
   
   .header-brand {
