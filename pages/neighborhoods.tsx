@@ -150,8 +150,10 @@ export default function Neighborhoods() {
           <div className="listings-section">
             <h3>Available Homes in {selectedNeighborhood}</h3>
             <RealScoutWidget 
-              filterByZip={currentData.zipCodes.join(',')}
               neighborhood={selectedNeighborhood}
+              type="featured-listings"
+              title={`Homes in ${selectedNeighborhood}`}
+              description={`Discover available properties in ${selectedNeighborhood}`}
             />
           </div>
         </motion.section>
