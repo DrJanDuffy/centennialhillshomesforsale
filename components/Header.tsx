@@ -50,7 +50,7 @@ export default function Header() {
         : 'bg-transparent'
     }`}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-20">
+        <div className="flex items-center justify-between h-[70px] md:h-[70px] sm:h-[60px] xs:h-[55px]">
           
           {/* Logo and Brand Section */}
           <div className="flex-shrink-0">
