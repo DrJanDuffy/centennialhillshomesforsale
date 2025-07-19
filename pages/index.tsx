@@ -91,7 +91,9 @@ const HomePage: React.FC = () => {
       bathrooms: 3.5,
       sqft: 3200,
       images: [
-        { url: '/images/providence-luxury-home.jpg', alt: 'Luxury Home in Providence' }
+        { url: 'https://images.unsplash.com/photo-1564013799919-ab600027ffc6?w=800&h=600&fit=crop', alt: 'Luxury Home in Providence' },
+        { url: 'https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=800&h=600&fit=crop', alt: 'Modern Kitchen' },
+        { url: 'https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=800&h=600&fit=crop', alt: 'Living Room' }
       ],
       neighborhood: { name: 'Providence' },
       listDate: '2024-01-15',
@@ -110,7 +112,9 @@ const HomePage: React.FC = () => {
       bathrooms: 4,
       sqft: 4100,
       images: [
-        { url: '/images/centennial-hills-modern-estate.jpg', alt: 'Modern Estate in Centennial Hills' }
+        { url: 'https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=800&h=600&fit=crop', alt: 'Modern Estate in Centennial Hills' },
+        { url: 'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=800&h=600&fit=crop', alt: 'Exterior View' },
+        { url: 'https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?w=800&h=600&fit=crop', alt: 'Master Suite' }
       ],
       neighborhood: { name: 'Centennial Hills' },
       listDate: '2024-01-20',
@@ -129,7 +133,9 @@ const HomePage: React.FC = () => {
       bathrooms: 3,
       sqft: 2800,
       images: [
-        { url: '/images/skye-canyon-family-home.jpg', alt: 'Family Home in Skye Canyon' }
+        { url: 'https://images.unsplash.com/photo-1600607687644-c7171b42498b?w=800&h=600&fit=crop', alt: 'Family Home in Skye Canyon' },
+        { url: 'https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?w=800&h=600&fit=crop', alt: 'Kitchen' },
+        { url: 'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=800&h=600&fit=crop', alt: 'Backyard' }
       ],
       neighborhood: { name: 'Skye Canyon' },
       listDate: '2024-01-18',

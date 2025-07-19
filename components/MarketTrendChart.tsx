@@ -345,14 +345,14 @@ const MarketTrendChart: React.FC<MarketTrendChartProps> = ({
   );
 };
 
-// Default market data
+// Default market data with more realistic variation
 const defaultMarketData: MarketData[] = [
-  { month: 'Jan', avgPrice: 720000, daysOnMarket: 15, homesSold: 45, newListings: 28, priceChange: 2.5 },
-  { month: 'Feb', avgPrice: 735000, daysOnMarket: 14, homesSold: 52, newListings: 32, priceChange: 2.1 },
-  { month: 'Mar', avgPrice: 748000, daysOnMarket: 13, homesSold: 48, newListings: 35, priceChange: 1.8 },
-  { month: 'Apr', avgPrice: 762000, daysOnMarket: 12, homesSold: 55, newListings: 38, priceChange: 1.9 },
-  { month: 'May', avgPrice: 775000, daysOnMarket: 11, homesSold: 58, newListings: 42, priceChange: 1.7 },
-  { month: 'Jun', avgPrice: 789000, daysOnMarket: 10, homesSold: 62, newListings: 45, priceChange: 1.8 }
+  { month: 'Jan', avgPrice: 720000, daysOnMarket: 18, homesSold: 42, newListings: 25, priceChange: 1.2 },
+  { month: 'Feb', avgPrice: 735000, daysOnMarket: 16, homesSold: 48, newListings: 28, priceChange: 2.1 },
+  { month: 'Mar', avgPrice: 748000, daysOnMarket: 14, homesSold: 55, newListings: 32, priceChange: 1.8 },
+  { month: 'Apr', avgPrice: 762000, daysOnMarket: 12, homesSold: 62, newListings: 38, priceChange: 1.9 },
+  { month: 'May', avgPrice: 775000, daysOnMarket: 10, homesSold: 68, newListings: 45, priceChange: 1.7 },
+  { month: 'Jun', avgPrice: 789000, daysOnMarket: 8, homesSold: 75, newListings: 52, priceChange: 1.8 }
 ];
 
 export default MarketTrendChart;
