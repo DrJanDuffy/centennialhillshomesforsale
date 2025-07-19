@@ -15,12 +15,12 @@ import { Star, MapPin, TrendingUp, Users, Award, Phone, Home } from 'lucide-reac
 
 // Lazy load heavy components for better performance
 const AIAssistant = dynamic(() => import('../components/AIAssistant'), {
-  loading: () => <div className="animate-pulse bg-gray-200 h-64 rounded-lg"></div>,
+  loading: () => <div className="animate-pulse bg-tertiary h-64 rounded-lg"></div>,
   ssr: false
 });
 
 const InteractivePropertyMap = dynamic(() => import('../components/InteractivePropertyMap'), {
-  loading: () => <div className="animate-pulse bg-gray-200 h-96 rounded-lg"></div>,
+  loading: () => <div className="animate-pulse bg-tertiary h-96 rounded-lg"></div>,
   ssr: false
 });
 
@@ -76,16 +76,13 @@ const HomePage: React.FC = () => {
     }
   ];
 
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
   const stats = [
-    { icon: Home, label: 'Homes Sold', value: '500+', color: 'text-blue-600' },
-    { icon: Users, label: 'Happy Families', value: '500+', color: 'text-green-600' },
-    { icon: Award, label: 'Years Experience', value: '15+', color: 'text-purple-600' },
-    { icon: TrendingUp, label: 'Average Days on Market', value: '12', color: 'text-orange-600' }
+    { icon: Home, label: 'Homes Sold', value: '500+', color: 'text-secondary-color' },
+    { icon: Users, label: 'Happy Families', value: '500+', color: 'text-accent-color' },
+    { icon: Award, label: 'Years Experience', value: '15+', color: 'text-primary-color' },
+    { icon: TrendingUp, label: 'Average Days on Market', value: '12', color: 'text-warning-color' }
   ];
 
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [isLoaded, setIsLoaded] = React.useState(false);
 
   React.useEffect(() => {
@@ -105,11 +102,15 @@ const HomePage: React.FC = () => {
 
       {/* About Section */}
       <SlideUpSection delay={200}>
-        <section className="about-section">
+        <section className="section bg-secondary">
           <div className="container">
-            <div className="section-header">
-              <h2>Your Centennial Hills Real Estate Expert</h2>
-              <p className="section-subtitle">30+ Years of Local Expertise</p>
+            <div className="text-center mb-8">
+              <h2 className="text-4xl md:text-5xl font-bold text-primary mb-4">
+                Your Centennial Hills Real Estate Expert
+              </h2>
+              <p className="text-xl text-secondary max-w-3xl mx-auto">
+                30+ Years of Local Expertise in Northwest Las Vegas
+              </p>
             </div>
           </div>
         </section>
@@ -121,8 +122,8 @@ const HomePage: React.FC = () => {
       </FadeInSection>
 
       {/* Featured Properties */}
-      <section className="py-20 bg-gray-50">
-        <div className="max-w-7xl mx-auto px-6">
+      <section className="section bg-tertiary">
+        <div className="container">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -130,10 +131,10 @@ const HomePage: React.FC = () => {
             viewport={{ once: true }}
             className="text-center mb-16"
           >
-            <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
+            <h2 className="text-4xl md:text-5xl font-bold text-primary mb-6">
               Featured Properties
             </h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+            <p className="text-xl text-secondary max-w-3xl mx-auto">
               Discover exceptional homes in Centennial Hills' most desirable neighborhoods
             </p>
           </motion.div>
@@ -159,7 +160,7 @@ const HomePage: React.FC = () => {
             viewport={{ once: true }}
             className="text-center mt-12"
           >
-            <button className="bg-gradient-to-r from-blue-600 to-purple-600 text-white px-8 py-4 rounded-xl font-semibold text-lg hover:from-blue-700 hover:to-purple-700 transition-all duration-300 transform hover:scale-105">
+            <button className="btn btn-primary btn-lg">
               View All Properties
             </button>
           </motion.div>
@@ -170,8 +171,8 @@ const HomePage: React.FC = () => {
       <SmartPropertyRecommendations />
 
       {/* Interactive Map */}
-      <section className="py-20 bg-white">
-        <div className="max-w-7xl mx-auto px-6">
+      <section className="section bg-primary">
+        <div className="container">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -179,10 +180,10 @@ const HomePage: React.FC = () => {
             viewport={{ once: true }}
             className="text-center mb-16"
           >
-            <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
+            <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
               Explore Neighborhoods
             </h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+            <p className="text-xl text-white/80 max-w-3xl mx-auto">
               Interactive map of Centennial Hills, Providence, and Skye Canyon communities
             </p>
           </motion.div>
@@ -199,8 +200,8 @@ const HomePage: React.FC = () => {
       </section>
 
       {/* Market Trends */}
-      <section className="py-20 bg-gray-50">
-        <div className="max-w-7xl mx-auto px-6">
+      <section className="section bg-secondary">
+        <div className="container">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -208,10 +209,10 @@ const HomePage: React.FC = () => {
             viewport={{ once: true }}
             className="text-center mb-16"
           >
-            <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
+            <h2 className="text-4xl md:text-5xl font-bold text-primary mb-6">
               Market Trends & Insights
             </h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+            <p className="text-xl text-secondary max-w-3xl mx-auto">
               Stay informed with real-time market data and trends in Centennial Hills
             </p>
           </motion.div>
@@ -224,22 +225,24 @@ const HomePage: React.FC = () => {
       <LocalAmenities />
 
       {/* Lead Capture */}
-      <section className="py-20 bg-gradient-to-r from-blue-600 to-purple-600">
-        <div className="max-w-4xl mx-auto px-6 text-center">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            viewport={{ once: true }}
-          >
-            <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
-              Ready to Find Your Dream Home?
-            </h2>
-            <p className="text-xl text-blue-100 mb-8">
-              Get personalized property recommendations and expert guidance from Dr. Jan Duff
-            </p>
-            <LeadCaptureForm trigger="homepage" onClose={() => {}} />
-          </motion.div>
+      <section className="section bg-gradient-to-r from-primary-color to-secondary-color">
+        <div className="container">
+          <div className="max-w-4xl mx-auto text-center">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8 }}
+              viewport={{ once: true }}
+            >
+              <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
+                Ready to Find Your Dream Home?
+              </h2>
+              <p className="text-xl text-white/90 mb-8">
+                Get personalized property recommendations and expert guidance from Dr. Jan Duff
+              </p>
+              <LeadCaptureForm trigger="homepage" onClose={() => {}} />
+            </motion.div>
+          </div>
         </div>
       </section>
 
