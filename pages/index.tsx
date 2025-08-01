@@ -1,5 +1,9 @@
 import dynamic from 'next/dynamic';
 import Layout from '@/components/Layout';
+import BreadcrumbNavigation from '@/components/BreadcrumbNavigation';
+import FAQSection from '@/components/FAQSection';
+import GoogleTagManager from '@/components/GoogleTagManager';
+import PerformanceOptimizer from '@/components/PerformanceOptimizer';
 import AwesomeHero from '@/components/AwesomeHero';
 import AwesomeEnhancements from '@/components/AwesomeEnhancements';
 import { SlideUpSection, FadeInSection, BounceSection } from '../components/AwesomeScrollAnimations';
@@ -819,6 +823,59 @@ const HomePage: React.FC = () => {
           </div>
         </div>
       </section>
+
+      {/* FAQ Section */}
+      <FAQSection
+        title="Frequently Asked Questions About Centennial Hills Real Estate"
+        items={[
+          {
+            question: "What makes Centennial Hills a great place to live?",
+            answer: "Centennial Hills offers luxury homes with stunning mountain views, top-rated schools, premium amenities, and a family-friendly community atmosphere. Located in Northwest Las Vegas, it provides easy access to shopping, dining, and outdoor recreation while maintaining a peaceful residential environment.",
+            category: "Neighborhood"
+          },
+          {
+            question: "How can Dr. Jan Duffy help me buy a home?",
+            answer: "Dr. Jan Duffy provides comprehensive buyer services including MLS access, financing guidance, negotiation support, and expert market knowledge of Centennial Hills, Providence, and Skye Canyon. As a Top 1% REALTOR®, she offers personalized property recommendations and 24/7 availability for showings.",
+            category: "Buying"
+          },
+          {
+            question: "What are the current market trends in Centennial Hills?",
+            answer: "The Centennial Hills market is currently very active with strong demand for luxury homes. Average home prices are around $635,000 with 15-30 days on market. The area continues to see appreciation due to its desirable location, quality schools, and premium amenities.",
+            category: "Market"
+          },
+          {
+            question: "What amenities are available in Centennial Hills?",
+            answer: "Centennial Hills features shopping centers, restaurants, parks, hiking trails, golf courses, and excellent schools. The area is known for its mountain views, family-friendly atmosphere, and convenient access to major highways and the Las Vegas Strip.",
+            category: "Amenities"
+          },
+          {
+            question: "How do I get started with my home search?",
+            answer: "Start by contacting Dr. Jan Duffy for a free consultation. She'll discuss your needs, budget, and timeline, then provide personalized property recommendations and MLS access. You can also explore our featured listings and use our search tools to find your dream home.",
+            category: "Buying"
+          },
+          {
+            question: "What financing options are available?",
+            answer: "Dr. Jan Duffy works with trusted lenders to offer various financing options including conventional loans, FHA loans, VA loans, and jumbo loans. She can help you get pre-approved and find the best rates and terms for your situation.",
+            category: "Financing"
+          }
+        ]}
+        showCategories={true}
+      />
+
+      {/* Google Tag Manager */}
+      <GoogleTagManager
+        gtmId="GTM-XXXXXXX"
+        gaId="G-XXXXXXXXXX"
+        enableConversionTracking={true}
+        enablePhoneTracking={true}
+      />
+
+      {/* Performance Optimizer */}
+      <PerformanceOptimizer
+        enableMonitoring={true}
+        enablePreloading={true}
+        enableLazyLoading={true}
+      />
 
       {/* AI Assistant */}
       <AIAssistant />

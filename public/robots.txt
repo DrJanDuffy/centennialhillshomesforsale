@@ -1,35 +1,78 @@
 User-agent: *
 Allow: /
 
-# Sitemap
-Sitemap: https://centennialhillshomesforsale.com/sitemap.xml
+# Allow all major search engines
+User-agent: Googlebot
+Allow: /
 
-# Disallow admin and system files
-Disallow: /api/
-Disallow: /_next/
+User-agent: Bingbot
+Allow: /
+
+User-agent: Slurp
+Allow: /
+
+User-agent: DuckDuckBot
+Allow: /
+
+# Allow image crawling
+User-agent: Googlebot-Image
+Allow: /
+
+User-agent: Bingbot-Image
+Allow: /
+
+# Allow mobile crawling
+User-agent: Googlebot-Mobile
+Allow: /
+
+# Disallow admin and private areas
 Disallow: /admin/
 Disallow: /private/
 Disallow: /temp/
 Disallow: /backup/
+Disallow: /api/
+Disallow: /_next/
+Disallow: /api-backup/
 
 # Allow important pages
-Allow: /search
-Allow: /buyers/
-Allow: /blog/
-Allow: /neighborhoods/
 Allow: /centennial-hills/
 Allow: /providence-las-vegas/
 Allow: /skye-canyon/
-Allow: /northwest-las-vegas/
-Allow: /las-vegas-89149/
-Allow: /las-vegas-89166/
+Allow: /neighborhoods/
 Allow: /listings/
 Allow: /market-update/
+Allow: /buyers/
+Allow: /blog/
+Allow: /search/
 Allow: /contact/
+Allow: /about/
 Allow: /services/
 Allow: /testimonials/
 Allow: /faq/
-Allow: /about/
 
-# Crawl delay (optional)
+# Allow static assets
+Allow: /images/
+Allow: /fonts/
+Allow: /css/
+Allow: /js/
+Allow: /*.js
+Allow: /*.css
+Allow: /*.png
+Allow: /*.jpg
+Allow: /*.jpeg
+Allow: /*.gif
+Allow: /*.svg
+Allow: /*.ico
+Allow: /*.woff
+Allow: /*.woff2
+Allow: /*.ttf
+Allow: /*.eot
+
+# Crawl delay for respectful crawling
 Crawl-delay: 1
+
+# Sitemap location
+Sitemap: https://centennialhillshomesforsale.com/sitemap.xml
+
+# RSS Feed
+Sitemap: https://centennialhillshomesforsale.com/feed.xml
