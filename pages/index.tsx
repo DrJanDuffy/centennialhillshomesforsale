@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import dynamic from 'next/dynamic';
+import Link from 'next/link';
+import Image from 'next/image';
 import Layout from '../components/Layout';
 import GoogleTagManager from '../components/GoogleTagManager';
 import PerformanceOptimizer from '../components/PerformanceOptimizer';
@@ -79,25 +81,27 @@ const HomePage: React.FC = () => {
 
   const featuredProperties = [
     {
-      id: '1',
-      mlsNumber: 'MLS-001',
-      address: '1234 Providence Drive',
+      id: 'featured-golden-moments',
+      mlsNumber: 'GLVARTRESTLE-409',
+      address: '11773 Golden Moments Avenue',
       price: 850000,
       bedrooms: 4,
-      bathrooms: 3.5,
+      bathrooms: 3,
       sqft: 3200,
       images: [
-        { url: 'https://images.unsplash.com/photo-1564013799919-ab600027ffc6?w=800&h=600&fit=crop', alt: 'Luxury Home in Providence' },
+        { url: 'https://images.unsplash.com/photo-1564013799919-ab600027ffc6?w=800&h=600&fit=crop', alt: 'Luxury Home - Golden Moments Avenue' },
         { url: 'https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=800&h=600&fit=crop', alt: 'Modern Kitchen' },
         { url: 'https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=800&h=600&fit=crop', alt: 'Living Room' }
       ],
-      neighborhood: { name: 'Providence' },
+      neighborhood: { name: 'Golden Moments' },
       listDate: '2024-01-15',
       status: 'active',
-      features: ['Pool', 'Mountain Views', 'Gourmet Kitchen', 'Smart Home'],
-      daysOnMarket: 12,
+      features: ['Pool & Spa', 'Mountain Views', 'Gourmet Kitchen', 'Smart Home'],
+      daysOnMarket: 15,
       pricePerSqft: 266,
-      lotSize: '0.25 acres'
+      lotSize: '0.25 acres',
+      isFeatured: true,
+      realScoutUrl: 'https://drjanduffy.realscout.com/homesearch/listings/p-11773-golden-moments-avenue-las-vegas-89138-glvartrestle-409'
     },
     {
       id: '2',
@@ -485,7 +489,12 @@ const HomePage: React.FC = () => {
                          <Heart className="w-5 h-5 text-white" />
                        </button>
                      </div>
-                    <div className="absolute bottom-4 left-4">
+                    <div className="absolute bottom-4 left-4 flex gap-2">
+                      {property.isFeatured && (
+                        <span className="bg-gradient-to-r from-yellow-400 to-orange-500 text-white px-3 py-1 rounded-full text-sm font-semibold animate-pulse">
+                          ⭐ Featured Home
+                        </span>
+                      )}
                       <span className="bg-accent-color text-white px-3 py-1 rounded-full text-sm font-semibold">
                         {property.daysOnMarket} days on market
                       </span>
@@ -533,17 +542,24 @@ const HomePage: React.FC = () => {
                     </div>
 
                     <div className="flex gap-3">
-                      <button className="btn btn-primary flex-1">
-                        <Eye className="w-4 h-4 mr-2" />
-                        View Details
+                      {property.isFeatured ? (
+                        <Link href="/featured-home" className="btn btn-primary flex-1">
+                          <Eye className="w-4 h-4 mr-2" />
+                          View Featured Home
+                        </Link>
+                      ) : (
+                        <button className="btn btn-primary flex-1">
+                          <Eye className="w-4 h-4 mr-2" />
+                          View Details
+                        </button>
+                      )}
+                      <button 
+                        className="btn btn-outline"
+                        aria-label="Share property"
+                        title="Share property"
+                      >
+                        <Share2 className="w-4 h-4" />
                       </button>
-                                           <button 
-                       className="btn btn-outline"
-                       aria-label="Share property"
-                       title="Share property"
-                     >
-                       <Share2 className="w-4 h-4" />
-                     </button>
                     </div>
                   </div>
                 </div>
@@ -784,6 +800,92 @@ const HomePage: React.FC = () => {
       {/* Local Amenities */}
       <LocalAmenities />
 
+      {/* Featured Home CTA */}
+      <section className="section bg-gradient-to-br from-yellow-400 via-orange-500 to-red-500 text-white">
+        <div className="container">
+          <div className="max-w-6xl mx-auto">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8 }}
+              viewport={{ once: true }}
+              className="text-center mb-12"
+            >
+              <h2 className="text-4xl md:text-5xl font-bold mb-6">
+                ⭐ Featured Luxury Home ⭐
+              </h2>
+              <p className="text-xl text-white/90 mb-8 max-w-3xl mx-auto">
+                Discover this stunning 4-bedroom luxury home in the prestigious Golden Moments neighborhood
+              </p>
+            </motion.div>
+
+            <div className="grid lg:grid-cols-2 gap-8 items-center">
+              <motion.div
+                initial={{ opacity: 0, x: -20 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.8, delay: 0.2 }}
+                viewport={{ once: true }}
+              >
+                <div className="bg-white/10 backdrop-blur-md rounded-2xl p-8">
+                  <h3 className="text-2xl font-bold mb-4">11773 Golden Moments Avenue</h3>
+                  <div className="text-3xl font-bold text-yellow-300 mb-4">$850,000</div>
+                  <div className="grid grid-cols-3 gap-4 mb-6">
+                    <div className="text-center">
+                      <div className="text-2xl font-bold">4</div>
+                      <div className="text-sm text-white/80">Bedrooms</div>
+                    </div>
+                    <div className="text-center">
+                      <div className="text-2xl font-bold">3</div>
+                      <div className="text-sm text-white/80">Bathrooms</div>
+                    </div>
+                    <div className="text-center">
+                      <div className="text-2xl font-bold">3,200</div>
+                      <div className="text-sm text-white/80">Sq Ft</div>
+                    </div>
+                  </div>
+                  <div className="flex flex-wrap gap-2 mb-6">
+                    <span className="bg-white/20 px-3 py-1 rounded-full text-sm">Pool & Spa</span>
+                    <span className="bg-white/20 px-3 py-1 rounded-full text-sm">Mountain Views</span>
+                    <span className="bg-white/20 px-3 py-1 rounded-full text-sm">Smart Home</span>
+                  </div>
+                  <Link
+                    href="/featured-home"
+                    className="btn btn-white text-orange-600 hover:bg-gray-100 w-full text-center"
+                  >
+                    View Full Details & Photos
+                  </Link>
+                </div>
+              </motion.div>
+
+              <motion.div
+                initial={{ opacity: 0, x: 20 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.8, delay: 0.4 }}
+                viewport={{ once: true }}
+                className="relative"
+              >
+                <div className="relative h-80 rounded-2xl overflow-hidden shadow-2xl">
+                  <Image
+                    src="https://images.unsplash.com/photo-1564013799919-ab600027ffc6?w=800&h=600&fit=crop"
+                    alt="Featured Luxury Home - Golden Moments Avenue"
+                    fill
+                    className="object-cover"
+                    sizes="(max-width: 768px) 100vw, 50vw"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
+                  <div className="absolute bottom-4 left-4 right-4">
+                    <div className="bg-white/90 backdrop-blur-md rounded-lg p-4">
+                      <div className="text-lg font-semibold text-gray-800">Golden Moments Neighborhood</div>
+                      <div className="text-sm text-gray-600">Prestigious location with luxury amenities</div>
+                    </div>
+                  </div>
+                </div>
+              </motion.div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Lead Capture */}
       <section className="section bg-gradient-to-r from-primary-color to-secondary-color">
         <div className="container">
@@ -798,7 +900,7 @@ const HomePage: React.FC = () => {
                 Ready to Find Your Dream Home?
               </h2>
               <p className="text-xl text-white/90 mb-8">
-                Get personalized property recommendations and expert guidance from Dr. Jan Duff
+                Get personalized property recommendations and expert guidance from Dr. Jan Duffy
               </p>
               <LeadCaptureForm trigger="homepage" onClose={() => {}} />
             </motion.div>
