@@ -1,6 +1,5 @@
 
 import { useState } from 'react';
-import Head from 'next/head';
 import { motion } from 'framer-motion';
 import Layout from '../components/Layout';
 import { FaPhone, FaEnvelope, FaMapMarkerAlt, FaClock } from 'react-icons/fa';
@@ -31,13 +30,11 @@ export default function Contact() {
   };
 
   return (
-    <Layout>
-      <Head>
-        <title>Contact Our Centennial Hills Real Estate Team | Las Vegas Agents</title>
-        <meta name="description" content="Contact our local Centennial Hills real estate experts. Office located in Las Vegas serving 89149, 89166, and surrounding areas. Call, email, or visit today." />
-        <meta name="keywords" content="Centennial Hills real estate agent, Las Vegas realtor, contact real estate agent, 89149 realtor, Las Vegas real estate office" />
-        <link rel="canonical" href="https://centennialhillshomesforsale.com/contact" />
-      </Head>
+    <Layout
+      title="Contact Our Centennial Hills Real Estate Team | Las Vegas Agents"
+      description="Contact our local Centennial Hills real estate experts. Office located in Las Vegas serving 89149, 89166, and surrounding areas. Call, email, or visit today."
+      canonical="https://centennialhillshomesforsale.com/contact/"
+    >
 
       <main className="container">
         <motion.section 

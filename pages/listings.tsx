@@ -9,7 +9,7 @@ export default function Listings() {
     <Layout
       title="Centennial Hills Homes For Sale | Current Listings | Dr. Jan Duffy REALTOR®"
       description="Browse current homes for sale in Centennial Hills, Providence, and Skye Canyon. Expert real estate listings with Dr. Jan Duffy, top 1% Las Vegas REALTOR®. Call (702) 903-1952."
-      canonical="https://centennialhillshomesforsale.com/listings"
+      canonical="https://centennialhillshomesforsale.com/listings/"
     >
       <main className="container">
         <motion.section 
@@ -18,10 +18,11 @@ export default function Listings() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
         >
-          <h1>Homes for Sale in Centennial Hills</h1>
+          <h1>Current Real Estate Listings in Centennial Hills</h1>
           <p>
-            Discover your perfect home in Las Vegas&apos;s premier Centennial Hills area. 
-            Browse luxury homes, condos, and townhomes with detailed search filters and interactive maps.
+            Explore our exclusive collection of luxury homes, condos, and townhomes in Las Vegas&apos;s premier Centennial Hills area. 
+            Each listing features detailed property information, high-quality photos, and virtual tours. 
+            Filter by price, bedrooms, bathrooms, and more to find your perfect home.
           </p>
         </motion.section>
 

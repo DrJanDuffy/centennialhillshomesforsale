@@ -1,5 +1,4 @@
 import React from 'react';
-import Head from 'next/head';
 import { motion } from 'framer-motion';
 import Layout from '../components/Layout';
 import RealScoutWidget from '../components/widgets/RealScoutWidget';
@@ -10,11 +9,11 @@ export default function About() {
   const scrollRef = React.useRef(null);
 
   return (
-    <Layout>
-      <Head>
-        <title>About Us - Centennial Hills Homes For Sale</title>
-        <meta name="description" content="Learn about our team and services at Centennial Hills Homes For Sale." />
-      </Head>
+    <Layout
+      title="About Dr. Jan Duffy | Top 1% Las Vegas REALTOR® | Centennial Hills Homes For Sale"
+      description="Learn about Dr. Jan Duffy, Top 1% Las Vegas REALTOR® with 30+ years experience in Centennial Hills, Providence, and Skye Canyon luxury real estate. Call (702) 903-1952."
+      canonical="https://centennialhillshomesforsale.com/about/"
+    >
 
       <main className="container">
         <motion.section 

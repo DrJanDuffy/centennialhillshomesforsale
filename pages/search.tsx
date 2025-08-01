@@ -71,7 +71,7 @@ const SearchPage: React.FC = () => {
     <Layout
       title={`Search Results for "${searchQuery}" | Centennial Hills Homes For Sale`}
       description={`Search results for "${searchQuery}" in Centennial Hills, Providence, and Skye Canyon. Find your dream home with Dr. Jan Duffy.`}
-      canonical={`https://centennialhillshomesforsale.com/search?q=${encodeURIComponent(searchQuery)}`}
+      canonical={`https://centennialhillshomesforsale.com/search/?q=${encodeURIComponent(searchQuery)}`}
     >
       <div className="min-h-screen bg-gray-50">
         {/* Search Header */}

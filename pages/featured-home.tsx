@@ -107,7 +107,7 @@ const FeaturedHome: React.FC = () => {
     <Layout
       title={`${property.address} - Featured Luxury Home | Dr. Jan Duffy REALTOR®`}
       description={`Discover this stunning ${property.bedrooms}-bedroom luxury home at ${property.address}, Las Vegas. ${property.sqft.toLocaleString()} sq ft with pool, mountain views, and premium finishes. Call Dr. Jan Duffy at (702) 903-1952.`}
-      canonical={`https://centennialhillshomesforsale.com/featured-home`}
+      canonical={`https://centennialhillshomesforsale.com/featured-home/`}
     >
       {/* Hero Section */}
       <section className="relative bg-gradient-to-br from-primary to-secondary text-white">
