@@ -27,13 +27,7 @@ interface RealScoutWidgetProps {
 const RealScoutWidget: React.FC<RealScoutWidgetProps> = ({
   type = 'office-listings',
   propertyId,
-  agentId,
-  brokerId,
   neighborhood,
-  priceRange,
-  bedrooms,
-  bathrooms,
-  propertyType,
   className = '',
   title,
   description,

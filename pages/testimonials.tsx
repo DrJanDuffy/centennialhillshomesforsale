@@ -1,10 +1,9 @@
 
+import React from 'react';
+import Layout from '../components/Layout';
+import { FaStar, FaQuoteLeft } from 'react-icons/fa';
 import { motion } from 'framer-motion';
 import Head from 'next/head';
-import Layout from '../components/Layout';
-import SEOOptimized from '../components/SEOOptimized';
-import { generateSchemaForPage } from '../scripts/generate-schema';
-import { FaStar, FaQuoteLeft } from 'react-icons/fa';
 import Link from 'next/link';
 
 export default function Testimonials() {
@@ -181,7 +180,7 @@ export default function Testimonials() {
                     {renderStars(testimonial.rating)}
                   </div>
                   
-                  <p className="testimonial-text">"{testimonial.text}"</p>
+                  <p className="testimonial-text">&ldquo;{testimonial.text}&rdquo;</p>
                   
                   <div className="testimonial-footer">
                     <h4>{testimonial.name}</h4>

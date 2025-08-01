@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useCallback } from 'react';
 import { useRouter } from 'next/router';
 
 interface PageError {
@@ -24,7 +24,7 @@ export default function PageErrorChecker() {
     setIsClient(true);
   }, []);
 
-  const checkPageErrors = () => {
+  const checkPageErrors = useCallback(() => {
     if (!isClient || typeof window === 'undefined') return;
 
     const newErrors: PageError[] = [];
@@ -55,7 +55,7 @@ export default function PageErrorChecker() {
 
       // Check for broken links
       const links = document.querySelectorAll('a[href^="/"], a[href^="http"]');
-      links.forEach((link, index) => {
+      links.forEach((link) => {
         const href = link.getAttribute('href');
         if (href && href.includes('undefined') || href === '#') {
           newErrors.push({
@@ -111,7 +111,7 @@ export default function PageErrorChecker() {
       localStorage.setItem('page-errors', JSON.stringify(newErrors));
       localStorage.setItem('error-stats', JSON.stringify(stats));
     }
-  };
+  }, [isClient, router.pathname, stats]);
 
   useEffect(() => {
     if (isClient && router?.isReady) {
@@ -121,7 +121,7 @@ export default function PageErrorChecker() {
 
       return () => clearTimeout(timeout);
     }
-  }, [isClient, router?.pathname]);
+  }, [isClient, router?.pathname, checkPageErrors, router?.isReady]);
 
   // Only show errors in development
   if (process.env.NODE_ENV === 'production') {

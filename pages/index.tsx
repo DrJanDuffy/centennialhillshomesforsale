@@ -1,54 +1,30 @@
-import dynamic from 'next/dynamic';
-import Layout from '@/components/Layout';
-import BreadcrumbNavigation from '@/components/BreadcrumbNavigation';
-import FAQSection from '@/components/FAQSection';
-import GoogleTagManager from '@/components/GoogleTagManager';
-import PerformanceOptimizer from '@/components/PerformanceOptimizer';
-import AwesomeHero from '@/components/AwesomeHero';
-import AwesomeEnhancements from '@/components/AwesomeEnhancements';
-import { SlideUpSection, FadeInSection, BounceSection } from '../components/AwesomeScrollAnimations';
-import LeadCaptureForm from '@/components/LeadCaptureForm';
-import LocalAmenities from '@/components/LocalAmenities';
-import MarketTrendChart from '@/components/MarketTrendChart';
-import SmartPropertyRecommendations from '@/components/SmartPropertyRecommendations';
-
 import React, { useState, useEffect } from 'react';
-import { PropertyCard } from '../components/PropertyCard';
-import { motion, AnimatePresence } from 'framer-motion';
-import { 
-  Star, 
-  MapPin, 
-  TrendingUp, 
-  Users, 
-  Award, 
-  Phone, 
-  Home, 
+import dynamic from 'next/dynamic';
+import Layout from '../components/Layout';
+import GoogleTagManager from '../components/GoogleTagManager';
+import PerformanceOptimizer from '../components/PerformanceOptimizer';
+import FAQSection from '../components/FAQSection';
+import {
+  Star,
+  MapPin,
+  TrendingUp,
+  Users,
+  Award,
+  Home,
   Heart,
   Search,
-  Calendar,
-  DollarSign,
-  Shield,
-  Clock,
-  CheckCircle,
   ArrowRight,
   Play,
   Quote,
   ChevronRight,
   ChevronLeft,
-  Filter,
-  Grid,
-  List,
   Share2,
-  Bookmark,
   Eye,
   MessageCircle,
   Sparkles,
-  Zap,
-  Target,
-  MousePointer,
-  Sparkle,
-  Star as StarIcon
+  Sparkle
 } from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
 
 // Lazy load heavy components for better performance
 const AIAssistant = dynamic(() => import('../components/AIAssistant'), {
@@ -61,8 +37,27 @@ const InteractivePropertyMap = dynamic(() => import('../components/InteractivePr
   ssr: false
 });
 
+const SmartPropertyRecommendations = dynamic(() => import('../components/SmartPropertyRecommendations'), {
+  loading: () => <div className="loading-skeleton h-64 rounded-lg"></div>,
+  ssr: false
+});
+
+const MarketTrendChart = dynamic(() => import('../components/MarketTrendChart'), {
+  loading: () => <div className="loading-skeleton h-64 rounded-lg"></div>,
+  ssr: false
+});
+
+const LocalAmenities = dynamic(() => import('../components/LocalAmenities'), {
+  loading: () => <div className="loading-skeleton h-64 rounded-lg"></div>,
+  ssr: false
+});
+
+const LeadCaptureForm = dynamic(() => import('../components/LeadCaptureForm'), {
+  loading: () => <div className="loading-skeleton h-64 rounded-lg"></div>,
+  ssr: false
+});
+
 const HomePage: React.FC = () => {
-  const [isLoaded, setIsLoaded] = useState(false);
   const [currentTestimonial, setCurrentTestimonial] = useState(0);
   const [searchFilters, setSearchFilters] = useState({
     location: '',
@@ -71,13 +66,10 @@ const HomePage: React.FC = () => {
     propertyType: ''
   });
   const [showFloatingMenu, setShowFloatingMenu] = useState(false);
-  const [scrollY, setScrollY] = useState(0);
 
   useEffect(() => {
-    setIsLoaded(true);
     
     const handleScroll = () => {
-      setScrollY(window.scrollY);
       setShowFloatingMenu(window.scrollY > 500);
     };
 
@@ -220,16 +212,6 @@ const HomePage: React.FC = () => {
             exit={{ opacity: 0, scale: 0.8, y: 20 }}
             className="fixed bottom-6 right-6 z-50 flex flex-col gap-3"
           >
-            <motion.button
-              whileHover={{ scale: 1.1 }}
-              whileTap={{ scale: 0.9 }}
-              className="bg-accent-color text-white p-4 rounded-full shadow-lg hover:shadow-xl transition-all duration-300"
-              onClick={() => window.location.href = 'tel:+17025551234'}
-              aria-label="Call us"
-              title="Call us"
-            >
-              <Phone className="w-6 h-6" />
-            </motion.button>
             
             <motion.button
               whileHover={{ scale: 1.1 }}
@@ -473,7 +455,7 @@ const HomePage: React.FC = () => {
                 Featured Properties
               </h2>
               <p className="text-xl text-white/80 max-w-3xl mx-auto">
-                Discover exceptional homes in Centennial Hills' most desirable neighborhoods
+                Discover exceptional homes in Centennial Hills&apos; most desirable neighborhoods
               </p>
             </motion.div>
           </div>
@@ -669,7 +651,7 @@ const HomePage: React.FC = () => {
                 What Our Clients Say
               </h2>
               <p className="text-xl text-white/80 max-w-3xl mx-auto">
-                Don't just take our word for it - hear from the families we've helped find their dream homes
+                Don&apos;t just take our word for it - hear from the families we&apos;ve helped find their dream homes
               </p>
             </motion.div>
           </div>
@@ -695,7 +677,7 @@ const HomePage: React.FC = () => {
                     ))}
                   </div>
                   <blockquote className="text-lg text-secondary mb-6 leading-relaxed">
-                    "{testimonials[currentTestimonial].text}"
+                    &ldquo;{testimonials[currentTestimonial].text}&rdquo;
                   </blockquote>
                   <div>
                     <div className="font-bold text-primary text-lg">

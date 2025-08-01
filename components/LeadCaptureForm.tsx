@@ -76,7 +76,7 @@ const LeadCaptureForm: React.FC<{ trigger: string; onClose: () => void }> = ({ t
           <div className="text-6xl mb-4">🎉</div>
           <h3 className="text-2xl font-bold text-gray-900 mb-4">Thank You!</h3>
           <p className="text-gray-600 mb-6">
-            I'll contact you within 1 hour to discuss your Centennial Hills real estate needs.
+            I&apos;ll contact you within 1 hour to discuss your Centennial Hills real estate needs.
           </p>
           <div className="bg-blue-50 rounded-lg p-4 mb-6">
             <p className="text-sm text-blue-800">
@@ -162,7 +162,7 @@ const LeadCaptureForm: React.FC<{ trigger: string; onClose: () => void }> = ({ t
           <div className="grid grid-cols-2 gap-4">
             <div>
               <label htmlFor="interest-select" className="block text-sm font-medium text-gray-700 mb-1">
-                I'm Interested In
+                I&apos;m Interested In
               </label>
               <select
                 id="interest-select"

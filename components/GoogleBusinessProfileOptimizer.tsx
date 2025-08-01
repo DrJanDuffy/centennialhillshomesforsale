@@ -11,8 +11,6 @@ interface GoogleBusinessProfileOptimizerProps {
 }
 
 export default function GoogleBusinessProfileOptimizer({
-  pageType = 'home',
-  neighborhood,
   showWidget = false
 }: GoogleBusinessProfileOptimizerProps) {
 

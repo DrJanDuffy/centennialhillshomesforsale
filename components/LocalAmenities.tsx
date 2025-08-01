@@ -1,6 +1,4 @@
-import React, { useState, useEffect, useMemo, useCallback } from 'react';
-import { MapPinIcon, StarIcon, ClockIcon, PhoneIcon } from '@heroicons/react/24/outline';
-import { GlobeAltIcon } from '@heroicons/react/24/solid';
+import React from 'react';
 import { motion } from 'framer-motion';
 
 const amenitiesData = {
@@ -75,7 +73,7 @@ export default function LocalAmenities() {
         <div className="distance-note">
           <p>
             <strong>Note:</strong> Drive times are approximate and may vary based on traffic conditions. 
-            Centennial Hills' strategic location provides easy access to all areas of Las Vegas.
+            Centennial Hills&apos; strategic location provides easy access to all areas of Las Vegas.
           </p>
         </div>
       </div>

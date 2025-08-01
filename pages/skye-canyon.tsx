@@ -33,7 +33,7 @@ export default function SkyeCanyon() {
           <div className="container">
             <h1>Skye Canyon Las Vegas Real Estate</h1>
             <p className="hero-subtitle">
-              Discover modern family living in one of Las Vegas's newest master-planned communities. 
+              Discover modern family living in one of Las Vegas&apos;s newest master-planned communities. 
               Featuring new construction homes, world-class amenities, and mountain views.
             </p>
           </div>
@@ -51,7 +51,7 @@ export default function SkyeCanyon() {
               <div className="overview-content">
                 <p>
                   Skye Canyon is a vibrant, newer master-planned community that has quickly become 
-                  one of Las Vegas's most sought-after neighborhoods. With its family-focused amenities, 
+                  one of Las Vegas&apos;s most sought-after neighborhoods. With its family-focused amenities, 
                   stunning mountain views, and modern homes, Skye Canyon offers the perfect blend of 
                   suburban tranquility and urban convenience.
                 </p>
@@ -86,7 +86,7 @@ export default function SkyeCanyon() {
             <div className="amenities-grid">
               <div className="amenity-card">
                 <h3>🏊‍♀️ Aquatic Center</h3>
-                <p>Resort-style pools, lap pool, water slides, and children's splash area</p>
+                <p>Resort-style pools, lap pool, water slides, and children&apos;s splash area</p>
               </div>
               <div className="amenity-card">
                 <h3>🏋️‍♀️ Fitness Center</h3>

@@ -2,64 +2,76 @@ import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import Layout from '@/components/Layout';
 import Link from 'next/link';
+import Image from 'next/image';
 import { Search, Home, Bed, Bath } from 'lucide-react';
+
+interface Property {
+  id: number;
+  address: string;
+  price: number;
+  bedrooms: number;
+  bathrooms: number;
+  sqft: number;
+  neighborhood: string;
+  image: string;
+}
 
 const SearchPage: React.FC = () => {
   const router = useRouter();
   const { q } = router.query;
-  const [searchTerm, setSearchTerm] = useState('');
-  const [searchResults, setSearchResults] = useState<any[]>([]);
-  const [isLoading, setIsLoading] = useState(false);
+  const [searchResults, setSearchResults] = useState<Property[]>([]);
+  const [loading, setLoading] = useState(false);
+  const [searchQuery, setSearchQuery] = useState('');
 
   useEffect(() => {
     if (q && typeof q === 'string') {
-      setSearchTerm(q);
-      performSearch(q);
+      setSearchQuery(q);
+      performSearch();
     }
   }, [q]);
 
-  const performSearch = async (searchTerm: string) => {
-    setIsLoading(true);
-    // Mock search results - in production, this would call your search API
-    const mockResults = [
-      {
-        id: 1,
-        address: '1234 Providence Drive',
-        price: 850000,
-        bedrooms: 4,
-        bathrooms: 3.5,
-        sqft: 3200,
-        neighborhood: 'Providence',
-        image: 'https://images.unsplash.com/photo-1564013799919-ab600027ffc6?w=800&h=600&fit=crop'
-      },
-      {
-        id: 2,
-        address: '5678 Skye Canyon Blvd',
-        price: 725000,
-        bedrooms: 3,
-        bathrooms: 2.5,
-        sqft: 2800,
-        neighborhood: 'Skye Canyon',
-        image: 'https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=800&h=600&fit=crop'
-      }
-    ];
+  const performSearch = async () => {
+    setLoading(true);
     
-    setSearchResults(mockResults);
-    setIsLoading(false);
+    try {
+      // Simulate API call
+      await new Promise(resolve => setTimeout(resolve, 1000));
+      
+      // Mock search results
+      const mockResults: Property[] = [
+        {
+          id: 1,
+          address: '123 Centennial Hills Dr',
+          price: 750000,
+          bedrooms: 4,
+          bathrooms: 3,
+          sqft: 2800,
+          neighborhood: 'Centennial Hills',
+          image: '/images/property-1.jpg'
+        },
+        // Add more mock results as needed
+      ];
+      
+      setSearchResults(mockResults);
+    } catch (err) {
+      console.error('Search error:', err);
+    } finally {
+      setLoading(false);
+    }
   };
 
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault();
-    if (searchTerm.trim()) {
-      router.push(`/search?q=${encodeURIComponent(searchTerm.trim())}`);
+    if (searchQuery.trim()) {
+      router.push(`/search?q=${encodeURIComponent(searchQuery.trim())}`);
     }
   };
 
   return (
     <Layout
-      title={`Search Results for "${searchTerm}" | Centennial Hills Homes For Sale`}
-      description={`Search results for "${searchTerm}" in Centennial Hills, Providence, and Skye Canyon. Find your dream home with Dr. Jan Duffy.`}
-      canonical={`https://centennialhillshomesforsale.com/search?q=${encodeURIComponent(searchTerm)}`}
+      title={`Search Results for "${searchQuery}" | Centennial Hills Homes For Sale`}
+      description={`Search results for "${searchQuery}" in Centennial Hills, Providence, and Skye Canyon. Find your dream home with Dr. Jan Duffy.`}
+      canonical={`https://centennialhillshomesforsale.com/search?q=${encodeURIComponent(searchQuery)}`}
     >
       <div className="min-h-screen bg-gray-50">
         {/* Search Header */}
@@ -76,8 +88,8 @@ const SearchPage: React.FC = () => {
                   <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
                   <input
                     type="text"
-                    value={searchTerm}
-                    onChange={(e) => setSearchTerm(e.target.value)}
+                    value={searchQuery}
+                    onChange={(e) => setSearchQuery(e.target.value)}
                     placeholder="Search by address, neighborhood, or keywords..."
                     className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                   />
@@ -95,26 +107,28 @@ const SearchPage: React.FC = () => {
 
         {/* Search Results */}
         <section className="container mx-auto px-4 py-8">
-          {isLoading ? (
+          {loading ? (
             <div className="text-center py-12">
               <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto"></div>
               <p className="mt-4 text-gray-600">Searching...</p>
             </div>
-          ) : searchTerm ? (
+          ) : searchQuery ? (
             <div>
               <div className="mb-6">
-                <p className="text-gray-600">
-                  Found {searchResults.length} results for "{searchTerm}"
-                </p>
+                                  <p className="text-gray-600">
+                    Found {searchResults.length} results for &ldquo;{searchQuery}&rdquo;
+                  </p>
               </div>
               
               {searchResults.length > 0 ? (
                 <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
                   {searchResults.map((property) => (
                     <div key={property.id} className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow">
-                      <img
+                      <Image
                         src={property.image}
                         alt={property.address}
+                        width={800}
+                        height={600}
                         className="w-full h-48 object-cover"
                       />
                       <div className="p-6">

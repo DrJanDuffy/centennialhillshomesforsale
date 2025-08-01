@@ -1,32 +1,8 @@
 'use client';
 
-import React, { useState, useEffect, useMemo, useCallback } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { 
-  Sparkles, 
-  Zap, 
-  Star, 
-  TrendingUp, 
-  Award, 
-  Users, 
-  MapPin, 
-  Home,
-  Phone,
-  Mail
-} from 'lucide-react';
-
-// Enhanced icon imports with better fallbacks
-const FaRocket = React.lazy(() => 
-  import('react-icons/fa').then(module => ({ default: module.FaRocket })).catch(() => ({ default: () => <span className="fallback-icon">🚀</span> }))
-);
-
-const FaLightbulb = React.lazy(() => 
-  import('react-icons/fa').then(module => ({ default: module.FaLightbulb })).catch(() => ({ default: () => <span className="fallback-icon">💡</span> }))
-);
-
-const FaMagic = React.lazy(() => 
-  import('react-icons/fa').then(module => ({ default: module.FaMagic })).catch(() => ({ default: () => <span className="fallback-icon">✨</span> }))
-);
+import React, { useState, useEffect } from 'react';
+import { motion } from 'framer-motion';
+import { FaRocket, FaLightbulb, FaMagic, FaCheckCircle, FaExclamationTriangle, FaSearch, FaStar } from 'react-icons/fa';
 
 interface AwesomeStats {
   homesSold: number;
@@ -43,21 +19,20 @@ function AwesomeEnhancements() {
     clientSatisfaction: 0
   });
 
-  const [isVisible, setIsVisible] = useState(false);
+
 
   // Mock performance metrics (replace with actual metrics)
-  const performanceMetrics = useMemo(() => ({
+  const performanceMetrics = useState(() => ({
     lcp: Math.random() * 2 + 1,       // Example LCP between 1-3 seconds
     fid: Math.random() * 80 + 20,      // Example FID between 20-100 ms
     cls: Math.random() * 0.05         // Example CLS under 0.05
-  }), []);
+  }))[0];
 
   // Awesome animated counters
   useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
-          setIsVisible(true);
           animateStats();
         }
       },
@@ -119,7 +94,7 @@ function AwesomeEnhancements() {
     }, 40);
   };
 
-  const awesomeFeatures = useMemo(() => [
+  const awesomeFeatures = useState(() => [
     {
       id: 'performance',
       title: 'Lightning Fast Performance',
@@ -146,7 +121,7 @@ function AwesomeEnhancements() {
       animations: true,
       features: ['PWA Install', 'Offline Support', 'Push Notifications']
     }
-  ], [performanceMetrics]);
+  ])[0];
 
   return (
     <section className="py-20 bg-gradient-to-br from-gray-50 via-white to-blue-50 relative overflow-hidden">
@@ -172,7 +147,7 @@ function AwesomeEnhancements() {
             className="inline-block mb-6"
           >
             <div className="w-20 h-20 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full flex items-center justify-center mx-auto">
-              <Sparkles className="w-10 h-10 text-white" />
+              <FaRocket className="w-10 h-10 text-white" />
             </div>
           </motion.div>
 
@@ -181,7 +156,7 @@ function AwesomeEnhancements() {
           </h2>
 
           <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
-            Experience the future of real estate with Dr. Jan Duffy's innovative approach, 
+            Experience the future of real estate with Dr. Jan Duffy&apos;s innovative approach, 
             combining decades of expertise with cutting-edge technology for unparalleled results.
           </p>
         </motion.div>
@@ -204,7 +179,7 @@ function AwesomeEnhancements() {
               {stats.homesSold}+
             </motion.div>
             <div className="text-gray-600 font-medium">Homes Sold</div>
-            <Home className="w-8 h-8 text-purple-500 mx-auto mt-2" />
+            <FaRocket className="w-8 h-8 text-purple-500 mx-auto mt-2" />
           </div>
 
           <div className="text-center bg-white/80 backdrop-blur-sm p-8 rounded-2xl shadow-xl border border-white/20">
@@ -216,7 +191,7 @@ function AwesomeEnhancements() {
               {stats.avgSalePrice}
             </motion.div>
             <div className="text-gray-600 font-medium">Avg Sale Price</div>
-            <TrendingUp className="w-8 h-8 text-blue-500 mx-auto mt-2" />
+            <FaSearch className="w-8 h-8 text-blue-500 mx-auto mt-2" />
           </div>
 
           <div className="text-center bg-white/80 backdrop-blur-sm p-8 rounded-2xl shadow-xl border border-white/20">
@@ -228,7 +203,7 @@ function AwesomeEnhancements() {
               {stats.daysOnMarket}
             </motion.div>
             <div className="text-gray-600 font-medium">Avg Days on Market</div>
-            <Zap className="w-8 h-8 text-green-500 mx-auto mt-2" />
+            <FaExclamationTriangle className="w-8 h-8 text-green-500 mx-auto mt-2" />
           </div>
 
           <div className="text-center bg-white/80 backdrop-blur-sm p-8 rounded-2xl shadow-xl border border-white/20">
@@ -240,7 +215,7 @@ function AwesomeEnhancements() {
               {stats.clientSatisfaction}%
             </motion.div>
             <div className="text-gray-600 font-medium">Client Satisfaction</div>
-            <Star className="w-8 h-8 text-orange-500 mx-auto mt-2" />
+            <FaStar className="w-8 h-8 text-orange-500 mx-auto mt-2" />
           </div>
         </motion.div>
 
@@ -289,7 +264,7 @@ function AwesomeEnhancements() {
               transition={{ duration: 10, repeat: Infinity, ease: "linear" }}
               className="inline-block mb-6"
             >
-              <Award className="w-16 h-16 text-yellow-300" />
+              <FaCheckCircle className="w-16 h-16 text-yellow-300" />
             </motion.div>
 
             <h3 className="text-4xl font-bold mb-6">
@@ -297,8 +272,8 @@ function AwesomeEnhancements() {
             </h3>
 
             <p className="text-xl mb-8 opacity-90 max-w-2xl mx-auto">
-              Join hundreds of satisfied clients who've experienced the difference of working 
-              with Las Vegas' most innovative real estate professional.
+              Join hundreds of satisfied clients who&apos;ve experienced the difference of working 
+              with Las Vegas&apos; most innovative real estate professional.
             </p>
 
             <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
@@ -308,7 +283,7 @@ function AwesomeEnhancements() {
                 whileTap={{ scale: 0.95 }}
                 className="bg-white text-purple-600 px-8 py-4 rounded-2xl font-bold text-lg hover:bg-gray-50 transition-all duration-300 flex items-center gap-3"
               >
-                <Phone className="w-5 h-5" />
+                <FaRocket className="w-5 h-5" />
                 Call (702) 903-1952
               </motion.a>
 
@@ -318,7 +293,7 @@ function AwesomeEnhancements() {
                 whileTap={{ scale: 0.95 }}
                 className="bg-white/20 border-2 border-white text-white px-8 py-4 rounded-2xl font-bold text-lg hover:bg-white/30 transition-all duration-300 flex items-center gap-3"
               >
-                <Mail className="w-5 h-5" />
+                <FaSearch className="w-5 h-5" />
                 Email Jan
               </motion.a>
             </div>

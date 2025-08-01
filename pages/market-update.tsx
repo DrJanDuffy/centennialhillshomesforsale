@@ -88,7 +88,7 @@ export default function MarketUpdate() {
         >
           <h2>Zip Code Market Breakdown</h2>
           <div className="zip-stats-grid">
-            {zipCodeData.map((data, index) => (
+            {zipCodeData.map((data) => (
               <div key={data.zip} className="zip-stat-card">
                 <h3>Zip Code {data.zip}</h3>
                 <div className="zip-details">

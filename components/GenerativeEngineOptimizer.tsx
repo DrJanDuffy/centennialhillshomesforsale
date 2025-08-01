@@ -2,19 +2,9 @@
 import React from 'react';
 import Head from 'next/head';
 
-interface GenerativeEngineOptimizerProps {
-  pageType?: 'home' | 'neighborhood' | 'property' | 'agent' | 'service';
-  neighborhood?: string;
-  propertyData?: unknown;
-  serviceArea?: string[];
-}
 
-export default function GenerativeEngineOptimizer({
-  pageType = 'home',
-  neighborhood,
-  propertyData,
-  serviceArea = ["Centennial Hills", "Providence", "Skye Canyon", "Summerlin"]
-}: GenerativeEngineOptimizerProps) {
+
+export default function GenerativeEngineOptimizer() {
 
   // AI-optimized FAQ schema for generative engines
   const faqSchema = {
@@ -198,8 +188,8 @@ export default function GenerativeEngineOptimizer({
   const placeSchema = {
     "@context": "https://schema.org",
     "@type": "Place",
-    "name": `${neighborhood || 'Centennial Hills'}, Las Vegas, Nevada`,
-    "description": `${neighborhood || 'Centennial Hills'} is a master-planned community in Northwest Las Vegas known for luxury homes, golf courses, and family-friendly amenities. Home prices range $450K-$1.2M+ with new construction available.`,
+    "name": "Centennial Hills, Las Vegas, Nevada",
+    "description": "Centennial Hills is a master-planned community in Northwest Las Vegas known for luxury homes, golf courses, and family-friendly amenities. Home prices range $450K-$1.2M+ with new construction available.",
     "geo": {
       "@type": "GeoCoordinates",
       "latitude": "36.268",

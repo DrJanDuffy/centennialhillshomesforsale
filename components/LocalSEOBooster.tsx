@@ -10,8 +10,7 @@ interface LocalSEOBoosterProps {
 
 export default function LocalSEOBooster({
   neighborhood = "Centennial Hills",
-  zipCode,
-  pageType = 'neighborhood'
+  zipCode
 }: LocalSEOBoosterProps) {
 
   // Local citation data

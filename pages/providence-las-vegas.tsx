@@ -2,7 +2,6 @@
 import React, { useState } from 'react';
 import Head from 'next/head';
 import Layout from '../components/Layout';
-import SEOOptimized from '../components/SEOOptimized';
 import NeighborhoodBar from '../components/NeighborhoodBar';
 import SchoolInfo from '../components/SchoolInfo';
 import RealScoutListings from '../components/RealScoutListings';

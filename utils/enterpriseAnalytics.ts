@@ -45,7 +45,7 @@ class EnterpriseAnalytics {
 
       window.dataLayer = window.dataLayer || [];
       if (!window.gtag) {
-        window.gtag = function(...args) {
+        window.gtag = function(...args: unknown[]) {
           if (window.dataLayer) {
             window.dataLayer.push(args);
           }

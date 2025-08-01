@@ -5,17 +5,8 @@ import { motion } from 'framer-motion';
 import Layout from '../components/Layout';
 import NeighborhoodBar from '../components/NeighborhoodBar';
 import SchoolInfo from '../components/SchoolInfo';
-import RealScoutWidget from '../components/widgets/RealScoutWidget';
 
-const neighborhoods = [
-  'Centennial Hills',
-  'The Trails',
-  'Tournament Hills',
-  'Skye Canyon',
-  'Sun City Aliante'
-] as const;
-
-type NeighborhoodName = typeof neighborhoods[number];
+type NeighborhoodName = 'Centennial Hills' | 'The Trails' | 'Tournament Hills' | 'Skye Canyon' | 'Sun City Aliante';
 
 const neighborhoodData: Record<NeighborhoodName, {
   description: string;

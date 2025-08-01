@@ -11,7 +11,7 @@ interface LayoutProps {
   description?: string;
   canonical?: string;
   image?: string;
-  structuredData?: any;
+  structuredData?: Record<string, unknown>;
   isPropertyPage?: boolean;
   propertyData?: {
     address: string;
@@ -29,7 +29,7 @@ const Layout: React.FC<LayoutProps> = ({
   title = "Centennial Hills Homes For Sale | Dr. Jan Duffy | Las Vegas Luxury Real Estate",
   description = "Discover luxury homes for sale in Centennial Hills, Las Vegas. Dr. Jan Duffy, Top 1% REALTOR®, specializes in Providence, Skye Canyon, and Northwest Las Vegas luxury real estate.",
   canonical,
-  image = "https://centennialhillshomesforsale.com/images/og-image.jpg",
+
   structuredData,
   isPropertyPage = false,
   propertyData

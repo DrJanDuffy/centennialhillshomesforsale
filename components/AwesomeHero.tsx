@@ -1,23 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { 
-  Search, 
-  Play, 
-  ArrowRight, 
-  ChevronRight, 
-  Home, 
-  Users, 
-  Award, 
-  TrendingUp,
-  MapPin,
-  DollarSign,
-  Clock,
-  Star
-} from 'lucide-react';
+import { motion } from 'framer-motion';
+import { Search, Play, ArrowRight, ChevronRight, Star, Home, Users, Award, TrendingUp, MapPin, DollarSign, Clock } from 'lucide-react';
 
 const AwesomeHero: React.FC = () => {
   const [isVideoLoaded, setIsVideoLoaded] = useState(false);
-  const [currentStat, setCurrentStat] = useState(0);
+
 
   const stats = [
     { 
@@ -79,7 +66,7 @@ const AwesomeHero: React.FC = () => {
 
   useEffect(() => {
     const timer = setInterval(() => {
-      setCurrentStat((prev) => (prev + 1) % stats.length);
+      
     }, 3000);
 
     return () => clearInterval(timer);
@@ -155,7 +142,7 @@ const AwesomeHero: React.FC = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.6 }}
           >
-            {stats.map((stat, index) => (
+            {stats.map((stat) => (
               <motion.div
                 key={stat.label}
                 initial={{ opacity: 0, y: 20 }}

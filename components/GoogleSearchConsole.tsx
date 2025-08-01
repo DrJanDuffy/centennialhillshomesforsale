@@ -6,7 +6,7 @@ interface GoogleSearchConsoleProps {
   pageTitle?: string;
   pageDescription?: string;
   pageUrl?: string;
-  structuredData?: any;
+  structuredData?: Record<string, unknown>;
   isPropertyPage?: boolean;
   propertyData?: {
     address: string;
@@ -23,8 +23,6 @@ const GoogleSearchConsole: React.FC<GoogleSearchConsoleProps> = ({
   pageTitle = "Centennial Hills Homes For Sale | Dr. Jan Duffy | Las Vegas Luxury Real Estate",
   pageDescription = "Discover luxury homes for sale in Centennial Hills, Las Vegas. Dr. Jan Duffy, Top 1% REALTOR®, specializes in Providence, Skye Canyon, and Northwest Las Vegas luxury real estate.",
   pageUrl = "https://centennialhillshomesforsale.com",
-  structuredData,
-  isPropertyPage = false,
   propertyData
 }) => {
   useEffect(() => {

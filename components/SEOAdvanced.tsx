@@ -17,9 +17,7 @@ export default function SEOAdvanced({
   description = "Find luxury homes in Centennial Hills, Providence & Skye Canyon with Dr. Jan Duffy, top 1% Las Vegas REALTOR®. 30+ years experience, 4.9/5 rating, same-day showings. Call (702) 903-1952.",
   keywords = "Centennial Hills homes for sale, Providence Las Vegas, Skye Canyon real estate, Dr Jan Duffy REALTOR, luxury homes Las Vegas, Berkshire Hathaway, 89149, 89166",
   canonicalUrl,
-  pageType = 'home',
-  neighborhood,
-  propertyData
+  neighborhood
 }: SEOAdvancedProps) {
 
   const siteUrl = 'https://centennialhillshomesforsale.com';

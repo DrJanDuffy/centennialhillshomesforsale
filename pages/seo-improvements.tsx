@@ -1,13 +1,12 @@
 
 import { motion } from 'framer-motion';
-import Head from 'next/head';
-import { useEffect } from 'react';
+import { useEffect, useMemo } from 'react';
 import Layout from '../components/Layout';
 import SEOOptimized from '../components/SEOOptimized';
 import { FaCheckCircle, FaExclamationTriangle, FaSearch, FaMapMarkerAlt, FaStar } from 'react-icons/fa';
 
 export default function SEOImprovements() {
-  const improvementAreas = [
+  const improvementAreas = useMemo(() => [
     {
       category: "Local Citations",
       priority: "High",
@@ -86,7 +85,7 @@ export default function SEOImprovements() {
       ],
       impact: "Better mobile search rankings"
     }
-  ];
+  ], []);
 
   const keywordOpportunities = [
     {
@@ -170,7 +169,7 @@ export default function SEOImprovements() {
         progressBar.style.setProperty('--seo-progress-width', `${width}%`);
       }
     });
-  }, []);
+  }, [improvementAreas]);
 
   return (
     <Layout>

@@ -1,14 +1,13 @@
-import { useRef } from 'react';
+import React from 'react';
 import Head from 'next/head';
 import { motion } from 'framer-motion';
 import Layout from '../components/Layout';
 import RealScoutWidget from '../components/widgets/RealScoutWidget';
-import { FaHome, FaChartLine, FaHandshake } from 'react-icons/fa';
 
 export default function About() {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const scrollRef = useRef(null);
+  const scrollRef = React.useRef(null);
 
   return (
     <Layout>
@@ -157,7 +156,7 @@ export default function About() {
           <div className="cta-container">
             <h2>Ready to Find Your Dream Home?</h2>
             <p>
-              Let's start your journey to finding the perfect property in Centennial Hills.
+              Let&apos;s start your journey to finding the perfect property in Centennial Hills.
               Our team is here to help every step of the way.
             </p>
             <div className="cta-buttons">

@@ -68,7 +68,7 @@ export default function NorthwestLasVegas() {
                 <h3>Area Highlights</h3>
                 <ul>
                   <li><strong>Major Communities:</strong> Centennial Hills, Skye Canyon, The Trails</li>
-                  <li><strong>Golf Courses:</strong> TPC Las Vegas, Bear's Best, Angel Park</li>
+                  <li><strong>Golf Courses:</strong> TPC Las Vegas, Bear&apos;s Best, Angel Park</li>
                   <li><strong>Shopping:</strong> Downtown Summerlin, Centennial Center</li>
                   <li><strong>Schools:</strong> Top-rated CCSD schools</li>
                   <li><strong>Recreation:</strong> Red Rock Canyon, multiple parks</li>
@@ -111,7 +111,7 @@ export default function NorthwestLasVegas() {
               <div className="community-card">
                 <h3>Tournament Hills</h3>
                 <p className="price-range">$500K - $1.8M</p>
-                <p>Golf course community with Bear's Best and mountain views.</p>
+                <p>Golf course community with Bear&apos;s Best and mountain views.</p>
                 <Link href="/neighborhoods" className="btn btn-primary">Explore</Link>
               </div>
             </div>

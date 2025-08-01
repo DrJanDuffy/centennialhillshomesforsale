@@ -101,7 +101,7 @@ export default function Contact() {
             </div>
 
             <div className="service-areas">
-              <h3>Dr. Duffy's Specialty Areas</h3>
+              <h3>Dr. Duffy&apos;s Specialty Areas</h3>
               <div className="service-area-tags">
                 <span className="area-tag">Centennial Hills</span>
                 <span className="area-tag">Providence</span>
@@ -164,7 +164,7 @@ export default function Contact() {
 
               <div className="form-row">
                 <div className="form-group">
-                  <label htmlFor="propertyType">I'm Interested In</label>
+                  <label htmlFor="propertyType">I&apos;m Interested In</label>
                   <select
                     id="propertyType"
                     name="propertyType"
@@ -272,7 +272,7 @@ export default function Contact() {
             </div>
             <div className="knowledge-item">
               <h3>🤝 Personal Service</h3>
-              <p>Direct contact with your agent, not a call center. We're here when you need us.</p>
+              <p>Direct contact with your agent, not a call center. We&apos;re here when you need us.</p>
             </div>
             <div className="knowledge-item">
               <h3>💰 Negotiation Power</h3>

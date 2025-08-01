@@ -2,12 +2,10 @@ import { useState } from 'react';
 import Link from 'next/link';
 import Head from 'next/head';
 import Layout from '../components/Layout';
-import SEOOptimized from '../components/SEOOptimized';
 import NeighborhoodBar from '../components/NeighborhoodBar';
 import SchoolInfo from '../components/SchoolInfo';
 import RealScoutListings from '../components/RealScoutListings';
 import { motion } from 'framer-motion';
-import RealScoutWidget from '../components/widgets/RealScoutWidget';
 import type { NeighborhoodName } from '../components/NeighborhoodBar';
 
 export default function LasVegas89149() {
@@ -54,13 +52,13 @@ export default function LasVegas89149() {
             <div className="overview-grid">
               <div className="overview-content">
                 <p>
-                  Zip code 89149 encompasses some of Las Vegas's most prestigious neighborhoods, 
+                  Zip code 89149 encompasses some of Las Vegas&apos;s most prestigious neighborhoods, 
                   including Centennial Hills, Tournament Hills, and portions of The Trails. 
                   This area is renowned for its championship golf courses, luxury homes, and 
                   family-friendly master-planned communities.
                 </p>
                 <p>
-                  Residents enjoy access to TPC Las Vegas, Bear's Best Golf Course, top-rated 
+                  Residents enjoy access to TPC Las Vegas, Bear&apos;s Best Golf Course, top-rated 
                   schools, and proximity to Downtown Summerlin shopping and dining. Home prices 
                   range from $500K to $3M+ with diverse architectural styles and lot sizes.
                 </p>
@@ -72,7 +70,7 @@ export default function LasVegas89149() {
                   <li><strong>Median Income:</strong> $89,500</li>
                   <li><strong>Median Home Value:</strong> $675,000</li>
                   <li><strong>Major Neighborhoods:</strong> Centennial Hills, Tournament Hills, The Trails</li>
-                  <li><strong>Golf Courses:</strong> TPC Las Vegas, Bear's Best</li>
+                  <li><strong>Golf Courses:</strong> TPC Las Vegas, Bear&apos;s Best</li>
                 </ul>
               </div>
             </div>
@@ -104,7 +102,7 @@ export default function LasVegas89149() {
                 <h3>Tournament Hills</h3>
                 <p className="price-range">$500K - $1.8M</p>
                 <ul>
-                  <li>Bear's Best Golf Course</li>
+                  <li>Bear&apos;s Best Golf Course</li>
                   <li>Mountain and city views</li>
                   <li>Established community</li>
                   <li>Premium lot locations</li>

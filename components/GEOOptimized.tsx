@@ -1,6 +1,6 @@
 
 import Head from 'next/head';
-import { useEffect } from 'react';
+
 
 interface GEOProps {
   title?: string;
@@ -18,12 +18,7 @@ export default function GEOOptimized({
   title = "Centennial Hills Homes For Sale | Dr. Jan Duffy REALTOR®",
   description = "Find luxury homes in Centennial Hills, Providence & Skye Canyon with Dr. Jan Duffy, top-rated REALTOR® with 30+ years experience in Las Vegas real estate.",
   keywords = "Centennial Hills homes for sale, Providence Las Vegas, Skye Canyon real estate, Dr. Jan Duffy REALTOR",
-  pageType = 'homepage',
-  neighborhood,
-  priceRange = "$450,000 - $1,200,000",
-  factualData,
-  citations = [],
-  statistics
+  priceRange = "$450,000 - $1,200,000"
 }: GEOProps) {
 
   // Comprehensive structured data for AI engines
@@ -297,20 +292,18 @@ export default function GEOOptimized({
       />
       
       {/* Neighborhood-specific structured data */}
-      {neighborhood && (
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify({
-              "@context": "https://schema.org",
-              "@type": "Neighborhood",
-              "name": neighborhood,
-              "containedInPlace": "Las Vegas, Nevada",
-              "description": `${neighborhood} is a sought-after community in Las Vegas known for luxury homes, family amenities, and excellent schools.`
-            })
-          }}
-        />
-      )}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "Neighborhood",
+            "name": "Centennial Hills",
+            "containedInPlace": "Las Vegas, Nevada",
+            "description": "Centennial Hills is a sought-after community in Las Vegas known for luxury homes, family amenities, and excellent schools."
+          })
+        }}
+      />
     </Head>
   );
 }

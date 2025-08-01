@@ -30,23 +30,25 @@ const PerformanceOptimizer: React.FC<PerformanceOptimizerProps> = ({
           }
           
           if (entry.entryType === 'first-input') {
-            console.log('FID:', entry.processingStart - entry.startTime);
+            const fidEntry = entry as PerformanceEventTiming;
+            console.log('FID:', fidEntry.processingStart - fidEntry.startTime);
             if (window.gtag) {
               window.gtag('event', 'core_web_vitals', {
                 event_category: 'Web Vitals',
                 event_label: 'FID',
-                value: Math.round(entry.processingStart - entry.startTime)
+                value: Math.round(fidEntry.processingStart - fidEntry.startTime)
               });
             }
           }
           
           if (entry.entryType === 'layout-shift') {
-            console.log('CLS:', entry.value);
+            const clsEntry = entry as unknown as { value: number };
+            console.log('CLS:', clsEntry.value);
             if (window.gtag) {
               window.gtag('event', 'core_web_vitals', {
                 event_category: 'Web Vitals',
                 event_label: 'CLS',
-                value: Math.round(entry.value * 1000)
+                value: Math.round(clsEntry.value * 1000)
               });
             }
           }

@@ -32,7 +32,7 @@ const BreadcrumbNavigation: React.FC<BreadcrumbNavigationProps> = ({
     }
     
     let currentPath = '';
-    pathSegments.forEach((segment, index) => {
+    pathSegments.forEach((segment) => {
       currentPath += `/${segment}`;
       
       // Convert segment to readable name

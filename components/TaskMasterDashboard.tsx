@@ -1,6 +1,6 @@
 
 import React, { useState, useEffect } from 'react';
-import { Activity, TrendingUp, Users, Search, AlertCircle, CheckCircle } from 'lucide-react';
+import { Activity, TrendingUp, Users, Search, CheckCircle } from 'lucide-react';
 
 interface TaskMasterMetrics {
   searchRankings: { keyword: string; position: number; change: number }[];
@@ -11,7 +11,6 @@ interface TaskMasterMetrics {
 
 const TaskMasterDashboard: React.FC = () => {
   const [metrics, setMetrics] = useState<TaskMasterMetrics | null>(null);
-  const [activeTab, setActiveTab] = useState('overview');
 
   useEffect(() => {
     // Mock data - replace with actual TaskMaster API calls
