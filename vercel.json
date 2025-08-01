@@ -7,6 +7,16 @@
       "source": "http://centennialhillshomesforsale.com/:path*",
       "destination": "https://centennialhillshomesforsale.com/:path*",
       "permanent": true
+    },
+    {
+      "source": "https://www.centennialhillshomesforsale.com/:path*",
+      "destination": "https://centennialhillshomesforsale.com/:path*",
+      "permanent": true
+    },
+    {
+      "source": "http://www.centennialhillshomesforsale.com/:path*",
+      "destination": "https://centennialhillshomesforsale.com/:path*",
+      "permanent": true
     }
   ],
   "headers": [

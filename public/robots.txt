@@ -78,5 +78,10 @@ Sitemap: https://centennialhillshomesforsale.com/sitemap.xml
 # RSS Feed
 Sitemap: https://centennialhillshomesforsale.com/feed.xml
 
-# Force HTTPS
+# Force HTTPS and preferred domain
 Host: https://centennialhillshomesforsale.com
+
+# Disallow www subdomain to prevent duplicate content
+User-agent: *
+Disallow: http://www.centennialhillshomesforsale.com/
+Disallow: https://www.centennialhillshomesforsale.com/
