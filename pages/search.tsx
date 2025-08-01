@@ -47,7 +47,7 @@ const SearchPage: React.FC = () => {
           bathrooms: 3,
           sqft: 2800,
           neighborhood: 'Centennial Hills',
-          image: '/images/property-1.jpg'
+          image: 'https://images.unsplash.com/photo-1564013799919-ab600027ffc6?w=800&h=600&fit=crop'
         },
         // Add more mock results as needed
       ];

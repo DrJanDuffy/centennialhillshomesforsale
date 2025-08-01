@@ -1,14 +1,28 @@
 {
   "buildCommand": "npm run build",
   "outputDirectory": "out",
-  "framework": "nextjs",
-  "builds": [
-    {
-      "src": "package.json",
-      "use": "@vercel/next"
-    }
-  ],
+  "framework": null,
   "routes": [
+    {
+      "src": "/search",
+      "dest": "/search.html"
+    },
+    {
+      "src": "/buyers",
+      "dest": "/buyers.html"
+    },
+    {
+      "src": "/blog",
+      "dest": "/blog.html"
+    },
+    {
+      "src": "/neighborhoods",
+      "dest": "/neighborhoods.html"
+    },
+    {
+      "src": "/featured-home",
+      "dest": "/featured-home.html"
+    },
     {
       "src": "/(.*)",
       "dest": "/$1"
