@@ -1,0 +1,14 @@
+{
+  "successMessage": "Thank you! Your information has been received. Dr. Jan Duffy will contact you within 24 hours.",
+  "errorMessage": "Please fill in all required fields.",
+  "requiredFields": ["name", "email", "phone"],
+  "contactInfo": {
+    "phone": "(702) 903-1952",
+    "email": "jan@centennialhillshomesforsale.com",
+    "office": "Berkshire Hathaway HomeServices"
+  },
+  "autoResponse": {
+    "subject": "Thank you for your interest in Centennial Hills homes",
+    "message": "Thank you for contacting Dr. Jan Duffy. We've received your inquiry and will be in touch within 24 hours."
+  }
+} 

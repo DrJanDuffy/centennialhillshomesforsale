@@ -1,0 +1,28 @@
+{
+  "latitude": 36.2089,
+  "longitude": -115.2644,
+  "address": "Centennial Hills",
+  "city": "Las Vegas",
+  "state": "NV",
+  "zipCode": "89149",
+  "neighborhoods": [
+    {
+      "name": "Centennial Hills",
+      "zipCode": "89149",
+      "latitude": 36.2089,
+      "longitude": -115.2644
+    },
+    {
+      "name": "Providence",
+      "zipCode": "89149",
+      "latitude": 36.2150,
+      "longitude": -115.2700
+    },
+    {
+      "name": "Skye Canyon",
+      "zipCode": "89166",
+      "latitude": 36.2200,
+      "longitude": -115.2800
+    }
+  ]
+} 

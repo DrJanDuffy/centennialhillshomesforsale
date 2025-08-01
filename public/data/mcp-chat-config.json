@@ -1,0 +1,25 @@
+{
+  "defaultResponses": [
+    {
+      "trigger": "homes",
+      "response": "I can help you find homes in Centennial Hills, Providence, and Skye Canyon. What's your price range and preferred number of bedrooms?",
+      "suggestions": ["Under $500k", "$500k-$750k", "$750k-$1M", "Over $1M"]
+    },
+    {
+      "trigger": "market",
+      "response": "The Centennial Hills market is currently very active. Average home prices are around $635,000 with 15-30 days on market. Would you like a detailed market analysis?",
+      "suggestions": ["Market Report", "Price Trends", "Neighborhood Data"]
+    },
+    {
+      "trigger": "contact",
+      "response": "Dr. Jan Duffy is available 24/7 for showings and consultations. You can reach her at (702) 903-1952 or jan@centennialhillshomesforsale.com",
+      "suggestions": ["Schedule Showing", "Free Consultation", "Market Analysis"]
+    }
+  ],
+  "fallbackResponse": "I'm here to help with your real estate needs in Centennial Hills. You can ask about homes, market conditions, or contact Dr. Jan Duffy directly.",
+  "contactInfo": {
+    "phone": "(702) 903-1952",
+    "email": "jan@centennialhillshomesforsale.com",
+    "availability": "24/7"
+  }
+} 

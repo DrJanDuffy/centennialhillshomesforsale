@@ -12,7 +12,6 @@ const nextConfig = {
   output: 'export',
   trailingSlash: true,
   skipTrailingSlashRedirect: true,
-  distDir: 'out',
   basePath: '',
   reactStrictMode: true,
   swcMinify: true,
@@ -25,8 +24,6 @@ const nextConfig = {
     domains: ['images.unsplash.com', 'cdn.pixabay.com', 'source.unsplash.com'],
     formats: ['image/webp', 'image/avif']
   },
-
-  
 
   compiler: {
     removeConsole: process.env.NODE_ENV === 'production'
@@ -101,39 +98,7 @@ const nextConfig = {
     }
 
     return config;
-  },
-
-  async headers() {
-    return [
-      {
-        source: '/(.*)',
-        headers: [
-          {
-            key: 'X-Content-Type-Options',
-            value: 'nosniff'
-          },
-          {
-            key: 'X-Frame-Options',
-            value: 'DENY'
-          },
-          {
-            key: 'X-XSS-Protection',
-            value: '1; mode=block'
-          }
-        ]
-      },
-      {
-        source: '/static/(.*)',
-        headers: [
-          {
-            key: 'Cache-Control',
-            value: 'public, max-age=31536000, immutable'
-          }
-        ]
-      }
-    ];
-  },
-  
+  }
 };
 
 module.exports = withPWA(nextConfig);
