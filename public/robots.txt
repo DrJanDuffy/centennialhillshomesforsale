@@ -77,3 +77,6 @@ Sitemap: https://centennialhillshomesforsale.com/sitemap.xml
 
 # RSS Feed
 Sitemap: https://centennialhillshomesforsale.com/feed.xml
+
+# Force HTTPS
+Host: https://centennialhillshomesforsale.com
