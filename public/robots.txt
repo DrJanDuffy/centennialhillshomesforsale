@@ -1,52 +1,35 @@
 User-agent: *
 Allow: /
-Disallow: /admin/
-Disallow: /private/
+
+# Sitemap
+Sitemap: https://centennialhillshomesforsale.com/sitemap.xml
+
+# Disallow admin and system files
 Disallow: /api/
 Disallow: /_next/
-Disallow: /attached_assets/
+Disallow: /admin/
+Disallow: /private/
+Disallow: /temp/
+Disallow: /backup/
 
-# Search Engine Specific Rules
-User-agent: Googlebot
-Allow: /
-Crawl-delay: 1
-
-User-agent: Bingbot
-Allow: /
-Crawl-delay: 1
-
-User-agent: Slurp
-Allow: /
-Crawl-delay: 2
-
-# AI Crawlers for content optimization
-User-agent: GPTBot
-Allow: /
-Allow: /ai-optimized-content.json
-Allow: /conversation-prompts.json
-Allow: /seo-audit-report.json
-
-User-agent: ChatGPT-User
-Allow: /
-
-# Allow important real estate pages
-Allow: /listings/
+# Allow important pages
+Allow: /search
+Allow: /buyers/
+Allow: /blog/
 Allow: /neighborhoods/
 Allow: /centennial-hills/
 Allow: /providence-las-vegas/
 Allow: /skye-canyon/
+Allow: /northwest-las-vegas/
 Allow: /las-vegas-89149/
 Allow: /las-vegas-89166/
-Allow: /northwest-las-vegas/
+Allow: /listings/
 Allow: /market-update/
-Allow: /services/
-Allow: /about/
 Allow: /contact/
+Allow: /services/
 Allow: /testimonials/
+Allow: /faq/
+Allow: /about/
 
-# Sitemaps
-Sitemap: https://centennialhillshomesforsale.com/sitemap.xml
-Sitemap: https://centennialhillshomesforsale.com/sitemap-news.xml
-
-# Crawl-delay for respectful crawling
+# Crawl delay (optional)
 Crawl-delay: 1
