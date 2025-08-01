@@ -1,6 +1,7 @@
 
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 
 // Define interfaces for component props
 interface RealScoutListingsProps {
@@ -49,65 +50,42 @@ interface PropertyListing {
   };
 }
 
-interface ListingsResponse {
-  listings: PropertyListing[];
-  total: number;
-  page: number;
-  hasMore: boolean;
-}
 
-// Import icons with fallback
-let HomeIcon, MapPinIcon, CameraIcon, HeartIcon, ShareIcon, EyeIcon;
 
-try {
-  const icons = require('@heroicons/react/24/outline');
-  HomeIcon = icons.HomeIcon;
-  MapPinIcon = icons.MapPinIcon;
-  CameraIcon = icons.CameraIcon;
-  HeartIcon = icons.HeartIcon;
-  ShareIcon = icons.ShareIcon;
-  EyeIcon = icons.EyeIcon;
-} catch (e) {
-  // Fallback SVG icons
-  HomeIcon = ({ className }: { className?: string }) => (
-    <svg className={className} fill="none" viewBox="0 0 24 24" stroke="currentColor">
-      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
-    </svg>
-  );
-  
-  MapPinIcon = ({ className }: { className?: string }) => (
-    <svg className={className} fill="none" viewBox="0 0 24 24" stroke="currentColor">
-      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
-      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
-    </svg>
-  );
-  
-  CameraIcon = ({ className }: { className?: string }) => (
-    <svg className={className} fill="none" viewBox="0 0 24 24" stroke="currentColor">
-      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z" />
-      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 13a3 3 0 11-6 0 3 3 0 016 0z" />
-    </svg>
-  );
-  
-  HeartIcon = ({ className }: { className?: string }) => (
-    <svg className={className} fill="none" viewBox="0 0 24 24" stroke="currentColor">
-      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
-    </svg>
-  );
-  
-  ShareIcon = ({ className }: { className?: string }) => (
-    <svg className={className} fill="none" viewBox="0 0 24 24" stroke="currentColor">
-      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.367 2.684 3 3 0 00-5.367-2.684z" />
-    </svg>
-  );
-  
-  EyeIcon = ({ className }: { className?: string }) => (
-    <svg className={className} fill="none" viewBox="0 0 24 24" stroke="currentColor">
-      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
-    </svg>
-  );
-}
+
+
+const MapPinIcon = ({ className }: { className?: string }) => (
+  <svg className={className} fill="none" viewBox="0 0 24 24" stroke="currentColor">
+    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+  </svg>
+);
+
+const CameraIcon = ({ className }: { className?: string }) => (
+  <svg className={className} fill="none" viewBox="0 0 24 24" stroke="currentColor">
+    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z" />
+    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 13a3 3 0 11-6 0 3 3 0 016 0z" />
+  </svg>
+);
+
+const HeartIcon = ({ className }: { className?: string }) => (
+  <svg className={className} fill="none" viewBox="0 0 24 24" stroke="currentColor">
+    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+  </svg>
+);
+
+const ShareIcon = ({ className }: { className?: string }) => (
+  <svg className={className} fill="none" viewBox="0 0 24 24" stroke="currentColor">
+    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.367 2.684 3 3 0 00-5.367-2.684z" />
+  </svg>
+);
+
+const EyeIcon = ({ className }: { className?: string }) => (
+  <svg className={className} fill="none" viewBox="0 0 24 24" stroke="currentColor">
+    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+  </svg>
+);
 
 const RealScoutListings: React.FC<RealScoutListingsProps> = ({
   agentId = "QWdlbnQtMjI1MDUw",
@@ -117,18 +95,11 @@ const RealScoutListings: React.FC<RealScoutListingsProps> = ({
   propertyTypes = "SFR,MF,TC",
   maxResults = 20,
   priceMin = 0,
-  priceMax = 10000000,
-  bedsMin = 0,
-  bathsMin = 0,
-  sqftMin = 0,
-  yearBuiltMin = 1900,
   className = ""
 }) => {
   const finalAgentId = agentEncodedId || agentId;
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [hasError, setHasError] = useState<boolean>(false);
-  const [scriptLoaded, setScriptLoaded] = useState<boolean>(false);
-  const [listings, setListings] = useState<PropertyListing[]>([]);
   const [favorites, setFavorites] = useState<Set<string>>(new Set());
   const [showMockData, setShowMockData] = useState<boolean>(false);
 
@@ -232,12 +203,10 @@ const RealScoutListings: React.FC<RealScoutListingsProps> = ({
         const script = document.querySelector('script[src*="realscout-web-components"]');
         if (script) {
           if (script.getAttribute('data-loaded') === 'true') {
-            setScriptLoaded(true);
             setIsLoading(false);
           } else {
             script.addEventListener('load', () => {
               script.setAttribute('data-loaded', 'true');
-              setScriptLoaded(true);
               setIsLoading(false);
             });
             script.addEventListener('error', () => {
@@ -281,7 +250,6 @@ const RealScoutListings: React.FC<RealScoutListingsProps> = ({
     if (typeof window !== 'undefined' && window.customElements) {
       window.customElements.whenDefined('realscout-office-listings')
         .then(() => {
-          setScriptLoaded(true);
           setIsLoading(false);
         })
         .catch(() => {
@@ -334,7 +302,7 @@ const RealScoutListings: React.FC<RealScoutListingsProps> = ({
     return (
       <div className="realscout-error">
         <h3>Unable to Load Property Listings</h3>
-        <p>We're experiencing technical difficulties loading the property listings widget.</p>
+                        <p>We&apos;re experiencing technical difficulties loading the property listings widget.</p>
         <div className="fallback-buttons">
           <a href="tel:+17029031952" className="btn btn-primary">
             📞 Call (702) 903-1952
@@ -375,9 +343,11 @@ const RealScoutListings: React.FC<RealScoutListingsProps> = ({
             >
               {/* Image */}
               <div className="relative">
-                <img
+                <Image
                   src={listing.images[0]}
                   alt={`${listing.address} - ${listing.city}`}
+                  width={400}
+                  height={300}
                   className="w-full h-48 object-cover"
                 />
                 

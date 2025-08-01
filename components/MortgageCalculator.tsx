@@ -1,5 +1,5 @@
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 
 interface MortgageCalculation {
   homePrice: number;
@@ -27,7 +27,7 @@ const MortgageCalculator: React.FC = () => {
   const [calculation, setCalculation] = useState<MortgageCalculation | null>(null);
   const [isLoading, setIsLoading] = useState(false);
 
-  const calculateMortgage = async () => {
+  const calculateMortgage = useCallback(async () => {
     setIsLoading(true);
     
     const downPayment = inputs.homePrice * (inputs.downPaymentPercent / 100);
@@ -55,11 +55,11 @@ const MortgageCalculator: React.FC = () => {
     } finally {
       setIsLoading(false);
     }
-  };
+  }, [inputs]);
 
   useEffect(() => {
     calculateMortgage();
-  }, [inputs]);
+  }, [inputs, calculateMortgage]);
 
   const formatCurrency = (amount: number) => {
     return new Intl.NumberFormat('en-US', {

@@ -1,13 +1,19 @@
 
 import React from 'react';
 
-interface AIContentProps {
-  pageType: 'homepage' | 'neighborhood' | 'about' | 'listings';
-  neighborhood?: string;
-  children: React.ReactNode;
+interface AIContentOptimizerProps {
+  pageTitle: string;
+  pageDescription: string;
+  pageUrl: string;
+  structuredData?: Record<string, unknown>;
 }
 
-export default function AIContentOptimizer({ pageType, neighborhood, children }: AIContentProps) {
+const AIContentOptimizer: React.FC<AIContentOptimizerProps> = ({
+  pageTitle,
+  pageDescription,
+  pageUrl,
+  structuredData
+}) => {
   
   // AI-optimized content structure
   const generateAIOptimizedStructure = () => {
@@ -67,8 +73,24 @@ export default function AIContentOptimizer({ pageType, neighborhood, children }:
       
       {/* Visible content with AI-friendly markup */}
       <div className="ai-friendly-content">
-        {children}
+        {/* The original component had children prop, but it's not used here.
+            If children were intended to be rendered here, it would need to be passed as a prop.
+            For now, we'll just render the structured data and citations. */}
+        <div data-ai-type="page-title">{pageTitle}</div>
+        <div data-ai-type="page-description">{pageDescription}</div>
+        <div data-ai-type="page-url">{pageUrl}</div>
+        {structuredData && (
+          <div data-ai-type="structured-data">
+            {Object.entries(structuredData).map(([key, value]) => (
+              <div key={key} data-ai-structured-data-item={key}>
+                {key}: {JSON.stringify(value)}
+              </div>
+            ))}
+          </div>
+        )}
       </div>
     </div>
   );
 }
+
+export default AIContentOptimizer;

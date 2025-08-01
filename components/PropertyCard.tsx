@@ -3,6 +3,7 @@
 
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import Image from 'next/image';
 import { 
   Heart, 
   Share2, 
@@ -11,9 +12,6 @@ import {
   Bed, 
   Bath, 
   Square, 
-  Calendar,
-  Star,
-  TrendingUp,
   Home,
   Car,
   TreePine,
@@ -66,7 +64,6 @@ export const PropertyCard: React.FC<PropertyCardProps> = ({
 }) => {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [isFavorited, setIsFavorited] = useState(false);
-  const [showImageGallery, setShowImageGallery] = useState(false);
   const [isHovered, setIsHovered] = useState(false);
 
   const handleFavorite = () => {
@@ -116,7 +113,7 @@ export const PropertyCard: React.FC<PropertyCardProps> = ({
   };
 
   const getFeatureIcon = (feature: string) => {
-    const featureIcons: { [key: string]: React.ComponentType<any> } = {
+    const featureIcons: { [key: string]: React.ComponentType<{ className?: string }> } = {
       'Pool': Bath,
       'Mountain Views': TreePine,
       'Gourmet Kitchen': Home,
@@ -155,9 +152,11 @@ export const PropertyCard: React.FC<PropertyCardProps> = ({
             className="absolute inset-0"
           >
             {property.images && property.images.length > 0 ? (
-              <img
+              <Image
                 src={property.images[currentImageIndex]?.url}
                 alt={property.images[currentImageIndex]?.alt || 'Property image'}
+                width={800}
+                height={600}
                 className="w-full h-full object-cover"
                 onError={(e) => {
                   // Fallback to gradient background if image fails to load

@@ -1,17 +1,10 @@
 
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import Image from 'next/image';
 import { 
-  MapPin, 
   Home, 
   Search, 
-  Star, 
-  Users, 
-  TrendingUp,
-  Building,
-  TreePine,
-  Car,
-  ShoppingBag,
   Heart,
   Eye
 } from 'lucide-react';
@@ -212,9 +205,11 @@ const InteractivePropertyMap: React.FC<InteractivePropertyMapProps> = ({ classNa
 
               {/* Image */}
               <div className="relative h-48 rounded-xl overflow-hidden mb-4">
-                <img
+                <Image
                   src={selectedNeighborhood.image}
                   alt={selectedNeighborhood.name}
+                  width={400}
+                  height={300}
                   className="w-full h-full object-cover"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>

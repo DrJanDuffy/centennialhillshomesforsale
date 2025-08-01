@@ -1,32 +1,41 @@
 
-import React, { useEffect } from 'react';
+import React, { useEffect, useMemo } from 'react';
 import { motion } from 'framer-motion';
 import Link from 'next/link';
+import { FaRocket, FaLightbulb, FaMagic } from 'react-icons/fa';
 
 const AwesomeFeatures: React.FC = () => {
-  const features = [
+  const features = useMemo(() => [
     {
-      icon: '🏘️',
-      title: 'Premium Locations',
-      description: 'Explore stunning homes in Providence, Skye Canyon, and other premier neighborhoods with resort-style amenities!',
-      link: '/neighborhoods',
-      gradient: 'from-purple-400 to-pink-400'
+      id: 'performance',
+      title: 'Lightning Fast Performance',
+      description: 'Optimized for Core Web Vitals with advanced caching and lazy loading',
+      icon: FaRocket,
+      color: 'from-red-500 to-orange-500',
+      highlights: ['< 2.5s LCP', '< 100ms FID', '< 0.1 CLS'],
+      link: '/services'
     },
     {
-      icon: '⭐',
-      title: 'Expert Service',
-      description: 'Professional real estate guidance from local market experts who know Centennial Hills inside and out!',
-      link: '/about',
-      gradient: 'from-blue-400 to-purple-400'
+      id: 'ai-powered',
+      title: 'AI-Powered Intelligence',
+      description: 'Smart property recommendations with machine learning',
+      icon: FaLightbulb,
+      color: 'from-blue-500 to-cyan-500',
+      highlights: ['Voice Search', 'Smart Recommendations', 'AI Chat', 'Predictive Analytics'],
+      link: '/services'
     },
     {
-      icon: '📊',
-      title: 'Market Insights',
-      description: 'Stay informed with the latest market trends and property values in real-time!',
-      link: '/market-update',
-      gradient: 'from-green-400 to-blue-400'
+      id: 'awesome-ux',
+      title: 'Awesome User Experience',
+      description: 'Smooth animations, PWA support, and responsive design',
+      icon: FaMagic,
+      color: 'from-purple-500 to-pink-500',
+      highlights: ['PWA Install', 'Offline Support', 'Push Notifications'],
+      link: '/services'
     }
-  ];
+  ], []);
+
+
 
   const stats = [
     { number: '15+', label: 'Years Experience', icon: '🏆' },
@@ -43,7 +52,7 @@ const AwesomeFeatures: React.FC = () => {
         element.style.setProperty('--animation-delay', `${index * 0.2}s`);
       }
     });
-  }, []);
+  }, [features]);
 
   return (
     <div className="awesome-features-section">
@@ -63,7 +72,7 @@ const AwesomeFeatures: React.FC = () => {
             }}
           >
             <div className="text-6xl mb-6 bounce-animation animate-delay-dynamic">
-              {feature.icon}
+              {React.createElement(feature.icon, { className: "w-16 h-16" })}
             </div>
             <h3 className="text-2xl font-bold mb-4 gradient-text">{feature.title}</h3>
             <p className="awesome-text mb-6">{feature.description}</p>

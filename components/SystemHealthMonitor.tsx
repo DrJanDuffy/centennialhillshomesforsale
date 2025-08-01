@@ -1,6 +1,5 @@
 
 import React, { useState, useEffect } from 'react';
-import ErrorTracker from '../utils/errorTracking';
 import GlobalErrorHandler from '../utils/globalErrorHandler';
 
 interface HealthMetrics {

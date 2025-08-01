@@ -27,8 +27,8 @@ export default function SEOOptimized({
 
   useEffect(() => {
     // Google Analytics page view tracking
-    if (typeof window !== 'undefined' && (window as any).gtag) {
-      (window as any).gtag('config', 'GA_MEASUREMENT_ID', {
+    if (typeof window !== 'undefined' && (window as unknown as { gtag: (command: string, targetId: string, config: Record<string, unknown>) => void }).gtag) {
+      (window as unknown as { gtag: (command: string, targetId: string, config: Record<string, unknown>) => void }).gtag('config', 'GA_MEASUREMENT_ID', {
         page_title: title,
         page_location: window.location.href
       });

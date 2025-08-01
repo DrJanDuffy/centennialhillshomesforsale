@@ -1,10 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { 
   TrendingUp, 
-  TrendingDown, 
   DollarSign, 
-  Calendar, 
   Home, 
   Clock,
   BarChart3,
@@ -139,7 +137,7 @@ const MarketTrendChart: React.FC<MarketTrendChartProps> = ({
           {metrics.map((metric) => (
             <button
               key={metric.key}
-              onClick={() => setSelectedMetric(metric.key as any)}
+                             onClick={() => setSelectedMetric(metric.key as 'price' | 'days' | 'volume')}
               className={`flex items-center gap-2 px-4 py-2 rounded-lg transition-all duration-300 ${
                 selectedMetric === metric.key
                   ? 'bg-primary text-white'
@@ -218,7 +216,7 @@ const MarketTrendChart: React.FC<MarketTrendChartProps> = ({
             {timeframes.map((tf) => (
               <button
                 key={tf.key}
-                onClick={() => setTimeframe(tf.key as any)}
+                                 onClick={() => setTimeframe(tf.key as '3m' | '6m' | '12m')}
                 className={`px-3 py-1 rounded-lg text-sm transition-all duration-300 ${
                   timeframe === tf.key
                     ? 'bg-primary text-white'

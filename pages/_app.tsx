@@ -5,7 +5,6 @@ import type { AppProps } from 'next/app'
 import { ErrorBoundary, FallbackProps } from 'react-error-boundary'
 import Script from 'next/script'
 import GoogleAnalytics from '../components/GoogleAnalytics'
-import AdvancedSEOOptimizer from '../components/AdvancedSEOOptimizer'
 import LocalSEOBooster from '../components/LocalSEOBooster'
 import { useEffect } from 'react'
 import GlobalErrorHandler from '../utils/globalErrorHandler'
@@ -55,7 +54,6 @@ export default function App({ Component, pageProps }: AppProps) {
         strategy="afterInteractive"
       />
       <GoogleAnalytics />
-      <AdvancedSEOOptimizer />
       <LocalSEOBooster />
       <Component {...pageProps} />
     </ErrorBoundary>

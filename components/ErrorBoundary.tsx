@@ -32,8 +32,8 @@ class ErrorBoundary extends Component<Props, State> {
     });
 
     // Report error to analytics (if available)
-    if (typeof window !== 'undefined' && (window as any).gtag) {
-      (window as any).gtag('event', 'exception', {
+    if (typeof window !== 'undefined' && (window as unknown as { gtag?: unknown }).gtag) {
+      ((window as unknown as { gtag: (command: string, action: string, params: Record<string, unknown>) => void }).gtag)('event', 'exception', {
         description: error.toString(),
         fatal: false
       });
@@ -51,7 +51,7 @@ class ErrorBoundary extends Component<Props, State> {
           <div className="error-container">
             <h2>🏠 Centennial Hills Homes</h2>
             <h3>Something went wrong</h3>
-            <p>We're sorry, but something unexpected happened. Our team has been notified.</p>
+            <p>We&apos;re sorry, but something unexpected happened. Our team has been notified.</p>
             
             <div className="error-actions">
               <button 

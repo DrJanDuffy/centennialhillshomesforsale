@@ -8,12 +8,13 @@ interface GoogleTagManagerProps {
   enablePhoneTracking?: boolean;
 }
 
-declare global {
-  interface Window {
-    gtag: (...args: any[]) => void;
-    dataLayer: any[];
-  }
-}
+// Remove global declaration to avoid conflicts
+// declare global {
+//   interface Window {
+//     gtag: (...args: unknown[]) => void;
+//     dataLayer: unknown[];
+//   }
+// }
 
 const GoogleTagManager: React.FC<GoogleTagManagerProps> = ({
   gtmId = 'GTM-XXXXXXX',
@@ -25,9 +26,13 @@ const GoogleTagManager: React.FC<GoogleTagManagerProps> = ({
     // Initialize Google Tag Manager
     if (typeof window !== 'undefined') {
       window.dataLayer = window.dataLayer || [];
-      window.gtag = function() {
-        window.dataLayer.push(arguments);
-      };
+      
+      // Only define gtag if it doesn't already exist
+      if (!window.gtag) {
+        window.gtag = function(...args: unknown[]) {
+          window.dataLayer.push(args);
+        };
+      }
       
       window.gtag('js', new Date());
       window.gtag('config', gaId, {
@@ -48,7 +53,7 @@ const GoogleTagManager: React.FC<GoogleTagManagerProps> = ({
     // Track phone number clicks
     if (enablePhoneTracking && typeof window !== 'undefined') {
       const trackPhoneClicks = (event: Event) => {
-        const target = event.target as HTMLElement;
+        const target = event.target as HTMLAnchorElement;
         if (target.tagName === 'A' && target.href?.startsWith('tel:')) {
           window.gtag('event', 'phone_click', {
             event_category: 'Contact',

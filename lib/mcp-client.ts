@@ -1,11 +1,3 @@
-interface MCPMessage {
-  id: string;
-  type: 'user' | 'assistant';
-  content: string;
-  timestamp: Date;
-  suggestions?: string[];
-}
-
 interface MCPResponse {
   success: boolean;
   data?: {

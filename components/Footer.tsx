@@ -82,7 +82,7 @@ const Footer: React.FC = () => {
     <footer className="footer">
       <div className="footer-content">
         {/* Main Footer Sections */}
-        {footerSections.map((section, index) => (
+        {footerSections.map((section) => (
           <div key={section.title} className="footer-section">
             <h3>{section.title}</h3>
             <p className="text-sm text-white/70 mb-4 leading-relaxed">

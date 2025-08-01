@@ -1,17 +1,16 @@
 
-import { useState } from 'react';
+import React from 'react';
 import Head from 'next/head';
-import { motion } from 'framer-motion';
 import Layout from '../components/Layout';
+import { motion } from 'framer-motion';
 import NeighborhoodBar from '../components/NeighborhoodBar';
 import SchoolInfo from '../components/SchoolInfo';
 import LocalAmenities from '../components/LocalAmenities';
-import RealScoutWidget from '../components/widgets/RealScoutWidget';
 
 type NeighborhoodName = 'Centennial Hills' | 'The Trails' | 'Tournament Hills' | 'Skye Canyon' | 'Sun City Aliante';
 
 export default function CentennialHills() {
-  const [currentNeighborhood, setCurrentNeighborhood] = useState<NeighborhoodName>('Centennial Hills');
+  const [currentNeighborhood, setCurrentNeighborhood] = React.useState<NeighborhoodName>('Centennial Hills');
 
   return (
     <Layout>
@@ -37,7 +36,7 @@ export default function CentennialHills() {
           <div className="container">
             <h1>Centennial Hills Las Vegas Real Estate</h1>
             <p className="hero-subtitle">
-              Discover luxury living in Las Vegas's premier master-planned community. 
+              Discover luxury living in Las Vegas&apos;s premier master-planned community. 
               Featuring championship golf, top-rated schools, and stunning desert homes.
             </p>
           </div>

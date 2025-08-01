@@ -1,6 +1,7 @@
 import React from 'react';
 import Layout from '@/components/Layout';
 import Link from 'next/link';
+import Image from 'next/image';
 import { Calendar, Clock, User, ArrowRight, MapPin, DollarSign, Home } from 'lucide-react';
 
 const BlogPage: React.FC = () => {
@@ -125,9 +126,11 @@ const BlogPage: React.FC = () => {
                 <div className="grid md:grid-cols-2 gap-8">
                   {blogPosts.map((post) => (
                     <article key={post.id} className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow">
-                      <img
+                      <Image
                         src={post.image}
                         alt={post.title}
+                        width={800}
+                        height={400}
                         className="w-full h-48 object-cover"
                       />
                       <div className="p-6">

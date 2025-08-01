@@ -1,5 +1,5 @@
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { motion } from 'framer-motion';
 
 interface CalculatorProps {
@@ -13,13 +13,8 @@ const PropertyCalculator: React.FC<CalculatorProps> = ({ homePrice = 750000, cla
   const [interestRate, setInterestRate] = useState(6.5);
   const [loanTerm, setLoanTerm] = useState(30);
   const [monthlyPayment, setMonthlyPayment] = useState(0);
-  const [totalPayment, setTotalPayment] = useState(0);
 
-  useEffect(() => {
-    calculatePayment();
-  }, [price, downPayment, interestRate, loanTerm]);
-
-  const calculatePayment = () => {
+  const calculatePayment = useCallback(() => {
     const principal = price - (price * downPayment / 100);
     const monthlyRate = interestRate / 100 / 12;
     const numberOfPayments = loanTerm * 12;
@@ -30,9 +25,13 @@ const PropertyCalculator: React.FC<CalculatorProps> = ({ homePrice = 750000, cla
       const monthly = principal * (monthlyRate * Math.pow(1 + monthlyRate, numberOfPayments)) / 
                      (Math.pow(1 + monthlyRate, numberOfPayments) - 1);
       setMonthlyPayment(monthly);
-      setTotalPayment(monthly * numberOfPayments);
+
     }
-  };
+  }, [price, downPayment, interestRate, loanTerm]);
+
+  useEffect(() => {
+    calculatePayment();
+  }, [calculatePayment]);
 
   return (
     <motion.div 

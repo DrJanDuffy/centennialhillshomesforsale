@@ -1,35 +1,16 @@
 
-import { useState } from 'react';
-import Link from 'next/link';
-import Head from 'next/head';
-import { motion } from 'framer-motion';
+import React from 'react';
 import Layout from '../components/Layout';
-import AdvancedSearch from '../components/AdvancedSearch';
-import RealScoutWidget from '../components/widgets/RealScoutWidget';
-import RealScoutListings from '../components/RealScoutListings';
+import Link from 'next/link';
+import { motion } from 'framer-motion';
 
 export default function Listings() {
-  const [searchFilters, setSearchFilters] = useState({
-    priceMin: 0,
-    priceMax: 2000000,
-    beds: 'unknown',
-    baths: 'unknown',
-    sqftMin: 0,
-    sqftMax: 10000,
-    propertyType: 'unknown',
-    features: [],
-    neighborhood: 'all'
-  });
-
   return (
-    <Layout>
-      <Head>
-        <title>Homes for Sale in Centennial Hills Las Vegas | Browse All Listings</title>
-        <meta name="description" content="Browse all homes for sale in Centennial Hills, Las Vegas. Search by price, bedrooms, bathrooms, and neighborhood. View photos, details, and schedule tours." />
-        <meta name="keywords" content="Centennial Hills homes for sale, Las Vegas real estate listings, 89149 homes, 89166 properties, luxury homes Las Vegas" />
-        <link rel="canonical" href="https://centennialhillshomesforsale.com/listings" />
-      </Head>
-
+    <Layout
+      title="Centennial Hills Homes For Sale | Current Listings | Dr. Jan Duffy REALTOR®"
+      description="Browse current homes for sale in Centennial Hills, Providence, and Skye Canyon. Expert real estate listings with Dr. Jan Duffy, top 1% Las Vegas REALTOR®. Call (702) 903-1952."
+      canonical="https://centennialhillshomesforsale.com/listings"
+    >
       <main className="container">
         <motion.section 
           className="hero-section"
@@ -39,19 +20,12 @@ export default function Listings() {
         >
           <h1>Homes for Sale in Centennial Hills</h1>
           <p>
-            Discover your perfect home in Las Vegas's premier Centennial Hills area. 
+            Discover your perfect home in Las Vegas&apos;s premier Centennial Hills area. 
             Browse luxury homes, condos, and townhomes with detailed search filters and interactive maps.
           </p>
         </motion.section>
 
-        <motion.section 
-          className="search-section"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.2, duration: 0.6 }}
-        >
-          <AdvancedSearch />
-        </motion.section>
+
 
         {/* RealScout Your Listings */}
         <motion.section 
@@ -128,14 +102,14 @@ export default function Listings() {
           transition={{ delay: 0.8, duration: 0.6 }}
         >
           <h2>All Available Properties</h2>
-          <RealScoutWidget
-            type="office-listings"
-            title="All Available Properties"
-            description="Browse all properties in Centennial Hills and surrounding areas"
-            priceMin={300000}
-            priceMax={2000000}
-            propertyTypes="SFR,MF,TC"
-          />
+          <realscout-office-listings 
+            agent-encoded-id="QWdlbnQtMjI1MDUw" 
+            sort-order="STATUS_AND_SIGNIFICANT_CHANGE" 
+            listing-status="For Sale" 
+            property-types="SFR,MF,TC" 
+            price-min="300000" 
+            price-max="2000000">
+          </realscout-office-listings>
         </motion.section>
 
         <motion.section 

@@ -69,7 +69,7 @@ class ErrorBoundaryWrapper extends Component<Props, State> {
             <ExclamationTriangleIcon className="h-12 w-12 text-red-500 mx-auto mb-4" aria-hidden="true" />
             <h2 className="text-xl font-semibold text-gray-900 mb-2">Something went wrong</h2>
             <p className="text-gray-600 mb-4">
-              We're working to fix this issue. Please try refreshing the page.
+              We&apos;re sorry, but something went wrong. Please try refreshing the page or contact us if the problem persists.
             </p>
             {process.env.NODE_ENV === 'development' && this.state.error && (
               <details className="text-left text-xs text-gray-500 mb-4 p-2 bg-gray-100 rounded">

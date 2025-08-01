@@ -32,8 +32,8 @@ const TaskMasterPage: React.FC = () => {
               <h1 className="text-4xl font-bold text-gray-900 mb-4">
                 🤖 TaskMaster AI Control Center
               </h1>
-              <p className="text-xl text-gray-600 mb-8">
-                Real-time optimization and monitoring for your Centennial Hills real estate website
+              <p className="text-lg text-gray-600 mb-8">
+                Welcome to the TaskMaster Dashboard - your comprehensive real estate management system. Track leads, monitor market trends, and optimize your business performance with our advanced analytics and automation tools.
               </p>
             </div>
             
@@ -169,7 +169,7 @@ const TaskMasterPage: React.FC = () => {
                   <Lightbulb className="text-green-500" />
                   <h3>💡 Opportunity</h3>
                 </div>
-                <p>Search volume for "Providence Nevada homes" increased 15%. Consider creating targeted content.</p>
+                                  <p>Search volume for &ldquo;Providence Nevada homes&rdquo; increased 15%. Consider creating targeted content.</p>
                 <button className="insight-action">Explore</button>
               </div>
             </div>

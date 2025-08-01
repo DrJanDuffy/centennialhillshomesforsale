@@ -2,30 +2,23 @@
 import React, { useEffect } from 'react';
 import Head from 'next/head';
 
-interface AdvancedSEOProps {
-  title?: string;
-  description?: string;
-  keywords?: string;
-  canonicalUrl?: string;
-  pageType?: 'homepage' | 'neighborhood' | 'listings' | 'property' | 'service';
-  neighborhood?: string;
-  propertyData?: unknown;
-  localBusinessData?: unknown;
+interface AdvancedSEOOptimizerProps {
+  pageType: 'home' | 'property' | 'neighborhood' | 'service';
+  pageTitle: string;
+  pageDescription: string;
+  pageUrl: string;
+  structuredData?: Record<string, unknown>;
 }
 
-export default function AdvancedSEOOptimizer({
-  title = "Centennial Hills Homes For Sale | Dr. Jan Duffy REALTOR® | Las Vegas NV",
-  description = "Find luxury homes in Centennial Hills, Providence & Skye Canyon with Dr. Jan Duffy, top 1% Las Vegas REALTOR®. 30+ years experience, 4.9/5 rating, same-day showings. Call (702) 903-1952.",
-  keywords = "Centennial Hills homes for sale, Providence Las Vegas, Skye Canyon real estate, Dr Jan Duffy REALTOR, luxury homes Las Vegas, 89149, 89166",
-  canonicalUrl,
-  pageType = 'homepage',
-  neighborhood,
-  propertyData,
-  localBusinessData
-}: AdvancedSEOProps) {
+const AdvancedSEOOptimizer: React.FC<AdvancedSEOOptimizerProps> = ({
+  pageType,
+  pageTitle,
+  pageDescription,
+  pageUrl
+}) => {
 
   const siteUrl = 'https://centennialhillshomesforsale.com';
-  const fullCanonicalUrl = canonicalUrl || `${siteUrl}${typeof window !== 'undefined' ? window.location.pathname : ''}`;
+  const fullCanonicalUrl = pageUrl || `${siteUrl}${typeof window !== 'undefined' ? window.location.pathname : ''}`;
 
   // Enhanced Local Business Schema with E-A-T signals
   const localBusinessSchema = {
@@ -256,7 +249,7 @@ export default function AdvancedSEOOptimizer({
       
       try {
         observer.observe({ entryTypes: ['largest-contentful-paint', 'first-input', 'cumulative-layout-shift'] });
-      } catch (e) {
+      } catch {
         console.log('Performance observer not supported');
       }
 
@@ -271,9 +264,9 @@ export default function AdvancedSEOOptimizer({
   return (
     <Head>
       {/* Enhanced Title and Meta */}
-      <title>{title}</title>
-      <meta name="description" content={description} />
-      <meta name="keywords" content={keywords} />
+      <title>{pageTitle}</title>
+      <meta name="description" content={pageDescription} />
+      <meta name="keywords" content="Centennial Hills homes for sale, Providence Las Vegas, Skye Canyon real estate, Dr Jan Duffy REALTOR, luxury homes Las Vegas, 89149, 89166" />
       
       {/* Advanced Robot Instructions */}
       <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
@@ -293,8 +286,8 @@ export default function AdvancedSEOOptimizer({
       
       {/* Enhanced Open Graph */}
       <meta property="og:type" content="website" />
-      <meta property="og:title" content={title} />
-      <meta property="og:description" content={description} />
+      <meta property="og:title" content={pageTitle} />
+      <meta property="og:description" content={pageDescription} />
       <meta property="og:url" content={fullCanonicalUrl} />
       <meta property="og:image" content={`${siteUrl}/apple-touch-icon.png`} />
       <meta property="og:image:width" content="512" />
@@ -305,8 +298,8 @@ export default function AdvancedSEOOptimizer({
       
       {/* Enhanced Twitter Cards */}
       <meta name="twitter:card" content="summary_large_image" />
-      <meta name="twitter:title" content={title} />
-      <meta name="twitter:description" content={description} />
+      <meta name="twitter:title" content={pageTitle} />
+      <meta name="twitter:description" content={pageDescription} />
       <meta name="twitter:image" content={`${siteUrl}/apple-touch-icon.png`} />
       <meta name="twitter:site" content="@CentennialHillsHomes" />
       <meta name="twitter:creator" content="@DrJanDuffy" />
@@ -316,7 +309,7 @@ export default function AdvancedSEOOptimizer({
       <meta name="geo.placename" content="Las Vegas, Nevada" />
       <meta name="geo.position" content="36.268;-115.328" />
       <meta name="ICBM" content="36.268, -115.328" />
-      <meta name="DC.title" content={title} />
+      <meta name="DC.title" content={pageTitle} />
       
       {/* Business Information */}
       <meta name="contact" content="(702) 903-1952" />
@@ -404,3 +397,5 @@ export default function AdvancedSEOOptimizer({
     </Head>
   );
 }
+
+export default AdvancedSEOOptimizer;

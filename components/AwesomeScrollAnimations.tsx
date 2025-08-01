@@ -239,7 +239,7 @@ export const StaggerContainer: React.FC<StaggerContainerProps> = ({
           }
         }}
       >
-        {React.Children.map(children, (child, index) => (
+        {React.Children.map(children, (child) => (
           <motion.div
             variants={{
               hidden: { opacity: 0, y: 20 },

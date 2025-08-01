@@ -4,23 +4,12 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { 
-  MessageCircle, 
   Send, 
   X, 
   Bot, 
   User, 
-  Sparkles,
-  Home,
-  Search,
-  DollarSign,
-  MapPin,
-  Clock,
-  Star,
-  Zap,
   Mic,
-  MicOff,
-  Paperclip,
-  Smile
+  MicOff
 } from 'lucide-react';
 
 interface Message {
@@ -40,7 +29,7 @@ const AIAssistant: React.FC<AIAssistantProps> = ({ className = '' }) => {
   const [messages, setMessages] = useState<Message[]>([
     {
       id: '1',
-      text: "Hi! I'm your AI real estate assistant. I can help you find properties, answer questions about neighborhoods, and guide you through the home buying process. What would you like to know?",
+      text: "Hi! I&apos;m your AI real estate assistant. I can help you find properties, answer questions about neighborhoods, and guide you through the home buying process. What would you like to know?",
       sender: 'ai',
       timestamp: new Date()
     }
@@ -53,7 +42,7 @@ const AIAssistant: React.FC<AIAssistantProps> = ({ className = '' }) => {
 
   const quickSuggestions = [
     "Show me homes in Centennial Hills",
-    "What's the average price in Providence?",
+    "What&apos;s the average price in Providence?",
     "Tell me about Skye Canyon",
     "How do I get pre-approved?",
     "What are closing costs?",
@@ -94,8 +83,8 @@ const AIAssistant: React.FC<AIAssistantProps> = ({ className = '' }) => {
         "I'd be happy to help you with that! Let me search for properties that match your criteria.",
         "Great question! Based on current market data, I can provide you with detailed insights.",
         "I found several properties that might interest you. Would you like me to show you the details?",
-        "That's a common concern. Let me explain the process and what you can expect.",
-        "I can help you with that! Here's what you need to know about the local market.",
+        "That&apos;s a common concern. Let me explain the process and what you can expect.",
+        "I can help you with that! Here&apos;s what you need to know about the local market.",
         "Perfect! I have some great options for you. Let me share the details."
       ];
 

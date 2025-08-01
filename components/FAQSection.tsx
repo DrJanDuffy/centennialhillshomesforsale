@@ -82,7 +82,7 @@ const FAQSection: React.FC<FAQSectionProps> = ({
               )}
               
               <div className="space-y-4">
-                {categoryItems.map((item, index) => {
+                {categoryItems.map((item) => {
                   const globalIndex = items.indexOf(item);
                   const isOpen = openItems.includes(globalIndex);
                   

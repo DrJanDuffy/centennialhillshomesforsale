@@ -22,7 +22,7 @@ const SafeGoogleAnalytics: React.FC<GoogleAnalyticsProps> = ({ measurementId }) 
       const script = document.createElement('script');
       script.async = true;
       script.src = `https://www.googletagmanager.com/gtag/js?id=${measurementId}`;
-      script.onerror = (error) => {
+      script.onerror = () => {
         errorReporter.reportError({
           error: 'Failed to load Google Analytics script',
           component: 'SafeGoogleAnalytics',
@@ -61,7 +61,7 @@ const SafeGoogleAnalytics: React.FC<GoogleAnalyticsProps> = ({ measurementId }) 
         severity: 'medium'
       });
     }
-  }, [measurementId]);
+  }, [measurementId, errorReporter]);
 
   return null; // This component doesn't render anything
 };
