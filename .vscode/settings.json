@@ -30,5 +30,28 @@
     "*.jsx": "javascriptreact",
     "*.ts": "typescript",
     "*.tsx": "typescriptreact"
-  }
+  },
+  "cssPeek.supportTags": true,
+  "cssPeek.peekFromLanguages": [
+    "html",
+    "javascript",
+    "javascriptreact",
+    "typescript",
+    "typescriptreact",
+    "jsx",
+    "tsx",
+    "vue",
+    "svelte",
+    "astro",
+    "php"
+  ],
+  "cssPeek.peekToExclude": [
+    "**/node_modules/**",
+    "**/bower_components/**",
+    "**/.git/**",
+    "**/dist/**",
+    "**/build/**",
+    "**/.next/**",
+    "**/out/**"
+  ]
 }
