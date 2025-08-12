@@ -1,7 +1,7 @@
 {
   "buildCommand": "npm run build",
   "outputDirectory": "out",
-  "framework": null,
+  "framework": "nextjs",
   "redirects": [
     {
       "source": "http://centennialhillshomesforsale.com/:path*",
@@ -30,30 +30,26 @@
       ]
     }
   ],
-  "routes": [
+  "rewrites": [
     {
-      "src": "/search",
-      "dest": "/search.html"
+      "source": "/search",
+      "destination": "/search.html"
     },
     {
-      "src": "/buyers",
-      "dest": "/buyers.html"
+      "source": "/buyers",
+      "destination": "/buyers.html"
     },
     {
-      "src": "/blog",
-      "dest": "/blog.html"
+      "source": "/blog",
+      "destination": "/blog.html"
     },
     {
-      "src": "/neighborhoods",
-      "dest": "/neighborhoods.html"
+      "source": "/neighborhoods",
+      "destination": "/neighborhoods.html"
     },
     {
-      "src": "/featured-home",
-      "dest": "/featured-home.html"
-    },
-    {
-      "src": "/(.*)",
-      "dest": "/$1"
+      "source": "/featured-home",
+      "destination": "/featured-home.html"
     }
   ]
 }
