@@ -1,0 +1,16 @@
+{
+  "recommendations": [
+    "formulahendry.auto-rename-tag",
+    "bradlc.vscode-tailwindcss",
+    "esbenp.prettier-vscode",
+    "ms-vscode.vscode-typescript-next",
+    "ms-vscode.vscode-json",
+    "bradlc.vscode-tailwindcss",
+    "ms-vscode.vscode-css-peek",
+    "ms-vscode.vscode-html-language-features",
+    "ms-vscode.vscode-javascript-debug",
+    "ms-vscode.vscode-typescript-debug",
+    "ms-vscode.vscode-js-debug",
+    "ms-vscode.vscode-js-debug-companion"
+  ]
+}
