@@ -1,4 +1,3 @@
-import React from 'react';
 import AwesomeFrameworkDemo from '../components/AwesomeFrameworkDemo';
 import Layout from '../components/Layout';
 
