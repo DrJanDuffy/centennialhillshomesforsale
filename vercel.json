@@ -4,17 +4,13 @@
   "framework": "nextjs",
   "redirects": [
     {
-      "source": "http://centennialhillshomesforsale.com/:path*",
-      "destination": "https://centennialhillshomesforsale.com/:path*",
-      "permanent": true
-    },
-    {
-      "source": "https://www.centennialhillshomesforsale.com/:path*",
-      "destination": "https://centennialhillshomesforsale.com/:path*",
-      "permanent": true
-    },
-    {
-      "source": "http://www.centennialhillshomesforsale.com/:path*",
+      "source": "/:path*",
+      "has": [
+        {
+          "type": "host",
+          "value": "www.centennialhillshomesforsale.com"
+        }
+      ],
       "destination": "https://centennialhillshomesforsale.com/:path*",
       "permanent": true
     }
