@@ -1,5 +1,5 @@
-
-import React, { useState, useEffect } from 'react';
+import type React from 'react';
+import { useEffect, useState } from 'react';
 import ErrorTracker from '../utils/errorTracking';
 
 interface ErrorItem {

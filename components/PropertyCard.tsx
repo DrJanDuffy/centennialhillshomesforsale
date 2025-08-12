@@ -1,24 +1,24 @@
-
 'use client';
 
-import React, { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import Image from 'next/image';
-import { 
-  Heart, 
-  Share2, 
-  Eye, 
-  MapPin, 
-  Bed, 
-  Bath, 
-  Square, 
-  Home,
+import { AnimatePresence, motion } from 'framer-motion';
+import {
+  Bath,
+  Bed,
   Car,
+  Eye,
+  Heart,
+  Home,
+  MapPin,
+  Share2,
+  Shield,
+  Square,
   TreePine,
   Wifi,
-  Shield,
-  Zap
+  Zap,
 } from 'lucide-react';
+import Image from 'next/image';
+import type React from 'react';
+import { useState } from 'react';
 
 interface PropertyImage {
   url: string;
@@ -60,7 +60,7 @@ export const PropertyCard: React.FC<PropertyCardProps> = ({
   className = '',
   onFavorite,
   onShare,
-  onViewDetails
+  onViewDetails,
 }) => {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [isFavorited, setIsFavorited] = useState(false);
@@ -89,19 +89,27 @@ export const PropertyCard: React.FC<PropertyCardProps> = ({
 
   const getStatusColor = () => {
     switch (property.status) {
-      case 'active': return 'bg-accent-color';
-      case 'pending': return 'bg-warning-color';
-      case 'sold': return 'bg-secondary-color';
-      default: return 'bg-accent-color';
+      case 'active':
+        return 'bg-accent-color';
+      case 'pending':
+        return 'bg-warning-color';
+      case 'sold':
+        return 'bg-secondary-color';
+      default:
+        return 'bg-accent-color';
     }
   };
 
   const getStatusText = () => {
     switch (property.status) {
-      case 'active': return 'Active';
-      case 'pending': return 'Pending';
-      case 'sold': return 'Sold';
-      default: return 'Active';
+      case 'active':
+        return 'Active';
+      case 'pending':
+        return 'Pending';
+      case 'sold':
+        return 'Sold';
+      default:
+        return 'Active';
     }
   };
 
@@ -114,19 +122,19 @@ export const PropertyCard: React.FC<PropertyCardProps> = ({
 
   const getFeatureIcon = (feature: string) => {
     const featureIcons: { [key: string]: React.ComponentType<{ className?: string }> } = {
-      'Pool': Bath,
+      Pool: Bath,
       'Mountain Views': TreePine,
       'Gourmet Kitchen': Home,
       'Smart Home': Zap,
       'Guest House': Home,
       'Wine Cellar': Shield,
       'Home Theater': Eye,
-      'Casita': Home,
+      Casita: Home,
       'Open Floor Plan': Square,
       'Upgraded Kitchen': Home,
       'Large Yard': TreePine,
-      'Garage': Car,
-      'High-Speed Internet': Wifi
+      Garage: Car,
+      'High-Speed Internet': Wifi,
     };
     return featureIcons[feature] || Home;
   };
@@ -165,9 +173,11 @@ export const PropertyCard: React.FC<PropertyCardProps> = ({
                 }}
               />
             ) : null}
-            
+
             {/* Fallback gradient background */}
-            <div className={`w-full h-full bg-gradient-to-br from-secondary-color/80 to-accent-color/80 flex items-center justify-center ${property.images && property.images.length > 0 ? 'hidden' : ''}`}>
+            <div
+              className={`w-full h-full bg-gradient-to-br from-secondary-color/80 to-accent-color/80 flex items-center justify-center ${property.images && property.images.length > 0 ? 'hidden' : ''}`}
+            >
               <Home className="w-16 h-16 text-white opacity-30" />
             </div>
           </motion.div>
@@ -184,14 +194,11 @@ export const PropertyCard: React.FC<PropertyCardProps> = ({
               aria-label="Previous image"
               title="Previous image"
             >
-              <motion.div
-                animate={{ x: isHovered ? -2 : 0 }}
-                transition={{ duration: 0.2 }}
-              >
+              <motion.div animate={{ x: isHovered ? -2 : 0 }} transition={{ duration: 0.2 }}>
                 ←
               </motion.div>
             </motion.button>
-            
+
             <motion.button
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.9 }}
@@ -200,10 +207,7 @@ export const PropertyCard: React.FC<PropertyCardProps> = ({
               aria-label="Next image"
               title="Next image"
             >
-              <motion.div
-                animate={{ x: isHovered ? 2 : 0 }}
-                transition={{ duration: 0.2 }}
-              >
+              <motion.div animate={{ x: isHovered ? 2 : 0 }} transition={{ duration: 0.2 }}>
                 →
               </motion.div>
             </motion.button>
@@ -227,7 +231,9 @@ export const PropertyCard: React.FC<PropertyCardProps> = ({
 
         {/* Status Badge */}
         <div className="absolute top-4 left-4">
-          <span className={`${getStatusColor()} text-white px-3 py-1 rounded-full text-sm font-semibold shadow-lg`}>
+          <span
+            className={`${getStatusColor()} text-white px-3 py-1 rounded-full text-sm font-semibold shadow-lg`}
+          >
             {getStatusText()}
           </span>
         </div>
@@ -246,12 +252,12 @@ export const PropertyCard: React.FC<PropertyCardProps> = ({
             whileTap={{ scale: 0.9 }}
             onClick={handleFavorite}
             className={`w-10 h-10 rounded-full backdrop-blur-md flex items-center justify-center transition-all duration-300 ${
-              isFavorited 
-                ? 'bg-red-500 text-white shadow-lg' 
+              isFavorited
+                ? 'bg-red-500 text-white shadow-lg'
                 : 'bg-white/20 text-white hover:bg-white/30'
             }`}
-            aria-label={isFavorited ? "Remove from favorites" : "Add to favorites"}
-            title={isFavorited ? "Remove from favorites" : "Add to favorites"}
+            aria-label={isFavorited ? 'Remove from favorites' : 'Add to favorites'}
+            title={isFavorited ? 'Remove from favorites' : 'Add to favorites'}
           >
             <motion.div
               animate={isFavorited ? { scale: [1, 1.2, 1] } : {}}
@@ -260,7 +266,7 @@ export const PropertyCard: React.FC<PropertyCardProps> = ({
               <Heart className={`w-5 h-5 ${isFavorited ? 'fill-current' : ''}`} />
             </motion.div>
           </motion.button>
-          
+
           <motion.button
             whileHover={{ scale: 1.1 }}
             whileTap={{ scale: 0.9 }}
@@ -290,9 +296,7 @@ export const PropertyCard: React.FC<PropertyCardProps> = ({
         {/* Header */}
         <div className="flex justify-between items-start mb-4">
           <div className="flex-1">
-            <h3 className="text-xl font-bold text-primary mb-2 line-clamp-1">
-              {property.address}
-            </h3>
+            <h3 className="text-xl font-bold text-primary mb-2 line-clamp-1">{property.address}</h3>
             <p className="text-secondary flex items-center text-sm">
               <MapPin className="w-4 h-4 mr-1" />
               {property.neighborhood.name}
@@ -308,7 +312,7 @@ export const PropertyCard: React.FC<PropertyCardProps> = ({
 
         {/* Property Stats */}
         <div className="grid grid-cols-3 gap-4 mb-6">
-          <motion.div 
+          <motion.div
             className="text-center p-3 bg-tertiary rounded-lg"
             whileHover={{ scale: 1.05, y: -2 }}
             transition={{ duration: 0.2 }}
@@ -319,8 +323,8 @@ export const PropertyCard: React.FC<PropertyCardProps> = ({
             </div>
             <div className="text-xs text-secondary">Beds</div>
           </motion.div>
-          
-          <motion.div 
+
+          <motion.div
             className="text-center p-3 bg-tertiary rounded-lg"
             whileHover={{ scale: 1.05, y: -2 }}
             transition={{ duration: 0.2 }}
@@ -331,8 +335,8 @@ export const PropertyCard: React.FC<PropertyCardProps> = ({
             </div>
             <div className="text-xs text-secondary">Baths</div>
           </motion.div>
-          
-          <motion.div 
+
+          <motion.div
             className="text-center p-3 bg-tertiary rounded-lg"
             whileHover={{ scale: 1.05, y: -2 }}
             transition={{ duration: 0.2 }}
@@ -383,7 +387,7 @@ export const PropertyCard: React.FC<PropertyCardProps> = ({
             <Eye className="w-4 h-4 mr-2 group-hover:scale-110 transition-transform" />
             View Details
           </motion.button>
-          
+
           <motion.button
             className="btn btn-outline group"
             whileHover={{ scale: 1.02 }}

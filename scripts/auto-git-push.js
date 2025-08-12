@@ -1,9 +1,9 @@
 
 #!/usr/bin/env node
 
-const { execSync } = require('child_process');
-const fs = require('fs');
-const path = require('path');
+const { execSync } = require('node:child_process');
+const _fs = require('node:fs');
+const _path = require('node:path');
 
 // Configuration
 const AUTO_COMMIT_MESSAGE = 'Automated commit: Updated project files';

@@ -1,5 +1,5 @@
-
-import React, { useState, useEffect } from 'react';
+import type React from 'react';
+import { useEffect, useState } from 'react';
 
 interface PerformanceMetrics {
   lcp: number;
@@ -16,15 +16,17 @@ export const AwesomePerformanceBar: React.FC = () => {
     // Simulate performance monitoring
     const checkPerformance = () => {
       if (typeof window !== 'undefined' && 'performance' in window) {
-        const navigation = performance.getEntriesByType('navigation')[0] as PerformanceNavigationTiming;
-        
+        const navigation = performance.getEntriesByType(
+          'navigation'
+        )[0] as PerformanceNavigationTiming;
+
         const simulatedMetrics: PerformanceMetrics = {
           lcp: Math.random() * 1000 + 1200, // Simulate good LCP
-          fid: Math.random() * 30 + 10,     // Simulate good FID
-          cls: Math.random() * 0.05 + 0.02,  // Simulate good CLS
-          ttfb: navigation.responseStart - navigation.requestStart || 150
+          fid: Math.random() * 30 + 10, // Simulate good FID
+          cls: Math.random() * 0.05 + 0.02, // Simulate good CLS
+          ttfb: navigation.responseStart - navigation.requestStart || 150,
         };
-        
+
         setMetrics(simulatedMetrics);
       }
     };
@@ -74,52 +76,58 @@ export const AwesomePerformanceBar: React.FC = () => {
         <span className="performance-icon">⚡</span>
         Core Web Vitals
       </div>
-      
+
       <div className="performance-grid">
         <div className="performance-row">
           <span>LCP:</span>
-          <span 
+          <span
             className="performance-value performance-value-dynamic"
-            style={{ '--performance-color': getScoreColor('lcp', metrics.lcp) } as React.CSSProperties}
+            style={
+              { '--performance-color': getScoreColor('lcp', metrics.lcp) } as React.CSSProperties
+            }
           >
             {formatMetric('lcp', metrics.lcp)}
           </span>
         </div>
-        
+
         <div className="performance-row">
           <span>FID:</span>
-          <span 
+          <span
             className="performance-value performance-value-dynamic"
-            style={{ '--performance-color': getScoreColor('fid', metrics.fid) } as React.CSSProperties}
+            style={
+              { '--performance-color': getScoreColor('fid', metrics.fid) } as React.CSSProperties
+            }
           >
             {formatMetric('fid', metrics.fid)}
           </span>
         </div>
-        
+
         <div className="performance-row">
           <span>CLS:</span>
-          <span 
+          <span
             className="performance-value performance-value-dynamic"
-            style={{ '--performance-color': getScoreColor('cls', metrics.cls) } as React.CSSProperties}
+            style={
+              { '--performance-color': getScoreColor('cls', metrics.cls) } as React.CSSProperties
+            }
           >
             {formatMetric('cls', metrics.cls)}
           </span>
         </div>
-        
+
         <div className="performance-row">
           <span>TTFB:</span>
-          <span 
+          <span
             className="performance-value performance-value-dynamic"
-            style={{ '--performance-color': getScoreColor('ttfb', metrics.ttfb) } as React.CSSProperties}
+            style={
+              { '--performance-color': getScoreColor('ttfb', metrics.ttfb) } as React.CSSProperties
+            }
           >
             {formatMetric('ttfb', metrics.ttfb)}
           </span>
         </div>
       </div>
-      
-      <div className="performance-status">
-        🚀 AWESOME PERFORMANCE
-      </div>
+
+      <div className="performance-status">🚀 AWESOME PERFORMANCE</div>
     </div>
   );
 };

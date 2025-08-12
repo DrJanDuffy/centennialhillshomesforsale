@@ -2,26 +2,26 @@
 
 /* ===== ENHANCED PROPERTY SEARCH ===== */
 .enhanced-property-search {
-  --search-primary: #0A2540;
-  --search-secondary: #3A8DDE;
-  --search-accent: #16B286;
-  --search-success: #10B981;
-  --search-warning: #F59E0B;
-  --search-error: #EF4444;
-  --search-gray-50: #F9FAFB;
-  --search-gray-100: #F3F4F6;
-  --search-gray-200: #E5E7EB;
-  --search-gray-300: #D1D5DB;
-  --search-gray-400: #9CA3AF;
-  --search-gray-500: #6B7280;
-  --search-gray-600: #4B5563;
+  --search-primary: #0a2540;
+  --search-secondary: #3a8dde;
+  --search-accent: #16b286;
+  --search-success: #10b981;
+  --search-warning: #f59e0b;
+  --search-error: #ef4444;
+  --search-gray-50: #f9fafb;
+  --search-gray-100: #f3f4f6;
+  --search-gray-200: #e5e7eb;
+  --search-gray-300: #d1d5db;
+  --search-gray-400: #9ca3af;
+  --search-gray-500: #6b7280;
+  --search-gray-600: #4b5563;
   --search-gray-700: #374151;
-  --search-gray-800: #1F2937;
+  --search-gray-800: #1f2937;
   --search-gray-900: #111827;
 }
 
 .enhanced-property-search .bg-white {
-  background: linear-gradient(135deg, #FFFFFF 0%, #F8FAFC 100%);
+  background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
   border: 1px solid var(--search-gray-200);
 }
 
@@ -96,21 +96,21 @@
 
 /* ===== ENHANCED CONTACT FORM ===== */
 .enhanced-contact-form {
-  --contact-primary: #0A2540;
-  --contact-secondary: #3A8DDE;
-  --contact-accent: #16B286;
-  --contact-success: #10B981;
-  --contact-warning: #F59E0B;
-  --contact-error: #EF4444;
+  --contact-primary: #0a2540;
+  --contact-secondary: #3a8dde;
+  --contact-accent: #16b286;
+  --contact-success: #10b981;
+  --contact-warning: #f59e0b;
+  --contact-error: #ef4444;
 }
 
 .enhanced-contact-form .bg-white {
-  background: linear-gradient(135deg, #FFFFFF 0%, #F8FAFC 100%);
+  background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
   border: 1px solid var(--contact-gray-200);
 }
 
 .enhanced-contact-form .bg-blue-50 {
-  background: linear-gradient(135deg, #EFF6FF 0%, #DBEAFE 100%);
+  background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%);
   border: 1px solid var(--contact-blue-200);
 }
 
@@ -160,7 +160,7 @@
 
 .enhanced-contact-form .bg-blue-50 > div:hover {
   transform: translateY(-2px);
-  background: linear-gradient(135deg, #DBEAFE 0%, #BFDBFE 100%);
+  background: linear-gradient(135deg, #dbeafe 0%, #bfdbfe 100%);
 }
 
 /* ===== ENHANCED ANIMATIONS ===== */
@@ -217,12 +217,12 @@
 
 /* ===== ENHANCED BUTTONS ===== */
 .enhanced-button {
-  --btn-primary: #0A2540;
-  --btn-secondary: #3A8DDE;
-  --btn-accent: #16B286;
-  --btn-outline: #E5E7EB;
-  --btn-text: #FFFFFF;
-  --btn-text-dark: #1F2937;
+  --btn-primary: #0a2540;
+  --btn-secondary: #3a8dde;
+  --btn-accent: #16b286;
+  --btn-outline: #e5e7eb;
+  --btn-text: #ffffff;
+  --btn-text-dark: #1f2937;
 }
 
 .enhanced-button {
@@ -260,7 +260,7 @@
 }
 
 .enhanced-button.primary:hover:not(:disabled) {
-  background-color: #061A2B;
+  background-color: #061a2b;
   box-shadow: 0 4px 12px rgba(10, 37, 64, 0.3);
 }
 
@@ -270,7 +270,7 @@
 }
 
 .enhanced-button.secondary:hover:not(:disabled) {
-  background-color: #2B6CB0;
+  background-color: #2b6cb0;
   box-shadow: 0 4px 12px rgba(58, 141, 222, 0.3);
 }
 
@@ -313,12 +313,12 @@
 
 /* ===== ENHANCED FORM FIELDS ===== */
 .enhanced-form-field {
-  --field-border: #D1D5DB;
-  --field-border-focus: #3A8DDE;
-  --field-border-error: #EF4444;
-  --field-bg: #FFFFFF;
-  --field-text: #1F2937;
-  --field-placeholder: #9CA3AF;
+  --field-border: #d1d5db;
+  --field-border-focus: #3a8dde;
+  --field-border-error: #ef4444;
+  --field-bg: #ffffff;
+  --field-text: #1f2937;
+  --field-placeholder: #9ca3af;
 }
 
 .enhanced-form-field {
@@ -363,7 +363,7 @@
 .enhanced-form-field input:hover,
 .enhanced-form-field select:hover,
 .enhanced-form-field textarea:hover {
-  border-color: #9CA3AF;
+  border-color: #9ca3af;
 }
 
 .enhanced-form-field input.error,
@@ -384,16 +384,16 @@
   .enhanced-property-search .grid {
     grid-template-columns: 1fr;
   }
-  
+
   .enhanced-contact-form .grid {
     grid-template-columns: 1fr;
   }
-  
+
   .enhanced-button.lg {
     padding: 0.875rem 1.5rem;
     font-size: 0.875rem;
   }
-  
+
   .enhanced-form-field input,
   .enhanced-form-field select,
   .enhanced-form-field textarea {
@@ -406,11 +406,11 @@
   .enhanced-property-search .bg-white {
     padding: 1.5rem;
   }
-  
+
   .enhanced-contact-form .bg-white {
     padding: 1.5rem;
   }
-  
+
   .enhanced-button {
     width: 100%;
     justify-content: center;
@@ -439,7 +439,7 @@
   .enhanced-contact-form .bg-white {
     border: 2px solid #000000;
   }
-  
+
   .enhanced-button {
     border: 2px solid currentColor;
   }
@@ -463,9 +463,9 @@
     box-shadow: none;
     border: 1px solid #000000;
   }
-  
+
   .enhanced-button {
-    background-color: #FFFFFF !important;
+    background-color: #ffffff !important;
     color: #000000 !important;
     border: 1px solid #000000 !important;
   }

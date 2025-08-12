@@ -19,7 +19,7 @@ class ErrorReportingSystem {
   reportError(errorReport: ErrorReport): void {
     this.errors.push({
       ...errorReport,
-      timestamp: new Date().toISOString()
+      timestamp: new Date().toISOString(),
     } as any);
 
     // Only log in development

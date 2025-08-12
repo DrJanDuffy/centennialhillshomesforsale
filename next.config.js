@@ -1,10 +1,10 @@
-const crypto = require('crypto');
+const crypto = require('node:crypto');
 const withPWA = require('next-pwa')({
   dest: 'public',
   register: false,
   skipWaiting: false,
   disable: true,
-  runtimeCaching: []
+  runtimeCaching: [],
 });
 
 /** @type {import('next').NextConfig} */
@@ -22,11 +22,11 @@ const nextConfig = {
   images: {
     unoptimized: true,
     domains: ['images.unsplash.com', 'cdn.pixabay.com', 'source.unsplash.com'],
-    formats: ['image/webp', 'image/avif']
+    formats: ['image/webp', 'image/avif'],
   },
 
   compiler: {
-    removeConsole: process.env.NODE_ENV === 'production'
+    removeConsole: process.env.NODE_ENV === 'production',
   },
 
   webpack: (config, { isServer, dev }) => {
@@ -44,7 +44,7 @@ const nextConfig = {
         https: false,
         assert: false,
         os: false,
-        path: false
+        path: false,
       };
     }
 
@@ -91,14 +91,14 @@ const nextConfig = {
               minChunks: 1,
               priority: 10,
               reuseExistingChunk: true,
-            }
-          }
-        }
+            },
+          },
+        },
       };
     }
 
     return config;
-  }
+  },
 };
 
 module.exports = withPWA(nextConfig);

@@ -1,8 +1,8 @@
 
 #!/usr/bin/env node
 
-const fs = require('fs');
-const path = require('path');
+const fs = require('node:fs');
+const path = require('node:path');
 
 console.log('⚡ REALTOR WEBSITE PERFORMANCE AUDIT');
 console.log('====================================');
@@ -27,7 +27,7 @@ try {
   // Check for heavy dependencies
   const heavyDeps = ['lodash', 'moment', 'jquery'];
   const foundHeavyDeps = heavyDeps.filter(dep => 
-    packageJson.dependencies && packageJson.dependencies[dep]
+    packageJson.dependencies?.[dep]
   );
   
   if (foundHeavyDeps.length > 0) {
@@ -37,7 +37,7 @@ try {
     console.log(`  ✅ No heavy dependencies detected`);
     performanceMetrics.bundleSize = 90;
   }
-} catch (error) {
+} catch (_error) {
   console.log('  ❌ Error reading package.json');
   performanceMetrics.bundleSize = 50;
 }

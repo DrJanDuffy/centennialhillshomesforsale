@@ -1,33 +1,32 @@
-
 import { motion } from 'framer-motion';
 import Layout from '../components/Layout';
 import SEOOptimized from '../components/SEOOptimized';
 
 export default function BusinessVerification() {
   const verificationData = {
-    businessName: "Centennial Hills Homes | Providence & Skye Canyon | Dr. Jan Duffy, REALTOR®",
-    category: "Real Estate Agent",
-    address: "Providence Skye Canyon Dr, Las Vegas, NV 89166",
-    phone: "(702) 903-1952",
-    website: "https://centennialhillshomesforsale.com",
-    established: "September 1993",
+    businessName: 'Centennial Hills Homes | Providence & Skye Canyon | Dr. Jan Duffy, REALTOR®',
+    category: 'Real Estate Agent',
+    address: 'Providence Skye Canyon Dr, Las Vegas, NV 89166',
+    phone: '(702) 903-1952',
+    website: 'https://centennialhillshomesforsale.com',
+    established: 'September 1993',
     services: [
-      "Building lot sales",
-      "Buying agent services", 
-      "Commercial property buying & sales",
-      "First-time home buyer services",
-      "Luxury property buying & sales",
-      "New construction sales & leasing"
+      'Building lot sales',
+      'Buying agent services',
+      'Commercial property buying & sales',
+      'First-time home buyer services',
+      'Luxury property buying & sales',
+      'New construction sales & leasing',
     ],
     areas: [
-      "North Las Vegas",
-      "Centennial Hills", 
-      "Providence",
-      "Skye Canyon",
-      "Summerlin",
-      "Lone Mountain",
-      "Aliante"
-    ]
+      'North Las Vegas',
+      'Centennial Hills',
+      'Providence',
+      'Skye Canyon',
+      'Summerlin',
+      'Lone Mountain',
+      'Aliante',
+    ],
   };
 
   return (
@@ -37,9 +36,9 @@ export default function BusinessVerification() {
         description="Verified Google Business Profile for Dr. Jan Duffy, REALTOR® specializing in Centennial Hills, Providence, and Skye Canyon real estate since 1993."
         pageType="local-business"
       />
-      
+
       <main className="verification-page">
-        <motion.section 
+        <motion.section
           className="verification-hero"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -47,24 +46,40 @@ export default function BusinessVerification() {
         >
           <div className="container">
             <h1>✅ Verified Google Business Profile</h1>
-            <p className="lead">Dr. Jan Duffy, REALTOR® - Your Trusted Las Vegas Real Estate Expert</p>
-            
+            <p className="lead">
+              Dr. Jan Duffy, REALTOR® - Your Trusted Las Vegas Real Estate Expert
+            </p>
+
             <div className="verification-badge">
               <div className="badge-content">
                 <h2>🏢 {verificationData.businessName}</h2>
-                <p><strong>Category:</strong> {verificationData.category}</p>
-                <p><strong>📍 Address:</strong> {verificationData.address}</p>
-                <p><strong>📞 Phone:</strong> {verificationData.phone}</p>
-                <p><strong>🌐 Website:</strong> {verificationData.website}</p>
-                <p><strong>📅 Established:</strong> {verificationData.established}</p>
-                <p><strong>⭐ Rating:</strong> 4.9/5 (127 reviews)</p>
-                <p><strong>🏆 Recognition:</strong> Top 1% Las Vegas REALTOR®</p>
+                <p>
+                  <strong>Category:</strong> {verificationData.category}
+                </p>
+                <p>
+                  <strong>📍 Address:</strong> {verificationData.address}
+                </p>
+                <p>
+                  <strong>📞 Phone:</strong> {verificationData.phone}
+                </p>
+                <p>
+                  <strong>🌐 Website:</strong> {verificationData.website}
+                </p>
+                <p>
+                  <strong>📅 Established:</strong> {verificationData.established}
+                </p>
+                <p>
+                  <strong>⭐ Rating:</strong> 4.9/5 (127 reviews)
+                </p>
+                <p>
+                  <strong>🏆 Recognition:</strong> Top 1% Las Vegas REALTOR®
+                </p>
               </div>
             </div>
           </div>
         </motion.section>
 
-        <motion.section 
+        <motion.section
           className="services-verification"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -82,7 +97,7 @@ export default function BusinessVerification() {
           </div>
         </motion.section>
 
-        <motion.section 
+        <motion.section
           className="areas-verification"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -100,7 +115,7 @@ export default function BusinessVerification() {
           </div>
         </motion.section>
 
-        <motion.section 
+        <motion.section
           className="contact-verification"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}

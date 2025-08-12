@@ -1,5 +1,5 @@
-const fs = require('fs');
-const path = require('path');
+const fs = require('node:fs');
+const _path = require('node:path');
 
 const filesToFix = [
   './pages/about.tsx',
@@ -8,11 +8,11 @@ const filesToFix = [
   // Add all files with unused imports
 ];
 
-filesToFix.forEach(file => {
+filesToFix.forEach((file) => {
   try {
     console.log(`Processing: ${file}`);
     let content = fs.readFileSync(file, 'utf8');
-    
+
     // Remove all next/image imports
     content = content.replace(/import\s+.*Image.*from\s+['"]next\/image['"];?\n?/g, '');
     // Remove all next/link imports
@@ -23,4 +23,4 @@ filesToFix.forEach(file => {
   } catch (err) {
     console.error(`Error processing ${file}:`, err.message);
   }
-}); 
+});

@@ -29,8 +29,8 @@
     }
   },
   "include": [
-    "next-env.d.ts", 
-    "**/*.ts", 
+    "next-env.d.ts",
+    "**/*.ts",
     "**/*.tsx",
     "types/**/*.ts",
     "lib/**/*.ts",
@@ -41,11 +41,5 @@
     "hooks/**/*.ts",
     "utils/**/*.ts"
   ],
-  "exclude": [
-    "node_modules", 
-    "out", 
-    "build",
-    ".next",
-    "dist"
-  ]
+  "exclude": ["node_modules", "out", "build", ".next", "dist"]
 }

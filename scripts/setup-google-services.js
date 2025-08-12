@@ -1,6 +1,5 @@
-
-const fs = require('fs');
-const path = require('path');
+const fs = require('node:fs');
+const path = require('node:path');
 
 // Google Services Configuration
 const googleConfig = {
@@ -11,19 +10,19 @@ const googleConfig = {
       'HTML tag',
       'DNS record',
       'Google Analytics',
-      'Google Tag Manager'
+      'Google Tag Manager',
     ],
     sitemapUrls: [
       'https://centennialhillshomesforsale.com/sitemap.xml',
-      'https://centennialhillshomesforsale.com/sitemap-news.xml'
-    ]
+      'https://centennialhillshomesforsale.com/sitemap-news.xml',
+    ],
   },
   analytics: {
     measurementId: 'G-9CKG30GVQR',
     propertyName: 'Centennial Hills Homes',
     industryCategory: 'Real Estate',
     reportingTimeZone: 'America/Los_Angeles',
-    currency: 'USD'
+    currency: 'USD',
   },
   businessProfile: {
     name: 'Dr. Jan Duffy, REALTOR®',
@@ -37,15 +36,15 @@ const googleConfig = {
       'Skye Canyon, Las Vegas, NV',
       'Northwest Las Vegas, NV',
       'Las Vegas, NV 89149',
-      'Las Vegas, NV 89166'
-    ]
-  }
+      'Las Vegas, NV 89166',
+    ],
+  },
 };
 
 // Generate Google Search Console verification file
 function generateVerificationFile() {
-  const verificationContent = `google-site-verification: google${Date.now()}.html`;
-  
+  const _verificationContent = `google-site-verification: google${Date.now()}.html`;
+
   const htmlVerification = `<!DOCTYPE html>
 <html>
 <head>
@@ -59,7 +58,7 @@ function generateVerificationFile() {
 
   // Save verification file
   fs.writeFileSync(
-    path.join(__dirname, '../public/google-site-verification.html'), 
+    path.join(__dirname, '../public/google-site-verification.html'),
     htmlVerification
   );
 
@@ -92,10 +91,7 @@ Allow: /providence-las-vegas/
 Allow: /skye-canyon/
 `;
 
-  fs.writeFileSync(
-    path.join(__dirname, '../public/robots.txt'), 
-    robotsContent
-  );
+  fs.writeFileSync(path.join(__dirname, '../public/robots.txt'), robotsContent);
 
   console.log('✅ Enhanced robots.txt created');
 }
@@ -110,7 +106,7 @@ function generateAnalyticsConfig() {
       neighborhood: 'custom_dimension_2',
       price_range: 'custom_dimension_3',
       user_type: 'custom_dimension_4',
-      search_query: 'custom_dimension_5'
+      search_query: 'custom_dimension_5',
     },
     custom_events: [
       'property_search',
@@ -119,19 +115,19 @@ function generateAnalyticsConfig() {
       'phone_call_click',
       'property_favorite',
       'mortgage_calculator_use',
-      'map_interaction'
+      'map_interaction',
     ],
     conversion_goals: [
       'contact_form_completion',
       'phone_call_initiated',
       'property_inquiry_sent',
       'newsletter_signup',
-      'property_tour_request'
-    ]
+      'property_tour_request',
+    ],
   };
 
   fs.writeFileSync(
-    path.join(__dirname, '../config/analytics-config.json'), 
+    path.join(__dirname, '../config/analytics-config.json'),
     JSON.stringify(analyticsConfig, null, 2)
   );
 
@@ -155,17 +151,17 @@ function generateIndexingRequests() {
     '/market-update',
     '/services',
     '/faq',
-    '/testimonials'
+    '/testimonials',
   ];
 
-  const indexingRequests = pages.map(page => ({
+  const indexingRequests = pages.map((page) => ({
     url: `${googleConfig.searchConsole.siteUrl}${page}`,
     type: 'URL_UPDATED',
-    priority: page === '' ? 'HIGH' : page.includes('listings') ? 'HIGH' : 'MEDIUM'
+    priority: page === '' ? 'HIGH' : page.includes('listings') ? 'HIGH' : 'MEDIUM',
   }));
 
   fs.writeFileSync(
-    path.join(__dirname, '../config/indexing-requests.json'), 
+    path.join(__dirname, '../config/indexing-requests.json'),
     JSON.stringify(indexingRequests, null, 2)
   );
 
@@ -175,71 +171,72 @@ function generateIndexingRequests() {
 // Create structured data for Google
 function generateStructuredData() {
   const structuredData = {
-    "@context": "https://schema.org",
-    "@graph": [
+    '@context': 'https://schema.org',
+    '@graph': [
       {
-        "@type": "WebSite",
-        "@id": `${googleConfig.searchConsole.siteUrl}/#website`,
-        "url": googleConfig.searchConsole.siteUrl,
-        "name": "Centennial Hills Homes For Sale",
-        "description": "Find luxury homes in Centennial Hills, Providence & Skye Canyon with Dr. Jan Duffy, top-rated REALTOR®",
-        "potentialAction": [
+        '@type': 'WebSite',
+        '@id': `${googleConfig.searchConsole.siteUrl}/#website`,
+        url: googleConfig.searchConsole.siteUrl,
+        name: 'Centennial Hills Homes For Sale',
+        description:
+          'Find luxury homes in Centennial Hills, Providence & Skye Canyon with Dr. Jan Duffy, top-rated REALTOR®',
+        potentialAction: [
           {
-            "@type": "SearchAction",
-            "target": {
-              "@type": "EntryPoint",
-              "urlTemplate": `${googleConfig.searchConsole.siteUrl}/listings?search={search_term_string}`
+            '@type': 'SearchAction',
+            target: {
+              '@type': 'EntryPoint',
+              urlTemplate: `${googleConfig.searchConsole.siteUrl}/listings?search={search_term_string}`,
             },
-            "query-input": "required name=search_term_string"
-          }
+            'query-input': 'required name=search_term_string',
+          },
         ],
-        "inLanguage": "en-US"
+        inLanguage: 'en-US',
       },
       {
-        "@type": "Organization",
-        "@id": `${googleConfig.searchConsole.siteUrl}/#organization`,
-        "name": googleConfig.businessProfile.name,
-        "url": googleConfig.searchConsole.siteUrl,
-        "telephone": googleConfig.businessProfile.phone,
-        "address": {
-          "@type": "PostalAddress",
-          "streetAddress": "Providence Skye Canyon Dr",
-          "addressLocality": "Las Vegas",
-          "addressRegion": "NV",
-          "postalCode": "89166",
-          "addressCountry": "US"
+        '@type': 'Organization',
+        '@id': `${googleConfig.searchConsole.siteUrl}/#organization`,
+        name: googleConfig.businessProfile.name,
+        url: googleConfig.searchConsole.siteUrl,
+        telephone: googleConfig.businessProfile.phone,
+        address: {
+          '@type': 'PostalAddress',
+          streetAddress: 'Providence Skye Canyon Dr',
+          addressLocality: 'Las Vegas',
+          addressRegion: 'NV',
+          postalCode: '89166',
+          addressCountry: 'US',
         },
-        "geo": {
-          "@type": "GeoCoordinates",
-          "latitude": 36.268,
-          "longitude": -115.328
+        geo: {
+          '@type': 'GeoCoordinates',
+          latitude: 36.268,
+          longitude: -115.328,
         },
-        "areaServed": googleConfig.businessProfile.serviceAreas.map(area => ({
-          "@type": "Place",
-          "name": area
+        areaServed: googleConfig.businessProfile.serviceAreas.map((area) => ({
+          '@type': 'Place',
+          name: area,
         })),
-        "hasOfferCatalog": {
-          "@type": "OfferCatalog",
-          "name": "Real Estate Services",
-          "itemListElement": [
+        hasOfferCatalog: {
+          '@type': 'OfferCatalog',
+          name: 'Real Estate Services',
+          itemListElement: [
             {
-              "@type": "Offer",
-              "name": "Home Buying Services",
-              "description": "Professional assistance for home buyers in Las Vegas"
+              '@type': 'Offer',
+              name: 'Home Buying Services',
+              description: 'Professional assistance for home buyers in Las Vegas',
             },
             {
-              "@type": "Offer", 
-              "name": "Home Selling Services",
-              "description": "Expert home selling services with proven results"
-            }
-          ]
-        }
-      }
-    ]
+              '@type': 'Offer',
+              name: 'Home Selling Services',
+              description: 'Expert home selling services with proven results',
+            },
+          ],
+        },
+      },
+    ],
   };
 
   fs.writeFileSync(
-    path.join(__dirname, '../public/structured-data.json'), 
+    path.join(__dirname, '../public/structured-data.json'),
     JSON.stringify(structuredData, null, 2)
   );
 
@@ -270,7 +267,6 @@ function setupGoogleServices() {
     console.log('3. Submit sitemaps to Google Search Console');
     console.log('4. Request indexing for all pages');
     console.log('5. Set up Google Analytics conversion tracking');
-
   } catch (error) {
     console.error('❌ Error during setup:', error);
   }
@@ -281,5 +277,5 @@ setupGoogleServices();
 
 module.exports = {
   googleConfig,
-  setupGoogleServices
+  setupGoogleServices,
 };

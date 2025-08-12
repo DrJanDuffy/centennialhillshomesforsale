@@ -1,76 +1,87 @@
-import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { Search, Play, ArrowRight, ChevronRight, Star, Home, Users, Award, TrendingUp, MapPin, DollarSign, Clock } from 'lucide-react';
+import {
+  ArrowRight,
+  Award,
+  ChevronRight,
+  Clock,
+  DollarSign,
+  Home,
+  MapPin,
+  Play,
+  Search,
+  Star,
+  TrendingUp,
+  Users,
+} from 'lucide-react';
+import type React from 'react';
+import { useEffect, useState } from 'react';
 
 const AwesomeHero: React.FC = () => {
   const [isVideoLoaded, setIsVideoLoaded] = useState(false);
 
-
   const stats = [
-    { 
-      icon: Home, 
-      label: 'Homes Sold', 
-      value: '500+', 
-      color: 'text-secondary-color', 
+    {
+      icon: Home,
+      label: 'Homes Sold',
+      value: '500+',
+      color: 'text-secondary-color',
       description: 'Successful transactions',
-      delay: 0.1
+      delay: 0.1,
     },
-    { 
-      icon: Users, 
-      label: 'Happy Families', 
-      value: '500+', 
-      color: 'text-accent-color', 
+    {
+      icon: Users,
+      label: 'Happy Families',
+      value: '500+',
+      color: 'text-accent-color',
       description: 'Satisfied clients',
-      delay: 0.2
+      delay: 0.2,
     },
-    { 
-      icon: Award, 
-      label: 'Years Experience', 
-      value: '15+', 
-      color: 'text-primary-color', 
+    {
+      icon: Award,
+      label: 'Years Experience',
+      value: '15+',
+      color: 'text-primary-color',
       description: 'Local expertise',
-      delay: 0.3
+      delay: 0.3,
     },
-    { 
-      icon: TrendingUp, 
-      label: 'Avg Days on Market', 
-      value: '12', 
-      color: 'text-warning-color', 
+    {
+      icon: TrendingUp,
+      label: 'Avg Days on Market',
+      value: '12',
+      color: 'text-warning-color',
       description: 'Fast sales',
-      delay: 0.4
-    }
+      delay: 0.4,
+    },
   ];
 
   const features = [
     {
       icon: Search,
       title: 'AI-Powered Search',
-      description: 'Find your perfect home with intelligent matching'
+      description: 'Find your perfect home with intelligent matching',
     },
     {
       icon: MapPin,
       title: 'Local Expertise',
-      description: '15+ years of Northwest Las Vegas knowledge'
+      description: '15+ years of Northwest Las Vegas knowledge',
     },
     {
       icon: DollarSign,
       title: 'Best Value',
-      description: 'Negotiate the best deals with expert guidance'
+      description: 'Negotiate the best deals with expert guidance',
     },
     {
       icon: Clock,
       title: 'Fast Results',
-      description: 'Average 12 days on market for quick sales'
-    }
+      description: 'Average 12 days on market for quick sales',
+    },
   ];
 
   useEffect(() => {
-    const timer = setInterval(() => {
-      
-    }, 3000);
+    const timer = setInterval(() => {}, 3000);
 
     return () => clearInterval(timer);
-  }, [stats.length]);
+  }, []);
 
   const handleVideoLoad = () => {
     setIsVideoLoaded(true);
@@ -92,14 +103,10 @@ const AwesomeHero: React.FC = () => {
           <source src="/videos/centennial-hills-hero.mp4" type="video/mp4" />
           <source src="/videos/centennial-hills-hero.webm" type="video/webm" />
         </video>
-        
+
         {/* Fallback Image */}
-        {!isVideoLoaded && (
-          <div 
-            className="w-full h-full bg-cover bg-center hero-poster-bg"
-          />
-        )}
-        
+        {!isVideoLoaded && <div className="w-full h-full bg-cover bg-center hero-poster-bg" />}
+
         {/* Gradient Overlay */}
         <div className="absolute inset-0 bg-gradient-to-r from-primary-color/90 via-primary-color/80 to-secondary-color/70"></div>
         <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent"></div>
@@ -113,7 +120,7 @@ const AwesomeHero: React.FC = () => {
           transition={{ duration: 0.8 }}
         >
           {/* Main Headline */}
-          <motion.h1 
+          <motion.h1
             className="text-5xl md:text-7xl font-extrabold mb-6 leading-tight"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -126,17 +133,18 @@ const AwesomeHero: React.FC = () => {
           </motion.h1>
 
           {/* Subtitle */}
-          <motion.p 
+          <motion.p
             className="text-xl md:text-2xl mb-8 max-w-3xl mx-auto opacity-90 leading-relaxed"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.4 }}
           >
-            Experience the future of real estate with AI-powered search, expert guidance, and unparalleled local knowledge
+            Experience the future of real estate with AI-powered search, expert guidance, and
+            unparalleled local knowledge
           </motion.p>
-          
+
           {/* Hero Stats */}
-          <motion.div 
+          <motion.div
             className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-12 max-w-4xl mx-auto"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -159,7 +167,7 @@ const AwesomeHero: React.FC = () => {
           </motion.div>
 
           {/* Hero CTA */}
-          <motion.div 
+          <motion.div
             className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-12"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -177,7 +185,7 @@ const AwesomeHero: React.FC = () => {
           </motion.div>
 
           {/* Features Grid */}
-          <motion.div 
+          <motion.div
             className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-5xl mx-auto"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -246,10 +254,14 @@ const AwesomeHero: React.FC = () => {
         className="absolute -bottom-20 left-1/2 transform -translate-x-1/2 z-20 w-full max-w-4xl px-6"
       >
         <div className="bg-white rounded-2xl shadow-2xl p-8">
-          <h2 className="text-3xl font-bold text-center mb-8 text-primary">Find Your Perfect Home</h2>
+          <h2 className="text-3xl font-bold text-center mb-8 text-primary">
+            Find Your Perfect Home
+          </h2>
           <div className="grid md:grid-cols-4 gap-6">
             <div className="form-group">
-              <label className="form-label" htmlFor="hero-location">Location</label>
+              <label className="form-label" htmlFor="hero-location">
+                Location
+              </label>
               <select id="hero-location" className="form-input" aria-label="Select location">
                 <option>All Areas</option>
                 <option>Centennial Hills</option>
@@ -258,7 +270,9 @@ const AwesomeHero: React.FC = () => {
               </select>
             </div>
             <div className="form-group">
-              <label className="form-label" htmlFor="hero-price">Price Range</label>
+              <label className="form-label" htmlFor="hero-price">
+                Price Range
+              </label>
               <select id="hero-price" className="form-input" aria-label="Select price range">
                 <option>Any Price</option>
                 <option>$300K - $500K</option>
@@ -268,8 +282,14 @@ const AwesomeHero: React.FC = () => {
               </select>
             </div>
             <div className="form-group">
-              <label className="form-label" htmlFor="hero-bedrooms">Bedrooms</label>
-              <select id="hero-bedrooms" className="form-input" aria-label="Select number of bedrooms">
+              <label className="form-label" htmlFor="hero-bedrooms">
+                Bedrooms
+              </label>
+              <select
+                id="hero-bedrooms"
+                className="form-input"
+                aria-label="Select number of bedrooms"
+              >
                 <option>Any</option>
                 <option>1+</option>
                 <option>2+</option>

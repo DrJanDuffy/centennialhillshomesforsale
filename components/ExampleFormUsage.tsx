@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import type React from 'react';
+import { useState } from 'react';
 import FormField from './FormField';
 import PropertyTypeSelector from './PropertyTypeSelector';
 
@@ -20,13 +21,13 @@ const ExampleFormUsage: React.FC = () => {
     propertyType: '',
     budget: '',
     timeline: '',
-    message: ''
+    message: '',
   });
 
   const handleChange = (field: keyof FormData, value: string) => {
-    setFormData(prev => ({
+    setFormData((prev) => ({
       ...prev,
-      [field]: value
+      [field]: value,
     }));
   };
 
@@ -42,7 +43,7 @@ const ExampleFormUsage: React.FC = () => {
     { value: '400k-600k', label: '$400k - $600k' },
     { value: '600k-800k', label: '$600k - $800k' },
     { value: '800k-1m', label: '$800k - $1M' },
-    { value: 'over-1m', label: 'Over $1M' }
+    { value: 'over-1m', label: 'Over $1M' },
   ];
 
   const timelineOptions = [
@@ -51,13 +52,13 @@ const ExampleFormUsage: React.FC = () => {
     { value: '1-3-months', label: '1-3 Months' },
     { value: '3-6-months', label: '3-6 Months' },
     { value: '6-12-months', label: '6-12 Months' },
-    { value: 'just-looking', label: 'Just Looking' }
+    { value: 'just-looking', label: 'Just Looking' },
   ];
 
   return (
     <div className="max-w-2xl mx-auto p-6">
       <h2 className="text-2xl font-bold mb-6">Property Inquiry Form</h2>
-      
+
       <form onSubmit={handleSubmit} className="space-y-6">
         {/* Basic Information */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -71,7 +72,7 @@ const ExampleFormUsage: React.FC = () => {
             required
             placeholder="Enter your full name"
           />
-          
+
           <FormField
             type="email"
             id="email"
@@ -101,7 +102,7 @@ const ExampleFormUsage: React.FC = () => {
             onChange={(value) => handleChange('propertyType', value)}
             required
           />
-          
+
           <FormField
             type="select"
             id="budget"
@@ -147,4 +148,4 @@ const ExampleFormUsage: React.FC = () => {
   );
 };
 
-export default ExampleFormUsage; 
+export default ExampleFormUsage;

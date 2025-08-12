@@ -59,7 +59,7 @@
 
 /* Loading State */
 .realscoutContainer::before {
-  content: '';
+  content: "";
   position: absolute;
   top: 50%;
   left: 50%;
@@ -89,7 +89,7 @@
 
 /* Error State */
 .realscoutContainer:empty::after {
-  content: 'RealScout widget is loading...';
+  content: "RealScout widget is loading...";
   position: absolute;
   top: 50%;
   left: 50%;
@@ -136,8 +136,12 @@
 
 /* Animation */
 @keyframes spin {
-  0% { transform: translate(-50%, -50%) rotate(0deg); }
-  100% { transform: translate(-50%, -50%) rotate(360deg); }
+  0% {
+    transform: translate(-50%, -50%) rotate(0deg);
+  }
+  100% {
+    transform: translate(-50%, -50%) rotate(360deg);
+  }
 }
 
 /* RealScout Element Overrides */
@@ -159,7 +163,14 @@
 }
 
 /* Fallback for when RealScout fails to load */
-.realscoutContainer:not(:has(realscout-office-listings, realscout-search, realscout-property-details, realscout-market-analysis)) {
+.realscoutContainer:not(
+    :has(
+        realscout-office-listings,
+        realscout-search,
+        realscout-property-details,
+        realscout-market-analysis
+      )
+  ) {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -167,10 +178,17 @@
   border: 2px dashed var(--color-border);
 }
 
-.realscoutContainer:not(:has(realscout-office-listings, realscout-search, realscout-property-details, realscout-market-analysis))::after {
-  content: 'RealScout widget is currently unavailable. Please try again later.';
+.realscoutContainer:not(
+    :has(
+        realscout-office-listings,
+        realscout-search,
+        realscout-property-details,
+        realscout-market-analysis
+      )
+  )::after {
+  content: "RealScout widget is currently unavailable. Please try again later.";
   color: var(--color-text-secondary);
   font-size: 1rem;
   text-align: center;
   padding: 2rem;
-} 
+}

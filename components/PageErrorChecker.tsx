@@ -1,5 +1,5 @@
-import { useEffect, useState, useCallback } from 'react';
 import { useRouter } from 'next/router';
+import { useCallback, useEffect, useState } from 'react';
 
 interface PageError {
   page: string;
@@ -17,7 +17,11 @@ interface ErrorStats {
 export default function PageErrorChecker() {
   const router = useRouter();
   const [errors, setErrors] = useState<PageError[]>([]);
-  const [stats, setStats] = useState<ErrorStats>({ totalErrors: 0, criticalErrors: 0, lastCheck: '' });
+  const [stats, setStats] = useState<ErrorStats>({
+    totalErrors: 0,
+    criticalErrors: 0,
+    lastCheck: '',
+  });
   const [isClient, setIsClient] = useState(false);
 
   useEffect(() => {
@@ -38,7 +42,7 @@ export default function PageErrorChecker() {
             page: router.pathname,
             error: `Missing image: ${img.src || img.alt || `Image ${index + 1}`}`,
             severity: 'medium',
-            timestamp: new Date().toISOString()
+            timestamp: new Date().toISOString(),
           });
         }
 
@@ -48,7 +52,7 @@ export default function PageErrorChecker() {
             page: router.pathname,
             error: `Large unoptimized image: ${img.naturalWidth}x${img.naturalHeight}`,
             severity: 'medium',
-            timestamp: new Date().toISOString()
+            timestamp: new Date().toISOString(),
           });
         }
       });
@@ -57,12 +61,12 @@ export default function PageErrorChecker() {
       const links = document.querySelectorAll('a[href^="/"], a[href^="http"]');
       links.forEach((link) => {
         const href = link.getAttribute('href');
-        if (href && href.includes('undefined') || href === '#') {
+        if (href?.includes('undefined') || href === '#') {
           newErrors.push({
             page: router.pathname,
             error: `Broken link: ${href}`,
             severity: 'high',
-            timestamp: new Date().toISOString()
+            timestamp: new Date().toISOString(),
           });
         }
       });
@@ -74,7 +78,7 @@ export default function PageErrorChecker() {
           page: router.pathname,
           error: `Excessive DOM nodes: ${allElements.length} (recommended: <1500)`,
           severity: 'low',
-          timestamp: new Date().toISOString()
+          timestamp: new Date().toISOString(),
         });
       }
 
@@ -85,25 +89,24 @@ export default function PageErrorChecker() {
           page: router.pathname,
           error: `Console error: ${args.join(' ')}`,
           severity: 'high',
-          timestamp: new Date().toISOString()
+          timestamp: new Date().toISOString(),
         });
         originalError.apply(console, args);
       };
-
     } catch (error) {
       newErrors.push({
         page: router.pathname,
         error: `Error checking failed: ${error instanceof Error ? error.message : String(error)}`,
         severity: 'low',
-        timestamp: new Date().toISOString()
+        timestamp: new Date().toISOString(),
       });
     }
 
     setErrors(newErrors);
     setStats({
       totalErrors: newErrors.length,
-      criticalErrors: newErrors.filter(e => e.severity === 'critical').length,
-      lastCheck: new Date().toISOString()
+      criticalErrors: newErrors.filter((e) => e.severity === 'critical').length,
+      lastCheck: new Date().toISOString(),
     });
 
     // Store in localStorage for debugging
@@ -121,7 +124,7 @@ export default function PageErrorChecker() {
 
       return () => clearTimeout(timeout);
     }
-  }, [isClient, router?.pathname, checkPageErrors, router?.isReady]);
+  }, [isClient, checkPageErrors, router?.isReady]);
 
   // Only show errors in development
   if (process.env.NODE_ENV === 'production') {

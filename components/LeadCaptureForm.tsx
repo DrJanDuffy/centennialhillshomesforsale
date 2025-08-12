@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import type React from 'react';
+import { useState } from 'react';
 
 interface LeadData {
   name: string;
@@ -10,7 +11,10 @@ interface LeadData {
   message: string;
 }
 
-const LeadCaptureForm: React.FC<{ trigger: string; onClose: () => void }> = ({ trigger, onClose }) => {
+const LeadCaptureForm: React.FC<{ trigger: string; onClose: () => void }> = ({
+  trigger,
+  onClose,
+}) => {
   const [formData, setFormData] = useState<LeadData>({
     name: '',
     email: '',
@@ -18,7 +22,7 @@ const LeadCaptureForm: React.FC<{ trigger: string; onClose: () => void }> = ({ t
     interest: 'buying',
     timeline: '1-3 months',
     budget: '$600K-$700K',
-    message: ''
+    message: '',
   });
 
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -27,7 +31,7 @@ const LeadCaptureForm: React.FC<{ trigger: string; onClose: () => void }> = ({ t
     name: '',
     email: '',
     phone: '',
-    message: ''
+    message: '',
   });
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -38,7 +42,7 @@ const LeadCaptureForm: React.FC<{ trigger: string; onClose: () => void }> = ({ t
         name: !formData.name ? 'Name is required' : '',
         email: !formData.email ? 'Email is required' : '',
         phone: !formData.phone ? 'Phone is required' : '',
-        message: ''
+        message: '',
       });
       return;
     }
@@ -54,7 +58,7 @@ const LeadCaptureForm: React.FC<{ trigger: string; onClose: () => void }> = ({ t
         body: JSON.stringify({
           ...formData,
           trigger,
-          timestamp: new Date().toISOString()
+          timestamp: new Date().toISOString(),
         }),
       });
 
@@ -80,10 +84,10 @@ const LeadCaptureForm: React.FC<{ trigger: string; onClose: () => void }> = ({ t
           </p>
           <div className="bg-blue-50 rounded-lg p-4 mb-6">
             <p className="text-sm text-blue-800">
-              <strong>Next Steps:</strong><br/>
-              • Personal consultation call<br/>
-              • Custom property search<br/>
-              • Market analysis for your needs
+              <strong>Next Steps:</strong>
+              <br />• Personal consultation call
+              <br />• Custom property search
+              <br />• Market analysis for your needs
             </p>
           </div>
           <button
@@ -101,13 +105,8 @@ const LeadCaptureForm: React.FC<{ trigger: string; onClose: () => void }> = ({ t
     <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
       <div className="bg-white rounded-xl p-6 max-w-lg w-full max-h-[90vh] overflow-y-auto">
         <div className="flex justify-between items-center mb-6">
-          <h3 className="text-xl font-bold text-gray-900">
-            Get Your Free Consultation
-          </h3>
-          <button
-            onClick={onClose}
-            className="text-gray-400 hover:text-gray-600 text-2xl"
-          >
+          <h3 className="text-xl font-bold text-gray-900">Get Your Free Consultation</h3>
+          <button onClick={onClose} className="text-gray-400 hover:text-gray-600 text-2xl">
             ×
           </button>
         </div>
@@ -115,28 +114,24 @@ const LeadCaptureForm: React.FC<{ trigger: string; onClose: () => void }> = ({ t
         <form onSubmit={handleSubmit} className="space-y-4">
           <div className="grid grid-cols-2 gap-4">
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">
-                Full Name *
-              </label>
+              <label className="block text-sm font-medium text-gray-700 mb-1">Full Name *</label>
               <input
                 type="text"
                 required
                 value={formData.name}
-                onChange={(e) => setFormData(prev => ({ ...prev, name: e.target.value }))}
+                onChange={(e) => setFormData((prev) => ({ ...prev, name: e.target.value }))}
                 className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
                 placeholder="Your name"
               />
               {errors.name && <p className="text-red-500 text-xs italic">{errors.name}</p>}
             </div>
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">
-                Phone Number *
-              </label>
+              <label className="block text-sm font-medium text-gray-700 mb-1">Phone Number *</label>
               <input
                 type="tel"
                 required
                 value={formData.phone}
-                onChange={(e) => setFormData(prev => ({ ...prev, phone: e.target.value }))}
+                onChange={(e) => setFormData((prev) => ({ ...prev, phone: e.target.value }))}
                 className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
                 placeholder="(702) 555-0123"
               />
@@ -145,14 +140,12 @@ const LeadCaptureForm: React.FC<{ trigger: string; onClose: () => void }> = ({ t
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">
-              Email Address *
-            </label>
+            <label className="block text-sm font-medium text-gray-700 mb-1">Email Address *</label>
             <input
               type="email"
               required
               value={formData.email}
-              onChange={(e) => setFormData(prev => ({ ...prev, email: e.target.value }))}
+              onChange={(e) => setFormData((prev) => ({ ...prev, email: e.target.value }))}
               className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
               placeholder="your@email.com"
             />
@@ -161,13 +154,16 @@ const LeadCaptureForm: React.FC<{ trigger: string; onClose: () => void }> = ({ t
 
           <div className="grid grid-cols-2 gap-4">
             <div>
-              <label htmlFor="interest-select" className="block text-sm font-medium text-gray-700 mb-1">
+              <label
+                htmlFor="interest-select"
+                className="block text-sm font-medium text-gray-700 mb-1"
+              >
                 I&apos;m Interested In
               </label>
               <select
                 id="interest-select"
                 value={formData.interest}
-                onChange={(e) => setFormData(prev => ({ ...prev, interest: e.target.value }))}
+                onChange={(e) => setFormData((prev) => ({ ...prev, interest: e.target.value }))}
                 className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
                 aria-label="Select your interest in real estate services"
               >
@@ -179,13 +175,16 @@ const LeadCaptureForm: React.FC<{ trigger: string; onClose: () => void }> = ({ t
               </select>
             </div>
             <div>
-              <label htmlFor="timeline-select" className="block text-sm font-medium text-gray-700 mb-1">
+              <label
+                htmlFor="timeline-select"
+                className="block text-sm font-medium text-gray-700 mb-1"
+              >
                 Timeline
               </label>
               <select
                 id="timeline-select"
                 value={formData.timeline}
-                onChange={(e) => setFormData(prev => ({ ...prev, timeline: e.target.value }))}
+                onChange={(e) => setFormData((prev) => ({ ...prev, timeline: e.target.value }))}
                 className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
                 aria-label="Select your timeline for real estate transaction"
               >
@@ -200,13 +199,16 @@ const LeadCaptureForm: React.FC<{ trigger: string; onClose: () => void }> = ({ t
 
           {formData.interest === 'buying' && (
             <div>
-              <label htmlFor="budget-select" className="block text-sm font-medium text-gray-700 mb-1">
+              <label
+                htmlFor="budget-select"
+                className="block text-sm font-medium text-gray-700 mb-1"
+              >
                 Budget Range
               </label>
               <select
                 id="budget-select"
                 value={formData.budget}
-                onChange={(e) => setFormData(prev => ({ ...prev, budget: e.target.value }))}
+                onChange={(e) => setFormData((prev) => ({ ...prev, budget: e.target.value }))}
                 className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
                 aria-label="Select your budget range for home purchase"
               >
@@ -225,7 +227,7 @@ const LeadCaptureForm: React.FC<{ trigger: string; onClose: () => void }> = ({ t
             </label>
             <textarea
               value={formData.message}
-              onChange={(e) => setFormData(prev => ({ ...prev, message: e.target.value }))}
+              onChange={(e) => setFormData((prev) => ({ ...prev, message: e.target.value }))}
               className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
               rows={3}
               placeholder="Tell me about your specific needs..."
@@ -234,11 +236,11 @@ const LeadCaptureForm: React.FC<{ trigger: string; onClose: () => void }> = ({ t
 
           <div className="bg-blue-50 rounded-lg p-4">
             <p className="text-sm text-blue-800">
-              <strong>🎯 Why work with me?</strong><br/>
-              • Expert knowledge of Centennial Hills<br/>
-              • Proven track record (98% success rate)<br/>
-              • Personalized service & quick response<br/>
-              • Free market analysis & consultation
+              <strong>🎯 Why work with me?</strong>
+              <br />• Expert knowledge of Centennial Hills
+              <br />• Proven track record (98% success rate)
+              <br />• Personalized service & quick response
+              <br />• Free market analysis & consultation
             </p>
           </div>
 

@@ -1,4 +1,4 @@
-import React from 'react';
+import type React from 'react';
 
 interface AwesomeLoaderProps {
   isLoading?: boolean;
@@ -11,20 +11,20 @@ const AwesomeLoader: React.FC<AwesomeLoaderProps> = ({
   isLoading = true,
   message = 'Loading...',
   size = 'medium',
-  variant = 'default'
+  variant = 'default',
 }) => {
   if (!isLoading) return null;
 
   const sizeClasses = {
     small: 'h-6 w-6',
-    medium: 'h-12 w-12', 
-    large: 'h-16 w-16'
+    medium: 'h-12 w-12',
+    large: 'h-16 w-16',
   };
 
   const containerClasses = {
     small: 'p-4',
     medium: 'p-8',
-    large: 'p-12'
+    large: 'p-12',
   };
 
   const getVariantContent = () => {
@@ -32,17 +32,17 @@ const AwesomeLoader: React.FC<AwesomeLoaderProps> = ({
       case 'property':
         return {
           icon: '🏠',
-          defaultMessage: 'Searching properties...'
+          defaultMessage: 'Searching properties...',
         };
       case 'search':
         return {
           icon: '🔍',
-          defaultMessage: 'Searching...'
+          defaultMessage: 'Searching...',
         };
       default:
         return {
           icon: '⚡',
-          defaultMessage: 'Loading...'
+          defaultMessage: 'Loading...',
         };
     }
   };
@@ -54,7 +54,9 @@ const AwesomeLoader: React.FC<AwesomeLoaderProps> = ({
     <div className={`flex flex-col items-center justify-center ${containerClasses[size]}`}>
       {/* Animated Spinner */}
       <div className="relative">
-        <div className={`${sizeClasses[size]} border-4 border-gray-200 border-t-blue-500 rounded-full animate-spin`}></div>
+        <div
+          className={`${sizeClasses[size]} border-4 border-gray-200 border-t-blue-500 rounded-full animate-spin`}
+        ></div>
 
         {/* Center Icon */}
         <div className="absolute inset-0 flex items-center justify-center">

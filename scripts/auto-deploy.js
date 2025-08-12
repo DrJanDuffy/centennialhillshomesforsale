@@ -1,7 +1,7 @@
 
 #!/usr/bin/env node
 
-const { execSync } = require('child_process');
+const { execSync } = require('node:child_process');
 
 console.log('🚀 Starting automatic deployment...');
 

@@ -1,16 +1,15 @@
-
 'use client';
 
-import { useEffect } from 'react';
 import { usePathname } from 'next/navigation';
 import Script from 'next/script';
+import { useEffect } from 'react';
 
 interface GoogleAnalyticsProps {
   measurementId?: string;
 }
 
-const GoogleAnalytics: React.FC<GoogleAnalyticsProps> = ({ 
-  measurementId = process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID || 'G-PLACEHOLDER' 
+const GoogleAnalytics: React.FC<GoogleAnalyticsProps> = ({
+  measurementId = process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID || 'G-PLACEHOLDER',
 }) => {
   const pathname = usePathname();
 
@@ -20,13 +19,17 @@ const GoogleAnalytics: React.FC<GoogleAnalyticsProps> = ({
       window.gtag('config', measurementId, {
         page_path: pathname,
         page_title: document.title,
-        page_location: window.location.href
+        page_location: window.location.href,
       });
     }
   }, [pathname, measurementId]);
 
   // Don't render in development or if no measurement ID
-  if (process.env.NODE_ENV === 'development' || !measurementId || measurementId === 'G-PLACEHOLDER') {
+  if (
+    process.env.NODE_ENV === 'development' ||
+    !measurementId ||
+    measurementId === 'G-PLACEHOLDER'
+  ) {
     return null;
   }
 

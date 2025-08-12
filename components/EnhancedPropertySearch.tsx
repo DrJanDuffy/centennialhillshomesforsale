@@ -1,8 +1,9 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { Search, MapPin, DollarSign, Home, Filter } from 'lucide-react';
+import { Filter, Home, MapPin, Search } from 'lucide-react';
+import type React from 'react';
+import { useState } from 'react';
 import { EnhancedButton, EnhancedFormField } from './EnhancedAnimations';
 
 interface PropertyFilters {
@@ -25,15 +26,15 @@ interface PropertySearchProps {
 export const EnhancedPropertySearch: React.FC<PropertySearchProps> = ({
   onSearch,
   className = '',
-  showAdvanced = false
+  showAdvanced = false,
 }) => {
   const [filters, setFilters] = useState<PropertyFilters>({
     location: '',
     priceRange: '',
     bedrooms: '',
-    propertyType: ''
+    propertyType: '',
   });
-  
+
   const [showAdvancedFilters, setShowAdvancedFilters] = useState(showAdvanced);
   const [isSearching, setIsSearching] = useState(false);
   const [searchResults, setSearchResults] = useState<any[]>([]);
@@ -45,7 +46,7 @@ export const EnhancedPropertySearch: React.FC<PropertySearchProps> = ({
     { value: 'providence', label: 'Providence' },
     { value: 'skye-canyon', label: 'Skye Canyon' },
     { value: 'northwest-las-vegas', label: 'Northwest Las Vegas' },
-    { value: 'all-areas', label: 'All Areas' }
+    { value: 'all-areas', label: 'All Areas' },
   ];
 
   // Price range options
@@ -55,7 +56,7 @@ export const EnhancedPropertySearch: React.FC<PropertySearchProps> = ({
     { value: '750-1000', label: '$750K - $1M' },
     { value: '1000-1500', label: '$1M - $1.5M' },
     { value: '1500+', label: '$1.5M+' },
-    { value: 'any-price', label: 'Any Price' }
+    { value: 'any-price', label: 'Any Price' },
   ];
 
   // Bedroom options
@@ -65,7 +66,7 @@ export const EnhancedPropertySearch: React.FC<PropertySearchProps> = ({
     { value: '3', label: '3+' },
     { value: '4', label: '4+' },
     { value: '5+', label: '5+' },
-    { value: 'any', label: 'Any' }
+    { value: 'any', label: 'Any' },
   ];
 
   // Property type options
@@ -75,7 +76,7 @@ export const EnhancedPropertySearch: React.FC<PropertySearchProps> = ({
     { value: 'condo', label: 'Condo' },
     { value: 'luxury', label: 'Luxury' },
     { value: 'new-construction', label: 'New Construction' },
-    { value: 'all-types', label: 'All Types' }
+    { value: 'all-types', label: 'All Types' },
   ];
 
   // Bathroom options
@@ -85,7 +86,7 @@ export const EnhancedPropertySearch: React.FC<PropertySearchProps> = ({
     { value: '2', label: '2+' },
     { value: '2.5', label: '2.5+' },
     { value: '3', label: '3+' },
-    { value: 'any', label: 'Any' }
+    { value: 'any', label: 'Any' },
   ];
 
   // Square footage options
@@ -95,7 +96,7 @@ export const EnhancedPropertySearch: React.FC<PropertySearchProps> = ({
     { value: '2000-2500', label: '2,000 - 2,500 sq ft' },
     { value: '2500-3000', label: '2,500 - 3,000 sq ft' },
     { value: '3000+', label: '3,000+ sq ft' },
-    { value: 'any', label: 'Any Size' }
+    { value: 'any', label: 'Any Size' },
   ];
 
   // Feature options
@@ -107,13 +108,13 @@ export const EnhancedPropertySearch: React.FC<PropertySearchProps> = ({
     { value: 'guest-house', label: 'Guest House' },
     { value: 'wine-cellar', label: 'Wine Cellar' },
     { value: 'home-theater', label: 'Home Theater' },
-    { value: 'casita', label: 'Casita' }
+    { value: 'casita', label: 'Casita' },
   ];
 
   const handleFilterChange = (name: keyof PropertyFilters, value: string | string[]) => {
-    setFilters(prev => ({
+    setFilters((prev) => ({
       ...prev,
-      [name]: value
+      [name]: value,
     }));
   };
 
@@ -129,17 +130,17 @@ export const EnhancedPropertySearch: React.FC<PropertySearchProps> = ({
 
     try {
       // Simulate API call
-      await new Promise(resolve => setTimeout(resolve, 1500));
-      
+      await new Promise((resolve) => setTimeout(resolve, 1500));
+
       // Mock search results
       const mockResults = generateMockResults(filters);
       setSearchResults(mockResults);
-      
+
       // Call parent callback if provided
       if (onSearch) {
         onSearch(filters);
       }
-      
+
       // Scroll to results
       setTimeout(() => {
         const resultsElement = document.getElementById('search-results');
@@ -147,7 +148,6 @@ export const EnhancedPropertySearch: React.FC<PropertySearchProps> = ({
           resultsElement.scrollIntoView({ behavior: 'smooth' });
         }
       }, 100);
-      
     } catch (error) {
       console.error('Search failed:', error);
       setSearchResults([]);
@@ -168,7 +168,7 @@ export const EnhancedPropertySearch: React.FC<PropertySearchProps> = ({
         sqft: 3200,
         location: 'Centennial Hills',
         type: 'Single Family',
-        image: 'https://images.unsplash.com/photo-1564013799919-ab600027ffc6?w=800&h=600&fit=crop'
+        image: 'https://images.unsplash.com/photo-1564013799919-ab600027ffc6?w=800&h=600&fit=crop',
       },
       {
         id: '2',
@@ -179,7 +179,7 @@ export const EnhancedPropertySearch: React.FC<PropertySearchProps> = ({
         sqft: 4100,
         location: 'Centennial Hills',
         type: 'Luxury',
-        image: 'https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=800&h=600&fit=crop'
+        image: 'https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=800&h=600&fit=crop',
       },
       {
         id: '3',
@@ -190,31 +190,31 @@ export const EnhancedPropertySearch: React.FC<PropertySearchProps> = ({
         sqft: 2800,
         location: 'Skye Canyon',
         type: 'Single Family',
-        image: 'https://images.unsplash.com/photo-1600607687644-c7171b42498b?w=800&h=600&fit=crop'
-      }
+        image: 'https://images.unsplash.com/photo-1600607687644-c7171b42498b?w=800&h=600&fit=crop',
+      },
     ];
 
     // Filter based on search criteria
-    return baseProperties.filter(property => {
+    return baseProperties.filter((property) => {
       if (searchFilters.location && searchFilters.location !== 'all-areas') {
         if (!property.location.toLowerCase().includes(searchFilters.location.toLowerCase())) {
           return false;
         }
       }
-      
+
       if (searchFilters.bedrooms && searchFilters.bedrooms !== 'any') {
         const minBedrooms = parseInt(searchFilters.bedrooms);
         if (property.bedrooms < minBedrooms) {
           return false;
         }
       }
-      
+
       if (searchFilters.propertyType && searchFilters.propertyType !== 'all-types') {
         if (property.type.toLowerCase() !== searchFilters.propertyType.toLowerCase()) {
           return false;
         }
       }
-      
+
       return true;
     });
   };
@@ -224,7 +224,7 @@ export const EnhancedPropertySearch: React.FC<PropertySearchProps> = ({
       location: '',
       priceRange: '',
       bedrooms: '',
-      propertyType: ''
+      propertyType: '',
     });
     setSearchResults([]);
     setHasSearched(false);
@@ -238,7 +238,7 @@ export const EnhancedPropertySearch: React.FC<PropertySearchProps> = ({
   return (
     <div className={`enhanced-property-search ${className}`}>
       {/* Search Form */}
-      <motion.div 
+      <motion.div
         className="bg-white rounded-2xl shadow-2xl p-8 mb-8"
         initial={{ opacity: 0, y: 50 }}
         whileInView={{ opacity: 1, y: 0 }}
@@ -246,14 +246,12 @@ export const EnhancedPropertySearch: React.FC<PropertySearchProps> = ({
         viewport={{ once: true }}
       >
         <div className="text-center mb-8">
-          <h2 className="text-3xl font-bold mb-4 text-gray-800">
-            Find Your Perfect Home
-          </h2>
+          <h2 className="text-3xl font-bold mb-4 text-gray-800">Find Your Perfect Home</h2>
           <p className="text-gray-600">
             Use our advanced search to find properties that match your criteria
           </p>
         </div>
-        
+
         {/* Basic Search Fields */}
         <div className="grid md:grid-cols-4 gap-6 mb-6">
           <EnhancedFormField
@@ -265,7 +263,7 @@ export const EnhancedPropertySearch: React.FC<PropertySearchProps> = ({
             options={locationOptions}
             placeholder="Select location"
           />
-          
+
           <EnhancedFormField
             label="Price Range"
             name="priceRange"
@@ -275,7 +273,7 @@ export const EnhancedPropertySearch: React.FC<PropertySearchProps> = ({
             options={priceRangeOptions}
             placeholder="Select price range"
           />
-          
+
           <EnhancedFormField
             label="Bedrooms"
             name="bedrooms"
@@ -285,7 +283,7 @@ export const EnhancedPropertySearch: React.FC<PropertySearchProps> = ({
             options={bedroomOptions}
             placeholder="Select bedrooms"
           />
-          
+
           <EnhancedFormField
             label="Property Type"
             name="propertyType"
@@ -326,7 +324,7 @@ export const EnhancedPropertySearch: React.FC<PropertySearchProps> = ({
               options={bathroomOptions}
               placeholder="Select bathrooms"
             />
-            
+
             <EnhancedFormField
               label="Square Footage"
               name="sqft"
@@ -336,11 +334,9 @@ export const EnhancedPropertySearch: React.FC<PropertySearchProps> = ({
               options={sqftOptions}
               placeholder="Select square footage"
             />
-            
+
             <div className="form-field">
-              <label className="block text-sm font-medium text-gray-700 mb-2">
-                Features
-              </label>
+              <label className="block text-sm font-medium text-gray-700 mb-2">Features</label>
               <div className="grid grid-cols-2 gap-2">
                 {featureOptions.map((feature) => (
                   <label key={feature.value} className="flex items-center">
@@ -352,7 +348,10 @@ export const EnhancedPropertySearch: React.FC<PropertySearchProps> = ({
                         if (e.target.checked) {
                           handleFilterChange('features', [...currentFeatures, feature.value]);
                         } else {
-                          handleFilterChange('features', currentFeatures.filter(f => f !== feature.value));
+                          handleFilterChange(
+                            'features',
+                            currentFeatures.filter((f) => f !== feature.value)
+                          );
                         }
                       }}
                       className="mr-2"
@@ -377,16 +376,11 @@ export const EnhancedPropertySearch: React.FC<PropertySearchProps> = ({
             <Search className="w-5 h-5 mr-2" />
             {isSearching ? 'Searching...' : 'Search Properties'}
           </EnhancedButton>
-          
-          <EnhancedButton
-            onClick={clearFilters}
-            variant="outline"
-            size="lg"
-            disabled={isSearching}
-          >
+
+          <EnhancedButton onClick={clearFilters} variant="outline" size="lg" disabled={isSearching}>
             Clear Filters
           </EnhancedButton>
-          
+
           <EnhancedButton
             onClick={resetSearch}
             variant="secondary"
@@ -408,9 +402,7 @@ export const EnhancedPropertySearch: React.FC<PropertySearchProps> = ({
           transition={{ duration: 0.5 }}
         >
           <div className="text-center mb-8">
-            <h3 className="text-2xl font-bold text-gray-800 mb-2">
-              Search Results
-            </h3>
+            <h3 className="text-2xl font-bold text-gray-800 mb-2">Search Results</h3>
             <p className="text-gray-600">
               Found {searchResults.length} properties matching your criteria
             </p>
@@ -436,14 +428,14 @@ export const EnhancedPropertySearch: React.FC<PropertySearchProps> = ({
                       ${property.price.toLocaleString()}
                     </div>
                   </div>
-                  
+
                   <div className="p-4">
                     <h4 className="font-semibold text-gray-800 mb-2">{property.address}</h4>
                     <div className="flex items-center text-gray-600 mb-2">
                       <MapPin className="w-4 h-4 mr-1" />
                       <span className="text-sm">{property.location}</span>
                     </div>
-                    
+
                     <div className="grid grid-cols-3 gap-4 mb-4 text-center">
                       <div>
                         <div className="font-bold text-gray-800">{property.bedrooms}</div>
@@ -454,23 +446,18 @@ export const EnhancedPropertySearch: React.FC<PropertySearchProps> = ({
                         <div className="text-xs text-gray-600">Baths</div>
                       </div>
                       <div>
-                        <div className="font-bold text-gray-800">{property.sqft.toLocaleString()}</div>
+                        <div className="font-bold text-gray-800">
+                          {property.sqft.toLocaleString()}
+                        </div>
                         <div className="text-xs text-gray-600">Sq Ft</div>
                       </div>
                     </div>
-                    
+
                     <div className="flex gap-2">
-                      <EnhancedButton
-                        variant="primary"
-                        size="sm"
-                        className="flex-1"
-                      >
+                      <EnhancedButton variant="primary" size="sm" className="flex-1">
                         View Details
                       </EnhancedButton>
-                      <EnhancedButton
-                        variant="outline"
-                        size="sm"
-                      >
+                      <EnhancedButton variant="outline" size="sm">
                         Save
                       </EnhancedButton>
                     </div>
@@ -485,10 +472,7 @@ export const EnhancedPropertySearch: React.FC<PropertySearchProps> = ({
               <p className="text-gray-500 mb-4">
                 Try adjusting your search criteria or expanding your search area
               </p>
-              <EnhancedButton
-                onClick={clearFilters}
-                variant="primary"
-              >
+              <EnhancedButton onClick={clearFilters} variant="primary">
                 Modify Search
               </EnhancedButton>
             </div>

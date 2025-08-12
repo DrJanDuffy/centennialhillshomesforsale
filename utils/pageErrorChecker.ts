@@ -1,4 +1,3 @@
-
 interface PageError {
   type: 'missing-meta' | 'broken-link' | 'missing-schema' | 'seo-issue';
   severity: 'low' | 'medium' | 'high' | 'critical';
@@ -18,7 +17,7 @@ class PageErrorChecker {
   private errors: PageError[] = [];
   private warnings: PageError[] = [];
 
-  validatePage(url?: string): PageValidationResult {
+  validatePage(_url?: string): PageValidationResult {
     this.errors = [];
     this.warnings = [];
 
@@ -72,7 +71,12 @@ class PageErrorChecker {
     const images = document.querySelectorAll('img');
     images.forEach((img, index) => {
       if (!img.getAttribute('alt')) {
-        this.addWarning('seo-issue', 'medium', `Image missing alt attribute`, `img:nth-child(${index + 1})`);
+        this.addWarning(
+          'seo-issue',
+          'medium',
+          `Image missing alt attribute`,
+          `img:nth-child(${index + 1})`
+        );
       }
     });
   }
@@ -82,7 +86,12 @@ class PageErrorChecker {
     links.forEach((link, index) => {
       const href = link.getAttribute('href');
       if (href === '#' || href === '') {
-        this.addWarning('broken-link', 'low', 'Empty or placeholder link', `a:nth-child(${index + 1})`);
+        this.addWarning(
+          'broken-link',
+          'low',
+          'Empty or placeholder link',
+          `a:nth-child(${index + 1})`
+        );
       }
     });
   }
@@ -95,8 +104,13 @@ class PageErrorChecker {
       schemaScripts.forEach((script, index) => {
         try {
           JSON.parse(script.textContent || '');
-        } catch (error) {
-          this.addError('missing-schema', 'high', `Invalid JSON-LD schema`, `script:nth-child(${index + 1})`);
+        } catch (_error) {
+          this.addError(
+            'missing-schema',
+            'high',
+            `Invalid JSON-LD schema`,
+            `script:nth-child(${index + 1})`
+          );
         }
       });
     }
@@ -114,21 +128,33 @@ class PageErrorChecker {
     }
   }
 
-  private addError(type: PageError['type'], severity: PageError['severity'], message: string, element?: string): void {
+  private addError(
+    type: PageError['type'],
+    severity: PageError['severity'],
+    message: string,
+    element?: string
+  ): void {
     this.errors.push({ type, severity, message, element });
   }
 
-  private addWarning(type: PageError['type'], severity: PageError['severity'], message: string, element?: string): void {
+  private addWarning(
+    type: PageError['type'],
+    severity: PageError['severity'],
+    message: string,
+    element?: string
+  ): void {
     this.warnings.push({ type, severity, message, element });
   }
 
   private calculateScore(): number {
-    const totalIssues = this.errors.length + this.warnings.length;
-    const criticalPenalty = this.errors.filter(e => e.severity === 'critical').length * 25;
-    const highPenalty = this.errors.filter(e => e.severity === 'high').length * 15;
-    const mediumPenalty = (this.errors.filter(e => e.severity === 'medium').length + 
-                          this.warnings.filter(w => w.severity === 'medium').length) * 10;
-    const lowPenalty = this.warnings.filter(w => w.severity === 'low').length * 5;
+    const _totalIssues = this.errors.length + this.warnings.length;
+    const criticalPenalty = this.errors.filter((e) => e.severity === 'critical').length * 25;
+    const highPenalty = this.errors.filter((e) => e.severity === 'high').length * 15;
+    const mediumPenalty =
+      (this.errors.filter((e) => e.severity === 'medium').length +
+        this.warnings.filter((w) => w.severity === 'medium').length) *
+      10;
+    const lowPenalty = this.warnings.filter((w) => w.severity === 'low').length * 5;
 
     const totalPenalty = criticalPenalty + highPenalty + mediumPenalty + lowPenalty;
     return Math.max(0, 100 - totalPenalty);

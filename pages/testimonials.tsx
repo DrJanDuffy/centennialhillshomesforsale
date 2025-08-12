@@ -1,69 +1,64 @@
-
-import React from 'react';
-import Layout from '../components/Layout';
-import { FaStar, FaQuoteLeft } from 'react-icons/fa';
 import { motion } from 'framer-motion';
 import Head from 'next/head';
 import Link from 'next/link';
+import { FaQuoteLeft, FaStar } from 'react-icons/fa';
+import Layout from '../components/Layout';
 
 export default function Testimonials() {
   const testimonials = [
     {
-      name: "Sarah M.",
-      location: "Centennial Hills",
+      name: 'Sarah M.',
+      location: 'Centennial Hills',
       rating: 5,
       text: "Dr. Jan Duffy helped us find our dream home in Centennial Hills. Her knowledge of the area and professionalism made the entire process smooth. We couldn't be happier with our new home!",
-      date: "November 2024",
-      serviceType: "Home Purchase"
+      date: 'November 2024',
+      serviceType: 'Home Purchase',
     },
     {
-      name: "Michael R.",
-      location: "Providence",
+      name: 'Michael R.',
+      location: 'Providence',
       rating: 5,
-      text: "Outstanding service! Jan knew exactly what we were looking for in Providence. She was available 24/7 and found us the perfect home within our budget. True professional!",
-      date: "October 2024",
-      serviceType: "First-Time Buyer"
+      text: 'Outstanding service! Jan knew exactly what we were looking for in Providence. She was available 24/7 and found us the perfect home within our budget. True professional!',
+      date: 'October 2024',
+      serviceType: 'First-Time Buyer',
     },
     {
-      name: "Jennifer L.",
-      location: "Skye Canyon",
+      name: 'Jennifer L.',
+      location: 'Skye Canyon',
       rating: 5,
-      text: "First-time home buyer experience was amazing with Dr. Duffy. She guided us through every step and helped us understand the Skye Canyon market thoroughly.",
-      date: "October 2024",
-      serviceType: "Buyer Consultation"
+      text: 'First-time home buyer experience was amazing with Dr. Duffy. She guided us through every step and helped us understand the Skye Canyon market thoroughly.',
+      date: 'October 2024',
+      serviceType: 'Buyer Consultation',
     },
     {
-      name: "David K.",
-      location: "Summerlin",
+      name: 'David K.',
+      location: 'Summerlin',
       rating: 5,
       text: "Sold our Summerlin home in just 12 days! Jan's marketing strategy and pricing expertise are top-notch. We got above asking price thanks to her guidance.",
-      date: "September 2024",
-      serviceType: "Home Sale"
+      date: 'September 2024',
+      serviceType: 'Home Sale',
     },
     {
-      name: "Lisa T.",
-      location: "Lone Mountain",
+      name: 'Lisa T.',
+      location: 'Lone Mountain',
       rating: 5,
       text: "Luxury home purchase in Lone Mountain went perfectly. Jan's attention to detail and market knowledge saved us both time and money. Highly recommend!",
-      date: "September 2024",
-      serviceType: "Luxury Purchase"
+      date: 'September 2024',
+      serviceType: 'Luxury Purchase',
     },
     {
-      name: "Robert W.",
-      location: "Aliante",
+      name: 'Robert W.',
+      location: 'Aliante',
       rating: 5,
       text: "Commercial property investment guidance was exceptional. Dr. Duffy's expertise in the Las Vegas market helped us make a profitable investment decision.",
-      date: "August 2024",
-      serviceType: "Commercial Investment"
-    }
+      date: 'August 2024',
+      serviceType: 'Commercial Investment',
+    },
   ];
 
   const renderStars = (rating: number) => {
     return [...Array(5)].map((_, i) => (
-      <FaStar
-        key={i}
-        className={i < rating ? 'star filled' : 'star'}
-      />
+      <FaStar key={i} className={i < rating ? 'star filled' : 'star'} />
     ));
   };
 
@@ -71,66 +66,72 @@ export default function Testimonials() {
     <Layout>
       <Head>
         <title>Client Testimonials | Dr. Jan Duffy REALTOR® | Las Vegas Real Estate Reviews</title>
-        <meta name="description" content="Read real client testimonials and reviews for Dr. Jan Duffy, top-rated REALTOR® in Centennial Hills, Providence, Skye Canyon, and Summerlin. 4.9/5 star rating with 127+ reviews." />
-        <meta name="keywords" content="client testimonials, real estate reviews, Dr Jan Duffy reviews, Centennial Hills realtor reviews, Las Vegas realtor testimonials" />
+        <meta
+          name="description"
+          content="Read real client testimonials and reviews for Dr. Jan Duffy, top-rated REALTOR® in Centennial Hills, Providence, Skye Canyon, and Summerlin. 4.9/5 star rating with 127+ reviews."
+        />
+        <meta
+          name="keywords"
+          content="client testimonials, real estate reviews, Dr Jan Duffy reviews, Centennial Hills realtor reviews, Las Vegas realtor testimonials"
+        />
         <link rel="canonical" href="https://centennialhillshomesforsale.com/testimonials" />
-        
+
         {/* Reviews Schema */}
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
             __html: JSON.stringify({
-              "@context": "https://schema.org",
-              "@type": "LocalBusiness",
-              "name": "Dr. Jan Duffy, REALTOR®",
-              "aggregateRating": {
-                "@type": "AggregateRating",
-                "ratingValue": "4.9",
-                "reviewCount": "127",
-                "bestRating": "5",
-                "worstRating": "4"
+              '@context': 'https://schema.org',
+              '@type': 'LocalBusiness',
+              name: 'Dr. Jan Duffy, REALTOR®',
+              aggregateRating: {
+                '@type': 'AggregateRating',
+                ratingValue: '4.9',
+                reviewCount: '127',
+                bestRating: '5',
+                worstRating: '4',
               },
-              "review": testimonials.map(testimonial => ({
-                "@type": "Review",
-                "author": {
-                  "@type": "Person",
-                  "name": testimonial.name
+              review: testimonials.map((testimonial) => ({
+                '@type': 'Review',
+                author: {
+                  '@type': 'Person',
+                  name: testimonial.name,
                 },
-                "reviewRating": {
-                  "@type": "Rating",
-                  "ratingValue": testimonial.rating,
-                  "bestRating": "5"
+                reviewRating: {
+                  '@type': 'Rating',
+                  ratingValue: testimonial.rating,
+                  bestRating: '5',
                 },
-                "reviewBody": testimonial.text,
-                "datePublished": testimonial.date
-              }))
-            })
+                reviewBody: testimonial.text,
+                datePublished: testimonial.date,
+              })),
+            }),
           }}
         />
-        
+
         {/* Service Area Schema */}
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
             __html: JSON.stringify({
-              "@context": "https://schema.org",
-              "@type": "RealEstateAgent",
-              "name": "Dr. Jan Duffy, REALTOR®",
-              "areaServed": [
-                "Centennial Hills, Las Vegas, NV",
-                "Providence, Las Vegas, NV", 
-                "Skye Canyon, Las Vegas, NV",
-                "Summerlin, Las Vegas, NV",
-                "Lone Mountain, Las Vegas, NV",
-                "Aliante, Las Vegas, NV"
-              ]
-            })
+              '@context': 'https://schema.org',
+              '@type': 'RealEstateAgent',
+              name: 'Dr. Jan Duffy, REALTOR®',
+              areaServed: [
+                'Centennial Hills, Las Vegas, NV',
+                'Providence, Las Vegas, NV',
+                'Skye Canyon, Las Vegas, NV',
+                'Summerlin, Las Vegas, NV',
+                'Lone Mountain, Las Vegas, NV',
+                'Aliante, Las Vegas, NV',
+              ],
+            }),
           }}
         />
       </Head>
 
       <main className="testimonials-page">
-        <motion.section 
+        <motion.section
           className="testimonials-hero"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -141,13 +142,11 @@ export default function Testimonials() {
             <p className="lead">
               See why Dr. Jan Duffy is rated 4.9/5 stars by 127+ satisfied clients across Las Vegas
             </p>
-            
+
             <div className="rating-summary">
               <div className="overall-rating">
                 <h2>4.9/5</h2>
-                <div className="stars">
-                  {renderStars(5)}
-                </div>
+                <div className="stars">{renderStars(5)}</div>
                 <p>127+ Reviews</p>
                 <p className="certification">🏆 Top 1% Las Vegas REALTOR®</p>
               </div>
@@ -155,7 +154,7 @@ export default function Testimonials() {
           </div>
         </motion.section>
 
-        <motion.section 
+        <motion.section
           className="testimonials-grid-section"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -175,13 +174,11 @@ export default function Testimonials() {
                   <div className="quote-icon">
                     <FaQuoteLeft />
                   </div>
-                  
-                  <div className="rating">
-                    {renderStars(testimonial.rating)}
-                  </div>
-                  
+
+                  <div className="rating">{renderStars(testimonial.rating)}</div>
+
                   <p className="testimonial-text">&ldquo;{testimonial.text}&rdquo;</p>
-                  
+
                   <div className="testimonial-footer">
                     <h4>{testimonial.name}</h4>
                     <p className="location">📍 {testimonial.location}</p>
@@ -194,7 +191,7 @@ export default function Testimonials() {
           </div>
         </motion.section>
 
-        <motion.section 
+        <motion.section
           className="trust-indicators"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -231,7 +228,7 @@ export default function Testimonials() {
           </div>
         </motion.section>
 
-        <motion.section 
+        <motion.section
           className="cta-section"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}

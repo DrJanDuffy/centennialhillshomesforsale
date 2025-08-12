@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 
 interface MCPClientResponse {
   success: boolean;
@@ -71,7 +71,7 @@ export function useMCPClient(): MCPClientHook {
     isLoading,
     error,
     connect,
-    disconnect
+    disconnect,
   };
 }
 

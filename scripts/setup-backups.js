@@ -1,10 +1,10 @@
-const https = require('https');
-const fs = require('fs');
-const path = require('path');
+const https = require('node:https');
+const fs = require('node:fs');
+const path = require('node:path');
 require('dotenv').config({ path: '.env.local' });
 
 const API_TOKEN = process.env.CLOUDFLARE_API_TOKEN;
-const ACCOUNT_ID = process.env.CLOUDFLARE_ACCOUNT_ID;
+const _ACCOUNT_ID = process.env.CLOUDFLARE_ACCOUNT_ID;
 const DOMAIN = 'centennialhillshomesforsale.com';
 
 // Get Zone ID first
@@ -15,14 +15,14 @@ const getZoneId = () => {
       path: `/client/v4/zones?name=${DOMAIN}`,
       method: 'GET',
       headers: {
-        'Authorization': `Bearer ${API_TOKEN}`,
+        Authorization: `Bearer ${API_TOKEN}`,
         'Content-Type': 'application/json',
-      }
+      },
     };
 
     const req = https.request(options, (res) => {
       let data = '';
-      res.on('data', (chunk) => data += chunk);
+      res.on('data', (chunk) => (data += chunk));
       res.on('end', () => {
         const response = JSON.parse(data);
         if (response.success && response.result.length > 0) {
@@ -45,9 +45,9 @@ const configureBackups = async (zoneId) => {
     path: `/client/v4/zones/${zoneId}/backup`,
     method: 'POST',
     headers: {
-      'Authorization': `Bearer ${API_TOKEN}`,
+      Authorization: `Bearer ${API_TOKEN}`,
       'Content-Type': 'application/json',
-    }
+    },
   };
 
   const data = JSON.stringify({
@@ -58,15 +58,15 @@ const configureBackups = async (zoneId) => {
       encryption: true,
       notifications: {
         email: true,
-        slack: true
-      }
-    }
+        slack: true,
+      },
+    },
   });
 
   await new Promise((resolve, reject) => {
     const req = https.request(options, (res) => {
       let data = '';
-      res.on('data', (chunk) => data += chunk);
+      res.on('data', (chunk) => (data += chunk));
       res.on('end', () => {
         const response = JSON.parse(data);
         if (response.success) {
@@ -142,4 +142,4 @@ const setupBackups = async () => {
   }
 };
 
-setupBackups(); 
+setupBackups();

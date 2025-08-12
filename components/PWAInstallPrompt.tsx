@@ -1,5 +1,4 @@
-
-import { useState, useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
 interface BeforeInstallPromptEvent extends Event {
   prompt(): Promise<void>;
@@ -27,11 +26,11 @@ export default function PWAInstallPrompt() {
 
     deferredPrompt.prompt();
     const { outcome } = await deferredPrompt.userChoice;
-    
+
     if (outcome === 'accepted') {
       setShowInstallButton(false);
     }
-    
+
     setDeferredPrompt(null);
   };
 

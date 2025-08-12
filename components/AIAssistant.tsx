@@ -1,16 +1,9 @@
-
 'use client';
 
-import React, { useState, useRef, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { 
-  Send, 
-  X, 
-  Bot, 
-  User, 
-  Mic,
-  MicOff
-} from 'lucide-react';
+import { AnimatePresence, motion } from 'framer-motion';
+import { Bot, Mic, MicOff, Send, User, X } from 'lucide-react';
+import type React from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 interface Message {
   id: string;
@@ -29,10 +22,10 @@ const AIAssistant: React.FC<AIAssistantProps> = ({ className = '' }) => {
   const [messages, setMessages] = useState<Message[]>([
     {
       id: '1',
-      text: "Hi! I&apos;m your AI real estate assistant. I can help you find properties, answer questions about neighborhoods, and guide you through the home buying process. What would you like to know?",
+      text: 'Hi! I&apos;m your AI real estate assistant. I can help you find properties, answer questions about neighborhoods, and guide you through the home buying process. What would you like to know?',
       sender: 'ai',
-      timestamp: new Date()
-    }
+      timestamp: new Date(),
+    },
   ]);
   const [inputValue, setInputValue] = useState('');
   const [isTyping, setIsTyping] = useState(false);
@@ -41,12 +34,12 @@ const AIAssistant: React.FC<AIAssistantProps> = ({ className = '' }) => {
   const inputRef = useRef<HTMLInputElement>(null);
 
   const quickSuggestions = [
-    "Show me homes in Centennial Hills",
-    "What&apos;s the average price in Providence?",
-    "Tell me about Skye Canyon",
-    "How do I get pre-approved?",
-    "What are closing costs?",
-    "Show me luxury homes"
+    'Show me homes in Centennial Hills',
+    'What&apos;s the average price in Providence?',
+    'Tell me about Skye Canyon',
+    'How do I get pre-approved?',
+    'What are closing costs?',
+    'Show me luxury homes',
   ];
 
   const scrollToBottom = () => {
@@ -55,7 +48,7 @@ const AIAssistant: React.FC<AIAssistantProps> = ({ className = '' }) => {
 
   useEffect(() => {
     scrollToBottom();
-  }, [messages]);
+  }, [scrollToBottom]);
 
   useEffect(() => {
     if (isOpen && inputRef.current) {
@@ -70,36 +63,39 @@ const AIAssistant: React.FC<AIAssistantProps> = ({ className = '' }) => {
       id: Date.now().toString(),
       text: inputValue,
       sender: 'user',
-      timestamp: new Date()
+      timestamp: new Date(),
     };
 
-    setMessages(prev => [...prev, userMessage]);
+    setMessages((prev) => [...prev, userMessage]);
     setInputValue('');
     setIsTyping(true);
 
     // Simulate AI response
-    setTimeout(() => {
-      const aiResponses = [
-        "I'd be happy to help you with that! Let me search for properties that match your criteria.",
-        "Great question! Based on current market data, I can provide you with detailed insights.",
-        "I found several properties that might interest you. Would you like me to show you the details?",
-        "That&apos;s a common concern. Let me explain the process and what you can expect.",
-        "I can help you with that! Here&apos;s what you need to know about the local market.",
-        "Perfect! I have some great options for you. Let me share the details."
-      ];
+    setTimeout(
+      () => {
+        const aiResponses = [
+          "I'd be happy to help you with that! Let me search for properties that match your criteria.",
+          'Great question! Based on current market data, I can provide you with detailed insights.',
+          'I found several properties that might interest you. Would you like me to show you the details?',
+          'That&apos;s a common concern. Let me explain the process and what you can expect.',
+          'I can help you with that! Here&apos;s what you need to know about the local market.',
+          'Perfect! I have some great options for you. Let me share the details.',
+        ];
 
-      const randomResponse = aiResponses[Math.floor(Math.random() * aiResponses.length)];
-      
-      const aiMessage: Message = {
-        id: (Date.now() + 1).toString(),
-        text: randomResponse,
-        sender: 'ai',
-        timestamp: new Date()
-      };
+        const randomResponse = aiResponses[Math.floor(Math.random() * aiResponses.length)];
 
-      setMessages(prev => [...prev, aiMessage]);
-      setIsTyping(false);
-    }, 1500 + Math.random() * 1000);
+        const aiMessage: Message = {
+          id: (Date.now() + 1).toString(),
+          text: randomResponse,
+          sender: 'ai',
+          timestamp: new Date(),
+        };
+
+        setMessages((prev) => [...prev, aiMessage]);
+        setIsTyping(false);
+      },
+      1500 + Math.random() * 1000
+    );
   };
 
   const handleSuggestionClick = (suggestion: string) => {
@@ -119,7 +115,7 @@ const AIAssistant: React.FC<AIAssistantProps> = ({ className = '' }) => {
     if (!isListening) {
       // Start listening
       setTimeout(() => {
-        setInputValue("Show me homes in Centennial Hills under $800,000");
+        setInputValue('Show me homes in Centennial Hills under $800,000');
         setIsListening(false);
       }, 2000);
     }
@@ -162,7 +158,7 @@ const AIAssistant: React.FC<AIAssistantProps> = ({ className = '' }) => {
             </motion.div>
           )}
         </AnimatePresence>
-        
+
         {/* Pulse Animation */}
         <motion.div
           className="absolute inset-0 bg-accent-color rounded-full"
@@ -185,7 +181,7 @@ const AIAssistant: React.FC<AIAssistantProps> = ({ className = '' }) => {
               initial={{ opacity: 0, scale: 0.8, y: 50 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.8, y: 50 }}
-              transition={{ type: "spring", damping: 25, stiffness: 300 }}
+              transition={{ type: 'spring', damping: 25, stiffness: 300 }}
               className="absolute bottom-24 left-6 w-96 h-[500px] bg-white rounded-2xl shadow-2xl overflow-hidden"
               onClick={(e) => e.stopPropagation()}
             >
@@ -226,23 +222,35 @@ const AIAssistant: React.FC<AIAssistantProps> = ({ className = '' }) => {
                       exit={{ opacity: 0, y: -20 }}
                       className={`flex ${message.sender === 'user' ? 'justify-end' : 'justify-start'}`}
                     >
-                      <div className={`flex items-start gap-3 max-w-[80%] ${message.sender === 'user' ? 'flex-row-reverse' : ''}`}>
-                        <div className={`w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0 ${
-                          message.sender === 'user' 
-                            ? 'bg-primary-color text-white' 
-                            : 'bg-gradient-to-r from-accent-color to-secondary-color text-white'
-                        }`}>
-                          {message.sender === 'user' ? <User className="w-4 h-4" /> : <Bot className="w-4 h-4" />}
+                      <div
+                        className={`flex items-start gap-3 max-w-[80%] ${message.sender === 'user' ? 'flex-row-reverse' : ''}`}
+                      >
+                        <div
+                          className={`w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0 ${
+                            message.sender === 'user'
+                              ? 'bg-primary-color text-white'
+                              : 'bg-gradient-to-r from-accent-color to-secondary-color text-white'
+                          }`}
+                        >
+                          {message.sender === 'user' ? (
+                            <User className="w-4 h-4" />
+                          ) : (
+                            <Bot className="w-4 h-4" />
+                          )}
                         </div>
-                        <div className={`rounded-2xl px-4 py-2 ${
-                          message.sender === 'user'
-                            ? 'bg-primary-color text-white'
-                            : 'bg-tertiary text-primary'
-                        }`}>
+                        <div
+                          className={`rounded-2xl px-4 py-2 ${
+                            message.sender === 'user'
+                              ? 'bg-primary-color text-white'
+                              : 'bg-tertiary text-primary'
+                          }`}
+                        >
                           <p className="text-sm">{message.text}</p>
-                          <p className={`text-xs mt-1 ${
-                            message.sender === 'user' ? 'text-white/70' : 'text-secondary'
-                          }`}>
+                          <p
+                            className={`text-xs mt-1 ${
+                              message.sender === 'user' ? 'text-white/70' : 'text-secondary'
+                            }`}
+                          >
                             {formatTime(message.timestamp)}
                           </p>
                         </div>
@@ -324,16 +332,16 @@ const AIAssistant: React.FC<AIAssistantProps> = ({ className = '' }) => {
                     whileTap={{ scale: 0.9 }}
                     onClick={toggleListening}
                     className={`w-10 h-10 rounded-full flex items-center justify-center transition-colors ${
-                      isListening 
-                        ? 'bg-red-500 text-white' 
+                      isListening
+                        ? 'bg-red-500 text-white'
                         : 'bg-tertiary text-secondary hover:bg-secondary-color/20'
                     }`}
-                    aria-label={isListening ? "Stop listening" : "Start voice input"}
-                    title={isListening ? "Stop listening" : "Start voice input"}
+                    aria-label={isListening ? 'Stop listening' : 'Start voice input'}
+                    title={isListening ? 'Stop listening' : 'Start voice input'}
                   >
                     {isListening ? <MicOff className="w-4 h-4" /> : <Mic className="w-4 h-4" />}
                   </motion.button>
-                  
+
                   <div className="flex-1 relative">
                     <input
                       ref={inputRef}

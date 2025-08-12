@@ -1,6 +1,6 @@
-
-import React, { useState, useEffect } from 'react';
-import { Activity, TrendingUp, Users, Search, CheckCircle } from 'lucide-react';
+import { Activity, CheckCircle, Search, TrendingUp, Users } from 'lucide-react';
+import type React from 'react';
+import { useEffect, useState } from 'react';
 
 interface TaskMasterMetrics {
   searchRankings: { keyword: string; position: number; change: number }[];
@@ -18,11 +18,11 @@ const TaskMasterDashboard: React.FC = () => {
       searchRankings: [
         { keyword: 'Centennial Hills homes for sale', position: 3, change: +2 },
         { keyword: 'Las Vegas real estate agent', position: 7, change: +1 },
-        { keyword: 'Providence Nevada homes', position: 5, change: 0 }
+        { keyword: 'Providence Nevada homes', position: 5, change: 0 },
       ],
       leadGeneration: { today: 4, week: 23, month: 89 },
       sitePerformance: { speed: 92, uptime: 99.8, coreWebVitals: 'Good' },
-      aiOptimization: { score: 94, lastUpdate: '2 hours ago' }
+      aiOptimization: { score: 94, lastUpdate: '2 hours ago' },
     });
   }, []);
 
@@ -54,7 +54,8 @@ const TaskMasterDashboard: React.FC = () => {
                   <span className="keyword">{rank.keyword}</span>
                   <span className="position">#{rank.position}</span>
                   <span className={`change ${rank.change >= 0 ? 'positive' : 'negative'}`}>
-                    {rank.change > 0 ? '+' : ''}{rank.change}
+                    {rank.change > 0 ? '+' : ''}
+                    {rank.change}
                   </span>
                 </div>
               ))}
@@ -119,9 +120,7 @@ const TaskMasterDashboard: React.FC = () => {
                 <span className="score">{metrics.aiOptimization.score}</span>
                 <span className="label">AI Score</span>
               </div>
-              <div className="last-update">
-                Last optimized: {metrics.aiOptimization.lastUpdate}
-              </div>
+              <div className="last-update">Last optimized: {metrics.aiOptimization.lastUpdate}</div>
             </div>
           </div>
         </div>

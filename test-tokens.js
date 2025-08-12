@@ -1,13 +1,13 @@
-const https = require('https');
+const https = require('node:https');
 
 const options = {
   hostname: 'api.cloudflare.com',
   path: '/client/v4/user/tokens/verify',
   method: 'GET',
   headers: {
-    'Authorization': 'Bearer nLy-MHNoM5waS5EvUSdNW91_-OBZpugqzQjuJ0d5',
-    'Content-Type': 'application/json'
-  }
+    Authorization: 'Bearer nLy-MHNoM5waS5EvUSdNW91_-OBZpugqzQjuJ0d5',
+    'Content-Type': 'application/json',
+  },
 };
 
 const req = https.request(options, (res) => {
@@ -21,4 +21,4 @@ req.on('error', (error) => {
   console.error('Error:', error);
 });
 
-req.end(); 
+req.end();

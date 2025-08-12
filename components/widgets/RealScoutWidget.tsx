@@ -1,9 +1,15 @@
-import React, { useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
+import type React from 'react';
+import { useEffect, useRef } from 'react';
 import styles from './RealScoutWidget.module.css';
 
 interface RealScoutWidgetProps {
-  type?: 'search' | 'property-details' | 'market-analysis' | 'featured-listings' | 'office-listings';
+  type?:
+    | 'search'
+    | 'property-details'
+    | 'market-analysis'
+    | 'featured-listings'
+    | 'office-listings';
   propertyId?: string;
   agentId?: string;
   brokerId?: string;
@@ -37,7 +43,7 @@ const RealScoutWidget: React.FC<RealScoutWidgetProps> = ({
   listingStatus = 'For Sale',
   propertyTypes = 'SFR,MF,TC',
   priceMin = 600000,
-  priceMax = 1200000
+  priceMax = 1200000,
 }) => {
   const widgetRef = useRef<HTMLDivElement>(null);
 
@@ -61,9 +67,9 @@ const RealScoutWidget: React.FC<RealScoutWidgetProps> = ({
     const initializeWidget = async () => {
       try {
         await loadRealScoutScript();
-        
+
         // Wait for RealScout to be ready
-        if (window.realscout && window.realscout.init) {
+        if (window.realscout?.init) {
           window.realscout.init();
         }
       } catch (error) {
@@ -88,7 +94,7 @@ const RealScoutWidget: React.FC<RealScoutWidgetProps> = ({
           {description && <p className={styles.widgetDescription}>{description}</p>}
         </div>
       )}
-      
+
       <div className={styles.realscoutContainer}>
         <realscout-office-listings
           agent-encoded-id={agentEncodedId}
@@ -116,7 +122,7 @@ const RealScoutWidget: React.FC<RealScoutWidgetProps> = ({
           {description && <p className={styles.widgetDescription}>{description}</p>}
         </div>
       )}
-      
+
       <div className={styles.realscoutContainer}>
         <realscout-search
           agent-encoded-id={agentEncodedId}
@@ -144,12 +150,9 @@ const RealScoutWidget: React.FC<RealScoutWidgetProps> = ({
           {description && <p className={styles.widgetDescription}>{description}</p>}
         </div>
       )}
-      
+
       <div className={styles.realscoutContainer}>
-        <realscout-property-details
-          agent-encoded-id={agentEncodedId}
-          property-id={propertyId}
-        />
+        <realscout-property-details agent-encoded-id={agentEncodedId} property-id={propertyId} />
       </div>
     </motion.div>
   );
@@ -168,12 +171,9 @@ const RealScoutWidget: React.FC<RealScoutWidgetProps> = ({
           {description && <p className={styles.widgetDescription}>{description}</p>}
         </div>
       )}
-      
+
       <div className={styles.realscoutContainer}>
-        <realscout-market-analysis
-          agent-encoded-id={agentEncodedId}
-          neighborhood={neighborhood}
-        />
+        <realscout-market-analysis agent-encoded-id={agentEncodedId} neighborhood={neighborhood} />
       </div>
     </motion.div>
   );
@@ -186,8 +186,6 @@ const RealScoutWidget: React.FC<RealScoutWidgetProps> = ({
         return renderPropertyDetails();
       case 'market-analysis':
         return renderMarketAnalysis();
-      case 'featured-listings':
-      case 'office-listings':
       default:
         return renderOfficeListings();
     }

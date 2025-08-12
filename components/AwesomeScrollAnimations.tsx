@@ -1,8 +1,7 @@
-
 'use client';
 
-import React from 'react';
 import { motion } from 'framer-motion';
+import React from 'react';
 import { useInView } from 'react-intersection-observer';
 
 interface AnimationProps {
@@ -14,12 +13,12 @@ interface AnimationProps {
 }
 
 // Slide up animation
-export const SlideUpSection: React.FC<AnimationProps> = ({ 
-  children, 
-  delay = 0, 
+export const SlideUpSection: React.FC<AnimationProps> = ({
+  children,
+  delay = 0,
   duration = 0.6,
   threshold = 0.1,
-  className = ''
+  className = '',
 }) => {
   const [ref, inView] = useInView({
     threshold,
@@ -40,12 +39,12 @@ export const SlideUpSection: React.FC<AnimationProps> = ({
 };
 
 // Fade in animation
-export const FadeInSection: React.FC<AnimationProps> = ({ 
-  children, 
-  delay = 0, 
+export const FadeInSection: React.FC<AnimationProps> = ({
+  children,
+  delay = 0,
   duration = 0.8,
   threshold = 0.1,
-  className = ''
+  className = '',
 }) => {
   const [ref, inView] = useInView({
     threshold,
@@ -66,12 +65,12 @@ export const FadeInSection: React.FC<AnimationProps> = ({
 };
 
 // Bounce animation
-export const BounceSection: React.FC<AnimationProps> = ({ 
-  children, 
-  delay = 0, 
+export const BounceSection: React.FC<AnimationProps> = ({
+  children,
+  delay = 0,
   duration = 0.6,
   threshold = 0.1,
-  className = ''
+  className = '',
 }) => {
   const [ref, inView] = useInView({
     threshold,
@@ -83,12 +82,12 @@ export const BounceSection: React.FC<AnimationProps> = ({
       ref={ref}
       initial={{ opacity: 0, scale: 0.8 }}
       animate={inView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.8 }}
-      transition={{ 
-        duration, 
+      transition={{
+        duration,
         delay,
-        type: "spring",
+        type: 'spring',
         stiffness: 100,
-        damping: 10
+        damping: 10,
       }}
       className={className}
     >
@@ -98,12 +97,12 @@ export const BounceSection: React.FC<AnimationProps> = ({
 };
 
 // Slide in from left
-export const SlideInLeft: React.FC<AnimationProps> = ({ 
-  children, 
-  delay = 0, 
+export const SlideInLeft: React.FC<AnimationProps> = ({
+  children,
+  delay = 0,
   duration = 0.6,
   threshold = 0.1,
-  className = ''
+  className = '',
 }) => {
   const [ref, inView] = useInView({
     threshold,
@@ -124,12 +123,12 @@ export const SlideInLeft: React.FC<AnimationProps> = ({
 };
 
 // Slide in from right
-export const SlideInRight: React.FC<AnimationProps> = ({ 
-  children, 
-  delay = 0, 
+export const SlideInRight: React.FC<AnimationProps> = ({
+  children,
+  delay = 0,
   duration = 0.6,
   threshold = 0.1,
-  className = ''
+  className = '',
 }) => {
   const [ref, inView] = useInView({
     threshold,
@@ -150,12 +149,12 @@ export const SlideInRight: React.FC<AnimationProps> = ({
 };
 
 // Scale in animation
-export const ScaleInSection: React.FC<AnimationProps> = ({ 
-  children, 
-  delay = 0, 
+export const ScaleInSection: React.FC<AnimationProps> = ({
+  children,
+  delay = 0,
   duration = 0.6,
   threshold = 0.1,
-  className = ''
+  className = '',
 }) => {
   const [ref, inView] = useInView({
     threshold,
@@ -176,12 +175,12 @@ export const ScaleInSection: React.FC<AnimationProps> = ({
 };
 
 // Rotate in animation
-export const RotateInSection: React.FC<AnimationProps> = ({ 
-  children, 
-  delay = 0, 
+export const RotateInSection: React.FC<AnimationProps> = ({
+  children,
+  delay = 0,
   duration = 0.6,
   threshold = 0.1,
-  className = ''
+  className = '',
 }) => {
   const [ref, inView] = useInView({
     threshold,
@@ -206,13 +205,13 @@ interface StaggerContainerProps extends AnimationProps {
   staggerDelay?: number;
 }
 
-export const StaggerContainer: React.FC<StaggerContainerProps> = ({ 
-  children, 
-  delay = 0, 
+export const StaggerContainer: React.FC<StaggerContainerProps> = ({
+  children,
+  delay = 0,
   duration = 0.6,
   threshold = 0.1,
   staggerDelay = 0.1,
-  className = ''
+  className = '',
 }) => {
   const [ref, inView] = useInView({
     threshold,
@@ -223,7 +222,7 @@ export const StaggerContainer: React.FC<StaggerContainerProps> = ({
     <motion.div
       ref={ref}
       initial="hidden"
-      animate={inView ? "visible" : "hidden"}
+      animate={inView ? 'visible' : 'hidden'}
       transition={{ delay }}
       className={className}
     >
@@ -234,16 +233,16 @@ export const StaggerContainer: React.FC<StaggerContainerProps> = ({
             opacity: 1,
             transition: {
               staggerChildren: staggerDelay,
-              delayChildren: delay
-            }
-          }
+              delayChildren: delay,
+            },
+          },
         }}
       >
         {React.Children.map(children, (child) => (
           <motion.div
             variants={{
               hidden: { opacity: 0, y: 20 },
-              visible: { opacity: 1, y: 0 }
+              visible: { opacity: 1, y: 0 },
             }}
             transition={{ duration }}
           >
@@ -260,15 +259,15 @@ interface ParallaxSectionProps extends AnimationProps {
   speed?: number;
 }
 
-export const ParallaxSection: React.FC<ParallaxSectionProps> = ({ 
-  children, 
+export const ParallaxSection: React.FC<ParallaxSectionProps> = ({
+  children,
   speed = 0.5,
-  className = ''
+  className = '',
 }) => {
   return (
     <motion.div
       style={{
-        y: useParallax(speed)
+        y: useParallax(speed),
       }}
       className={className}
     >
@@ -291,11 +290,11 @@ function useParallax(speed: number) {
 }
 
 // Floating animation for elements
-export const FloatingElement: React.FC<AnimationProps> = ({ 
-  children, 
-  delay = 0, 
+export const FloatingElement: React.FC<AnimationProps> = ({
+  children,
+  delay = 0,
   duration = 2,
-  className = ''
+  className = '',
 }) => {
   return (
     <motion.div
@@ -306,7 +305,7 @@ export const FloatingElement: React.FC<AnimationProps> = ({
         duration,
         repeat: Infinity,
         delay,
-        ease: "easeInOut"
+        ease: 'easeInOut',
       }}
       className={className}
     >
@@ -316,11 +315,11 @@ export const FloatingElement: React.FC<AnimationProps> = ({
 };
 
 // Pulse animation
-export const PulseElement: React.FC<AnimationProps> = ({ 
-  children, 
-  delay = 0, 
+export const PulseElement: React.FC<AnimationProps> = ({
+  children,
+  delay = 0,
   duration = 1.5,
-  className = ''
+  className = '',
 }) => {
   return (
     <motion.div
@@ -331,7 +330,7 @@ export const PulseElement: React.FC<AnimationProps> = ({
         duration,
         repeat: Infinity,
         delay,
-        ease: "easeInOut"
+        ease: 'easeInOut',
       }}
       className={className}
     >
@@ -348,11 +347,11 @@ interface TypewriterProps {
   className?: string;
 }
 
-export const Typewriter: React.FC<TypewriterProps> = ({ 
-  text, 
-  speed = 50, 
+export const Typewriter: React.FC<TypewriterProps> = ({
+  text,
+  speed = 50,
   delay = 0,
-  className = ''
+  className = '',
 }) => {
   const [displayText, setDisplayText] = React.useState('');
   const [currentIndex, setCurrentIndex] = React.useState(0);
@@ -360,8 +359,8 @@ export const Typewriter: React.FC<TypewriterProps> = ({
   React.useEffect(() => {
     if (currentIndex < text.length) {
       const timeout = setTimeout(() => {
-        setDisplayText(prev => prev + text[currentIndex]);
-        setCurrentIndex(prev => prev + 1);
+        setDisplayText((prev) => prev + text[currentIndex]);
+        setCurrentIndex((prev) => prev + 1);
       }, speed);
 
       return () => clearTimeout(timeout);

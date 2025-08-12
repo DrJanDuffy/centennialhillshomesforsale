@@ -1,8 +1,8 @@
 
 #!/usr/bin/env node
 
-const fs = require('fs');
-const path = require('path');
+const fs = require('node:fs');
+const _path = require('node:path');
 
 console.log('🔍 PRODUCTION DEPLOYMENT VERIFICATION');
 console.log('====================================');

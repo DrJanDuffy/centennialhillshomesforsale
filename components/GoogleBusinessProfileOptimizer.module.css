@@ -1,7 +1,7 @@
 /* GoogleBusinessProfileOptimizer.module.css */
 
 .statusOpen {
-  color: #16B286;
+  color: #16b286;
   font-weight: bold;
 }
 
@@ -11,26 +11,26 @@
 }
 
 .reviewCount {
-  color: #3A8DDE;
+  color: #3a8dde;
   font-weight: bold;
 }
 
 .star {
-  color: #FFD700;
+  color: #ffd700;
   font-size: 1.2em;
   margin-right: 2px;
 }
 
 .profileImage {
   border-radius: 50%;
-  border: 3px solid #3A8DDE;
+  border: 3px solid #3a8dde;
   width: 80px;
   height: 80px;
   object-fit: cover;
 }
 
 .badge {
-  background: #16B286;
+  background: #16b286;
   color: #fff;
   border-radius: 12px;
   padding: 2px 10px;
@@ -38,4 +38,4 @@
   margin-left: 8px;
 }
 
-/* Add more classes as needed for other inline styles */ 
+/* Add more classes as needed for other inline styles */

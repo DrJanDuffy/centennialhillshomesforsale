@@ -24,9 +24,7 @@
         "latitude": "36.268",
         "longitude": "-115.328"
       },
-      "openingHours": [
-        "Mo-Su 06:00-21:00"
-      ],
+      "openingHours": ["Mo-Su 06:00-21:00"],
       "aggregateRating": {
         "@type": "AggregateRating",
         "ratingValue": "4.9",
@@ -131,9 +129,7 @@
         "latitude": "36.268",
         "longitude": "-115.328"
       },
-      "openingHours": [
-        "Mo-Su 06:00-21:00"
-      ],
+      "openingHours": ["Mo-Su 06:00-21:00"],
       "aggregateRating": {
         "@type": "AggregateRating",
         "ratingValue": "4.9",

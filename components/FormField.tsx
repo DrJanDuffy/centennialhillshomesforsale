@@ -1,4 +1,4 @@
-import React from 'react';
+import type React from 'react';
 
 interface FormFieldProps {
   type: 'text' | 'email' | 'tel' | 'number' | 'select' | 'textarea';
@@ -33,9 +33,10 @@ const FormField: React.FC<FormFieldProps> = ({
   rows = 3,
   min,
   max,
-  step
+  step,
 }) => {
-  const baseClasses = "w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 disabled:bg-gray-100 disabled:cursor-not-allowed";
+  const baseClasses =
+    'w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 disabled:bg-gray-100 disabled:cursor-not-allowed';
 
   const renderInput = () => {
     switch (type) {
@@ -107,4 +108,4 @@ const FormField: React.FC<FormFieldProps> = ({
   );
 };
 
-export default FormField; 
+export default FormField;

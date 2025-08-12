@@ -15,14 +15,14 @@
     {
       "name": "Providence",
       "zipCode": "89149",
-      "latitude": 36.2150,
-      "longitude": -115.2700
+      "latitude": 36.215,
+      "longitude": -115.27
     },
     {
       "name": "Skye Canyon",
       "zipCode": "89166",
-      "latitude": 36.2200,
-      "longitude": -115.2800
+      "latitude": 36.22,
+      "longitude": -115.28
     }
   ]
-} 
+}

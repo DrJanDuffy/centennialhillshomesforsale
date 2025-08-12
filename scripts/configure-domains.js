@@ -1,4 +1,4 @@
-const https = require('https');
+const https = require('node:https');
 require('dotenv').config({ path: '.env.local' });
 
 const API_TOKEN = process.env.CLOUDFLARE_API_TOKEN;
@@ -10,15 +10,15 @@ const options = {
   path: `/client/v4/zones`,
   method: 'POST',
   headers: {
-    'Authorization': `Bearer ${API_TOKEN}`,
+    Authorization: `Bearer ${API_TOKEN}`,
     'Content-Type': 'application/json',
-  }
+  },
 };
 
 const data = JSON.stringify({
   name: DOMAIN,
   account: { id: ACCOUNT_ID },
-  jump_start: true
+  jump_start: true,
 });
 
 const req = https.request(options, (res) => {
@@ -44,4 +44,4 @@ req.on('error', (error) => {
 });
 
 req.write(data);
-req.end(); 
+req.end();

@@ -1,6 +1,6 @@
-
-import React, { useState, useEffect } from 'react';
-import { CheckCircle, Clock, AlertTriangle, Zap, TrendingUp, Users, Search } from 'lucide-react';
+import { AlertTriangle, CheckCircle, Clock, Search, TrendingUp, Users, Zap } from 'lucide-react';
+import type React from 'react';
+import { useEffect, useState } from 'react';
 
 interface OptimizationStatus {
   seoScore: number;
@@ -33,25 +33,25 @@ const TaskMasterStatus: React.FC = () => {
           'Local SEO Enhancement',
           'Core Web Vitals Optimization',
           'AI Content Generation',
-          'Schema Markup Updates'
+          'Schema Markup Updates',
         ],
         recommendations: [
           {
             type: 'critical',
             message: 'New competitor detected in Centennial Hills market',
-            action: 'Enhance competitive positioning'
+            action: 'Enhance competitive positioning',
           },
           {
-            type: 'important', 
+            type: 'important',
             message: 'Search volume spike for "Providence Nevada homes"',
-            action: 'Create targeted landing page'
+            action: 'Create targeted landing page',
           },
           {
             type: 'suggestion',
             message: 'Consider adding virtual tour capability',
-            action: 'Implement 360° property views'
-          }
-        ]
+            action: 'Implement 360° property views',
+          },
+        ],
       });
     };
 
@@ -65,8 +65,10 @@ const TaskMasterStatus: React.FC = () => {
   useEffect(() => {
     if (status) {
       const seoProgressBar = document.querySelector('.progress-fill-seo') as HTMLElement;
-      const performanceProgressBar = document.querySelector('.progress-fill-performance') as HTMLElement;
-      
+      const performanceProgressBar = document.querySelector(
+        '.progress-fill-performance'
+      ) as HTMLElement;
+
       if (seoProgressBar) {
         seoProgressBar.style.setProperty('--progress-width', `${status.seoScore}%`);
       }
@@ -86,7 +88,7 @@ const TaskMasterStatus: React.FC = () => {
           ...status,
           seoScore: Math.min(100, status.seoScore + 2),
           performanceScore: Math.min(100, status.performanceScore + 1),
-          lastOptimized: 'Just now'
+          lastOptimized: 'Just now',
         });
       }
     }, 3000);
@@ -111,11 +113,7 @@ const TaskMasterStatus: React.FC = () => {
             {isOptimizing ? 'Optimizing...' : 'Active'}
           </span>
         </div>
-        <button 
-          onClick={runOptimization}
-          disabled={isOptimizing}
-          className="optimize-btn"
-        >
+        <button onClick={runOptimization} disabled={isOptimizing} className="optimize-btn">
           {isOptimizing ? (
             <>
               <Clock size={16} className="animate-spin" />

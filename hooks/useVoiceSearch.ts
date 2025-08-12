@@ -1,5 +1,4 @@
-
-import { useState, useRef, useEffect, useCallback } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 
 interface VoiceSearchResult {
   transcript: string;
@@ -24,7 +23,8 @@ export function useVoiceSearch(): VoiceSearchHook {
   const [error, setError] = useState<string | null>(null);
   const recognitionRef = useRef<any>(null);
 
-  const isSupported = typeof window !== 'undefined' && 
+  const isSupported =
+    typeof window !== 'undefined' &&
     ('SpeechRecognition' in window || 'webkitSpeechRecognition' in window);
 
   const startListening = useCallback(() => {
@@ -34,9 +34,10 @@ export function useVoiceSearch(): VoiceSearchHook {
     }
 
     try {
-      const SpeechRecognition = (window as any).SpeechRecognition || (window as any).webkitSpeechRecognition;
+      const SpeechRecognition =
+        (window as any).SpeechRecognition || (window as any).webkitSpeechRecognition;
       recognitionRef.current = new SpeechRecognition();
-      
+
       recognitionRef.current.continuous = true;
       recognitionRef.current.interimResults = true;
       recognitionRef.current.lang = 'en-US';
@@ -71,7 +72,7 @@ export function useVoiceSearch(): VoiceSearchHook {
       recognitionRef.current.start();
       setIsListening(true);
       setError(null);
-    } catch (err) {
+    } catch (_err) {
       setError('Failed to start speech recognition');
     }
   }, [isSupported]);

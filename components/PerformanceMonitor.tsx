@@ -1,4 +1,3 @@
-
 import { useEffect } from 'react';
 
 interface PerformanceMetrics {
@@ -17,14 +16,14 @@ export default function PerformanceMonitor() {
           const metrics: PerformanceMetrics = {
             pageLoadTime: navEntry.loadEventEnd - navEntry.loadEventStart,
             renderTime: navEntry.domContentLoadedEventEnd - navEntry.domContentLoadedEventStart,
-            interactionDelay: navEntry.responseEnd - navEntry.requestStart
+            interactionDelay: navEntry.responseEnd - navEntry.requestStart,
           };
-          
+
           // Log metrics for monitoring
           if (process.env.NODE_ENV === 'development') {
             console.log('Performance Metrics:', metrics);
           }
-          
+
           // Store in localStorage for analytics
           localStorage.setItem('performance-metrics', JSON.stringify(metrics));
         }

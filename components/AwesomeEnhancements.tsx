@@ -1,8 +1,16 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { FaRocket, FaLightbulb, FaMagic, FaCheckCircle, FaExclamationTriangle, FaSearch, FaStar } from 'react-icons/fa';
+import { useEffect, useState } from 'react';
+import {
+  FaCheckCircle,
+  FaExclamationTriangle,
+  FaLightbulb,
+  FaMagic,
+  FaRocket,
+  FaSearch,
+  FaStar,
+} from 'react-icons/fa';
 
 interface AwesomeStats {
   homesSold: number;
@@ -16,16 +24,14 @@ function AwesomeEnhancements() {
     homesSold: 0,
     avgSalePrice: '$0',
     daysOnMarket: 0,
-    clientSatisfaction: 0
+    clientSatisfaction: 0,
   });
-
-
 
   // Mock performance metrics (replace with actual metrics)
   const performanceMetrics = useState(() => ({
-    lcp: Math.random() * 2 + 1,       // Example LCP between 1-3 seconds
-    fid: Math.random() * 80 + 20,      // Example FID between 20-100 ms
-    cls: Math.random() * 0.05         // Example CLS under 0.05
+    lcp: Math.random() * 2 + 1, // Example LCP between 1-3 seconds
+    fid: Math.random() * 80 + 20, // Example FID between 20-100 ms
+    cls: Math.random() * 0.05, // Example CLS under 0.05
   }))[0];
 
   // Awesome animated counters
@@ -43,7 +49,7 @@ function AwesomeEnhancements() {
     if (element) observer.observe(element);
 
     return () => observer.disconnect();
-  }, []);
+  }, [animateStats]);
 
   const animateStats = () => {
     // Animate homes sold
@@ -54,7 +60,7 @@ function AwesomeEnhancements() {
         homesSoldCount = 850;
         clearInterval(homesSoldInterval);
       }
-      setStats(prev => ({ ...prev, homesSold: homesSoldCount }));
+      setStats((prev) => ({ ...prev, homesSold: homesSoldCount }));
     }, 20);
 
     // Animate average sale price
@@ -65,9 +71,9 @@ function AwesomeEnhancements() {
         priceCount = 725000;
         clearInterval(priceInterval);
       }
-      setStats(prev => ({ 
-        ...prev, 
-        avgSalePrice: `$${(priceCount / 1000).toFixed(0)}K` 
+      setStats((prev) => ({
+        ...prev,
+        avgSalePrice: `$${(priceCount / 1000).toFixed(0)}K`,
       }));
     }, 30);
 
@@ -79,7 +85,7 @@ function AwesomeEnhancements() {
         daysCount = 18;
         clearInterval(daysInterval);
       }
-      setStats(prev => ({ ...prev, daysOnMarket: daysCount }));
+      setStats((prev) => ({ ...prev, daysOnMarket: daysCount }));
     }, 50);
 
     // Animate client satisfaction
@@ -90,7 +96,7 @@ function AwesomeEnhancements() {
         satisfactionCount = 98;
         clearInterval(satisfactionInterval);
       }
-      setStats(prev => ({ ...prev, clientSatisfaction: satisfactionCount }));
+      setStats((prev) => ({ ...prev, clientSatisfaction: satisfactionCount }));
     }, 40);
   };
 
@@ -102,7 +108,7 @@ function AwesomeEnhancements() {
       icon: FaRocket,
       color: '#FF6B6B',
       metrics: performanceMetrics,
-      highlights: ['< 2.5s LCP', '< 100ms FID', '< 0.1 CLS']
+      highlights: ['< 2.5s LCP', '< 100ms FID', '< 0.1 CLS'],
     },
     {
       id: 'ai-powered',
@@ -110,7 +116,7 @@ function AwesomeEnhancements() {
       description: 'Smart property recommendations with machine learning',
       icon: FaLightbulb,
       color: '#4ECDC4',
-      features: ['Voice Search', 'Smart Recommendations', 'AI Chat', 'Predictive Analytics']
+      features: ['Voice Search', 'Smart Recommendations', 'AI Chat', 'Predictive Analytics'],
     },
     {
       id: 'awesome-ux',
@@ -119,8 +125,8 @@ function AwesomeEnhancements() {
       icon: FaMagic,
       color: '#FFE066',
       animations: true,
-      features: ['PWA Install', 'Offline Support', 'Push Notifications']
-    }
+      features: ['PWA Install', 'Offline Support', 'Push Notifications'],
+    },
   ])[0];
 
   return (
@@ -143,7 +149,7 @@ function AwesomeEnhancements() {
         >
           <motion.div
             animate={{ rotate: [0, 360] }}
-            transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
+            transition={{ duration: 20, repeat: Infinity, ease: 'linear' }}
             className="inline-block mb-6"
           >
             <div className="w-20 h-20 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full flex items-center justify-center mx-auto">
@@ -156,7 +162,7 @@ function AwesomeEnhancements() {
           </h2>
 
           <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
-            Experience the future of real estate with Dr. Jan Duffy&apos;s innovative approach, 
+            Experience the future of real estate with Dr. Jan Duffy&apos;s innovative approach,
             combining decades of expertise with cutting-edge technology for unparalleled results.
           </p>
         </motion.div>
@@ -232,15 +238,15 @@ function AwesomeEnhancements() {
               className="relative group"
             >
               <div className="bg-white/90 backdrop-blur-sm p-8 rounded-2xl shadow-xl border border-white/20 h-full hover:shadow-2xl transition-all duration-300">
-                <div className={`w-16 h-16 bg-gradient-to-r ${feature.color} rounded-2xl flex items-center justify-center mb-6 mx-auto group-hover:scale-110 transition-transform duration-300`}>
+                <div
+                  className={`w-16 h-16 bg-gradient-to-r ${feature.color} rounded-2xl flex items-center justify-center mb-6 mx-auto group-hover:scale-110 transition-transform duration-300`}
+                >
                   <feature.icon className="w-8 h-8 text-white" />
                 </div>
                 <h3 className="text-xl font-bold text-gray-800 mb-4 text-center">
                   {feature.title}
                 </h3>
-                <p className="text-gray-600 text-center leading-relaxed">
-                  {feature.description}
-                </p>
+                <p className="text-gray-600 text-center leading-relaxed">{feature.description}</p>
 
                 {/* Awesome hover effect */}
                 <div className="absolute inset-0 bg-gradient-to-r from-purple-500/10 to-blue-500/10 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
@@ -261,7 +267,7 @@ function AwesomeEnhancements() {
           <div className="relative z-10">
             <motion.div
               animate={{ rotate: [0, 360] }}
-              transition={{ duration: 10, repeat: Infinity, ease: "linear" }}
+              transition={{ duration: 10, repeat: Infinity, ease: 'linear' }}
               className="inline-block mb-6"
             >
               <FaCheckCircle className="w-16 h-16 text-yellow-300" />
@@ -272,7 +278,7 @@ function AwesomeEnhancements() {
             </h3>
 
             <p className="text-xl mb-8 opacity-90 max-w-2xl mx-auto">
-              Join hundreds of satisfied clients who&apos;ve experienced the difference of working 
+              Join hundreds of satisfied clients who&apos;ve experienced the difference of working
               with Las Vegas&apos; most innovative real estate professional.
             </p>
 

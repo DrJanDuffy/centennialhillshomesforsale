@@ -1,8 +1,8 @@
-const https = require('https');
+const https = require('node:https');
 require('dotenv').config({ path: '.env.local' });
 
 const API_TOKEN = process.env.CLOUDFLARE_API_TOKEN;
-const ACCOUNT_ID = process.env.CLOUDFLARE_ACCOUNT_ID;
+const _ACCOUNT_ID = process.env.CLOUDFLARE_ACCOUNT_ID;
 const DOMAIN = 'centennialhillshomesforsale.com';
 
 // Get Zone ID first
@@ -13,14 +13,14 @@ const getZoneId = () => {
       path: `/client/v4/zones?name=${DOMAIN}`,
       method: 'GET',
       headers: {
-        'Authorization': `Bearer ${API_TOKEN}`,
+        Authorization: `Bearer ${API_TOKEN}`,
         'Content-Type': 'application/json',
-      }
+      },
     };
 
     const req = https.request(options, (res) => {
       let data = '';
-      res.on('data', (chunk) => data += chunk);
+      res.on('data', (chunk) => (data += chunk));
       res.on('end', () => {
         const response = JSON.parse(data);
         if (response.success && response.result.length > 0) {
@@ -41,22 +41,24 @@ const configureWAF = async (zoneId) => {
   const rules = [
     {
       description: 'Block SQL Injection',
-      expression: 'http.request.uri.query contains "select" or http.request.uri.query contains "union" or http.request.uri.query contains "insert" or http.request.uri.query contains "delete" or http.request.uri.query contains "update"',
-      action: 'block'
+      expression:
+        'http.request.uri.query contains "select" or http.request.uri.query contains "union" or http.request.uri.query contains "insert" or http.request.uri.query contains "delete" or http.request.uri.query contains "update"',
+      action: 'block',
     },
     {
       description: 'Block XSS Attempts',
-      expression: 'http.request.uri.query contains "<script>" or http.request.uri.query contains "javascript:"',
-      action: 'block'
+      expression:
+        'http.request.uri.query contains "<script>" or http.request.uri.query contains "javascript:"',
+      action: 'block',
     },
     {
       description: 'Rate Limiting',
       expression: 'http.request.uri.path contains "/api/"',
       action: 'challenge',
       rate_limit: {
-        requests_per_second: 10
-      }
-    }
+        requests_per_second: 10,
+      },
+    },
   ];
 
   for (const rule of rules) {
@@ -65,9 +67,9 @@ const configureWAF = async (zoneId) => {
       path: `/client/v4/zones/${zoneId}/firewall/rules`,
       method: 'POST',
       headers: {
-        'Authorization': `Bearer ${API_TOKEN}`,
+        Authorization: `Bearer ${API_TOKEN}`,
         'Content-Type': 'application/json',
-      }
+      },
     };
 
     const data = JSON.stringify(rule);
@@ -75,7 +77,7 @@ const configureWAF = async (zoneId) => {
     await new Promise((resolve, reject) => {
       const req = https.request(options, (res) => {
         let data = '';
-        res.on('data', (chunk) => data += chunk);
+        res.on('data', (chunk) => (data += chunk));
         res.on('end', () => {
           const response = JSON.parse(data);
           if (response.success) {
@@ -102,20 +104,20 @@ const configureSSL = async (zoneId) => {
     path: `/client/v4/zones/${zoneId}/ssl/tls`,
     method: 'PATCH',
     headers: {
-      'Authorization': `Bearer ${API_TOKEN}`,
+      Authorization: `Bearer ${API_TOKEN}`,
       'Content-Type': 'application/json',
-    }
+    },
   };
 
   const data = JSON.stringify({
     value: 'strict',
-    min_tls_version: '1.2'
+    min_tls_version: '1.2',
   });
 
   await new Promise((resolve, reject) => {
     const req = https.request(options, (res) => {
       let data = '';
-      res.on('data', (chunk) => data += chunk);
+      res.on('data', (chunk) => (data += chunk));
       res.on('end', () => {
         const response = JSON.parse(data);
         if (response.success) {
@@ -141,9 +143,9 @@ const configureHeaders = async (zoneId) => {
     path: `/client/v4/zones/${zoneId}/rules/transform`,
     method: 'POST',
     headers: {
-      'Authorization': `Bearer ${API_TOKEN}`,
+      Authorization: `Bearer ${API_TOKEN}`,
       'Content-Type': 'application/json',
-    }
+    },
   };
 
   const data = JSON.stringify({
@@ -153,40 +155,40 @@ const configureHeaders = async (zoneId) => {
         action: 'set_http_response_header',
         value: {
           name: 'X-Frame-Options',
-          value: 'DENY'
-        }
+          value: 'DENY',
+        },
       },
       {
         expression: 'true',
         action: 'set_http_response_header',
         value: {
           name: 'X-Content-Type-Options',
-          value: 'nosniff'
-        }
+          value: 'nosniff',
+        },
       },
       {
         expression: 'true',
         action: 'set_http_response_header',
         value: {
           name: 'X-XSS-Protection',
-          value: '1; mode=block'
-        }
+          value: '1; mode=block',
+        },
       },
       {
         expression: 'true',
         action: 'set_http_response_header',
         value: {
           name: 'Strict-Transport-Security',
-          value: 'max-age=31536000; includeSubDomains; preload'
-        }
-      }
-    ]
+          value: 'max-age=31536000; includeSubDomains; preload',
+        },
+      },
+    ],
   });
 
   await new Promise((resolve, reject) => {
     const req = https.request(options, (res) => {
       let data = '';
-      res.on('data', (chunk) => data += chunk);
+      res.on('data', (chunk) => (data += chunk));
       res.on('end', () => {
         const response = JSON.parse(data);
         if (response.success) {
@@ -220,4 +222,4 @@ const setupSecurity = async () => {
   }
 };
 
-setupSecurity(); 
+setupSecurity();

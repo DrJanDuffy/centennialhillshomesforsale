@@ -1,8 +1,8 @@
 
 #!/usr/bin/env node
 
-const fs = require('fs');
-const path = require('path');
+const fs = require('node:fs');
+const _path = require('node:path');
 
 console.log('🚀 FINAL DEPLOYMENT PREPARATION');
 console.log('================================');
@@ -65,7 +65,7 @@ try {
   
   const requiredScripts = ['build', 'start', 'dev'];
   requiredScripts.forEach(script => {
-    if (packageJson.scripts && packageJson.scripts[script]) {
+    if (packageJson.scripts?.[script]) {
       console.log(`✅ Script "${script}" present`);
     } else {
       console.log(`❌ Missing script: ${script}`);
@@ -78,7 +78,7 @@ try {
 }
 
 // Final status
-console.log('\n' + '='.repeat(50));
+console.log(`\n${'='.repeat(50)}`);
 if (allFilesPresent) {
   console.log('🎉 DEPLOYMENT READY!');
   console.log('✅ All critical files and configurations verified');

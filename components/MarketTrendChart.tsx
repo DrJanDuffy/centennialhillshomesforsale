@@ -1,17 +1,17 @@
-import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { 
-  TrendingUp, 
-  DollarSign, 
-  Home, 
-  Clock,
-  BarChart3,
-  PieChart,
+import {
   Activity,
-  ArrowUp,
   ArrowDown,
-  Minus
+  ArrowUp,
+  BarChart3,
+  Clock,
+  DollarSign,
+  Home,
+  Minus,
+  PieChart,
+  TrendingUp,
 } from 'lucide-react';
+import React, { useState } from 'react';
 
 interface MarketData {
   month: string;
@@ -27,9 +27,9 @@ interface MarketTrendChartProps {
   className?: string;
 }
 
-const MarketTrendChart: React.FC<MarketTrendChartProps> = ({ 
-  data = defaultMarketData, 
-  className = '' 
+const MarketTrendChart: React.FC<MarketTrendChartProps> = ({
+  data = defaultMarketData,
+  className = '',
 }) => {
   const [selectedMetric, setSelectedMetric] = useState<'price' | 'days' | 'volume'>('price');
   const [timeframe, setTimeframe] = useState<'3m' | '6m' | '12m'>('6m');
@@ -37,13 +37,13 @@ const MarketTrendChart: React.FC<MarketTrendChartProps> = ({
   const metrics = [
     { key: 'price', label: 'Average Price', icon: DollarSign, color: 'text-accent-color' },
     { key: 'days', label: 'Days on Market', icon: Clock, color: 'text-warning-color' },
-    { key: 'volume', label: 'Homes Sold', icon: Home, color: 'text-secondary-color' }
+    { key: 'volume', label: 'Homes Sold', icon: Home, color: 'text-secondary-color' },
   ];
 
   const timeframes = [
     { key: '3m', label: '3 Months' },
     { key: '6m', label: '6 Months' },
-    { key: '12m', label: '12 Months' }
+    { key: '12m', label: '12 Months' },
   ];
 
   const getCurrentValue = () => {
@@ -112,16 +112,19 @@ const MarketTrendChart: React.FC<MarketTrendChartProps> = ({
     const filteredData = data.slice(-6); // Last 6 months
     return filteredData.map((item, index) => ({
       x: index,
-      y: selectedMetric === 'price' ? item.avgPrice / 1000 : 
-         selectedMetric === 'days' ? item.daysOnMarket : 
-         item.homesSold,
-      label: item.month
+      y:
+        selectedMetric === 'price'
+          ? item.avgPrice / 1000
+          : selectedMetric === 'days'
+            ? item.daysOnMarket
+            : item.homesSold,
+      label: item.month,
     }));
   };
 
   const chartData = getChartData();
-  const maxValue = Math.max(...chartData.map(d => d.y));
-  const minValue = Math.min(...chartData.map(d => d.y));
+  const maxValue = Math.max(...chartData.map((d) => d.y));
+  const minValue = Math.min(...chartData.map((d) => d.y));
 
   return (
     <div className={`bg-white rounded-2xl p-8 shadow-xl ${className}`}>
@@ -131,20 +134,20 @@ const MarketTrendChart: React.FC<MarketTrendChartProps> = ({
           <h3 className="text-2xl font-bold text-primary mb-2">Market Trends</h3>
           <p className="text-secondary">Real-time market data for Centennial Hills</p>
         </div>
-        
+
         {/* Metric Selector */}
         <div className="flex gap-2 mt-4 lg:mt-0">
           {metrics.map((metric) => (
             <button
               key={metric.key}
-                             onClick={() => setSelectedMetric(metric.key as 'price' | 'days' | 'volume')}
+              onClick={() => setSelectedMetric(metric.key as 'price' | 'days' | 'volume')}
               className={`flex items-center gap-2 px-4 py-2 rounded-lg transition-all duration-300 ${
                 selectedMetric === metric.key
                   ? 'bg-primary text-white'
                   : 'bg-tertiary text-secondary hover:bg-secondary-color/10'
               }`}
             >
-              {React.createElement(metric.icon, { className: "w-4 h-4" })}
+              {React.createElement(metric.icon, { className: 'w-4 h-4' })}
               <span className="text-sm font-medium">{metric.label}</span>
             </button>
           ))}
@@ -160,10 +163,14 @@ const MarketTrendChart: React.FC<MarketTrendChartProps> = ({
           className="bg-gradient-to-br from-accent-color/10 to-secondary-color/10 rounded-xl p-6 border border-accent-color/20"
         >
           <div className="flex items-center justify-between mb-4">
-            <h4 className="text-lg font-semibold text-primary">Current {metrics.find(m => m.key === selectedMetric)?.label}</h4>
+            <h4 className="text-lg font-semibold text-primary">
+              Current {metrics.find((m) => m.key === selectedMetric)?.label}
+            </h4>
             {(() => {
-              const metric = metrics.find(m => m.key === selectedMetric);
-              return metric?.icon ? React.createElement(metric.icon, { className: "w-6 h-6 text-accent-color" }) : null;
+              const metric = metrics.find((m) => m.key === selectedMetric);
+              return metric?.icon
+                ? React.createElement(metric.icon, { className: 'w-6 h-6 text-accent-color' })
+                : null;
             })()}
           </div>
           <div className="text-3xl font-bold text-primary mb-2">
@@ -216,7 +223,7 @@ const MarketTrendChart: React.FC<MarketTrendChartProps> = ({
             {timeframes.map((tf) => (
               <button
                 key={tf.key}
-                                 onClick={() => setTimeframe(tf.key as '3m' | '6m' | '12m')}
+                onClick={() => setTimeframe(tf.key as '3m' | '6m' | '12m')}
                 className={`px-3 py-1 rounded-lg text-sm transition-all duration-300 ${
                   timeframe === tf.key
                     ? 'bg-primary text-white'
@@ -272,7 +279,8 @@ const MarketTrendChart: React.FC<MarketTrendChartProps> = ({
             <li className="flex items-start gap-3">
               <div className="w-2 h-2 bg-accent-color rounded-full mt-2 flex-shrink-0"></div>
               <span className="text-secondary text-sm">
-                Average home prices have {getChangePercentage() > 0 ? 'increased' : 'decreased'} by {Math.abs(getChangePercentage()).toFixed(1)}% this month
+                Average home prices have {getChangePercentage() > 0 ? 'increased' : 'decreased'} by{' '}
+                {Math.abs(getChangePercentage()).toFixed(1)}% this month
               </span>
             </li>
             <li className="flex items-start gap-3">
@@ -305,7 +313,11 @@ const MarketTrendChart: React.FC<MarketTrendChartProps> = ({
               <div className="flex justify-between items-center mb-2">
                 <span className="text-sm text-secondary">Price Trend</span>
                 <span className="text-sm font-medium text-primary">
-                  {getChangePercentage() > 0 ? '↗ Upward' : getChangePercentage() < 0 ? '↘ Downward' : '→ Stable'}
+                  {getChangePercentage() > 0
+                    ? '↗ Upward'
+                    : getChangePercentage() < 0
+                      ? '↘ Downward'
+                      : '→ Stable'}
                 </span>
               </div>
               <div className="w-full bg-tertiary rounded-full h-2">
@@ -319,18 +331,24 @@ const MarketTrendChart: React.FC<MarketTrendChartProps> = ({
                 />
               </div>
             </div>
-            
+
             <div>
               <div className="flex justify-between items-center mb-2">
                 <span className="text-sm text-secondary">Inventory Level</span>
                 <span className="text-sm font-medium text-primary">
-                  {data[data.length - 1].newListings > 20 ? 'High' : data[data.length - 1].newListings > 10 ? 'Medium' : 'Low'}
+                  {data[data.length - 1].newListings > 20
+                    ? 'High'
+                    : data[data.length - 1].newListings > 10
+                      ? 'Medium'
+                      : 'Low'}
                 </span>
               </div>
               <div className="w-full bg-tertiary rounded-full h-2">
                 <motion.div
                   initial={{ width: 0 }}
-                  animate={{ width: `${Math.min((data[data.length - 1].newListings / 30) * 100, 100)}%` }}
+                  animate={{
+                    width: `${Math.min((data[data.length - 1].newListings / 30) * 100, 100)}%`,
+                  }}
                   transition={{ duration: 1, delay: 0.7 }}
                   className="h-2 rounded-full bg-secondary-color"
                 />
@@ -345,12 +363,54 @@ const MarketTrendChart: React.FC<MarketTrendChartProps> = ({
 
 // Default market data with more realistic variation
 const defaultMarketData: MarketData[] = [
-  { month: 'Jan', avgPrice: 720000, daysOnMarket: 18, homesSold: 42, newListings: 25, priceChange: 1.2 },
-  { month: 'Feb', avgPrice: 735000, daysOnMarket: 16, homesSold: 48, newListings: 28, priceChange: 2.1 },
-  { month: 'Mar', avgPrice: 748000, daysOnMarket: 14, homesSold: 55, newListings: 32, priceChange: 1.8 },
-  { month: 'Apr', avgPrice: 762000, daysOnMarket: 12, homesSold: 62, newListings: 38, priceChange: 1.9 },
-  { month: 'May', avgPrice: 775000, daysOnMarket: 10, homesSold: 68, newListings: 45, priceChange: 1.7 },
-  { month: 'Jun', avgPrice: 789000, daysOnMarket: 8, homesSold: 75, newListings: 52, priceChange: 1.8 }
+  {
+    month: 'Jan',
+    avgPrice: 720000,
+    daysOnMarket: 18,
+    homesSold: 42,
+    newListings: 25,
+    priceChange: 1.2,
+  },
+  {
+    month: 'Feb',
+    avgPrice: 735000,
+    daysOnMarket: 16,
+    homesSold: 48,
+    newListings: 28,
+    priceChange: 2.1,
+  },
+  {
+    month: 'Mar',
+    avgPrice: 748000,
+    daysOnMarket: 14,
+    homesSold: 55,
+    newListings: 32,
+    priceChange: 1.8,
+  },
+  {
+    month: 'Apr',
+    avgPrice: 762000,
+    daysOnMarket: 12,
+    homesSold: 62,
+    newListings: 38,
+    priceChange: 1.9,
+  },
+  {
+    month: 'May',
+    avgPrice: 775000,
+    daysOnMarket: 10,
+    homesSold: 68,
+    newListings: 45,
+    priceChange: 1.7,
+  },
+  {
+    month: 'Jun',
+    avgPrice: 789000,
+    daysOnMarket: 8,
+    homesSold: 75,
+    newListings: 52,
+    priceChange: 1.8,
+  },
 ];
 
 export default MarketTrendChart;

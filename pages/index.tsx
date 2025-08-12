@@ -1,64 +1,91 @@
-import React, { useState, useEffect } from 'react';
-import dynamic from 'next/dynamic';
-import Link from 'next/link';
-import Image from 'next/image';
-import Layout from '../components/Layout';
-import GoogleTagManager from '../components/GoogleTagManager';
-import PerformanceOptimizer from '../components/PerformanceOptimizer';
-import FAQSection from '../components/FAQSection';
-import EnhancedPropertySearch from '../components/EnhancedPropertySearch';
-import EnhancedContactForm from '../components/EnhancedContactForm';
 import {
-  Star,
-  MapPin,
-  TrendingUp,
-  Users,
-  Award,
-  Home,
-  Heart,
-  Search,
   ArrowRight,
+  Award,
+  ChevronLeft,
+  ChevronRight,
+  Eye,
+  Heart,
+  Home,
+  MapPin,
+  MessageCircle,
   Play,
   Quote,
-  ChevronRight,
-  ChevronLeft,
+  Search,
   Share2,
-  Eye,
-  MessageCircle,
+  Sparkle,
   Sparkles,
-  Sparkle
+  Star,
+  TrendingUp,
+  Users,
 } from 'lucide-react';
-import { motion, AnimatePresence } from 'framer-motion';
+import dynamic from 'next/dynamic';
+import Image from 'next/image';
+import Link from 'next/link';
+import type React from 'react';
+import { useEffect, useState } from 'react';
+import EnhancedContactForm from '../components/EnhancedContactForm';
+import EnhancedPropertySearch from '../components/EnhancedPropertySearch';
+import FAQSection from '../components/FAQSection';
+import GoogleTagManager from '../components/GoogleTagManager';
+import Layout from '../components/Layout';
+import PerformanceOptimizer from '../components/PerformanceOptimizer';
 
 // Lazy load heavy components for better performance
 const AIAssistant = dynamic(() => import('../components/AIAssistant'), {
-  loading: () => <div className="loading-skeleton h-64 rounded-lg"></div>,
-  ssr: false
+  loading: () => (
+    <div className="bg-gray-100 h-64 rounded-lg flex items-center justify-center">
+      Loading AI Assistant...
+    </div>
+  ),
+  ssr: false,
 });
 
 const InteractivePropertyMap = dynamic(() => import('../components/InteractivePropertyMap'), {
-  loading: () => <div className="loading-skeleton h-96 rounded-lg"></div>,
-  ssr: false
+  loading: () => (
+    <div className="bg-gray-100 h-96 rounded-lg flex items-center justify-center">
+      Loading Interactive Map...
+    </div>
+  ),
+  ssr: false,
 });
 
-const SmartPropertyRecommendations = dynamic(() => import('../components/SmartPropertyRecommendations'), {
-  loading: () => <div className="loading-skeleton h-64 rounded-lg"></div>,
-  ssr: false
-});
+const SmartPropertyRecommendations = dynamic(
+  () => import('../components/SmartPropertyRecommendations'),
+  {
+    loading: () => (
+      <div className="bg-gray-100 h-64 rounded-lg flex items-center justify-center">
+        Loading Recommendations...
+      </div>
+    ),
+    ssr: false,
+  }
+);
 
 const MarketTrendChart = dynamic(() => import('../components/MarketTrendChart'), {
-  loading: () => <div className="loading-skeleton h-64 rounded-lg"></div>,
-  ssr: false
+  loading: () => (
+    <div className="bg-gray-100 h-64 rounded-lg flex items-center justify-center">
+      Loading Market Data...
+    </div>
+  ),
+  ssr: false,
 });
 
 const LocalAmenities = dynamic(() => import('../components/LocalAmenities'), {
-  loading: () => <div className="loading-skeleton h-64 rounded-lg"></div>,
-  ssr: false
+  loading: () => (
+    <div className="bg-gray-100 h-64 rounded-lg flex items-center justify-center">
+      Loading Amenities...
+    </div>
+  ),
+  ssr: false,
 });
 
-const LeadCaptureForm = dynamic(() => import('../components/LeadCaptureForm'), {
-  loading: () => <div className="loading-skeleton h-64 rounded-lg"></div>,
-  ssr: false
+const _LeadCaptureForm = dynamic(() => import('../components/LeadCaptureForm'), {
+  loading: () => (
+    <div className="bg-gray-100 h-64 rounded-lg flex items-center justify-center">
+      Loading Contact Form...
+    </div>
+  ),
+  ssr: false,
 });
 
 const HomePage: React.FC = () => {
@@ -66,7 +93,6 @@ const HomePage: React.FC = () => {
   const [showFloatingMenu, setShowFloatingMenu] = useState(false);
 
   useEffect(() => {
-    
     const handleScroll = () => {
       setShowFloatingMenu(window.scrollY > 500);
     };
@@ -85,9 +111,18 @@ const HomePage: React.FC = () => {
       bathrooms: 3,
       sqft: 3200,
       images: [
-        { url: 'https://images.unsplash.com/photo-1564013799919-ab600027ffc6?w=800&h=600&fit=crop', alt: 'Luxury Home - Golden Moments Avenue' },
-        { url: 'https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=800&h=600&fit=crop', alt: 'Modern Kitchen' },
-        { url: 'https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=800&h=600&fit=crop', alt: 'Living Room' }
+        {
+          url: 'https://images.unsplash.com/photo-1564013799919-ab600027ffc6?w=800&h=600&fit=crop',
+          alt: 'Luxury Home - Golden Moments Avenue',
+        },
+        {
+          url: 'https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=800&h=600&fit=crop',
+          alt: 'Modern Kitchen',
+        },
+        {
+          url: 'https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=800&h=600&fit=crop',
+          alt: 'Living Room',
+        },
       ],
       neighborhood: { name: 'Golden Moments' },
       listDate: '2024-01-15',
@@ -97,7 +132,8 @@ const HomePage: React.FC = () => {
       pricePerSqft: 266,
       lotSize: '0.25 acres',
       isFeatured: true,
-      realScoutUrl: 'https://drjanduffy.realscout.com/homesearch/listings/p-11773-golden-moments-avenue-las-vegas-89138-glvartrestle-409'
+      realScoutUrl:
+        'https://drjanduffy.realscout.com/homesearch/listings/p-11773-golden-moments-avenue-las-vegas-89138-glvartrestle-409',
     },
     {
       id: '2',
@@ -108,9 +144,18 @@ const HomePage: React.FC = () => {
       bathrooms: 4,
       sqft: 4100,
       images: [
-        { url: 'https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=800&h=600&fit=crop', alt: 'Modern Estate in Centennial Hills' },
-        { url: 'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=800&h=600&fit=crop', alt: 'Exterior View' },
-        { url: 'https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?w=800&h=600&fit=crop', alt: 'Master Suite' }
+        {
+          url: 'https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=800&h=600&fit=crop',
+          alt: 'Modern Estate in Centennial Hills',
+        },
+        {
+          url: 'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=800&h=600&fit=crop',
+          alt: 'Exterior View',
+        },
+        {
+          url: 'https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?w=800&h=600&fit=crop',
+          alt: 'Master Suite',
+        },
       ],
       neighborhood: { name: 'Centennial Hills' },
       listDate: '2024-01-20',
@@ -118,7 +163,7 @@ const HomePage: React.FC = () => {
       features: ['Guest House', 'Wine Cellar', 'Home Theater', 'Casita'],
       daysOnMarket: 8,
       pricePerSqft: 293,
-      lotSize: '0.5 acres'
+      lotSize: '0.5 acres',
     },
     {
       id: '3',
@@ -129,9 +174,18 @@ const HomePage: React.FC = () => {
       bathrooms: 3,
       sqft: 2800,
       images: [
-        { url: 'https://images.unsplash.com/photo-1600607687644-c7171b42498b?w=800&h=600&fit=crop', alt: 'Family Home in Skye Canyon' },
-        { url: 'https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?w=800&h=600&fit=crop', alt: 'Kitchen' },
-        { url: 'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=800&h=600&fit=crop', alt: 'Backyard' }
+        {
+          url: 'https://images.unsplash.com/photo-1600607687644-c7171b42498b?w=800&h=600&fit=crop',
+          alt: 'Family Home in Skye Canyon',
+        },
+        {
+          url: 'https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?w=800&h=600&fit=crop',
+          alt: 'Kitchen',
+        },
+        {
+          url: 'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=800&h=600&fit=crop',
+          alt: 'Backyard',
+        },
       ],
       neighborhood: { name: 'Skye Canyon' },
       listDate: '2024-01-18',
@@ -139,15 +193,39 @@ const HomePage: React.FC = () => {
       features: ['Open Floor Plan', 'Mountain Views', 'Upgraded Kitchen', 'Large Yard'],
       daysOnMarket: 15,
       pricePerSqft: 232,
-      lotSize: '0.3 acres'
-    }
+      lotSize: '0.3 acres',
+    },
   ];
 
   const stats = [
-    { icon: Home, label: 'Homes Sold', value: '500+', color: 'text-secondary-color', description: 'Successful transactions' },
-    { icon: Users, label: 'Happy Families', value: '500+', color: 'text-accent-color', description: 'Satisfied clients' },
-    { icon: Award, label: 'Years Experience', value: '15+', color: 'text-primary-color', description: 'Local expertise' },
-    { icon: TrendingUp, label: 'Avg Days on Market', value: '12', color: 'text-warning-color', description: 'Fast sales' }
+    {
+      icon: Home,
+      label: 'Homes Sold',
+      value: '500+',
+      color: 'text-secondary-color',
+      description: 'Successful transactions',
+    },
+    {
+      icon: Users,
+      label: 'Happy Families',
+      value: '500+',
+      color: 'text-accent-color',
+      description: 'Satisfied clients',
+    },
+    {
+      icon: Award,
+      label: 'Years Experience',
+      value: '15+',
+      color: 'text-primary-color',
+      description: 'Local expertise',
+    },
+    {
+      icon: TrendingUp,
+      label: 'Avg Days on Market',
+      value: '12',
+      color: 'text-warning-color',
+      description: 'Fast sales',
+    },
   ];
 
   const testimonials = [
@@ -158,7 +236,7 @@ const HomePage: React.FC = () => {
       rating: 5,
       text: 'Dr. Jan Duffy made our home buying experience absolutely seamless. Her knowledge of the area and attention to detail is unmatched. We found our dream home in just 2 weeks!',
       image: '/images/testimonial-1.jpg',
-      property: '4 bed, 3 bath in Centennial Hills'
+      property: '4 bed, 3 bath in Centennial Hills',
     },
     {
       id: 2,
@@ -167,7 +245,7 @@ const HomePage: React.FC = () => {
       rating: 5,
       text: 'As a first-time homebuyer, I was nervous about the process. Dr. Duffy guided me through every step with patience and expertise. Highly recommend!',
       image: '/images/testimonial-2.jpg',
-      property: '3 bed, 2.5 bath in Providence'
+      property: '3 bed, 2.5 bath in Providence',
     },
     {
       id: 3,
@@ -176,8 +254,8 @@ const HomePage: React.FC = () => {
       rating: 5,
       text: 'Dr. Duffy helped us sell our home above asking price in just 8 days! Her marketing strategy and negotiation skills are incredible.',
       image: '/images/testimonial-3.jpg',
-      property: '5 bed, 4 bath in Skye Canyon'
-    }
+      property: '5 bed, 4 bath in Skye Canyon',
+    },
   ];
 
   const nextTestimonial = () => {
@@ -187,8 +265,6 @@ const HomePage: React.FC = () => {
   const prevTestimonial = () => {
     setCurrentTestimonial((prev) => (prev - 1 + testimonials.length) % testimonials.length);
   };
-
-
 
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -201,39 +277,27 @@ const HomePage: React.FC = () => {
       canonical="https://centennialhillshomesforsale.com"
     >
       {/* Floating Action Menu */}
-      <AnimatePresence>
-        {showFloatingMenu && (
-          <motion.div
-            initial={{ opacity: 0, scale: 0.8, y: 20 }}
-            animate={{ opacity: 1, scale: 1, y: 0 }}
-            exit={{ opacity: 0, scale: 0.8, y: 20 }}
-            className="fixed bottom-6 right-6 z-50 flex flex-col gap-3"
+      {showFloatingMenu && (
+        <div className="fixed bottom-6 right-6 z-50 flex flex-col gap-3">
+          <button
+            className="bg-primary-color text-white p-4 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 active:scale-95"
+            onClick={() => (window.location.href = 'mailto:jan@centennialhillshomesforsale.com')}
+            aria-label="Email us"
+            title="Email us"
           >
-            
-            <motion.button
-              whileHover={{ scale: 1.1 }}
-              whileTap={{ scale: 0.9 }}
-              className="bg-primary-color text-white p-4 rounded-full shadow-lg hover:shadow-xl transition-all duration-300"
-              onClick={() => window.location.href = 'mailto:jan@centennialhillshomesforsale.com'}
-              aria-label="Email us"
-              title="Email us"
-            >
-              <MessageCircle className="w-6 h-6" />
-            </motion.button>
-            
-            <motion.button
-              whileHover={{ scale: 1.1 }}
-              whileTap={{ scale: 0.9 }}
-              className="bg-secondary-color text-white p-4 rounded-full shadow-lg hover:shadow-xl transition-all duration-300"
-              onClick={scrollToTop}
-              aria-label="Back to top"
-              title="Back to top"
-            >
-              <ArrowRight className="w-6 h-6 rotate-[-90deg]" />
-            </motion.button>
-          </motion.div>
-        )}
-      </AnimatePresence>
+            <MessageCircle className="w-6 h-6" />
+          </button>
+
+          <button
+            className="bg-secondary-color text-white p-4 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 active:scale-95"
+            onClick={scrollToTop}
+            aria-label="Back to top"
+            title="Back to top"
+          >
+            <ArrowRight className="w-6 h-6 rotate-[-90deg]" />
+          </button>
+        </div>
+      )}
 
       {/* Hero Section with Video Background */}
       <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
@@ -261,11 +325,7 @@ const HomePage: React.FC = () => {
 
         {/* Hero Content */}
         <div className="relative z-10 container text-center text-white">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-          >
+          <div className="animate-fade-in-up">
             {/* Animated Sparkles */}
             <div className="absolute top-0 left-1/4 animate-bounce">
               <Sparkles className="w-8 h-8 text-accent-color opacity-60" />
@@ -281,68 +341,52 @@ const HomePage: React.FC = () => {
               </span>
             </h1>
             <p className="text-xl md:text-2xl mb-8 max-w-3xl mx-auto opacity-90">
-              Experience the future of real estate with AI-powered search, expert guidance, and unparalleled local knowledge
+              Experience the future of real estate with AI-powered search, expert guidance, and
+              unparalleled local knowledge
             </p>
-            
+
             {/* Hero Stats */}
             <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-12 max-w-4xl mx-auto">
-              {stats.map((stat, index) => (
-                <motion.div
+              {stats.map((stat, _index) => (
+                <div
                   key={stat.label}
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.6, delay: index * 0.1 }}
-                  whileHover={{ scale: 1.05, y: -5 }}
-                  className="bg-white/10 backdrop-blur-md rounded-xl p-6 border border-white/20 hover:bg-white/20 transition-all duration-300"
+                  className="bg-white/10 backdrop-blur-md rounded-xl p-6 border border-white/20 hover:bg-white/20 transition-all duration-300 hover:scale-105 hover:-translate-y-1"
                 >
                   <stat.icon className={`w-8 h-8 mx-auto mb-3 ${stat.color}`} />
                   <div className="text-3xl font-bold mb-1">{stat.value}</div>
                   <div className="text-sm opacity-80">{stat.label}</div>
                   <div className="text-xs opacity-60">{stat.description}</div>
-                </motion.div>
+                </div>
               ))}
             </div>
 
             {/* Hero CTA */}
             <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-              <motion.button 
-                className="btn btn-accent btn-lg group"
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-              >
+              <button className="btn btn-accent btn-lg group hover:scale-105 active:scale-95 transition-transform">
                 <Search className="w-5 h-5 mr-2 group-hover:scale-110 transition-transform" />
                 Start Your Search
                 <ArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" />
-              </motion.button>
-              <motion.button 
-                className="btn btn-outline btn-lg group text-white border-white hover:bg-white hover:text-primary-color"
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-              >
+              </button>
+              <button className="btn btn-outline btn-lg group text-white border-white hover:bg-white hover:text-primary-color hover:scale-105 active:scale-95 transition-transform">
                 <Play className="w-5 h-5 mr-2 group-hover:scale-110 transition-transform" />
                 Watch Our Story
-              </motion.button>
+              </button>
             </div>
-          </motion.div>
+          </div>
         </div>
 
         {/* Scroll Indicator */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 1, duration: 0.8 }}
-          className="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-10"
-        >
+        <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-10 animate-fade-in-up">
           <div className="animate-bounce">
             <ChevronRight className="w-6 h-6 text-white rotate-90" />
           </div>
-        </motion.div>
+        </div>
       </section>
 
-            {/* Enhanced Property Search Section */}
+      {/* Enhanced Property Search Section */}
       <section className="section bg-secondary -mt-20 relative z-20">
         <div className="container">
-          <EnhancedPropertySearch 
+          <EnhancedPropertySearch
             onSearch={(filters) => {
               console.log('Search filters:', filters);
               // Handle search results
@@ -356,30 +400,22 @@ const HomePage: React.FC = () => {
       <section className="section bg-primary">
         <div className="container">
           <div className="text-center mb-16">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8 }}
-              viewport={{ once: true }}
-            >
+            <div className="animate-fade-in-up">
               <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
                 Featured Properties
               </h2>
               <p className="text-xl text-white/80 max-w-3xl mx-auto">
                 Discover exceptional homes in Centennial Hills&apos; most desirable neighborhoods
               </p>
-            </motion.div>
+            </div>
           </div>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {featuredProperties.map((property, index) => (
-              <motion.div
+              <div
                 key={property.id}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: index * 0.1 }}
-                viewport={{ once: true }}
-                className="group"
+                className="group animate-fade-in-up"
+                style={{ animationDelay: `${index * 0.1}s` }}
               >
                 <div className="bg-white rounded-2xl overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-300 group-hover:-translate-y-2">
                   {/* Property Image */}
@@ -387,15 +423,15 @@ const HomePage: React.FC = () => {
                     <div className="absolute inset-0 flex items-center justify-center">
                       <Home className="w-16 h-16 text-white opacity-20" />
                     </div>
-                                         <div className="absolute top-4 right-4">
-                       <button 
-                         className="bg-white/20 backdrop-blur-md rounded-full p-2 hover:bg-white/30 transition-colors"
-                         aria-label="Add to favorites"
-                         title="Add to favorites"
-                       >
-                         <Heart className="w-5 h-5 text-white" />
-                       </button>
-                     </div>
+                    <div className="absolute top-4 right-4">
+                      <button
+                        className="bg-white/20 backdrop-blur-md rounded-full p-2 hover:bg-white/30 transition-colors"
+                        aria-label="Add to favorites"
+                        title="Add to favorites"
+                      >
+                        <Heart className="w-5 h-5 text-white" />
+                      </button>
+                    </div>
                     <div className="absolute bottom-4 left-4 flex gap-2">
                       {property.isFeatured && (
                         <span className="bg-gradient-to-r from-yellow-400 to-orange-500 text-white px-3 py-1 rounded-full text-sm font-semibold animate-pulse">
@@ -435,14 +471,19 @@ const HomePage: React.FC = () => {
                         <div className="text-sm text-secondary">Baths</div>
                       </div>
                       <div className="text-center">
-                        <div className="text-lg font-bold text-primary">{property.sqft.toLocaleString()}</div>
+                        <div className="text-lg font-bold text-primary">
+                          {property.sqft.toLocaleString()}
+                        </div>
                         <div className="text-sm text-secondary">Sq Ft</div>
                       </div>
                     </div>
 
                     <div className="flex flex-wrap gap-2 mb-6">
                       {property.features.slice(0, 3).map((feature, idx) => (
-                        <span key={idx} className="bg-tertiary text-secondary px-2 py-1 rounded text-xs">
+                        <span
+                          key={idx}
+                          className="bg-tertiary text-secondary px-2 py-1 rounded text-xs"
+                        >
                           {feature}
                         </span>
                       ))}
@@ -460,7 +501,7 @@ const HomePage: React.FC = () => {
                           View Details
                         </button>
                       )}
-                      <button 
+                      <button
                         className="btn btn-outline"
                         aria-label="Share property"
                         title="Share property"
@@ -470,93 +511,61 @@ const HomePage: React.FC = () => {
                     </div>
                   </div>
                 </div>
-              </motion.div>
+              </div>
             ))}
           </div>
 
-          <motion.div
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            transition={{ duration: 0.8, delay: 0.4 }}
-            viewport={{ once: true }}
-            className="text-center mt-12"
-          >
+          <div className="text-center mt-12 animate-fade-in-up">
             <button className="btn btn-accent btn-lg group">
               View All Properties
               <ArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" />
             </button>
-          </motion.div>
+          </div>
         </div>
       </section>
 
       {/* RealScout Your Listings */}
       <section className="section bg-secondary">
         <div className="container">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            viewport={{ once: true }}
-            className="text-center mb-16"
-          >
-            <h2 className="text-4xl md:text-5xl font-bold text-primary mb-6">
-              Your Listings
-            </h2>
+          <div className="text-center mb-16 animate-fade-in-up">
+            <h2 className="text-4xl md:text-5xl font-bold text-primary mb-6">Your Listings</h2>
             <p className="text-xl text-secondary max-w-3xl mx-auto">
               Browse our latest properties in Centennial Hills and surrounding areas
             </p>
-          </motion.div>
+          </div>
 
-          <motion.div
-            initial={{ opacity: 0, scale: 0.95 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
-            viewport={{ once: true }}
-          >
-            <realscout-your-listings 
-              agent-encoded-id="QWdlbnQtMjI1MDUw" 
-              sort-order="STATUS_AND_SIGNIFICANT_CHANGE" 
-              listing-status="For Sale,Sold" 
-              property-types="SFR" 
-              price-min="500000">
-            </realscout-your-listings>
-          </motion.div>
+          <div className="animate-fade-in-up">
+            <realscout-your-listings
+              agent-encoded-id="QWdlbnQtMjI1MDUw"
+              sort-order="STATUS_AND_SIGNIFICANT_CHANGE"
+              listing-status="For Sale,Sold"
+              property-types="SFR"
+              price-min="500000"
+            ></realscout-your-listings>
+          </div>
         </div>
       </section>
 
       {/* RealScout Office Listings */}
       <section className="section bg-white">
         <div className="container">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            viewport={{ once: true }}
-            className="text-center mb-16"
-          >
-            <h2 className="text-4xl md:text-5xl font-bold text-primary mb-6">
-              Current Listings
-            </h2>
+          <div className="text-center mb-16 animate-fade-in-up">
+            <h2 className="text-4xl md:text-5xl font-bold text-primary mb-6">Current Listings</h2>
             <p className="text-xl text-secondary max-w-3xl mx-auto">
               Browse our latest properties in Centennial Hills and surrounding areas
             </p>
-          </motion.div>
+          </div>
 
-          <motion.div
-            initial={{ opacity: 0, scale: 0.95 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
-            viewport={{ once: true }}
-          >
-            <realscout-office-listings 
-              agent-encoded-id="QWdlbnQtMjI1MDUw" 
-              sort-order="STATUS_AND_SIGNIFICANT_CHANGE" 
-              listing-status="For Sale" 
-              property-types="SFR,MF,TC" 
-              price-min="600000" 
-              price-max="1200000">
-            </realscout-office-listings>
-          </motion.div>
+          <div className="animate-fade-in-up">
+            <realscout-office-listings
+              agent-encoded-id="QWdlbnQtMjI1MDUw"
+              sort-order="STATUS_AND_SIGNIFICANT_CHANGE"
+              listing-status="For Sale"
+              property-types="SFR,MF,TC"
+              price-min="600000"
+              price-max="1200000"
+            ></realscout-office-listings>
+          </div>
         </div>
       </section>
 
@@ -564,28 +573,21 @@ const HomePage: React.FC = () => {
       <section className="section bg-primary">
         <div className="container">
           <div className="text-center mb-16">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8 }}
-              viewport={{ once: true }}
-            >
+            <div className="animate-fade-in-up">
               <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
                 What Our Clients Say
               </h2>
               <p className="text-xl text-white/80 max-w-3xl mx-auto">
-                Don&apos;t just take our word for it - hear from the families we&apos;ve helped find their dream homes
+                Don&apos;t just take our word for it - hear from the families we&apos;ve helped find
+                their dream homes
               </p>
-            </motion.div>
+            </div>
           </div>
 
           <div className="relative max-w-4xl mx-auto">
-            <motion.div
+            <div
               key={currentTestimonial}
-              initial={{ opacity: 0, x: 50 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.5 }}
-              className="bg-white rounded-2xl p-8 md:p-12 shadow-2xl"
+              className="bg-white rounded-2xl p-8 md:p-12 shadow-2xl animate-fade-in-up"
             >
               <div className="flex flex-col md:flex-row items-center md:items-start gap-8">
                 <div className="flex-shrink-0">
@@ -607,12 +609,13 @@ const HomePage: React.FC = () => {
                       {testimonials[currentTestimonial].name}
                     </div>
                     <div className="text-secondary">
-                      {testimonials[currentTestimonial].property} • {testimonials[currentTestimonial].location}
+                      {testimonials[currentTestimonial].property} •{' '}
+                      {testimonials[currentTestimonial].location}
                     </div>
                   </div>
                 </div>
               </div>
-            </motion.div>
+            </div>
 
             {/* Navigation */}
             <div className="flex justify-center mt-8 gap-4">
@@ -656,49 +659,32 @@ const HomePage: React.FC = () => {
       {/* Interactive Map */}
       <section className="section bg-secondary">
         <div className="container">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            viewport={{ once: true }}
-            className="text-center mb-16"
-          >
+          <div className="text-center mb-16 animate-fade-in-up">
             <h2 className="text-4xl md:text-5xl font-bold text-primary mb-6">
               Explore Neighborhoods
             </h2>
             <p className="text-xl text-secondary max-w-3xl mx-auto">
               Interactive map of Centennial Hills, Providence, and Skye Canyon communities
             </p>
-          </motion.div>
+          </div>
 
-          <motion.div
-            initial={{ opacity: 0, scale: 0.95 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
-            viewport={{ once: true }}
-          >
+          <div className="animate-fade-in-up">
             <InteractivePropertyMap />
-          </motion.div>
+          </div>
         </div>
       </section>
 
       {/* Market Trends */}
       <section className="section bg-primary">
         <div className="container">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            viewport={{ once: true }}
-            className="text-center mb-16"
-          >
+          <div className="text-center mb-16 animate-fade-in-up">
             <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
               Market Trends & Insights
             </h2>
             <p className="text-xl text-white/80 max-w-3xl mx-auto">
               Stay informed with real-time market data and trends in Centennial Hills
             </p>
-          </motion.div>
+          </div>
 
           <MarketTrendChart />
         </div>
@@ -711,28 +697,16 @@ const HomePage: React.FC = () => {
       <section className="section bg-gradient-to-br from-yellow-400 via-orange-500 to-red-500 text-white">
         <div className="container">
           <div className="max-w-6xl mx-auto">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8 }}
-              viewport={{ once: true }}
-              className="text-center mb-12"
-            >
-              <h2 className="text-4xl md:text-5xl font-bold mb-6">
-                ⭐ Featured Luxury Home ⭐
-              </h2>
+            <div className="text-center mb-12 animate-fade-in-up">
+              <h2 className="text-4xl md:text-5xl font-bold mb-6">⭐ Featured Luxury Home ⭐</h2>
               <p className="text-xl text-white/90 mb-8 max-w-3xl mx-auto">
-                Discover this stunning 4-bedroom luxury home in the prestigious Golden Moments neighborhood
+                Discover this stunning 4-bedroom luxury home in the prestigious Golden Moments
+                neighborhood
               </p>
-            </motion.div>
+            </div>
 
             <div className="grid lg:grid-cols-2 gap-8 items-center">
-              <motion.div
-                initial={{ opacity: 0, x: -20 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.8, delay: 0.2 }}
-                viewport={{ once: true }}
-              >
+              <div className="animate-fade-in-up">
                 <div className="bg-white/10 backdrop-blur-md rounded-2xl p-8">
                   <h3 className="text-2xl font-bold mb-4">11773 Golden Moments Avenue</h3>
                   <div className="text-3xl font-bold text-yellow-300 mb-4">$850,000</div>
@@ -752,7 +726,9 @@ const HomePage: React.FC = () => {
                   </div>
                   <div className="flex flex-wrap gap-2 mb-6">
                     <span className="bg-white/20 px-3 py-1 rounded-full text-sm">Pool & Spa</span>
-                    <span className="bg-white/20 px-3 py-1 rounded-full text-sm">Mountain Views</span>
+                    <span className="bg-white/20 px-3 py-1 rounded-full text-sm">
+                      Mountain Views
+                    </span>
                     <span className="bg-white/20 px-3 py-1 rounded-full text-sm">Smart Home</span>
                   </div>
                   <Link
@@ -762,32 +738,32 @@ const HomePage: React.FC = () => {
                     View Full Details & Photos
                   </Link>
                 </div>
-              </motion.div>
+              </div>
 
-              <motion.div
-                initial={{ opacity: 0, x: 20 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.8, delay: 0.4 }}
-                viewport={{ once: true }}
-                className="relative"
-              >
-                <div className="relative h-80 rounded-2xl overflow-hidden shadow-2xl">
-                  <Image
-                    src="https://images.unsplash.com/photo-1564013799919-ab600027ffc6?w=800&h=600&fit=crop"
-                    alt="Featured Luxury Home - Golden Moments Avenue"
-                    fill
-                    className="object-cover"
-                    sizes="(max-width: 768px) 100vw, 50vw"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
-                  <div className="absolute bottom-4 left-4 right-4">
-                    <div className="bg-white/90 backdrop-blur-md rounded-lg p-4">
-                      <div className="text-lg font-semibold text-gray-800">Golden Moments Neighborhood</div>
-                      <div className="text-sm text-gray-600">Prestigious location with luxury amenities</div>
+              <div className="animate-fade-in-up">
+                <div className="relative">
+                  <div className="relative h-80 rounded-2xl overflow-hidden shadow-2xl">
+                    <Image
+                      src="https://images.unsplash.com/photo-1564013799919-ab600027ffc6?w=800&h=600&fit=crop"
+                      alt="Featured Luxury Home - Golden Moments Avenue"
+                      fill
+                      className="object-cover"
+                      sizes="(max-width: 768px) 100vw, 50vw"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
+                    <div className="absolute bottom-4 left-4 right-4">
+                      <div className="bg-white/90 backdrop-blur-md rounded-lg p-4">
+                        <div className="text-lg font-semibold text-gray-800">
+                          Golden Moments Neighborhood
+                        </div>
+                        <div className="text-sm text-gray-600">
+                          Prestigious location with luxury amenities
+                        </div>
+                      </div>
                     </div>
                   </div>
                 </div>
-              </motion.div>
+              </div>
             </div>
           </div>
         </div>
@@ -815,35 +791,41 @@ const HomePage: React.FC = () => {
         title="Frequently Asked Questions About Centennial Hills Real Estate"
         items={[
           {
-            question: "What makes Centennial Hills a great place to live?",
-            answer: "Centennial Hills offers luxury homes with stunning mountain views, top-rated schools, premium amenities, and a family-friendly community atmosphere. Located in Northwest Las Vegas, it provides easy access to shopping, dining, and outdoor recreation while maintaining a peaceful residential environment.",
-            category: "Neighborhood"
+            question: 'What makes Centennial Hills a great place to live?',
+            answer:
+              'Centennial Hills offers luxury homes with stunning mountain views, top-rated schools, premium amenities, and a family-friendly community atmosphere. Located in Northwest Las Vegas, it provides easy access to shopping, dining, and outdoor recreation while maintaining a peaceful residential environment.',
+            category: 'Neighborhood',
           },
           {
-            question: "How can Dr. Jan Duffy help me buy a home?",
-            answer: "Dr. Jan Duffy provides comprehensive buyer services including MLS access, financing guidance, negotiation support, and expert market knowledge of Centennial Hills, Providence, and Skye Canyon. As a Top 1% REALTOR®, she offers personalized property recommendations and 24/7 availability for showings.",
-            category: "Buying"
+            question: 'How can Dr. Jan Duffy help me buy a home?',
+            answer:
+              'Dr. Jan Duffy provides comprehensive buyer services including MLS access, financing guidance, negotiation support, and expert market knowledge of Centennial Hills, Providence, and Skye Canyon. As a Top 1% REALTOR®, she offers personalized property recommendations and 24/7 availability for showings.',
+            category: 'Buying',
           },
           {
-            question: "What are the current market trends in Centennial Hills?",
-            answer: "The Centennial Hills market is currently very active with strong demand for luxury homes. Average home prices are around $635,000 with 15-30 days on market. The area continues to see appreciation due to its desirable location, quality schools, and premium amenities.",
-            category: "Market"
+            question: 'What are the current market trends in Centennial Hills?',
+            answer:
+              'The Centennial Hills market is currently very active with strong demand for luxury homes. Average home prices are around $635,000 with 15-30 days on market. The area continues to see appreciation due to its desirable location, quality schools, and premium amenities.',
+            category: 'Market',
           },
           {
-            question: "What amenities are available in Centennial Hills?",
-            answer: "Centennial Hills features shopping centers, restaurants, parks, hiking trails, golf courses, and excellent schools. The area is known for its mountain views, family-friendly atmosphere, and convenient access to major highways and the Las Vegas Strip.",
-            category: "Amenities"
+            question: 'What amenities are available in Centennial Hills?',
+            answer:
+              'Centennial Hills features shopping centers, restaurants, parks, hiking trails, golf courses, and excellent schools. The area is known for its mountain views, family-friendly atmosphere, and convenient access to major highways and the Las Vegas Strip.',
+            category: 'Amenities',
           },
           {
-            question: "How do I get started with my home search?",
-            answer: "Start by contacting Dr. Jan Duffy for a free consultation. She'll discuss your needs, budget, and timeline, then provide personalized property recommendations and MLS access. You can also explore our featured listings and use our search tools to find your dream home.",
-            category: "Buying"
+            question: 'How do I get started with my home search?',
+            answer:
+              "Start by contacting Dr. Jan Duffy for a free consultation. She'll discuss your needs, budget, and timeline, then provide personalized property recommendations and MLS access. You can also explore our featured listings and use our search tools to find your dream home.",
+            category: 'Buying',
           },
           {
-            question: "What financing options are available?",
-            answer: "Dr. Jan Duffy works with trusted lenders to offer various financing options including conventional loans, FHA loans, VA loans, and jumbo loans. She can help you get pre-approved and find the best rates and terms for your situation.",
-            category: "Financing"
-          }
+            question: 'What financing options are available?',
+            answer:
+              'Dr. Jan Duffy works with trusted lenders to offer various financing options including conventional loans, FHA loans, VA loans, and jumbo loans. She can help you get pre-approved and find the best rates and terms for your situation.',
+            category: 'Financing',
+          },
         ]}
         showCategories={true}
       />

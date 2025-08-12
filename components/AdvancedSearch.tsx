@@ -1,6 +1,5 @@
-
-import React, { useState } from 'react';
 import { motion } from 'framer-motion';
+import { useState } from 'react';
 
 interface SearchFilters {
   priceMin: number;
@@ -20,15 +19,15 @@ export default function AdvancedSearch() {
     bathrooms: 0,
     sqft: 0,
     propertyType: 'all',
-    neighborhood: 'all'
+    neighborhood: 'all',
   });
 
   const [isExpanded, setIsExpanded] = useState(false);
 
   const handleFilterChange = (key: keyof SearchFilters, value: number | string) => {
-    setFilters(prev => ({
+    setFilters((prev) => ({
       ...prev,
-      [key]: value
+      [key]: value,
     }));
   };
 
@@ -55,9 +54,7 @@ export default function AdvancedSearch() {
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-2">
-            Price Range
-          </label>
+          <label className="block text-sm font-medium text-gray-700 mb-2">Price Range</label>
           <div className="flex gap-2">
             <input
               type="number"
@@ -97,7 +94,10 @@ export default function AdvancedSearch() {
         </div>
 
         <div>
-          <label htmlFor="bathrooms-select" className="block text-sm font-medium text-gray-700 mb-2">
+          <label
+            htmlFor="bathrooms-select"
+            className="block text-sm font-medium text-gray-700 mb-2"
+          >
             Bathrooms
           </label>
           <select
@@ -116,7 +116,10 @@ export default function AdvancedSearch() {
         </div>
 
         <div>
-          <label htmlFor="property-type-select" className="block text-sm font-medium text-gray-700 mb-2">
+          <label
+            htmlFor="property-type-select"
+            className="block text-sm font-medium text-gray-700 mb-2"
+          >
             Property Type
           </label>
           <select
@@ -143,9 +146,7 @@ export default function AdvancedSearch() {
           className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-6"
         >
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">
-              Square Footage
-            </label>
+            <label className="block text-sm font-medium text-gray-700 mb-2">Square Footage</label>
             <input
               type="number"
               placeholder="Min sqft"
@@ -156,7 +157,10 @@ export default function AdvancedSearch() {
           </div>
 
           <div>
-            <label htmlFor="neighborhood-select" className="block text-sm font-medium text-gray-700 mb-2">
+            <label
+              htmlFor="neighborhood-select"
+              className="block text-sm font-medium text-gray-700 mb-2"
+            >
               Neighborhood
             </label>
             <select
@@ -175,9 +179,7 @@ export default function AdvancedSearch() {
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">
-              Features
-            </label>
+            <label className="block text-sm font-medium text-gray-700 mb-2">Features</label>
             <div className="space-y-2">
               <label className="flex items-center">
                 <input type="checkbox" className="mr-2" />

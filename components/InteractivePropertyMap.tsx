@@ -1,13 +1,8 @@
-
-import React, { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { AnimatePresence, motion } from 'framer-motion';
+import { Eye, Heart, Home, Search } from 'lucide-react';
 import Image from 'next/image';
-import { 
-  Home, 
-  Search, 
-  Heart,
-  Eye
-} from 'lucide-react';
+import type React from 'react';
+import { useState } from 'react';
 
 interface Neighborhood {
   id: string;
@@ -37,28 +32,28 @@ const InteractivePropertyMap: React.FC<InteractivePropertyMapProps> = ({ classNa
       avgPrice: 789000,
       description: 'Upscale residential community with mountain views and modern amenities',
       features: ['Mountain Views', 'Golf Course', 'Shopping Centers', 'Top Schools'],
-      image: 'https://images.unsplash.com/photo-1564013799919-ab600027ffc6?w=400&h=300&fit=crop'
+      image: 'https://images.unsplash.com/photo-1564013799919-ab600027ffc6?w=400&h=300&fit=crop',
     },
     {
       id: 'providence',
       name: 'Providence',
-      coordinates: { lat: 36.2900, lng: -115.2900 },
+      coordinates: { lat: 36.29, lng: -115.29 },
       properties: 32,
       avgPrice: 850000,
       description: 'Luxury community with custom homes and exclusive amenities',
       features: ['Custom Homes', 'Private Pool', 'Wine Cellar', 'Home Theater'],
-      image: 'https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=400&h=300&fit=crop'
+      image: 'https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=400&h=300&fit=crop',
     },
     {
       id: 'skye-canyon',
       name: 'Skye Canyon',
-      coordinates: { lat: 36.2750, lng: -115.2750 },
+      coordinates: { lat: 36.275, lng: -115.275 },
       properties: 28,
       avgPrice: 650000,
       description: 'Family-friendly community with parks and recreational facilities',
       features: ['Parks & Trails', 'Community Pool', 'Playgrounds', 'Family Amenities'],
-      image: 'https://images.unsplash.com/photo-1600607687644-c7171b42498b?w=400&h=300&fit=crop'
-    }
+      image: 'https://images.unsplash.com/photo-1600607687644-c7171b42498b?w=400&h=300&fit=crop',
+    },
   ];
 
   const formatPrice = (price: number) => {
@@ -76,11 +71,17 @@ const InteractivePropertyMap: React.FC<InteractivePropertyMapProps> = ({ classNa
           </div>
           <div className="flex items-center gap-4">
             <div className="text-center">
-              <div className="text-2xl font-bold">{neighborhoods.reduce((sum, n) => sum + n.properties, 0)}</div>
+              <div className="text-2xl font-bold">
+                {neighborhoods.reduce((sum, n) => sum + n.properties, 0)}
+              </div>
               <div className="text-sm text-white/80">Total Properties</div>
             </div>
             <div className="text-center">
-              <div className="text-2xl font-bold">{formatPrice(neighborhoods.reduce((sum, n) => sum + n.avgPrice, 0) / neighborhoods.length)}</div>
+              <div className="text-2xl font-bold">
+                {formatPrice(
+                  neighborhoods.reduce((sum, n) => sum + n.avgPrice, 0) / neighborhoods.length
+                )}
+              </div>
               <div className="text-sm text-white/80">Avg Price</div>
             </div>
           </div>
@@ -105,8 +106,8 @@ const InteractivePropertyMap: React.FC<InteractivePropertyMapProps> = ({ classNa
               hoveredNeighborhood === neighborhood.id ? 'z-20' : 'z-10'
             }`}
             style={{
-              left: `${20 + (index * 25)}%`,
-              top: `${30 + (index * 10)}%`
+              left: `${20 + index * 25}%`,
+              top: `${30 + index * 10}%`,
             }}
             onMouseEnter={() => setHoveredNeighborhood(neighborhood.id)}
             onMouseLeave={() => setHoveredNeighborhood(null)}
@@ -121,7 +122,7 @@ const InteractivePropertyMap: React.FC<InteractivePropertyMapProps> = ({ classNa
               <div className="w-12 h-12 bg-accent-color rounded-full shadow-lg flex items-center justify-center border-4 border-white">
                 <Home className="w-6 h-6 text-white" />
               </div>
-              
+
               {/* Pulse Animation */}
               <motion.div
                 className="absolute inset-0 bg-accent-color rounded-full"
@@ -133,7 +134,10 @@ const InteractivePropertyMap: React.FC<InteractivePropertyMapProps> = ({ classNa
             {/* Neighborhood Label */}
             <motion.div
               initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: hoveredNeighborhood === neighborhood.id ? 1 : 0, y: hoveredNeighborhood === neighborhood.id ? 0 : 10 }}
+              animate={{
+                opacity: hoveredNeighborhood === neighborhood.id ? 1 : 0,
+                y: hoveredNeighborhood === neighborhood.id ? 0 : 10,
+              }}
               className="absolute top-16 left-1/2 transform -translate-x-1/2 bg-white rounded-lg px-3 py-2 shadow-lg whitespace-nowrap"
             >
               <div className="text-sm font-semibold text-primary">{neighborhood.name}</div>
@@ -188,7 +192,7 @@ const InteractivePropertyMap: React.FC<InteractivePropertyMapProps> = ({ classNa
               initial={{ opacity: 0, scale: 0.8, y: 50 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.8, y: 50 }}
-              transition={{ type: "spring", damping: 25, stiffness: 300 }}
+              transition={{ type: 'spring', damping: 25, stiffness: 300 }}
               className="bg-white rounded-2xl p-6 max-w-md w-full mx-4 shadow-2xl"
               onClick={(e) => e.stopPropagation()}
             >
@@ -214,7 +218,9 @@ const InteractivePropertyMap: React.FC<InteractivePropertyMapProps> = ({ classNa
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
                 <div className="absolute bottom-4 left-4 text-white">
-                  <div className="text-2xl font-bold">{formatPrice(selectedNeighborhood.avgPrice)}</div>
+                  <div className="text-2xl font-bold">
+                    {formatPrice(selectedNeighborhood.avgPrice)}
+                  </div>
                   <div className="text-sm opacity-90">Average Price</div>
                 </div>
               </div>
@@ -222,11 +228,15 @@ const InteractivePropertyMap: React.FC<InteractivePropertyMapProps> = ({ classNa
               {/* Stats */}
               <div className="grid grid-cols-2 gap-4 mb-4">
                 <div className="text-center p-3 bg-tertiary rounded-lg">
-                  <div className="text-lg font-bold text-primary">{selectedNeighborhood.properties}</div>
+                  <div className="text-lg font-bold text-primary">
+                    {selectedNeighborhood.properties}
+                  </div>
                   <div className="text-sm text-secondary">Properties</div>
                 </div>
                 <div className="text-center p-3 bg-tertiary rounded-lg">
-                  <div className="text-lg font-bold text-primary">{selectedNeighborhood.features.length}</div>
+                  <div className="text-lg font-bold text-primary">
+                    {selectedNeighborhood.features.length}
+                  </div>
                   <div className="text-sm text-secondary">Amenities</div>
                 </div>
               </div>

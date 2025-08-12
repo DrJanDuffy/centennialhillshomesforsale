@@ -1,77 +1,83 @@
-import React from 'react';
-import Layout from '@/components/Layout';
-import Link from 'next/link';
+import { ArrowRight, Calendar, Clock, DollarSign, Home, MapPin, User } from 'lucide-react';
 import Image from 'next/image';
-import { Calendar, Clock, User, ArrowRight, MapPin, DollarSign, Home } from 'lucide-react';
+import Link from 'next/link';
+import type React from 'react';
+import Layout from '@/components/Layout';
 
 const BlogPage: React.FC = () => {
   const blogPosts = [
     {
       id: 1,
       title: 'Centennial Hills Market Update: Summer 2024',
-      excerpt: 'Discover the latest trends in Centennial Hills real estate, including price movements, inventory levels, and what buyers and sellers can expect.',
+      excerpt:
+        'Discover the latest trends in Centennial Hills real estate, including price movements, inventory levels, and what buyers and sellers can expect.',
       author: 'Dr. Jan Duffy',
       date: 'July 15, 2024',
       readTime: '5 min read',
       category: 'Market Analysis',
       image: 'https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=800&h=400&fit=crop',
-      slug: 'centennial-hills-market-update-summer-2024'
+      slug: 'centennial-hills-market-update-summer-2024',
     },
     {
       id: 2,
       title: 'Why Providence is the Perfect Family Neighborhood',
-      excerpt: 'Explore the family-friendly amenities, top-rated schools, and community features that make Providence one of Las Vegas\' most sought-after neighborhoods.',
+      excerpt:
+        "Explore the family-friendly amenities, top-rated schools, and community features that make Providence one of Las Vegas' most sought-after neighborhoods.",
       author: 'Dr. Jan Duffy',
       date: 'July 10, 2024',
       readTime: '4 min read',
       category: 'Neighborhood Guide',
       image: 'https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=800&h=400&fit=crop',
-      slug: 'why-providence-perfect-family-neighborhood'
+      slug: 'why-providence-perfect-family-neighborhood',
     },
     {
       id: 3,
       title: 'First-Time Homebuyer Guide: Centennial Hills Edition',
-      excerpt: 'Everything first-time buyers need to know about purchasing a home in Centennial Hills, from financing options to closing costs.',
+      excerpt:
+        'Everything first-time buyers need to know about purchasing a home in Centennial Hills, from financing options to closing costs.',
       author: 'Dr. Jan Duffy',
       date: 'July 5, 2024',
       readTime: '7 min read',
       category: 'Buyer Guide',
       image: 'https://images.unsplash.com/photo-1564013799919-ab600027ffc6?w=800&h=400&fit=crop',
-      slug: 'first-time-homebuyer-guide-centennial-hills'
+      slug: 'first-time-homebuyer-guide-centennial-hills',
     },
     {
       id: 4,
       title: 'Skye Canyon: The Ultimate Outdoor Lifestyle Community',
-      excerpt: 'Learn about Skye Canyon\'s unique outdoor amenities, hiking trails, and community events that make it perfect for active families.',
+      excerpt:
+        "Learn about Skye Canyon's unique outdoor amenities, hiking trails, and community events that make it perfect for active families.",
       author: 'Dr. Jan Duffy',
       date: 'June 28, 2024',
       readTime: '6 min read',
       category: 'Neighborhood Guide',
       image: 'https://images.unsplash.com/photo-1449824913935-59a10b8d2000?w=800&h=400&fit=crop',
-      slug: 'skye-canyon-ultimate-outdoor-lifestyle'
+      slug: 'skye-canyon-ultimate-outdoor-lifestyle',
     },
     {
       id: 5,
       title: 'Investment Properties in Northwest Las Vegas',
-      excerpt: 'Discover the best investment opportunities in Northwest Las Vegas, including rental properties and appreciation potential.',
+      excerpt:
+        'Discover the best investment opportunities in Northwest Las Vegas, including rental properties and appreciation potential.',
       author: 'Dr. Jan Duffy',
       date: 'June 20, 2024',
       readTime: '8 min read',
       category: 'Investment',
       image: 'https://images.unsplash.com/photo-1560472354-b33ff0c44a43?w=800&h=400&fit=crop',
-      slug: 'investment-properties-northwest-las-vegas'
+      slug: 'investment-properties-northwest-las-vegas',
     },
     {
       id: 6,
       title: 'Preparing Your Home for Sale: A Complete Checklist',
-      excerpt: 'Get your home market-ready with our comprehensive checklist covering everything from curb appeal to staging tips.',
+      excerpt:
+        'Get your home market-ready with our comprehensive checklist covering everything from curb appeal to staging tips.',
       author: 'Dr. Jan Duffy',
       date: 'June 15, 2024',
       readTime: '6 min read',
       category: 'Seller Guide',
       image: 'https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=800&h=400&fit=crop',
-      slug: 'preparing-home-sale-complete-checklist'
-    }
+      slug: 'preparing-home-sale-complete-checklist',
+    },
   ];
 
   const categories = [
@@ -79,7 +85,7 @@ const BlogPage: React.FC = () => {
     { name: 'Neighborhood Guide', count: 2 },
     { name: 'Buyer Guide', count: 1 },
     { name: 'Seller Guide', count: 1 },
-    { name: 'Investment', count: 1 }
+    { name: 'Investment', count: 1 },
   ];
 
   return (
@@ -93,9 +99,7 @@ const BlogPage: React.FC = () => {
         <section className="bg-gradient-to-r from-blue-600 to-blue-800 text-white">
           <div className="container mx-auto px-4 py-16">
             <div className="max-w-4xl mx-auto text-center">
-              <h1 className="text-4xl md:text-6xl font-bold mb-6">
-                Real Estate Insights
-              </h1>
+              <h1 className="text-4xl md:text-6xl font-bold mb-6">Real Estate Insights</h1>
               <p className="text-xl md:text-2xl mb-8 opacity-90">
                 Expert analysis, market updates, and neighborhood guides for Centennial Hills
               </p>
@@ -125,7 +129,10 @@ const BlogPage: React.FC = () => {
               <div className="lg:col-span-3">
                 <div className="grid md:grid-cols-2 gap-8">
                   {blogPosts.map((post) => (
-                    <article key={post.id} className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow">
+                    <article
+                      key={post.id}
+                      className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow"
+                    >
                       <Image
                         src={post.image}
                         alt={post.title}
@@ -142,9 +149,7 @@ const BlogPage: React.FC = () => {
                         <h2 className="text-xl font-bold text-gray-900 mb-3 line-clamp-2">
                           {post.title}
                         </h2>
-                        <p className="text-gray-600 mb-4 line-clamp-3">
-                          {post.excerpt}
-                        </p>
+                        <p className="text-gray-600 mb-4 line-clamp-3">{post.excerpt}</p>
                         <div className="flex items-center justify-between text-sm text-gray-500 mb-4">
                           <div className="flex items-center">
                             <User className="w-4 h-4 mr-1" />
@@ -222,7 +227,9 @@ const BlogPage: React.FC = () => {
                 </div>
 
                 <div className="bg-white rounded-lg shadow-md p-6">
-                  <h3 className="text-lg font-semibold text-gray-900 mb-4">Contact Dr. Jan Duffy</h3>
+                  <h3 className="text-lg font-semibold text-gray-900 mb-4">
+                    Contact Dr. Jan Duffy
+                  </h3>
                   <p className="text-gray-600 mb-4">
                     Have questions about the market or need personalized advice?
                   </p>
@@ -242,4 +249,4 @@ const BlogPage: React.FC = () => {
   );
 };
 
-export default BlogPage; 
+export default BlogPage;

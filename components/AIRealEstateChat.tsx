@@ -1,5 +1,5 @@
-
-import React, { useState, useRef, useEffect } from 'react';
+import type React from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 interface ChatMessage {
   id: string;
@@ -14,9 +14,10 @@ const AIRealEstateChat: React.FC = () => {
     {
       id: '1',
       type: 'assistant',
-      content: 'Hi! I\'m your Centennial Hills real estate assistant. Ask me about market conditions, home values, schools, or anything about the area!',
-      timestamp: new Date()
-    }
+      content:
+        "Hi! I'm your Centennial Hills real estate assistant. Ask me about market conditions, home values, schools, or anything about the area!",
+      timestamp: new Date(),
+    },
   ]);
   const [inputValue, setInputValue] = useState('');
   const [isLoading, setIsLoading] = useState(false);
@@ -24,7 +25,7 @@ const AIRealEstateChat: React.FC = () => {
 
   useEffect(() => {
     scrollToBottom();
-  }, [messages]);
+  }, [scrollToBottom]);
 
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
@@ -37,10 +38,10 @@ const AIRealEstateChat: React.FC = () => {
       id: Date.now().toString(),
       type: 'user',
       content: inputValue,
-      timestamp: new Date()
+      timestamp: new Date(),
     };
 
-    setMessages(prev => [...prev, userMessage]);
+    setMessages((prev) => [...prev, userMessage]);
     setInputValue('');
     setIsLoading(true);
 
@@ -52,7 +53,7 @@ const AIRealEstateChat: React.FC = () => {
         },
         body: JSON.stringify({
           message: inputValue,
-          context: 'centennial-hills-real-estate'
+          context: 'centennial-hills-real-estate',
         }),
       });
 
@@ -61,20 +62,23 @@ const AIRealEstateChat: React.FC = () => {
       const assistantMessage: ChatMessage = {
         id: (Date.now() + 1).toString(),
         type: 'assistant',
-        content: data.response || 'I apologize, but I encountered an issue. Please try asking your question again.',
-        timestamp: new Date()
+        content:
+          data.response ||
+          'I apologize, but I encountered an issue. Please try asking your question again.',
+        timestamp: new Date(),
       };
 
-      setMessages(prev => [...prev, assistantMessage]);
+      setMessages((prev) => [...prev, assistantMessage]);
     } catch (error) {
       console.error('Chat error:', error);
       const errorMessage: ChatMessage = {
         id: (Date.now() + 1).toString(),
         type: 'assistant',
-        content: 'I\'m having trouble connecting right now. Please try again later or call (702) 903-1952 for immediate assistance.',
-        timestamp: new Date()
+        content:
+          "I'm having trouble connecting right now. Please try again later or call (702) 903-1952 for immediate assistance.",
+        timestamp: new Date(),
       };
-      setMessages(prev => [...prev, errorMessage]);
+      setMessages((prev) => [...prev, errorMessage]);
     } finally {
       setIsLoading(false);
     }
@@ -85,7 +89,7 @@ const AIRealEstateChat: React.FC = () => {
     'Tell me about the schools',
     'What amenities are nearby?',
     'I want to buy a home',
-    'Get my home value'
+    'Get my home value',
   ];
 
   const handleQuickQuestion = (question: string) => {
@@ -135,21 +139,21 @@ const AIRealEstateChat: React.FC = () => {
           >
             <div
               className={`max-w-[80%] p-3 rounded-lg ${
-                message.type === 'user'
-                  ? 'bg-blue-600 text-white'
-                  : 'bg-gray-100 text-gray-800'
+                message.type === 'user' ? 'bg-blue-600 text-white' : 'bg-gray-100 text-gray-800'
               }`}
             >
               <p className="text-sm">{message.content}</p>
-              <span className={`text-xs mt-1 block ${
-                message.type === 'user' ? 'text-blue-100' : 'text-gray-500'
-              }`}>
+              <span
+                className={`text-xs mt-1 block ${
+                  message.type === 'user' ? 'text-blue-100' : 'text-gray-500'
+                }`}
+              >
                 {message.timestamp.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
               </span>
             </div>
           </div>
         ))}
-        
+
         {isLoading && (
           <div className="flex justify-start">
             <div className="bg-gray-100 text-gray-800 p-3 rounded-lg">
@@ -160,7 +164,7 @@ const AIRealEstateChat: React.FC = () => {
             </div>
           </div>
         )}
-        
+
         <div ref={messagesEndRef} />
       </div>
 

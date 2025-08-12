@@ -1,8 +1,8 @@
-const https = require('https');
+const https = require('node:https');
 require('dotenv').config({ path: '.env.local' });
 
 const API_TOKEN = process.env.CLOUDFLARE_API_TOKEN;
-const ACCOUNT_ID = process.env.CLOUDFLARE_ACCOUNT_ID;
+const _ACCOUNT_ID = process.env.CLOUDFLARE_ACCOUNT_ID;
 const DOMAIN = 'centennialhillshomesforsale.com';
 
 // Get Zone ID first
@@ -13,14 +13,14 @@ const getZoneId = () => {
       path: `/client/v4/zones?name=${DOMAIN}`,
       method: 'GET',
       headers: {
-        'Authorization': `Bearer ${API_TOKEN}`,
+        Authorization: `Bearer ${API_TOKEN}`,
         'Content-Type': 'application/json',
-      }
+      },
     };
 
     const req = https.request(options, (res) => {
       let data = '';
-      res.on('data', (chunk) => data += chunk);
+      res.on('data', (chunk) => (data += chunk));
       res.on('end', () => {
         const response = JSON.parse(data);
         if (response.success && response.result.length > 0) {
@@ -43,9 +43,9 @@ const configureAnalytics = async (zoneId) => {
     path: `/client/v4/zones/${zoneId}/analytics/web`,
     method: 'POST',
     headers: {
-      'Authorization': `Bearer ${API_TOKEN}`,
+      Authorization: `Bearer ${API_TOKEN}`,
       'Content-Type': 'application/json',
-    }
+    },
   };
 
   const data = JSON.stringify({
@@ -61,8 +61,8 @@ const configureAnalytics = async (zoneId) => {
           'first_byte',
           'dom_interactive',
           'dom_complete',
-          'load_time'
-        ]
+          'load_time',
+        ],
       },
       // User interaction events
       events: {
@@ -73,8 +73,8 @@ const configureAnalytics = async (zoneId) => {
           'form_submissions',
           'property_searches',
           'property_views',
-          'contact_requests'
-        ]
+          'contact_requests',
+        ],
       },
       // Real estate specific metrics
       real_estate: {
@@ -85,26 +85,21 @@ const configureAnalytics = async (zoneId) => {
           'location',
           'bedrooms',
           'bathrooms',
-          'square_feet'
-        ]
+          'square_feet',
+        ],
       },
       // Error tracking
       errors: {
         enabled: true,
-        tracking: [
-          'javascript_errors',
-          'network_errors',
-          'api_errors',
-          'form_validation_errors'
-        ]
-      }
-    }
+        tracking: ['javascript_errors', 'network_errors', 'api_errors', 'form_validation_errors'],
+      },
+    },
   });
 
   await new Promise((resolve, reject) => {
     const req = https.request(options, (res) => {
       let data = '';
-      res.on('data', (chunk) => data += chunk);
+      res.on('data', (chunk) => (data += chunk));
       res.on('end', () => {
         const response = JSON.parse(data);
         if (response.success) {
@@ -130,28 +125,28 @@ const configureCustomEvents = async (zoneId) => {
     path: `/client/v4/zones/${zoneId}/analytics/events`,
     method: 'POST',
     headers: {
-      'Authorization': `Bearer ${API_TOKEN}`,
+      Authorization: `Bearer ${API_TOKEN}`,
       'Content-Type': 'application/json',
-    }
+    },
   };
 
   const events = [
     {
       name: 'property_search',
-      properties: ['query', 'filters', 'results_count']
+      properties: ['query', 'filters', 'results_count'],
     },
     {
       name: 'property_view',
-      properties: ['property_id', 'property_type', 'price']
+      properties: ['property_id', 'property_type', 'price'],
     },
     {
       name: 'contact_request',
-      properties: ['property_id', 'contact_type', 'source']
+      properties: ['property_id', 'contact_type', 'source'],
     },
     {
       name: 'widget_interaction',
-      properties: ['widget_type', 'action', 'property_id']
-    }
+      properties: ['widget_type', 'action', 'property_id'],
+    },
   ];
 
   for (const event of events) {
@@ -160,7 +155,7 @@ const configureCustomEvents = async (zoneId) => {
     await new Promise((resolve, reject) => {
       const req = https.request(options, (res) => {
         let data = '';
-        res.on('data', (chunk) => data += chunk);
+        res.on('data', (chunk) => (data += chunk));
         res.on('end', () => {
           const response = JSON.parse(data);
           if (response.success) {
@@ -194,4 +189,4 @@ const setupAnalytics = async () => {
   }
 };
 
-setupAnalytics(); 
+setupAnalytics();
