@@ -1,91 +1,46 @@
-// Variables and Mixins
+// =============================
+// MAIN SCSS ENTRY POINT
+// =============================
+
+// Import utilities and variables first
 @import 'utils/variables';
 @import 'utils/mixins';
-@import 'utils/functions';
 @import 'utils/animations';
-@import 'utils/utilities';
+@import 'utils/functions';
 
-// Base styles
+// Import base styles
 @import 'base/reset';
 @import 'base/typography';
 @import 'base/utilities';
 
-// Layout components
-@import 'layouts/header';
-@import 'layouts/footer';
-@import 'layouts/navigation';
-@import 'layouts/grid';
-@import 'layouts/forms';
-@import 'layouts/sidebar';
-
-// Components
-@import 'components/buttons';
-@import 'components/cards';
-@import 'components/property-listing';
-@import 'components/search-filters';
-@import 'components/testimonials';
-@import 'components/team-member';
-@import 'components/contact-form';
-@import 'components/modal';
-@import 'components/slider';
-@import 'components/map';
-@import 'components/widgets';
-@import 'components/navigation';
-@import 'components/forms';
-@import 'components/modals';
-@import 'components/toasts';
-@import 'components/loading';
-
-// Third-party components
-@import 'vendors/realscout';
-@import 'vendors/homebot';
-@import 'vendors/cloudcma';
-@import 'vendors/percy';
-
-// Page-specific styles
-@import 'pages/home';
-@import 'pages/listings';
-@import 'pages/property-detail';
-@import 'pages/neighborhoods';
-@import 'pages/about';
-@import 'pages/contact';
-@import 'pages/blog';
-@import 'pages/market-update';
-@import 'pages/buyers';
-@import 'pages/sellers';
-@import 'pages/testimonials';
-
-// Responsive styles
-@import 'utils/responsive';
-
-// Import components
-@import 'components/navigation';
-@import 'components/buttons';
-@import 'components/forms';
-@import 'components/cards';
-@import 'components/modals';
-@import 'components/toasts';
-@import 'components/loading';
-@import 'components/widgets';
-
-// Import layouts
+// Import layout components
 @import 'layouts/header';
 @import 'layouts/footer';
 @import 'layouts/grid';
-@import 'layouts/sidebar';
+@import 'layouts/container';
 
-// Import pages
+// Import component styles
+@import 'components/buttons';
+@import 'components/forms';
+@import 'components/navigation';
+@import 'components/cards';
+@import 'components/modals';
+@import 'components/loading';
+
+// Import page-specific styles
 @import 'pages/home';
-@import 'pages/listings';
-@import 'pages/property-detail';
-@import 'pages/neighborhoods';
 @import 'pages/about';
+@import 'pages/listings';
 @import 'pages/contact';
-@import 'pages/blog';
-@import 'pages/market-update';
-@import 'pages/buyers';
-@import 'pages/sellers';
-@import 'pages/testimonials';
+
+// Import vendor styles
+@import 'vendors/framer-motion';
+@import 'vendors/tailwind';
+
+// Import enhanced components
+@import '../../styles/enhanced-components.css';
+@import '../../styles/components.css';
+@import '../../styles/design-system.css';
 
 // Base styles
 * {

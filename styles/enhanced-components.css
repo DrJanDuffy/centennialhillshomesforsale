@@ -1,0 +1,472 @@
+/* Enhanced Components CSS for Centennial Hills Real Estate Website */
+
+/* ===== ENHANCED PROPERTY SEARCH ===== */
+.enhanced-property-search {
+  --search-primary: #0A2540;
+  --search-secondary: #3A8DDE;
+  --search-accent: #16B286;
+  --search-success: #10B981;
+  --search-warning: #F59E0B;
+  --search-error: #EF4444;
+  --search-gray-50: #F9FAFB;
+  --search-gray-100: #F3F4F6;
+  --search-gray-200: #E5E7EB;
+  --search-gray-300: #D1D5DB;
+  --search-gray-400: #9CA3AF;
+  --search-gray-500: #6B7280;
+  --search-gray-600: #4B5563;
+  --search-gray-700: #374151;
+  --search-gray-800: #1F2937;
+  --search-gray-900: #111827;
+}
+
+.enhanced-property-search .bg-white {
+  background: linear-gradient(135deg, #FFFFFF 0%, #F8FAFC 100%);
+  border: 1px solid var(--search-gray-200);
+}
+
+.enhanced-property-search .shadow-2xl {
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.15);
+}
+
+.enhanced-property-search .form-field {
+  margin-bottom: 1rem;
+}
+
+.enhanced-property-search .form-field label {
+  display: block;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--search-gray-700);
+  margin-bottom: 0.5rem;
+}
+
+.enhanced-property-search .form-field input,
+.enhanced-property-search .form-field select,
+.enhanced-property-search .form-field textarea {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  border: 2px solid var(--search-gray-300);
+  border-radius: 0.5rem;
+  font-size: 0.875rem;
+  transition: all 0.2s ease-in-out;
+  background-color: white;
+}
+
+.enhanced-property-search .form-field input:focus,
+.enhanced-property-search .form-field select:focus,
+.enhanced-property-search .form-field textarea:focus {
+  outline: none;
+  border-color: var(--search-secondary);
+  box-shadow: 0 0 0 3px rgba(58, 141, 222, 0.1);
+}
+
+.enhanced-property-search .form-field input:hover,
+.enhanced-property-search .form-field select:hover,
+.enhanced-property-search .form-field textarea:hover {
+  border-color: var(--search-gray-400);
+}
+
+/* Search Results Styling */
+.search-results {
+  margin-top: 2rem;
+}
+
+.search-results .bg-white {
+  transition: all 0.3s ease;
+}
+
+.search-results .bg-white:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+}
+
+.search-results .h-48 {
+  position: relative;
+  overflow: hidden;
+}
+
+.search-results .h-48 img {
+  transition: transform 0.3s ease;
+}
+
+.search-results .bg-white:hover .h-48 img {
+  transform: scale(1.05);
+}
+
+/* ===== ENHANCED CONTACT FORM ===== */
+.enhanced-contact-form {
+  --contact-primary: #0A2540;
+  --contact-secondary: #3A8DDE;
+  --contact-accent: #16B286;
+  --contact-success: #10B981;
+  --contact-warning: #F59E0B;
+  --contact-error: #EF4444;
+}
+
+.enhanced-contact-form .bg-white {
+  background: linear-gradient(135deg, #FFFFFF 0%, #F8FAFC 100%);
+  border: 1px solid var(--contact-gray-200);
+}
+
+.enhanced-contact-form .bg-blue-50 {
+  background: linear-gradient(135deg, #EFF6FF 0%, #DBEAFE 100%);
+  border: 1px solid var(--contact-blue-200);
+}
+
+.enhanced-contact-form .form-field {
+  margin-bottom: 1.5rem;
+}
+
+.enhanced-contact-form .form-field label {
+  display: block;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--contact-gray-700);
+  margin-bottom: 0.5rem;
+}
+
+.enhanced-contact-form .form-field input,
+.enhanced-contact-form .form-field select,
+.enhanced-contact-form .form-field textarea {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  border: 2px solid var(--contact-gray-300);
+  border-radius: 0.5rem;
+  font-size: 0.875rem;
+  transition: all 0.2s ease-in-out;
+  background-color: white;
+  resize: vertical;
+}
+
+.enhanced-contact-form .form-field input:focus,
+.enhanced-contact-form .form-field select:focus,
+.enhanced-contact-form .form-field textarea:focus {
+  outline: none;
+  border-color: var(--contact-secondary);
+  box-shadow: 0 0 0 3px rgba(58, 141, 222, 0.1);
+}
+
+.enhanced-contact-form .form-field input:hover,
+.enhanced-contact-form .form-field select:hover,
+.enhanced-contact-form .form-field textarea:hover {
+  border-color: var(--contact-gray-400);
+}
+
+/* Contact Information Cards */
+.enhanced-contact-form .bg-blue-50 > div {
+  transition: all 0.3s ease;
+}
+
+.enhanced-contact-form .bg-blue-50 > div:hover {
+  transform: translateY(-2px);
+  background: linear-gradient(135deg, #DBEAFE 0%, #BFDBFE 100%);
+}
+
+/* ===== ENHANCED ANIMATIONS ===== */
+.enhanced-animation {
+  --animation-duration: 0.6s;
+  --animation-easing: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Fade In Animation */
+.animate-fade-in {
+  animation: fadeIn var(--animation-duration) var(--animation-easing);
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* Slide Up Animation */
+.animate-slide-up {
+  animation: slideUp var(--animation-duration) var(--animation-easing);
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Scale In Animation */
+.animate-scale-in {
+  animation: scaleIn var(--animation-duration) var(--animation-easing);
+}
+
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* ===== ENHANCED BUTTONS ===== */
+.enhanced-button {
+  --btn-primary: #0A2540;
+  --btn-secondary: #3A8DDE;
+  --btn-accent: #16B286;
+  --btn-outline: #E5E7EB;
+  --btn-text: #FFFFFF;
+  --btn-text-dark: #1F2937;
+}
+
+.enhanced-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+  border-radius: 0.5rem;
+  transition: all 0.2s ease-in-out;
+  cursor: pointer;
+  border: none;
+  outline: none;
+  text-decoration: none;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+}
+
+.enhanced-button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.enhanced-button:not(:disabled):hover {
+  transform: translateY(-1px);
+}
+
+.enhanced-button:not(:disabled):active {
+  transform: translateY(0);
+}
+
+/* Button Variants */
+.enhanced-button.primary {
+  background-color: var(--btn-primary);
+  color: var(--btn-text);
+}
+
+.enhanced-button.primary:hover:not(:disabled) {
+  background-color: #061A2B;
+  box-shadow: 0 4px 12px rgba(10, 37, 64, 0.3);
+}
+
+.enhanced-button.secondary {
+  background-color: var(--btn-secondary);
+  color: var(--btn-text);
+}
+
+.enhanced-button.secondary:hover:not(:disabled) {
+  background-color: #2B6CB0;
+  box-shadow: 0 4px 12px rgba(58, 141, 222, 0.3);
+}
+
+.enhanced-button.accent {
+  background-color: var(--btn-accent);
+  color: var(--btn-text);
+}
+
+.enhanced-button.accent:hover:not(:disabled) {
+  background-color: #059669;
+  box-shadow: 0 4px 12px rgba(22, 178, 134, 0.3);
+}
+
+.enhanced-button.outline {
+  background-color: transparent;
+  color: var(--btn-primary);
+  border: 2px solid var(--btn-primary);
+}
+
+.enhanced-button.outline:hover:not(:disabled) {
+  background-color: var(--btn-primary);
+  color: var(--btn-text);
+}
+
+/* Button Sizes */
+.enhanced-button.sm {
+  padding: 0.5rem 1rem;
+  font-size: 0.75rem;
+}
+
+.enhanced-button.md {
+  padding: 0.75rem 1.5rem;
+  font-size: 0.875rem;
+}
+
+.enhanced-button.lg {
+  padding: 1rem 2rem;
+  font-size: 1rem;
+}
+
+/* ===== ENHANCED FORM FIELDS ===== */
+.enhanced-form-field {
+  --field-border: #D1D5DB;
+  --field-border-focus: #3A8DDE;
+  --field-border-error: #EF4444;
+  --field-bg: #FFFFFF;
+  --field-text: #1F2937;
+  --field-placeholder: #9CA3AF;
+}
+
+.enhanced-form-field {
+  margin-bottom: 1.5rem;
+}
+
+.enhanced-form-field label {
+  display: block;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--field-text);
+  margin-bottom: 0.5rem;
+}
+
+.enhanced-form-field input,
+.enhanced-form-field select,
+.enhanced-form-field textarea {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  border: 2px solid var(--field-border);
+  border-radius: 0.5rem;
+  font-size: 0.875rem;
+  color: var(--field-text);
+  background-color: var(--field-bg);
+  transition: all 0.2s ease-in-out;
+  font-family: inherit;
+}
+
+.enhanced-form-field input::placeholder,
+.enhanced-form-field textarea::placeholder {
+  color: var(--field-placeholder);
+}
+
+.enhanced-form-field input:focus,
+.enhanced-form-field select:focus,
+.enhanced-form-field textarea:focus {
+  outline: none;
+  border-color: var(--field-border-focus);
+  box-shadow: 0 0 0 3px rgba(58, 141, 222, 0.1);
+}
+
+.enhanced-form-field input:hover,
+.enhanced-form-field select:hover,
+.enhanced-form-field textarea:hover {
+  border-color: #9CA3AF;
+}
+
+.enhanced-form-field input.error,
+.enhanced-form-field select.error,
+.enhanced-form-field textarea.error {
+  border-color: var(--field-border-error);
+}
+
+.enhanced-form-field .error-message {
+  color: var(--field-border-error);
+  font-size: 0.75rem;
+  margin-top: 0.25rem;
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+/* ===== RESPONSIVE DESIGN ===== */
+@media (max-width: 768px) {
+  .enhanced-property-search .grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .enhanced-contact-form .grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .enhanced-button.lg {
+    padding: 0.875rem 1.5rem;
+    font-size: 0.875rem;
+  }
+  
+  .enhanced-form-field input,
+  .enhanced-form-field select,
+  .enhanced-form-field textarea {
+    padding: 0.625rem 0.875rem;
+    font-size: 0.8125rem;
+  }
+}
+
+@media (max-width: 640px) {
+  .enhanced-property-search .bg-white {
+    padding: 1.5rem;
+  }
+  
+  .enhanced-contact-form .bg-white {
+    padding: 1.5rem;
+  }
+  
+  .enhanced-button {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+/* ===== ACCESSIBILITY IMPROVEMENTS ===== */
+.enhanced-property-search .form-field input:focus-visible,
+.enhanced-property-search .form-field select:focus-visible,
+.enhanced-property-search .form-field textarea:focus-visible,
+.enhanced-contact-form .form-field input:focus-visible,
+.enhanced-contact-form .form-field select:focus-visible,
+.enhanced-contact-form .form-field textarea:focus-visible {
+  outline: 2px solid var(--search-secondary);
+  outline-offset: 2px;
+}
+
+.enhanced-button:focus-visible {
+  outline: 2px solid var(--btn-secondary);
+  outline-offset: 2px;
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  .enhanced-property-search .bg-white,
+  .enhanced-contact-form .bg-white {
+    border: 2px solid #000000;
+  }
+  
+  .enhanced-button {
+    border: 2px solid currentColor;
+  }
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  .enhanced-property-search *,
+  .enhanced-contact-form *,
+  .enhanced-button * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* ===== PRINT STYLES ===== */
+@media print {
+  .enhanced-property-search .bg-white,
+  .enhanced-contact-form .bg-white {
+    box-shadow: none;
+    border: 1px solid #000000;
+  }
+  
+  .enhanced-button {
+    background-color: #FFFFFF !important;
+    color: #000000 !important;
+    border: 1px solid #000000 !important;
+  }
+}
