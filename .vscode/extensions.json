@@ -11,6 +11,8 @@
     "ms-vscode.vscode-javascript-debug",
     "ms-vscode.vscode-typescript-debug",
     "ms-vscode.vscode-js-debug",
-    "ms-vscode.vscode-js-debug-companion"
+    "ms-vscode.vscode-js-debug-companion",
+    "GitHub.vscode-pull-request-github",
+    "GitHub.vscode-github-issues"
   ]
 }
