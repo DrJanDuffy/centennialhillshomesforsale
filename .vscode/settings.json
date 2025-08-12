@@ -53,5 +53,48 @@
     "**/build/**",
     "**/.next/**",
     "**/out/**"
-  ]
+  ],
+  "githubPullRequests.queries": [
+    {
+      "label": "Waiting For My Review",
+      "query": "is:open review-requested:${user}"
+    },
+    {
+      "label": "Assigned To Me",
+      "query": "is:open assignee:${user}"
+    },
+    {
+      "label": "Created By Me",
+      "query": "is:open author:${user}"
+    },
+    {
+      "label": "Mentioned Me",
+      "query": "is:open mentions:${user}"
+    },
+    {
+      "label": "My Team's PRs",
+      "query": "is:open org:DrJanDuffy"
+    }
+  ],
+  "githubIssues.queries": [
+    {
+      "label": "Assigned To Me",
+      "query": "is:open assignee:${user}"
+    },
+    {
+      "label": "Created By Me",
+      "query": "is:open author:${user}"
+    },
+    {
+      "label": "Mentioned Me",
+      "query": "is:open mentions:${user}"
+    },
+    {
+      "label": "My Team's Issues",
+      "query": "is:open org:DrJanDuffy"
+    }
+  ],
+  "githubPullRequests.defaultMergeMethod": "squash",
+  "githubPullRequests.pullRequestTitleValidation": "enabled",
+  "githubPullRequests.pullRequestDescriptionValidation": "enabled"
 }
