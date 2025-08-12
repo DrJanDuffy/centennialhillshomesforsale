@@ -1,5 +1,5 @@
-const fs = require('fs');
-const path = require('path');
+const fs = require('node:fs');
+const path = require('node:path');
 
 const siteConfig = {
   baseUrl: 'https://centennialhillshomesforsale.com',
@@ -18,8 +18,8 @@ const siteConfig = {
     { url: '/services', priority: 0.7, changefreq: 'monthly' },
     { url: '/about', priority: 0.5, changefreq: 'monthly' },
     { url: '/contact', priority: 0.5, changefreq: 'monthly' },
-    { url: '/local-business-optimization', priority: 0.5, changefreq: 'monthly' }
-  ]
+    { url: '/local-business-optimization', priority: 0.5, changefreq: 'monthly' },
+  ],
 };
 
 function generateSitemap() {
@@ -28,7 +28,7 @@ function generateSitemap() {
   let sitemap = '<?xml version="1.0" encoding="UTF-8"?>\n';
   sitemap += '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n';
 
-  siteConfig.pages.forEach(page => {
+  siteConfig.pages.forEach((page) => {
     sitemap += '  <url>\n';
     sitemap += `    <loc>${siteConfig.baseUrl}${page.url}</loc>\n`;
     sitemap += `    <lastmod>${currentDate}</lastmod>\n`;
@@ -46,7 +46,8 @@ function generateNewsSitemap() {
   const currentDate = new Date().toISOString();
 
   let newsSitemap = '<?xml version="1.0" encoding="UTF-8"?>\n';
-  newsSitemap += '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:news="http://www.google.com/schemas/sitemap-news/0.9">\n';
+  newsSitemap +=
+    '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:news="http://www.google.com/schemas/sitemap-news/0.9">\n';
 
   // Add market update as news content
   newsSitemap += '  <url>\n';
@@ -58,7 +59,8 @@ function generateNewsSitemap() {
   newsSitemap += '      </news:publication>\n';
   newsSitemap += `      <news:publication_date>${currentDate}</news:publication_date>\n`;
   newsSitemap += '      <news:title>Centennial Hills Real Estate Market Update</news:title>\n';
-  newsSitemap += '      <news:keywords>real estate, Centennial Hills, Las Vegas, market update, home prices</news:keywords>\n';
+  newsSitemap +=
+    '      <news:keywords>real estate, Centennial Hills, Las Vegas, market update, home prices</news:keywords>\n';
   newsSitemap += '    </news:news>\n';
   newsSitemap += '  </url>\n';
 
@@ -81,5 +83,5 @@ console.log('- sitemap-news.xml: News sitemap for market updates');
 module.exports = {
   generateSitemap,
   generateNewsSitemap,
-  siteConfig
+  siteConfig,
 };

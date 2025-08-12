@@ -1,4 +1,3 @@
-
 const UNSPLASH_ACCESS_KEY = process.env.NEXT_PUBLIC_UNSPLASH_ACCESS_KEY;
 const UNSPLASH_BASE_URL = 'https://api.unsplash.com';
 
@@ -90,7 +89,7 @@ export async function searchUnsplashImages(
       `${UNSPLASH_BASE_URL}/search/photos?query=${encodeURIComponent(query)}&page=${page}&per_page=${perPage}`,
       {
         headers: {
-          'Authorization': `Client-ID ${UNSPLASH_ACCESS_KEY}`,
+          Authorization: `Client-ID ${UNSPLASH_ACCESS_KEY}`,
         },
       }
     );
@@ -108,7 +107,9 @@ export async function searchUnsplashImages(
   }
 }
 
-export async function getRandomUnsplashImage(query: string = 'real estate'): Promise<UnsplashImage | null> {
+export async function getRandomUnsplashImage(
+  query: string = 'real estate'
+): Promise<UnsplashImage | null> {
   if (!UNSPLASH_ACCESS_KEY) {
     return FALLBACK_IMAGES[Math.floor(Math.random() * FALLBACK_IMAGES.length)];
   }
@@ -118,7 +119,7 @@ export async function getRandomUnsplashImage(query: string = 'real estate'): Pro
       `${UNSPLASH_BASE_URL}/photos/random?query=${encodeURIComponent(query)}`,
       {
         headers: {
-          'Authorization': `Client-ID ${UNSPLASH_ACCESS_KEY}`,
+          Authorization: `Client-ID ${UNSPLASH_ACCESS_KEY}`,
         },
       }
     );

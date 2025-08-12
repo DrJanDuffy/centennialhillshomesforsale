@@ -1,6 +1,5 @@
-
-const fs = require('fs');
-const path = require('path');
+const fs = require('node:fs');
+const path = require('node:path');
 
 // Create simple placeholder images for properties
 const createPlaceholderImage = (filename, text) => {
@@ -11,8 +10,11 @@ const createPlaceholderImage = (filename, text) => {
     ${text}
   </text>
 </svg>`;
-  
-  fs.writeFileSync(path.join(__dirname, '..', 'public', 'images', 'centennial-hills', filename), svgContent);
+
+  fs.writeFileSync(
+    path.join(__dirname, '..', 'public', 'images', 'centennial-hills', filename),
+    svgContent
+  );
   console.log(`Created placeholder: ${filename}`);
 };
 
@@ -24,10 +26,10 @@ const properties = [
   { filename: 'property4.jpg', text: 'The Trails Luxury' },
   { filename: 'property5.jpg', text: 'Tournament Hills Home' },
   { filename: 'property6.jpg', text: 'Desert Foothills Property' },
-  { filename: 'tournament-hills.jpg', text: 'Tournament Hills Community' }
+  { filename: 'tournament-hills.jpg', text: 'Tournament Hills Community' },
 ];
 
-properties.forEach(prop => {
+properties.forEach((prop) => {
   createPlaceholderImage(prop.filename, prop.text);
 });
 

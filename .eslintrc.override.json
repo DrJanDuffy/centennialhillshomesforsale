@@ -10,4 +10,4 @@
     "@typescript-eslint/no-require-imports": "off",
     "compat-api/html": "off"
   }
-} 
+}

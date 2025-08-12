@@ -1,4 +1,3 @@
-
 export interface GeoData {
   latitude: number;
   longitude: number;
@@ -23,7 +22,7 @@ export const geoData: GeoDataSet = {
     averageHomePrice: 650000,
     medianHomePrice: 580000,
     pricePerSqFt: 280,
-    daysOnMarket: 45
+    daysOnMarket: 45,
   },
   providence: {
     latitude: 36.2483,
@@ -32,7 +31,7 @@ export const geoData: GeoDataSet = {
     averageHomePrice: 750000,
     medianHomePrice: 680000,
     pricePerSqFt: 320,
-    daysOnMarket: 38
+    daysOnMarket: 38,
   },
   skyeCanyon: {
     latitude: 36.2847,
@@ -41,8 +40,8 @@ export const geoData: GeoDataSet = {
     averageHomePrice: 700000,
     medianHomePrice: 625000,
     pricePerSqFt: 310,
-    daysOnMarket: 42
-  }
+    daysOnMarket: 42,
+  },
 };
 
 export function getGeoData(area?: keyof GeoDataSet): GeoData | GeoDataSet {

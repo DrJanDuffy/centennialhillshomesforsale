@@ -7,8 +7,8 @@
  * Updated for enhanced status tracking and implementation monitoring
  */
 
-const fs = require('fs');
-const path = require('path');
+const fs = require('node:fs');
+const _path = require('node:path');
 
 class PRDParser {
   constructor(prdFilePath) {
@@ -223,8 +223,8 @@ class PRDParser {
         currentQuarter = 'q3_2024';
       } else if (line.includes('Q4 2024')) {
         currentQuarter = 'q4_2024';
-      } else if (line.trim().match(/^[✅🔧📋🚀]/) && currentQuarter) {
-        const item = line.trim().replace(/^[✅🔧📋🚀]\s*/, '').trim();
+      } else if (line.trim().match(/^[✅🔧📋🚀]/u) && currentQuarter) {
+        const item = line.trim().replace(/^[✅🔧📋🚀]\s*/u, '').trim();
         if (item) {
           roadmap[currentQuarter].push(item);
         }

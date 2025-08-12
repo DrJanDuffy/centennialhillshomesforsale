@@ -1,4 +1,3 @@
-
 import type { NextApiRequest, NextApiResponse } from 'next';
 
 interface LeadData {
@@ -13,10 +12,7 @@ interface LeadData {
   timestamp: string;
 }
 
-export default async function handler(
-  req: NextApiRequest,
-  res: NextApiResponse
-) {
+export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   if (req.method !== 'POST') {
     return res.status(405).json({ error: 'Method not allowed' });
   }
@@ -26,9 +22,9 @@ export default async function handler(
 
     // Validate required fields
     if (!leadData.name || !leadData.email || !leadData.phone) {
-      return res.status(400).json({ 
+      return res.status(400).json({
         error: 'Missing required fields',
-        success: false 
+        success: false,
       });
     }
 
@@ -44,21 +40,20 @@ export default async function handler(
       phone: leadData.phone,
       interest: leadData.interest,
       trigger: leadData.trigger,
-      timestamp: leadData.timestamp
+      timestamp: leadData.timestamp,
     });
 
     // Simulate successful lead capture
     return res.status(200).json({
       success: true,
       message: 'Lead captured successfully',
-      leadId: `lead_${Date.now()}`
+      leadId: `lead_${Date.now()}`,
     });
-
   } catch (error) {
     console.error('Lead capture error:', error);
     return res.status(500).json({
       error: 'Internal server error',
-      success: false
+      success: false,
     });
   }
 }

@@ -1,13 +1,12 @@
-
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import { useState, useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
 export default function Header() {
   const router = useRouter();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
-  
+
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 50);
@@ -44,7 +43,6 @@ export default function Header() {
   return (
     <header className={`header ${isScrolled ? 'header--scrolled' : ''}`}>
       <div className="header-content">
-        
         {/* Logo and Brand Section */}
         <div className="header-brand">
           <Link href="/" onClick={closeMenu} className="logo">
@@ -69,63 +67,36 @@ export default function Header() {
 
         {/* Desktop Navigation - Moved to center */}
         <nav className="hidden md:flex items-center space-x-8 flex-1 justify-center">
-          <Link 
-            href="/" 
-            className={`nav-link ${
-              router.pathname === '/' 
-                ? 'active' 
-                : ''
-            }`}
-          >
+          <Link href="/" className={`nav-link ${router.pathname === '/' ? 'active' : ''}`}>
             Home
           </Link>
-          <Link 
-            href="/about" 
-            className={`nav-link ${
-              router.pathname === '/about' 
-                ? 'active' 
-                : ''
-            }`}
+          <Link
+            href="/about"
+            className={`nav-link ${router.pathname === '/about' ? 'active' : ''}`}
           >
             About
           </Link>
-          <Link 
-            href="/listings" 
-            className={`nav-link ${
-              router.pathname === '/listings' 
-                ? 'active' 
-                : ''
-            }`}
+          <Link
+            href="/listings"
+            className={`nav-link ${router.pathname === '/listings' ? 'active' : ''}`}
           >
             Listings
           </Link>
-          <Link 
-            href="/neighborhoods" 
-            className={`nav-link ${
-              router.pathname === '/neighborhoods' 
-                ? 'active' 
-                : ''
-            }`}
+          <Link
+            href="/neighborhoods"
+            className={`nav-link ${router.pathname === '/neighborhoods' ? 'active' : ''}`}
           >
             Neighborhoods
           </Link>
-          <Link 
-            href="/services" 
-            className={`nav-link ${
-              router.pathname === '/services' 
-                ? 'active' 
-                : ''
-            }`}
+          <Link
+            href="/services"
+            className={`nav-link ${router.pathname === '/services' ? 'active' : ''}`}
           >
             Services
           </Link>
-          <Link 
-            href="/contact" 
-            className={`nav-link ${
-              router.pathname === '/contact' 
-                ? 'active' 
-                : ''
-            }`}
+          <Link
+            href="/contact"
+            className={`nav-link ${router.pathname === '/contact' ? 'active' : ''}`}
           >
             Contact
           </Link>
@@ -142,16 +113,13 @@ export default function Header() {
 
           {/* Contact Info - Hidden on small screens */}
           <div className="hidden md:block">
-            <a 
-              href="tel:+17029031952" 
-              className="phone-number"
-            >
+            <a href="tel:+17029031952" className="phone-number">
               📞 (702) 903-1952
             </a>
           </div>
 
           {/* Mobile Menu Button */}
-          <button 
+          <button
             className={`menu-toggle ${isMenuOpen ? 'active' : ''}`}
             onClick={toggleMenu}
             aria-label="Toggle menu"
@@ -170,8 +138,8 @@ export default function Header() {
         <div className="nav-menu">
           {/* Mobile Contact */}
           <div className="pb-4 border-b border-primary">
-            <a 
-              href="tel:+17029031952" 
+            <a
+              href="tel:+17029031952"
               className="phone-number w-full justify-center"
               onClick={closeMenu}
             >
@@ -185,43 +153,43 @@ export default function Header() {
           </div>
 
           {/* Mobile Navigation Links */}
-          <Link 
-            href="/" 
+          <Link
+            href="/"
             className={`nav-link ${router.pathname === '/' ? 'active' : ''}`}
             onClick={closeMenu}
           >
             Home
           </Link>
-          <Link 
-            href="/about" 
+          <Link
+            href="/about"
             className={`nav-link ${router.pathname === '/about' ? 'active' : ''}`}
             onClick={closeMenu}
           >
             About Dr. Duffy
           </Link>
-          <Link 
-            href="/listings" 
+          <Link
+            href="/listings"
             className={`nav-link ${router.pathname === '/listings' ? 'active' : ''}`}
             onClick={closeMenu}
           >
             Listings
           </Link>
-          <Link 
-            href="/neighborhoods" 
+          <Link
+            href="/neighborhoods"
             className={`nav-link ${router.pathname === '/neighborhoods' ? 'active' : ''}`}
             onClick={closeMenu}
           >
             Neighborhoods
           </Link>
-          <Link 
-            href="/services" 
+          <Link
+            href="/services"
             className={`nav-link ${router.pathname === '/services' ? 'active' : ''}`}
             onClick={closeMenu}
           >
             Services
           </Link>
-          <Link 
-            href="/contact" 
+          <Link
+            href="/contact"
             className={`nav-link ${router.pathname === '/contact' ? 'active' : ''}`}
             onClick={closeMenu}
           >
@@ -231,12 +199,7 @@ export default function Header() {
       </div>
 
       {/* Mobile Menu Overlay */}
-      {isMenuOpen && (
-        <div 
-          className="nav-overlay active"
-          onClick={closeMenu}
-        />
-      )}
+      {isMenuOpen && <div className="nav-overlay active" onClick={closeMenu} />}
     </header>
   );
 }

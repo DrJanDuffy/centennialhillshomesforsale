@@ -1,4 +1,3 @@
-
 interface ErrorDetails {
   message: string;
   stack?: string;
@@ -26,11 +25,11 @@ class ErrorTracker {
       component,
       url: typeof window !== 'undefined' ? window.location.href : '',
       userAgent: typeof window !== 'undefined' ? window.navigator.userAgent : '',
-      timestamp: new Date().toISOString()
+      timestamp: new Date().toISOString(),
     };
 
     this.errors.push(errorDetails);
-    
+
     // Keep only last 50 errors to prevent memory issues
     if (this.errors.length > 50) {
       this.errors = this.errors.slice(-50);
@@ -52,8 +51,8 @@ class ErrorTracker {
         fatal: false,
         custom_map: {
           component: errorDetails.component,
-          url: errorDetails.url
-        }
+          url: errorDetails.url,
+        },
       });
     }
   }
@@ -75,10 +74,7 @@ export const setupGlobalErrorHandling = (): void => {
 
   // Handle unhandled promise rejections
   window.addEventListener('unhandledrejection', (event) => {
-    errorTracker.trackError(
-      new Error(`Unhandled promise rejection: ${event.reason}`),
-      'Promise'
-    );
+    errorTracker.trackError(new Error(`Unhandled promise rejection: ${event.reason}`), 'Promise');
   });
 
   // Handle JavaScript errors

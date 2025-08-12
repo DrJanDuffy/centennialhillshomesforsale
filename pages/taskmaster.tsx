@@ -1,9 +1,18 @@
-
-import React, { useState, useEffect } from 'react';
+import {
+  Activity,
+  AlertTriangle,
+  CheckCircle,
+  Clock,
+  Lightbulb,
+  Settings,
+  TrendingUp,
+  Zap,
+} from 'lucide-react';
+import type React from 'react';
+import { useEffect, useState } from 'react';
 import Layout from '../components/Layout';
 import TaskMasterDashboard from '../components/TaskMasterDashboard';
 import TaskMasterStatus from '../components/TaskMasterStatus';
-import { Activity, Settings, TrendingUp, Zap, Clock, CheckCircle, AlertTriangle, Lightbulb } from 'lucide-react';
 
 const TaskMasterPage: React.FC = () => {
   const [isVisible, setIsVisible] = useState(false);
@@ -18,10 +27,8 @@ const TaskMasterPage: React.FC = () => {
     setActiveWorkflow(activeWorkflow === workflowId ? null : workflowId);
   };
 
-
-
   return (
-    <Layout 
+    <Layout
       title="TaskMaster AI Dashboard - Centennial Hills Homes"
       description="Real-time AI optimization dashboard for Centennial Hills real estate website"
     >
@@ -33,10 +40,12 @@ const TaskMasterPage: React.FC = () => {
                 🤖 TaskMaster AI Control Center
               </h1>
               <p className="text-lg text-gray-600 mb-8">
-                Welcome to the TaskMaster Dashboard - your comprehensive real estate management system. Track leads, monitor market trends, and optimize your business performance with our advanced analytics and automation tools.
+                Welcome to the TaskMaster Dashboard - your comprehensive real estate management
+                system. Track leads, monitor market trends, and optimize your business performance
+                with our advanced analytics and automation tools.
               </p>
             </div>
-            
+
             <div className="quick-actions">
               <button className="action-btn primary">
                 <Zap size={20} />
@@ -54,13 +63,13 @@ const TaskMasterPage: React.FC = () => {
           </div>
 
           <TaskMasterStatus />
-          
+
           <TaskMasterDashboard />
 
           <div className={`workflow-status ${isVisible ? 'animate-fade-in-scale' : ''}`}>
             <h2 className="text-2xl font-bold mb-6">Active Workflows</h2>
             <div className="workflow-grid">
-              <div 
+              <div
                 className={`workflow-card running ${isVisible ? 'animate-delay-1' : ''}`}
                 onClick={() => handleWorkflowClick('seo-optimization')}
                 role="button"
@@ -75,7 +84,7 @@ const TaskMasterPage: React.FC = () => {
                 <p>Monitoring search rankings and updating meta tags</p>
                 <div className="workflow-progress">
                   <div className="progress-bar">
-                    <div 
+                    <div
                       className="progress-fill progress-fill-taskmaster"
                       style={{ width: '75%' }}
                     ></div>
@@ -91,7 +100,7 @@ const TaskMasterPage: React.FC = () => {
                 )}
               </div>
 
-              <div 
+              <div
                 className={`workflow-card scheduled ${isVisible ? 'animate-delay-2' : ''}`}
                 onClick={() => handleWorkflowClick('performance-monitor')}
                 role="button"
@@ -104,9 +113,7 @@ const TaskMasterPage: React.FC = () => {
                 </div>
                 <h3>Performance Monitor</h3>
                 <p>Real-time Core Web Vitals tracking</p>
-                <div className="next-run">
-                  Next run: In 12 minutes
-                </div>
+                <div className="next-run">Next run: In 12 minutes</div>
                 {activeWorkflow === 'performance-monitor' && (
                   <div className="workflow-details">
                     <p>• Current LCP: 2.1s</p>
@@ -116,7 +123,7 @@ const TaskMasterPage: React.FC = () => {
                 )}
               </div>
 
-              <div 
+              <div
                 className={`workflow-card completed ${isVisible ? 'animate-delay-3' : ''}`}
                 onClick={() => handleWorkflowClick('content-refresh')}
                 role="button"
@@ -129,9 +136,7 @@ const TaskMasterPage: React.FC = () => {
                 </div>
                 <h3>Content Refresh</h3>
                 <p>Updated property listings and market data</p>
-                <div className="last-run">
-                  Last run: 2 hours ago
-                </div>
+                <div className="last-run">Last run: 2 hours ago</div>
                 {activeWorkflow === 'content-refresh' && (
                   <div className="workflow-details">
                     <p>• Updated 8 property listings</p>
@@ -151,25 +156,34 @@ const TaskMasterPage: React.FC = () => {
                   <AlertTriangle className="text-red-500" />
                   <h3>🚨 High Priority</h3>
                 </div>
-                <p>Core Web Vitals score dropped to 82. Consider optimizing images and reducing JavaScript bundle size.</p>
+                <p>
+                  Core Web Vitals score dropped to 82. Consider optimizing images and reducing
+                  JavaScript bundle size.
+                </p>
                 <button className="insight-action">Fix Now</button>
               </div>
-              
+
               <div className={`insight-card priority-medium ${isVisible ? 'animate-delay-2' : ''}`}>
                 <div className="insight-header">
                   <AlertTriangle className="text-yellow-500" />
                   <h3>⚠️ Medium Priority</h3>
                 </div>
-                <p>3 new competitor listings detected in Centennial Hills. Update market positioning content.</p>
+                <p>
+                  3 new competitor listings detected in Centennial Hills. Update market positioning
+                  content.
+                </p>
                 <button className="insight-action">Review</button>
               </div>
-              
+
               <div className={`insight-card priority-low ${isVisible ? 'animate-delay-3' : ''}`}>
                 <div className="insight-header">
                   <Lightbulb className="text-green-500" />
                   <h3>💡 Opportunity</h3>
                 </div>
-                                  <p>Search volume for &ldquo;Providence Nevada homes&rdquo; increased 15%. Consider creating targeted content.</p>
+                <p>
+                  Search volume for &ldquo;Providence Nevada homes&rdquo; increased 15%. Consider
+                  creating targeted content.
+                </p>
                 <button className="insight-action">Explore</button>
               </div>
             </div>

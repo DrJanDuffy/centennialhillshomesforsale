@@ -1,13 +1,8 @@
 'use client';
 
-import React, { useEffect, useRef } from 'react';
 import { motion, useInView } from 'framer-motion';
-import { 
-  animationVariants, 
-  transitionConfigs, 
-  fixImmediateVisibility,
-  replaceLoadingSkeletons 
-} from '../utils/animationUtils';
+import React, { useEffect, useRef } from 'react';
+import { animationVariants, transitionConfigs } from '../utils/animationUtils';
 
 interface EnhancedAnimationProps {
   children: React.ReactNode;
@@ -29,10 +24,10 @@ export const EnhancedAnimation: React.FC<EnhancedAnimationProps> = ({
   threshold = 0.1,
   className = '',
   dataAnimate,
-  onAnimationComplete
+  onAnimationComplete,
 }) => {
   const ref = useRef<HTMLDivElement>(null);
-  const isInView = useInView(ref, { threshold, triggerOnce: true });
+  const isInView = useInView(ref, { amount: threshold, once: true });
 
   useEffect(() => {
     // Fix any immediate visibility issues
@@ -52,10 +47,10 @@ export const EnhancedAnimation: React.FC<EnhancedAnimationProps> = ({
       ref={ref}
       variants={animationVariants[variant]}
       initial="hidden"
-      animate={isInView ? "visible" : "hidden"}
+      animate={isInView ? 'visible' : 'hidden'}
       transition={{
         ...transitionConfigs[transition],
-        delay
+        delay,
       }}
       className={className}
       data-animate={dataAnimate}
@@ -76,17 +71,17 @@ interface StaggerContainerProps {
 export const StaggerContainer: React.FC<StaggerContainerProps> = ({
   children,
   staggerDelay = 0.1,
-  className = ''
+  className = '',
 }) => {
   const ref = useRef<HTMLDivElement>(null);
-  const isInView = useInView(ref, { threshold: 0.1, triggerOnce: true });
+  const isInView = useInView(ref, { amount: 0.1, once: true });
 
   return (
     <motion.div
       ref={ref}
       variants={animationVariants.staggerContainer}
       initial="hidden"
-      animate={isInView ? "visible" : "hidden"}
+      animate={isInView ? 'visible' : 'hidden'}
       transition={transitionConfigs.normal}
       className={className}
     >
@@ -116,10 +111,10 @@ export const ScrollAnimation: React.FC<ScrollAnimationProps> = ({
   direction = 'up',
   distance = 30,
   delay = 0,
-  className = ''
+  className = '',
 }) => {
   const ref = useRef<HTMLDivElement>(null);
-  const isInView = useInView(ref, { threshold: 0.1, triggerOnce: true });
+  const isInView = useInView(ref, { amount: 0.1, once: true });
 
   const getInitialState = () => {
     switch (direction) {
@@ -174,7 +169,7 @@ export const ScrollAnimation: React.FC<ScrollAnimationProps> = ({
       transition={{
         duration: 0.6,
         delay,
-        ease: 'easeOut'
+        ease: 'easeOut',
       }}
       className={className}
     >
@@ -195,7 +190,7 @@ export const EnhancedLoading: React.FC<EnhancedLoadingProps> = ({
   isLoading,
   children,
   fallback,
-  className = ''
+  className = '',
 }) => {
   const defaultFallback = (
     <div className={`flex items-center justify-center p-8 ${className}`}>
@@ -231,7 +226,7 @@ export const EnhancedImage: React.FC<EnhancedImageProps> = ({
   width,
   height,
   priority = false,
-  fallback = '/images/placeholder-property.jpg'
+  fallback = '/images/placeholder-property.jpg',
 }) => {
   const [imageSrc, setImageSrc] = React.useState(priority ? src : fallback);
   const [isLoading, setIsLoading] = React.useState(!priority);
@@ -264,7 +259,7 @@ export const EnhancedImage: React.FC<EnhancedImageProps> = ({
           <div className="animate-spin w-6 h-6 border-2 border-gray-300 border-t-blue-500 rounded-full"></div>
         </div>
       )}
-      
+
       <img
         src={imageSrc}
         alt={alt}
@@ -277,7 +272,7 @@ export const EnhancedImage: React.FC<EnhancedImageProps> = ({
         onError={handleImageError}
         loading={priority ? 'eager' : 'lazy'}
       />
-      
+
       {hasError && (
         <div className="absolute inset-0 bg-gray-100 rounded-lg flex items-center justify-center">
           <div className="text-center text-gray-500">
@@ -312,32 +307,28 @@ export const EnhancedButton: React.FC<EnhancedButtonProps> = ({
   variant = 'primary',
   size = 'md',
   className = '',
-  type = 'button'
+  type = 'button',
 }) => {
-  const baseClasses = 'inline-flex items-center justify-center font-semibold rounded-lg transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed';
-  
+  const baseClasses =
+    'inline-flex items-center justify-center font-semibold rounded-lg transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed';
+
   const variantClasses = {
     primary: 'bg-blue-600 text-white hover:bg-blue-700 focus:ring-blue-500',
     secondary: 'bg-gray-600 text-white hover:bg-gray-700 focus:ring-gray-500',
     accent: 'bg-green-600 text-white hover:bg-green-700 focus:ring-green-500',
-    outline: 'border-2 border-blue-600 text-blue-600 hover:bg-blue-50 focus:ring-blue-500'
+    outline: 'border-2 border-blue-600 text-blue-600 hover:bg-blue-50 focus:ring-blue-500',
   };
-  
+
   const sizeClasses = {
     sm: 'px-3 py-2 text-sm',
     md: 'px-4 py-2 text-base',
-    lg: 'px-6 py-3 text-lg'
+    lg: 'px-6 py-3 text-lg',
   };
 
   const buttonClasses = `${baseClasses} ${variantClasses[variant]} ${sizeClasses[size]} ${className}`;
 
   return (
-    <button
-      type={type}
-      className={buttonClasses}
-      onClick={onClick}
-      disabled={disabled || loading}
-    >
+    <button type={type} className={buttonClasses} onClick={onClick} disabled={disabled || loading}>
       {loading && (
         <div className="animate-spin w-4 h-4 border-2 border-white border-t-transparent rounded-full mr-2"></div>
       )}
@@ -370,15 +361,16 @@ export const EnhancedFormField: React.FC<EnhancedFormFieldProps> = ({
   options = [],
   required = false,
   error,
-  className = ''
+  className = '',
 }) => {
   const fieldId = `field-${name}`;
   const hasError = !!error;
 
-  const baseInputClasses = 'w-full px-3 py-2 border rounded-lg transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-blue-500';
+  const baseInputClasses =
+    'w-full px-3 py-2 border rounded-lg transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-blue-500';
   const inputClasses = `${baseInputClasses} ${
-    hasError 
-      ? 'border-red-300 focus:border-red-500 focus:ring-red-500' 
+    hasError
+      ? 'border-red-300 focus:border-red-500 focus:ring-red-500'
       : 'border-gray-300 focus:border-blue-500'
   }`;
 
@@ -402,7 +394,7 @@ export const EnhancedFormField: React.FC<EnhancedFormFieldProps> = ({
             ))}
           </select>
         );
-      
+
       case 'textarea':
         return (
           <textarea
@@ -415,7 +407,7 @@ export const EnhancedFormField: React.FC<EnhancedFormFieldProps> = ({
             required={required}
           />
         );
-      
+
       default:
         return (
           <input
@@ -438,14 +430,10 @@ export const EnhancedFormField: React.FC<EnhancedFormFieldProps> = ({
         {label}
         {required && <span className="text-red-500 ml-1">*</span>}
       </label>
-      
+
       {renderField()}
-      
-      {hasError && (
-        <p className="mt-1 text-sm text-red-600 animate-fade-in">
-          {error}
-        </p>
-      )}
+
+      {hasError && <p className="mt-1 text-sm text-red-600 animate-fade-in">{error}</p>}
     </div>
   );
 };
@@ -458,5 +446,5 @@ export default {
   EnhancedLoading,
   EnhancedImage,
   EnhancedButton,
-  EnhancedFormField
+  EnhancedFormField,
 };

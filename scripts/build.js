@@ -1,8 +1,8 @@
 #!/usr/bin/env node
 
-const { execSync } = require('child_process');
-const fs = require('fs');
-const path = require('path');
+const { execSync } = require('node:child_process');
+const fs = require('node:fs');
+const path = require('node:path');
 
 console.log('🔨 PRODUCTION BUILD - CENTENNIAL HILLS WEBSITE');
 console.log('===============================================');
@@ -40,7 +40,7 @@ try {
 
     // Check critical files
     const criticalFiles = ['index.html', '404.html', 'manifest.json', 'robots.txt'];
-    criticalFiles.forEach(file => {
+    criticalFiles.forEach((file) => {
       const filePath = path.join('out', file);
       if (fs.existsSync(filePath)) {
         const size = Math.round(fs.statSync(filePath).size / 1024);
@@ -54,7 +54,6 @@ try {
   } else {
     throw new Error('Build output directory is empty or missing');
   }
-
 } catch (error) {
   console.error('❌ Build failed:', error.message);
   console.log('🔄 Attempting fallback build...');

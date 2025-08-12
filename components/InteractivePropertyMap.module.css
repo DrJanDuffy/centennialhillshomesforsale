@@ -2,7 +2,7 @@
   max-width: 1200px;
   margin: 0 auto;
   padding: 20px;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 }
 
 .header {
@@ -33,7 +33,7 @@
   padding: 20px;
   background: #f8f9fa;
   border-radius: 10px;
-  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
   flex-wrap: wrap;
 }
 
@@ -71,7 +71,7 @@
   background: #fff;
   border-radius: 10px;
   overflow: hidden;
-  box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
   margin-bottom: 30px;
 }
 
@@ -130,7 +130,7 @@
 
 .markerPin {
   font-size: 24px;
-  filter: drop-shadow(2px 2px 4px rgba(0,0,0,0.3));
+  filter: drop-shadow(2px 2px 4px rgba(0, 0, 0, 0.3));
 }
 
 .priceTag {
@@ -140,7 +140,7 @@
   font-size: 0.8rem;
   font-weight: bold;
   color: #2c3e50;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
   margin-top: 4px;
   white-space: nowrap;
 }
@@ -167,7 +167,7 @@
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(0,0,0,0.8);
+  background: rgba(0, 0, 0, 0.8);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -176,8 +176,12 @@
 }
 
 @keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
 
 .propertyCard {
@@ -192,15 +196,21 @@
 }
 
 @keyframes slideUp {
-  from { transform: translateY(30px); opacity: 0; }
-  to { transform: translateY(0); opacity: 1; }
+  from {
+    transform: translateY(30px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
 }
 
 .closeBtn {
   position: absolute;
   top: 15px;
   right: 15px;
-  background: rgba(0,0,0,0.7);
+  background: rgba(0, 0, 0, 0.7);
   color: white;
   border: none;
   width: 30px;
@@ -213,7 +223,7 @@
 }
 
 .closeBtn:hover {
-  background: rgba(0,0,0,0.9);
+  background: rgba(0, 0, 0, 0.9);
 }
 
 .propertyImage {
@@ -354,14 +364,16 @@
   background: white;
   border-radius: 10px;
   overflow: hidden;
-  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
   cursor: pointer;
 }
 
 .propertyGrid .propertyCard:hover {
   transform: translateY(-5px);
-  box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
 }
 
 .cardImage {
@@ -507,25 +519,85 @@
 }
 
 /* Dynamic positioning classes for property markers */
-.pos-20-30 { left: 20%; top: 30%; }
-.pos-35-40 { left: 35%; top: 40%; }
-.pos-50-35 { left: 50%; top: 35%; }
-.pos-65-45 { left: 65%; top: 45%; }
-.pos-80-30 { left: 80%; top: 30%; }
-.pos-25-60 { left: 25%; top: 60%; }
-.pos-40-70 { left: 40%; top: 70%; }
-.pos-55-65 { left: 55%; top: 65%; }
-.pos-70-75 { left: 70%; top: 75%; }
-.pos-85-60 { left: 85%; top: 60%; }
+.pos-20-30 {
+  left: 20%;
+  top: 30%;
+}
+.pos-35-40 {
+  left: 35%;
+  top: 40%;
+}
+.pos-50-35 {
+  left: 50%;
+  top: 35%;
+}
+.pos-65-45 {
+  left: 65%;
+  top: 45%;
+}
+.pos-80-30 {
+  left: 80%;
+  top: 30%;
+}
+.pos-25-60 {
+  left: 25%;
+  top: 60%;
+}
+.pos-40-70 {
+  left: 40%;
+  top: 70%;
+}
+.pos-55-65 {
+  left: 55%;
+  top: 65%;
+}
+.pos-70-75 {
+  left: 70%;
+  top: 75%;
+}
+.pos-85-60 {
+  left: 85%;
+  top: 60%;
+}
 
 /* Dynamic positioning classes for tooltips */
-.tooltip-20-30 { left: 20%; top: 30%; }
-.tooltip-35-40 { left: 35%; top: 40%; }
-.tooltip-50-35 { left: 50%; top: 35%; }
-.tooltip-65-45 { left: 65%; top: 45%; }
-.tooltip-80-30 { left: 80%; top: 30%; }
-.tooltip-25-60 { left: 25%; top: 60%; }
-.tooltip-40-70 { left: 40%; top: 70%; }
-.tooltip-55-65 { left: 55%; top: 65%; }
-.tooltip-70-75 { left: 70%; top: 75%; }
-.tooltip-85-60 { left: 85%; top: 60%; }
+.tooltip-20-30 {
+  left: 20%;
+  top: 30%;
+}
+.tooltip-35-40 {
+  left: 35%;
+  top: 40%;
+}
+.tooltip-50-35 {
+  left: 50%;
+  top: 35%;
+}
+.tooltip-65-45 {
+  left: 65%;
+  top: 45%;
+}
+.tooltip-80-30 {
+  left: 80%;
+  top: 30%;
+}
+.tooltip-25-60 {
+  left: 25%;
+  top: 60%;
+}
+.tooltip-40-70 {
+  left: 40%;
+  top: 70%;
+}
+.tooltip-55-65 {
+  left: 55%;
+  top: 65%;
+}
+.tooltip-70-75 {
+  left: 70%;
+  top: 75%;
+}
+.tooltip-85-60 {
+  left: 85%;
+  top: 60%;
+}

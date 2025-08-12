@@ -1,24 +1,25 @@
-import React, { useState } from 'react';
-import Image from 'next/image';
-import Layout from '../components/Layout';
 import { motion } from 'framer-motion';
 import {
-  Bed,
-  Bath,
-  Square,
-  Car,
-  Calendar,
-  Star,
-  Heart,
-  Share2,
-  Phone,
-  MessageCircle,
   ArrowLeft,
+  Bath,
+  Bed,
+  Calendar,
+  Car,
   ExternalLink,
+  Heart,
   Home,
-  Users
+  MessageCircle,
+  Phone,
+  Share2,
+  Square,
+  Star,
+  Users,
 } from 'lucide-react';
+import Image from 'next/image';
 import Link from 'next/link';
+import type React from 'react';
+import { useState } from 'react';
+import Layout from '../components/Layout';
 
 const FeaturedHome: React.FC = () => {
   const [currentImage, setCurrentImage] = useState(0);
@@ -44,24 +45,24 @@ const FeaturedHome: React.FC = () => {
     images: [
       {
         url: 'https://images.unsplash.com/photo-1564013799919-ab600027ffc6?w=1200&h=800&fit=crop',
-        alt: 'Luxury Home Exterior - Golden Moments Avenue'
+        alt: 'Luxury Home Exterior - Golden Moments Avenue',
       },
       {
         url: 'https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=1200&h=800&fit=crop',
-        alt: 'Modern Kitchen with Granite Countertops'
+        alt: 'Modern Kitchen with Granite Countertops',
       },
       {
         url: 'https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=1200&h=800&fit=crop',
-        alt: 'Spacious Living Room with Fireplace'
+        alt: 'Spacious Living Room with Fireplace',
       },
       {
         url: 'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=1200&h=800&fit=crop',
-        alt: 'Master Bedroom Suite'
+        alt: 'Master Bedroom Suite',
       },
       {
         url: 'https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?w=1200&h=800&fit=crop',
-        alt: 'Backyard with Pool and Mountain Views'
-      }
+        alt: 'Backyard with Pool and Mountain Views',
+      },
     ],
     features: [
       'Pool & Spa',
@@ -73,22 +74,24 @@ const FeaturedHome: React.FC = () => {
       'Granite Countertops',
       'Walk-in Closets',
       'Fireplace',
-      'Large Backyard'
+      'Large Backyard',
     ],
     description: `Discover this stunning luxury home in the prestigious Golden Moments neighborhood of Las Vegas. This meticulously maintained 4-bedroom, 3-bathroom residence offers 3,200 square feet of living space with premium finishes throughout. The open-concept design features a gourmet kitchen with granite countertops, stainless steel appliances, and a large center island perfect for entertaining. The master suite includes a spa-like bathroom and generous walk-in closet. Enjoy the beautiful backyard with pool, spa, and breathtaking mountain views. This home combines luxury living with the perfect location near shopping, dining, and excellent schools.`,
     neighborhood: {
       name: 'Golden Moments',
-      description: 'A prestigious neighborhood in Northwest Las Vegas known for luxury homes and family-friendly amenities.',
-      amenities: ['Shopping Centers', 'Restaurants', 'Parks', 'Schools', 'Golf Courses']
+      description:
+        'A prestigious neighborhood in Northwest Las Vegas known for luxury homes and family-friendly amenities.',
+      amenities: ['Shopping Centers', 'Restaurants', 'Parks', 'Schools', 'Golf Courses'],
     },
-    realScoutUrl: 'https://drjanduffy.realscout.com/homesearch/listings/p-11773-golden-moments-avenue-las-vegas-89138-glvartrestle-409'
+    realScoutUrl:
+      'https://drjanduffy.realscout.com/homesearch/listings/p-11773-golden-moments-avenue-las-vegas-89138-glvartrestle-409',
   };
 
   const stats = [
     { icon: Home, label: 'Property Type', value: property.propertyType },
     { icon: Calendar, label: 'Year Built', value: property.yearBuilt },
     { icon: Square, label: 'Lot Size', value: property.lotSize },
-    { icon: Car, label: 'Garage', value: '3-Car' }
+    { icon: Car, label: 'Garage', value: '3-Car' },
   ];
 
   const nextImage = () => {
@@ -112,20 +115,21 @@ const FeaturedHome: React.FC = () => {
       {/* Hero Section */}
       <section className="relative bg-gradient-to-br from-primary to-secondary text-white">
         <div className="container mx-auto px-4 py-8">
-          <Link href="/" className="inline-flex items-center text-white/80 hover:text-white mb-6 transition-colors">
+          <Link
+            href="/"
+            className="inline-flex items-center text-white/80 hover:text-white mb-6 transition-colors"
+          >
             <ArrowLeft className="w-4 h-4 mr-2" />
             Back to Home
           </Link>
-          
+
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
             className="text-center"
           >
-            <h1 className="text-4xl md:text-6xl font-bold mb-4">
-              Featured Luxury Home
-            </h1>
+            <h1 className="text-4xl md:text-6xl font-bold mb-4">Featured Luxury Home</h1>
             <p className="text-xl md:text-2xl text-white/90 mb-6">
               {property.address}, {property.city}, {property.state} {property.zip}
             </p>
@@ -148,7 +152,7 @@ const FeaturedHome: React.FC = () => {
                 className="object-cover"
                 sizes="(max-width: 768px) 100vw, (max-width: 1200px) 80vw, 1200px"
               />
-              
+
               {/* Navigation Arrows */}
               <button
                 onClick={prevImage}
@@ -197,7 +201,9 @@ const FeaturedHome: React.FC = () => {
                   key={index}
                   onClick={() => setCurrentImage(index)}
                   className={`w-20 h-16 rounded-lg overflow-hidden transition-all ${
-                    currentImage === index ? 'ring-2 ring-accent-color' : 'opacity-60 hover:opacity-100'
+                    currentImage === index
+                      ? 'ring-2 ring-accent-color'
+                      : 'opacity-60 hover:opacity-100'
                   }`}
                 >
                   <Image
@@ -226,7 +232,7 @@ const FeaturedHome: React.FC = () => {
                 transition={{ duration: 0.6, delay: 0.2 }}
               >
                 <h2 className="text-3xl font-bold text-primary mb-6">Property Details</h2>
-                
+
                 {/* Key Stats */}
                 <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
                   <div className="text-center p-4 bg-gray-50 rounded-lg">
@@ -241,7 +247,9 @@ const FeaturedHome: React.FC = () => {
                   </div>
                   <div className="text-center p-4 bg-gray-50 rounded-lg">
                     <Square className="w-8 h-8 mx-auto mb-2 text-accent-color" />
-                    <div className="text-2xl font-bold text-primary">{property.sqft.toLocaleString()}</div>
+                    <div className="text-2xl font-bold text-primary">
+                      {property.sqft.toLocaleString()}
+                    </div>
                     <div className="text-sm text-secondary">Square Feet</div>
                   </div>
                   <div className="text-center p-4 bg-gray-50 rounded-lg">
@@ -276,7 +284,10 @@ const FeaturedHome: React.FC = () => {
                   <p className="text-secondary mb-4">{property.neighborhood.description}</p>
                   <div className="flex flex-wrap gap-2">
                     {property.neighborhood.amenities.map((amenity, index) => (
-                      <span key={index} className="bg-accent-color/10 text-accent-color px-3 py-1 rounded-full text-sm">
+                      <span
+                        key={index}
+                        className="bg-accent-color/10 text-accent-color px-3 py-1 rounded-full text-sm"
+                      >
                         {amenity}
                       </span>
                     ))}
@@ -301,7 +312,7 @@ const FeaturedHome: React.FC = () => {
                   <div className="text-secondary mb-4">
                     ${property.pricePerSqft}/sq ft • {property.daysOnMarket} days on market
                   </div>
-                  
+
                   <div className="space-y-3 mb-6">
                     {stats.map((stat, index) => (
                       <div key={index} className="flex items-center justify-between">
@@ -324,7 +335,7 @@ const FeaturedHome: React.FC = () => {
                       <ExternalLink className="w-4 h-4 mr-2" />
                       View on RealScout
                     </a>
-                    
+
                     <a
                       href="tel:702-903-1952"
                       className="btn btn-outline w-full flex items-center justify-center"
@@ -332,7 +343,7 @@ const FeaturedHome: React.FC = () => {
                       <Phone className="w-4 h-4 mr-2" />
                       Call Dr. Jan Duffy
                     </a>
-                    
+
                     <Link
                       href="/contact"
                       className="btn btn-secondary w-full flex items-center justify-center"
@@ -383,10 +394,10 @@ const FeaturedHome: React.FC = () => {
           >
             <h2 className="text-3xl font-bold text-primary mb-6">Interactive Property Details</h2>
             <p className="text-secondary mb-8 max-w-2xl mx-auto">
-              Explore this property with our advanced RealScout integration. Get detailed information, 
-              virtual tours, and neighborhood insights.
+              Explore this property with our advanced RealScout integration. Get detailed
+              information, virtual tours, and neighborhood insights.
             </p>
-            
+
             <div className="bg-white rounded-2xl shadow-xl p-8">
               <realscout-property-details
                 property-id="p-11773-golden-moments-avenue-las-vegas-89138-glvartrestle-409"
@@ -406,18 +417,14 @@ const FeaturedHome: React.FC = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.8 }}
           >
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">
-              Ready to Make This Your Home?
-            </h2>
+            <h2 className="text-3xl md:text-4xl font-bold mb-4">Ready to Make This Your Home?</h2>
             <p className="text-xl text-white/90 mb-8 max-w-2xl mx-auto">
-              Contact Dr. Jan Duffy today to schedule a private viewing or get more information about this exceptional property.
+              Contact Dr. Jan Duffy today to schedule a private viewing or get more information
+              about this exceptional property.
             </p>
-            
+
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <a
-                href="tel:702-903-1952"
-                className="btn btn-white text-primary hover:bg-gray-100"
-              >
+              <a href="tel:702-903-1952" className="btn btn-white text-primary hover:bg-gray-100">
                 <Phone className="w-5 h-5 mr-2" />
                 Call Now: (702) 903-1952
               </a>
@@ -436,4 +443,4 @@ const FeaturedHome: React.FC = () => {
   );
 };
 
-export default FeaturedHome; 
+export default FeaturedHome;

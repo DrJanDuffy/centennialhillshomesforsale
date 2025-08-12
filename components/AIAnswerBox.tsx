@@ -1,4 +1,3 @@
-
 import { motion } from 'framer-motion';
 
 interface AIAnswerBoxProps {
@@ -15,11 +14,11 @@ interface AIAnswerBoxProps {
   }>;
 }
 
-export default function AIAnswerBox({ 
-  question, 
-  answer, 
-  statistics = [], 
-  sources = [] 
+export default function AIAnswerBox({
+  question,
+  answer,
+  statistics = [],
+  sources = [],
 }: AIAnswerBoxProps) {
   return (
     <motion.div
@@ -31,10 +30,10 @@ export default function AIAnswerBox({
       <div className="answer-header">
         <h3 className="answer-question">{question}</h3>
       </div>
-      
+
       <div className="answer-content">
         <p className="answer-text">{answer}</p>
-        
+
         {statistics.length > 0 && (
           <div className="answer-statistics">
             <h4>Key Statistics</h4>
@@ -53,7 +52,7 @@ export default function AIAnswerBox({
             </div>
           </div>
         )}
-        
+
         {sources.length > 0 && (
           <div className="answer-sources">
             <h4>Sources</h4>
@@ -73,7 +72,7 @@ export default function AIAnswerBox({
           </div>
         )}
       </div>
-      
+
       <style jsx>{`
         .ai-answer-box {
           background: #f8fafc;

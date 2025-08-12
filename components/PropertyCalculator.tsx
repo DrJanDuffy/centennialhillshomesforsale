@@ -1,6 +1,5 @@
-
-import { useState, useEffect, useCallback } from 'react';
 import { motion } from 'framer-motion';
+import { useCallback, useEffect, useState } from 'react';
 
 interface CalculatorProps {
   homePrice?: number;
@@ -15,17 +14,17 @@ const PropertyCalculator: React.FC<CalculatorProps> = ({ homePrice = 750000, cla
   const [monthlyPayment, setMonthlyPayment] = useState(0);
 
   const calculatePayment = useCallback(() => {
-    const principal = price - (price * downPayment / 100);
+    const principal = price - (price * downPayment) / 100;
     const monthlyRate = interestRate / 100 / 12;
     const numberOfPayments = loanTerm * 12;
-    
+
     if (monthlyRate === 0) {
       setMonthlyPayment(principal / numberOfPayments);
     } else {
-      const monthly = principal * (monthlyRate * Math.pow(1 + monthlyRate, numberOfPayments)) / 
-                     (Math.pow(1 + monthlyRate, numberOfPayments) - 1);
+      const monthly =
+        (principal * (monthlyRate * (1 + monthlyRate) ** numberOfPayments)) /
+        ((1 + monthlyRate) ** numberOfPayments - 1);
       setMonthlyPayment(monthly);
-
     }
   }, [price, downPayment, interestRate, loanTerm]);
 
@@ -34,7 +33,7 @@ const PropertyCalculator: React.FC<CalculatorProps> = ({ homePrice = 750000, cla
   }, [calculatePayment]);
 
   return (
-    <motion.div 
+    <motion.div
       className={`calculator-widget ${className}`}
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
@@ -44,42 +43,44 @@ const PropertyCalculator: React.FC<CalculatorProps> = ({ homePrice = 750000, cla
         <h3>Mortgage Calculator</h3>
         <p>Calculate your monthly payments</p>
       </div>
-      
+
       <div className="calculator-inputs">
         <div className="input-group">
           <label htmlFor="home-price">Home Price</label>
-          <input 
+          <input
             id="home-price"
-            type="number" 
-            value={price} 
+            type="number"
+            value={price}
             onChange={(e) => setPrice(Number(e.target.value))}
             className="calculator-input"
             aria-label="Enter home price in dollars"
             placeholder="Enter home price"
           />
         </div>
-        
+
         <div className="input-group">
           <label htmlFor="down-payment">Down Payment (%)</label>
-          <input 
+          <input
             id="down-payment"
-            type="range" 
-            min="5" 
-            max="50" 
+            type="range"
+            min="5"
+            max="50"
             value={downPayment}
             onChange={(e) => setDownPayment(Number(e.target.value))}
             className="slider"
             aria-label="Select down payment percentage"
           />
-          <span className="slider-value" aria-live="polite">{downPayment}%</span>
+          <span className="slider-value" aria-live="polite">
+            {downPayment}%
+          </span>
         </div>
-        
+
         <div className="input-group">
           <label htmlFor="interest-rate">Interest Rate (%)</label>
-          <input 
+          <input
             id="interest-rate"
-            type="number" 
-            step="0.1" 
+            type="number"
+            step="0.1"
             value={interestRate}
             onChange={(e) => setInterestRate(Number(e.target.value))}
             className="calculator-input"
@@ -87,10 +88,10 @@ const PropertyCalculator: React.FC<CalculatorProps> = ({ homePrice = 750000, cla
             placeholder="Enter interest rate"
           />
         </div>
-        
+
         <div className="input-group">
           <label htmlFor="loan-term">Loan Term (years)</label>
-          <select 
+          <select
             id="loan-term"
             value={loanTerm}
             onChange={(e) => setLoanTerm(Number(e.target.value))}
@@ -103,19 +104,28 @@ const PropertyCalculator: React.FC<CalculatorProps> = ({ homePrice = 750000, cla
           </select>
         </div>
       </div>
-      
+
       <div className="calculator-results">
         <div className="result-item">
           <span className="result-label">Monthly Payment</span>
-          <span className="result-value">${monthlyPayment.toLocaleString('en-US', { maximumFractionDigits: 0 })}</span>
+          <span className="result-value">
+            ${monthlyPayment.toLocaleString('en-US', { maximumFractionDigits: 0 })}
+          </span>
         </div>
         <div className="result-item">
           <span className="result-label">Down Payment</span>
-          <span className="result-value">${(price * downPayment / 100).toLocaleString('en-US', { maximumFractionDigits: 0 })}</span>
+          <span className="result-value">
+            ${((price * downPayment) / 100).toLocaleString('en-US', { maximumFractionDigits: 0 })}
+          </span>
         </div>
         <div className="result-item">
           <span className="result-label">Loan Amount</span>
-          <span className="result-value">${(price - (price * downPayment / 100)).toLocaleString('en-US', { maximumFractionDigits: 0 })}</span>
+          <span className="result-value">
+            $
+            {(price - (price * downPayment) / 100).toLocaleString('en-US', {
+              maximumFractionDigits: 0,
+            })}
+          </span>
         </div>
       </div>
     </motion.div>

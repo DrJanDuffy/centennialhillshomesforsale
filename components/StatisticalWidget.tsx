@@ -1,6 +1,14 @@
-
-import React, { useState, useEffect } from 'react';
-import { FaHome, FaChartLine, FaUsers, FaMapMarkerAlt, FaSchool, FaDollarSign, FaArrowUp, FaInfoCircle } from 'react-icons/fa';
+import { useEffect, useState } from 'react';
+import {
+  FaArrowUp,
+  FaChartLine,
+  FaDollarSign,
+  FaHome,
+  FaInfoCircle,
+  FaMapMarkerAlt,
+  FaSchool,
+  FaUsers,
+} from 'react-icons/fa';
 
 interface StatisticalData {
   medianHomePrice: string;
@@ -20,11 +28,11 @@ interface StatisticalWidgetProps {
   animateOnLoad?: boolean;
 }
 
-export default function StatisticalWidget({ 
-  neighborhood, 
-  data, 
+export default function StatisticalWidget({
+  neighborhood,
+  data,
   showComparison = false,
-  animateOnLoad = true
+  animateOnLoad = true,
 }: StatisticalWidgetProps) {
   const [isVisible, setIsVisible] = useState(false);
   const [showTooltip, setShowTooltip] = useState<string | null>(null);
@@ -41,52 +49,52 @@ export default function StatisticalWidget({
   const statistics = [
     {
       icon: <FaDollarSign />,
-      label: "Median Home Price",
+      label: 'Median Home Price',
       value: data.medianHomePrice,
       trend: data.priceAppreciationYoY,
-      colorClass: "stat-card-green",
-      tooltip: "Average price of homes sold in this neighborhood"
+      colorClass: 'stat-card-green',
+      tooltip: 'Average price of homes sold in this neighborhood',
     },
     {
       icon: <FaChartLine />,
-      label: "Days on Market",
+      label: 'Days on Market',
       value: `${data.averageDaysOnMarket} days`,
-      trend: "vs 28 avg",
-      colorClass: "stat-card-blue",
-      tooltip: "Average time homes stay on the market before selling"
+      trend: 'vs 28 avg',
+      colorClass: 'stat-card-blue',
+      tooltip: 'Average time homes stay on the market before selling',
     },
     {
       icon: <FaHome />,
-      label: "Average Home Size",
+      label: 'Average Home Size',
       value: data.averageHomeSize,
-      trend: "+12% vs county",
-      colorClass: "stat-card-purple",
-      tooltip: "Typical square footage of homes in this area"
+      trend: '+12% vs county',
+      colorClass: 'stat-card-purple',
+      tooltip: 'Typical square footage of homes in this area',
     },
     {
       icon: <FaUsers />,
-      label: "Population Growth",
+      label: 'Population Growth',
       value: data.populationGrowth5Year,
-      trend: "5-year trend",
-      colorClass: "stat-card-orange",
-      tooltip: "Population growth rate over the past 5 years"
+      trend: '5-year trend',
+      colorClass: 'stat-card-orange',
+      tooltip: 'Population growth rate over the past 5 years',
     },
     {
       icon: <FaSchool />,
-      label: "School Rating",
+      label: 'School Rating',
       value: `${data.schoolRatingAverage}/10`,
-      trend: "Average rating",
-      colorClass: "stat-card-red",
-      tooltip: "Average rating of schools in this neighborhood"
+      trend: 'Average rating',
+      colorClass: 'stat-card-red',
+      tooltip: 'Average rating of schools in this neighborhood',
     },
     {
       icon: <FaMapMarkerAlt />,
-      label: "Walkability",
+      label: 'Walkability',
       value: `${data.walkabilityScore}/100`,
-      trend: "Walk Score",
-      colorClass: "stat-card-cyan",
-      tooltip: "Walkability score based on nearby amenities"
-    }
+      trend: 'Walk Score',
+      colorClass: 'stat-card-cyan',
+      tooltip: 'Walkability score based on nearby amenities',
+    },
   ];
 
   const getComparisonWidth = (percentage: string) => {
@@ -97,9 +105,13 @@ export default function StatisticalWidget({
   // Set CSS custom properties for comparison progress bars
   useEffect(() => {
     if (showComparison) {
-      const lasVegasBar = document.querySelector('.comparison-item:first-child .progress-fill-comparison') as HTMLElement;
-      const nationalBar = document.querySelector('.comparison-item:last-child .progress-fill-comparison') as HTMLElement;
-      
+      const lasVegasBar = document.querySelector(
+        '.comparison-item:first-child .progress-fill-comparison'
+      ) as HTMLElement;
+      const nationalBar = document.querySelector(
+        '.comparison-item:last-child .progress-fill-comparison'
+      ) as HTMLElement;
+
       if (lasVegasBar) {
         lasVegasBar.style.setProperty('--comparison-width', getComparisonWidth('85%'));
       }
@@ -107,7 +119,7 @@ export default function StatisticalWidget({
         nationalBar.style.setProperty('--comparison-width', getComparisonWidth('92%'));
       }
     }
-  }, [showComparison]);
+  }, [showComparison, getComparisonWidth]);
 
   return (
     <div className="statistical-widget">
@@ -115,7 +127,7 @@ export default function StatisticalWidget({
         <h3>{neighborhood} Market Statistics</h3>
         <div className="header-info">
           <span className="data-source">Data as of 2024</span>
-          <button 
+          <button
             className="info-button"
             aria-label="Learn more about market statistics"
             onMouseEnter={() => setShowTooltip('market-stats')}
@@ -125,39 +137,36 @@ export default function StatisticalWidget({
           </button>
         </div>
       </div>
-      
+
       {showTooltip === 'market-stats' && (
         <div className="tooltip tooltip-market-stats">
-          Market statistics are updated monthly and reflect current market conditions in {neighborhood}.
+          Market statistics are updated monthly and reflect current market conditions in{' '}
+          {neighborhood}.
         </div>
       )}
-      
+
       <div className="statistics-grid">
         {statistics.map((stat, index) => (
-          <div 
-            key={index} 
+          <div
+            key={index}
             className={`stat-card stat-card-dynamic ${stat.colorClass} ${isVisible ? 'stat-card-animate' : ''}`}
             onMouseEnter={() => setShowTooltip(`stat-${index}`)}
             onMouseLeave={() => setShowTooltip(null)}
             role="region"
             aria-label={`${stat.label}: ${stat.value}`}
           >
-            <div className={`stat-icon stat-icon-dynamic ${stat.colorClass}`}>
-              {stat.icon}
-            </div>
+            <div className={`stat-icon stat-icon-dynamic ${stat.colorClass}`}>{stat.icon}</div>
             <div className="stat-content">
               <h4 className="stat-value">{stat.value}</h4>
               <p className="stat-label">{stat.label}</p>
-                             <span className="stat-trend">
-                 <FaArrowUp />
-                 {stat.trend}
-               </span>
+              <span className="stat-trend">
+                <FaArrowUp />
+                {stat.trend}
+              </span>
             </div>
-            
+
             {showTooltip === `stat-${index}` && (
-              <div className="tooltip tooltip-stat">
-                {stat.tooltip}
-              </div>
+              <div className="tooltip tooltip-stat">{stat.tooltip}</div>
             )}
           </div>
         ))}

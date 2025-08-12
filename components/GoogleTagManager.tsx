@@ -1,5 +1,6 @@
-import React, { useEffect } from 'react';
 import Head from 'next/head';
+import type React from 'react';
+import { useEffect } from 'react';
 
 interface GoogleTagManagerProps {
   gtmId?: string;
@@ -20,31 +21,31 @@ const GoogleTagManager: React.FC<GoogleTagManagerProps> = ({
   gtmId = 'GTM-XXXXXXX',
   gaId = 'G-XXXXXXXXXX',
   enableConversionTracking = true,
-  enablePhoneTracking = true
+  enablePhoneTracking = true,
 }) => {
   useEffect(() => {
     // Initialize Google Tag Manager
     if (typeof window !== 'undefined') {
       window.dataLayer = window.dataLayer || [];
-      
+
       // Only define gtag if it doesn't already exist
       if (!window.gtag) {
-        window.gtag = function(...args: unknown[]) {
+        window.gtag = (...args: unknown[]) => {
           window.dataLayer.push(args);
         };
       }
-      
+
       window.gtag('js', new Date());
       window.gtag('config', gaId, {
         page_title: document.title,
         page_location: window.location.href,
         custom_map: {
-          'cd1': 'userType',
-          'cd2': 'pageType', 
-          'cd3': 'neighborhood',
-          'cd4': 'propertyType',
-          'cd5': 'conversionValue'
-        }
+          cd1: 'userType',
+          cd2: 'pageType',
+          cd3: 'neighborhood',
+          cd4: 'propertyType',
+          cd5: 'conversionValue',
+        },
       });
     }
   }, [gaId]);
@@ -58,7 +59,7 @@ const GoogleTagManager: React.FC<GoogleTagManagerProps> = ({
           window.gtag('event', 'phone_click', {
             event_category: 'Contact',
             event_label: target.href,
-            value: 1
+            value: 1,
           });
         }
       };
@@ -77,7 +78,7 @@ const GoogleTagManager: React.FC<GoogleTagManagerProps> = ({
           window.gtag('event', 'form_submit', {
             event_category: 'Lead Generation',
             event_label: form.action || 'contact_form',
-            value: 10
+            value: 10,
           });
         }
       };
@@ -98,16 +99,13 @@ const GoogleTagManager: React.FC<GoogleTagManagerProps> = ({
             j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
             'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
             })(window,document,'script','dataLayer','${gtmId}');
-          `
+          `,
         }}
       />
-      
+
       {/* Google Analytics */}
-      <script
-        async
-        src={`https://www.googletagmanager.com/gtag/js?id=${gaId}`}
-      />
-      
+      <script async src={`https://www.googletagmanager.com/gtag/js?id=${gaId}`} />
+
       {/* Enhanced Ecommerce Tracking */}
       <script
         dangerouslySetInnerHTML={{
@@ -164,11 +162,11 @@ const GoogleTagManager: React.FC<GoogleTagManagerProps> = ({
                 value: 5
               });
             }
-          `
+          `,
         }}
       />
     </Head>
   );
 };
 
-export default GoogleTagManager; 
+export default GoogleTagManager;

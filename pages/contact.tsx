@@ -1,8 +1,7 @@
-
-import { useState } from 'react';
 import { motion } from 'framer-motion';
+import { useState } from 'react';
+import { FaClock, FaEnvelope, FaMapMarkerAlt, FaPhone } from 'react-icons/fa';
 import Layout from '../components/Layout';
-import { FaPhone, FaEnvelope, FaMapMarkerAlt, FaClock } from 'react-icons/fa';
 
 export default function Contact() {
   const [formData, setFormData] = useState({
@@ -13,7 +12,7 @@ export default function Contact() {
     budget: '',
     timeline: '',
     neighborhood: '',
-    message: ''
+    message: '',
   });
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -22,10 +21,12 @@ export default function Contact() {
     // Form submission handled
   };
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
+  ) => {
     setFormData({
       ...formData,
-      [e.target.name]: e.target.value
+      [e.target.name]: e.target.value,
     });
   };
 
@@ -35,9 +36,8 @@ export default function Contact() {
       description="Contact our local Centennial Hills real estate experts. Office located in Las Vegas serving 89149, 89166, and surrounding areas. Call, email, or visit today."
       canonical="https://centennialhillshomesforsale.com/contact/"
     >
-
       <main className="container">
-        <motion.section 
+        <motion.section
           className="hero-section"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -45,20 +45,20 @@ export default function Contact() {
         >
           <h1>Contact Our Centennial Hills Real Estate Team</h1>
           <p>
-            Ready to buy or sell in Centennial Hills? Our local experts are here to help. 
-            Contact us today for personalized service and deep market knowledge.
+            Ready to buy or sell in Centennial Hills? Our local experts are here to help. Contact us
+            today for personalized service and deep market knowledge.
           </p>
         </motion.section>
 
         <div className="contact-content">
-          <motion.section 
+          <motion.section
             className="contact-info"
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ delay: 0.2, duration: 0.6 }}
           >
             <h2>Get in Touch</h2>
-            
+
             <div className="contact-methods">
               <div className="contact-method">
                 <FaPhone className="contact-icon" />
@@ -82,7 +82,11 @@ export default function Contact() {
                 <FaMapMarkerAlt className="contact-icon" />
                 <div>
                   <h3>Service Area</h3>
-                  <p>Providence Skye Canyon Dr<br />Las Vegas, NV 89166</p>
+                  <p>
+                    Providence Skye Canyon Dr
+                    <br />
+                    Las Vegas, NV 89166
+                  </p>
                   <p className="contact-note">Berkshire Hathaway HomeServices</p>
                 </div>
               </div>
@@ -91,7 +95,11 @@ export default function Contact() {
                 <FaClock className="contact-icon" />
                 <div>
                   <h3>Availability</h3>
-                  <p>Daily: 6:00 AM - 9:00 PM<br />Emergency: 24/7</p>
+                  <p>
+                    Daily: 6:00 AM - 9:00 PM
+                    <br />
+                    Emergency: 24/7
+                  </p>
                   <p className="contact-note">Since September 1993</p>
                 </div>
               </div>
@@ -114,7 +122,7 @@ export default function Contact() {
             </div>
           </motion.section>
 
-          <motion.section 
+          <motion.section
             className="contact-form-section"
             initial={{ opacity: 0, x: 20 }}
             animate={{ opacity: 1, x: 0 }}
@@ -122,7 +130,7 @@ export default function Contact() {
           >
             <form onSubmit={handleSubmit} className="contact-form">
               <h2>Send Us a Message</h2>
-              
+
               <div className="form-group">
                 <label htmlFor="name">Full Name *</label>
                 <input
@@ -176,12 +184,7 @@ export default function Contact() {
                 </div>
                 <div className="form-group">
                   <label htmlFor="budget">Budget Range</label>
-                  <select
-                    id="budget"
-                    name="budget"
-                    value={formData.budget}
-                    onChange={handleChange}
-                  >
+                  <select id="budget" name="budget" value={formData.budget} onChange={handleChange}>
                     <option value="">Select Range</option>
                     <option value="under-400k">Under $400k</option>
                     <option value="400k-600k">$400k - $600k</option>
@@ -244,14 +247,14 @@ export default function Contact() {
               </button>
 
               <p className="form-disclaimer">
-                By submitting this form, you agree to be contacted by our team. 
-                We respect your privacy and will never share your information.
+                By submitting this form, you agree to be contacted by our team. We respect your
+                privacy and will never share your information.
               </p>
             </form>
           </motion.section>
         </div>
 
-        <motion.section 
+        <motion.section
           className="local-knowledge"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -261,7 +264,9 @@ export default function Contact() {
           <div className="knowledge-grid">
             <div className="knowledge-item">
               <h3>🏠 Neighborhood Experts</h3>
-              <p>We live and work in Centennial Hills. We know every street, school, and amenity.</p>
+              <p>
+                We live and work in Centennial Hills. We know every street, school, and amenity.
+              </p>
             </div>
             <div className="knowledge-item">
               <h3>📊 Market Data</h3>
@@ -269,7 +274,9 @@ export default function Contact() {
             </div>
             <div className="knowledge-item">
               <h3>🤝 Personal Service</h3>
-              <p>Direct contact with your agent, not a call center. We&apos;re here when you need us.</p>
+              <p>
+                Direct contact with your agent, not a call center. We&apos;re here when you need us.
+              </p>
             </div>
             <div className="knowledge-item">
               <h3>💰 Negotiation Power</h3>

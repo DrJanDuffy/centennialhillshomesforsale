@@ -1,11 +1,18 @@
-
 interface SpeechRecognitionEvent extends Event {
   results: SpeechRecognitionResultList;
   resultIndex: number;
 }
 
 interface SpeechRecognitionErrorEvent extends Event {
-  error: 'no-speech' | 'aborted' | 'audio-capture' | 'network' | 'not-allowed' | 'service-not-allowed' | 'bad-grammar' | 'language-not-supported';
+  error:
+    | 'no-speech'
+    | 'aborted'
+    | 'audio-capture'
+    | 'network'
+    | 'not-allowed'
+    | 'service-not-allowed'
+    | 'bad-grammar'
+    | 'language-not-supported';
   message?: string;
 }
 
@@ -16,11 +23,11 @@ interface SpeechRecognition extends EventTarget {
   lang: string;
   maxAlternatives: number;
   serviceURI: string;
-  
+
   start(): void;
   stop(): void;
   abort(): void;
-  
+
   onaudiostart: ((this: SpeechRecognition, ev: Event) => any) | null;
   onaudioend: ((this: SpeechRecognition, ev: Event) => any) | null;
   onend: ((this: SpeechRecognition, ev: Event) => any) | null;
@@ -35,7 +42,7 @@ interface SpeechRecognition extends EventTarget {
 }
 
 interface SpeechRecognitionStatic {
-  new(): SpeechRecognition;
+  new (): SpeechRecognition;
   prototype: SpeechRecognition;
 }
 

@@ -1,8 +1,8 @@
 
 #!/usr/bin/env node
 
-const fs = require('fs');
-const path = require('path');
+const fs = require('node:fs');
+const path = require('node:path');
 
 console.log('🏠 REALTOR WEBSITE CODE VALIDATION');
 console.log('===================================');
@@ -16,7 +16,7 @@ const validationResults = {
 };
 
 // Critical realtor website requirements
-const realtorRequirements = {
+const _realtorRequirements = {
   seo: {
     required: ['title', 'meta description', 'h1', 'structured data'],
     realEstateSpecific: ['property schema', 'local business schema', 'agent schema']
@@ -49,8 +49,8 @@ pages.forEach(pageFile => {
   
   // Check for SEO elements
   const hasSEO = content.includes('<Head>') || content.includes('EnhancedSEO');
-  const hasTitle = content.includes('<title>') || content.includes('title=');
-  const hasDescription = content.includes('description=');
+  const _hasTitle = content.includes('<title>') || content.includes('title=');
+  const _hasDescription = content.includes('description=');
   
   if (!hasSEO) {
     console.log(`  ❌ Missing SEO component`);
@@ -62,7 +62,7 @@ pages.forEach(pageFile => {
   // Check for realtor-specific content
   const hasAgentInfo = content.includes('Jan Duffy') || content.includes('REALTOR');
   const hasLocalFocus = content.includes('Centennial Hills') || content.includes('Las Vegas');
-  const hasLicenseInfo = content.includes('Nevada') || content.includes('license');
+  const _hasLicenseInfo = content.includes('Nevada') || content.includes('license');
   
   if (!hasAgentInfo) {
     console.log(`  ⚠️  Missing agent information`);

@@ -1,30 +1,29 @@
-
 'use client';
 
-import { useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
 import { ChevronDownIcon, PlayIcon, SparklesIcon } from '@heroicons/react/24/outline';
+import { AnimatePresence, motion } from 'framer-motion';
 import Image from 'next/image';
+import { useEffect, useState } from 'react';
 
 const heroImages = [
   {
     src: '/images/centennial-hills-luxury-1.jpg',
     alt: 'Luxury Centennial Hills Home with Mountain Views',
     title: 'Luxury Mountain Views',
-    subtitle: 'Starting from $750K'
+    subtitle: 'Starting from $750K',
   },
   {
     src: '/images/centennial-hills-golf-1.jpg',
     alt: 'Golf Course Home in Centennial Hills',
     title: 'Golf Course Living',
-    subtitle: 'Premium Locations'
+    subtitle: 'Premium Locations',
   },
   {
     src: '/images/centennial-hills-new-construction.jpg',
     alt: 'New Construction in Centennial Hills',
     title: 'New Construction',
-    subtitle: 'Move-in Ready'
-  }
+    subtitle: 'Move-in Ready',
+  },
 ];
 
 export function HeroSection() {
@@ -47,7 +46,7 @@ export function HeroSection() {
           initial={{ opacity: 0, scale: 1.1 }}
           animate={{ opacity: 1, scale: 1 }}
           exit={{ opacity: 0, scale: 0.95 }}
-          transition={{ duration: 1.5, ease: "easeInOut" }}
+          transition={{ duration: 1.5, ease: 'easeInOut' }}
           className="absolute inset-0"
         >
           <Image
@@ -121,8 +120,8 @@ export function HeroSection() {
             transition={{ duration: 0.8, delay: 0.2 }}
             className="text-xl md:text-2xl text-gray-200 mb-8 leading-relaxed"
           >
-            Experience the future of real estate with AI-powered search, instant valuations, 
-            and personalized recommendations. Let Dr. Jan Duffy guide you home.
+            Experience the future of real estate with AI-powered search, instant valuations, and
+            personalized recommendations. Let Dr. Jan Duffy guide you home.
           </motion.p>
 
           <motion.div
@@ -134,7 +133,7 @@ export function HeroSection() {
             <button className="px-8 py-4 bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 rounded-full font-semibold text-lg transition-all duration-300 shadow-xl hover:shadow-2xl transform hover:scale-105">
               🤖 Start AI Search
             </button>
-            <button 
+            <button
               onClick={() => setIsVideoPlaying(true)}
               className="px-8 py-4 bg-white/10 backdrop-blur-sm border border-white/20 hover:bg-white/20 rounded-full font-semibold text-lg transition-all duration-300 flex items-center gap-2"
             >
@@ -154,7 +153,7 @@ export function HeroSection() {
               { value: '500+', label: 'Homes Sold' },
               { value: '$2.5B+', label: 'Sales Volume' },
               { value: '98%', label: 'Satisfaction' },
-              { value: '15min', label: 'Response Time' }
+              { value: '15min', label: 'Response Time' },
             ].map((stat, index) => (
               <div key={index} className="text-center">
                 <div className="text-2xl md:text-3xl font-bold text-blue-400">{stat.value}</div>

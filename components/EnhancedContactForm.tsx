@@ -1,8 +1,9 @@
 'use client';
 
-import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Send, Phone, Mail, MapPin, User, MessageSquare, Home } from 'lucide-react';
+import { Mail, MapPin, Phone, Send } from 'lucide-react';
+import type React from 'react';
+import { useState } from 'react';
 import { EnhancedButton, EnhancedFormField } from './EnhancedAnimations';
 
 interface ContactFormData {
@@ -29,15 +30,15 @@ export const EnhancedContactForm: React.FC<ContactFormProps> = ({
   onSubmit,
   className = '',
   showPropertyFields = false,
-  title = "Get in Touch",
-  description = "Ready to find your dream home? Contact us for personalized assistance."
+  title = 'Get in Touch',
+  description = 'Ready to find your dream home? Contact us for personalized assistance.',
 }) => {
   const [formData, setFormData] = useState<ContactFormData>({
     firstName: '',
     lastName: '',
     email: '',
     phone: '',
-    message: ''
+    message: '',
   });
 
   const [errors, setErrors] = useState<Partial<ContactFormData>>({});
@@ -50,7 +51,7 @@ export const EnhancedContactForm: React.FC<ContactFormProps> = ({
     { value: 'selling', label: 'Selling a Home' },
     { value: 'investing', label: 'Real Estate Investment' },
     { value: 'renting', label: 'Renting a Property' },
-    { value: 'general', label: 'General Inquiry' }
+    { value: 'general', label: 'General Inquiry' },
   ];
 
   // Timeline options
@@ -59,7 +60,7 @@ export const EnhancedContactForm: React.FC<ContactFormProps> = ({
     { value: '1-3-months', label: '1-3 months' },
     { value: '3-6-months', label: '3-6 months' },
     { value: '6-12-months', label: '6-12 months' },
-    { value: 'planning', label: 'Just planning ahead' }
+    { value: 'planning', label: 'Just planning ahead' },
   ];
 
   // Budget options
@@ -69,7 +70,7 @@ export const EnhancedContactForm: React.FC<ContactFormProps> = ({
     { value: '750-1000', label: '$750K - $1M' },
     { value: '1000-1500', label: '$1M - $1.5M' },
     { value: '1500+', label: '$1.5M+' },
-    { value: 'undecided', label: 'Not sure yet' }
+    { value: 'undecided', label: 'Not sure yet' },
   ];
 
   // Preferred contact options
@@ -77,7 +78,7 @@ export const EnhancedContactForm: React.FC<ContactFormProps> = ({
     { value: 'email', label: 'Email' },
     { value: 'phone', label: 'Phone Call' },
     { value: 'text', label: 'Text Message' },
-    { value: 'any', label: 'Any method' }
+    { value: 'any', label: 'Any method' },
   ];
 
   const validateForm = (): boolean => {
@@ -100,7 +101,7 @@ export const EnhancedContactForm: React.FC<ContactFormProps> = ({
 
     if (!formData.phone.trim()) {
       newErrors.phone = 'Phone number is required';
-    } else if (!/^[\+]?[1-9][\d]{0,15}$/.test(formData.phone.replace(/[\s\-\(\)]/g, ''))) {
+    } else if (!/^[+]?[1-9][\d]{0,15}$/.test(formData.phone.replace(/[\s\-()]/g, ''))) {
       newErrors.phone = 'Please enter a valid phone number';
     }
 
@@ -115,16 +116,16 @@ export const EnhancedContactForm: React.FC<ContactFormProps> = ({
   };
 
   const handleInputChange = (name: keyof ContactFormData, value: string) => {
-    setFormData(prev => ({
+    setFormData((prev) => ({
       ...prev,
-      [name]: value
+      [name]: value,
     }));
 
     // Clear error when user starts typing
     if (errors[name]) {
-      setErrors(prev => ({
+      setErrors((prev) => ({
         ...prev,
-        [name]: undefined
+        [name]: undefined,
       }));
     }
   };
@@ -140,7 +141,7 @@ export const EnhancedContactForm: React.FC<ContactFormProps> = ({
 
     try {
       // Simulate API call
-      await new Promise(resolve => setTimeout(resolve, 2000));
+      await new Promise((resolve) => setTimeout(resolve, 2000));
 
       // Call parent callback if provided
       if (onSubmit) {
@@ -158,10 +159,9 @@ export const EnhancedContactForm: React.FC<ContactFormProps> = ({
           lastName: '',
           email: '',
           phone: '',
-          message: ''
+          message: '',
         });
       }, 5000);
-
     } catch (error) {
       console.error('Form submission failed:', error);
       // Handle error state
@@ -184,11 +184,7 @@ export const EnhancedContactForm: React.FC<ContactFormProps> = ({
         <p className="text-green-600 mb-4">
           Thank you for contacting us. Dr. Jan Duffy will get back to you within 24 hours.
         </p>
-        <EnhancedButton
-          onClick={() => setIsSubmitted(false)}
-          variant="outline"
-          size="lg"
-        >
+        <EnhancedButton onClick={() => setIsSubmitted(false)} variant="outline" size="lg">
           Send Another Message
         </EnhancedButton>
       </motion.div>
@@ -219,7 +215,7 @@ export const EnhancedContactForm: React.FC<ContactFormProps> = ({
             <h3 className="font-semibold text-gray-800 mb-1">Phone</h3>
             <p className="text-blue-600">(702) 555-0123</p>
           </div>
-          
+
           <div className="text-center">
             <div className="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-3">
               <Mail className="w-6 h-6 text-blue-600" />
@@ -227,7 +223,7 @@ export const EnhancedContactForm: React.FC<ContactFormProps> = ({
             <h3 className="font-semibold text-gray-800 mb-1">Email</h3>
             <p className="text-blue-600">jan@centennialhillshomesforsale.com</p>
           </div>
-          
+
           <div className="text-center">
             <div className="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-3">
               <MapPin className="w-6 h-6 text-blue-600" />
@@ -251,7 +247,7 @@ export const EnhancedContactForm: React.FC<ContactFormProps> = ({
               required
               error={errors.firstName}
             />
-            
+
             <EnhancedFormField
               label="Last Name"
               name="lastName"
@@ -275,7 +271,7 @@ export const EnhancedContactForm: React.FC<ContactFormProps> = ({
               required
               error={errors.email}
             />
-            
+
             <EnhancedFormField
               label="Phone Number"
               name="phone"
@@ -305,7 +301,7 @@ export const EnhancedContactForm: React.FC<ContactFormProps> = ({
                 options={propertyInterestOptions}
                 placeholder="What are you looking for?"
               />
-              
+
               <EnhancedFormField
                 label="Timeline"
                 name="timeline"
@@ -315,7 +311,7 @@ export const EnhancedContactForm: React.FC<ContactFormProps> = ({
                 options={timelineOptions}
                 placeholder="When do you plan to move?"
               />
-              
+
               <EnhancedFormField
                 label="Budget Range"
                 name="budget"

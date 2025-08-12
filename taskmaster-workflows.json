@@ -1,4 +1,3 @@
-
 {
   "workflows": {
     "daily-optimization": {
@@ -26,7 +25,7 @@
         }
       ]
     },
-    
+
     "content-refresh": {
       "name": "Weekly Content Optimization",
       "schedule": "0 9 * * 1",
@@ -45,7 +44,7 @@
         }
       ]
     },
-    
+
     "performance-monitor": {
       "name": "Real-time Performance Monitoring",
       "schedule": "*/15 * * * *",
@@ -65,17 +64,13 @@
       ]
     }
   },
-  
+
   "triggers": {
     "new_property_inquiry": {
       "event": "form_submission",
-      "actions": [
-        "notify.send_instant_alert",
-        "crm.create_lead",
-        "ai.personalize_follow_up"
-      ]
+      "actions": ["notify.send_instant_alert", "crm.create_lead", "ai.personalize_follow_up"]
     },
-    
+
     "ranking_change": {
       "event": "seo_ranking_drop",
       "threshold": -3,

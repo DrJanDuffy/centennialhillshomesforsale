@@ -1,5 +1,5 @@
-
-import React, { useState, useEffect, useCallback } from 'react';
+import type React from 'react';
+import { useCallback, useEffect, useState } from 'react';
 
 interface MortgageCalculation {
   homePrice: number;
@@ -21,17 +21,17 @@ const MortgageCalculator: React.FC = () => {
     homePrice: 650000,
     downPaymentPercent: 20,
     interestRate: 7.5,
-    loanTerm: 30
+    loanTerm: 30,
   });
-  
+
   const [calculation, setCalculation] = useState<MortgageCalculation | null>(null);
   const [isLoading, setIsLoading] = useState(false);
 
   const calculateMortgage = useCallback(async () => {
     setIsLoading(true);
-    
+
     const downPayment = inputs.homePrice * (inputs.downPaymentPercent / 100);
-    
+
     try {
       const response = await fetch('/api/mortgage-calculator', {
         method: 'POST',
@@ -42,7 +42,7 @@ const MortgageCalculator: React.FC = () => {
           homePrice: inputs.homePrice,
           downPayment,
           interestRate: inputs.interestRate,
-          loanTerm: inputs.loanTerm
+          loanTerm: inputs.loanTerm,
         }),
       });
 
@@ -59,7 +59,7 @@ const MortgageCalculator: React.FC = () => {
 
   useEffect(() => {
     calculateMortgage();
-  }, [inputs, calculateMortgage]);
+  }, [calculateMortgage]);
 
   const formatCurrency = (amount: number) => {
     return new Intl.NumberFormat('en-US', {
@@ -83,14 +83,19 @@ const MortgageCalculator: React.FC = () => {
         {/* Input Section */}
         <div className="space-y-4">
           <div>
-            <label htmlFor="home-price-input" className="block text-sm font-medium text-gray-700 mb-2">
+            <label
+              htmlFor="home-price-input"
+              className="block text-sm font-medium text-gray-700 mb-2"
+            >
               Home Price
             </label>
             <input
               id="home-price-input"
               type="number"
               value={inputs.homePrice}
-              onChange={(e) => setInputs(prev => ({ ...prev, homePrice: Number(e.target.value) }))}
+              onChange={(e) =>
+                setInputs((prev) => ({ ...prev, homePrice: Number(e.target.value) }))
+              }
               className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
               min="100000"
               step="10000"
@@ -100,7 +105,10 @@ const MortgageCalculator: React.FC = () => {
           </div>
 
           <div>
-            <label htmlFor="down-payment-input" className="block text-sm font-medium text-gray-700 mb-2">
+            <label
+              htmlFor="down-payment-input"
+              className="block text-sm font-medium text-gray-700 mb-2"
+            >
               Down Payment ({inputs.downPaymentPercent}%)
             </label>
             <input
@@ -109,7 +117,9 @@ const MortgageCalculator: React.FC = () => {
               min="5"
               max="30"
               value={inputs.downPaymentPercent}
-              onChange={(e) => setInputs(prev => ({ ...prev, downPaymentPercent: Number(e.target.value) }))}
+              onChange={(e) =>
+                setInputs((prev) => ({ ...prev, downPaymentPercent: Number(e.target.value) }))
+              }
               className="w-full"
               aria-label="Select down payment percentage"
             />
@@ -123,14 +133,19 @@ const MortgageCalculator: React.FC = () => {
           </div>
 
           <div>
-            <label htmlFor="interest-rate-input" className="block text-sm font-medium text-gray-700 mb-2">
+            <label
+              htmlFor="interest-rate-input"
+              className="block text-sm font-medium text-gray-700 mb-2"
+            >
               Interest Rate (%)
             </label>
             <input
               id="interest-rate-input"
               type="number"
               value={inputs.interestRate}
-              onChange={(e) => setInputs(prev => ({ ...prev, interestRate: Number(e.target.value) }))}
+              onChange={(e) =>
+                setInputs((prev) => ({ ...prev, interestRate: Number(e.target.value) }))
+              }
               className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
               min="3"
               max="12"
@@ -141,13 +156,16 @@ const MortgageCalculator: React.FC = () => {
           </div>
 
           <div>
-            <label htmlFor="loan-term-input" className="block text-sm font-medium text-gray-700 mb-2">
+            <label
+              htmlFor="loan-term-input"
+              className="block text-sm font-medium text-gray-700 mb-2"
+            >
               Loan Term (years)
             </label>
             <select
               id="loan-term-input"
               value={inputs.loanTerm}
-              onChange={(e) => setInputs(prev => ({ ...prev, loanTerm: Number(e.target.value) }))}
+              onChange={(e) => setInputs((prev) => ({ ...prev, loanTerm: Number(e.target.value) }))}
               className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
               aria-label="Select loan term in years"
             >
@@ -176,7 +194,9 @@ const MortgageCalculator: React.FC = () => {
               <div className="space-y-3">
                 <div className="flex justify-between items-center">
                   <span className="text-gray-600">Principal & Interest</span>
-                  <span className="font-semibold">{formatCurrency(calculation.monthlyPayment)}</span>
+                  <span className="font-semibold">
+                    {formatCurrency(calculation.monthlyPayment)}
+                  </span>
                 </div>
                 <div className="flex justify-between items-center">
                   <span className="text-gray-600">Property Taxes</span>
@@ -209,7 +229,8 @@ const MortgageCalculator: React.FC = () => {
 
               <div className="bg-green-100 rounded-lg p-3 mt-4">
                 <p className="text-sm text-green-800 text-center">
-                  💡 <strong>Tip:</strong> In Centennial Hills, homes in this price range typically see 8.2% annual appreciation!
+                  💡 <strong>Tip:</strong> In Centennial Hills, homes in this price range typically
+                  see 8.2% annual appreciation!
                 </p>
               </div>
             </div>

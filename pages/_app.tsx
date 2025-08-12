@@ -1,13 +1,13 @@
-import '../styles/globals.css'
-import '../styles/design-system.css'
-import '../styles/components.css'
-import type { AppProps } from 'next/app'
-import { ErrorBoundary, FallbackProps } from 'react-error-boundary'
-import Script from 'next/script'
-import GoogleAnalytics from '../components/GoogleAnalytics'
-import LocalSEOBooster from '../components/LocalSEOBooster'
-import { useEffect } from 'react'
-import GlobalErrorHandler from '../utils/globalErrorHandler'
+import '../styles/globals.css';
+import '../styles/design-system.css';
+import '../styles/components.css';
+import type { AppProps } from 'next/app';
+import Script from 'next/script';
+import { useEffect } from 'react';
+import { ErrorBoundary, type FallbackProps } from 'react-error-boundary';
+import GoogleAnalytics from '../components/GoogleAnalytics';
+import LocalSEOBooster from '../components/LocalSEOBooster';
+import GlobalErrorHandler from '../utils/globalErrorHandler';
 
 function ErrorFallback({ error, resetErrorBoundary }: FallbackProps) {
   return (
@@ -21,13 +21,13 @@ function ErrorFallback({ error, resetErrorBoundary }: FallbackProps) {
             <pre>{error.message}</pre>
           </details>
         )}
-        <button 
+        <button
           onClick={resetErrorBoundary}
           className="error-handler-btn error-handler-btn-primary"
         >
           Try Again
         </button>
-        <button 
+        <button
           onClick={() => window.location.reload()}
           className="error-handler-btn error-handler-btn-secondary"
         >

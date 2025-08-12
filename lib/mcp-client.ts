@@ -43,7 +43,7 @@ class MCPClientImpl implements MCPClient {
       this.error = error instanceof Error ? error.message : 'Unknown error occurred';
       return {
         success: false,
-        error: this.error
+        error: this.error,
       };
     } finally {
       this.loading = false;

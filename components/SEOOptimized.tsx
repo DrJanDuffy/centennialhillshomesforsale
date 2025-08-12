@@ -13,24 +13,34 @@ interface SEOProps {
   priceRange?: string;
 }
 
-export default function SEOOptimized({ 
-  title = "Centennial Hills Homes For Sale | Dr. Jan Duffy REALTOR®",
-  description = "Find luxury homes in Centennial Hills, Providence & Skye Canyon with Dr. Jan Duffy, top-rated REALTOR® at Berkshire Hathaway HomeServices Nevada Properties.",
-  keywords = "Centennial Hills homes, Las Vegas real estate, Providence, Skye Canyon, Dr Jan Duff",
-  ogImage = "/icon-512x512.png",
+export default function SEOOptimized({
+  title = 'Centennial Hills Homes For Sale | Dr. Jan Duffy REALTOR®',
+  description = 'Find luxury homes in Centennial Hills, Providence & Skye Canyon with Dr. Jan Duffy, top-rated REALTOR® at Berkshire Hathaway HomeServices Nevada Properties.',
+  keywords = 'Centennial Hills homes, Las Vegas real estate, Providence, Skye Canyon, Dr Jan Duff',
+  ogImage = '/icon-512x512.png',
   canonicalUrl,
   structuredData,
   pageType = 'website',
   neighborhood,
-  priceRange = "$450,000 - $1,200,000"
+  priceRange = '$450,000 - $1,200,000',
 }: SEOProps) {
-
   useEffect(() => {
     // Google Analytics page view tracking
-    if (typeof window !== 'undefined' && (window as unknown as { gtag: (command: string, targetId: string, config: Record<string, unknown>) => void }).gtag) {
-      (window as unknown as { gtag: (command: string, targetId: string, config: Record<string, unknown>) => void }).gtag('config', 'GA_MEASUREMENT_ID', {
+    if (
+      typeof window !== 'undefined' &&
+      (
+        window as unknown as {
+          gtag: (command: string, targetId: string, config: Record<string, unknown>) => void;
+        }
+      ).gtag
+    ) {
+      (
+        window as unknown as {
+          gtag: (command: string, targetId: string, config: Record<string, unknown>) => void;
+        }
+      ).gtag('config', 'GA_MEASUREMENT_ID', {
         page_title: title,
-        page_location: window.location.href
+        page_location: window.location.href,
       });
     }
 
@@ -41,39 +51,39 @@ export default function SEOOptimized({
         fetch('/api/request-indexing', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ url: window.location.href })
+          body: JSON.stringify({ url: window.location.href }),
         });
       });
     }
   }, [title]);
 
   const defaultStructuredData = {
-    "@context": "https://schema.org",
-    "@type": pageType === 'local-business' ? 'RealEstateAgent' : 'WebPage',
-    "name": title,
-    "description": description,
-    "url": canonicalUrl || (typeof window !== 'undefined' ? window.location.href : ''),
+    '@context': 'https://schema.org',
+    '@type': pageType === 'local-business' ? 'RealEstateAgent' : 'WebPage',
+    name: title,
+    description: description,
+    url: canonicalUrl || (typeof window !== 'undefined' ? window.location.href : ''),
     ...(neighborhood && {
-      "about": {
-        "@type": "Place",
-        "name": `${neighborhood}, Las Vegas, NV`,
-        "geo": {
-          "@type": "GeoCoordinates",
-          "latitude": "36.268",
-          "longitude": "-115.328"
-        }
-      }
+      about: {
+        '@type': 'Place',
+        name: `${neighborhood}, Las Vegas, NV`,
+        geo: {
+          '@type': 'GeoCoordinates',
+          latitude: '36.268',
+          longitude: '-115.328',
+        },
+      },
     }),
     ...(pageType === 'realestate' && {
-      "serviceType": "Real Estate Sales",
-      "areaServed": "Las Vegas, Nevada",
-      "priceRange": priceRange,
-      "provider": {
-        "@type": "RealEstateAgent",
-        "name": "Dr. Jan Duffy",
-        "telephone": "(702) 903-1952"
-      }
-    })
+      serviceType: 'Real Estate Sales',
+      areaServed: 'Las Vegas, Nevada',
+      priceRange: priceRange,
+      provider: {
+        '@type': 'RealEstateAgent',
+        name: 'Dr. Jan Duffy',
+        telephone: '(702) 903-1952',
+      },
+    }),
   };
 
   const finalStructuredData = structuredData || defaultStructuredData;
@@ -108,8 +118,14 @@ export default function SEOOptimized({
       <meta property="twitter:image" content={ogImage} />
 
       {/* Additional SEO Meta Tags */}
-      <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
-      <meta name="googlebot" content="index, follow, max-video-preview:-1, max-image-preview:large, max-snippet:-1" />
+      <meta
+        name="robots"
+        content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1"
+      />
+      <meta
+        name="googlebot"
+        content="index, follow, max-video-preview:-1, max-image-preview:large, max-snippet:-1"
+      />
       <meta name="format-detection" content="telephone=no" />
 
       {/* Geo Tags */}
@@ -122,7 +138,7 @@ export default function SEOOptimized({
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
-          __html: JSON.stringify(finalStructuredData)
+          __html: JSON.stringify(finalStructuredData),
         }}
       />
 

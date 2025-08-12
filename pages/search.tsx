@@ -1,9 +1,10 @@
-import React, { useState, useEffect } from 'react';
-import { useRouter } from 'next/router';
-import Layout from '@/components/Layout';
-import Link from 'next/link';
+import { Bath, Bed, Home, Search } from 'lucide-react';
 import Image from 'next/image';
-import { Search, Home, Bed, Bath } from 'lucide-react';
+import Link from 'next/link';
+import { useRouter } from 'next/router';
+import type React from 'react';
+import { useEffect, useState } from 'react';
+import Layout from '@/components/Layout';
 
 interface Property {
   id: number;
@@ -28,15 +29,15 @@ const SearchPage: React.FC = () => {
       setSearchQuery(q);
       performSearch();
     }
-  }, [q]);
+  }, [q, performSearch]);
 
   const performSearch = async () => {
     setLoading(true);
-    
+
     try {
       // Simulate API call
-      await new Promise(resolve => setTimeout(resolve, 1000));
-      
+      await new Promise((resolve) => setTimeout(resolve, 1000));
+
       // Mock search results
       const mockResults: Property[] = [
         {
@@ -47,11 +48,12 @@ const SearchPage: React.FC = () => {
           bathrooms: 3,
           sqft: 2800,
           neighborhood: 'Centennial Hills',
-          image: 'https://images.unsplash.com/photo-1564013799919-ab600027ffc6?w=800&h=600&fit=crop'
+          image:
+            'https://images.unsplash.com/photo-1564013799919-ab600027ffc6?w=800&h=600&fit=crop',
         },
         // Add more mock results as needed
       ];
-      
+
       setSearchResults(mockResults);
     } catch (err) {
       console.error('Search error:', err);
@@ -77,10 +79,8 @@ const SearchPage: React.FC = () => {
         {/* Search Header */}
         <section className="bg-white shadow-sm">
           <div className="container mx-auto px-4 py-8">
-            <h1 className="text-3xl font-bold text-gray-900 mb-6">
-              Search Results
-            </h1>
-            
+            <h1 className="text-3xl font-bold text-gray-900 mb-6">Search Results</h1>
+
             {/* Search Form */}
             <form onSubmit={handleSearch} className="max-w-2xl">
               <div className="flex gap-4">
@@ -115,15 +115,18 @@ const SearchPage: React.FC = () => {
           ) : searchQuery ? (
             <div>
               <div className="mb-6">
-                                  <p className="text-gray-600">
-                    Found {searchResults.length} results for &ldquo;{searchQuery}&rdquo;
-                  </p>
+                <p className="text-gray-600">
+                  Found {searchResults.length} results for &ldquo;{searchQuery}&rdquo;
+                </p>
               </div>
-              
+
               {searchResults.length > 0 ? (
                 <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
                   {searchResults.map((property) => (
-                    <div key={property.id} className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow">
+                    <div
+                      key={property.id}
+                      className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow"
+                    >
                       <Image
                         src={property.image}
                         alt={property.address}
@@ -136,13 +139,13 @@ const SearchPage: React.FC = () => {
                           {property.address}
                         </h3>
                         <p className="text-gray-600 mb-4">{property.neighborhood}</p>
-                        
+
                         <div className="flex items-center justify-between mb-4">
                           <span className="text-2xl font-bold text-blue-600">
                             ${property.price.toLocaleString()}
                           </span>
                         </div>
-                        
+
                         <div className="flex items-center gap-4 text-sm text-gray-600">
                           <div className="flex items-center gap-1">
                             <Bed className="w-4 h-4" />
@@ -157,7 +160,7 @@ const SearchPage: React.FC = () => {
                             <span>{property.sqft.toLocaleString()} sqft</span>
                           </div>
                         </div>
-                        
+
                         <button className="w-full mt-4 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors">
                           View Details
                         </button>
@@ -196,4 +199,4 @@ const SearchPage: React.FC = () => {
   );
 };
 
-export default SearchPage; 
+export default SearchPage;

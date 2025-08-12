@@ -1,30 +1,30 @@
-const https = require('https');
+const https = require('node:https');
 
 const projects = [
   {
     name: 'centennialhillshomesforsale',
-    domain: 'centennialhillshomes.com'
+    domain: 'centennialhillshomes.com',
   },
   {
     name: 'waterfall-homes',
-    domain: 'waterfallhomeslv.com'
+    domain: 'waterfallhomeslv.com',
   },
   {
     name: 'heritage-stonebridge',
-    domain: 'heritagestonebridge.com'
+    domain: 'heritagestonebridge.com',
   },
   {
     name: 'speedy-cash-home-offers',
-    domain: 'speedycashhomes.com'
+    domain: 'speedycashhomes.com',
   },
   {
     name: 'realtimetouring',
-    domain: 'realtimetouring.com'
+    domain: 'realtimetouring.com',
   },
   {
     name: 'realestatelistings',
-    domain: 'lasvegasrealestate.com'
-  }
+    domain: 'lasvegasrealestate.com',
+  },
 ];
 
 const API_TOKEN = process.env.CLOUDFLARE_API_TOKEN;
@@ -36,15 +36,15 @@ async function deployProject(project) {
     path: `/client/v4/accounts/${ACCOUNT_ID}/pages/projects/${project.name}/deployments`,
     method: 'POST',
     headers: {
-      'Authorization': `Bearer ${API_TOKEN}`,
-      'Content-Type': 'application/json'
-    }
+      Authorization: `Bearer ${API_TOKEN}`,
+      'Content-Type': 'application/json',
+    },
   };
 
   return new Promise((resolve, reject) => {
     const req = https.request(options, (res) => {
       let data = '';
-      res.on('data', (chunk) => data += chunk);
+      res.on('data', (chunk) => (data += chunk));
       res.on('end', () => {
         if (res.statusCode === 200) {
           console.log(`Successfully deployed ${project.name} to ${project.domain}`);
@@ -61,20 +61,22 @@ async function deployProject(project) {
       reject(error);
     });
 
-    req.write(JSON.stringify({
-      branch: 'main',
-      build_config: {
-        build_command: 'npm run build',
-        destination_dir: 'out'
-      }
-    }));
+    req.write(
+      JSON.stringify({
+        branch: 'main',
+        build_config: {
+          build_command: 'npm run build',
+          destination_dir: 'out',
+        },
+      })
+    );
     req.end();
   });
 }
 
 async function deployAll() {
   console.log('Starting deployment of all projects...');
-  
+
   for (const project of projects) {
     try {
       await deployProject(project);
@@ -82,8 +84,8 @@ async function deployAll() {
       console.error(`Failed to deploy ${project.name}:`, error);
     }
   }
-  
+
   console.log('Deployment process completed.');
 }
 
-deployAll(); 
+deployAll();

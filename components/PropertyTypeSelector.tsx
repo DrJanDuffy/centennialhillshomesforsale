@@ -1,4 +1,4 @@
-import React from 'react';
+import type React from 'react';
 
 interface PropertyTypeSelectorProps {
   value: string;
@@ -15,7 +15,7 @@ const PropertyTypeSelector: React.FC<PropertyTypeSelectorProps> = ({
   className = '',
   label = 'Property Type',
   required = false,
-  disabled = false
+  disabled = false,
 }) => {
   const propertyTypes = [
     { value: '', label: 'Select property type' },
@@ -24,7 +24,7 @@ const PropertyTypeSelector: React.FC<PropertyTypeSelectorProps> = ({
     { value: 'townhouse', label: 'Townhouse' },
     { value: 'luxury', label: 'Luxury' },
     { value: 'new-construction', label: 'New Construction' },
-    { value: 'investment', label: 'Investment Property' }
+    { value: 'investment', label: 'Investment Property' },
   ];
 
   return (
@@ -53,4 +53,4 @@ const PropertyTypeSelector: React.FC<PropertyTypeSelectorProps> = ({
   );
 };
 
-export default PropertyTypeSelector; 
+export default PropertyTypeSelector;

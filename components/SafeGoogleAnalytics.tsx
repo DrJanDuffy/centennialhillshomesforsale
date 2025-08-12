@@ -1,5 +1,5 @@
-
-import React, { useEffect } from 'react';
+import type React from 'react';
+import { useEffect } from 'react';
 import ErrorReportingSystem from '../utils/errorReporting';
 
 interface GoogleAnalyticsProps {
@@ -26,7 +26,7 @@ const SafeGoogleAnalytics: React.FC<GoogleAnalyticsProps> = ({ measurementId }) 
         errorReporter.reportError({
           error: 'Failed to load Google Analytics script',
           component: 'SafeGoogleAnalytics',
-          severity: 'medium'
+          severity: 'medium',
         });
       };
 
@@ -35,7 +35,7 @@ const SafeGoogleAnalytics: React.FC<GoogleAnalyticsProps> = ({ measurementId }) 
       // Initialize gtag function
       window.dataLayer = window.dataLayer || [];
       if (!window.gtag) {
-        window.gtag = function(...args: unknown[]) {
+        window.gtag = (...args: unknown[]) => {
           // Check if window.dataLayer is defined
           if (!window.dataLayer) {
             window.dataLayer = []; // Initialize it as an empty array if not defined
@@ -48,17 +48,16 @@ const SafeGoogleAnalytics: React.FC<GoogleAnalyticsProps> = ({ measurementId }) 
       window.gtag('config', measurementId, {
         page_title: 'Centennial Hills Homes for Sale',
         custom_map: {
-          'real_estate_type': 'residential',
-          'market_area': 'centennial_hills',
-          'agent_name': 'jan_duff'
-        }
+          real_estate_type: 'residential',
+          market_area: 'centennial_hills',
+          agent_name: 'jan_duff',
+        },
       });
-
     } catch (error) {
       errorReporter.reportError({
         error: error instanceof Error ? error.message : String(error),
         component: 'SafeGoogleAnalytics',
-        severity: 'medium'
+        severity: 'medium',
       });
     }
   }, [measurementId, errorReporter]);

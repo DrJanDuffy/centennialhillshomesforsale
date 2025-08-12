@@ -1,4 +1,3 @@
-
 import ErrorTracker from './errorTracking';
 
 class GlobalErrorHandler {
@@ -20,11 +19,8 @@ class GlobalErrorHandler {
     // Handle unhandled promise rejections
     window.addEventListener('unhandledrejection', (event) => {
       console.error('Unhandled promise rejection:', event.reason);
-      errorTracker.trackError(
-        new Error(`Unhandled promise rejection: ${event.reason}`),
-        'Promise'
-      );
-      
+      errorTracker.trackError(new Error(`Unhandled promise rejection: ${event.reason}`), 'Promise');
+
       // Prevent the default browser behavior
       event.preventDefault();
     });
@@ -39,28 +35,31 @@ class GlobalErrorHandler {
     });
 
     // Handle resource loading errors
-    window.addEventListener('error', (event) => {
-      if (event.target !== window) {
-        const target = event.target as HTMLElement;
-        const tagName = target.tagName?.toLowerCase();
-        
-        if (tagName === 'img' || tagName === 'script' || tagName === 'link') {
-          errorTracker.trackError(
-            new Error(`Failed to load ${tagName}: ${(target as any).src || (target as any).href}`),
-            'ResourceLoading'
-          );
+    window.addEventListener(
+      'error',
+      (event) => {
+        if (event.target !== window) {
+          const target = event.target as HTMLElement;
+          const tagName = target.tagName?.toLowerCase();
+
+          if (tagName === 'img' || tagName === 'script' || tagName === 'link') {
+            errorTracker.trackError(
+              new Error(
+                `Failed to load ${tagName}: ${(target as any).src || (target as any).href}`
+              ),
+              'ResourceLoading'
+            );
+          }
         }
-      }
-    }, true);
+      },
+      true
+    );
 
     // Monitor console errors in development
     if (process.env.NODE_ENV === 'development') {
       const originalError = console.error;
       console.error = (...args) => {
-        errorTracker.trackError(
-          new Error(`Console error: ${args.join(' ')}`),
-          'Console'
-        );
+        errorTracker.trackError(new Error(`Console error: ${args.join(' ')}`), 'Console');
         originalError.apply(console, args);
       };
     }
@@ -79,10 +78,10 @@ class GlobalErrorHandler {
   getErrorSummary(): { totalErrors: number; recentErrors: any[] } {
     const errorTracker = ErrorTracker.getInstance();
     const errors = errorTracker.getErrors();
-    
+
     return {
       totalErrors: errors.length,
-      recentErrors: errors.slice(-5) // Last 5 errors
+      recentErrors: errors.slice(-5), // Last 5 errors
     };
   }
 }

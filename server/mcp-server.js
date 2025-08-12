@@ -1,8 +1,6 @@
-
+import cors from 'cors';
 // server/mcp-server.js
 import express from 'express';
-import { createServer } from 'vite';
-import cors from 'cors';
 
 class CentennialHillsMCPServer {
   constructor() {
@@ -24,7 +22,12 @@ class CentennialHillsMCPServer {
       try {
         const { minPrice, maxPrice, bedrooms, bathrooms, propertyType, features } = req.body;
         const properties = await this.searchProperties({
-          minPrice, maxPrice, bedrooms, bathrooms, propertyType, features
+          minPrice,
+          maxPrice,
+          bedrooms,
+          bathrooms,
+          propertyType,
+          features,
         });
         res.json({ success: true, properties });
       } catch (error) {
@@ -69,7 +72,10 @@ class CentennialHillsMCPServer {
       try {
         const { homePrice, downPayment, interestRate, loanTerm } = req.body;
         const calculation = await this.calculateMortgage({
-          homePrice, downPayment, interestRate, loanTerm
+          homePrice,
+          downPayment,
+          interestRate,
+          loanTerm,
         });
         res.json({ success: true, calculation });
       } catch (error) {
@@ -109,15 +115,15 @@ class CentennialHillsMCPServer {
           pricePerSqft: 227,
           daysOnMarket: 18,
           appreciation: 8.2,
-          features: ['TPC Golf Course', 'A+ Schools', 'Gated Communities']
+          features: ['TPC Golf Course', 'A+ Schools', 'Gated Communities'],
         },
-        'providence': {
+        providence: {
           medianPrice: 750000,
           avgSqft: 3200,
           pricePerSqft: 234,
           daysOnMarket: 15,
           appreciation: 9.1,
-          features: ['Master Planned', 'Mountain Views', 'Resort Style']
+          features: ['Master Planned', 'Mountain Views', 'Resort Style'],
         },
         'skye-canyon': {
           medianPrice: 580000,
@@ -125,14 +131,14 @@ class CentennialHillsMCPServer {
           pricePerSqft: 223,
           daysOnMarket: 22,
           appreciation: 7.8,
-          features: ['Family Friendly', 'Parks', 'New Construction']
-        }
+          features: ['Family Friendly', 'Parks', 'New Construction'],
+        },
       },
       schools: {
         'centennial-high': { rating: 9, type: 'High School', distance: '0.5 miles' },
         'alexander-dawson': { rating: 10, type: 'Private School', distance: '1.2 miles' },
-        'centennial-elementary': { rating: 8, type: 'Elementary', distance: '0.3 miles' }
-      }
+        'centennial-elementary': { rating: 8, type: 'Elementary', distance: '0.3 miles' },
+      },
     };
   }
 
@@ -148,7 +154,7 @@ class CentennialHillsMCPServer {
         sqft: 2850,
         propertyType: 'Single Family',
         features: ['Golf Course View', 'Pool', 'Gated'],
-        neighborhood: 'Centennial Hills'
+        neighborhood: 'Centennial Hills',
       },
       {
         id: 2,
@@ -159,11 +165,11 @@ class CentennialHillsMCPServer {
         sqft: 3200,
         propertyType: 'Single Family',
         features: ['Mountain View', 'Casita', 'Pool'],
-        neighborhood: 'Providence'
-      }
+        neighborhood: 'Providence',
+      },
     ];
 
-    return sampleProperties.filter(property => {
+    return sampleProperties.filter((property) => {
       if (filters.minPrice && property.price < filters.minPrice) return false;
       if (filters.maxPrice && property.price > filters.maxPrice) return false;
       if (filters.bedrooms && property.bedrooms < filters.bedrooms) return false;
@@ -173,11 +179,11 @@ class CentennialHillsMCPServer {
   }
 
   async getMarketAnalysis(zipCode) {
-    const neighborhood = zipCode === '89149' ? 'centennial-hills' : 
-                        zipCode === '89166' ? 'providence' : 'skye-canyon';
-    
+    const neighborhood =
+      zipCode === '89149' ? 'centennial-hills' : zipCode === '89166' ? 'providence' : 'skye-canyon';
+
     const data = this.realEstateData.neighborhoods[neighborhood];
-    
+
     return {
       zipCode,
       neighborhood,
@@ -186,43 +192,47 @@ class CentennialHillsMCPServer {
       daysOnMarket: data.daysOnMarket,
       appreciation: data.appreciation,
       inventory: '1.8 months',
-      trends: 'Strong seller\'s market with high demand',
-      forecast: 'Continued appreciation expected through 2024'
+      trends: "Strong seller's market with high demand",
+      forecast: 'Continued appreciation expected through 2024',
     };
   }
 
   async calculateHomeValue(propertyData) {
     const { address, sqft, bedrooms, bathrooms } = propertyData;
-    
+
     // Simple valuation algorithm
     const basePricePerSqft = 225;
     const bedroomBonus = bedrooms * 15000;
     const bathroomBonus = bathrooms * 10000;
-    
-    const estimatedValue = (sqft * basePricePerSqft) + bedroomBonus + bathroomBonus;
-    
+
+    const estimatedValue = sqft * basePricePerSqft + bedroomBonus + bathroomBonus;
+
     return {
       address,
       estimatedValue,
       priceRange: {
         low: Math.round(estimatedValue * 0.9),
-        high: Math.round(estimatedValue * 1.1)
+        high: Math.round(estimatedValue * 1.1),
       },
       confidence: '85%',
       factors: [
         'Recent comparable sales',
         'Neighborhood trends',
         'Property features',
-        'Market conditions'
-      ]
+        'Market conditions',
+      ],
     };
   }
 
-  async processAIChat(message, context) {
+  async processAIChat(message, _context) {
     const lowerMessage = message.toLowerCase();
-    
+
     // Advanced AI pattern matching with detailed responses
-    if (lowerMessage.includes('market') || lowerMessage.includes('price') || lowerMessage.includes('value')) {
+    if (
+      lowerMessage.includes('market') ||
+      lowerMessage.includes('price') ||
+      lowerMessage.includes('value')
+    ) {
       const marketData = this.realEstateData.neighborhoods['centennial-hills'];
       return `📊 **Centennial Hills Market Update:**
       
@@ -250,7 +260,11 @@ The market is extremely active with low inventory and high demand. Properties of
 The area is known for excellent educational opportunities. Would you like information about specific schools or enrollment procedures?`;
     }
 
-    if (lowerMessage.includes('amenities') || lowerMessage.includes('activities') || lowerMessage.includes('recreation')) {
+    if (
+      lowerMessage.includes('amenities') ||
+      lowerMessage.includes('activities') ||
+      lowerMessage.includes('recreation')
+    ) {
       return `🏌️ **Centennial Hills Amenities:**
 
 **Recreation:**
@@ -272,7 +286,11 @@ The area is known for excellent educational opportunities. Would you like inform
 What specific amenities are most important to you?`;
     }
 
-    if (lowerMessage.includes('buy') || lowerMessage.includes('purchase') || lowerMessage.includes('home search')) {
+    if (
+      lowerMessage.includes('buy') ||
+      lowerMessage.includes('purchase') ||
+      lowerMessage.includes('home search')
+    ) {
       return `🏡 **Ready to Buy in Centennial Hills?**
 
 I can help you find the perfect home! Here's how:
@@ -289,7 +307,11 @@ I can help you find the perfect home! Here's how:
 What's your budget and must-have features? I'll create a custom search for you!`;
     }
 
-    if (lowerMessage.includes('sell') || lowerMessage.includes('listing') || lowerMessage.includes('valuation')) {
+    if (
+      lowerMessage.includes('sell') ||
+      lowerMessage.includes('listing') ||
+      lowerMessage.includes('valuation')
+    ) {
       return `💰 **Selling Your Centennial Hills Home?**
 
 **Current Market Advantages:**
@@ -309,7 +331,12 @@ What's your budget and must-have features? I'll create a custom search for you!`
 Ready for your free home valuation? What's your address?`;
     }
 
-    if (lowerMessage.includes('mortgage') || lowerMessage.includes('payment') || lowerMessage.includes('finance') || lowerMessage.includes('loan')) {
+    if (
+      lowerMessage.includes('mortgage') ||
+      lowerMessage.includes('payment') ||
+      lowerMessage.includes('finance') ||
+      lowerMessage.includes('loan')
+    ) {
       return `💳 **Mortgage Information for Centennial Hills:**
 
 **Current Rates (estimated):**
@@ -327,7 +354,11 @@ Ready for your free home valuation? What's your address?`;
 Would you like me to connect you with a lender for pre-approval?`;
     }
 
-    if (lowerMessage.includes('investment') || lowerMessage.includes('rental') || lowerMessage.includes('roi')) {
+    if (
+      lowerMessage.includes('investment') ||
+      lowerMessage.includes('rental') ||
+      lowerMessage.includes('roi')
+    ) {
       return `📈 **Centennial Hills Investment Opportunities:**
 
 **Investment Highlights:**
@@ -347,7 +378,11 @@ Would you like me to connect you with a lender for pre-approval?`;
 Interested in investment properties? I can show you current opportunities!`;
     }
 
-    if (lowerMessage.includes('neighborhood') || lowerMessage.includes('area') || lowerMessage.includes('community')) {
+    if (
+      lowerMessage.includes('neighborhood') ||
+      lowerMessage.includes('area') ||
+      lowerMessage.includes('community')
+    ) {
       return `🏘️ **Centennial Hills Neighborhoods:**
 
 **Featured Communities:**
@@ -390,25 +425,25 @@ Just ask me anything about Centennial Hills real estate! I'm here 24/7 to help.`
 
   async calculateMortgage(data) {
     const { homePrice, downPayment, interestRate, loanTerm } = data;
-    
+
     const loanAmount = homePrice - downPayment;
-    const monthlyRate = (interestRate / 100) / 12;
+    const monthlyRate = interestRate / 100 / 12;
     const numPayments = loanTerm * 12;
-    
-    const monthlyPayment = loanAmount * 
-      (monthlyRate * Math.pow(1 + monthlyRate, numPayments)) / 
-      (Math.pow(1 + monthlyRate, numPayments) - 1);
-    
+
+    const monthlyPayment =
+      (loanAmount * (monthlyRate * (1 + monthlyRate) ** numPayments)) /
+      ((1 + monthlyRate) ** numPayments - 1);
+
     const totalPayment = monthlyPayment * numPayments;
     const totalInterest = totalPayment - loanAmount;
-    
+
     // Estimate taxes and insurance for Centennial Hills
-    const propertyTax = homePrice * 0.0076 / 12; // Nevada average
-    const insurance = homePrice * 0.0035 / 12; // Estimate
-    const pmi = loanAmount < homePrice * 0.8 ? 0 : loanAmount * 0.005 / 12;
-    
+    const propertyTax = (homePrice * 0.0076) / 12; // Nevada average
+    const insurance = (homePrice * 0.0035) / 12; // Estimate
+    const pmi = loanAmount < homePrice * 0.8 ? 0 : (loanAmount * 0.005) / 12;
+
     const totalMonthlyPayment = monthlyPayment + propertyTax + insurance + pmi;
-    
+
     return {
       homePrice,
       downPayment,
@@ -421,7 +456,7 @@ Just ask me anything about Centennial Hills real estate! I'm here 24/7 to help.`
       totalPayment: Math.round(totalPayment),
       totalInterest: Math.round(totalInterest),
       interestRate,
-      loanTerm
+      loanTerm,
     };
   }
 
@@ -432,20 +467,20 @@ Just ask me anything about Centennial Hills real estate! I'm here 24/7 to help.`
       timestamp: new Date().toISOString(),
       ...leadData,
       source: 'centennial-hills-website',
-      status: 'new'
+      status: 'new',
     };
-    
+
     console.log('New lead captured:', lead);
-    
+
     // Simulate email notification
     return {
-      message: 'Thank you! I\'ll contact you within 1 hour.',
+      message: "Thank you! I'll contact you within 1 hour.",
       leadId: lead.id,
       nextSteps: [
-        'I\'ll call you within 1 hour',
+        "I'll call you within 1 hour",
         'Send you a custom property search',
-        'Schedule a consultation if desired'
-      ]
+        'Schedule a consultation if desired',
+      ],
     };
   }
 
@@ -456,15 +491,16 @@ Just ask me anything about Centennial Hills real estate! I'm here 24/7 to help.`
       email,
       criteria,
       created: new Date().toISOString(),
-      active: true
+      active: true,
     };
-    
+
     console.log('Property alert created:', alert);
-    
+
     return {
-      message: 'Property alerts activated! You\'ll receive notifications when new properties match your criteria.',
+      message:
+        "Property alerts activated! You'll receive notifications when new properties match your criteria.",
       alertId: alert.id,
-      criteria
+      criteria,
     };
   }
 

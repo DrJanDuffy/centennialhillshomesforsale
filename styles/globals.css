@@ -31,7 +31,7 @@
 
 /* Focus Styles */
 *:focus-visible {
-  outline: 2px solid #3A8DDE;
+  outline: 2px solid #3a8dde;
   outline-offset: 2px;
 }
 
@@ -115,35 +115,35 @@
 
 /* Enhanced Component Utilities */
 .text-primary-color {
-  color: #0A2540;
+  color: #0a2540;
 }
 
 .text-secondary-color {
-  color: #3A8DDE;
+  color: #3a8dde;
 }
 
 .text-accent-color {
-  color: #16B286;
+  color: #16b286;
 }
 
 .text-warning-color {
-  color: #F59E0B;
+  color: #f59e0b;
 }
 
 .bg-primary-color {
-  background-color: #0A2540;
+  background-color: #0a2540;
 }
 
 .bg-secondary-color {
-  background-color: #3A8DDE;
+  background-color: #3a8dde;
 }
 
 .bg-accent-color {
-  background-color: #16B286;
+  background-color: #16b286;
 }
 
 .bg-warning-color {
-  background-color: #F59E0B;
+  background-color: #f59e0b;
 }
 
 /* Responsive Utilities */

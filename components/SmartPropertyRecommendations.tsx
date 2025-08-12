@@ -1,24 +1,24 @@
-
-import React, { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { 
-  Sparkles, 
-  Heart, 
-  MapPin, 
-  DollarSign, 
-  Home, 
-  Star, 
-  Filter,
-  Sliders,
-  Eye,
-  Share2,
-  MessageCircle,
-  Clock,
-  CheckCircle,
+import { AnimatePresence, motion } from 'framer-motion';
+import {
   ArrowRight,
+  CheckCircle,
   ChevronDown,
-  ChevronUp
+  ChevronUp,
+  Clock,
+  DollarSign,
+  Eye,
+  Filter,
+  Heart,
+  Home,
+  MapPin,
+  MessageCircle,
+  Share2,
+  Sliders,
+  Sparkles,
+  Star,
 } from 'lucide-react';
+import type React from 'react';
+import { useState } from 'react';
 
 interface PropertyRecommendation {
   id: string;
@@ -41,8 +41,8 @@ interface SmartPropertyRecommendationsProps {
   className?: string;
 }
 
-const SmartPropertyRecommendations: React.FC<SmartPropertyRecommendationsProps> = ({ 
-  className = '' 
+const SmartPropertyRecommendations: React.FC<SmartPropertyRecommendationsProps> = ({
+  className = '',
 }) => {
   const [isEnabled, setIsEnabled] = useState(true);
   const [selectedFilters, setSelectedFilters] = useState<string[]>([]);
@@ -63,13 +63,13 @@ const SmartPropertyRecommendations: React.FC<SmartPropertyRecommendationsProps> 
         'Within your budget range',
         'Recently renovated and move-in ready',
         'Includes 3D virtual tour',
-        'Excellent school district'
+        'Excellent school district',
       ],
       features: ['Pool', 'Mountain Views', 'Gourmet Kitchen', 'Smart Home'],
       daysOnMarket: 8,
       pricePerSqft: 243,
       image: '/images/providence-home-1.jpg',
-      status: 'active'
+      status: 'active',
     },
     {
       id: '2',
@@ -84,13 +84,13 @@ const SmartPropertyRecommendations: React.FC<SmartPropertyRecommendationsProps> 
         'Perfect for your growing family',
         'Large backyard with mountain views',
         'Recently updated kitchen',
-        'Close to shopping and amenities'
+        'Close to shopping and amenities',
       ],
       features: ['Guest House', 'Wine Cellar', 'Home Theater', 'Casita'],
       daysOnMarket: 12,
       pricePerSqft: 233,
       image: '/images/centennial-hills-home-1.jpg',
-      status: 'active'
+      status: 'active',
     },
     {
       id: '3',
@@ -105,14 +105,14 @@ const SmartPropertyRecommendations: React.FC<SmartPropertyRecommendationsProps> 
         'Great starter home opportunity',
         'Low maintenance community',
         'Access to hiking trails',
-        'Modern open floor plan'
+        'Modern open floor plan',
       ],
       features: ['Open Floor Plan', 'Mountain Views', 'Upgraded Kitchen', 'Large Yard'],
       daysOnMarket: 15,
       pricePerSqft: 270,
       image: '/images/skye-canyon-home-1.jpg',
-      status: 'active'
-    }
+      status: 'active',
+    },
   ];
 
   const filters = [
@@ -121,22 +121,20 @@ const SmartPropertyRecommendations: React.FC<SmartPropertyRecommendationsProps> 
     { key: 'smart-home', label: 'Smart Home', icon: '🏠' },
     { key: 'gourmet-kitchen', label: 'Gourmet Kitchen', icon: '👨‍🍳' },
     { key: 'guest-house', label: 'Guest House', icon: '🏡' },
-    { key: 'wine-cellar', label: 'Wine Cellar', icon: '🍷' }
+    { key: 'wine-cellar', label: 'Wine Cellar', icon: '🍷' },
   ];
 
   const sortOptions = [
     { key: 'match', label: 'Best Match', icon: Star },
     { key: 'price', label: 'Price', icon: DollarSign },
-    { key: 'date', label: 'Newest', icon: Clock }
+    { key: 'date', label: 'Newest', icon: Clock },
   ];
 
   const filteredRecommendations = recommendations
-    .filter(rec => {
+    .filter((rec) => {
       if (selectedFilters.length === 0) return true;
-      return selectedFilters.some(filter => 
-        rec.features.some(feature => 
-          feature.toLowerCase().includes(filter.toLowerCase())
-        )
+      return selectedFilters.some((filter) =>
+        rec.features.some((feature) => feature.toLowerCase().includes(filter.toLowerCase()))
       );
     })
     .sort((a, b) => {
@@ -156,7 +154,7 @@ const SmartPropertyRecommendations: React.FC<SmartPropertyRecommendationsProps> 
     return new Intl.NumberFormat('en-US', {
       style: 'currency',
       currency: 'USD',
-      maximumFractionDigits: 0
+      maximumFractionDigits: 0,
     }).format(price);
   };
 
@@ -195,7 +193,9 @@ const SmartPropertyRecommendations: React.FC<SmartPropertyRecommendationsProps> 
 
           {/* Toggle Switch */}
           <div className="flex items-center justify-center gap-4">
-            <span className={`text-sm font-medium ${!isEnabled ? 'text-secondary' : 'text-primary'}`}>
+            <span
+              className={`text-sm font-medium ${!isEnabled ? 'text-secondary' : 'text-primary'}`}
+            >
               AI Recommendations
             </span>
             <button
@@ -213,7 +213,9 @@ const SmartPropertyRecommendations: React.FC<SmartPropertyRecommendationsProps> 
                 layout
               />
             </button>
-            <span className={`text-sm font-medium ${isEnabled ? 'text-secondary' : 'text-primary'}`}>
+            <span
+              className={`text-sm font-medium ${isEnabled ? 'text-secondary' : 'text-primary'}`}
+            >
               Manual Search
             </span>
           </div>
@@ -239,11 +241,16 @@ const SmartPropertyRecommendations: React.FC<SmartPropertyRecommendationsProps> 
                     >
                       <Filter className="w-4 h-4" />
                       <span className="text-sm font-medium">Filters</span>
-                      {showFilters ? <ChevronUp className="w-4 h-4" /> : <ChevronDown className="w-4 h-4" />}
+                      {showFilters ? (
+                        <ChevronUp className="w-4 h-4" />
+                      ) : (
+                        <ChevronDown className="w-4 h-4" />
+                      )}
                     </button>
                     {selectedFilters.length > 0 && (
                       <span className="text-sm text-secondary">
-                        {selectedFilters.length} filter{selectedFilters.length !== 1 ? 's' : ''} applied
+                        {selectedFilters.length} filter{selectedFilters.length !== 1 ? 's' : ''}{' '}
+                        applied
                       </span>
                     )}
                   </div>
@@ -261,9 +268,9 @@ const SmartPropertyRecommendations: React.FC<SmartPropertyRecommendationsProps> 
                           <button
                             key={filter.key}
                             onClick={() => {
-                              setSelectedFilters(prev =>
+                              setSelectedFilters((prev) =>
                                 prev.includes(filter.key)
-                                  ? prev.filter(f => f !== filter.key)
+                                  ? prev.filter((f) => f !== filter.key)
                                   : [...prev, filter.key]
                               );
                             }}
@@ -282,23 +289,25 @@ const SmartPropertyRecommendations: React.FC<SmartPropertyRecommendationsProps> 
                   </AnimatePresence>
                 </div>
 
-                                 {/* Sort */}
-                 <div className="flex items-center gap-2">
-                   <label htmlFor="sort-select" className="text-sm text-secondary">Sort by:</label>
-                   <select
-                     id="sort-select"
-                     value={sortBy}
-                     onChange={(e) => setSortBy(e.target.value as 'match' | 'price' | 'date')}
-                     className="px-3 py-2 bg-tertiary rounded-lg text-sm border-none focus:ring-2 focus:ring-accent-color/50"
-                     aria-label="Sort recommendations"
-                   >
-                     {sortOptions.map((option) => (
-                       <option key={option.key} value={option.key}>
-                         {option.label}
-                       </option>
-                     ))}
-                   </select>
-                 </div>
+                {/* Sort */}
+                <div className="flex items-center gap-2">
+                  <label htmlFor="sort-select" className="text-sm text-secondary">
+                    Sort by:
+                  </label>
+                  <select
+                    id="sort-select"
+                    value={sortBy}
+                    onChange={(e) => setSortBy(e.target.value as 'match' | 'price' | 'date')}
+                    className="px-3 py-2 bg-tertiary rounded-lg text-sm border-none focus:ring-2 focus:ring-accent-color/50"
+                    aria-label="Sort recommendations"
+                  >
+                    {sortOptions.map((option) => (
+                      <option key={option.key} value={option.key}>
+                        {option.label}
+                      </option>
+                    ))}
+                  </select>
+                </div>
               </div>
             </motion.div>
 
@@ -318,37 +327,43 @@ const SmartPropertyRecommendations: React.FC<SmartPropertyRecommendationsProps> 
                     <div className="absolute inset-0 flex items-center justify-center">
                       <Home className="w-16 h-16 text-white opacity-20" />
                     </div>
-                    
+
                     {/* Match Badge */}
                     <div className="absolute top-4 left-4">
-                      <div className={`px-3 py-1 rounded-full text-sm font-semibold ${getMatchBgColor(recommendation.matchPercentage)} ${getMatchColor(recommendation.matchPercentage)}`}>
+                      <div
+                        className={`px-3 py-1 rounded-full text-sm font-semibold ${getMatchBgColor(recommendation.matchPercentage)} ${getMatchColor(recommendation.matchPercentage)}`}
+                      >
                         {recommendation.matchPercentage}% Match
                       </div>
                     </div>
 
-                                         {/* Action Buttons */}
-                     <div className="absolute top-4 right-4 flex gap-2">
-                       <button 
-                         className="w-8 h-8 bg-white/20 backdrop-blur-md rounded-full flex items-center justify-center hover:bg-white/30 transition-colors"
-                         aria-label="Add to favorites"
-                         title="Add to favorites"
-                       >
-                         <Heart className="w-4 h-4 text-white" />
-                       </button>
-                       <button 
-                         className="w-8 h-8 bg-white/20 backdrop-blur-md rounded-full flex items-center justify-center hover:bg-white/30 transition-colors"
-                         aria-label="Share property"
-                         title="Share property"
-                       >
-                         <Share2 className="w-4 h-4 text-white" />
-                       </button>
-                     </div>
+                    {/* Action Buttons */}
+                    <div className="absolute top-4 right-4 flex gap-2">
+                      <button
+                        className="w-8 h-8 bg-white/20 backdrop-blur-md rounded-full flex items-center justify-center hover:bg-white/30 transition-colors"
+                        aria-label="Add to favorites"
+                        title="Add to favorites"
+                      >
+                        <Heart className="w-4 h-4 text-white" />
+                      </button>
+                      <button
+                        className="w-8 h-8 bg-white/20 backdrop-blur-md rounded-full flex items-center justify-center hover:bg-white/30 transition-colors"
+                        aria-label="Share property"
+                        title="Share property"
+                      >
+                        <Share2 className="w-4 h-4 text-white" />
+                      </button>
+                    </div>
 
                     {/* Price Overlay */}
                     <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-4">
                       <div className="text-white">
-                        <div className="text-2xl font-bold">{formatPrice(recommendation.price)}</div>
-                        <div className="text-sm opacity-80">${recommendation.pricePerSqft}/sq ft</div>
+                        <div className="text-2xl font-bold">
+                          {formatPrice(recommendation.price)}
+                        </div>
+                        <div className="text-sm opacity-80">
+                          ${recommendation.pricePerSqft}/sq ft
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -369,15 +384,21 @@ const SmartPropertyRecommendations: React.FC<SmartPropertyRecommendationsProps> 
                     {/* Property Stats */}
                     <div className="grid grid-cols-3 gap-4 mb-4">
                       <div className="text-center">
-                        <div className="text-lg font-bold text-primary">{recommendation.bedrooms}</div>
+                        <div className="text-lg font-bold text-primary">
+                          {recommendation.bedrooms}
+                        </div>
                         <div className="text-xs text-secondary">Beds</div>
                       </div>
                       <div className="text-center">
-                        <div className="text-lg font-bold text-primary">{recommendation.bathrooms}</div>
+                        <div className="text-lg font-bold text-primary">
+                          {recommendation.bathrooms}
+                        </div>
                         <div className="text-xs text-secondary">Baths</div>
                       </div>
                       <div className="text-center">
-                        <div className="text-lg font-bold text-primary">{recommendation.sqft.toLocaleString()}</div>
+                        <div className="text-lg font-bold text-primary">
+                          {recommendation.sqft.toLocaleString()}
+                        </div>
                         <div className="text-xs text-secondary">Sq Ft</div>
                       </div>
                     </div>
@@ -402,7 +423,10 @@ const SmartPropertyRecommendations: React.FC<SmartPropertyRecommendationsProps> 
                     <div className="mb-4">
                       <div className="flex flex-wrap gap-1">
                         {recommendation.features.slice(0, 3).map((feature, idx) => (
-                          <span key={idx} className="bg-tertiary text-secondary px-2 py-1 rounded text-xs">
+                          <span
+                            key={idx}
+                            className="bg-tertiary text-secondary px-2 py-1 rounded text-xs"
+                          >
                             {feature}
                           </span>
                         ))}
@@ -416,13 +440,13 @@ const SmartPropertyRecommendations: React.FC<SmartPropertyRecommendationsProps> 
                         View Details
                         <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
                       </button>
-                                             <button 
-                         className="btn btn-outline"
-                         aria-label="Contact about this property"
-                         title="Contact about this property"
-                       >
-                         <MessageCircle className="w-4 h-4" />
-                       </button>
+                      <button
+                        className="btn btn-outline"
+                        aria-label="Contact about this property"
+                        title="Contact about this property"
+                      >
+                        <MessageCircle className="w-4 h-4" />
+                      </button>
                     </div>
 
                     {/* Days on Market */}
@@ -444,12 +468,13 @@ const SmartPropertyRecommendations: React.FC<SmartPropertyRecommendationsProps> 
                 <div className="w-16 h-16 bg-tertiary rounded-full flex items-center justify-center mx-auto mb-4">
                   <Home className="w-8 h-8 text-secondary" />
                 </div>
-                <h3 className="text-lg font-semibold text-primary mb-2">No properties match your filters</h3>
-                <p className="text-secondary mb-4">Try adjusting your filters or contact us for personalized recommendations</p>
-                <button 
-                  onClick={() => setSelectedFilters([])}
-                  className="btn btn-primary"
-                >
+                <h3 className="text-lg font-semibold text-primary mb-2">
+                  No properties match your filters
+                </h3>
+                <p className="text-secondary mb-4">
+                  Try adjusting your filters or contact us for personalized recommendations
+                </p>
+                <button onClick={() => setSelectedFilters([])} className="btn btn-primary">
                   Clear Filters
                 </button>
               </motion.div>
@@ -482,10 +507,10 @@ const SmartPropertyRecommendations: React.FC<SmartPropertyRecommendationsProps> 
               <Sliders className="w-8 h-8 text-secondary" />
             </div>
             <h3 className="text-lg font-semibold text-primary mb-2">Manual Search Mode</h3>
-            <p className="text-secondary mb-4">Use our advanced search filters to find your perfect home</p>
-            <button className="btn btn-primary">
-              Start Manual Search
-            </button>
+            <p className="text-secondary mb-4">
+              Use our advanced search filters to find your perfect home
+            </p>
+            <button className="btn btn-primary">Start Manual Search</button>
           </motion.div>
         )}
       </div>

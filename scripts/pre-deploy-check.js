@@ -1,7 +1,7 @@
 
 #!/usr/bin/env node
 
-const fs = require('fs');
+const fs = require('node:fs');
 
 console.log('🏥 PRE-DEPLOYMENT HEALTH CHECK');
 console.log('==============================');
@@ -18,8 +18,7 @@ const healthChecks = {
 console.log('\n📦 Checking dependencies...');
 try {
   const packageJson = JSON.parse(fs.readFileSync('package.json', 'utf8'));
-  const hasEssentialDeps = packageJson.dependencies && 
-                          packageJson.dependencies.next && 
+  const hasEssentialDeps = packageJson.dependencies?.next && 
                           packageJson.dependencies.react;
 
   if (hasEssentialDeps) {
@@ -28,7 +27,7 @@ try {
   } else {
     console.log('❌ Missing essential dependencies');
   }
-} catch (error) {
+} catch (_error) {
   console.log('❌ Error reading package.json');
 }
 

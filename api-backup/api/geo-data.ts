@@ -25,11 +25,11 @@ export default async function handler(
       address: 'Centennial Hills',
       city: 'Las Vegas',
       state: 'NV',
-      zipCode: '89149'
+      zipCode: '89149',
     };
 
     res.status(200).json(geoData);
-  } catch (error) {
+  } catch (_error) {
     res.status(500).json({ error: 'Failed to fetch GEO data' });
   }
 }

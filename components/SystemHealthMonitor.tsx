@@ -1,5 +1,5 @@
-
-import React, { useState, useEffect } from 'react';
+import type React from 'react';
+import { useEffect, useState } from 'react';
 import GlobalErrorHandler from '../utils/globalErrorHandler';
 
 interface HealthMetrics {
@@ -14,7 +14,7 @@ const SystemHealthMonitor: React.FC = () => {
     totalErrors: 0,
     recentErrors: [],
     performanceScore: 100,
-    lastCheck: new Date().toISOString()
+    lastCheck: new Date().toISOString(),
   });
 
   const [isVisible, setIsVisible] = useState(false);
@@ -24,24 +24,21 @@ const SystemHealthMonitor: React.FC = () => {
     const checkHealth = () => {
       const globalErrorHandler = GlobalErrorHandler.getInstance();
       const errorSummary = globalErrorHandler.getErrorSummary();
-      
+
       // Calculate performance score (simplified)
-      const performanceScore = Math.max(0, 100 - (errorSummary.totalErrors * 10));
+      const performanceScore = Math.max(0, 100 - errorSummary.totalErrors * 10);
 
       const newHealth: HealthMetrics = {
         totalErrors: errorSummary.totalErrors,
         recentErrors: errorSummary.recentErrors,
         performanceScore,
-        lastCheck: new Date().toISOString()
+        lastCheck: new Date().toISOString(),
       };
 
       setHealth(newHealth);
-      
+
       // Show if there are errors or in development
-      setIsVisible(
-        process.env.NODE_ENV === 'development' || 
-        errorSummary.totalErrors > 0
-      );
+      setIsVisible(process.env.NODE_ENV === 'development' || errorSummary.totalErrors > 0);
     };
 
     checkHealth();
@@ -68,33 +65,33 @@ const SystemHealthMonitor: React.FC = () => {
     <div className="fixed top-4 left-4 bg-white border border-gray-200 rounded-lg p-3 max-w-xs z-50 shadow-lg text-sm">
       <div className="flex items-center justify-between mb-2">
         <span className="font-semibold text-gray-800">System Health</span>
-        <button 
+        <button
           onClick={() => setIsVisible(false)}
           className="text-gray-400 hover:text-gray-600 text-xs"
         >
           ×
         </button>
       </div>
-      
-      <div className={`font-medium ${getHealthColor()} mb-1`}>
-        {getHealthStatus()}
-      </div>
-      
+
+      <div className={`font-medium ${getHealthColor()} mb-1`}>{getHealthStatus()}</div>
+
       <div className="text-xs text-gray-600 space-y-1">
         <div>Score: {health.performanceScore}/100</div>
         <div>Errors: {health.totalErrors}</div>
-        
+
         {health.recentErrors.length > 0 && (
           <div className="mt-2">
             <div className="font-medium text-gray-700">Recent Issues:</div>
             {health.recentErrors.slice(0, 2).map((error, index) => (
               <div key={index} className="text-xs text-red-600 truncate">
-                {typeof error === 'object' && error && 'message' in error ? (error as { message: string }).message : String(error)}
+                {typeof error === 'object' && error && 'message' in error
+                  ? (error as { message: string }).message
+                  : String(error)}
               </div>
             ))}
           </div>
         )}
-        
+
         <div className="text-xs text-gray-400 mt-2">
           Last check: {new Date(health.lastCheck).toLocaleTimeString()}
         </div>

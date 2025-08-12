@@ -1,6 +1,5 @@
-
-const fs = require('fs');
-const path = require('path');
+const fs = require('node:fs');
+const path = require('node:path');
 
 console.log('🚀 Setting up Enterprise Real Estate Analytics...');
 
@@ -9,7 +8,7 @@ const analyticsConfig = {
   project: {
     id: 'real-estate-analytics-2025',
     name: 'Real Estate Analytics Enterprise',
-    created: new Date().toISOString()
+    created: new Date().toISOString(),
   },
   services: {
     analytics: {
@@ -17,18 +16,18 @@ const analyticsConfig = {
       quotas: {
         daily_requests: 1000000,
         concurrent_users: 10000,
-        custom_events: 500
-      }
+        custom_events: 500,
+      },
     },
     bigquery: {
       enabled: true,
       dataset: 'real_estate_analytics',
-      tables: ['property_views', 'searches', 'leads', 'performance']
+      tables: ['property_views', 'searches', 'leads', 'performance'],
     },
     ai_platform: {
       enabled: true,
-      models: ['property_recommendation', 'price_prediction', 'lead_scoring']
-    }
+      models: ['property_recommendation', 'price_prediction', 'lead_scoring'],
+    },
   },
   real_estate_tracking: {
     property_events: [
@@ -36,28 +35,22 @@ const analyticsConfig = {
       'property_search',
       'contact_request',
       'calculator_usage',
-      'listing_click'
+      'listing_click',
     ],
-    custom_dimensions: [
-      'property_type',
-      'price_range',
-      'location',
-      'agent_name',
-      'lead_source'
-    ],
+    custom_dimensions: ['property_type', 'price_range', 'location', 'agent_name', 'lead_source'],
     goals: [
       {
         name: 'Contact Form Submission',
         type: 'destination',
-        value: 100
+        value: 100,
       },
       {
         name: 'Property Detail View',
         type: 'event',
-        value: 10
-      }
-    ]
-  }
+        value: 10,
+      },
+    ],
+  },
 };
 
 // Save configuration
@@ -75,8 +68,8 @@ const bigQuerySchema = {
       { name: 'property_type', type: 'STRING' },
       { name: 'price', type: 'NUMERIC' },
       { name: 'location', type: 'STRING' },
-      { name: 'page_path', type: 'STRING' }
-    ]
+      { name: 'page_path', type: 'STRING' },
+    ],
   },
   searches: {
     fields: [
@@ -85,8 +78,8 @@ const bigQuerySchema = {
       { name: 'filters_applied', type: 'JSON' },
       { name: 'results_count', type: 'INTEGER' },
       { name: 'user_id', type: 'STRING' },
-      { name: 'session_id', type: 'STRING' }
-    ]
+      { name: 'session_id', type: 'STRING' },
+    ],
   },
   leads: {
     fields: [
@@ -95,9 +88,9 @@ const bigQuerySchema = {
       { name: 'contact_method', type: 'STRING' },
       { name: 'property_interest', type: 'STRING' },
       { name: 'lead_score', type: 'NUMERIC' },
-      { name: 'source', type: 'STRING' }
-    ]
-  }
+      { name: 'source', type: 'STRING' },
+    ],
+  },
 };
 
 const schemaPath = path.join(process.cwd(), 'public', 'bigquery-schema.json');
@@ -109,20 +102,20 @@ const aiModels = {
     model_type: 'collaborative_filtering',
     features: ['price', 'location', 'property_type', 'bedrooms', 'bathrooms'],
     training_data: 'user_property_interactions',
-    update_frequency: 'daily'
+    update_frequency: 'daily',
   },
   price_prediction: {
     model_type: 'regression',
     features: ['location', 'square_feet', 'bedrooms', 'bathrooms', 'lot_size', 'year_built'],
     training_data: 'historical_sales',
-    update_frequency: 'weekly'
+    update_frequency: 'weekly',
   },
   lead_scoring: {
     model_type: 'classification',
     features: ['page_views', 'time_on_site', 'property_searches', 'contact_attempts'],
     training_data: 'converted_leads',
-    update_frequency: 'daily'
-  }
+    update_frequency: 'daily',
+  },
 };
 
 const aiPath = path.join(process.cwd(), 'public', 'ai-models-config.json');

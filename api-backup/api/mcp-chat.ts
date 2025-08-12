@@ -1,4 +1,3 @@
-
 import type { NextApiRequest, NextApiResponse } from 'next';
 
 interface ChatRequest {
@@ -15,10 +14,7 @@ interface ChatResponse {
   error?: string;
 }
 
-export default async function handler(
-  req: NextApiRequest,
-  res: NextApiResponse<ChatResponse>
-) {
+export default async function handler(req: NextApiRequest, res: NextApiResponse<ChatResponse>) {
   if (req.method !== 'POST') {
     return res.status(405).json({ success: false, error: 'Method not allowed' });
   }
@@ -35,16 +31,16 @@ export default async function handler(
       success: true,
       data: {
         content: `I received your message: "${message}". This is a mock response. In production, this would connect to the MCP client.`,
-        suggestions: ['Find homes', 'Get market analysis', 'Contact agent']
-      }
+        suggestions: ['Find homes', 'Get market analysis', 'Contact agent'],
+      },
     };
 
     res.status(200).json(response);
   } catch (error) {
     console.error('MCP Chat API Error:', error);
-    res.status(500).json({ 
-      success: false, 
-      error: 'Internal server error' 
+    res.status(500).json({
+      success: false,
+      error: 'Internal server error',
     });
   }
 }

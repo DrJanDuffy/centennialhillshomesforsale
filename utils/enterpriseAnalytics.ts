@@ -1,4 +1,3 @@
-
 interface AnalyticsEvent {
   category: string;
   action: string;
@@ -23,7 +22,7 @@ class EnterpriseAnalytics {
     searchQueries: 0,
     contactRequests: 0,
     listingClicks: 0,
-    calculatorUsage: 0
+    calculatorUsage: 0,
   };
 
   static getInstance(): EnterpriseAnalytics {
@@ -45,7 +44,7 @@ class EnterpriseAnalytics {
 
       window.dataLayer = window.dataLayer || [];
       if (!window.gtag) {
-        window.gtag = function(...args: unknown[]) {
+        window.gtag = (...args: unknown[]) => {
           if (window.dataLayer) {
             window.dataLayer.push(args);
           }
@@ -56,10 +55,10 @@ class EnterpriseAnalytics {
       window.gtag('config', measurementId, {
         page_title: 'Centennial Hills Homes for Sale',
         custom_map: {
-          'real_estate_type': 'residential',
-          'market_area': 'centennial_hills',
-          'agent_name': 'jan_duff'
-        }
+          real_estate_type: 'residential',
+          market_area: 'centennial_hills',
+          agent_name: 'jan_duff',
+        },
       });
     }
 
@@ -76,7 +75,7 @@ class EnterpriseAnalytics {
         this.trackEvent({
           category: 'Real Estate',
           action: 'Property Search',
-          label: 'Search Form Submission'
+          label: 'Search Form Submission',
         });
         this.metrics.searchQueries++;
       }
@@ -89,7 +88,7 @@ class EnterpriseAnalytics {
         this.trackEvent({
           category: 'Lead Generation',
           action: 'Contact Request',
-          label: 'Contact Form'
+          label: 'Contact Form',
         });
         this.metrics.contactRequests++;
       }
@@ -106,8 +105,8 @@ class EnterpriseAnalytics {
           label: propertyId || 'Unknown Property',
           customParameters: {
             property_id: propertyId,
-            timestamp: new Date().toISOString()
-          }
+            timestamp: new Date().toISOString(),
+          },
         });
         this.metrics.propertyViews++;
       }
@@ -121,7 +120,7 @@ class EnterpriseAnalytics {
         event_category: event.category,
         event_label: event.label,
         value: event.value,
-        ...event.customParameters
+        ...event.customParameters,
       });
     }
 
@@ -141,14 +140,14 @@ class EnterpriseAnalytics {
       events.push({
         ...event,
         timestamp: new Date().toISOString(),
-        page: window.location.pathname
+        page: window.location.pathname,
       });
-      
+
       // Keep only last 1000 events
       if (events.length > 1000) {
         events.splice(0, events.length - 1000);
       }
-      
+
       localStorage.setItem('enterprise_analytics_events', JSON.stringify(events));
     } catch (error) {
       console.error('Failed to store analytics event:', error);
@@ -165,7 +164,7 @@ class EnterpriseAnalytics {
       return {
         metrics: this.metrics,
         events: events ? JSON.parse(events) : [],
-        exportedAt: new Date().toISOString()
+        exportedAt: new Date().toISOString(),
       };
     } catch (error) {
       console.error('Failed to export analytics data:', error);
@@ -182,8 +181,8 @@ class EnterpriseAnalytics {
       customParameters: {
         search_query: query,
         filters: filters,
-        results_count: filters.resultsCount || 0
-      }
+        results_count: filters.resultsCount || 0,
+      },
     });
   }
 
@@ -196,8 +195,8 @@ class EnterpriseAnalytics {
       customParameters: {
         property_id: propertyId,
         property_type: propertyType,
-        price: price
-      }
+        price: price,
+      },
     });
   }
 
@@ -208,8 +207,8 @@ class EnterpriseAnalytics {
       label: calculatorType,
       customParameters: {
         calculator_type: calculatorType,
-        inputs: inputs
-      }
+        inputs: inputs,
+      },
     });
     this.metrics.calculatorUsage++;
   }
@@ -222,8 +221,8 @@ class EnterpriseAnalytics {
       customParameters: {
         lead_source: source,
         property_id: propertyId,
-        conversion_page: window.location.pathname
-      }
+        conversion_page: window.location.pathname,
+      },
     });
   }
 }

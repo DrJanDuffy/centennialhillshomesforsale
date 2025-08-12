@@ -1,17 +1,16 @@
-
-const https = require('https');
-const fs = require('fs');
-const path = require('path');
+const _https = require('node:https');
+const fs = require('node:fs');
+const path = require('node:path');
 
 // Google Indexing API setup
-const INDEXING_API_ENDPOINT = 'https://indexing.googleapis.com/v3/urlNotifications:publish';
+const _INDEXING_API_ENDPOINT = 'https://indexing.googleapis.com/v3/urlNotifications:publish';
 const SITE_URL = 'https://centennialhillshomesforsale.com';
 
 // Pages to request indexing for
 const pages = [
   '',
   '/about',
-  '/listings', 
+  '/listings',
   '/contact',
   '/centennial-hills',
   '/providence-las-vegas',
@@ -23,18 +22,18 @@ const pages = [
   '/market-update',
   '/services',
   '/faq',
-  '/testimonials'
+  '/testimonials',
 ];
 
 async function requestIndexing() {
   console.log('🔍 Requesting Google indexing for all pages...\n');
 
-  const requests = pages.map(page => {
+  const requests = pages.map((page) => {
     const fullUrl = `${SITE_URL}${page}`;
-    
+
     return {
       url: fullUrl,
-      type: 'URL_UPDATED'
+      type: 'URL_UPDATED',
     };
   });
 
@@ -43,7 +42,7 @@ async function requestIndexing() {
     site: SITE_URL,
     timestamp: new Date().toISOString(),
     pages: requests.length,
-    requests: requests
+    requests: requests,
   };
 
   fs.writeFileSync(
@@ -54,8 +53,8 @@ async function requestIndexing() {
   console.log(`✅ Generated indexing requests for ${requests.length} pages`);
   console.log('📝 Saved to config/indexing-requests.json');
   console.log('\n🔗 Submit these URLs manually in Google Search Console:');
-  
-  requests.forEach(req => {
+
+  requests.forEach((req) => {
     console.log(`   - ${req.url}`);
   });
 
@@ -71,24 +70,21 @@ async function requestIndexing() {
 
 // Create sitemap ping requests
 function pingSitemaps() {
-  const sitemapUrls = [
-    `${SITE_URL}/sitemap.xml`,
-    `${SITE_URL}/sitemap-news.xml`
-  ];
+  const sitemapUrls = [`${SITE_URL}/sitemap.xml`, `${SITE_URL}/sitemap-news.xml`];
 
   console.log('\n🗺️ Sitemap URLs for Google Search Console:');
-  sitemapUrls.forEach(url => {
+  sitemapUrls.forEach((url) => {
     console.log(`   - ${url}`);
   });
 
   // Generate ping URLs for search engines
   const pingUrls = [
     `https://www.google.com/ping?sitemap=${encodeURIComponent(sitemapUrls[0])}`,
-    `https://www.bing.com/ping?sitemap=${encodeURIComponent(sitemapUrls[0])}`
+    `https://www.bing.com/ping?sitemap=${encodeURIComponent(sitemapUrls[0])}`,
   ];
 
   console.log('\n📡 Search Engine Ping URLs:');
-  pingUrls.forEach(url => {
+  pingUrls.forEach((url) => {
     console.log(`   - ${url}`);
   });
 }
@@ -98,14 +94,13 @@ async function main() {
   try {
     await requestIndexing();
     pingSitemaps();
-    
+
     console.log('\n🎉 Indexing setup completed!');
     console.log('\n⚡ Quick Actions:');
     console.log('• Add NEXT_PUBLIC_GA_MEASUREMENT_ID=G-9CKG30GVQR to Secrets');
     console.log('• Add Google Search Console verification code to Secrets');
     console.log('• Deploy your site to make it accessible to Google');
     console.log('• Submit sitemaps in Google Search Console');
-    
   } catch (error) {
     console.error('❌ Error:', error);
   }

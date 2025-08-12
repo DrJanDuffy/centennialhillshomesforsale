@@ -1,8 +1,5 @@
 {
-  "extends": [
-    "next/core-web-vitals",
-    "next/typescript"
-  ],
+  "extends": ["next/core-web-vitals", "next/typescript"],
   "rules": {
     "compat-api/html": "off",
     "react/no-unescaped-entities": "warn",
@@ -21,4 +18,4 @@
       }
     }
   ]
-} 
+}

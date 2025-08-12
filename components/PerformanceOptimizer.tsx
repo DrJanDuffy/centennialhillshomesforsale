@@ -1,5 +1,5 @@
-
-import React, { useEffect } from 'react';
+import type React from 'react';
+import { useEffect } from 'react';
 
 interface PerformanceOptimizerProps {
   enableMonitoring?: boolean;
@@ -10,7 +10,7 @@ interface PerformanceOptimizerProps {
 const PerformanceOptimizer: React.FC<PerformanceOptimizerProps> = ({
   enableMonitoring = true,
   enablePreloading = true,
-  enableLazyLoading = true
+  enableLazyLoading = true,
 }) => {
   useEffect(() => {
     if (enableMonitoring && typeof window !== 'undefined') {
@@ -24,11 +24,11 @@ const PerformanceOptimizer: React.FC<PerformanceOptimizerProps> = ({
               window.gtag('event', 'core_web_vitals', {
                 event_category: 'Web Vitals',
                 event_label: 'LCP',
-                value: Math.round(entry.startTime)
+                value: Math.round(entry.startTime),
               });
             }
           }
-          
+
           if (entry.entryType === 'first-input') {
             const fidEntry = entry as PerformanceEventTiming;
             console.log('FID:', fidEntry.processingStart - fidEntry.startTime);
@@ -36,11 +36,11 @@ const PerformanceOptimizer: React.FC<PerformanceOptimizerProps> = ({
               window.gtag('event', 'core_web_vitals', {
                 event_category: 'Web Vitals',
                 event_label: 'FID',
-                value: Math.round(fidEntry.processingStart - fidEntry.startTime)
+                value: Math.round(fidEntry.processingStart - fidEntry.startTime),
               });
             }
           }
-          
+
           if (entry.entryType === 'layout-shift') {
             const clsEntry = entry as unknown as { value: number };
             console.log('CLS:', clsEntry.value);
@@ -48,7 +48,7 @@ const PerformanceOptimizer: React.FC<PerformanceOptimizerProps> = ({
               window.gtag('event', 'core_web_vitals', {
                 event_category: 'Web Vitals',
                 event_label: 'CLS',
-                value: Math.round(clsEntry.value * 1000)
+                value: Math.round(clsEntry.value * 1000),
               });
             }
           }
@@ -67,10 +67,10 @@ const PerformanceOptimizer: React.FC<PerformanceOptimizerProps> = ({
       const preloadLinks = [
         { href: '/fonts/inter-var.woff2', as: 'font', type: 'font/woff2' },
         { href: '/images/hero-image.jpg', as: 'image' },
-        { href: '/images/dr-jan-duffy-realtor.jpg', as: 'image' }
+        { href: '/images/dr-jan-duffy-realtor.jpg', as: 'image' },
       ];
 
-      preloadLinks.forEach(link => {
+      preloadLinks.forEach((link) => {
         const linkElement = document.createElement('link');
         linkElement.rel = 'preload';
         linkElement.href = link.href;
@@ -85,24 +85,27 @@ const PerformanceOptimizer: React.FC<PerformanceOptimizerProps> = ({
   useEffect(() => {
     if (enableLazyLoading && typeof window !== 'undefined') {
       // Intersection Observer for lazy loading images
-      const imageObserver = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            const img = entry.target as HTMLImageElement;
-            if (img.dataset.src) {
-              img.src = img.dataset.src;
-              img.classList.remove('lazy');
-              imageObserver.unobserve(img);
+      const imageObserver = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              const img = entry.target as HTMLImageElement;
+              if (img.dataset.src) {
+                img.src = img.dataset.src;
+                img.classList.remove('lazy');
+                imageObserver.unobserve(img);
+              }
             }
-          }
-        });
-      }, {
-        rootMargin: '50px 0px',
-        threshold: 0.01
-      });
+          });
+        },
+        {
+          rootMargin: '50px 0px',
+          threshold: 0.01,
+        }
+      );
 
       // Observe all lazy images
-      document.querySelectorAll('img[data-src]').forEach(img => {
+      document.querySelectorAll('img[data-src]').forEach((img) => {
         imageObserver.observe(img);
       });
 
@@ -117,10 +120,10 @@ const PerformanceOptimizer: React.FC<PerformanceOptimizerProps> = ({
       '//maps.googleapis.com',
       '//images.unsplash.com',
       '//fonts.googleapis.com',
-      '//fonts.gstatic.com'
+      '//fonts.gstatic.com',
     ];
 
-    domains.forEach(domain => {
+    domains.forEach((domain) => {
       const link = document.createElement('link');
       link.rel = 'dns-prefetch';
       link.href = domain;
@@ -133,10 +136,10 @@ const PerformanceOptimizer: React.FC<PerformanceOptimizerProps> = ({
     const criticalDomains = [
       'https://fonts.googleapis.com',
       'https://fonts.gstatic.com',
-      'https://images.unsplash.com'
+      'https://images.unsplash.com',
     ];
 
-    criticalDomains.forEach(domain => {
+    criticalDomains.forEach((domain) => {
       const link = document.createElement('link');
       link.rel = 'preconnect';
       link.href = domain;

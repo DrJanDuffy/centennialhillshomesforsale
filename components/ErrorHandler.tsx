@@ -1,6 +1,6 @@
 'use client';
 
-import React, { Component, ReactNode, ErrorInfo } from 'react';
+import { Component, type ErrorInfo, type ReactNode } from 'react';
 
 interface Props {
   children: ReactNode;
@@ -33,7 +33,7 @@ class ErrorHandler extends Component<Props, State> {
     if (typeof window !== 'undefined' && window.gtag) {
       window.gtag('event', 'exception', {
         description: error.message,
-        fatal: false
+        fatal: false,
       });
     }
   }
@@ -44,25 +44,27 @@ class ErrorHandler extends Component<Props, State> {
 
   render() {
     if (this.state.hasError) {
-      return this.props.fallback || (
-        <div className="error-handler-container">
-          <div className="error-handler-content">
-            <h2>Something went wrong</h2>
-            <p>Please try refreshing the page or contact support if the issue persists.</p>
-            <button 
-              onClick={this.handleRetry}
-              className="error-handler-btn error-handler-btn-primary"
-            >
-              Try Again
-            </button>
-            <button 
-              onClick={() => window.location.reload()}
-              className="error-handler-btn error-handler-btn-secondary"
-            >
-              Refresh Page
-            </button>
+      return (
+        this.props.fallback || (
+          <div className="error-handler-container">
+            <div className="error-handler-content">
+              <h2>Something went wrong</h2>
+              <p>Please try refreshing the page or contact support if the issue persists.</p>
+              <button
+                onClick={this.handleRetry}
+                className="error-handler-btn error-handler-btn-primary"
+              >
+                Try Again
+              </button>
+              <button
+                onClick={() => window.location.reload()}
+                className="error-handler-btn error-handler-btn-secondary"
+              >
+                Refresh Page
+              </button>
+            </div>
           </div>
-        </div>
+        )
       );
     }
 

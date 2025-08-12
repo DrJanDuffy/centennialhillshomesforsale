@@ -1,6 +1,14 @@
-import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { TrendingUp, Users, DollarSign, Eye, MousePointer, Clock, AlertTriangle } from 'lucide-react';
+import {
+  AlertTriangle,
+  Clock,
+  DollarSign,
+  Eye,
+  MousePointer,
+  TrendingUp,
+  Users,
+} from 'lucide-react';
+import { useEffect, useState } from 'react';
 
 interface AnalyticsData {
   pageViews: number;
@@ -17,13 +25,12 @@ const AnalyticsDashboard: React.FC = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
-
   useEffect(() => {
     const fetchAnalytics = async () => {
       try {
         setLoading(true);
         // Simulate fetching data
-        await new Promise(resolve => setTimeout(resolve, 1000));
+        await new Promise((resolve) => setTimeout(resolve, 1000));
         setAnalyticsData({
           pageViews: 1200,
           uniqueVisitors: 800,

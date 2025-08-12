@@ -1,12 +1,12 @@
-import React from 'react';
 import { motion } from 'framer-motion';
+import React from 'react';
 import Layout from '../components/Layout';
 import RealScoutWidget from '../components/widgets/RealScoutWidget';
 
 export default function About() {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const scrollRef = React.useRef(null);
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const _scrollRef = React.useRef(null);
 
   return (
     <Layout
@@ -14,9 +14,8 @@ export default function About() {
       description="Learn about Dr. Jan Duffy, Top 1% Las Vegas REALTOR® with 30+ years experience in Centennial Hills, Providence, and Skye Canyon luxury real estate. Call (702) 903-1952."
       canonical="https://centennialhillshomesforsale.com/about/"
     >
-
       <main className="container">
-        <motion.section 
+        <motion.section
           className="section hero-about"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -35,21 +34,21 @@ export default function About() {
             </div>
             <div className="about-description">
               <p>
-                With over 30 years of Las Vegas real estate experience, Dr. Jan Duffy specializes in luxury 
-                and new-build homes in North Las Vegas master-planned communities. From Centennial Hills to 
-                Providence, Skye Canyon to Summerlin, Dr. Duffy provides expert guidance with same-day showings 
-                and personalized service available 24/7.
+                With over 30 years of Las Vegas real estate experience, Dr. Jan Duffy specializes in
+                luxury and new-build homes in North Las Vegas master-planned communities. From
+                Centennial Hills to Providence, Skye Canyon to Summerlin, Dr. Duffy provides expert
+                guidance with same-day showings and personalized service available 24/7.
               </p>
               <p>
-                Ranked in the Top 1% of Las Vegas REALTORS®, Dr. Duffy offers expert market analysis, 
-                professional photography, and comprehensive marketing strategies to help you buy or sell 
-                your Las Vegas home with confidence.
+                Ranked in the Top 1% of Las Vegas REALTORS®, Dr. Duffy offers expert market
+                analysis, professional photography, and comprehensive marketing strategies to help
+                you buy or sell your Las Vegas home with confidence.
               </p>
             </div>
           </div>
         </motion.section>
 
-        <motion.section 
+        <motion.section
           className="section"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -68,7 +67,7 @@ export default function About() {
           </div>
         </motion.section>
 
-        <motion.section 
+        <motion.section
           className="section"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -88,7 +87,7 @@ export default function About() {
         </motion.section>
 
         {/* RealScout Your Listings */}
-        <motion.section 
+        <motion.section
           className="section"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -98,17 +97,17 @@ export default function About() {
             <h2>Your Listings</h2>
             <p>Browse our latest properties in Centennial Hills and surrounding areas</p>
           </div>
-          <realscout-your-listings 
-            agent-encoded-id="QWdlbnQtMjI1MDUw" 
-            sort-order="STATUS_AND_SIGNIFICANT_CHANGE" 
-            listing-status="For Sale,Sold" 
-            property-types="SFR" 
-            price-min="500000">
-          </realscout-your-listings>
+          <realscout-your-listings
+            agent-encoded-id="QWdlbnQtMjI1MDUw"
+            sort-order="STATUS_AND_SIGNIFICANT_CHANGE"
+            listing-status="For Sale,Sold"
+            property-types="SFR"
+            price-min="500000"
+          ></realscout-your-listings>
         </motion.section>
 
         {/* RealScout Office Listings */}
-        <motion.section 
+        <motion.section
           className="section"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -118,17 +117,17 @@ export default function About() {
             <h2>Current Listings</h2>
             <p>Browse our latest properties in Centennial Hills and surrounding areas</p>
           </div>
-          <realscout-office-listings 
-            agent-encoded-id="QWdlbnQtMjI1MDUw" 
-            sort-order="STATUS_AND_SIGNIFICANT_CHANGE" 
-            listing-status="For Sale" 
-            property-types="SFR,MF,TC" 
-            price-min="600000" 
-            price-max="1200000">
-          </realscout-office-listings>
+          <realscout-office-listings
+            agent-encoded-id="QWdlbnQtMjI1MDUw"
+            sort-order="STATUS_AND_SIGNIFICANT_CHANGE"
+            listing-status="For Sale"
+            property-types="SFR,MF,TC"
+            price-min="600000"
+            price-max="1200000"
+          ></realscout-office-listings>
         </motion.section>
 
-        <motion.section 
+        <motion.section
           className="featured-listings-section section"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
@@ -146,7 +145,7 @@ export default function About() {
           />
         </motion.section>
 
-        <motion.section 
+        <motion.section
           className="cta-section section"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
@@ -155,20 +154,20 @@ export default function About() {
           <div className="cta-container">
             <h2>Ready to Find Your Dream Home?</h2>
             <p>
-              Let&apos;s start your journey to finding the perfect property in Centennial Hills.
-              Our team is here to help every step of the way.
+              Let&apos;s start your journey to finding the perfect property in Centennial Hills. Our
+              team is here to help every step of the way.
             </p>
             <div className="cta-buttons">
-              <motion.a 
-                href="/contact" 
+              <motion.a
+                href="/contact"
                 className="btn btn-primary"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
               >
                 Contact Us
               </motion.a>
-              <motion.a 
-                href="/listings" 
+              <motion.a
+                href="/listings"
                 className="btn btn-secondary"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}

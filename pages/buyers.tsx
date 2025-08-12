@@ -1,17 +1,17 @@
-import React from 'react';
-import Layout from '@/components/Layout';
-import Link from 'next/link';
-import { 
-  Search, 
-  DollarSign, 
-  FileText, 
-  Phone, 
-  Mail, 
-  MapPin, 
-  CheckCircle,
+import {
   ArrowRight,
-  Star
+  CheckCircle,
+  DollarSign,
+  FileText,
+  Mail,
+  MapPin,
+  Phone,
+  Search,
+  Star,
 } from 'lucide-react';
+import Link from 'next/link';
+import type React from 'react';
+import Layout from '@/components/Layout';
 
 const BuyersPage: React.FC = () => {
   const buyerServices = [
@@ -19,48 +19,58 @@ const BuyersPage: React.FC = () => {
       icon: Search,
       title: 'Property Search',
       description: 'Access to exclusive listings in Centennial Hills, Providence, and Skye Canyon',
-      features: ['MLS Access', 'Custom Alerts', 'Virtual Tours', 'Market Analysis']
+      features: ['MLS Access', 'Custom Alerts', 'Virtual Tours', 'Market Analysis'],
     },
     {
       icon: DollarSign,
       title: 'Financing Guidance',
       description: 'Expert advice on mortgages, loans, and financial planning',
-      features: ['Pre-approval Help', 'Rate Comparison', 'Down Payment Options', 'Closing Cost Analysis']
+      features: [
+        'Pre-approval Help',
+        'Rate Comparison',
+        'Down Payment Options',
+        'Closing Cost Analysis',
+      ],
     },
     {
       icon: FileText,
       title: 'Negotiation Support',
       description: 'Professional representation to get you the best deal',
-      features: ['Offer Strategy', 'Market Value Analysis', 'Inspection Coordination', 'Closing Support']
-    }
+      features: [
+        'Offer Strategy',
+        'Market Value Analysis',
+        'Inspection Coordination',
+        'Closing Support',
+      ],
+    },
   ];
 
   const buyerSteps = [
     {
       step: '01',
       title: 'Initial Consultation',
-      description: 'Meet with Dr. Jan Duffy to discuss your needs, budget, and timeline'
+      description: 'Meet with Dr. Jan Duffy to discuss your needs, budget, and timeline',
     },
     {
       step: '02',
       title: 'Property Search',
-      description: 'Receive customized property recommendations and MLS access'
+      description: 'Receive customized property recommendations and MLS access',
     },
     {
       step: '03',
       title: 'Property Viewing',
-      description: 'Schedule showings and virtual tours of your preferred properties'
+      description: 'Schedule showings and virtual tours of your preferred properties',
     },
     {
       step: '04',
       title: 'Offer & Negotiation',
-      description: 'Submit offers with expert guidance and negotiation support'
+      description: 'Submit offers with expert guidance and negotiation support',
     },
     {
       step: '05',
       title: 'Closing Process',
-      description: 'Complete inspections, financing, and finalize your purchase'
-    }
+      description: 'Complete inspections, financing, and finalize your purchase',
+    },
   ];
 
   return (
@@ -74,9 +84,7 @@ const BuyersPage: React.FC = () => {
         <section className="bg-gradient-to-r from-blue-600 to-blue-800 text-white">
           <div className="container mx-auto px-4 py-16">
             <div className="max-w-4xl mx-auto text-center">
-              <h1 className="text-4xl md:text-6xl font-bold mb-6">
-                Your Dream Home Awaits
-              </h1>
+              <h1 className="text-4xl md:text-6xl font-bold mb-6">Your Dream Home Awaits</h1>
               <p className="text-xl md:text-2xl mb-8 opacity-90">
                 Expert guidance through every step of your home buying journey in Centennial Hills
               </p>
@@ -109,7 +117,8 @@ const BuyersPage: React.FC = () => {
                 Why Choose Dr. Jan Duffy?
               </h2>
               <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-                Ranked in the Top 1% of Las Vegas REALTORS® with 20+ years of experience in master-planned communities
+                Ranked in the Top 1% of Las Vegas REALTORS® with 20+ years of experience in
+                master-planned communities
               </p>
             </div>
 
@@ -119,21 +128,27 @@ const BuyersPage: React.FC = () => {
                   <Star className="w-8 h-8 text-blue-600" />
                 </div>
                 <h3 className="text-xl font-semibold mb-2">Top 1% REALTOR®</h3>
-                <p className="text-gray-600">Consistently ranked among the highest-performing agents in Las Vegas</p>
+                <p className="text-gray-600">
+                  Consistently ranked among the highest-performing agents in Las Vegas
+                </p>
               </div>
               <div className="text-center p-6">
                 <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
                   <MapPin className="w-8 h-8 text-blue-600" />
                 </div>
                 <h3 className="text-xl font-semibold mb-2">Local Expert</h3>
-                <p className="text-gray-600">Deep knowledge of Centennial Hills, Providence, and Skye Canyon markets</p>
+                <p className="text-gray-600">
+                  Deep knowledge of Centennial Hills, Providence, and Skye Canyon markets
+                </p>
               </div>
               <div className="text-center p-6">
                 <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
                   <Phone className="w-8 h-8 text-blue-600" />
                 </div>
                 <h3 className="text-xl font-semibold mb-2">24/7 Availability</h3>
-                <p className="text-gray-600">Available whenever you need assistance, including same-day showings</p>
+                <p className="text-gray-600">
+                  Available whenever you need assistance, including same-day showings
+                </p>
               </div>
             </div>
           </div>
@@ -147,7 +162,8 @@ const BuyersPage: React.FC = () => {
                 Comprehensive Buyer Services
               </h2>
               <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-                From initial search to closing, we provide complete support for your home buying journey
+                From initial search to closing, we provide complete support for your home buying
+                journey
               </p>
             </div>
 
@@ -233,4 +249,4 @@ const BuyersPage: React.FC = () => {
   );
 };
 
-export default BuyersPage; 
+export default BuyersPage;

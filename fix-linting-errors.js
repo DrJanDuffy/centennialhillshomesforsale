@@ -1,34 +1,35 @@
-const fs = require('fs');
-const path = require('path');
+const fs = require('node:fs');
+const path = require('node:path');
 
 // Function to fix unused imports and variables
 function fixUnusedImports(filePath) {
   try {
-    let content = fs.readFileSync(filePath, 'utf8');
+    const content = fs.readFileSync(filePath, 'utf8');
     let modified = false;
 
     // Add eslint-disable comments for variables that are intentionally unused
     const lines = content.split('\n');
     const newLines = [];
-    
+
     for (let i = 0; i < lines.length; i++) {
       const line = lines[i];
-      
+
       // Check if this line declares a variable that might be unused
       if (line.match(/(const|let|var)\s+\w+\s*=/)) {
         const varName = line.match(/(const|let|var)\s+(\w+)\s*=/)?.[2];
         if (varName) {
           // Check if this variable is used elsewhere in the file
           const usageCount = (content.match(new RegExp(`\\b${varName}\\b`, 'g')) || []).length;
-          if (usageCount <= 1) { // Only declared, not used
+          if (usageCount <= 1) {
+            // Only declared, not used
             newLines.push(`// eslint-disable-next-line @typescript-eslint/no-unused-vars`);
           }
         }
       }
-      
+
       newLines.push(line);
     }
-    
+
     if (newLines.length !== lines.length) {
       fs.writeFileSync(filePath, newLines.join('\n'));
       console.log(`Fixed unused variables in ${filePath}`);
@@ -49,10 +50,10 @@ function fixUnescapedEntities(filePath) {
     let modified = false;
 
     // Fix apostrophes in JSX text
-    content = content.replace(/(\w)'(\w)/g, "$1&apos;$2");
-    content = content.replace(/(\w)'(\s)/g, "$1&apos;$2");
-    content = content.replace(/(\s)'(\w)/g, "$1&apos;$2");
-    
+    content = content.replace(/(\w)'(\w)/g, '$1&apos;$2');
+    content = content.replace(/(\w)'(\s)/g, '$1&apos;$2');
+    content = content.replace(/(\s)'(\w)/g, '$1&apos;$2');
+
     // Fix quotes in JSX text
     content = content.replace(/(\w)"(\w)/g, '$1&quot;$2');
     content = content.replace(/(\w)"(\s)/g, '$1&quot;$2');
@@ -79,10 +80,7 @@ function fixAnchorTags(filePath) {
     let modified = false;
 
     // Replace anchor tags with Next.js Link components
-    content = content.replace(
-      /<a\s+href="\/([^"]+)"([^>]*)>/g,
-      '<Link href="/$1"$2>'
-    );
+    content = content.replace(/<a\s+href="\/([^"]+)"([^>]*)>/g, '<Link href="/$1"$2>');
     content = content.replace(/<\/a>/g, '</Link>');
 
     // Add Link import if not present
@@ -147,7 +145,7 @@ function processFiles() {
 
   // Process pages
   if (fs.existsSync(pagesDir)) {
-    fs.readdirSync(pagesDir).forEach(file => {
+    fs.readdirSync(pagesDir).forEach((file) => {
       if (file.endsWith('.tsx') || file.endsWith('.ts')) {
         const filePath = path.join(pagesDir, file);
         fixUnusedImports(filePath);
@@ -160,7 +158,7 @@ function processFiles() {
 
   // Process components
   if (fs.existsSync(componentsDir)) {
-    fs.readdirSync(componentsDir).forEach(file => {
+    fs.readdirSync(componentsDir).forEach((file) => {
       if (file.endsWith('.tsx') || file.endsWith('.ts')) {
         const filePath = path.join(componentsDir, file);
         fixUnusedImports(filePath);
@@ -173,7 +171,7 @@ function processFiles() {
 
   // Process lib
   if (fs.existsSync(libDir)) {
-    fs.readdirSync(libDir).forEach(file => {
+    fs.readdirSync(libDir).forEach((file) => {
       if (file.endsWith('.tsx') || file.endsWith('.ts')) {
         const filePath = path.join(libDir, file);
         fixUnusedImports(filePath);
@@ -186,4 +184,4 @@ function processFiles() {
 // Run the script
 console.log('Starting to fix linting errors...');
 processFiles();
-console.log('Finished fixing linting errors.'); 
+console.log('Finished fixing linting errors.');

@@ -1,4 +1,3 @@
-
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 
@@ -21,6 +20,6 @@ export const useRouterSafe = () => {
     isReady: router.isReady && isClient,
     pathname: router.pathname || '/',
     asPath: router.asPath || '/',
-    query: router.query || {}
+    query: router.query || {},
   };
 };

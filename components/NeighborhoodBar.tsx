@@ -1,7 +1,11 @@
+import { useState } from 'react';
 
-import React, { useState } from 'react';
-
-export type NeighborhoodName = 'Centennial Hills' | 'The Trails' | 'Tournament Hills' | 'Skye Canyon' | 'Sun City Aliante';
+export type NeighborhoodName =
+  | 'Centennial Hills'
+  | 'The Trails'
+  | 'Tournament Hills'
+  | 'Skye Canyon'
+  | 'Sun City Aliante';
 
 interface NeighborhoodBarProps {
   currentNeighborhood: NeighborhoodName;
@@ -11,12 +15,15 @@ interface NeighborhoodBarProps {
 const neighborhoods: NeighborhoodName[] = [
   'Centennial Hills',
   'The Trails',
-  'Tournament Hills', 
+  'Tournament Hills',
   'Skye Canyon',
-  'Sun City Aliante'
+  'Sun City Aliante',
 ];
 
-export default function NeighborhoodBar({ currentNeighborhood, onNeighborhoodChange }: NeighborhoodBarProps) {
+export default function NeighborhoodBar({
+  currentNeighborhood,
+  onNeighborhoodChange,
+}: NeighborhoodBarProps) {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
@@ -26,10 +33,7 @@ export default function NeighborhoodBar({ currentNeighborhood, onNeighborhoodCha
           <span className="neighborhood-label">
             📍 Currently browsing: <strong>{currentNeighborhood}</strong>
           </span>
-          <button 
-            className="change-neighborhood"
-            onClick={() => setIsOpen(!isOpen)}
-          >
+          <button className="change-neighborhood" onClick={() => setIsOpen(!isOpen)}>
             Change Area
           </button>
           {isOpen && (
