@@ -155,6 +155,7 @@ export default function Header() {
             className={`menu-toggle ${isMenuOpen ? 'active' : ''}`}
             onClick={toggleMenu}
             aria-label="Toggle menu"
+            data-mobile-menu="true"
             {...(isMenuOpen ? { 'aria-expanded': 'true' } : { 'aria-expanded': 'false' })}
           >
             <span></span>
@@ -165,7 +166,7 @@ export default function Header() {
       </div>
 
       {/* Mobile Navigation Menu */}
-      <div className={`nav ${isMenuOpen ? 'nav--open' : ''}`}>
+      <div className={`nav ${isMenuOpen ? 'nav--open' : ''}`} data-mobile-menu-content="true">
         <div className="nav-menu">
           {/* Mobile Contact */}
           <div className="pb-4 border-b border-primary">

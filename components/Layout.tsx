@@ -4,6 +4,7 @@ import { useRouter } from 'next/router';
 import Header from './Header';
 import Footer from './Footer';
 import GoogleSearchConsole from './GoogleSearchConsole';
+import Script from 'next/script';
 
 interface LayoutProps {
   children: React.ReactNode;
@@ -195,6 +196,18 @@ const Layout: React.FC<LayoutProps> = ({
         </main>
         <Footer />
       </div>
+      
+      {/* UI Fixes Script */}
+      <Script
+        src="/js/ui-fixes.js"
+        strategy="afterInteractive"
+        onLoad={() => {
+          console.log('UI Fixes loaded successfully');
+        }}
+        onError={(e) => {
+          console.error('Failed to load UI Fixes:', e);
+        }}
+      />
     </>
   );
 };

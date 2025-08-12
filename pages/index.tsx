@@ -6,6 +6,8 @@ import Layout from '../components/Layout';
 import GoogleTagManager from '../components/GoogleTagManager';
 import PerformanceOptimizer from '../components/PerformanceOptimizer';
 import FAQSection from '../components/FAQSection';
+import EnhancedPropertySearch from '../components/EnhancedPropertySearch';
+import EnhancedContactForm from '../components/EnhancedContactForm';
 import {
   Star,
   MapPin,
@@ -61,12 +63,6 @@ const LeadCaptureForm = dynamic(() => import('../components/LeadCaptureForm'), {
 
 const HomePage: React.FC = () => {
   const [currentTestimonial, setCurrentTestimonial] = useState(0);
-  const [searchFilters, setSearchFilters] = useState({
-    location: '',
-    priceRange: '',
-    bedrooms: '',
-    propertyType: ''
-  });
   const [showFloatingMenu, setShowFloatingMenu] = useState(false);
 
   useEffect(() => {
@@ -192,10 +188,7 @@ const HomePage: React.FC = () => {
     setCurrentTestimonial((prev) => (prev - 1 + testimonials.length) % testimonials.length);
   };
 
-  const handleSearch = () => {
-    // Implement search functionality
-    console.log('Searching with filters:', searchFilters);
-  };
+
 
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -346,102 +339,16 @@ const HomePage: React.FC = () => {
         </motion.div>
       </section>
 
-      {/* Quick Search Section */}
+            {/* Enhanced Property Search Section */}
       <section className="section bg-secondary -mt-20 relative z-20">
         <div className="container">
-          <motion.div 
-            className="bg-white rounded-2xl shadow-2xl p-8"
-            initial={{ opacity: 0, y: 50 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            viewport={{ once: true }}
-          >
-            <div className="text-center mb-8">
-              <h2 className="text-3xl font-bold mb-4">Find Your Perfect Home</h2>
-              <p className="text-secondary">Use our advanced search to find properties that match your criteria</p>
-            </div>
-            
-            <div className="grid md:grid-cols-5 gap-6">
-              <div className="form-group">
-                <label className="form-label" htmlFor="location-select">Location</label>
-                <select 
-                  id="location-select" 
-                  className="form-input" 
-                  value={searchFilters.location}
-                  onChange={(e) => setSearchFilters({...searchFilters, location: e.target.value})}
-                  aria-label="Select location"
-                >
-                  <option value="">All Areas</option>
-                  <option value="centennial-hills">Centennial Hills</option>
-                  <option value="providence">Providence</option>
-                  <option value="skye-canyon">Skye Canyon</option>
-                </select>
-              </div>
-              
-              <div className="form-group">
-                <label className="form-label" htmlFor="price-select">Price Range</label>
-                <select 
-                  id="price-select" 
-                  className="form-input"
-                  value={searchFilters.priceRange}
-                  onChange={(e) => setSearchFilters({...searchFilters, priceRange: e.target.value})}
-                  aria-label="Select price range"
-                >
-                  <option value="">Any Price</option>
-                  <option value="300-500">$300K - $500K</option>
-                  <option value="500-750">$500K - $750K</option>
-                  <option value="750-1000">$750K - $1M</option>
-                  <option value="1000+">$1M+</option>
-                </select>
-              </div>
-              
-              <div className="form-group">
-                <label className="form-label" htmlFor="bedrooms-select">Bedrooms</label>
-                <select 
-                  id="bedrooms-select" 
-                  className="form-input"
-                  value={searchFilters.bedrooms}
-                  onChange={(e) => setSearchFilters({...searchFilters, bedrooms: e.target.value})}
-                  aria-label="Select number of bedrooms"
-                >
-                  <option value="">Any</option>
-                  <option value="1">1+</option>
-                  <option value="2">2+</option>
-                  <option value="3">3+</option>
-                  <option value="4">4+</option>
-                </select>
-              </div>
-              
-              <div className="form-group">
-                <label className="form-label" htmlFor="property-type-select">Property Type</label>
-                <select 
-                  id="property-type-select" 
-                  className="form-input"
-                  value={searchFilters.propertyType}
-                  onChange={(e) => setSearchFilters({...searchFilters, propertyType: e.target.value})}
-                  aria-label="Select property type"
-                >
-                  <option value="">All Types</option>
-                  <option value="single-family">Single Family</option>
-                  <option value="townhouse">Townhouse</option>
-                  <option value="condo">Condo</option>
-                  <option value="luxury">Luxury</option>
-                </select>
-              </div>
-              
-              <div className="form-group">
-                <motion.button 
-                  className="btn btn-primary w-full h-full"
-                  whileHover={{ scale: 1.02 }}
-                  whileTap={{ scale: 0.98 }}
-                  onClick={handleSearch}
-                >
-                  <Search className="w-5 h-5 mr-2" />
-                  Search
-                </motion.button>
-              </div>
-            </div>
-          </motion.div>
+          <EnhancedPropertySearch 
+            onSearch={(filters) => {
+              console.log('Search filters:', filters);
+              // Handle search results
+            }}
+            showAdvanced={false}
+          />
         </div>
       </section>
 
@@ -886,24 +793,19 @@ const HomePage: React.FC = () => {
         </div>
       </section>
 
-      {/* Lead Capture */}
+      {/* Enhanced Contact Form */}
       <section className="section bg-gradient-to-r from-primary-color to-secondary-color">
         <div className="container">
-          <div className="max-w-4xl mx-auto text-center">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8 }}
-              viewport={{ once: true }}
-            >
-              <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
-                Ready to Find Your Dream Home?
-              </h2>
-              <p className="text-xl text-white/90 mb-8">
-                Get personalized property recommendations and expert guidance from Dr. Jan Duffy
-              </p>
-              <LeadCaptureForm trigger="homepage" onClose={() => {}} />
-            </motion.div>
+          <div className="max-w-4xl mx-auto">
+            <EnhancedContactForm
+              onSubmit={(data) => {
+                console.log('Contact form submitted:', data);
+                // Handle form submission
+              }}
+              showPropertyFields={true}
+              title="Ready to Find Your Dream Home?"
+              description="Get personalized property recommendations and expert guidance from Dr. Jan Duffy. Fill out the form below and we'll get back to you within 24 hours."
+            />
           </div>
         </div>
       </section>
