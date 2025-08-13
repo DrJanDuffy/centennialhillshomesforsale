@@ -1,15 +1,8 @@
 const crypto = require('node:crypto');
-const withPWA = require('next-pwa')({
-  dest: 'public',
-  register: false,
-  skipWaiting: false,
-  disable: true,
-  runtimeCaching: [],
-});
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  // Removed output: 'export' to work with Vercel
+  // Vercel optimizations
   basePath: '',
   reactStrictMode: true,
   swcMinify: true,
@@ -17,14 +10,34 @@ const nextConfig = {
   generateEtags: false,
   compress: true,
 
+  // Image optimization for Vercel
   images: {
-    unoptimized: false, // Changed to false for Vercel
+    unoptimized: false,
     domains: ['images.unsplash.com', 'cdn.pixabay.com', 'source.unsplash.com'],
     formats: ['image/webp', 'image/avif'],
+    // Vercel-specific image settings
+    minimumCacheTTL: 60,
+    dangerouslyAllowSVG: true,
+    contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",
   },
 
+  // Production optimizations
   compiler: {
     removeConsole: process.env.NODE_ENV === 'production',
+  },
+
+  // Experimental features for Vercel
+  experimental: {
+    optimizeCss: true,
+    optimizePackageImports: ['@radix-ui/react-icons', 'lucide-react'],
+    turbo: {
+      rules: {
+        '*.svg': {
+          loaders: ['@svgr/webpack'],
+          as: '*.js',
+        },
+      },
+    },
   },
 
   webpack: (config, { isServer, dev, webpack }) => {
@@ -46,7 +59,7 @@ const nextConfig = {
       };
     }
 
-    // Bundle critical libraries together
+    // Optimized chunk splitting for Vercel
     config.optimization = {
       ...config.optimization,
       splitChunks: {
@@ -114,40 +127,6 @@ const nextConfig = {
       if (process.env.ANALYZE === 'true') {
         const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
         
-        // Enhanced webpack stats for better analysis
-        config.stats = {
-          ...config.stats,
-          chunks: true,
-          chunkModules: true,
-          modules: true,
-          reasons: true,
-          moduleTrace: true,
-          errorDetails: true,
-          chunkOrigins: true,
-          publicPath: true,
-          entrypoints: true,
-          children: true,
-          warnings: true,
-          warningsFilter: [],
-          assets: true,
-          assetsSort: 'size',
-          chunksSort: 'size',
-          modulesSort: 'size',
-          // Additional detailed stats (valid webpack properties)
-          source: true,
-          timings: true,
-          builtAt: true,
-          version: true,
-          hash: true,
-          colors: true,
-          env: true,
-          performance: true,
-          optimizationBailout: true,
-          usedExports: true,
-          providedExports: true,
-          depth: true,
-        };
-
         config.plugins.push(
           new BundleAnalyzerPlugin({
             analyzerMode: 'static',
@@ -172,7 +151,6 @@ const nextConfig = {
               assetsSort: 'size',
               chunksSort: 'size',
               modulesSort: 'size',
-              // Enhanced stats options (valid webpack properties)
               source: true,
               timings: true,
               builtAt: true,
@@ -185,18 +163,8 @@ const nextConfig = {
               usedExports: true,
               providedExports: true,
               depth: true,
-              // Additional detailed analysis options
-              chunkRelations: true,
-              chunkGroupAuxiliary: true,
-              chunkGroupChildren: true,
-              chunkGroupRoot: true,
-              dependentModules: true,
-              orphanModules: true,
-              outputPath: true,
-              warningsFilter: [],
             },
             logLevel: 'info',
-            // Additional analyzer options
             analyzerHost: '127.0.0.1',
             analyzerPort: 8888,
             analyzerUrl: 'http://127.0.0.1:8888',
@@ -220,4 +188,4 @@ const nextConfig = {
   },
 };
 
-module.exports = withPWA(nextConfig);
+module.exports = nextConfig;

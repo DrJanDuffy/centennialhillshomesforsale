@@ -1,18 +1,66 @@
-.git
-.gitignore
+# Dependencies and build artifacts
 node_modules
+.next
+out
+dist
+build
+coverage
+
+# Development and IDE files
 .env
 .env.*
+.env.local
+.env.development
+.env.test
+.env.production
 *.log
 .DS_Store
 .vscode
 .idea
+.cursor
+*.tsbuildinfo
+
+# Documentation and scripts
 *.md
 !README.md
 docs
+scripts
+attached_assets
+api-backup
+
+# Testing and development
 tests
-coverage
-dist
-build
+test-*.js
+fix-*.js
+deploy-*.js
+cleanup-*.js
+parse-*.js
+configure-*.js
+taskmaster-*.js
+*.ps1
+
+# Configuration files (not needed in production)
+.biomeignore
+biome.json
+replit.toml
+.replit
+wrangler.toml
+.github
+
+# Temporary and backup files
 tmp
-temp 
+temp
+*.backup
+*.bak
+*.tmp
+
+# Large assets that should be served from CDN
+public/data/*.json
+public/*.txt
+public/*.md
+
+# Development-specific files
+UI-FIXES-IMPLEMENTATION.md
+DEPLOYMENT-*.md
+audit-report*.md
+BROWSER-COMPATIBILITY.md 
