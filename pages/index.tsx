@@ -29,24 +29,42 @@ const HomePage: React.FC = () => {
       <ModernFeaturedProperties />
       
       {/* Market Data Dashboard Section */}
-      <section className="section bg-gray-50 py-12" id="market-dashboard">
-        <div className="container mx-auto px-4">
-          <h2 className="text-3xl md:text-4xl font-bold text-blue-600 mb-6 text-center">
+      <section className="section bg-gradient-soft" id="market-dashboard">
+        <div className="container">
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-primary-color mb-8 text-center">
             Centennial Hills Market Trends
           </h2>
 
           {/* Tab navigation */}
-          <div className="flex justify-center mb-8 gap-4">
-            <button type="button" className="tab-btn px-4 py-2 bg-blue-600 text-white rounded transition-colors duration-200" data-tab="price">Price Trend</button>
-            <button type="button" className="tab-btn px-4 py-2 bg-gray-200 text-gray-800 rounded transition-colors duration-200" data-tab="inventory">Inventory</button>
-            <button type="button" className="tab-btn px-4 py-2 bg-gray-200 text-gray-800 rounded transition-colors duration-200" data-tab="dom">Days on Market</button>
+          <div className="flex flex-wrap justify-center mb-12 gap-4">
+            <button 
+              type="button" 
+              className="tab-btn px-6 py-3 bg-secondary-color text-white rounded-lg font-semibold transition-all duration-300 hover:bg-secondary-dark hover:scale-105" 
+              data-tab="price"
+            >
+              Price Trend
+            </button>
+            <button 
+              type="button" 
+              className="tab-btn px-6 py-3 bg-gray-200 text-gray-800 rounded-lg font-semibold transition-all duration-300 hover:bg-gray-300 hover:scale-105" 
+              data-tab="inventory"
+            >
+              Inventory
+            </button>
+            <button 
+              type="button" 
+              className="tab-btn px-6 py-3 bg-gray-200 text-gray-800 rounded-lg font-semibold transition-all duration-300 hover:bg-gray-300 hover:scale-105" 
+              data-tab="dom"
+            >
+              Days on Market
+            </button>
           </div>
 
           {/* Canvas elements – only one shown at a time */}
-          <div className="relative">
-            <canvas id="chart-price" className="tab-canvas"></canvas>
-            <canvas id="chart-inventory" className="tab-canvas hidden"></canvas>
-            <canvas id="chart-dom" className="tab-canvas hidden"></canvas>
+          <div className="relative max-w-4xl mx-auto">
+            <canvas id="chart-price" className="tab-canvas w-full h-96"></canvas>
+            <canvas id="chart-inventory" className="tab-canvas hidden w-full h-96"></canvas>
+            <canvas id="chart-dom" className="tab-canvas hidden w-full h-96"></canvas>
           </div>
         </div>
       </section>

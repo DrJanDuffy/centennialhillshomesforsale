@@ -102,33 +102,26 @@ const ModernInteractiveMap: React.FC = () => {
     return locations.filter(location => location.type === activeFilter);
   }, [locations, activeFilter]);
 
-  const getMarkerColor = useCallback((type: string): string => {
+  const getMarkerColor = useCallback((type: string) => {
     switch (type) {
-      case 'neighborhood': return '#3B82F6';
-      case 'school': return '#10B981';
-      case 'shopping': return '#8B5CF6';
-      case 'park': return '#059669';
-      case 'golf': return '#F59E0B';
-      default: return '#6B7280';
+      case 'neighborhood': return '#3B82F6'; // blue-500
+      case 'school': return '#10B981'; // emerald-500
+      case 'shopping': return '#8B5CF6'; // violet-500
+      case 'park': return '#059669'; // emerald-600
+      case 'golf': return '#F59E0B'; // amber-500
+      default: return '#6B7280'; // gray-500
     }
   }, []);
 
-  // Initialize Google Maps
-  useEffect(() => {
-    if (!mapContainer.current || map.current) return;
-
-    // Wait for Google Maps to be available globally
-    const loadGoogleMaps = () => {
+  const loadGoogleMaps = useCallback(async () => {
+    if (typeof window !== 'undefined' && window.google && window.google.maps) {
       try {
-        // Check if Google Maps is available globally
-        if (typeof window !== 'undefined' && window.google && window.google.maps) {
-          const { Map: GoogleMap, Marker } = window.google.maps;
-
-          // Create map
-          const newMap = new GoogleMap(mapContainer.current!, {
-            center: { lat: 36.2897, lng: -115.2739 }, // Centennial Hills coordinates
+        const { Map: GoogleMap, Marker, LatLngBounds } = window.google.maps;
+        
+        if (mapContainer.current) {
+          const newMap = new GoogleMap(mapContainer.current, {
+            center: { lat: 36.2897, lng: -115.2739 },
             zoom: 13,
-            mapTypeId: 'roadmap',
             styles: [
               {
                 featureType: 'poi',
@@ -138,9 +131,15 @@ const ModernInteractiveMap: React.FC = () => {
             ]
           });
 
+          map.current = newMap;
+          
+          // Create bounds for all locations
+          const bounds = new LatLngBounds();
+          
           // Create markers for all locations
           const newMarkers: any[] = [];
-          locations.forEach(location => {
+          
+          locations.forEach((location) => {
             const marker = new Marker({
               position: { lat: location.coordinates.lat, lng: location.coordinates.lng },
               map: newMap,
@@ -149,7 +148,7 @@ const ModernInteractiveMap: React.FC = () => {
                 path: window.google.maps.SymbolPath.CIRCLE,
                 scale: 8,
                 fillColor: getMarkerColor(location.type),
-                fillOpacity: 1,
+                fillOpacity: 0.8,
                 strokeColor: '#FFFFFF',
                 strokeWeight: 2
               }
@@ -161,38 +160,29 @@ const ModernInteractiveMap: React.FC = () => {
             });
 
             newMarkers.push(marker);
+            bounds.extend({ lat: location.coordinates.lat, lng: location.coordinates.lng });
           });
 
           markers.current = newMarkers;
-          map.current = newMap;
+          
+          // Fit map to show all markers
+          newMap.fitBounds(bounds);
+          
           setMapLoaded(true);
-
-        } else {
-          // If Google Maps isn't loaded yet, wait a bit and try again
-          setTimeout(loadGoogleMaps, 100);
         }
       } catch (error) {
         console.error('Error loading Google Maps:', error);
       }
-    };
-
-    loadGoogleMaps();
-
-    // Cleanup
-    return () => {
-      if (map.current) {
-        // Clean up markers
-        markers.current.forEach(marker => {
-          window.google.maps.event.clearInstanceListeners(marker);
-        });
-        markers.current = [];
-      }
-    };
+    }
   }, [locations, getMarkerColor]);
 
-  // Update markers when filter changes
   useEffect(() => {
-    if (map.current && mapLoaded) {
+    loadGoogleMaps();
+  }, [loadGoogleMaps]);
+
+  useEffect(() => {
+    if (mapLoaded && map.current) {
+      // Update marker visibility based on filter
       markers.current.forEach((marker, index) => {
         const location = locations[index];
         if (activeFilter === 'all' || location.type === activeFilter) {
@@ -243,29 +233,29 @@ const ModernInteractiveMap: React.FC = () => {
   }, []);
 
   return (
-    <section className="py-20 bg-gray-50">
-      <div className="container mx-auto px-4">
+    <section className="section bg-gradient-soft">
+      <div className="container">
         {/* Section Header */}
-        <div className="text-center mb-12">
-          <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
+        <div className="text-center mb-12 lg:mb-16">
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-primary-color mb-6 lg:mb-8">
             Explore the
-            <span className="block text-blue-600">Centennial Hills Area</span>
+            <span className="block text-secondary-color mt-2">Centennial Hills Area</span>
           </h2>
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+          <p className="text-lg lg:text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
             Discover neighborhoods, schools, shopping, and amenities in the Centennial Hills community
           </p>
         </div>
 
         {/* Filter Tabs */}
-        <div className="flex flex-wrap justify-center gap-2 mb-8">
+        <div className="flex flex-wrap justify-center gap-2 lg:gap-3 mb-8 lg:mb-12">
           {filters.map((filter) => (
             <button
               key={filter.id}
               type="button"
               onClick={() => handleFilterChange(filter.id)}
-              className={`px-4 py-2 rounded-full font-medium transition-all duration-200 ${
+              className={`px-4 lg:px-6 py-2 lg:py-3 rounded-full font-medium transition-all duration-200 text-sm lg:text-base ${
                 activeFilter === filter.id
-                  ? 'bg-blue-600 text-white shadow-lg'
+                  ? 'bg-secondary-color text-white shadow-lg'
                   : 'bg-white text-gray-600 hover:bg-gray-100 border border-gray-200'
               }`}
             >
@@ -274,22 +264,22 @@ const ModernInteractiveMap: React.FC = () => {
           ))}
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 mb-12 lg:mb-16">
           {/* Real Google Maps */}
-          <div className="bg-white rounded-2xl shadow-lg p-6">
-            <div className="relative h-96 rounded-xl overflow-hidden">
+          <div className="card bg-white p-6 lg:p-8">
+            <div className="relative h-80 lg:h-96 rounded-xl overflow-hidden">
               <div 
                 ref={mapContainer} 
                 className="w-full h-full"
-                style={{ minHeight: '384px' }}
+                style={{ minHeight: '320px' }}
               />
               
               {/* Loading overlay */}
               {!mapLoaded && (
                 <div className="absolute inset-0 bg-gradient-to-br from-blue-50 to-blue-100 flex items-center justify-center">
                   <div className="text-center">
-                    <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto mb-4"></div>
-                    <p className="text-gray-600">Loading interactive map...</p>
+                    <div className="animate-spin rounded-full h-10 w-10 lg:h-12 lg:w-12 border-b-2 border-secondary-color mx-auto mb-4"></div>
+                    <p className="text-gray-600 text-sm lg:text-base">Loading interactive map...</p>
                   </div>
                 </div>
               )}
@@ -300,8 +290,8 @@ const ModernInteractiveMap: React.FC = () => {
           <div className="space-y-6">
             {selectedLocation ? (
               /* Selected Location Details */
-              <div className="bg-white rounded-2xl shadow-lg overflow-hidden">
-                <div className="relative h-48">
+              <div className="card bg-white overflow-hidden">
+                <div className="relative h-48 lg:h-56">
                   <Image
                     src={selectedLocation.image}
                     alt={selectedLocation.name}
@@ -309,13 +299,13 @@ const ModernInteractiveMap: React.FC = () => {
                     className="object-cover"
                     sizes="(max-width: 1024px) 100vw, 50vw"
                     placeholder="blur"
-                    blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAABAAEDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAUEAEAAAAAAAAAAAAAAAAAAAAA/8QAFQEBAQAAAAAAAAAAAAAAAAAAAAX/xAAUEQEAAAAAAAAAAAAAAAAAAAAA/9oADAMBAAIRAxEAPwCdABmX/9k="
+                    blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAABAAEDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAUEAEAAAAAAAAAAAAAAAAAAAAA/8QAFQEBAQAAAAAAAAAAAAAAAAAAAAX/xAAUEQEAAAAAAAAAAAAAAAAAAAAA/9oADAMBAAIRAxAAPwCdABmX/9k="
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
                   
                   {/* Type Badge */}
                   <div className="absolute top-4 left-4">
-                    <span className={`px-3 py-1 rounded-full text-sm font-semibold ${getTypeColor(selectedLocation.type)}`}>
+                    <span className={`px-3 py-1 rounded-full text-xs lg:text-sm font-semibold ${getTypeColor(selectedLocation.type)}`}>
                       {getTypeIcon(selectedLocation.type)} {selectedLocation.type.charAt(0).toUpperCase() + selectedLocation.type.slice(1)}
                     </span>
                   </div>
@@ -323,16 +313,16 @@ const ModernInteractiveMap: React.FC = () => {
                   {/* Rating */}
                   {selectedLocation.rating && (
                     <div className="absolute top-4 right-4 bg-white/90 backdrop-blur-sm rounded-full px-3 py-1">
-                      <span className="text-sm font-semibold text-gray-900">⭐ {selectedLocation.rating}</span>
+                      <span className="text-xs lg:text-sm font-semibold text-gray-900">⭐ {selectedLocation.rating}</span>
                     </div>
                   )}
                 </div>
                 
-                <div className="p-6">
-                  <h3 className="text-2xl font-bold text-gray-900 mb-2">{selectedLocation.name}</h3>
-                  <p className="text-gray-600 mb-4">{selectedLocation.description}</p>
+                <div className="p-6 lg:p-8">
+                  <h3 className="text-xl lg:text-2xl font-bold text-primary-color mb-3">{selectedLocation.name}</h3>
+                  <p className="text-gray-600 mb-6 leading-relaxed">{selectedLocation.description}</p>
                   
-                  <div className="flex items-center gap-4 text-sm text-gray-500 mb-4">
+                  <div className="flex items-center gap-4 text-sm text-gray-500 mb-6">
                     <span className="flex items-center gap-1">
                       <Navigation className="w-4 h-4" />
                       {selectedLocation.distance}
@@ -346,18 +336,18 @@ const ModernInteractiveMap: React.FC = () => {
                   <div className="flex gap-3">
                     <button 
                       type="button" 
-                      className="flex-1 bg-blue-600 hover:bg-blue-700 text-white py-2 px-4 rounded-lg font-medium transition-colors duration-200"
-                                              onClick={() => {
-                          if (map.current) {
-                            const latLng = new (window as any).google.maps.LatLng(selectedLocation.coordinates.lat, selectedLocation.coordinates.lng);
-                            map.current.panTo(latLng);
-                            map.current.setZoom(16);
-                          }
-                        }}
+                      className="flex-1 bg-secondary-color hover:bg-secondary-dark text-white py-2 lg:py-3 px-4 rounded-lg font-medium transition-colors duration-200 text-sm lg:text-base"
+                      onClick={() => {
+                        if (map.current) {
+                          const latLng = new window.google.maps.LatLng(selectedLocation.coordinates.lat, selectedLocation.coordinates.lng);
+                          map.current.panTo(latLng);
+                          map.current.setZoom(16);
+                        }
+                      }}
                     >
                       Focus on Map
                     </button>
-                    <button type="button" className="px-4 py-2 border border-gray-300 text-gray-700 hover:bg-gray-50 rounded-lg transition-colors duration-200">
+                    <button type="button" className="px-4 lg:px-6 py-2 lg:py-3 border border-gray-300 text-gray-700 hover:bg-gray-50 rounded-lg transition-colors duration-200 text-sm lg:text-base">
                       Learn More
                     </button>
                   </div>
@@ -371,15 +361,15 @@ const ModernInteractiveMap: React.FC = () => {
                     key={location.id}
                     type="button"
                     onClick={() => handleLocationClick(location)}
-                    className="w-full text-left bg-white rounded-xl shadow-md p-4 cursor-pointer hover:shadow-lg transition-all duration-200 hover:-translate-y-1 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+                    className="w-full text-left card bg-white p-4 lg:p-6 cursor-pointer hover:shadow-xl transition-all duration-200 hover:-translate-y-1 focus:outline-none focus:ring-2 focus:ring-secondary-color focus:ring-offset-2"
                   >
                     <div className="flex items-center gap-4">
-                      <div className="w-12 h-12 rounded-lg bg-gray-100 flex items-center justify-center text-xl">
+                      <div className="w-10 h-10 lg:w-12 lg:h-12 rounded-lg bg-gray-100 flex items-center justify-center text-lg lg:text-xl">
                         {getTypeIcon(location.type)}
                       </div>
                       <div className="flex-1">
-                        <h4 className="font-semibold text-gray-900">{location.name}</h4>
-                        <p className="text-sm text-gray-600">{location.description}</p>
+                        <h4 className="font-semibold text-primary-color text-sm lg:text-base">{location.name}</h4>
+                        <p className="text-xs lg:text-sm text-gray-600 leading-relaxed">{location.description}</p>
                         <div className="flex items-center gap-4 mt-2 text-xs text-gray-500">
                           <span>{location.distance}</span>
                           {location.rating && <span>⭐ {location.rating}</span>}
@@ -399,19 +389,19 @@ const ModernInteractiveMap: React.FC = () => {
         </div>
 
         {/* Bottom CTA */}
-        <div className="text-center mt-12">
-          <div className="bg-gradient-to-r from-blue-600 to-blue-700 rounded-2xl p-8 text-white">
-            <h3 className="text-2xl md:text-3xl font-bold mb-4">
+        <div className="text-center">
+          <div className="bg-gradient-to-r from-secondary-color to-secondary-dark rounded-2xl p-8 lg:p-10 text-white">
+            <h3 className="text-2xl md:text-3xl lg:text-4xl font-bold mb-6">
               Ready to Explore Centennial Hills?
             </h3>
-            <p className="text-xl text-blue-100 mb-6 max-w-2xl mx-auto">
+            <p className="text-lg lg:text-xl text-blue-100 mb-8 max-w-2xl mx-auto leading-relaxed">
               Let Dr. Jan Duffy show you around the area and help you find your perfect home in this amazing community.
             </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <button type="button" className="bg-white text-blue-600 hover:bg-gray-100 px-8 py-3 rounded-lg font-semibold transition-all duration-300 transform hover:scale-105">
+            <div className="flex flex-col sm:flex-row gap-4 lg:gap-6 justify-center">
+              <button type="button" className="bg-white text-secondary-color hover:bg-gray-100 px-8 lg:px-10 py-3 lg:py-4 rounded-lg font-semibold transition-all duration-300 transform hover:scale-105 text-base lg:text-lg">
                 Schedule a Tour
               </button>
-              <button type="button" className="border-2 border-white text-white hover:bg-white hover:text-blue-600 px-8 py-3 rounded-lg font-semibold transition-all duration-300 transform hover:scale-105">
+              <button type="button" className="border-2 border-white text-white hover:bg-white hover:text-secondary-color px-8 lg:px-10 py-3 lg:py-4 rounded-lg font-semibold transition-all duration-300 transform hover:scale-105 text-base lg:text-lg">
                 Contact Dr. Jan Duffy
               </button>
             </div>

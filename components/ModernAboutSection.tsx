@@ -21,24 +21,25 @@ const ModernAboutSection: React.FC = () => {
   ];
 
   return (
-    <section className="py-20 bg-gradient-to-br from-gray-50 to-blue-50">
-      <div className="container mx-auto px-4">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+    <section className="section bg-gradient-soft">
+      <div className="container">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
           {/* Left Column - Image & Stats */}
           <div className="relative">
             {/* Main Image */}
-            <div className="relative h-96 lg:h-[500px] rounded-2xl overflow-hidden shadow-2xl">
+            <div className="relative h-80 md:h-96 lg:h-[500px] rounded-2xl overflow-hidden shadow-2xl">
               <Image
                 src="https://images.unsplash.com/photo-1560250097-0b93528c311a?w=800&h=600&fit=crop"
                 alt="Dr. Jan Duffy - Top 1% REALTOR® in Centennial Hills"
                 fill
                 className="object-cover"
+                sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 50vw"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent"></div>
               
               {/* Experience Badge */}
               <div className="absolute bottom-6 left-6 bg-white/95 backdrop-blur-sm rounded-xl p-4 text-center">
-                <div className="text-3xl font-bold text-blue-600">15+</div>
+                <div className="text-2xl lg:text-3xl font-bold text-secondary-color">15+</div>
                 <div className="text-sm text-gray-600">Years Experience</div>
               </div>
             </div>
@@ -50,11 +51,11 @@ const ModernAboutSection: React.FC = () => {
                 return (
                   <div
                     key={achievement.label}
-                    className="bg-white rounded-xl p-4 shadow-lg text-center hover:shadow-xl transition-shadow duration-300"
+                    className="card bg-white p-4 lg:p-6 text-center hover:shadow-xl transition-shadow duration-300"
                   >
-                    <IconComponent className="w-8 h-8 text-blue-600 mx-auto mb-2" />
-                    <div className="text-lg font-bold text-gray-900">{achievement.value}</div>
-                    <div className="text-sm text-gray-600">{achievement.label}</div>
+                    <IconComponent className="w-6 h-6 lg:w-8 lg:h-8 text-secondary-color mx-auto mb-2 lg:mb-3" />
+                    <div className="text-base lg:text-lg font-bold text-primary-color">{achievement.value}</div>
+                    <div className="text-xs lg:text-sm text-gray-600">{achievement.label}</div>
                   </div>
                 );
               })}
@@ -62,14 +63,14 @@ const ModernAboutSection: React.FC = () => {
           </div>
 
           {/* Right Column - Content */}
-          <div className="space-y-8">
+          <div className="space-y-8 lg:space-y-10">
             {/* Section Header */}
             <div>
-              <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
+              <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-primary-color mb-6 lg:mb-8">
                 Meet Dr. Jan Duffy
-                <span className="block text-blue-600">Your Trusted Real Estate Expert</span>
+                <span className="block text-secondary-color mt-2">Your Trusted Real Estate Expert</span>
               </h2>
-              <p className="text-xl text-gray-600 leading-relaxed">
+              <p className="text-lg lg:text-xl text-gray-600 leading-relaxed">
                 As a Top 1% REALTOR® with over 15 years of experience in the Las Vegas market, 
                 I specialize in helping families find their perfect home in Centennial Hills and 
                 surrounding communities.
@@ -77,73 +78,73 @@ const ModernAboutSection: React.FC = () => {
             </div>
 
             {/* Key Benefits */}
-            <div className="space-y-4">
-              <h3 className="text-2xl font-bold text-gray-900">Why Choose Me?</h3>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div className="space-y-4 lg:space-y-6">
+              <h3 className="text-xl lg:text-2xl font-bold text-primary-color">Why Choose Me?</h3>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 lg:gap-6">
                 {services.map((service) => (
                   <div key={service} className="flex items-center gap-3">
-                    <div className="w-2 h-2 bg-blue-600 rounded-full"></div>
-                    <span className="text-gray-700">{service}</span>
+                    <div className="w-2 h-2 bg-secondary-color rounded-full flex-shrink-0"></div>
+                    <span className="text-gray-700 text-sm lg:text-base">{service}</span>
                   </div>
                 ))}
               </div>
             </div>
 
             {/* Local Expertise */}
-            <div className="bg-white rounded-2xl p-6 shadow-lg">
-              <h3 className="text-xl font-bold text-gray-900 mb-4 flex items-center gap-2">
-                <MapPin className="w-5 h-5 text-blue-600" />
+            <div className="card bg-white p-6 lg:p-8">
+              <h3 className="text-lg lg:text-xl font-bold text-primary-color mb-4 lg:mb-6 flex items-center gap-2">
+                <MapPin className="w-5 h-5 text-secondary-color" />
                 Local Market Expertise
               </h3>
-              <p className="text-gray-600 mb-4">
+              <p className="text-gray-600 mb-6 leading-relaxed">
                 Deep knowledge of Centennial Hills, Providence, and Skye Canyon neighborhoods. 
                 I understand the unique characteristics, school districts, and amenities that make 
                 each community special.
               </p>
-              <div className="flex flex-wrap gap-2">
-                <span className="bg-blue-50 text-blue-700 px-3 py-1 rounded-full text-sm">
+              <div className="flex flex-wrap gap-2 lg:gap-3">
+                <span className="bg-blue-50 text-blue-700 px-3 py-1 rounded-full text-sm font-medium">
                   Centennial Hills
                 </span>
-                <span className="bg-blue-50 text-blue-700 px-3 py-1 rounded-full text-sm">
+                <span className="bg-blue-50 text-blue-700 px-3 py-1 rounded-full text-sm font-medium">
                   Providence
                 </span>
-                <span className="bg-blue-50 text-blue-700 px-3 py-1 rounded-full text-sm">
+                <span className="bg-blue-50 text-blue-700 px-3 py-1 rounded-full text-sm font-medium">
                   Skye Canyon
                 </span>
-                <span className="bg-blue-50 text-blue-700 px-3 py-1 rounded-full text-sm">
+                <span className="bg-blue-50 text-blue-700 px-3 py-1 rounded-full text-sm font-medium">
                   Northwest LV
                 </span>
               </div>
             </div>
 
             {/* CTA Buttons */}
-            <div className="flex flex-col sm:flex-row gap-4">
+            <div className="flex flex-col sm:flex-row gap-4 lg:gap-6">
               <Link
                 href="/contact"
-                className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-4 rounded-lg font-semibold transition duration-300 transform hover:scale-105 flex items-center justify-center gap-2"
+                className="bg-secondary-color hover:bg-secondary-dark text-white px-8 lg:px-10 py-3 lg:py-4 rounded-lg font-semibold transition duration-300 transform hover:scale-105 flex items-center justify-center gap-2 text-base lg:text-lg"
               >
                 <Calendar className="w-5 h-5" />
                 Schedule Consultation
               </Link>
               <Link
                 href="/about"
-                className="border-2 border-blue-600 text-blue-600 hover:bg-blue-600 hover:text-white px-8 py-4 rounded-lg font-semibold transition duration-300 transform hover:scale-105"
+                className="border-2 border-secondary-color text-secondary-color hover:bg-secondary-color hover:text-white px-8 lg:px-10 py-3 lg:py-4 rounded-lg font-semibold transition duration-300 transform hover:scale-105 text-base lg:text-lg"
               >
                 Learn More About Me
               </Link>
             </div>
 
             {/* Contact Info */}
-            <div className="bg-gradient-to-r from-blue-600 to-blue-700 rounded-2xl p-6 text-white">
-              <h3 className="text-xl font-bold mb-4">Ready to Get Started?</h3>
-              <div className="space-y-3">
+            <div className="bg-gradient-to-r from-secondary-color to-secondary-dark rounded-2xl p-6 lg:p-8 text-white">
+              <h3 className="text-lg lg:text-xl font-bold mb-4 lg:mb-6">Ready to Get Started?</h3>
+              <div className="space-y-3 lg:space-y-4">
                 <div className="flex items-center gap-3">
                   <Phone className="w-5 h-5" />
-                  <span>(702) 555-0123</span>
+                  <span className="text-sm lg:text-base">(702) 555-0123</span>
                 </div>
                 <div className="flex items-center gap-3">
                   <Mail className="w-5 h-5" />
-                  <span>jan.duffy@centennialhillshomes.com</span>
+                  <span className="text-sm lg:text-base">jan.duffy@centennialhillshomes.com</span>
                 </div>
               </div>
             </div>

@@ -1,7 +1,7 @@
 import { ChevronLeft, ChevronRight, Quote, Star } from 'lucide-react';
 import Image from 'next/image';
-import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
+import React, { useEffect, useState } from 'react';
 
 interface Testimonial {
   id: string;
@@ -23,7 +23,7 @@ const ModernTestimonials: React.FC = () => {
       name: 'Sarah & Michael Johnson',
       location: 'Centennial Hills',
       rating: 5,
-      content: 'Dr. Jan Duffy made our home buying experience absolutely seamless. Her knowledge of the Centennial Hills market is unmatched, and she found us the perfect family home within our budget. We couldn\'t be happier!',
+      content: 'Dr. Jan Duffy made our home buying experience absolutely seamless. Her knowledge of the Centennial Hills market is unmatched, and she found us the perfect family home within our budget. We couldn&apos;t be happier!',
       image: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop&crop=face',
       propertyType: 'Luxury Family Home',
       salePrice: '$875,000'
@@ -82,63 +82,64 @@ const ModernTestimonials: React.FC = () => {
   const currentTestimonial = testimonials[currentIndex];
 
   return (
-    <section className="py-20 bg-gradient-to-br from-blue-900 via-blue-800 to-blue-700">
-      <div className="container mx-auto px-4">
+    <section className="section bg-gradient-to-br from-primary-color via-primary-dark to-primary-light">
+      <div className="container">
         {/* Section Header */}
-        <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
+        <div className="text-center mb-16 lg:mb-20">
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-6 lg:mb-8">
             What Our Clients
-            <span className="block text-blue-200">Say About Us</span>
+            <span className="block text-blue-200 mt-2">Say About Us</span>
           </h2>
-          <p className="text-xl text-blue-100 max-w-3xl mx-auto">
-            Don't just take our word for it - hear from families who found their dream homes with Dr. Jan Duffy
+          <p className="text-lg lg:text-xl text-blue-100 max-w-3xl mx-auto leading-relaxed">
+            Don&apos;t just take our word for it - hear from families who found their dream homes with Dr. Jan Duffy
           </p>
         </div>
 
         {/* Testimonial Display */}
         <div className="max-w-4xl mx-auto">
-          <div className="bg-white/95 backdrop-blur-sm rounded-3xl p-8 md:p-12 shadow-2xl relative">
+          <div className="card bg-white/95 backdrop-blur-sm rounded-3xl p-8 lg:p-12 shadow-2xl relative">
             {/* Quote Icon */}
-            <div className="absolute top-6 left-8 text-blue-600 opacity-20">
-              <Quote className="w-16 h-16" />
+            <div className="absolute top-6 left-8 text-secondary-color opacity-20">
+              <Quote className="w-12 h-12 lg:w-16 lg:h-16" />
             </div>
 
             {/* Testimonial Content */}
             <div className="text-center relative z-10">
-                             {/* Rating Stars */}
-               <div className="flex justify-center mb-6">
-                 {[...Array(currentTestimonial.rating)].map((_, i) => (
-                   <Star key={`star-${currentTestimonial.id}-${i}`} className="w-6 h-6 text-yellow-400 fill-current" />
-                 ))}
-               </div>
+              {/* Rating Stars */}
+              <div className="flex justify-center mb-6 lg:mb-8">
+                {[...Array(currentTestimonial.rating)].map((_, i) => (
+                  <Star key={`star-${currentTestimonial.id}-${i}`} className="w-5 h-5 lg:w-6 lg:h-6 text-yellow-400 fill-current" />
+                ))}
+              </div>
 
               {/* Testimonial Text */}
-              <blockquote className="text-xl md:text-2xl text-gray-800 mb-8 leading-relaxed italic">
+              <blockquote className="text-lg lg:text-xl xl:text-2xl text-gray-800 mb-8 lg:mb-10 leading-relaxed italic">
                 &quot;{currentTestimonial.content}&quot;
               </blockquote>
 
               {/* Client Info */}
-              <div className="flex items-center justify-center gap-4 mb-6">
-                <div className="relative w-16 h-16 rounded-full overflow-hidden">
+              <div className="flex items-center justify-center gap-4 mb-6 lg:mb-8">
+                <div className="relative w-14 h-14 lg:w-16 lg:h-16 rounded-full overflow-hidden">
                   <Image
                     src={currentTestimonial.image}
                     alt={currentTestimonial.name}
                     fill
                     className="object-cover"
+                    sizes="(max-width: 1024px) 56px, 64px"
                   />
                 </div>
                 <div className="text-left">
-                  <div className="font-bold text-gray-900 text-lg">{currentTestimonial.name}</div>
-                  <div className="text-blue-600">{currentTestimonial.location}</div>
+                  <div className="font-bold text-gray-900 text-base lg:text-lg">{currentTestimonial.name}</div>
+                  <div className="text-secondary-color text-sm lg:text-base">{currentTestimonial.location}</div>
                 </div>
               </div>
 
               {/* Property Details */}
-              <div className="bg-blue-50 rounded-xl p-4 inline-block">
+              <div className="bg-blue-50 rounded-xl p-4 lg:p-6 inline-block">
                 <div className="text-sm text-gray-600">Property Type</div>
-                <div className="font-semibold text-blue-900">{currentTestimonial.propertyType}</div>
-                <div className="text-sm text-gray-600 mt-1">Sale Price</div>
-                <div className="font-bold text-blue-900 text-lg">{currentTestimonial.salePrice}</div>
+                <div className="font-semibold text-primary-color text-base lg:text-lg">{currentTestimonial.propertyType}</div>
+                <div className="text-sm text-gray-600 mt-1 lg:mt-2">Sale Price</div>
+                <div className="font-bold text-primary-color text-lg lg:text-xl">{currentTestimonial.salePrice}</div>
               </div>
             </div>
 
@@ -146,23 +147,23 @@ const ModernTestimonials: React.FC = () => {
             <button
               type="button"
               onClick={prevTestimonial}
-              className="absolute left-4 top-1/2 transform -translate-y-1/2 bg-white/90 hover:bg-white text-gray-700 hover:text-blue-600 p-3 rounded-full shadow-lg transition-all duration-300 hover:scale-110"
+              className="absolute left-4 top-1/2 transform -translate-y-1/2 bg-white/90 hover:bg-white text-gray-700 hover:text-secondary-color p-2 lg:p-3 rounded-full shadow-lg transition-all duration-300 hover:scale-110"
               aria-label="Previous testimonial"
             >
-              <ChevronLeft className="w-6 h-6" />
+              <ChevronLeft className="w-5 h-5 lg:w-6 lg:h-6" />
             </button>
             <button
               type="button"
               onClick={nextTestimonial}
-              className="absolute right-4 top-1/2 transform -translate-y-1/2 bg-white/90 hover:bg-white text-gray-700 hover:text-blue-600 p-3 rounded-full shadow-lg transition-all duration-300 hover:scale-110"
+              className="absolute right-4 top-1/2 transform -translate-y-1/2 bg-white/90 hover:bg-white text-gray-700 hover:text-secondary-color p-2 lg:p-3 rounded-full shadow-lg transition-all duration-300 hover:scale-110"
               aria-label="Next testimonial"
             >
-              <ChevronRight className="w-6 h-6" />
+              <ChevronRight className="w-5 h-5 lg:w-6 lg:h-6" />
             </button>
           </div>
 
           {/* Dots Indicator */}
-          <div className="flex justify-center mt-8 gap-2">
+          <div className="flex justify-center mt-8 lg:mt-10 gap-2">
             {testimonials.map((testimonial, index) => (
               <button
                 key={`dot-${testimonial.id}`}
@@ -180,25 +181,25 @@ const ModernTestimonials: React.FC = () => {
         </div>
 
         {/* Bottom CTA */}
-        <div className="text-center mt-16">
-          <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-8 border border-white/20">
-            <h3 className="text-2xl md:text-3xl font-bold text-white mb-4">
+        <div className="text-center mt-16 lg:mt-20">
+          <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-8 lg:p-10 border border-white/20">
+            <h3 className="text-2xl md:text-3xl lg:text-4xl font-bold text-white mb-6">
               Ready to Join Our Happy Clients?
             </h3>
-            <p className="text-blue-100 mb-6 max-w-2xl mx-auto">
+            <p className="text-blue-100 mb-8 max-w-2xl mx-auto leading-relaxed text-base lg:text-lg">
               Let Dr. Jan Duffy help you find your perfect home in Centennial Hills and experience 
               the same exceptional service our clients rave about.
             </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <div className="flex flex-col sm:flex-row gap-4 lg:gap-6 justify-center">
               <Link
                 href="/contact"
-                className="bg-white text-blue-600 hover:bg-gray-100 px-8 py-3 rounded-lg font-semibold transition duration-300 transform hover:scale-105"
+                className="bg-white text-secondary-color hover:bg-gray-100 px-8 lg:px-10 py-3 lg:py-4 rounded-lg font-semibold transition duration-300 transform hover:scale-105 text-base lg:text-lg"
               >
                 Start Your Journey
               </Link>
               <Link
                 href="/testimonials"
-                className="border-2 border-white text-white hover:bg-white hover:text-blue-600 px-8 py-3 rounded-lg font-semibold transition duration-300 transform hover:scale-105"
+                className="border-2 border-white text-white hover:bg-white hover:text-secondary-color px-8 lg:px-10 py-3 lg:py-4 rounded-lg font-semibold transition duration-300 transform hover:scale-105 text-base lg:text-lg"
               >
                 Read More Reviews
               </Link>

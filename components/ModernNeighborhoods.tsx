@@ -18,7 +18,7 @@ const ModernNeighborhoods: React.FC = () => {
   const neighborhoods = useMemo((): Neighborhood[] => [
     {
       name: 'Centennial Hills',
-      description: 'Las Vegas\' most prestigious master-planned community featuring luxury homes with mountain views and world-class amenities.',
+      description: 'Las Vegas&apos; most prestigious master-planned community featuring luxury homes with mountain views and world-class amenities.',
       image: 'https://images.unsplash.com/photo-1564013799919-ab600027ffc6?w=800&h=600&fit=crop&q=75',
       href: '/centennial-hills',
       features: ['Mountain Views', 'Golf Course Access', 'Top Schools', 'Shopping Centers'],
@@ -64,30 +64,30 @@ const ModernNeighborhoods: React.FC = () => {
   }, []);
 
   return (
-    <section className="py-20 bg-gray-50">
-      <div className="container mx-auto px-4">
+    <section className="section bg-gradient-soft">
+      <div className="container">
         {/* Section Header */}
-        <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
+        <div className="text-center mb-16 lg:mb-20">
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-primary-color mb-6 lg:mb-8">
             Explore Our
-            <span className="block text-blue-600">Featured Neighborhoods</span>
+            <span className="block text-secondary-color mt-2">Featured Neighborhoods</span>
           </h2>
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+          <p className="text-lg lg:text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
             Discover the unique character and lifestyle each community offers in the Centennial Hills area
           </p>
         </div>
 
         {/* Neighborhoods Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8 mb-16 lg:mb-20">
           {neighborhoods.map((neighborhood) => (
             <Link
               key={neighborhood.name}
               href={neighborhood.href}
-              className="block bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 overflow-hidden group"
+              className="card block transform hover:-translate-y-2 overflow-hidden group"
               onClick={() => handleNeighborhoodClick(neighborhood.name)}
             >
               {/* Image with Lazy Loading */}
-              <div className="relative h-48 overflow-hidden">
+              <div className="relative h-48 lg:h-56 overflow-hidden">
                 <Image
                   src={neighborhood.image}
                   alt={`${neighborhood.name} neighborhood`}
@@ -107,21 +107,21 @@ const ModernNeighborhoods: React.FC = () => {
               </div>
 
               {/* Content */}
-              <div className="p-6">
-                <div className="flex items-center gap-2 mb-3">
-                  <MapPin className="w-5 h-5 text-blue-600" />
-                  <h3 className="text-xl font-bold text-gray-900">{neighborhood.name}</h3>
+              <div className="p-6 lg:p-8">
+                <div className="flex items-center gap-2 mb-4">
+                  <MapPin className="w-5 h-5 text-secondary-color" />
+                  <h3 className="text-xl lg:text-2xl font-bold text-primary-color">{neighborhood.name}</h3>
                 </div>
                 
-                <p className="text-gray-600 mb-4 line-clamp-3">{neighborhood.description}</p>
+                <p className="text-gray-600 mb-6 line-clamp-3 leading-relaxed">{neighborhood.description}</p>
                 
                 {/* Features */}
-                <div className="mb-4">
+                <div className="mb-6">
                   <div className="flex flex-wrap gap-2">
                     {neighborhood.features.slice(0, 2).map((feature) => (
                       <span
                         key={feature}
-                        className="bg-blue-50 text-blue-700 text-xs px-2 py-1 rounded-full"
+                        className="bg-blue-50 text-blue-700 text-xs px-3 py-1 rounded-full font-medium"
                       >
                         {feature}
                       </span>
@@ -130,16 +130,16 @@ const ModernNeighborhoods: React.FC = () => {
                 </div>
 
                 {/* Stats */}
-                <div className="flex items-center justify-between mb-4 text-sm text-gray-500">
+                <div className="flex items-center justify-between mb-6 text-sm text-gray-500">
                   <div className="flex items-center gap-1">
                     <Home className="w-4 h-4" />
                     <span>{neighborhood.homesCount} homes</span>
                   </div>
-                  <div className="font-semibold text-blue-600">{neighborhood.priceRange}</div>
+                  <div className="font-semibold text-secondary-color">{neighborhood.priceRange}</div>
                 </div>
 
                 {/* CTA Button */}
-                <div className="w-full bg-blue-600 hover:bg-blue-700 text-white text-center py-3 px-4 rounded-lg font-semibold transition-all duration-300 transform group-hover:scale-105 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">
+                <div className="w-full bg-secondary-color hover:bg-secondary-dark text-white text-center py-3 px-4 rounded-lg font-semibold transition-all duration-300 transform group-hover:scale-105 focus:outline-none focus:ring-2 focus:ring-secondary-color focus:ring-offset-2">
                   Explore {neighborhood.name}
                 </div>
               </div>
@@ -148,24 +148,24 @@ const ModernNeighborhoods: React.FC = () => {
         </div>
 
         {/* Bottom CTA */}
-        <div className="text-center mt-16">
-          <div className="bg-gradient-to-r from-blue-600 to-blue-700 rounded-2xl p-8 md:p-12 text-white">
-            <h3 className="text-3xl md:text-4xl font-bold mb-4">
+        <div className="text-center">
+          <div className="bg-gradient-to-r from-secondary-color to-secondary-dark rounded-2xl p-8 lg:p-12 text-white">
+            <h3 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-6">
               Ready to Find Your Perfect Neighborhood?
             </h3>
-            <p className="text-xl text-blue-100 mb-6 max-w-2xl mx-auto">
+            <p className="text-lg lg:text-xl text-blue-100 mb-8 max-w-2xl mx-auto leading-relaxed">
               Let Dr. Jan Duffy guide you through the best communities in Centennial Hills and help you find your dream home.
             </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <div className="flex flex-col sm:flex-row gap-4 lg:gap-6 justify-center">
               <Link
                 href="/contact"
-                className="bg-white text-blue-600 hover:bg-gray-100 px-8 py-3 rounded-lg font-semibold transition-all duration-300 transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-blue-600"
+                className="bg-white text-secondary-color hover:bg-gray-100 px-8 lg:px-10 py-3 lg:py-4 rounded-lg font-semibold transition-all duration-300 transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-secondary-color text-base lg:text-lg"
               >
                 Schedule a Consultation
               </Link>
               <Link
                 href="/listings"
-                className="border-2 border-white text-white hover:bg-white hover:text-blue-600 px-8 py-3 rounded-lg font-semibold transition-all duration-300 transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-blue-600"
+                className="border-2 border-white text-white hover:bg-white hover:text-secondary-color px-8 lg:px-10 py-3 lg:py-4 rounded-lg font-semibold transition-all duration-300 transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-secondary-color text-base lg:text-lg"
               >
                 View All Listings
               </Link>
