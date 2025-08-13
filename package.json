@@ -13,27 +13,21 @@
     "analyze": "cross-env ANALYZE=true next build",
     "analyze:server": "cross-env ANALYZE=true next build && open .next/analyze/client.html",
     "analyze:browser": "cross-env ANALYZE=true next build && open .next/analyze/client.html",
-    
     "biome:check": "biome check .",
     "biome:format": "biome format --write .",
     "biome:lint": "biome lint .",
     "biome:fix": "biome check --write .",
-    
     "vercel-build": "next build",
     "vercel-dev": "next dev",
-    
     "clean": "rm -rf .next out dist .vercel",
     "clean:all": "npm run clean && rm -rf node_modules package-lock.json",
-    
     "security:audit": "npm audit --audit-level=moderate",
     "security:fix": "npm audit fix",
     "deps:check": "npm outdated",
     "deps:update": "npm update",
-    
     "preview": "vercel --env preview",
     "deploy:preview": "vercel --prod=false",
     "deploy:production": "vercel --prod",
-    
     "test:build": "npm run build && npm run start & sleep 10 && curl -f http://localhost:3000 > /dev/null && kill %1",
     "test:vercel": "vercel --prod=false --yes"
   },
@@ -85,6 +79,7 @@
     "clsx": "^2.1.1",
     "critters": "^0.0.23",
     "cross-env": "^7.0.3",
+    "fast-xml-parser": "^5.2.5",
     "framer-motion": "^11.11.9",
     "lucide-react": "^0.460.0",
     "next": "^14.2.15",

@@ -1,7 +1,7 @@
-import React from 'react';
 import Head from 'next/head';
-import Layout from '../components/Layout';
+import Link from 'next/link';
 import KCMFeed from '../components/KCMFeed';
+import Layout from '../components/Layout';
 
 export default function MarketInsights() {
   return (
@@ -70,12 +70,12 @@ export default function MarketInsights() {
               >
                 View Latest Insights
               </a>
-              <a
+              <Link
                 href="/contact"
                 className="border-2 border-white text-white px-8 py-3 rounded-lg font-semibold hover:bg-white hover:text-blue-900 transition-colors duration-200"
               >
                 Get Personalized Analysis
-              </a>
+              </Link>
             </div>
           </div>
         </section>
@@ -225,18 +225,18 @@ export default function MarketInsights() {
               Get personalized market analysis and expert guidance for your real estate journey in Centennial Hills
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <a
+              <Link
                 href="/contact"
                 className="bg-white text-blue-900 px-8 py-3 rounded-lg font-semibold hover:bg-blue-50 transition-colors duration-200"
               >
                 Schedule a Consultation
-              </a>
-              <a
+              </Link>
+              <Link
                 href="/buyers"
                 className="border-2 border-white text-white px-8 py-3 rounded-lg font-semibold hover:bg-white hover:text-blue-900 transition-colors duration-200"
               >
                 Buyer Resources
-              </a>
+              </Link>
             </div>
           </div>
         </section>
