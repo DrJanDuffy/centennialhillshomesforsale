@@ -33,25 +33,25 @@ const HomePage: React.FC = () => {
         <div className="container">
           <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-primary-color mb-8 text-center">
             Centennial Hills Market Trends
-          </h2>
+              </h2>
 
           {/* Tab navigation */}
           <div className="flex flex-wrap justify-center mb-12 gap-4">
-            <button 
+                      <button
               type="button" 
               className="tab-btn px-6 py-3 bg-secondary-color text-white rounded-lg font-semibold transition-all duration-300 hover:bg-secondary-dark hover:scale-105" 
               data-tab="price"
             >
               Price Trend
-            </button>
+                      </button>
             <button 
               type="button" 
               className="tab-btn px-6 py-3 bg-gray-200 text-gray-800 rounded-lg font-semibold transition-all duration-300 hover:bg-gray-300 hover:scale-105" 
               data-tab="inventory"
             >
               Inventory
-            </button>
-            <button 
+                        </button>
+                      <button
               type="button" 
               className="tab-btn px-6 py-3 bg-gray-200 text-gray-800 rounded-lg font-semibold transition-all duration-300 hover:bg-gray-300 hover:scale-105" 
               data-tab="dom"
