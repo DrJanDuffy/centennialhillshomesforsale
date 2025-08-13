@@ -61,13 +61,8 @@ export default function Document() {
         {/* ==== MAP LIBRARY (Google Maps) ==== */}
         <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDt84u_m6IGyrNZ9Eyc2W0fAIx6yD3peTo&callback=initMap&libraries=places" async defer></script>
 
-        {/* ==== CHART.JS (for market dashboard) ==== */}
-        <link rel="preload" href="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.min.js" as="script" />
-        <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.min.js" defer></script>
-
-        {/* ==== AXIOS (used by the chatbot to call our API) ==== */}
-        <link rel="preload" href="https://cdn.jsdelivr.net/npm/axios@1.7.2/dist/axios.min.js" as="script" />
-        <script src="https://cdn.jsdelivr.net/npm/axios@1.7.2/dist/axios.min.js" defer></script>
+        {/* ==== CHART.JS & AXIOS (bundled via webpack) ==== */}
+        {/* Removed CDN calls - now bundled with webpack optimization */}
 
         {/* ==== MARKET CHARTS (custom functionality) ==== */}
         <script src="/js/market-charts.js" defer></script>
