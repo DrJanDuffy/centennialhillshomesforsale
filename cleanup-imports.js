@@ -4,7 +4,7 @@ const _path = require('node:path');
 const filesToFix = [
   './pages/about.tsx',
   './pages/index.tsx',
-  './components/AwesomeEnhancements.tsx',
+  
   // Add all files with unused imports
 ];
 
