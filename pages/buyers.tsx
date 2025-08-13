@@ -1,18 +1,18 @@
+import Layout from '@/components/Layout';
+import RealScoutListings from '@/components/RealScoutListings';
 import {
-  ArrowRight,
-  CheckCircle,
-  DollarSign,
-  FileText,
-  Mail,
-  MapPin,
-  Phone,
-  Search,
-  Star,
+    ArrowRight,
+    CheckCircle,
+    DollarSign,
+    FileText,
+    Mail,
+    MapPin,
+    Phone,
+    Search,
+    Star,
 } from 'lucide-react';
 import Link from 'next/link';
 import type React from 'react';
-import Layout from '@/components/Layout';
-import RealScoutListings from '@/components/RealScoutListings';
 
 const BuyersPage: React.FC = () => {
   const buyerServices = [

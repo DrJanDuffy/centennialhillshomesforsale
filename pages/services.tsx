@@ -2,8 +2,8 @@ import { motion } from 'framer-motion';
 import Link from 'next/link';
 import { FaBuilding, FaChartLine, FaHandshake, FaHome, FaKey, FaUsers } from 'react-icons/fa';
 import Layout from '../components/Layout';
-import SEOOptimized from '../components/SEOOptimized';
 import RealScoutListings from '../components/RealScoutListings';
+import SEOOptimized from '../components/SEOOptimized';
 
 const services = [
   {

@@ -49,32 +49,60 @@ export default function Document() {
         <link rel="preconnect" href="https://images.unsplash.com" />
         <link rel="dns-prefetch" href="//www.google-analytics.com" />
 
-        {/* RealScout Web Components Styles */}
+        {/* RealScout Web Components Script and Styles */}
+        <script src="https://em.realscout.com/widgets/realscout-web-components.umd.js" type="module"></script>
         <style
           dangerouslySetInnerHTML={{
             __html: `
             realscout-office-listings {
-              --rs-listing-divider-color: rgb(101, 141, 172);
+              --rs-listing-divider-color: #658dac;
+              --rs-primary-color: #2563eb;
+              --rs-hover-color: #1e40af;
+              --rs-text-color: #1f2937;
+              --rs-card-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
               width: 100%;
+              display: block;
+              min-height: 500px;
             }
+            
+            /* Responsive grid layout */
+            realscout-office-listings::part(listings-grid) {
+              display: grid;
+              grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+              gap: 1.5rem;
+            }
+            
+            /* Card styling */
+            realscout-office-listings::part(listing-card) {
+              border-radius: 12px;
+              overflow: hidden;
+              transition: transform 0.3s ease;
+            }
+            
+            realscout-office-listings::part(listing-card):hover {
+              transform: translateY(-4px);
+              box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
+            }
+            
+            /* Additional RealScout widget styles */
             realscout-search {
-              --rs-listing-divider-color: rgb(101, 141, 172);
+              --rs-listing-divider-color: #658dac;
+              --rs-primary-color: #2563eb;
               width: 100%;
             }
             realscout-property-details {
-              --rs-listing-divider-color: rgb(101, 141, 172);
+              --rs-listing-divider-color: #658dac;
+              --rs-primary-color: #2563eb;
               width: 100%;
             }
             realscout-market-analysis {
-              --rs-listing-divider-color: rgb(101, 141, 172);
+              --rs-listing-divider-color: #658dac;
+              --rs-primary-color: #2563eb;
               width: 100%;
             }
           `,
           }}
         />
-
-        {/* RealScout Scripts */}
-        <script src="https://cdn.realscout.com/js/realscout.js" async defer />
 
         {/* ==== MAP LIBRARY (Google Maps) ==== */}
         <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDt84u_m6IGyrNZ9Eyc2W0fAIx6yD3peTo&callback=initMap&libraries=places" async defer></script>
