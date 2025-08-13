@@ -1,5 +1,6 @@
 import Head from 'next/head';
 import Layout from '../components/Layout';
+import RealScoutListings from '../components/RealScoutListings';
 
 export default function About() {
   return (
@@ -283,6 +284,27 @@ export default function About() {
                 </ul>
               </div>
             </div>
+          </div>
+        </section>
+
+        {/* RealScout Listings */}
+        <section className="py-16 bg-gray-50">
+          <div className="container mx-auto px-4">
+            <div className="text-center mb-12">
+              <h2 className="text-3xl font-bold text-gray-800 mb-6">
+                Dr. Jan Duffy's Current Listings
+              </h2>
+              <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+                Browse the latest properties I'm representing in Centennial Hills and surrounding areas
+              </p>
+            </div>
+            
+            <RealScoutListings 
+              priceMin={500000}
+              priceMax={2500000}
+              propertyTypes="SFR,MF"
+              listingStatus="For Sale"
+            />
           </div>
         </section>
 

@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { FaBuilding, FaChartLine, FaHandshake, FaHome, FaKey, FaUsers } from 'react-icons/fa';
 import Layout from '../components/Layout';
 import SEOOptimized from '../components/SEOOptimized';
+import RealScoutListings from '../components/RealScoutListings';
 
 const services = [
   {
@@ -177,6 +178,26 @@ export default function Services() {
                 <p>Free comprehensive market analysis and pricing strategies</p>
               </div>
             </div>
+          </div>
+        </motion.section>
+
+        {/* RealScout Listings */}
+        <motion.section
+          className="listings-section"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.9, duration: 0.6 }}
+        >
+          <div className="container">
+            <h2>Current Property Listings</h2>
+            <p>Browse our latest properties while exploring our services</p>
+            
+            <RealScoutListings 
+              priceMin={400000}
+              priceMax={2000000}
+              propertyTypes="SFR,MF,TC"
+              listingStatus="For Sale"
+            />
           </div>
         </motion.section>
 

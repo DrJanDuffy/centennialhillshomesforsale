@@ -3,6 +3,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import type React from 'react';
 import Layout from '@/components/Layout';
+import RealScoutListings from '@/components/RealScoutListings';
 
 const BlogPage: React.FC = () => {
   const blogPosts = [
@@ -242,6 +243,27 @@ const BlogPage: React.FC = () => {
                 </div>
               </div>
             </div>
+          </div>
+        </section>
+
+        {/* RealScout Listings */}
+        <section className="py-16 bg-white">
+          <div className="container mx-auto px-4">
+            <div className="text-center mb-12">
+              <h2 className="text-3xl font-bold text-gray-900 mb-4">
+                Featured Properties
+              </h2>
+              <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+                Browse our latest listings while reading our latest market insights
+              </p>
+            </div>
+            
+            <RealScoutListings 
+              priceMin={500000}
+              priceMax={2000000}
+              propertyTypes="SFR,MF"
+              listingStatus="For Sale"
+            />
           </div>
         </section>
       </div>

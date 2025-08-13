@@ -1,6 +1,7 @@
 import Head from 'next/head';
 import Layout from '../components/Layout';
 import ModernNeighborhoods from '../components/ModernNeighborhoods';
+import RealScoutListings from '../components/RealScoutListings';
 
 export default function Neighborhoods() {
   return (
@@ -250,6 +251,27 @@ export default function Neighborhoods() {
                 </p>
               </div>
             </div>
+          </div>
+        </section>
+
+        {/* RealScout Listings */}
+        <section className="py-16 bg-white">
+          <div className="container mx-auto px-4">
+            <div className="text-center mb-12">
+              <h2 className="text-3xl font-bold text-gray-800 mb-6">
+                Properties in These Neighborhoods
+              </h2>
+              <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+                Browse current listings in Providence, Skye Canyon, and other Centennial Hills communities
+              </p>
+            </div>
+            
+            <RealScoutListings 
+              priceMin={400000}
+              priceMax={1500000}
+              propertyTypes="SFR,MF"
+              listingStatus="For Sale"
+            />
           </div>
         </section>
 
