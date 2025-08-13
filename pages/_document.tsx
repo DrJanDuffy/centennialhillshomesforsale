@@ -50,7 +50,11 @@ export default function Document() {
         <link rel="dns-prefetch" href="//www.google-analytics.com" />
 
         {/* RealScout Web Components Script and Styles */}
-        <script src="https://em.realscout.com/widgets/realscout-web-components.umd.js" type="module"></script>
+        <script 
+          src="https://em.realscout.com/widgets/realscout-web-components.umd.js" 
+          type="module"
+          defer
+        />
         <style
           dangerouslySetInnerHTML={{
             __html: `
