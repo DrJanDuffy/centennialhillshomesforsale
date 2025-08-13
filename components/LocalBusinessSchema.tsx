@@ -78,6 +78,11 @@ interface LocalBusinessSchema {
     }>;
   };
   sameAs: string[];
+  award?: string[];
+  specialization?: string[];
+  yearsOfExperience?: string;
+  numberOfPropertiesSold?: string;
+  clientSatisfactionRate?: string;
 }
 
 interface OrganizationSchema {
@@ -231,11 +236,30 @@ export default function LocalBusinessSchema({
       },
       {
         '@type': 'EducationalOccupationalCredential',
+        credentialCategory: 'certification',
+        name: 'Certified Luxury Home Marketing Specialist',
+      },
+      {
+        '@type': 'EducationalOccupationalCredential',
+        credentialCategory: 'certification',
+        name: 'Certified Residential Specialist (CRS)',
+      },
+      {
+        '@type': 'EducationalOccupationalCredential',
+        credentialCategory: 'certification',
+        name: 'Accredited Buyer\'s Representative (ABR)',
+      },
+      {
+        '@type': 'EducationalOccupationalCredential',
         credentialCategory: 'Professional Designation',
         name: 'REALTOR® Designation',
       },
     ],
     memberOf: [
+      {
+        '@type': 'Organization',
+        name: 'Greater Las Vegas Association of REALTORS',
+      },
       {
         '@type': 'Organization',
         name: 'Las Vegas Board of REALTORS®',
@@ -247,6 +271,10 @@ export default function LocalBusinessSchema({
       {
         '@type': 'Organization',
         name: 'Nevada Association of REALTORS®',
+      },
+      {
+        '@type': 'Organization',
+        name: 'Berkshire Hathaway HomeServices Network',
       },
     ],
     affiliation: {
@@ -302,6 +330,25 @@ export default function LocalBusinessSchema({
       'https://www.facebook.com/centennialhillshomes',
       'https://www.instagram.com/drjanduffy_realtor',
     ],
+    award: [
+      'Top 1% REALTOR® in Las Vegas Valley',
+      'Million Dollar Club Member',
+      'Excellence in Customer Service Award',
+      'Outstanding Sales Performance Recognition',
+    ],
+    specialization: [
+      'Luxury Home Sales',
+      'New Construction Properties',
+      'Master-Planned Communities',
+      'Investment Properties',
+      'First-Time Home Buyers',
+      'Relocation Services',
+      'Property Marketing',
+      'Market Analysis',
+    ],
+    yearsOfExperience: '20+',
+    numberOfPropertiesSold: '500+',
+    clientSatisfactionRate: '98%',
   };
 
   // Market Data Schema
