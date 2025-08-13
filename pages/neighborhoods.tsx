@@ -1,169 +1,128 @@
-import { motion } from 'framer-motion';
-import Head from 'next/head';
-import { useState } from 'react';
+import React from 'react';
 import Layout from '../components/Layout';
-import NeighborhoodBar from '../components/NeighborhoodBar';
-import SchoolInfo from '../components/SchoolInfo';
+import ModernNeighborhoods from '../components/ModernNeighborhoods';
+import GoogleTagManager from '../components/GoogleTagManager';
 
-type NeighborhoodName =
-  | 'Centennial Hills'
-  | 'The Trails'
-  | 'Tournament Hills'
-  | 'Skye Canyon'
-  | 'Sun City Aliante';
-
-const neighborhoodData: Record<
-  NeighborhoodName,
-  {
-    description: string;
-    medianPrice: string;
-    avgSqft: string;
-    yearBuilt: string;
-    highlights: string[];
-    zipCodes: string[];
-    coordinates: { lat: number; lng: number };
-  }
-> = {
-  'Centennial Hills': {
-    description:
-      'Master-planned community with luxury homes, championship golf, and family amenities',
-    medianPrice: '$650,000',
-    avgSqft: '2,800',
-    yearBuilt: '2005-2020',
-    highlights: ['TPC Las Vegas Golf Course', 'Downtown Summerlin nearby', 'A+ rated schools'],
-    zipCodes: ['89149', '89166'],
-    coordinates: { lat: 36.272, lng: -115.327 },
-  },
-  'The Trails': {
-    description: 'Established community featuring custom homes and mature landscaping',
-    medianPrice: '$580,000',
-    avgSqft: '2,600',
-    yearBuilt: '1995-2010',
-    highlights: ['Mature trees and landscaping', 'Walking trails throughout', 'Close to shopping'],
-    zipCodes: ['89149'],
-    coordinates: { lat: 36.265, lng: -115.315 },
-  },
-  'Tournament Hills': {
-    description: 'Golf course community with stunning mountain and city views',
-    medianPrice: '$720,000',
-    avgSqft: '3,200',
-    yearBuilt: '2000-2015',
-    highlights: ["Bear's Best Golf Course", 'Mountain views', 'Gated sections'],
-    zipCodes: ['89149'],
-    coordinates: { lat: 36.28, lng: -115.34 },
-  },
-  'Skye Canyon': {
-    description: 'Newer master-planned community with modern amenities and parks',
-    medianPrice: '$590,000',
-    avgSqft: '2,700',
-    yearBuilt: '2010-2023',
-    highlights: ['Skye Canyon Park', 'New construction available', 'Family-friendly amenities'],
-    zipCodes: ['89166'],
-    coordinates: { lat: 36.285, lng: -115.35 },
-  },
-  'Sun City Aliante': {
-    description: 'Active adult 55+ community with resort-style amenities',
-    medianPrice: '$480,000',
-    avgSqft: '2,200',
-    yearBuilt: '2005-2018',
-    highlights: ['55+ community', 'Golf course and clubhouse', 'Resort amenities'],
-    zipCodes: ['89084'],
-    coordinates: { lat: 36.29, lng: -115.37 },
-  },
-};
-
-export default function Neighborhoods() {
-  const [selectedNeighborhood, setSelectedNeighborhood] =
-    useState<NeighborhoodName>('Centennial Hills');
-  const currentData = neighborhoodData[selectedNeighborhood];
-
+const NeighborhoodsPage: React.FC = () => {
   return (
-    <Layout>
-      <Head>
-        <title>Neighborhoods in Centennial Hills Las Vegas | Complete Area Guide</title>
-        <meta
-          name="description"
-          content="Explore neighborhoods in Centennial Hills including The Trails, Tournament Hills, Skye Canyon. Find homes, schools, and amenities in each area."
-        />
-        <meta
-          name="keywords"
-          content="Centennial Hills neighborhoods, The Trails Las Vegas, Tournament Hills homes, Skye Canyon community, Sun City Aliante"
-        />
-        <link rel="canonical" href="https://centennialhillshomesforsale.com/neighborhoods" />
-      </Head>
-
-      <main className="container">
-        <motion.section
-          className="hero-section"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-        >
-          <h1>Neighborhoods in Centennial Hills Area</h1>
-          <p>
-            Discover the unique character and amenities of each neighborhood in the greater
-            Centennial Hills area. From established communities to new master-planned developments,
-            find your perfect Las Vegas home.
+    <Layout title="Centennial Hills Neighborhoods | Dr. Jan Duffy" description="Explore the beautiful neighborhoods of Centennial Hills, Las Vegas. Discover Providence, Skye Canyon, and other master-planned communities with luxury homes and mountain views.">
+      <GoogleTagManager />
+      
+      {/* Hero Section */}
+      <section className="relative py-20 lg:py-32 bg-gradient-to-br from-primary-color via-primary-dark to-primary-light overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-r from-primary-color/80 via-primary-dark/60 to-primary-light/40"></div>
+        <div className="relative container text-center text-white">
+          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 lg:mb-8">
+            Centennial Hills
+            <span className="block text-secondary-color mt-2">Neighborhoods</span>
+          </h1>
+          <p className="text-xl lg:text-2xl text-blue-100 max-w-4xl mx-auto leading-relaxed">
+            Discover the unique character and charm of each neighborhood in the Centennial Hills master-planned community
           </p>
-        </motion.section>
+        </div>
+      </section>
 
-        <NeighborhoodBar
-          currentNeighborhood={selectedNeighborhood}
-          onNeighborhoodChange={setSelectedNeighborhood}
-        />
+      {/* Neighborhoods Component */}
+      <ModernNeighborhoods />
 
-        <motion.section
-          className="neighborhood-details"
-          key={selectedNeighborhood}
-          initial={{ opacity: 0, x: 20 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.4 }}
-        >
-          <div className="neighborhood-header">
-            <h2>{selectedNeighborhood}</h2>
-            <p className="neighborhood-description">{currentData.description}</p>
+      {/* Additional Neighborhood Info */}
+      <section className="section bg-white">
+        <div className="container">
+          <div className="text-center mb-12 lg:mb-16">
+            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-primary-color mb-6 lg:mb-8">
+              Why Choose Centennial Hills?
+            </h2>
+            <p className="text-lg lg:text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
+              Each neighborhood offers its own unique lifestyle while sharing the benefits of this exceptional community
+            </p>
           </div>
 
-          {/* RealScout Your Listings */}
-          <div className="section">
-            <div className="text-center mb-8">
-              <h3>Your Listings</h3>
-              <p>Browse our latest properties in {selectedNeighborhood} and surrounding areas</p>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-12">
+            {/* Community Benefits */}
+            <div className="card p-6 lg:p-8 text-center">
+              <div className="w-16 h-16 lg:w-20 lg:h-20 bg-secondary-color rounded-full flex items-center justify-center mx-auto mb-6">
+                <span className="text-2xl lg:text-3xl">🏔️</span>
+              </div>
+              <h3 className="text-xl lg:text-2xl font-bold text-primary-color mb-4">Mountain Views</h3>
+              <p className="text-gray-600 leading-relaxed">
+                Stunning views of the Spring Mountains and Red Rock Canyon from many properties
+              </p>
             </div>
-            <realscout-your-listings
-              agent-encoded-id="QWdlbnQtMjI1MDUw"
-              sort-order="STATUS_AND_SIGNIFICANT_CHANGE"
-              listing-status="For Sale,Sold"
-              property-types="SFR"
-              price-min="500000"
-            ></realscout-your-listings>
-          </div>
 
-          <div className="neighborhood-highlights">
-            <h3>Neighborhood Highlights</h3>
-            <ul>
-              {currentData.highlights.map((highlight, index) => (
-                <li key={index}>{highlight}</li>
-              ))}
-            </ul>
-          </div>
+            <div className="card p-6 lg:p-8 text-center">
+              <div className="w-16 h-16 lg:w-20 lg:h-20 bg-secondary-color rounded-full flex items-center justify-center mx-auto mb-6">
+                <span className="text-2xl lg:text-3xl">🎓</span>
+              </div>
+              <h3 className="text-xl lg:text-2xl font-bold text-primary-color mb-4">Top Schools</h3>
+              <p className="text-gray-600 leading-relaxed">
+                Access to highly-rated schools including Centennial Hills Elementary and nearby high schools
+              </p>
+            </div>
 
-          <SchoolInfo neighborhood={selectedNeighborhood} />
+            <div className="card p-6 lg:p-8 text-center">
+              <div className="w-16 h-16 lg:w-20 lg:h-20 bg-secondary-color rounded-full flex items-center justify-center mx-auto mb-6">
+                <span className="text-2xl lg:text-3xl">🛍️</span>
+              </div>
+              <h3 className="text-xl lg:text-2xl font-bold text-primary-color mb-4">Shopping & Dining</h3>
+              <p className="text-gray-600 leading-relaxed">
+                Centennial Center and nearby shopping centers with restaurants, retail, and services
+              </p>
+            </div>
 
-          {/* RealScout Office Listings */}
-          <div className="listings-section">
-            <h3>Available Homes in {selectedNeighborhood}</h3>
-            <realscout-office-listings
-              agent-encoded-id="QWdlbnQtMjI1MDUw"
-              sort-order="STATUS_AND_SIGNIFICANT_CHANGE"
-              listing-status="For Sale"
-              property-types="SFR,MF,TC"
-              price-min="600000"
-              price-max="1200000"
-            ></realscout-office-listings>
+            <div className="card p-6 lg:p-8 text-center">
+              <div className="w-16 h-16 lg:w-20 lg:h-20 bg-secondary-color rounded-full flex items-center justify-center mx-auto mb-6">
+                <span className="text-2xl lg:text-3xl">🌳</span>
+              </div>
+              <h3 className="text-xl lg:text-2xl font-bold text-primary-color mb-4">Parks & Recreation</h3>
+              <p className="text-gray-600 leading-relaxed">
+                Beautiful parks, walking trails, and outdoor recreation opportunities
+              </p>
+            </div>
+
+            <div className="card p-6 lg:p-8 text-center">
+              <div className="w-16 h-16 lg:w-20 lg:h-20 bg-secondary-color rounded-full flex items-center justify-center mx-auto mb-6">
+                <span className="text-2xl lg:text-3xl">🚗</span>
+              </div>
+              <h3 className="text-xl lg:text-2xl font-bold text-primary-color mb-4">Easy Access</h3>
+              <p className="text-gray-600 leading-relaxed">
+                Convenient access to I-215, US-95, and major Las Vegas attractions
+              </p>
+            </div>
+
+            <div className="card p-6 lg:p-8 text-center">
+              <div className="w-16 h-16 lg:w-20 lg:h-20 bg-secondary-color rounded-full flex items-center justify-center mx-auto mb-6">
+                <span className="text-2xl lg:text-3xl">🏠</span>
+              </div>
+              <h3 className="text-xl lg:text-2xl font-bold text-primary-color mb-4">Luxury Homes</h3>
+              <p className="text-gray-600 leading-relaxed">
+                High-quality construction with modern amenities and beautiful architecture
+              </p>
+            </div>
           </div>
-        </motion.section>
-      </main>
+        </div>
+      </section>
+
+      {/* CTA Section */}
+      <section className="section bg-gradient-to-r from-secondary-color to-secondary-dark">
+        <div className="container text-center text-white">
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-6 lg:mb-8">
+            Ready to Find Your Perfect Neighborhood?
+          </h2>
+          <p className="text-xl lg:text-2xl text-blue-100 mb-8 lg:mb-12 max-w-3xl mx-auto leading-relaxed">
+            Let Dr. Jan Duffy guide you through the Centennial Hills community and help you discover the perfect neighborhood for your lifestyle
+          </p>
+          <div className="flex flex-col sm:flex-row gap-4 lg:gap-6 justify-center">
+            <button type="button" className="bg-white text-secondary-color hover:bg-gray-100 px-8 lg:px-10 py-3 lg:py-4 rounded-lg font-semibold transition-all duration-300 transform hover:scale-105 text-base lg:text-lg">
+              Schedule a Tour
+            </button>
+            <button type="button" className="border-2 border-white text-white hover:bg-white hover:text-secondary-color px-8 lg:px-10 py-3 lg:py-4 rounded-lg font-semibold transition-all duration-300 transform hover:scale-105 text-base lg:text-lg">
+              Contact Dr. Jan Duffy
+            </button>
+          </div>
+        </div>
+      </section>
     </Layout>
   );
-}
+};
+
+export default NeighborhoodsPage;

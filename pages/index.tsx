@@ -4,83 +4,98 @@ import GoogleTagManager from '../components/GoogleTagManager';
 import Layout from '../components/Layout';
 import ModernAboutSection from '../components/ModernAboutSection';
 import ModernContactCTA from '../components/ModernContactCTA';
-import ModernFeaturedProperties from '../components/ModernFeaturedProperties';
 import ModernHero from '../components/ModernHero';
-import ModernInteractiveMap from '../components/ModernInteractiveMap';
-import ModernNeighborhoods from '../components/ModernNeighborhoods';
 import ModernTestimonials from '../components/ModernTestimonials';
 
 const HomePage: React.FC = () => {
   return (
-    <Layout
-      title="Centennial Hills Homes For Sale | Luxury Real Estate | Dr. Jan Duffy"
-      description="Discover luxury homes for sale in Centennial Hills, Las Vegas. Dr. Jan Duffy, Top 1% REALTOR®, specializes in Providence, Skye Canyon, and Northwest Las Vegas luxury real estate."
-      canonical="https://centennialhillshomesforsale.com"
-    >
+    <Layout title="Centennial Hills Luxury Homes | Dr. Jan Duffy" description="Discover luxury homes for sale in Centennial Hills, Las Vegas. Dr. Jan Duffy specializes in premium real estate with stunning mountain views and exceptional quality.">
       <GoogleTagManager />
       
-      {/* Modern Hero Section */}
+      {/* Hero Section */}
       <ModernHero />
-      
-      {/* Modern Neighborhoods Section */}
-      <ModernNeighborhoods />
-      
-      {/* Modern Featured Properties Section */}
-      <ModernFeaturedProperties />
-      
-      {/* Market Data Dashboard Section */}
-      <section className="section bg-gradient-soft" id="market-dashboard">
-        <div className="container">
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-primary-color mb-8 text-center">
-            Centennial Hills Market Trends
-              </h2>
 
-          {/* Tab navigation */}
-          <div className="flex flex-wrap justify-center mb-12 gap-4">
-                      <button
-              type="button" 
-              className="tab-btn px-6 py-3 bg-secondary-color text-white rounded-lg font-semibold transition-all duration-300 hover:bg-secondary-dark hover:scale-105" 
-              data-tab="price"
-            >
-              Price Trend
-                      </button>
-            <button 
-              type="button" 
-              className="tab-btn px-6 py-3 bg-gray-200 text-gray-800 rounded-lg font-semibold transition-all duration-300 hover:bg-gray-300 hover:scale-105" 
-              data-tab="inventory"
-            >
-              Inventory
-                        </button>
-                      <button
-              type="button" 
-              className="tab-btn px-6 py-3 bg-gray-200 text-gray-800 rounded-lg font-semibold transition-all duration-300 hover:bg-gray-300 hover:scale-105" 
-              data-tab="dom"
-            >
-              Days on Market
-            </button>
+      {/* Quick Navigation Cards */}
+      <section className="section bg-gradient-soft">
+        <div className="container">
+          <div className="text-center mb-12 lg:mb-16">
+            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-primary-color mb-6 lg:mb-8">
+              Explore Centennial Hills
+            </h2>
+            <p className="text-lg lg:text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
+              Discover everything this beautiful master-planned community has to offer
+            </p>
           </div>
 
-          {/* Canvas elements – only one shown at a time */}
-          <div className="relative max-w-4xl mx-auto">
-            <canvas id="chart-price" className="tab-canvas w-full h-96"></canvas>
-            <canvas id="chart-inventory" className="tab-canvas hidden w-full h-96"></canvas>
-            <canvas id="chart-dom" className="tab-canvas hidden w-full h-96"></canvas>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8">
+            {/* Properties */}
+            <div className="card p-6 lg:p-8 text-center hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2">
+              <div className="w-16 h-16 lg:w-20 lg:h-20 bg-secondary-color rounded-full flex items-center justify-center mx-auto mb-6">
+                <span className="text-2xl lg:text-3xl">🏠</span>
+              </div>
+              <h3 className="text-xl lg:text-2xl font-bold text-primary-color mb-4">Luxury Properties</h3>
+              <p className="text-gray-600 mb-6 leading-relaxed">
+                Browse our curated selection of premium homes with stunning mountain views
+              </p>
+              <a href="/properties" className="inline-block bg-secondary-color hover:bg-secondary-dark text-white px-6 py-3 rounded-lg font-semibold transition-all duration-300 transform hover:scale-105">
+                View Properties
+              </a>
+            </div>
+
+            {/* Neighborhoods */}
+            <div className="card p-6 lg:p-8 text-center hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2">
+              <div className="w-16 h-16 lg:w-20 lg:h-20 bg-secondary-color rounded-full flex items-center justify-center mx-auto mb-6">
+                <span className="text-2xl lg:text-3xl">🏘️</span>
+              </div>
+              <h3 className="text-xl lg:text-2xl font-bold text-primary-color mb-4">Neighborhoods</h3>
+              <p className="text-gray-600 mb-6 leading-relaxed">
+                Explore the unique character of each neighborhood in Centennial Hills
+              </p>
+              <a href="/neighborhoods" className="inline-block bg-secondary-color hover:bg-secondary-dark text-white px-6 py-3 rounded-lg font-semibold transition-all duration-300 transform hover:scale-105">
+                Explore Areas
+              </a>
+            </div>
+
+            {/* Market Data */}
+            <div className="card p-6 lg:p-8 text-center hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2">
+              <div className="w-16 h-16 lg:w-20 lg:h-20 bg-secondary-color rounded-full flex items-center justify-center mx-auto mb-6">
+                <span className="text-2xl lg:text-3xl">📊</span>
+              </div>
+              <h3 className="text-xl lg:text-2xl font-bold text-primary-color mb-4">Market Trends</h3>
+              <p className="text-gray-600 mb-6 leading-relaxed">
+                Stay informed with the latest real estate market data and trends
+              </p>
+              <a href="/market-data" className="inline-block bg-secondary-color hover:bg-secondary-dark text-white px-6 py-3 rounded-lg font-semibold transition-all duration-300 transform hover:scale-105">
+                View Data
+              </a>
+            </div>
+
+            {/* Area Explorer */}
+            <div className="card p-6 lg:p-8 text-center hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2">
+              <div className="w-16 h-16 lg:w-20 lg:h-20 bg-secondary-color rounded-full flex items-center justify-center mx-auto mb-6">
+                <span className="text-2xl lg:text-3xl">🗺️</span>
+              </div>
+              <h3 className="text-xl lg:text-2xl font-bold text-primary-color mb-4">Area Explorer</h3>
+              <p className="text-gray-600 mb-6 leading-relaxed">
+                Interactive map to discover amenities, schools, and points of interest
+              </p>
+              <a href="/area-explorer" className="inline-block bg-secondary-color hover:bg-secondary-dark text-white px-6 py-3 rounded-lg font-semibold transition-all duration-300 transform hover:scale-105">
+                Explore Map
+              </a>
+            </div>
           </div>
         </div>
       </section>
 
-      {/* Modern Interactive Map Section */}
-      <ModernInteractiveMap />
-      
-      {/* Modern About Section */}
+      {/* About Section */}
       <ModernAboutSection />
-      
-      {/* Modern Testimonials Section */}
+
+      {/* Testimonials */}
       <ModernTestimonials />
-      
-      {/* Modern Contact CTA Section */}
+
+      {/* Contact CTA */}
       <ModernContactCTA />
-      
+
       {/* AI Chat Box */}
       <AIChatBox />
     </Layout>
