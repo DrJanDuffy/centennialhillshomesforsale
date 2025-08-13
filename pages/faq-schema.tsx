@@ -1,6 +1,6 @@
 import Head from 'next/head';
+import Link from 'next/link';
 import React from 'react';
-import GoogleTagManager from '../components/GoogleTagManager';
 import Layout from '../components/Layout';
 
 const FAQSchemaPage: React.FC = () => {
@@ -109,19 +109,18 @@ const FAQSchemaPage: React.FC = () => {
   };
 
   return (
-    <Layout 
-      title="Centennial Hills Real Estate FAQ | Dr. Jan Duffy" 
-      description="Get answers to frequently asked questions about Centennial Hills real estate, home prices, schools, amenities, and living in this beautiful Las Vegas community."
-    >
+    <Layout>
       <Head>
+        <title>Centennial Hills Real Estate FAQ | Dr. Jan Duffy</title>
+        <meta name="description" content="Get answers to frequently asked questions about Centennial Hills real estate, home prices, schools, amenities, and living in this beautiful Las Vegas community." />
+        <link rel="canonical" href="https://centennialhillshomesforsale.com/faq-schema" />
+        
         {/* FAQ Schema for better SERP visibility */}
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
         />
       </Head>
-      
-      <GoogleTagManager />
 
       {/* Hero Section */}
       <section className="relative py-20 lg:py-32 bg-gradient-to-br from-primary-color via-primary-dark to-primary-light overflow-hidden">
@@ -132,12 +131,12 @@ const FAQSchemaPage: React.FC = () => {
             <span className="block text-secondary-color mt-2">Real Estate FAQ</span>
           </h1>
           <p className="text-xl lg:text-2xl text-blue-100 max-w-4xl mx-auto leading-relaxed">
-            Get answers to the most common questions about living, buying, and investing in Centennial Hills, Las Vegas
+            Get answers to the most frequently asked questions about living, buying, and investing in Centennial Hills, Las Vegas&apos;s premier master-planned community.
           </p>
         </div>
       </section>
 
-      {/* FAQ Section */}
+      {/* FAQ Content Section */}
       <section className="section bg-white">
         <div className="container">
           <div className="text-center mb-12 lg:mb-16">
@@ -295,9 +294,9 @@ const FAQSchemaPage: React.FC = () => {
               <p className="text-gray-600 mb-6 leading-relaxed">
                 Stay informed with the latest real estate market data and trends in Centennial Hills
               </p>
-              <a href="/market-data" className="inline-block bg-secondary-color hover:bg-secondary-dark text-white px-6 py-3 rounded-lg font-semibold transition-all duration-300 transform hover:scale-105">
+              <Link href="/market-data" className="inline-block bg-secondary-color hover:bg-secondary-dark text-white px-6 py-3 rounded-lg font-semibold transition-all duration-300 transform hover:scale-105">
                 View Market Data
-              </a>
+              </Link>
             </div>
 
             {/* Properties */}
@@ -309,9 +308,9 @@ const FAQSchemaPage: React.FC = () => {
               <p className="text-gray-600 mb-6 leading-relaxed">
                 Browse our curated selection of premium homes with stunning mountain views
               </p>
-              <a href="/properties" className="inline-block bg-secondary-color hover:bg-secondary-dark text-white px-6 py-3 rounded-lg font-semibold transition-all duration-300 transform hover:scale-105">
+              <Link href="/properties" className="inline-block bg-secondary-color hover:bg-secondary-dark text-white px-6 py-3 rounded-lg font-semibold transition-all duration-300 transform hover:scale-105">
                 View Properties
-              </a>
+              </Link>
             </div>
 
             {/* Contact */}
@@ -323,9 +322,9 @@ const FAQSchemaPage: React.FC = () => {
               <p className="text-gray-600 mb-6 leading-relaxed">
                 Have specific questions? Contact Dr. Jan Duffy for personalized assistance
               </p>
-              <a href="/contact" className="inline-block bg-secondary-color hover:bg-secondary-dark text-white px-6 py-3 rounded-lg font-semibold transition-all duration-300 transform hover:scale-105">
+              <Link href="/contact" className="inline-block bg-secondary-color hover:bg-secondary-dark text-white px-6 py-3 rounded-lg font-semibold transition-all duration-300 transform hover:scale-105">
                 Contact Dr. Jan
-              </a>
+              </Link>
             </div>
           </div>
         </div>
@@ -341,12 +340,12 @@ const FAQSchemaPage: React.FC = () => {
             Dr. Jan Duffy has helped hundreds of families find their perfect home in Centennial Hills. Let her expertise guide you to your ideal property.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 lg:gap-6 justify-center">
-            <a href="/properties" className="bg-white text-secondary-color hover:bg-gray-100 px-8 lg:px-10 py-3 lg:py-4 rounded-lg font-semibold transition-all duration-300 transform hover:scale-105 text-base lg:text-lg">
+            <Link href="/properties" className="bg-white text-secondary-color hover:bg-gray-100 px-8 lg:px-10 py-3 lg:py-4 rounded-lg font-semibold transition-all duration-300 transform hover:scale-105 text-base lg:text-lg">
               Browse Properties
-            </a>
-            <a href="/contact" className="border-2 border-white text-white hover:bg-white hover:text-secondary-color px-8 lg:px-10 py-3 lg:py-4 rounded-lg font-semibold transition-all duration-300 transform hover:scale-105 text-base lg:text-lg">
+            </Link>
+            <Link href="/contact" className="border-2 border-white text-white hover:bg-white hover:text-secondary-color px-8 lg:px-10 py-3 lg:py-4 rounded-lg font-semibold transition-all duration-300 transform hover:scale-105 text-base lg:text-lg">
               Schedule a Consultation
-            </a>
+            </Link>
           </div>
         </div>
       </section>
