@@ -1,7 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import {
   FaCheckCircle,
   FaExclamationTriangle,
@@ -34,24 +34,7 @@ function AwesomeEnhancements() {
     cls: Math.random() * 0.05, // Example CLS under 0.05
   }))[0];
 
-  // Awesome animated counters
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          animateStats();
-        }
-      },
-      { threshold: 0.3 }
-    );
-
-    const element = document.getElementById('awesome-stats');
-    if (element) observer.observe(element);
-
-    return () => observer.disconnect();
-  }, [animateStats]);
-
-  const animateStats = () => {
+  const animateStats = useCallback(() => {
     // Animate homes sold
     let homesSoldCount = 0;
     const homesSoldInterval = setInterval(() => {
@@ -86,7 +69,7 @@ function AwesomeEnhancements() {
         clearInterval(daysInterval);
       }
       setStats((prev) => ({ ...prev, daysOnMarket: daysCount }));
-    }, 50);
+    }, 40);
 
     // Animate client satisfaction
     let satisfactionCount = 0;
@@ -98,7 +81,24 @@ function AwesomeEnhancements() {
       }
       setStats((prev) => ({ ...prev, clientSatisfaction: satisfactionCount }));
     }, 40);
-  };
+  }, []);
+
+  // Awesome animated counters
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          animateStats();
+        }
+      },
+      { threshold: 0.3 }
+    );
+
+    const element = document.getElementById('awesome-stats');
+    if (element) observer.observe(element);
+
+    return () => observer.disconnect();
+  }, [animateStats]);
 
   const awesomeFeatures = useState(() => [
     {
@@ -229,7 +229,7 @@ function AwesomeEnhancements() {
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 mb-16">
           {awesomeFeatures.map((feature, index) => (
             <motion.div
-              key={index}
+              key={feature.id}
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
