@@ -95,6 +95,12 @@ export default function Header() {
             Area Explorer
           </Link>
           <Link
+            href="/faq-schema"
+            className={`nav-link ${router.pathname === '/faq-schema' ? 'active' : ''}`}
+          >
+            FAQ
+          </Link>
+          <Link
             href="/about"
             className={`nav-link ${router.pathname === '/about' ? 'active' : ''}`}
           >
@@ -193,6 +199,13 @@ export default function Header() {
             onClick={closeMenu}
           >
             Area Explorer
+          </Link>
+          <Link
+            href="/faq-schema"
+            className={`nav-link ${router.pathname === '/faq-schema' ? 'active' : ''}`}
+            onClick={closeMenu}
+          >
+            FAQ
           </Link>
           <Link
             href="/about"
