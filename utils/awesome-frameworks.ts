@@ -1,243 +1,280 @@
 // Awesome Frameworks Utility File
 // This file provides easy access to all the new frameworks and utilities
 
+// Basic utility imports that we know work
+import { clsx } from 'clsx';
+import { twMerge } from 'tailwind-merge';
 
 // Headless UI Components
 export {
-    DialogPanel, Dialog as HeadlessDialog, DialogTitle as HeadlessDialogTitle, Popover as HeadlessPopover, RadioGroup as HeadlessRadioGroup, Switch as HeadlessSwitch, Listbox,
-    ListboxButton,
-    ListboxLabel,
-    ListboxOption,
-    ListboxOptions,
-    Menu,
-    MenuButton,
-    MenuItem,
-    MenuItems, PopoverButton,
-    PopoverPanel, RadioGroupLabel,
-    RadioGroupOption, Tab,
-    TabGroup,
-    TabList,
-    TabPanel,
-    TabPanels,
-    Transition,
-    TransitionChild
+  DialogPanel,
+  Dialog as HeadlessDialog,
+  DialogTitle as HeadlessDialogTitle,
+  Popover as HeadlessPopover,
+  RadioGroup as HeadlessRadioGroup,
+  Switch as HeadlessSwitch,
+  Listbox,
+  ListboxButton,
+  ListboxLabel,
+  ListboxOption,
+  ListboxOptions,
+  Menu,
+  MenuButton,
+  MenuItem,
+  MenuItems,
+  PopoverButton,
+  PopoverPanel,
+  RadioGroupLabel,
+  RadioGroupOption,
+  Tab,
+  TabGroup,
+  TabList,
+  TabPanel,
+  TabPanels,
+  Transition,
+  TransitionChild
 } from '@headlessui/react';
+
 export { zodResolver } from '@hookform/resolvers/zod';
-export {
-    Accordion,
-    AccordionContent,
-    AccordionItem,
-    AccordionTrigger
-} from '@radix-ui/react-accordion';
-export {
-    AspectRatio
-} from '@radix-ui/react-aspect-ratio';
-export {
-    Avatar,
-    AvatarFallback,
-    AvatarImage
-} from '@radix-ui/react-avatar';
-export {
-    Checkbox,
-    CheckboxIndicator
-} from '@radix-ui/react-checkbox';
-export {
-    Collapsible,
-    CollapsibleContent,
-    CollapsibleTrigger
-} from '@radix-ui/react-collapsible';
-export {
-    ContextMenu,
-    ContextMenuCheckboxItem,
-    ContextMenuContent,
-    ContextMenuItem,
-    ContextMenuLabel,
-    ContextMenuPortal,
-    ContextMenuRadioItem,
-    ContextMenuSeparator,
-    ContextMenuSub,
-    ContextMenuSubContent,
-    ContextMenuSubTrigger,
-    ContextMenuTrigger
-} from '@radix-ui/react-context-menu';
+
 // Radix UI Components
 export {
-    Dialog,
-    DialogContent,
-    DialogDescription,
-    DialogTitle,
-    DialogTrigger
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger
+} from '@radix-ui/react-accordion';
+
+export { AspectRatio } from '@radix-ui/react-aspect-ratio';
+
+export {
+  Avatar,
+  AvatarFallback,
+  AvatarImage
+} from '@radix-ui/react-avatar';
+
+export {
+  Checkbox,
+  CheckboxIndicator
+} from '@radix-ui/react-checkbox';
+
+export {
+  Collapsible,
+  CollapsibleContent,
+  CollapsibleTrigger
+} from '@radix-ui/react-collapsible';
+
+export {
+  ContextMenu,
+  ContextMenuCheckboxItem,
+  ContextMenuContent,
+  ContextMenuItem,
+  ContextMenuLabel,
+  ContextMenuPortal,
+  ContextMenuRadioItem,
+  ContextMenuSeparator,
+  ContextMenuSub,
+  ContextMenuSubContent,
+  ContextMenuSubTrigger,
+  ContextMenuTrigger
+} from '@radix-ui/react-context-menu';
+
+export {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogTitle,
+  DialogTrigger
 } from '@radix-ui/react-dialog';
+
 export {
-    DropdownMenu,
-    DropdownMenuCheckboxItem,
-    DropdownMenuContent,
-    DropdownMenuItem,
-    DropdownMenuLabel,
-    DropdownMenuRadioGroup,
-    DropdownMenuRadioItem,
-    DropdownMenuSeparator,
-    DropdownMenuSub,
-    DropdownMenuSubContent,
-    DropdownMenuSubTrigger,
-    DropdownMenuTrigger
+  DropdownMenu,
+  DropdownMenuCheckboxItem,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuRadioGroup,
+  DropdownMenuRadioItem,
+  DropdownMenuSeparator,
+  DropdownMenuSub,
+  DropdownMenuSubContent,
+  DropdownMenuSubTrigger,
+  DropdownMenuTrigger
 } from '@radix-ui/react-dropdown-menu';
+
 export {
-    HoverCard,
-    HoverCardContent,
-    HoverCardTrigger
+  HoverCard,
+  HoverCardContent,
+  HoverCardTrigger
 } from '@radix-ui/react-hover-card';
+
 export {
-    Menubar,
-    MenubarContent,
-    MenubarItem,
-    MenubarMenu,
-    MenubarSeparator,
-    MenubarShortcut,
-    MenubarSub,
-    MenubarSubContent,
-    MenubarSubTrigger,
-    MenubarTrigger
+  Menubar,
+  MenubarContent,
+  MenubarItem,
+  MenubarMenu,
+  MenubarSeparator,
+  MenubarSub,
+  MenubarSubContent,
+  MenubarSubTrigger,
+  MenubarTrigger
 } from '@radix-ui/react-menubar';
+
 export {
-    NavigationMenu,
-    NavigationMenuContent,
-    NavigationMenuIndicator,
-    NavigationMenuItem,
-    NavigationMenuLink,
-    NavigationMenuList,
-    NavigationMenuTrigger,
-    NavigationMenuViewport
+  NavigationMenu,
+  NavigationMenuContent,
+  NavigationMenuIndicator,
+  NavigationMenuItem,
+  NavigationMenuLink,
+  NavigationMenuList,
+  NavigationMenuTrigger,
+  NavigationMenuViewport
 } from '@radix-ui/react-navigation-menu';
+
 export {
-    Popover,
-    PopoverArrow,
-    PopoverClose,
-    PopoverContent,
-    PopoverTrigger
+  Popover,
+  PopoverArrow,
+  PopoverClose,
+  PopoverContent,
+  PopoverTrigger
 } from '@radix-ui/react-popover';
+
+export { Portal } from '@radix-ui/react-portal';
+
 export {
-    Portal
-} from '@radix-ui/react-portal';
-export {
-    Progress,
-    ProgressIndicator
+  Progress,
+  ProgressIndicator
 } from '@radix-ui/react-progress';
+
 export {
-    RadioGroup,
-    RadioGroupIndicator,
-    RadioGroupItem
+  RadioGroup,
+  RadioGroupIndicator,
+  RadioGroupItem
 } from '@radix-ui/react-radio-group';
+
 export {
-    ScrollArea,
-    ScrollAreaCorner,
-    ScrollAreaScrollbar,
-    ScrollAreaThumb,
-    ScrollAreaViewport
+  ScrollArea,
+  ScrollAreaCorner,
+  ScrollAreaScrollbar,
+  ScrollAreaThumb,
+  ScrollAreaViewport
 } from '@radix-ui/react-scroll-area';
+
 export {
-    Select,
-    SelectContent,
-    SelectItem,
-    SelectLabel,
-    SelectSeparator,
-    SelectTrigger,
-    SelectValue
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectLabel,
+  SelectSeparator,
+  SelectTrigger,
+  SelectValue
 } from '@radix-ui/react-select';
+
+export { Separator } from '@radix-ui/react-separator';
+
 export {
-    Separator
-} from '@radix-ui/react-separator';
-export {
-    Slider,
-    SliderRange,
-    SliderThumb,
-    SliderTrack
+  Slider,
+  SliderRange,
+  SliderThumb,
+  SliderTrack
 } from '@radix-ui/react-slider';
+
+export { Slot } from '@radix-ui/react-slot';
+
 export {
-    Slot
-} from '@radix-ui/react-slot';
-export {
-    Switch,
-    SwitchThumb
+  Switch,
+  SwitchThumb
 } from '@radix-ui/react-switch';
+
 export {
-    Tabs,
-    TabsContent,
-    TabsList,
-    TabsTrigger
+  Tabs,
+  TabsContent,
+  TabsList,
+  TabsTrigger
 } from '@radix-ui/react-tabs';
+
 export {
-    Toast,
-    ToastAction,
-    ToastClose,
-    ToastDescription,
-    ToastProvider,
-    ToastTitle,
-    ToastViewport
+  Toast,
+  ToastAction,
+  ToastClose,
+  ToastDescription,
+  ToastProvider,
+  ToastTitle,
+  ToastViewport
 } from '@radix-ui/react-toast';
+
 export {
-    Toolbar,
-    ToolbarButton,
-    ToolbarLink,
-    ToolbarSeparator,
-    ToolbarToggleGroup,
-    ToolbarToggleItem
+  Toolbar,
+  ToolbarButton,
+  ToolbarLink,
+  ToolbarSeparator,
+  ToolbarToggleGroup,
+  ToolbarToggleItem
 } from '@radix-ui/react-toolbar';
+
 export {
-    Tooltip,
-    TooltipContent,
-    TooltipProvider,
-    TooltipTrigger
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger
 } from '@radix-ui/react-tooltip';
-export {
-    VisuallyHidden
-} from '@radix-ui/react-visually-hidden';
+
+export { VisuallyHidden } from '@radix-ui/react-visually-hidden';
+
 // React Query
 export {
-    QueryClient,
-    QueryClientProvider,
-    useMutation,
-    useQuery,
-    useQueryClient
+  QueryClient,
+  QueryClientProvider,
+  useMutation,
+  useQuery,
+  useQueryClient
 } from '@tanstack/react-query';
+
 // Table
 export {
-    flexRender,
-    getCoreRowModel,
-    getFilteredRowModel,
-    getPaginationRowModel,
-    getSortedRowModel,
-    useReactTable
+  flexRender,
+  getCoreRowModel,
+  getFilteredRowModel,
+  getPaginationRowModel,
+  getSortedRowModel,
+  useReactTable
 } from '@tanstack/react-table';
+
 // Vercel Analytics
 export { Analytics } from '@vercel/analytics/react';
 export { SpeedInsights } from '@vercel/speed-insights/next';
+
 export { cva } from 'class-variance-authority';
-// Utility Functions
-export { clsx } from 'clsx';
+
 // Icons
 export * from 'lucide-react';
+
 // Form and Validation
 export { Controller, useForm } from 'react-hook-form';
+
 // Toast Notifications
 export { toast } from 'react-hot-toast';
+
 // Charts
 export {
-    Area,
-    AreaChart,
-    Bar,
-    BarChart,
-    CartesianGrid,
-    Cell,
-    Legend,
-    Line,
-    LineChart,
-    Pie,
-    PieChart, Tooltip as RechartsTooltip, ResponsiveContainer, XAxis,
-    YAxis
+  Area,
+  AreaChart,
+  Bar,
+  BarChart,
+  CartesianGrid,
+  Cell,
+  Legend,
+  Line,
+  LineChart,
+  Pie,
+  PieChart,
+  Tooltip as RechartsTooltip,
+  ResponsiveContainer,
+  XAxis,
+  YAxis
 } from 'recharts';
+
 export { Toaster, toast as sonnerToast } from 'sonner';
-export { twMerge } from 'tailwind-merge';
 export * as z from 'zod';
 
 // Utility Functions
