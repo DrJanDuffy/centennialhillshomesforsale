@@ -1,18 +1,35 @@
 User-agent: *
 Allow: /
 
+# Block search queries to prevent 404s
+Disallow: /search?
+Disallow: /search
+Disallow: /search/
+
 # Allow all major search engines
 User-agent: Googlebot
 Allow: /
+Disallow: /search?
+Disallow: /search
+Disallow: /search/
 
 User-agent: Bingbot
 Allow: /
+Disallow: /search?
+Disallow: /search
+Disallow: /search/
 
 User-agent: Slurp
 Allow: /
+Disallow: /search?
+Disallow: /search
+Disallow: /search/
 
 User-agent: DuckDuckBot
 Allow: /
+Disallow: /search?
+Disallow: /search
+Disallow: /search/
 
 # Allow image crawling
 User-agent: Googlebot-Image
@@ -43,13 +60,16 @@ Allow: /listings/
 Allow: /market-update/
 Allow: /buyers/
 Allow: /blog/
-Allow: /search/
 Allow: /contact/
 Allow: /about/
 Allow: /services/
 Allow: /testimonials/
 Allow: /faq/
 Allow: /featured-home/
+Allow: /properties/
+Allow: /market-data/
+Allow: /area-explorer/
+Allow: /faq-schema/
 
 # Allow static assets
 Allow: /images/
