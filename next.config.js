@@ -9,7 +9,7 @@ const withPWA = require('next-pwa')({
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  output: 'export',
+  // Removed output: 'export' to work with Vercel
   trailingSlash: true,
   skipTrailingSlashRedirect: true,
   basePath: '',
@@ -20,7 +20,7 @@ const nextConfig = {
   compress: true,
 
   images: {
-    unoptimized: true,
+    unoptimized: false, // Changed to false for Vercel
     domains: ['images.unsplash.com', 'cdn.pixabay.com', 'source.unsplash.com'],
     formats: ['image/webp', 'image/avif'],
   },
