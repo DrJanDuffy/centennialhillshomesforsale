@@ -53,10 +53,28 @@ const redirectMap = {
 export function middleware(request) {
   const url = request.nextUrl.clone();
   const pathname = url.pathname;
+  const hostname = request.headers.get('host') || '';
   
   // Log all requests for monitoring (optional)
   if (process.env.NODE_ENV === 'development') {
-    console.log(`Middleware processing: ${pathname}`);
+    console.log(`Middleware processing: ${pathname} from ${hostname}`);
+  }
+  
+  // Handle HTTP to HTTPS redirects
+  if (request.headers.get('x-forwarded-proto') === 'http') {
+    const httpsUrl = new URL(request.url);
+    httpsUrl.protocol = 'https:';
+    console.log(`Redirecting HTTP to HTTPS: ${request.url} → ${httpsUrl.toString()}`);
+    return NextResponse.redirect(httpsUrl, 301); // Permanent redirect
+  }
+  
+  // Handle www to non-www redirects
+  if (hostname.startsWith('www.')) {
+    const nonWwwHostname = hostname.replace(/^www\./, '');
+    const nonWwwUrl = new URL(request.url);
+    nonWwwUrl.hostname = nonWwwHostname;
+    console.log(`Redirecting www to non-www: ${request.url} → ${nonWwwUrl.toString()}`);
+    return NextResponse.redirect(nonWwwUrl, 301); // Permanent redirect
   }
   
   // Handle common typos and variations
