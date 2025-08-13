@@ -278,12 +278,12 @@ export function CompactFeaturedInsight({
         {...props}
       />
       <div className="mt-3 text-center">
-        <a 
-          href="/market-insights"
-          className="text-blue-600 hover:text-blue-800 text-sm font-medium underline"
-        >
-          View all insights →
-        </a>
+                 <Link 
+           href="/market-insights"
+           className="text-blue-600 hover:text-blue-800 text-sm font-medium underline"
+         >
+           View all insights →
+         </Link>
       </div>
     </div>
   );
