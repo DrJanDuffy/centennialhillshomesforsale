@@ -65,7 +65,6 @@ export {
     Dialog,
     DialogContent,
     DialogDescription,
-    DialogHeader,
     DialogTitle,
     DialogTrigger
 } from '@radix-ui/react-dialog';
