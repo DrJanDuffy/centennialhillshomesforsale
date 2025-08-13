@@ -2,6 +2,7 @@ import Head from 'next/head';
 import GoogleTagManager from '../components/GoogleTagManager';
 import Layout from '../components/Layout';
 import ModernFeaturedProperties from '../components/ModernFeaturedProperties';
+import RealScoutListings from '../components/RealScoutListings';
 
 export default function Properties() {
   return (
@@ -393,6 +394,27 @@ export default function Properties() {
                 </p>
               </div>
             </div>
+          </div>
+        </section>
+
+        {/* RealScout Listings */}
+        <section className="section bg-gray-50">
+          <div className="container">
+            <div className="text-center mb-12 lg:mb-16">
+              <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-primary-color mb-6 lg:mb-8">
+                Current Market Listings
+              </h2>
+              <p className="text-lg lg:text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
+                Browse our real-time property listings with advanced search and filter capabilities
+              </p>
+            </div>
+            
+            <RealScoutListings 
+              priceMin={500000}
+              priceMax={2000000}
+              propertyTypes="SFR,MF,TC"
+              listingStatus="For Sale"
+            />
           </div>
         </section>
 

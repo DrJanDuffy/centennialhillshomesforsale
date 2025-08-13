@@ -12,6 +12,7 @@ import {
 import Link from 'next/link';
 import type React from 'react';
 import Layout from '@/components/Layout';
+import RealScoutListings from '@/components/RealScoutListings';
 
 const BuyersPage: React.FC = () => {
   const buyerServices = [
@@ -214,6 +215,27 @@ const BuyersPage: React.FC = () => {
                 </div>
               ))}
             </div>
+          </div>
+        </section>
+
+        {/* RealScout Listings */}
+        <section className="py-16 bg-white">
+          <div className="container mx-auto px-4">
+            <div className="text-center mb-12">
+              <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+                Current Properties for Buyers
+              </h2>
+              <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+                Browse our latest listings to see what's available in your preferred areas
+              </p>
+            </div>
+            
+            <RealScoutListings 
+              priceMin={500000}
+              priceMax={1500000}
+              propertyTypes="SFR,MF"
+              listingStatus="For Sale"
+            />
           </div>
         </section>
 

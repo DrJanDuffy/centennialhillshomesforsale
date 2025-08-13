@@ -1,5 +1,6 @@
 import Head from 'next/head';
 import Layout from '../components/Layout';
+import RealScoutListings from '../components/RealScoutListings';
 
 export default function MarketData() {
   return (
@@ -325,6 +326,27 @@ export default function MarketData() {
                 </tbody>
               </table>
             </div>
+          </div>
+        </section>
+
+        {/* RealScout Listings */}
+        <section className="py-16 bg-gray-50">
+          <div className="container mx-auto px-4">
+            <div className="text-center mb-12">
+              <h2 className="text-3xl font-bold text-gray-800 mb-6">
+                Current Market Listings
+              </h2>
+              <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+                Browse real-time property listings to see the market data in action
+              </p>
+            </div>
+            
+            <RealScoutListings 
+              priceMin={300000}
+              priceMax={3000000}
+              propertyTypes="SFR,MF,TC"
+              listingStatus="For Sale"
+            />
           </div>
         </section>
 

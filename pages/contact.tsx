@@ -1,5 +1,6 @@
 import Head from 'next/head';
 import Layout from '../components/Layout';
+import RealScoutListings from '../components/RealScoutListings';
 
 export default function Contact() {
   return (
@@ -162,6 +163,27 @@ export default function Contact() {
         </section>
 
         {/* Contact Information */}
+        {/* RealScout Listings */}
+        <section className="py-16 bg-gray-50">
+          <div className="container mx-auto px-4">
+            <div className="text-center mb-12">
+              <h2 className="text-3xl font-bold text-gray-800 mb-6">
+                Featured Properties
+              </h2>
+              <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+                Browse our current listings while you're here - these properties won't last long!
+              </p>
+            </div>
+            
+            <RealScoutListings 
+              priceMin={600000}
+              priceMax={1800000}
+              propertyTypes="SFR,MF"
+              listingStatus="For Sale"
+            />
+          </div>
+        </section>
+
         <section className="py-16 bg-white">
           <div className="container mx-auto px-4">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
