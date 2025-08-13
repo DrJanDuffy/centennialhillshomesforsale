@@ -186,28 +186,67 @@ export function clearErrorLog() {
   }
 }
 
-// Default export for compatibility with globalErrorHandler
-const ErrorTracker = {
-  getInstance: () => ({
-    trackError: (error, context) => {
-      console.error('Error tracked:', { error, context });
-      // Store error in localStorage
-      if (typeof window !== 'undefined') {
-        const errors = JSON.parse(localStorage.getItem('errorLog') || '[]');
-        errors.push({
-          message: error.message || error.toString(),
-          context,
-          timestamp: new Date().toISOString(),
-          stack: error.stack
-        });
-        localStorage.setItem('errorLog', JSON.stringify(errors.slice(-100))); // Keep last 100 errors
-      }
-    },
-    getErrors: () => {
-      if (typeof window === 'undefined') return [];
-      return JSON.parse(localStorage.getItem('errorLog') || '[]');
+// Proper ErrorTracker class implementation
+class ErrorTracker {
+  constructor() {
+    this.errors = [];
+    this.maxErrors = 100;
+  }
+
+  static getInstance() {
+    if (!ErrorTracker.instance) {
+      ErrorTracker.instance = new ErrorTracker();
     }
-  })
-};
+    return ErrorTracker.instance;
+  }
+
+  trackError(error, context) {
+    const errorData = {
+      message: error.message || error.toString(),
+      context: context,
+      timestamp: new Date().toISOString(),
+      stack: error.stack,
+      url: typeof window !== 'undefined' ? window.location.href : 'server'
+    };
+
+    // Store error in localStorage
+    if (typeof window !== 'undefined') {
+      this.errors.push(errorData);
+      if (this.errors.length > this.maxErrors) {
+        this.errors = this.errors.slice(-this.maxErrors);
+      }
+      localStorage.setItem('errorLog', JSON.stringify(this.errors));
+    }
+
+    // Log to console in development
+    if (process.env.NODE_ENV === 'development') {
+      console.error('Error tracked:', errorData);
+    }
+
+    return errorData;
+  }
+
+  getErrors() {
+    if (typeof window === 'undefined') return [];
+    
+    try {
+      const stored = localStorage.getItem('errorLog');
+      return stored ? JSON.parse(stored) : [];
+    } catch (error) {
+      console.error('Failed to parse stored errors:', error);
+      return [];
+    }
+  }
+
+  clearErrors() {
+    this.errors = [];
+    if (typeof window !== 'undefined') {
+      localStorage.removeItem('errorLog');
+    }
+  }
+}
+
+// Create singleton instance
+ErrorTracker.instance = null;
 
 export default ErrorTracker;

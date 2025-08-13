@@ -1,14 +1,10 @@
 import Head from 'next/head';
 import Link from 'next/link';
 import Layout from '../components/Layout';
-import ModernAboutSection from '../components/ModernAboutSection';
-import ModernContactCTA from '../components/ModernContactCTA';
-import ModernHero from '../components/ModernHero';
-import ModernTestimonials from '../components/ModernTestimonials';
 
 export default function Home() {
   return (
-    <>
+    <Layout>
       <Head>
         <title>Centennial Hills Homes for Sale | Dr. Jan Duffy | Luxury Real Estate</title>
         <meta name="description" content="Discover luxury homes for sale in Centennial Hills, Las Vegas. Dr. Jan Duffy, Top 1% REALTOR®, specializes in luxury properties and master-planned communities." />
@@ -98,102 +94,241 @@ export default function Home() {
                     "@type": "Organization",
                     "name": "Berkshire Hathaway HomeServices Network"
                   }
-                ],
-                "aggregateRating": {
-                  "@type": "AggregateRating",
-                  "ratingValue": "4.9",
-                  "reviewCount": "127",
-                  "bestRating": "5"
-                },
-                "award": [
-                  "Top 1% REALTOR® in Las Vegas Valley",
-                  "Million Dollar Club Member",
-                  "Excellence in Customer Service Award",
-                  "Outstanding Sales Performance Recognition"
-                ],
-                "specialization": [
-                  "Luxury Home Sales",
-                  "New Construction Properties",
-                  "Master-Planned Communities",
-                  "Investment Properties",
-                  "First-Time Home Buyers",
-                  "Relocation Services",
-                  "Property Marketing",
-                  "Market Analysis"
-                ],
-                "yearsOfExperience": "20+",
-                "numberOfPropertiesSold": "500+",
-                "clientSatisfactionRate": "98%"
+                ]
               }
+            })
+          }}
+        />
+        
+        {/* RealEstateAgent Schema */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "RealEstateAgent",
+              "@id": "https://centennialhillshomesforsale.com/#realestateagent",
+              "name": "Dr. Jan Duffy",
+              "description": "Top 1% REALTOR® specializing in luxury homes and master-planned communities in Centennial Hills, Las Vegas",
+              "url": "https://centennialhillshomesforsale.com",
+              "telephone": "(702) 903-1952",
+              "email": "jan@centennialhillshomes.com",
+              "address": {
+                "@type": "PostalAddress",
+                "streetAddress": "Centennial Hills",
+                "addressLocality": "Las Vegas",
+                "addressRegion": "NV",
+                "postalCode": "89149",
+                "addressCountry": "US"
+              },
+              "areaServed": [
+                {
+                  "@type": "Place",
+                  "name": "Centennial Hills",
+                  "address": {
+                    "@type": "PostalAddress",
+                    "addressLocality": "Las Vegas",
+                    "addressRegion": "NV",
+                    "postalCode": "89149"
+                  }
+                },
+                {
+                  "@type": "Place",
+                  "name": "Providence",
+                  "address": {
+                    "@type": "PostalAddress",
+                    "addressLocality": "Las Vegas",
+                    "addressRegion": "NV",
+                    "postalCode": "89149"
+                  }
+                },
+                {
+                  "@type": "Place",
+                  "name": "Skye Canyon",
+                  "address": {
+                    "@type": "PostalAddress",
+                    "addressLocality": "Las Vegas",
+                    "addressRegion": "NV",
+                    "postalCode": "89166"
+                  }
+                }
+              ]
             })
           }}
         />
       </Head>
 
-      <Layout>
-        <ModernHero />
-        
-        <div className="container mx-auto px-4 py-16">
-          <h2 className="text-3xl font-bold text-center mb-12 text-gray-800">
-            Quick Navigation
-          </h2>
+      {/* Hero Section */}
+      <section className="relative py-20 lg:py-32 bg-gradient-to-br from-blue-900 via-blue-800 to-blue-700 overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-r from-blue-900/80 via-blue-800/60 to-blue-700/40"></div>
+        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-white">
+          <h1 className="text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold mb-8 leading-tight">
+            Discover Your Dream Home in
+            <span className="block text-blue-200 mt-2">Centennial Hills</span>
+          </h1>
           
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          <p className="text-lg md:text-xl lg:text-2xl text-blue-100 mb-12 max-w-3xl mx-auto leading-relaxed">
+            Luxury homes in Las Vegas&apos; most prestigious master-planned community. 
+            Expert guidance from Dr. Jan Duffy, Top 1% REALTOR®.
+          </p>
+
+          <div className="flex flex-col sm:flex-row gap-4 lg:gap-6 justify-center">
+            <Link href="/properties" className="bg-white text-blue-600 hover:bg-gray-100 px-8 lg:px-10 py-3 lg:py-4 rounded-lg font-semibold transition-all duration-300 transform hover:scale-105 text-base lg:text-lg">
+              Browse Properties
+            </Link>
+            <Link href="/contact" className="border-2 border-white text-white hover:bg-white hover:text-blue-600 px-8 lg:px-10 py-3 lg:py-4 rounded-lg font-semibold transition-all duration-300 transform hover:scale-105 text-base lg:text-lg">
+              Schedule a Consultation
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* Quick Navigation Cards */}
+      <section className="py-16 bg-gray-50">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 mb-6">
+              Explore Centennial Hills
+            </h2>
+            <p className="text-lg lg:text-xl text-gray-600 max-w-3xl mx-auto">
+              Everything you need to know about living, buying, and investing in this premier Las Vegas community
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8">
+            {/* Properties Card */}
             <Link href="/properties" className="group">
-              <div className="bg-white rounded-lg shadow-lg p-6 text-center transition-transform duration-300 group-hover:scale-105 hover:shadow-xl">
-                <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                  <svg className="w-8 h-8 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
-                  </svg>
+              <div className="bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 p-6 lg:p-8 text-center">
+                <div className="w-16 h-16 lg:w-20 lg:h-20 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-6 group-hover:bg-blue-200 transition-colors">
+                  <span className="text-2xl lg:text-3xl">🏠</span>
                 </div>
-                <h3 className="text-xl font-semibold text-gray-800 mb-2">Properties</h3>
-                <p className="text-gray-600">Browse our luxury home listings</p>
+                <h3 className="text-xl lg:text-2xl font-bold text-gray-900 mb-4">Available Properties</h3>
+                <p className="text-gray-600 mb-6">
+                  Browse our curated selection of premium homes with stunning mountain views
+                </p>
+                <div className="text-blue-600 font-semibold group-hover:text-blue-700 transition-colors">
+                  View Properties →
+                </div>
               </div>
             </Link>
 
+            {/* Neighborhoods Card */}
             <Link href="/neighborhoods" className="group">
-              <div className="bg-white rounded-lg shadow-lg p-6 text-center transition-transform duration-300 group-hover:scale-105 hover:shadow-xl">
-                <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                  <svg className="w-8 h-8 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
-                  </svg>
+              <div className="bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 p-6 lg:p-8 text-center">
+                <div className="w-16 h-16 lg:w-20 lg:h-20 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-6 group-hover:bg-green-200 transition-colors">
+                  <span className="text-2xl lg:text-3xl">🌄</span>
                 </div>
-                <h3 className="text-xl font-semibold text-gray-800 mb-2">Neighborhoods</h3>
-                <p className="text-gray-600">Explore Centennial Hills areas</p>
+                <h3 className="text-xl lg:text-2xl font-bold text-gray-900 mb-4">Neighborhoods</h3>
+                <p className="text-gray-600 mb-6">
+                  Discover the unique character and amenities of each community
+                </p>
+                <div className="text-green-600 font-semibold group-hover:text-green-700 transition-colors">
+                  Explore Areas →
+                </div>
               </div>
             </Link>
 
+            {/* Market Data Card */}
             <Link href="/market-data" className="group">
-              <div className="bg-white rounded-lg shadow-lg p-6 text-center transition-transform duration-300 group-hover:scale-105 hover:shadow-xl">
-                <div className="w-16 h-16 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                  <svg className="w-8 h-8 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
-                  </svg>
+              <div className="bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 p-6 lg:p-8 text-center">
+                <div className="w-16 h-16 lg:w-20 lg:h-20 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-6 group-hover:bg-purple-200 transition-colors">
+                  <span className="text-2xl lg:text-3xl">📊</span>
                 </div>
-                <h3 className="text-xl font-semibold text-gray-800 mb-2">Market Data</h3>
-                <p className="text-gray-600">Latest real estate insights</p>
+                <h3 className="text-xl lg:text-2xl font-bold text-gray-900 mb-4">Market Trends</h3>
+                <p className="text-gray-600 mb-6">
+                  Stay informed with the latest real estate market data and trends
+                </p>
+                <div className="text-purple-600 font-semibold group-hover:text-purple-700 transition-colors">
+                  View Data →
+                </div>
               </div>
             </Link>
 
+            {/* Area Explorer Card */}
             <Link href="/area-explorer" className="group">
-              <div className="bg-white rounded-lg shadow-lg p-6 text-center transition-transform duration-300 group-hover:scale-105 hover:shadow-xl">
-                <div className="w-16 h-16 bg-orange-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                  <svg className="w-8 h-8 text-orange-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-1.447-.894L15 4m0 13V4m0 0L9 7" />
-                  </svg>
+              <div className="bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 p-6 lg:p-8 text-center">
+                <div className="w-16 h-16 lg:w-20 lg:h-20 bg-orange-100 rounded-full flex items-center justify-center mx-auto mb-6 group-hover:bg-orange-200 transition-colors">
+                  <span className="text-2xl lg:text-3xl">🗺️</span>
                 </div>
-                <h3 className="text-xl font-semibold text-gray-800 mb-2">Area Explorer</h3>
-                <p className="text-gray-600">Interactive area guide</p>
+                <h3 className="text-xl lg:text-2xl font-bold text-gray-900 mb-4">Area Explorer</h3>
+                <p className="text-gray-600 mb-6">
+                  Interactive map showing amenities, schools, and attractions
+                </p>
+                <div className="text-orange-600 font-semibold group-hover:text-orange-700 transition-colors">
+                  Explore Map →
+                </div>
               </div>
             </Link>
           </div>
         </div>
+      </section>
 
-        <ModernAboutSection />
-        <ModernTestimonials />
-        <ModernContactCTA />
-      </Layout>
-    </>
+      {/* About Section */}
+      <section className="py-16 bg-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+            <div>
+              <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 mb-6">
+                Meet Dr. Jan Duffy
+              </h2>
+              <p className="text-lg lg:text-xl text-gray-600 mb-6 leading-relaxed">
+                As a Top 1% REALTOR® with over 15 years of experience, I&apos;ve helped hundreds of families find their perfect home in Centennial Hills and surrounding communities.
+              </p>
+              <p className="text-lg lg:text-xl text-gray-600 mb-8 leading-relaxed">
+                My expertise spans luxury homes, investment properties, and first-time buyer guidance. I understand the unique characteristics of each neighborhood and can help you make an informed decision.
+              </p>
+              <div className="flex flex-col sm:flex-row gap-4">
+                <Link href="/about" className="bg-blue-600 text-white px-8 py-3 rounded-lg font-semibold hover:bg-blue-700 transition-colors text-center">
+                  Learn More About Me
+                </Link>
+                <Link href="/contact" className="border-2 border-blue-600 text-blue-600 hover:bg-blue-600 hover:text-white px-8 py-3 rounded-lg font-semibold transition-colors text-center">
+                  Schedule a Consultation
+                </Link>
+              </div>
+            </div>
+            <div className="text-center">
+              <div className="w-64 h-64 mx-auto bg-gradient-to-br from-blue-100 to-blue-200 rounded-full flex items-center justify-center">
+                <span className="text-6xl">👩‍💼</span>
+              </div>
+              <div className="mt-6 space-y-2">
+                <div className="flex items-center justify-center gap-2">
+                  <span className="text-yellow-500">⭐</span>
+                  <span className="text-gray-700">Top 1% REALTOR®</span>
+                </div>
+                <div className="flex items-center justify-center gap-2">
+                  <span className="text-green-500">✅</span>
+                  <span className="text-gray-700">500+ Homes Sold</span>
+                </div>
+                <div className="flex items-center justify-center gap-2">
+                  <span className="text-blue-500">🏆</span>
+                  <span className="text-gray-700">15+ Years Experience</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* CTA Section */}
+      <section className="py-16 bg-gradient-to-r from-blue-600 to-blue-700">
+        <div className="max-w-4xl mx-auto text-center text-white px-4 sm:px-6 lg:px-8">
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-6">
+            Ready to Find Your Dream Home?
+          </h2>
+          <p className="text-xl lg:text-2xl text-blue-100 mb-8 max-w-3xl mx-auto">
+            Let me guide you through the process of finding the perfect property in Centennial Hills. 
+            From initial consultation to closing, I&apos;ll be with you every step of the way.
+          </p>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <Link href="/properties" className="bg-white text-blue-600 hover:bg-gray-100 px-8 lg:px-10 py-3 lg:py-4 rounded-lg font-semibold transition-all duration-300 transform hover:scale-105 text-base lg:text-lg">
+              Browse Available Properties
+            </Link>
+            <Link href="/contact" className="border-2 border-white text-white hover:bg-white hover:text-blue-600 px-8 lg:px-10 py-3 lg:py-4 rounded-lg font-semibold transition-all duration-300 transform hover:scale-105 text-base lg:text-lg">
+              Get Started Today
+            </Link>
+          </div>
+        </div>
+      </section>
+    </Layout>
   );
 }
