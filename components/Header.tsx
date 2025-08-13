@@ -71,16 +71,10 @@ export default function Header() {
             Home
           </Link>
           <Link
-            href="/about"
-            className={`nav-link ${router.pathname === '/about' ? 'active' : ''}`}
+            href="/properties"
+            className={`nav-link ${router.pathname === '/properties' ? 'active' : ''}`}
           >
-            About
-          </Link>
-          <Link
-            href="/listings"
-            className={`nav-link ${router.pathname === '/listings' ? 'active' : ''}`}
-          >
-            Listings
+            Properties
           </Link>
           <Link
             href="/neighborhoods"
@@ -89,10 +83,22 @@ export default function Header() {
             Neighborhoods
           </Link>
           <Link
-            href="/services"
-            className={`nav-link ${router.pathname === '/services' ? 'active' : ''}`}
+            href="/market-data"
+            className={`nav-link ${router.pathname === '/market-data' ? 'active' : ''}`}
           >
-            Services
+            Market Data
+          </Link>
+          <Link
+            href="/area-explorer"
+            className={`nav-link ${router.pathname === '/area-explorer' ? 'active' : ''}`}
+          >
+            Area Explorer
+          </Link>
+          <Link
+            href="/about"
+            className={`nav-link ${router.pathname === '/about' ? 'active' : ''}`}
+          >
+            About
           </Link>
           <Link
             href="/contact"
@@ -161,18 +167,11 @@ export default function Header() {
             Home
           </Link>
           <Link
-            href="/about"
-            className={`nav-link ${router.pathname === '/about' ? 'active' : ''}`}
+            href="/properties"
+            className={`nav-link ${router.pathname === '/properties' ? 'active' : ''}`}
             onClick={closeMenu}
           >
-            About Dr. Duffy
-          </Link>
-          <Link
-            href="/listings"
-            className={`nav-link ${router.pathname === '/listings' ? 'active' : ''}`}
-            onClick={closeMenu}
-          >
-            Listings
+            Properties
           </Link>
           <Link
             href="/neighborhoods"
@@ -182,11 +181,25 @@ export default function Header() {
             Neighborhoods
           </Link>
           <Link
-            href="/services"
-            className={`nav-link ${router.pathname === '/services' ? 'active' : ''}`}
+            href="/market-data"
+            className={`nav-link ${router.pathname === '/market-data' ? 'active' : ''}`}
             onClick={closeMenu}
           >
-            Services
+            Market Data
+          </Link>
+          <Link
+            href="/area-explorer"
+            className={`nav-link ${router.pathname === '/area-explorer' ? 'active' : ''}`}
+            onClick={closeMenu}
+          >
+            Area Explorer
+          </Link>
+          <Link
+            href="/about"
+            className={`nav-link ${router.pathname === '/about' ? 'active' : ''}`}
+            onClick={closeMenu}
+          >
+            About Dr. Duffy
           </Link>
           <Link
             href="/contact"
