@@ -57,9 +57,24 @@ export default function Document() {
               --rs-listing-divider-color: rgb(101, 141, 172);
               width: 100%;
             }
+            realscout-search {
+              --rs-listing-divider-color: rgb(101, 141, 172);
+              width: 100%;
+            }
+            realscout-property-details {
+              --rs-listing-divider-color: rgb(101, 141, 172);
+              width: 100%;
+            }
+            realscout-market-analysis {
+              --rs-listing-divider-color: rgb(101, 141, 172);
+              width: 100%;
+            }
           `,
           }}
         />
+
+        {/* RealScout Scripts */}
+        <script src="https://cdn.realscout.com/js/realscout.js" async defer />
 
         {/* ==== MAP LIBRARY (Google Maps) ==== */}
         <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDt84u_m6IGyrNZ9Eyc2W0fAIx6yD3peTo&callback=initMap&libraries=places" async defer></script>
