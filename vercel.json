@@ -1,6 +1,9 @@
 {
   "buildCommand": "npm run build",
   "framework": "nextjs",
+  "installCommand": "npm ci --prefer-offline --no-audit",
+  "devCommand": "npm run dev",
+  
   "redirects": [
     {
       "source": "/:path*",
@@ -12,39 +15,92 @@
       ],
       "destination": "https://centennialhillshomesforsale.com/:path*",
       "permanent": true
+    },
+    {
+      "source": "/search",
+      "destination": "/",
+      "permanent": false
+    },
+    {
+      "source": "/search/:query",
+      "destination": "/",
+      "permanent": false
     }
   ],
+  
   "headers": [
     {
       "source": "/(.*)",
       "headers": [
         {
           "key": "Strict-Transport-Security",
-          "value": "max-age=31536000; includeSubDomains"
+          "value": "max-age=31536000; includeSubDomains; preload"
+        },
+        {
+          "key": "X-Content-Type-Options",
+          "value": "nosniff"
+        },
+        {
+          "key": "X-Frame-Options",
+          "value": "DENY"
+        },
+        {
+          "key": "X-XSS-Protection",
+          "value": "1; mode=block"
+        },
+        {
+          "key": "Referrer-Policy",
+          "value": "strict-origin-when-cross-origin"
+        }
+      ]
+    },
+    {
+      "source": "/api/(.*)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=300, s-maxage=300"
+        }
+      ]
+    },
+    {
+      "source": "/_next/static/(.*)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=31536000, immutable"
+        }
+      ]
+    },
+    {
+      "source": "/images/(.*)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=86400, s-maxage=86400"
         }
       ]
     }
   ],
+  
   "rewrites": [
     {
-      "source": "/search",
-      "destination": "/search.html"
+      "source": "/sitemap.xml",
+      "destination": "/api/sitemap"
     },
     {
-      "source": "/buyers",
-      "destination": "/buyers.html"
-    },
-    {
-      "source": "/blog",
-      "destination": "/blog.html"
-    },
-    {
-      "source": "/neighborhoods",
-      "destination": "/neighborhoods.html"
-    },
-    {
-      "source": "/featured-home",
-      "destination": "/featured-home.html"
+      "source": "/robots.txt",
+      "destination": "/api/robots"
     }
-  ]
+  ],
+  
+  "functions": {
+    "pages/api/**/*.ts": {
+      "maxDuration": 30
+    }
+  },
+  
+  "regions": ["iad1"],
+  
+  "crons": []
 }
