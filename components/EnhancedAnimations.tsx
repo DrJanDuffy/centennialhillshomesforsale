@@ -1,6 +1,7 @@
 'use client';
 
 import { motion, useInView } from 'framer-motion';
+import Image from 'next/image';
 import React, { useEffect, useRef } from 'react';
 import { animationVariants, transitionConfigs } from '../utils/animationUtils';
 
@@ -260,7 +261,7 @@ export const EnhancedImage: React.FC<EnhancedImageProps> = ({
         </div>
       )}
 
-      <img
+      <Image
         src={imageSrc}
         alt={alt}
         width={width}

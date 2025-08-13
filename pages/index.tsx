@@ -1,5 +1,5 @@
-import React from 'react';
 import Link from 'next/link';
+import React from 'react';
 import AIChatBox from '../components/AIChatBox';
 import GoogleTagManager from '../components/GoogleTagManager';
 import Layout from '../components/Layout';
@@ -22,7 +22,7 @@ const HomePage: React.FC = () => {
           <div className="text-center mb-12 lg:mb-16">
             <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-primary-color mb-6 lg:mb-8">
               Explore Centennial Hills
-            </h2>
+              </h2>
             <p className="text-lg lg:text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
               Discover everything this beautiful master-planned community has to offer
             </p>
@@ -33,7 +33,7 @@ const HomePage: React.FC = () => {
             <div className="card p-6 lg:p-8 text-center hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2">
               <div className="w-16 h-16 lg:w-20 lg:h-20 bg-secondary-color rounded-full flex items-center justify-center mx-auto mb-6">
                 <span className="text-2xl lg:text-3xl">🏠</span>
-              </div>
+          </div>
               <h3 className="text-xl lg:text-2xl font-bold text-primary-color mb-4">Luxury Properties</h3>
               <p className="text-gray-600 mb-6 leading-relaxed">
                 Browse our curated selection of premium homes with stunning mountain views
@@ -41,7 +41,7 @@ const HomePage: React.FC = () => {
               <Link href="/properties" className="inline-block bg-secondary-color hover:bg-secondary-dark text-white px-6 py-3 rounded-lg font-semibold transition-all duration-300 transform hover:scale-105">
                 View Properties
               </Link>
-            </div>
+          </div>
 
             {/* Neighborhoods */}
             <div className="card p-6 lg:p-8 text-center hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2">
