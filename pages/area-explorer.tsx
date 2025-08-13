@@ -51,7 +51,7 @@ const AreaExplorerPage: React.FC = () => {
                 </li>
                 <li className="flex items-center gap-2">
                   <span className="w-2 h-2 bg-secondary-color rounded-full"></span>
-                  Grocery Stores (Smith's, Albertsons)
+                  Grocery Stores (Smith&apos;s, Albertsons)
                 </li>
                 <li className="flex items-center gap-2">
                   <span className="w-2 h-2 bg-secondary-color rounded-full"></span>
