@@ -2,7 +2,12 @@ import { MapPin, Navigation } from 'lucide-react';
 import Image from 'next/image';
 import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 
-// Google Maps types - using native google.maps types
+// Google Maps types declaration
+declare global {
+  interface Window {
+    google: any;
+  }
+}
 
 interface Location {
   id: string;
@@ -116,8 +121,8 @@ const ModernInteractiveMap: React.FC = () => {
     const loadGoogleMaps = () => {
       try {
         // Check if Google Maps is available globally
-        if (typeof window !== 'undefined' && (window as any).google && (window as any).google.maps) {
-          const { Map: GoogleMap, Marker } = (window as any).google.maps;
+        if (typeof window !== 'undefined' && window.google && window.google.maps) {
+          const { Map: GoogleMap, Marker } = window.google.maps;
 
           // Create map
           const newMap = new GoogleMap(mapContainer.current!, {
@@ -141,7 +146,7 @@ const ModernInteractiveMap: React.FC = () => {
               map: newMap,
               title: location.name,
               icon: {
-                path: (window as any).google.maps.SymbolPath.CIRCLE,
+                path: window.google.maps.SymbolPath.CIRCLE,
                 scale: 8,
                 fillColor: getMarkerColor(location.type),
                 fillOpacity: 1,
@@ -178,7 +183,7 @@ const ModernInteractiveMap: React.FC = () => {
       if (map.current) {
         // Clean up markers
         markers.current.forEach(marker => {
-          (window as any).google.maps.event.clearInstanceListeners(marker);
+          window.google.maps.event.clearInstanceListeners(marker);
         });
         markers.current = [];
       }
@@ -204,7 +209,7 @@ const ModernInteractiveMap: React.FC = () => {
     
     // Pan to location on map
     if (map.current) {
-      const latLng = new (window as any).google.maps.LatLng(location.coordinates.lat, location.coordinates.lng);
+      const latLng = new window.google.maps.LatLng(location.coordinates.lat, location.coordinates.lng);
       map.current.panTo(latLng);
       map.current.setZoom(15);
     }

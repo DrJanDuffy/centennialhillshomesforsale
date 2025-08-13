@@ -44,8 +44,10 @@ export default async function handler(
                   'I could not generate a response.';
 
     res.status(200).json({ reply });
-  } catch (error: any) {
-    console.error('Perplexity error →', error.response?.data || error.message);
+  } catch (error: unknown) {
+    const errorMessage = error instanceof Error ? error.message : 'Unknown error occurred';
+    const responseData = (error as any)?.response?.data;
+    console.error('Perplexity error →', responseData || errorMessage);
     res.status(500).json({ error: 'Failed to fetch response from Perplexity' });
   }
 }

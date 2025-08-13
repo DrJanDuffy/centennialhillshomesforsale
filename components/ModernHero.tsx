@@ -1,7 +1,7 @@
-import React, { useState, useCallback, useMemo } from 'react';
-import { Search, MapPin, Home, TrendingUp } from 'lucide-react';
+import { Home, MapPin, Search, TrendingUp } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
+import React, { useCallback, useMemo, useState } from 'react';
 
 interface ModernHeroProps {
   onSearchSubmit?: (searchData: SearchData) => void;
@@ -161,7 +161,7 @@ const ModernHero: React.FC<ModernHeroProps> = ({ onSearchSubmit }) => {
       <div className="absolute bottom-0 left-0 right-0 bg-white/95 backdrop-blur-sm">
         <div className="container mx-auto px-4 py-6">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
-            {stats.map((stat, index) => (
+            {stats.map((stat) => (
               <div key={stat.label} className="group">
                 <div className="text-2xl md:text-3xl font-bold text-blue-900 group-hover:scale-110 transition-transform duration-300">
                   {stat.value}

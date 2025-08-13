@@ -2,9 +2,23 @@
 
 import { motion } from 'framer-motion';
 import { Filter, Home, MapPin, Search } from 'lucide-react';
+import Image from 'next/image';
 import type React from 'react';
 import { useState } from 'react';
 import { EnhancedButton, EnhancedFormField } from './EnhancedAnimations';
+
+interface Property {
+  id: string;
+  address: string;
+  price: number;
+  bedrooms: number;
+  bathrooms: number;
+  sqft: number;
+  location: string;
+  propertyType: string;
+  image: string;
+  features: string[];
+}
 
 interface PropertyFilters {
   location: string;
@@ -37,7 +51,7 @@ export const EnhancedPropertySearch: React.FC<PropertySearchProps> = ({
 
   const [showAdvancedFilters, setShowAdvancedFilters] = useState(showAdvanced);
   const [isSearching, setIsSearching] = useState(false);
-  const [searchResults, setSearchResults] = useState<any[]>([]);
+  const [searchResults, setSearchResults] = useState<Property[]>([]);
   const [hasSearched, setHasSearched] = useState(false);
 
   // Location options
@@ -167,8 +181,9 @@ export const EnhancedPropertySearch: React.FC<PropertySearchProps> = ({
         bathrooms: 3,
         sqft: 3200,
         location: 'Centennial Hills',
-        type: 'Single Family',
+        propertyType: 'Single Family',
         image: 'https://images.unsplash.com/photo-1564013799919-ab600027ffc6?w=800&h=600&fit=crop',
+        features: ['Pool & Spa', 'Mountain Views', 'Gourmet Kitchen'],
       },
       {
         id: '2',
@@ -178,8 +193,9 @@ export const EnhancedPropertySearch: React.FC<PropertySearchProps> = ({
         bathrooms: 4,
         sqft: 4100,
         location: 'Centennial Hills',
-        type: 'Luxury',
+        propertyType: 'Luxury',
         image: 'https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=800&h=600&fit=crop',
+        features: ['Guest House', 'Wine Cellar', 'Home Theater'],
       },
       {
         id: '3',
@@ -189,8 +205,9 @@ export const EnhancedPropertySearch: React.FC<PropertySearchProps> = ({
         bathrooms: 3,
         sqft: 2800,
         location: 'Skye Canyon',
-        type: 'Single Family',
+        propertyType: 'Single Family',
         image: 'https://images.unsplash.com/photo-1600607687644-c7171b42498b?w=800&h=600&fit=crop',
+        features: ['Open Floor Plan', 'Mountain Views', 'Large Yard'],
       },
     ];
 
@@ -210,7 +227,7 @@ export const EnhancedPropertySearch: React.FC<PropertySearchProps> = ({
       }
 
       if (searchFilters.propertyType && searchFilters.propertyType !== 'all-types') {
-        if (property.type.toLowerCase() !== searchFilters.propertyType.toLowerCase()) {
+        if (property.propertyType.toLowerCase() !== searchFilters.propertyType.toLowerCase()) {
           return false;
         }
       }
@@ -298,6 +315,7 @@ export const EnhancedPropertySearch: React.FC<PropertySearchProps> = ({
         {/* Advanced Filters Toggle */}
         <div className="text-center mb-6">
           <button
+            type="button"
             onClick={() => setShowAdvancedFilters(!showAdvancedFilters)}
             className="inline-flex items-center text-blue-600 hover:text-blue-700 font-medium"
           >
@@ -336,12 +354,13 @@ export const EnhancedPropertySearch: React.FC<PropertySearchProps> = ({
             />
 
             <div className="form-field">
-              <label className="block text-sm font-medium text-gray-700 mb-2">Features</label>
+              <div className="block text-sm font-medium text-gray-700 mb-2">Features</div>
               <div className="grid grid-cols-2 gap-2">
                 {featureOptions.map((feature) => (
                   <label key={feature.value} className="flex items-center">
                     <input
                       type="checkbox"
+                      id={`feature-${feature.value}`}
                       checked={filters.features?.includes(feature.value) || false}
                       onChange={(e) => {
                         const currentFeatures = filters.features || [];
@@ -419,10 +438,11 @@ export const EnhancedPropertySearch: React.FC<PropertySearchProps> = ({
                   className="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300"
                 >
                   <div className="h-48 bg-gray-200 relative">
-                    <img
+                    <Image
                       src={property.image}
                       alt={property.address}
-                      className="w-full h-full object-cover"
+                      fill
+                      className="object-cover"
                     />
                     <div className="absolute top-2 right-2 bg-blue-600 text-white px-2 py-1 rounded text-sm font-semibold">
                       ${property.price.toLocaleString()}

@@ -1,7 +1,7 @@
-import React, { useState, useCallback, useMemo } from 'react';
-import { Heart, MapPin, Bed, Bath, Square, Star, Eye, Share2 } from 'lucide-react';
+import { Bath, Bed, Eye, Heart, MapPin, Share2, Square } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
+import React, { useCallback, useMemo, useState } from 'react';
 
 interface Property {
   id: string;
@@ -274,10 +274,10 @@ const ModernFeaturedProperties: React.FC = () => {
         <div className="text-center mt-16">
           <div className="bg-gradient-to-r from-gray-900 to-gray-800 rounded-2xl p-8 md:p-12 text-white">
             <h3 className="text-3xl md:text-4xl font-bold mb-4">
-              Don't See Your Dream Home?
+              Don&apos;t See Your Dream Home?
             </h3>
             <p className="text-xl text-gray-300 mb-6 max-w-2xl mx-auto">
-              Let us know what you're looking for and we'll find the perfect property for you in Centennial Hills.
+              Let us know what you&apos;re looking for and we&apos;ll find the perfect property for you in Centennial Hills.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link
