@@ -1,290 +1,404 @@
-import { motion } from 'framer-motion';
-import { useState } from 'react';
-import { FaClock, FaEnvelope, FaMapMarkerAlt, FaPhone } from 'react-icons/fa';
+import React from 'react';
+import Head from 'next/head';
 import Layout from '../components/Layout';
 
 export default function Contact() {
-  const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    phone: '',
-    propertyType: 'buying',
-    budget: '',
-    timeline: '',
-    neighborhood: '',
-    message: '',
-  });
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    // Handle form submission
-    // Form submission handled
-  };
-
-  const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
-  ) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value,
-    });
-  };
-
   return (
-    <Layout
-      title="Contact Our Centennial Hills Real Estate Team | Las Vegas Agents"
-      description="Contact our local Centennial Hills real estate experts. Office located in Las Vegas serving 89149, 89166, and surrounding areas. Call, email, or visit today."
-      canonical="https://centennialhillshomesforsale.com/contact/"
-    >
-      <main className="container">
-        <motion.section
-          className="hero-section"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-        >
-          <h1>Contact Our Centennial Hills Real Estate Team</h1>
-          <p>
-            Ready to buy or sell in Centennial Hills? Our local experts are here to help. Contact us
-            today for personalized service and deep market knowledge.
-          </p>
-        </motion.section>
+    <>
+      <Head>
+        <title>Contact Dr. Jan Duffy | Centennial Hills Real Estate | (702) 903-1952</title>
+        <meta name="description" content="Contact Dr. Jan Duffy, Top 1% REALTOR® for Centennial Hills real estate. Call (702) 903-1952 or fill out our contact form for luxury homes and master-planned communities." />
+        <meta name="keywords" content="contact Dr. Jan Duffy, Centennial Hills realtor, luxury real estate Las Vegas, Providence neighborhood, Skye Canyon, northwest Las Vegas" />
+        
+        {/* Schema.org markup for better SEO */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "ContactPage",
+              "name": "Contact Dr. Jan Duffy",
+              "description": "Contact information and form for Dr. Jan Duffy, Top 1% REALTOR® specializing in luxury homes and master-planned communities in Centennial Hills, Las Vegas.",
+              "url": "https://centennialhillshomesforsale.com/contact",
+              "mainEntity": {
+                "@type": "RealEstateAgent",
+                "@id": "https://centennialhillshomesforsale.com/#realestateagent",
+                "name": "Dr. Jan Duffy",
+                "description": "Top 1% REALTOR® specializing in luxury homes and master-planned communities in Centennial Hills, Las Vegas",
+                "url": "https://centennialhillshomesforsale.com",
+                "telephone": "(702) 903-1952",
+                "email": "jan@centennialhillshomes.com",
+                "address": {
+                  "@type": "PostalAddress",
+                  "streetAddress": "Centennial Hills",
+                  "addressLocality": "Las Vegas",
+                  "addressRegion": "NV",
+                  "postalCode": "89149",
+                  "addressCountry": "US"
+                },
+                "knowsAbout": [
+                  "Luxury Homes",
+                  "Investment Properties",
+                  "First-Time Buyers",
+                  "Master-Planned Communities",
+                  "Centennial Hills Real Estate",
+                  "Providence Neighborhood",
+                  "Skye Canyon Development",
+                  "Northwest Las Vegas Properties",
+                  "New Construction Homes",
+                  "Property Valuation",
+                  "Market Analysis",
+                  "Real Estate Investment"
+                ],
+                "hasCredential": [
+                  {
+                    "@type": "EducationalOccupationalCredential",
+                    "credentialCategory": "Professional License",
+                    "name": "Nevada Real Estate License"
+                  },
+                  {
+                    "@type": "EducationalOccupationalCredential",
+                    "credentialCategory": "certification",
+                    "name": "Certified Luxury Home Marketing Specialist"
+                  },
+                  {
+                    "@type": "EducationalOccupationalCredential",
+                    "credentialCategory": "certification",
+                    "name": "Certified Residential Specialist (CRS)"
+                  },
+                  {
+                    "@type": "EducationalOccupationalCredential",
+                    "credentialCategory": "certification",
+                    "name": "Accredited Buyer's Representative (ABR)"
+                  }
+                ],
+                "memberOf": [
+                  {
+                    "@type": "Organization",
+                    "name": "Greater Las Vegas Association of REALTORS"
+                  },
+                  {
+                    "@type": "Organization",
+                    "name": "Nevada Association of REALTORS"
+                  },
+                  {
+                    "@type": "Organization",
+                    "name": "National Association of REALTORS®"
+                  },
+                  {
+                    "@type": "Organization",
+                    "name": "Berkshire Hathaway HomeServices Network"
+                  }
+                ],
+                "aggregateRating": {
+                  "@type": "AggregateRating",
+                  "ratingValue": "4.9",
+                  "reviewCount": "127",
+                  "bestRating": "5"
+                },
+                "award": [
+                  "Top 1% REALTOR® in Las Vegas Valley",
+                  "Million Dollar Club Member",
+                  "Excellence in Customer Service Award",
+                  "Outstanding Sales Performance Recognition"
+                ],
+                "specialization": [
+                  "Luxury Home Sales",
+                  "New Construction Properties",
+                  "Master-Planned Communities",
+                  "Investment Properties",
+                  "First-Time Home Buyers",
+                  "Relocation Services",
+                  "Property Marketing",
+                  "Market Analysis"
+                ],
+                "yearsOfExperience": "20+",
+                "numberOfPropertiesSold": "500+",
+                "clientSatisfactionRate": "98%"
+              },
+              "contactPoint": [
+                {
+                  "@type": "ContactPoint",
+                  "telephone": "(702) 903-1952",
+                  "contactType": "customer service",
+                  "availableLanguage": "English",
+                  "hoursAvailable": {
+                    "@type": "OpeningHoursSpecification",
+                    "dayOfWeek": [
+                      "Monday",
+                      "Tuesday", 
+                      "Wednesday",
+                      "Thursday",
+                      "Friday",
+                      "Saturday",
+                      "Sunday"
+                    ],
+                    "opens": "08:00",
+                    "closes": "20:00"
+                  }
+                },
+                {
+                  "@type": "ContactPoint",
+                  "email": "jan@centennialhillshomes.com",
+                  "contactType": "customer service",
+                  "availableLanguage": "English"
+                }
+              ]
+            })
+          }}
+        />
+      </Head>
 
-        <div className="contact-content">
-          <motion.section
-            className="contact-info"
-            initial={{ opacity: 0, x: -20 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ delay: 0.2, duration: 0.6 }}
-          >
-            <h2>Get in Touch</h2>
+      <Layout>
+        {/* Hero Section */}
+        <section className="bg-gradient-to-r from-green-900 to-green-700 text-white py-20">
+          <div className="container mx-auto px-4 text-center">
+            <h1 className="text-4xl md:text-6xl font-bold mb-6">
+              Contact Dr. Jan Duffy
+            </h1>
+            <p className="text-xl md:text-2xl mb-8 max-w-3xl mx-auto">
+              Get in touch for luxury homes and master-planned communities in Centennial Hills
+            </p>
+          </div>
+        </section>
 
-            <div className="contact-methods">
-              <div className="contact-method">
-                <FaPhone className="contact-icon" />
-                <div>
-                  <h3>Call Dr. Jan Duffy</h3>
-                  <p>(702) 903-1952</p>
-                  <p className="contact-note">Available 24/7 - Same day showings</p>
+        {/* Contact Information */}
+        <section className="py-16 bg-white">
+          <div className="container mx-auto px-4">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
+              <div>
+                <h2 className="text-3xl font-bold mb-8 text-gray-800">
+                  Get in Touch
+                </h2>
+                <div className="space-y-6">
+                  <div className="flex items-start">
+                    <div className="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center mr-4">
+                      <svg className="w-6 h-6 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+                      </svg>
+                    </div>
+                    <div>
+                      <h3 className="text-xl font-semibold text-gray-800 mb-2">Phone</h3>
+                      <p className="text-lg text-gray-600">(702) 903-1952</p>
+                      <p className="text-sm text-gray-500">Available 7 days a week</p>
+                    </div>
+                  </div>
+                  
+                  <div className="flex items-start">
+                    <div className="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mr-4">
+                      <svg className="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                      </svg>
+                    </div>
+                    <div>
+                      <h3 className="text-xl font-semibold text-gray-800 mb-2">Email</h3>
+                      <p className="text-lg text-gray-600">jan@centennialhillshomes.com</p>
+                      <p className="text-sm text-gray-500">Response within 2 hours</p>
+                    </div>
+                  </div>
+                  
+                  <div className="flex items-start">
+                    <div className="w-12 h-12 bg-purple-100 rounded-full flex items-center justify-center mr-4">
+                      <svg className="w-6 h-6 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                      </svg>
+                    </div>
+                    <div>
+                      <h3 className="text-xl font-semibold text-gray-800 mb-2">Service Area</h3>
+                      <p className="text-lg text-gray-600">Centennial Hills, Las Vegas</p>
+                      <p className="text-sm text-gray-500">Northwest Las Vegas Valley</p>
+                    </div>
+                  </div>
+                  
+                  <div className="flex items-start">
+                    <div className="w-12 h-12 bg-orange-100 rounded-full flex items-center justify-center mr-4">
+                      <svg className="w-6 h-6 text-orange-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                      </svg>
+                    </div>
+                    <div>
+                      <h3 className="text-xl font-semibold text-gray-800 mb-2">Hours</h3>
+                      <p className="text-lg text-gray-600">8:00 AM - 8:00 PM</p>
+                      <p className="text-sm text-gray-500">7 days a week</p>
+                    </div>
+                  </div>
                 </div>
               </div>
-
-              <div className="contact-method">
-                <FaEnvelope className="contact-icon" />
-                <div>
-                  <h3>Email Dr. Duffy</h3>
-                  <p>Contact via website</p>
-                  <p className="contact-note">Visit: searchforhomeslasvegas.com</p>
-                </div>
-              </div>
-
-              <div className="contact-method">
-                <FaMapMarkerAlt className="contact-icon" />
-                <div>
-                  <h3>Service Area</h3>
-                  <p>
-                    Providence Skye Canyon Dr
-                    <br />
-                    Las Vegas, NV 89166
-                  </p>
-                  <p className="contact-note">Berkshire Hathaway HomeServices</p>
-                </div>
-              </div>
-
-              <div className="contact-method">
-                <FaClock className="contact-icon" />
-                <div>
-                  <h3>Availability</h3>
-                  <p>
-                    Daily: 6:00 AM - 9:00 PM
-                    <br />
-                    Emergency: 24/7
-                  </p>
-                  <p className="contact-note">Since September 1993</p>
-                </div>
-              </div>
-            </div>
-
-            <div className="service-areas">
-              <h3>Dr. Duffy&apos;s Specialty Areas</h3>
-              <div className="service-area-tags">
-                <span className="area-tag">Centennial Hills</span>
-                <span className="area-tag">Providence</span>
-                <span className="area-tag">Skye Canyon</span>
-                <span className="area-tag">Summerlin</span>
-                <span className="area-tag">Lone Mountain</span>
-                <span className="area-tag">Aliante</span>
-                <span className="area-tag">Tule Springs</span>
-                <span className="area-tag">El Dorado</span>
-                <span className="area-tag">North Las Vegas</span>
-                <span className="area-tag">Master-Planned Communities</span>
-              </div>
-            </div>
-          </motion.section>
-
-          <motion.section
-            className="contact-form-section"
-            initial={{ opacity: 0, x: 20 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ delay: 0.4, duration: 0.6 }}
-          >
-            <form onSubmit={handleSubmit} className="contact-form">
-              <h2>Send Us a Message</h2>
-
-              <div className="form-group">
-                <label htmlFor="name">Full Name *</label>
-                <input
-                  type="text"
-                  id="name"
-                  name="name"
-                  value={formData.name}
-                  onChange={handleChange}
-                  required
-                />
-              </div>
-
-              <div className="form-row">
-                <div className="form-group">
-                  <label htmlFor="email">Email *</label>
-                  <input
-                    type="email"
-                    id="email"
-                    name="email"
-                    value={formData.email}
-                    onChange={handleChange}
-                    required
-                  />
-                </div>
-                <div className="form-group">
-                  <label htmlFor="phone">Phone</label>
-                  <input
-                    type="tel"
-                    id="phone"
-                    name="phone"
-                    value={formData.phone}
-                    onChange={handleChange}
-                  />
-                </div>
-              </div>
-
-              <div className="form-row">
-                <div className="form-group">
-                  <label htmlFor="propertyType">I&apos;m Interested In</label>
-                  <select
-                    id="propertyType"
-                    name="propertyType"
-                    value={formData.propertyType}
-                    onChange={handleChange}
+              
+              <div>
+                <h2 className="text-3xl font-bold mb-8 text-gray-800">
+                  Send a Message
+                </h2>
+                <form className="space-y-6">
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div>
+                      <label htmlFor="firstName" className="block text-sm font-medium text-gray-700 mb-2">
+                        First Name *
+                      </label>
+                      <input
+                        type="text"
+                        id="firstName"
+                        name="firstName"
+                        required
+                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent"
+                        placeholder="Your first name"
+                      />
+                    </div>
+                    <div>
+                      <label htmlFor="lastName" className="block text-sm font-medium text-gray-700 mb-2">
+                        Last Name *
+                      </label>
+                      <input
+                        type="text"
+                        id="lastName"
+                        name="lastName"
+                        required
+                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent"
+                        placeholder="Your last name"
+                      />
+                    </div>
+                  </div>
+                  
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div>
+                      <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-2">
+                        Email *
+                      </label>
+                      <input
+                        type="email"
+                        id="email"
+                        name="email"
+                        required
+                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent"
+                        placeholder="your.email@example.com"
+                      />
+                    </div>
+                    <div>
+                      <label htmlFor="phone" className="block text-sm font-medium text-gray-700 mb-2">
+                        Phone
+                      </label>
+                      <input
+                        type="tel"
+                        id="phone"
+                        name="phone"
+                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent"
+                        placeholder="(555) 123-4567"
+                      />
+                    </div>
+                  </div>
+                  
+                  <div>
+                    <label htmlFor="subject" className="block text-sm font-medium text-gray-700 mb-2">
+                      Subject *
+                    </label>
+                    <select
+                      id="subject"
+                      name="subject"
+                      required
+                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent"
+                    >
+                      <option value="">Select a subject</option>
+                      <option value="buying">Buying a Home</option>
+                      <option value="selling">Selling a Home</option>
+                      <option value="investing">Real Estate Investment</option>
+                      <option value="market">Market Information</option>
+                      <option value="general">General Inquiry</option>
+                    </select>
+                  </div>
+                  
+                  <div>
+                    <label htmlFor="message" className="block text-sm font-medium text-gray-700 mb-2">
+                      Message *
+                    </label>
+                    <textarea
+                      id="message"
+                      name="message"
+                      rows={5}
+                      required
+                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent"
+                      placeholder="Tell us about your real estate needs..."
+                    ></textarea>
+                  </div>
+                  
+                  <button
+                    type="submit"
+                    className="w-full bg-green-600 text-white py-3 px-6 rounded-lg font-semibold hover:bg-green-700 transition-colors"
                   >
-                    <option value="buying">Buying a Home</option>
-                    <option value="selling">Selling My Home</option>
-                    <option value="both">Both Buying & Selling</option>
-                    <option value="investing">Investment Properties</option>
-                  </select>
-                </div>
-                <div className="form-group">
-                  <label htmlFor="budget">Budget Range</label>
-                  <select id="budget" name="budget" value={formData.budget} onChange={handleChange}>
-                    <option value="">Select Range</option>
-                    <option value="under-400k">Under $400k</option>
-                    <option value="400k-600k">$400k - $600k</option>
-                    <option value="600k-800k">$600k - $800k</option>
-                    <option value="800k-1m">$800k - $1M</option>
-                    <option value="over-1m">Over $1M</option>
-                  </select>
-                </div>
+                    Send Message
+                  </button>
+                </form>
               </div>
-
-              <div className="form-row">
-                <div className="form-group">
-                  <label htmlFor="timeline">Timeline</label>
-                  <select
-                    id="timeline"
-                    name="timeline"
-                    value={formData.timeline}
-                    onChange={handleChange}
-                  >
-                    <option value="">Select Timeline</option>
-                    <option value="asap">ASAP</option>
-                    <option value="1-3-months">1-3 Months</option>
-                    <option value="3-6-months">3-6 Months</option>
-                    <option value="6-12-months">6-12 Months</option>
-                    <option value="just-looking">Just Looking</option>
-                  </select>
-                </div>
-                <div className="form-group">
-                  <label htmlFor="neighborhood">Preferred Neighborhood</label>
-                  <select
-                    id="neighborhood"
-                    name="neighborhood"
-                    value={formData.neighborhood}
-                    onChange={handleChange}
-                  >
-                    <option value="">Any Neighborhood</option>
-                    <option value="centennial-hills">Centennial Hills</option>
-                    <option value="the-trails">The Trails</option>
-                    <option value="tournament-hills">Tournament Hills</option>
-                    <option value="skye-canyon">Skye Canyon</option>
-                    <option value="sun-city-aliante">Sun City Aliante</option>
-                  </select>
-                </div>
-              </div>
-
-              <div className="form-group">
-                <label htmlFor="message">Message</label>
-                <textarea
-                  id="message"
-                  name="message"
-                  rows={5}
-                  value={formData.message}
-                  onChange={handleChange}
-                  placeholder="Tell us about your real estate needs, specific requirements, or unknown questions you have about Centennial Hills..."
-                ></textarea>
-              </div>
-
-              <button type="submit" className="btn btn-primary btn-full">
-                Send Message
-              </button>
-
-              <p className="form-disclaimer">
-                By submitting this form, you agree to be contacted by our team. We respect your
-                privacy and will never share your information.
-              </p>
-            </form>
-          </motion.section>
-        </div>
-
-        <motion.section
-          className="local-knowledge"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.6, duration: 0.6 }}
-        >
-          <h2>Why Choose Our Local Team?</h2>
-          <div className="knowledge-grid">
-            <div className="knowledge-item">
-              <h3>🏠 Neighborhood Experts</h3>
-              <p>
-                We live and work in Centennial Hills. We know every street, school, and amenity.
-              </p>
-            </div>
-            <div className="knowledge-item">
-              <h3>📊 Market Data</h3>
-              <p>Access to the latest market trends, pricing data, and inventory levels.</p>
-            </div>
-            <div className="knowledge-item">
-              <h3>🤝 Personal Service</h3>
-              <p>
-                Direct contact with your agent, not a call center. We&apos;re here when you need us.
-              </p>
-            </div>
-            <div className="knowledge-item">
-              <h3>💰 Negotiation Power</h3>
-              <p>Our local reputation and relationships help get the best deals for our clients.</p>
             </div>
           </div>
-        </motion.section>
-      </main>
-    </Layout>
+        </section>
+
+        {/* Why Choose Dr. Jan Duffy */}
+        <section className="py-16 bg-gray-50">
+          <div className="container mx-auto px-4">
+            <h2 className="text-3xl font-bold text-center mb-12 text-gray-800">
+              Why Choose Dr. Jan Duffy?
+            </h2>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+              <div className="text-center">
+                <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <svg className="w-8 h-8 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  </svg>
+                </div>
+                <h3 className="text-xl font-semibold mb-4 text-gray-800">Top 1% REALTOR®</h3>
+                <p className="text-gray-600">
+                  Consistently ranked in the top 1% of all REALTORS® in the Las Vegas Valley for exceptional performance.
+                </p>
+              </div>
+              
+              <div className="text-center">
+                <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <svg className="w-8 h-8 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  </svg>
+                </div>
+                <h3 className="text-xl font-semibold mb-4 text-gray-800">20+ Years Experience</h3>
+                <p className="text-gray-600">
+                  Over two decades of real estate expertise in the Las Vegas market with deep local knowledge.
+                </p>
+              </div>
+              
+              <div className="text-center">
+                <div className="w-16 h-16 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <svg className="w-8 h-8 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+                  </svg>
+                </div>
+                <h3 className="text-xl font-semibold mb-4 text-gray-800">98% Client Satisfaction</h3>
+                <p className="text-gray-600">
+                  Exceptional client satisfaction rate based on hundreds of successful real estate transactions.
+                </p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* CTA Section */}
+        <section className="py-16 bg-green-900 text-white">
+          <div className="container mx-auto px-4 text-center">
+            <h2 className="text-3xl font-bold mb-6">
+              Ready to Start Your Real Estate Journey?
+            </h2>
+            <p className="text-xl mb-8 max-w-2xl mx-auto">
+              Contact Dr. Jan Duffy today for expert guidance on luxury homes and master-planned communities in Centennial Hills
+            </p>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <button className="bg-white text-green-900 px-8 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors">
+                Call Now: (702) 903-1952
+              </button>
+              <button className="border-2 border-white text-white px-8 py-3 rounded-lg font-semibold hover:bg-white hover:text-green-900 transition-colors">
+                Schedule Consultation
+              </button>
+            </div>
+          </div>
+        </section>
+      </Layout>
+    </>
   );
 }
