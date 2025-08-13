@@ -75,7 +75,9 @@ export default async function handler(
     console.error('Error in log-error API:', error);
     res.status(500).json({ 
       message: 'Internal server error',
-      error: process.env.NODE_ENV === 'development' ? error.message : 'Unknown error'
+      error: process.env.NODE_ENV === 'development' ? 
+        (error instanceof Error ? error.message : 'Unknown error') : 
+        'Unknown error'
     });
   }
 }
