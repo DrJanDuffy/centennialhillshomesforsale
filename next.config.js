@@ -10,8 +10,6 @@ const withPWA = require('next-pwa')({
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   // Removed output: 'export' to work with Vercel
-  trailingSlash: true,
-  skipTrailingSlashRedirect: true,
   basePath: '',
   reactStrictMode: true,
   swcMinify: true,
