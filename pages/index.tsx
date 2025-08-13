@@ -1,4 +1,5 @@
 import React from 'react';
+import Link from 'next/link';
 import AIChatBox from '../components/AIChatBox';
 import GoogleTagManager from '../components/GoogleTagManager';
 import Layout from '../components/Layout';
@@ -37,9 +38,9 @@ const HomePage: React.FC = () => {
               <p className="text-gray-600 mb-6 leading-relaxed">
                 Browse our curated selection of premium homes with stunning mountain views
               </p>
-              <a href="/properties" className="inline-block bg-secondary-color hover:bg-secondary-dark text-white px-6 py-3 rounded-lg font-semibold transition-all duration-300 transform hover:scale-105">
+              <Link href="/properties" className="inline-block bg-secondary-color hover:bg-secondary-dark text-white px-6 py-3 rounded-lg font-semibold transition-all duration-300 transform hover:scale-105">
                 View Properties
-              </a>
+              </Link>
             </div>
 
             {/* Neighborhoods */}
@@ -51,9 +52,9 @@ const HomePage: React.FC = () => {
               <p className="text-gray-600 mb-6 leading-relaxed">
                 Explore the unique character of each neighborhood in Centennial Hills
               </p>
-              <a href="/neighborhoods" className="inline-block bg-secondary-color hover:bg-secondary-dark text-white px-6 py-3 rounded-lg font-semibold transition-all duration-300 transform hover:scale-105">
+              <Link href="/neighborhoods" className="inline-block bg-secondary-color hover:bg-secondary-dark text-white px-6 py-3 rounded-lg font-semibold transition-all duration-300 transform hover:scale-105">
                 Explore Areas
-              </a>
+              </Link>
             </div>
 
             {/* Market Data */}
@@ -65,9 +66,9 @@ const HomePage: React.FC = () => {
               <p className="text-gray-600 mb-6 leading-relaxed">
                 Stay informed with the latest real estate market data and trends
               </p>
-              <a href="/market-data" className="inline-block bg-secondary-color hover:bg-secondary-dark text-white px-6 py-3 rounded-lg font-semibold transition-all duration-300 transform hover:scale-105">
+              <Link href="/market-data" className="inline-block bg-secondary-color hover:bg-secondary-dark text-white px-6 py-3 rounded-lg font-semibold transition-all duration-300 transform hover:scale-105">
                 View Data
-              </a>
+              </Link>
             </div>
 
             {/* Area Explorer */}
@@ -79,9 +80,9 @@ const HomePage: React.FC = () => {
               <p className="text-gray-600 mb-6 leading-relaxed">
                 Interactive map to discover amenities, schools, and points of interest
               </p>
-              <a href="/area-explorer" className="inline-block bg-secondary-color hover:bg-secondary-dark text-white px-6 py-3 rounded-lg font-semibold transition-all duration-300 transform hover:scale-105">
+              <Link href="/area-explorer" className="inline-block bg-secondary-color hover:bg-secondary-dark text-white px-6 py-3 rounded-lg font-semibold transition-all duration-300 transform hover:scale-105">
                 Explore Map
-              </a>
+              </Link>
             </div>
           </div>
         </div>
