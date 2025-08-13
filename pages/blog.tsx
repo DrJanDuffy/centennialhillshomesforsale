@@ -1,9 +1,9 @@
+import Layout from '@/components/Layout';
+import RealScoutListings from '@/components/RealScoutListings';
 import { ArrowRight, Calendar, Clock, DollarSign, Home, MapPin, User } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
 import type React from 'react';
-import Layout from '@/components/Layout';
-import RealScoutListings from '@/components/RealScoutListings';
 
 const BlogPage: React.FC = () => {
   const blogPosts = [
