@@ -29,7 +29,7 @@ const nextConfig = {
     removeConsole: process.env.NODE_ENV === 'production',
   },
 
-  webpack: (config, { isServer, dev }) => {
+  webpack: (config, { isServer, dev, webpack }) => {
     if (!isServer) {
       config.resolve.fallback = {
         ...config.resolve.fallback,
@@ -115,13 +115,106 @@ const nextConfig = {
       // Enable bundle analyzer in production builds
       if (process.env.ANALYZE === 'true') {
         const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
+        
+        // Enhanced webpack stats for better analysis
+        config.stats = {
+          ...config.stats,
+          chunks: true,
+          chunkModules: true,
+          modules: true,
+          reasons: true,
+          moduleTrace: true,
+          errorDetails: true,
+          chunkOrigins: true,
+          publicPath: true,
+          entrypoints: true,
+          children: true,
+          warnings: true,
+          warningsFilter: [],
+          assets: true,
+          assetsSort: 'size',
+          chunksSort: 'size',
+          modulesSort: 'size',
+          // Additional detailed stats (valid webpack properties)
+          source: true,
+          timings: true,
+          builtAt: true,
+          version: true,
+          hash: true,
+          colors: true,
+          env: true,
+          performance: true,
+          optimizationBailout: true,
+          usedExports: true,
+          providedExports: true,
+          depth: true,
+        };
+
         config.plugins.push(
           new BundleAnalyzerPlugin({
             analyzerMode: 'static',
             openAnalyzer: false,
             reportFilename: 'bundle-analysis.html',
+            generateStatsFile: true,
+            statsFilename: 'webpack-stats.json',
+            statsOptions: {
+              all: false,
+              chunks: true,
+              chunkModules: true,
+              modules: true,
+              reasons: true,
+              moduleTrace: true,
+              errorDetails: true,
+              chunkOrigins: true,
+              publicPath: true,
+              entrypoints: true,
+              children: true,
+              warnings: true,
+              assets: true,
+              assetsSort: 'size',
+              chunksSort: 'size',
+              modulesSort: 'size',
+              // Enhanced stats options (valid webpack properties)
+              source: true,
+              timings: true,
+              builtAt: true,
+              version: true,
+              hash: true,
+              colors: true,
+              env: true,
+              performance: true,
+              optimizationBailout: true,
+              usedExports: true,
+              providedExports: true,
+              depth: true,
+              // Additional detailed analysis options
+              chunkRelations: true,
+              chunkGroupAuxiliary: true,
+              chunkGroupChildren: true,
+              chunkGroupRoot: true,
+              dependentModules: true,
+              orphanModules: true,
+              outputPath: true,
+              warningsFilter: [],
+            },
+            logLevel: 'info',
+            // Additional analyzer options
+            analyzerHost: '127.0.0.1',
+            analyzerPort: 8888,
+            analyzerUrl: 'http://127.0.0.1:8888',
+            defaultSizes: 'gzip',
+            excludeAssets: null,
+            hideModules: false,
+            hideRuntime: false,
+            onlyAssets: false,
+            outputPath: null,
+            reportTitle: 'Centennial Hills Homes - Bundle Analysis',
+            startAnalyzer: false,
           })
         );
+
+        // Enable source maps for better analysis
+        config.devtool = dev ? 'eval-source-map' : 'source-map';
       }
     }
 
