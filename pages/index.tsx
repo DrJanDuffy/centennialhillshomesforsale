@@ -1,6 +1,7 @@
 import Head from 'next/head';
 import Link from 'next/link';
 import Layout from '../components/Layout';
+import RealScoutWidget from '../components/widgets/RealScoutWidget';
 
 export default function Home() {
   return (
@@ -260,6 +261,30 @@ export default function Home() {
               </div>
             </Link>
           </div>
+        </div>
+      </section>
+
+      {/* Featured Listings Section */}
+      <section className="py-16 bg-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 mb-6">
+              Featured Properties
+            </h2>
+            <p className="text-lg lg:text-xl text-gray-600 max-w-3xl mx-auto">
+              Discover the latest luxury homes available in Centennial Hills and surrounding communities
+            </p>
+          </div>
+          
+          <RealScoutWidget
+            type="office-listings"
+            title="Current Market Listings"
+            description="Browse our curated selection of premium properties with stunning mountain views"
+            agentEncodedId="QWdlbnQtMjI1MDUw"
+            priceMin={600000}
+            priceMax={1200000}
+            className="max-w-6xl mx-auto"
+          />
         </div>
       </section>
 
