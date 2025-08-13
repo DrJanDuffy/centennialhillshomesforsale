@@ -1,7 +1,7 @@
 import Head from 'next/head';
 import Link from 'next/link';
 import Layout from '../components/Layout';
-import RealScoutWidget from '../components/widgets/RealScoutWidget';
+import RealScoutListings from '../components/RealScoutListings';
 
 export default function Home() {
   return (
@@ -276,14 +276,11 @@ export default function Home() {
             </p>
           </div>
           
-          <RealScoutWidget
-            type="office-listings"
-            title="Current Market Listings"
-            description="Browse our curated selection of premium properties with stunning mountain views"
-            agentEncodedId="QWdlbnQtMjI1MDUw"
+          <RealScoutListings
             priceMin={600000}
             priceMax={1200000}
-            className="max-w-6xl mx-auto"
+            propertyTypes="SFR,MF"
+            listingStatus="For Sale"
           />
         </div>
       </section>

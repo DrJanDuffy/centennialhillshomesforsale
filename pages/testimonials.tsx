@@ -3,6 +3,7 @@ import Head from 'next/head';
 import Link from 'next/link';
 import { FaQuoteLeft, FaStar } from 'react-icons/fa';
 import Layout from '../components/Layout';
+import RealScoutListings from '../components/RealScoutListings';
 
 export default function Testimonials() {
   const testimonials = [
@@ -225,6 +226,26 @@ export default function Testimonials() {
                 <p>Market Analysis</p>
               </div>
             </div>
+          </div>
+        </motion.section>
+
+        {/* RealScout Listings */}
+        <motion.section
+          className="listings-section"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.8, duration: 0.6 }}
+        >
+          <div className="container">
+            <h2>Featured Properties</h2>
+            <p>Browse our latest listings while reading client testimonials</p>
+            
+            <RealScoutListings 
+              priceMin={500000}
+              priceMax={2000000}
+              propertyTypes="SFR,MF"
+              listingStatus="For Sale"
+            />
           </div>
         </motion.section>
 
