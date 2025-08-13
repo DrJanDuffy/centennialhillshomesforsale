@@ -7,13 +7,7 @@ import { twMerge } from 'tailwind-merge';
 
 // Headless UI Components
 export {
-    DialogPanel,
-    Dialog as HeadlessDialog,
-    DialogTitle as HeadlessDialogTitle,
-    Popover as HeadlessPopover,
-    RadioGroup as HeadlessRadioGroup,
-    Switch as HeadlessSwitch,
-    Listbox,
+    DialogPanel, Dialog as HeadlessDialog, DialogTitle as HeadlessDialogTitle, Popover as HeadlessPopover, RadioGroup as HeadlessRadioGroup, Switch as HeadlessSwitch, Listbox,
     ListboxButton,
     ListboxLabel,
     ListboxOption,
@@ -21,12 +15,9 @@ export {
     Menu,
     MenuButton,
     MenuItem,
-    MenuItems,
-    PopoverButton,
-    PopoverPanel,
-    RadioGroupLabel,
-    RadioGroupOption,
-    Tab,
+    MenuItems, PopoverButton,
+    PopoverPanel, RadioGroupLabel,
+    RadioGroupOption, Tab,
     TabGroup,
     TabList,
     TabPanel,
@@ -248,13 +239,8 @@ export {
     ArcElement,
     BarElement,
     CategoryScale,
-    Chart,
-    Legend, 
-    LineElement, 
-    LinearScale, 
-    PointElement,
-    Title,
-    Tooltip as ChartTooltip
+    Chart, Tooltip as ChartTooltip, Legend, LineElement, LinearScale, PointElement,
+    Title
 } from 'chart.js';
 export { cva } from 'class-variance-authority';
 // Icons
