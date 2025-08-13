@@ -40,7 +40,7 @@ const ModernHero: React.FC<ModernHeroProps> = ({ onSearchSubmit }) => {
   ], []);
 
   return (
-    <section className="relative min-h-screen bg-gradient-to-br from-blue-900 via-blue-800 to-blue-700 overflow-hidden">
+    <section className="relative min-h-screen bg-gradient-to-br from-primary-color via-primary-dark to-primary-light overflow-hidden">
       {/* Background Image with Lazy Loading */}
       <div className="absolute inset-0 z-0">
         <Image
@@ -53,28 +53,28 @@ const ModernHero: React.FC<ModernHeroProps> = ({ onSearchSubmit }) => {
           placeholder="blur"
           blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAABAAEDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAUEAEAAAAAAAAAAAAAAAAAAAAA/8QAFQEBAQAAAAAAAAAAAAAAAAAAAAX/xAAUEQEAAAAAAAAAAAAAAAAAAAAA/9oADAMBAAIRAxAAPwCdABmX/9k="
         />
-        <div className="absolute inset-0 bg-gradient-to-r from-blue-900/80 via-blue-800/60 to-blue-700/40"></div>
+        <div className="absolute inset-0 bg-gradient-to-r from-primary-color/80 via-primary-dark/60 to-primary-light/40"></div>
       </div>
 
       {/* Content */}
-      <div className="relative z-10 container mx-auto px-4 py-20 lg:py-32">
+      <div className="relative z-10 container py-20 lg:py-32">
         <div className="max-w-6xl mx-auto text-center">
           {/* Main Heading */}
-          <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold text-white mb-6 leading-tight">
+          <h1 className="text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold text-white mb-8 leading-tight">
             Discover Your Dream Home in
-            <span className="block text-blue-200">Centennial Hills</span>
+            <span className="block text-blue-200 mt-2">Centennial Hills</span>
           </h1>
           
           {/* Subtitle */}
-          <p className="text-xl md:text-2xl text-blue-100 mb-8 max-w-3xl mx-auto">
-            Luxury homes in Las Vegas' most prestigious master-planned community. 
+          <p className="text-lg md:text-xl lg:text-2xl text-blue-100 mb-12 max-w-3xl mx-auto leading-relaxed">
+            Luxury homes in Las Vegas&apos; most prestigious master-planned community. 
             Expert guidance from Dr. Jan Duffy, Top 1% REALTOR®.
           </p>
 
           {/* Search Form */}
-          <div className="bg-white/95 backdrop-blur-sm rounded-2xl p-6 md:p-8 shadow-2xl max-w-4xl mx-auto mb-12">
-            <form onSubmit={handleSearch} className="space-y-4">
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <div className="card bg-white/95 backdrop-blur-sm p-6 md:p-8 lg:p-10 shadow-2xl max-w-4xl mx-auto mb-16">
+            <form onSubmit={handleSearch} className="space-y-6">
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-4 lg:gap-6">
                 {/* Location */}
                 <div className="relative">
                   <label htmlFor="location-select" className="sr-only">Location</label>
@@ -83,7 +83,7 @@ const ModernHero: React.FC<ModernHeroProps> = ({ onSearchSubmit }) => {
                     id="location-select"
                     value={searchData.location}
                     onChange={(e) => setSearchData({...searchData, location: e.target.value})}
-                    className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200"
+                    className="w-full pl-10 pr-4 py-3 lg:py-4 border border-gray-300 rounded-lg focus:ring-2 focus:ring-secondary-color focus:border-transparent transition-all duration-300 text-sm lg:text-base"
                   >
                     <option value="Centennial Hills">Centennial Hills</option>
                     <option value="Providence">Providence</option>
@@ -100,7 +100,7 @@ const ModernHero: React.FC<ModernHeroProps> = ({ onSearchSubmit }) => {
                     id="property-type-select"
                     value={searchData.propertyType}
                     onChange={(e) => setSearchData({...searchData, propertyType: e.target.value})}
-                    className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200"
+                    className="w-full pl-10 pr-4 py-3 lg:py-4 border border-gray-300 rounded-lg focus:ring-2 focus:ring-secondary-color focus:border-transparent transition-all duration-300 text-sm lg:text-base"
                   >
                     <option value="All Properties">All Properties</option>
                     <option value="Single Family">Single Family</option>
@@ -118,7 +118,7 @@ const ModernHero: React.FC<ModernHeroProps> = ({ onSearchSubmit }) => {
                     id="price-range-select"
                     value={searchData.priceRange}
                     onChange={(e) => setSearchData({...searchData, priceRange: e.target.value})}
-                    className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200"
+                    className="w-full pl-10 pr-4 py-3 lg:py-4 border border-gray-300 rounded-lg focus:ring-2 focus:ring-secondary-color focus:border-transparent transition-all duration-300 text-sm lg:text-base"
                   >
                     <option value="Any Price">Any Price</option>
                     <option value="$500k - $750k">$500k - $750k</option>
@@ -131,7 +131,7 @@ const ModernHero: React.FC<ModernHeroProps> = ({ onSearchSubmit }) => {
               
               <button
                 type="submit"
-                className="w-full md:w-auto bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-8 rounded-lg transition-all duration-300 transform hover:scale-105 flex items-center justify-center gap-2 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+                className="w-full md:w-auto bg-secondary-color hover:bg-secondary-dark text-white font-semibold py-3 lg:py-4 px-8 lg:px-12 rounded-lg transition-all duration-300 transform hover:scale-105 flex items-center justify-center gap-2 focus:outline-none focus:ring-2 focus:ring-secondary-color focus:ring-offset-2 text-base lg:text-lg"
               >
                 <Search className="w-5 h-5" />
                 Search Properties
@@ -141,13 +141,13 @@ const ModernHero: React.FC<ModernHeroProps> = ({ onSearchSubmit }) => {
 
           {/* Popular Areas */}
           <div className="text-center">
-            <p className="text-blue-100 mb-4 text-lg">Popular Areas:</p>
-            <div className="flex flex-wrap justify-center gap-3">
+            <p className="text-blue-100 mb-6 text-lg lg:text-xl">Popular Areas:</p>
+            <div className="flex flex-wrap justify-center gap-3 lg:gap-4">
               {popularAreas.map((area) => (
                 <Link
                   key={area.name}
                   href={area.href}
-                  className="bg-white/20 hover:bg-white/30 text-white px-4 py-2 rounded-full transition-all duration-300 backdrop-blur-sm border border-white/30 hover:border-white/50 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-white/50"
+                  className="bg-white/20 hover:bg-white/30 text-white px-4 lg:px-6 py-2 lg:py-3 rounded-full transition-all duration-300 backdrop-blur-sm border border-white/30 hover:border-white/50 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-white/50 text-sm lg:text-base font-medium"
                 >
                   {area.name}
                 </Link>
@@ -159,14 +159,14 @@ const ModernHero: React.FC<ModernHeroProps> = ({ onSearchSubmit }) => {
 
       {/* Stats Bar */}
       <div className="absolute bottom-0 left-0 right-0 bg-white/95 backdrop-blur-sm">
-        <div className="container mx-auto px-4 py-6">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
+        <div className="container py-6 lg:py-8">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 lg:gap-8 text-center">
             {stats.map((stat) => (
               <div key={stat.label} className="group">
-                <div className="text-2xl md:text-3xl font-bold text-blue-900 group-hover:scale-110 transition-transform duration-300">
+                <div className="text-2xl md:text-3xl lg:text-4xl font-bold text-primary-color group-hover:scale-110 transition-transform duration-300">
                   {stat.value}
                 </div>
-                <div className="text-sm text-gray-600">{stat.label}</div>
+                <div className="text-sm lg:text-base text-gray-600 font-medium">{stat.label}</div>
               </div>
             ))}
           </div>
