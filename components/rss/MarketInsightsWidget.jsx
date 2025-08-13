@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useCallback, useEffect, useState } from 'react';
+import Link from 'next/link';
 import { trackRSSAnalytics, trackRSSPerformance } from '../../lib/rss-utils';
 import KCMFeed from './KCMFeed';
 
@@ -181,16 +182,16 @@ export default function MarketInsightsWidget({
       <div className="mt-4 pt-4 border-t border-gray-200">
         <div className="flex flex-col sm:flex-row items-center justify-between gap-3">
           {/* View All Link */}
-          <a
+          <Link
             href="/market-insights"
             onClick={handleViewAll}
             className={`inline-flex items-center ${currentTheme.buttonOutline} px-4 py-2 rounded-lg font-medium transition-all duration-200 text-sm`}
           >
             View All Insights
-            <svg className="w-4 h-4 ml-1" fill="currentColor" viewBox="0 0 20 20">
+            <svg className="w-4 h-4 ml-1" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
               <path fillRule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clipRule="evenodd" />
             </svg>
-          </a>
+          </Link>
 
           {/* Status Indicators */}
           <div className="flex items-center space-x-4 text-xs text-gray-500">
