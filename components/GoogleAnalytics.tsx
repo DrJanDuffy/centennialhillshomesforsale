@@ -1,6 +1,4 @@
-'use client';
-
-import { usePathname } from 'next/navigation';
+import { useRouter } from 'next/router';
 import Script from 'next/script';
 import { useEffect } from 'react';
 
@@ -11,18 +9,18 @@ interface GoogleAnalyticsProps {
 const GoogleAnalytics: React.FC<GoogleAnalyticsProps> = ({
   measurementId = process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID || 'G-PLACEHOLDER',
 }) => {
-  const pathname = usePathname();
+  const router = useRouter();
 
   useEffect(() => {
-    // Track page views on pathname change
+    // Track page views on route change
     if (typeof window !== 'undefined' && window.gtag) {
       window.gtag('config', measurementId, {
-        page_path: pathname,
+        page_path: router.asPath,
         page_title: document.title,
         page_location: window.location.href,
       });
     }
-  }, [pathname, measurementId]);
+  }, [router.asPath, measurementId]);
 
   // Don't render in development or if no measurement ID
   if (
