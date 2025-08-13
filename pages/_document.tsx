@@ -57,6 +57,26 @@ export default function Document() {
           `,
           }}
         />
+
+        {/* ==== MAP LIBRARY (Google Maps) ==== */}
+        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDt84u_m6IGyrNZ9Eyc2W0fAIx6yD3peTo&callback=initMap&libraries=places" async defer></script>
+
+        {/* ==== CHART.JS (for market dashboard) ==== */}
+        <link rel="preload" href="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.min.js" as="script" />
+        <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.min.js" defer></script>
+
+        {/* ==== AXIOS (used by the chatbot to call our API) ==== */}
+        <link rel="preload" href="https://cdn.jsdelivr.net/npm/axios@1.7.2/dist/axios.min.js" as="script" />
+        <script src="https://cdn.jsdelivr.net/npm/axios@1.7.2/dist/axios.min.js" defer></script>
+
+        {/* ==== MARKET CHARTS (custom functionality) ==== */}
+        <script src="/js/market-charts.js" defer></script>
+
+        {/* ==== PROPERTY MAP (Google Maps property listings) ==== */}
+        <script src="/js/property-map.js" defer></script>
+
+        {/* (Optional) If you ever want Recharts (React) instead of Chart.js, uncomment the line below */}
+        {/* <script src="https://unpkg.com/recharts/umd/Recharts.min.js" defer></script> */}
       </Head>
       <body>
         <Main />
