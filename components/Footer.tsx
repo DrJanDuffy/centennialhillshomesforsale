@@ -4,7 +4,7 @@ export default function Footer() {
   return (
     <footer className="bg-gray-900 text-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-5 gap-8">
           {/* Company Info */}
           <div className="col-span-1 md:col-span-2">
             <h3 className="text-lg font-semibold mb-4">Dr. Jan Duffy</h3>
@@ -70,6 +70,25 @@ export default function Footer() {
                 </Link>
               </li>
             </ul>
+          </div>
+
+          {/* Market Insights */}
+          <div>
+            <h4 className="text-lg font-semibold mb-4">Market Insights</h4>
+            <div className="space-y-3">
+              <p className="text-sm text-gray-300 mb-3">
+                Stay informed with the latest real estate trends and market analysis
+              </p>
+              <Link 
+                href="/market-insights" 
+                className="inline-flex items-center bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg text-sm font-medium transition-colors duration-200"
+              >
+                View Latest Insights
+                <svg className="w-4 h-4 ml-2" fill="currentColor" viewBox="0 0 20 20">
+                  <path fillRule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clipRule="evenodd" />
+                </svg>
+              </Link>
+            </div>
           </div>
         </div>
 
