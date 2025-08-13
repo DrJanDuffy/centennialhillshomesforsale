@@ -1,5 +1,5 @@
-import React from 'react';
 import Head from 'next/head';
+import React from 'react';
 import GoogleTagManager from '../components/GoogleTagManager';
 import Layout from '../components/Layout';
 
