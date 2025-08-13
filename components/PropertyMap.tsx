@@ -1,5 +1,12 @@
 import React, { useEffect, useRef } from 'react';
 
+// Google Maps types declaration
+declare global {
+  interface Window {
+    google: any;
+  }
+}
+
 interface Property {
   id: number;
   title: string;
@@ -87,8 +94,8 @@ const PropertyMap: React.FC<PropertyMapProps> = ({
 
     const initMap = () => {
       try {
-                 if (typeof window !== 'undefined' && (window as any).google && (window as any).google.maps) {
-           const { Map: GoogleMap, Marker, InfoWindow, SearchBox } = (window as any).google.maps;
+                         if (typeof window !== 'undefined' && window.google && window.google.maps) {
+          const { Map: GoogleMap, Marker, InfoWindow, SearchBox } = window.google.maps;
 
           const center = { lat: 36.268, lng: -115.328 }; // Centennial Hills centre
 
@@ -109,7 +116,7 @@ const PropertyMap: React.FC<PropertyMapProps> = ({
           const newMarkers: any[] = [];
           propertiesToShow.forEach(property => {
             const markerIcon = {
-              path: (window as any).google.maps.SymbolPath.CIRCLE,
+              path: window.google.maps.SymbolPath.CIRCLE,
               scale: 10,
               fillColor: '#2563eb',
               fillOpacity: 0.9,
@@ -195,7 +202,7 @@ const PropertyMap: React.FC<PropertyMapProps> = ({
                 const places = searchBox.getPlaces();
                 if (places.length === 0) return;
 
-                const bounds = new (window as any).google.maps.LatLngBounds();
+                const bounds = new window.google.maps.LatLngBounds();
                 places.forEach((place: any) => {
                   if (!place.geometry || !place.geometry.location) return;
                   
@@ -226,7 +233,7 @@ const PropertyMap: React.FC<PropertyMapProps> = ({
       if (map.current) {
         // Clean up markers
         markers.current.forEach(marker => {
-          (window as any).google.maps.event.clearInstanceListeners(marker);
+          window.google.maps.event.clearInstanceListeners(marker);
         });
         markers.current = [];
       }

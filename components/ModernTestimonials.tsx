@@ -1,6 +1,7 @@
 import { ChevronLeft, ChevronRight, Quote, Star } from 'lucide-react';
 import Image from 'next/image';
 import React, { useEffect, useState } from 'react';
+import Link from 'next/link';
 
 interface Testimonial {
   id: string;
@@ -107,13 +108,13 @@ const ModernTestimonials: React.FC = () => {
                              {/* Rating Stars */}
                <div className="flex justify-center mb-6">
                  {[...Array(currentTestimonial.rating)].map((_, i) => (
-                   <Star key={`star-${i}`} className="w-6 h-6 text-yellow-400 fill-current" />
+                   <Star key={`star-${currentTestimonial.id}-${i}`} className="w-6 h-6 text-yellow-400 fill-current" />
                  ))}
                </div>
 
               {/* Testimonial Text */}
               <blockquote className="text-xl md:text-2xl text-gray-800 mb-8 leading-relaxed italic">
-                "{currentTestimonial.content}"
+                &quot;{currentTestimonial.content}&quot;
               </blockquote>
 
               {/* Client Info */}
@@ -143,6 +144,7 @@ const ModernTestimonials: React.FC = () => {
 
             {/* Navigation Arrows */}
             <button
+              type="button"
               onClick={prevTestimonial}
               className="absolute left-4 top-1/2 transform -translate-y-1/2 bg-white/90 hover:bg-white text-gray-700 hover:text-blue-600 p-3 rounded-full shadow-lg transition-all duration-300 hover:scale-110"
               aria-label="Previous testimonial"
@@ -150,6 +152,7 @@ const ModernTestimonials: React.FC = () => {
               <ChevronLeft className="w-6 h-6" />
             </button>
             <button
+              type="button"
               onClick={nextTestimonial}
               className="absolute right-4 top-1/2 transform -translate-y-1/2 bg-white/90 hover:bg-white text-gray-700 hover:text-blue-600 p-3 rounded-full shadow-lg transition-all duration-300 hover:scale-110"
               aria-label="Next testimonial"
@@ -160,9 +163,10 @@ const ModernTestimonials: React.FC = () => {
 
           {/* Dots Indicator */}
           <div className="flex justify-center mt-8 gap-2">
-            {testimonials.map((_, index) => (
+            {testimonials.map((testimonial, index) => (
               <button
-                key={index}
+                key={`dot-${testimonial.id}`}
+                type="button"
                 onClick={() => goToTestimonial(index)}
                 className={`w-3 h-3 rounded-full transition-all duration-300 ${
                   index === currentIndex
@@ -186,18 +190,18 @@ const ModernTestimonials: React.FC = () => {
               the same exceptional service our clients rave about.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <a
+              <Link
                 href="/contact"
                 className="bg-white text-blue-600 hover:bg-gray-100 px-8 py-3 rounded-lg font-semibold transition duration-300 transform hover:scale-105"
               >
                 Start Your Journey
-              </a>
-              <a
+              </Link>
+              <Link
                 href="/testimonials"
                 className="border-2 border-white text-white hover:bg-white hover:text-blue-600 px-8 py-3 rounded-lg font-semibold transition duration-300 transform hover:scale-105"
               >
                 Read More Reviews
-              </a>
+              </Link>
             </div>
           </div>
         </div>

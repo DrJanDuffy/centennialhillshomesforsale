@@ -13,7 +13,7 @@ const AIChatBox: React.FC = () => {
   const [messages, setMessages] = useState<Message[]>([
     {
       id: '1',
-      text: 'Hi! I\'m Dr. Jan Duffy\'s AI assistant. How can I help you with Centennial Hills real estate today?',
+      text: 'Hi! I&apos;m Dr. Jan Duffy&apos;s AI assistant. How can I help you with Centennial Hills real estate today?',
       from: 'assistant',
       timestamp: new Date()
     }
@@ -70,20 +70,21 @@ const AIChatBox: React.FC = () => {
 
       // Capture interests for recommendations
       if (typeof window !== 'undefined' && (window as any).propertyBehaviour) {
+        const propertyBehaviour = (window as any).propertyBehaviour;
         if (/school|college|elementary/i.test(question)) {
-          (window as any).propertyBehaviour.add('feature:school');
+          propertyBehaviour.add('feature:school');
         }
         if (/pool|spa/i.test(question)) {
-          (window as any).propertyBehaviour.add('feature:pool');
+          propertyBehaviour.add('feature:pool');
         }
         if (/price|budget|cost/i.test(question)) {
-          (window as any).propertyBehaviour.add('feature:price');
+          propertyBehaviour.add('feature:price');
         }
         if (/neighborhood|area|community/i.test(question)) {
-          (window as any).propertyBehaviour.add('feature:neighborhood');
+          propertyBehaviour.add('feature:neighborhood');
         }
         if (/park|trail|outdoor/i.test(question)) {
-          (window as any).propertyBehaviour.add('feature:outdoor');
+          propertyBehaviour.add('feature:outdoor');
         }
       }
     } catch (error) {
@@ -106,6 +107,7 @@ const AIChatBox: React.FC = () => {
     <>
       {/* Chat Toggle Button */}
       <button
+        type="button"
         onClick={toggleChat}
         className={`fixed bottom-6 right-6 z-50 p-4 rounded-full shadow-lg transition-all duration-300 ${
           isOpen 
