@@ -1,7 +1,7 @@
 import React from 'react';
+import GoogleTagManager from '../components/GoogleTagManager';
 import Layout from '../components/Layout';
 import ModernNeighborhoods from '../components/ModernNeighborhoods';
-import GoogleTagManager from '../components/GoogleTagManager';
 
 const NeighborhoodsPage: React.FC = () => {
   return (
@@ -87,7 +87,7 @@ const NeighborhoodsPage: React.FC = () => {
               <p className="text-gray-600 leading-relaxed">
                 Convenient access to I-215, US-95, and major Las Vegas attractions
               </p>
-            </div>
+          </div>
 
             <div className="card p-6 lg:p-8 text-center">
               <div className="w-16 h-16 lg:w-20 lg:h-20 bg-secondary-color rounded-full flex items-center justify-center mx-auto mb-6">

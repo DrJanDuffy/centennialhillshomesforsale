@@ -1,6 +1,21 @@
 import axios from 'axios';
 import type { NextApiRequest, NextApiResponse } from 'next';
 
+// Define proper response types
+interface PerplexityResponse {
+  choices: Array<{
+    message: {
+      content: string;
+    };
+  }>;
+}
+
+interface PerplexityError {
+  response?: {
+    data?: unknown;
+  };
+}
+
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
@@ -19,7 +34,7 @@ export default async function handler(
     // --------------------------------------------------------------
     // PERPLEXITY API CALL
     // --------------------------------------------------------------
-    const response = await axios.post(
+    const response = await axios.post<PerplexityResponse>(
       'https://api.perplexity.ai/chat/completions',   // <-- official endpoint
       {
         model: 'llama-3-sonar-small-32k-online',   // pick any model you have access to
@@ -46,7 +61,7 @@ export default async function handler(
     res.status(200).json({ reply });
   } catch (error: unknown) {
     const errorMessage = error instanceof Error ? error.message : 'Unknown error occurred';
-    const responseData = (error as any)?.response?.data;
+    const responseData = (error as PerplexityError)?.response?.data;
     console.error('Perplexity error →', responseData || errorMessage);
     res.status(500).json({ error: 'Failed to fetch response from Perplexity' });
   }

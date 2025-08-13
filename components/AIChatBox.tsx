@@ -24,14 +24,16 @@ const AIChatBox: React.FC = () => {
   const inputRef = useRef<HTMLInputElement>(null);
 
   const scrollToBottom = useCallback(() => {
-    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+    if (messagesEndRef.current) {
+      messagesEndRef.current.scrollIntoView({ behavior: 'smooth' });
+    }
   }, []);
 
   useEffect(() => {
     scrollToBottom();
   }, [scrollToBottom]);
 
-  const addMessage = (text: string, from: 'user' | 'assistant') => {
+  const addMessage = useCallback((text: string, from: 'user' | 'assistant') => {
     const newMessage: Message = {
       id: Date.now().toString(),
       text,
@@ -39,9 +41,9 @@ const AIChatBox: React.FC = () => {
       timestamp: new Date()
     };
     setMessages(prev => [...prev, newMessage]);
-  };
+  }, []);
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = useCallback(async (e: React.FormEvent) => {
     e.preventDefault();
     const question = inputValue.trim();
     if (!question || isLoading) return;
@@ -66,7 +68,7 @@ const AIChatBox: React.FC = () => {
       }
 
       const data = await response.json();
-      addMessage(data.reply || 'I apologize, but I couldn\'t generate a response at this time.', 'assistant');
+      addMessage(data.reply || 'I apologize, but I couldn&apos;t generate a response at this time.', 'assistant');
 
       // Capture interests for recommendations
       if (typeof window !== 'undefined' && (window as any).propertyBehaviour) {
@@ -94,14 +96,18 @@ const AIChatBox: React.FC = () => {
       setIsLoading(false);
       inputRef.current?.focus();
     }
-  };
+  }, [inputValue, isLoading, addMessage]);
 
-  const toggleChat = () => {
+  const toggleChat = useCallback(() => {
     setIsOpen(!isOpen);
     if (!isOpen) {
       setTimeout(() => inputRef.current?.focus(), 100);
     }
-  };
+  }, [isOpen]);
+
+  const handleQuickQuestion = useCallback((question: string) => {
+    setInputValue(question);
+  }, []);
 
   return (
     <>
@@ -129,7 +135,7 @@ const AIChatBox: React.FC = () => {
                 <MessageCircle size={20} />
               </div>
               <div>
-                <h3 className="font-semibold">Dr. Jan Duffy's AI Assistant</h3>
+                <h3 className="font-semibold">Dr. Jan Duffy&apos;s AI Assistant</h3>
                 <p className="text-sm text-blue-100">Ask me about Centennial Hills real estate!</p>
               </div>
             </div>
@@ -198,11 +204,11 @@ const AIChatBox: React.FC = () => {
             
             {/* Quick Questions */}
             <div className="mt-3 flex flex-wrap gap-2">
-              {['What\'s the average home price?', 'Tell me about schools', 'Show me neighborhoods'].map((question) => (
+              {['What&apos;s the average home price?', 'Tell me about schools', 'Show me neighborhoods'].map((question) => (
                 <button
                   key={question}
                   type="button"
-                  onClick={() => setInputValue(question)}
+                  onClick={() => handleQuickQuestion(question)}
                   className="text-xs px-2 py-1 bg-gray-100 hover:bg-gray-200 text-gray-700 rounded-full transition-colors duration-200"
                 >
                   {question}
