@@ -63,13 +63,13 @@ class Cache {
     let validEntries = 0;
     let staleEntries = 0;
 
-    for (const [, entry] of this.store.entries()) {
+    this.store.forEach((entry) => {
       if (now - entry.timestamp > entry.ttl) {
         staleEntries++;
       } else {
         validEntries++;
       }
-    }
+    });
 
     return {
       total: this.store.size,
@@ -126,17 +126,17 @@ export async function getCachedData<T>(
   }
 }
 
-// Helper function to invalidate cache
-export function invalidateCache(pattern?: string): void {
-  if (pattern) {
-    // Delete keys matching pattern
-    for (const key of cache.store.keys()) {
-      if (key.includes(pattern)) {
-        cache.delete(key);
-      }
+  // Helper function to invalidate cache
+  export function invalidateCache(pattern?: string): void {
+    if (pattern) {
+      // Delete keys matching pattern
+      cache.store.forEach((_, key) => {
+        if (key.includes(pattern)) {
+          cache.delete(key);
+        }
+      });
+    } else {
+      // Clear all cache
+      cache.clear();
     }
-  } else {
-    // Clear all cache
-    cache.clear();
   }
-}
