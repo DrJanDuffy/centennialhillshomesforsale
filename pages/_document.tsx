@@ -7,6 +7,9 @@ export default function Document() {
         <meta charSet="utf-8" />
         <meta name="robots" content="index, follow" />
 
+        {/* Canonical URL - Force HTTPS and non-www */}
+        <link rel="canonical" href="https://centennialhillshomesforsale.com" />
+
         {/* Favicon and PWA icons */}
         <link rel="icon" href="/favicon.ico" />
         <link rel="manifest" href="/manifest.json" />
