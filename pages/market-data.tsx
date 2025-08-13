@@ -1,6 +1,6 @@
 import React from 'react';
-import Layout from '../components/Layout';
 import GoogleTagManager from '../components/GoogleTagManager';
+import Layout from '../components/Layout';
 
 const MarketDataPage: React.FC = () => {
   return (

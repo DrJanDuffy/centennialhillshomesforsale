@@ -1,7 +1,7 @@
 import React from 'react';
+import GoogleTagManager from '../components/GoogleTagManager';
 import Layout from '../components/Layout';
 import ModernInteractiveMap from '../components/ModernInteractiveMap';
-import GoogleTagManager from '../components/GoogleTagManager';
 
 const AreaExplorerPage: React.FC = () => {
   return (
