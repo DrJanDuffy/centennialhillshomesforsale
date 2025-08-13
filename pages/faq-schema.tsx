@@ -2,6 +2,7 @@ import Head from 'next/head';
 import Link from 'next/link';
 import React from 'react';
 import Layout from '../components/Layout';
+import RealScoutListings from '../components/RealScoutListings';
 
 const FAQSchemaPage: React.FC = () => {
   // FAQ Schema for better SERP visibility
@@ -219,6 +220,27 @@ const FAQSchemaPage: React.FC = () => {
               </Link>
             </div>
           </div>
+        </div>
+      </section>
+
+      {/* RealScout Listings */}
+      <section className="py-16 bg-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 mb-6">
+              Featured Properties
+            </h2>
+            <p className="text-lg lg:text-xl text-gray-600 max-w-3xl mx-auto">
+              Browse our latest listings while reading our FAQ
+            </p>
+          </div>
+          
+          <RealScoutListings 
+            priceMin={500000}
+            priceMax={2000000}
+            propertyTypes="SFR,MF"
+            listingStatus="For Sale"
+          />
         </div>
       </section>
 

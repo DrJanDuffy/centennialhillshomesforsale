@@ -1,6 +1,7 @@
 import Head from 'next/head';
 import Layout from '../components/Layout';
 import ModernInteractiveMap from '../components/ModernInteractiveMap';
+import RealScoutListings from '../components/RealScoutListings';
 
 export default function AreaExplorer() {
   return (
@@ -374,6 +375,27 @@ export default function AreaExplorer() {
                 <p className="text-gray-600">20 minutes</p>
               </div>
             </div>
+          </div>
+        </section>
+
+        {/* RealScout Listings */}
+        <section className="py-16 bg-gray-50">
+          <div className="container mx-auto px-4">
+            <div className="text-center mb-12">
+              <h2 className="text-3xl font-bold text-gray-800 mb-6">
+                Properties in This Area
+              </h2>
+              <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+                Browse current listings while exploring the Centennial Hills area
+              </p>
+            </div>
+            
+            <RealScoutListings 
+              priceMin={400000}
+              priceMax={2000000}
+              propertyTypes="SFR,MF,TC"
+              listingStatus="For Sale"
+            />
           </div>
         </section>
 

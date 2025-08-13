@@ -1,5 +1,4 @@
 // components/RealScoutListings.jsx
-import { useEffect } from 'react';
 
 export default function RealScoutListings({ 
   priceMin = 600000, 
