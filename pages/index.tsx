@@ -2,6 +2,7 @@ import Head from 'next/head';
 import Link from 'next/link';
 import Layout from '../components/Layout';
 import RealScoutListings from '../components/RealScoutListings';
+import FeaturedInsight from '../components/rss/FeaturedInsight';
 
 export default function Home() {
   return (
@@ -330,6 +331,15 @@ export default function Home() {
           </div>
         </div>
       </section>
+
+      {/* Market Insights Section */}
+      <FeaturedInsight 
+        title="Latest Market Insight"
+        subtitle="Stay informed with expert analysis from Keeping Current Matters"
+        theme="blue"
+        enableAnalytics={true}
+        enablePerformance={true}
+      />
 
       {/* CTA Section */}
       <section className="py-16 bg-gradient-to-r from-blue-600 to-blue-700">
