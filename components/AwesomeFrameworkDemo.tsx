@@ -10,6 +10,8 @@ import {
     AvatarFallback,
     AvatarImage,
     Badge,
+    Bar,
+    BarChart,
     BarChart3,
     Button,
     Card,
@@ -17,6 +19,7 @@ import {
     CardDescription,
     CardHeader,
     CardTitle,
+    CartesianGrid,
     Checkbox,
     Dialog,
     DialogContent,
@@ -35,10 +38,15 @@ import {
     HoverCardTrigger,
     Input,
     Label,
+    Legend,
+    Pie,
     PieChart,
     Progress,
     RadioGroup,
     RadioGroupItem,
+    RechartsTooltip,
+    // Chart components
+    ResponsiveContainer,
     Search,
     Select,
     SelectContent,
@@ -61,16 +69,8 @@ import {
     TooltipTrigger,
     TrendingUp,
     User,
-    // Chart components
-    ResponsiveContainer,
-    BarChart,
-    CartesianGrid,
     XAxis,
-    YAxis,
-    RechartsTooltip,
-    Bar,
-    Pie,
-    Legend
+    YAxis
 } from '../utils/awesome-frameworks';
 
 export default function AwesomeFrameworkDemo() {
