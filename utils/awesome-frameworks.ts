@@ -255,24 +255,19 @@ export { Controller, useForm } from 'react-hook-form';
 // Toast Notifications
 export { toast } from 'react-hot-toast';
 
-// Charts
+// Charts (Chart.js)
 export {
-  Area,
-  AreaChart,
-  Bar,
-  BarChart,
-  CartesianGrid,
-  Cell,
+  Chart,
+  CategoryScale,
+  LinearScale,
+  PointElement,
+  LineElement,
+  Title,
+  Tooltip,
   Legend,
-  Line,
-  LineChart,
-  Pie,
-  PieChart,
-  Tooltip as RechartsTooltip,
-  ResponsiveContainer,
-  XAxis,
-  YAxis
-} from 'recharts';
+  ArcElement,
+  BarElement
+} from 'chart.js';
 
 export { Toaster, toast as sonnerToast } from 'sonner';
 export * as z from 'zod';
