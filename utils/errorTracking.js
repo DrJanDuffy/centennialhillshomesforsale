@@ -185,3 +185,29 @@ export function clearErrorLog() {
     localStorage.removeItem('sessionId');
   }
 }
+
+// Default export for compatibility with globalErrorHandler
+const ErrorTracker = {
+  getInstance: () => ({
+    trackError: (error, context) => {
+      console.error('Error tracked:', { error, context });
+      // Store error in localStorage
+      if (typeof window !== 'undefined') {
+        const errors = JSON.parse(localStorage.getItem('errorLog') || '[]');
+        errors.push({
+          message: error.message || error.toString(),
+          context,
+          timestamp: new Date().toISOString(),
+          stack: error.stack
+        });
+        localStorage.setItem('errorLog', JSON.stringify(errors.slice(-100))); // Keep last 100 errors
+      }
+    },
+    getErrors: () => {
+      if (typeof window === 'undefined') return [];
+      return JSON.parse(localStorage.getItem('errorLog') || '[]');
+    }
+  })
+};
+
+export default ErrorTracker;
