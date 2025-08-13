@@ -3,13 +3,13 @@
 import { motion } from 'framer-motion';
 import { useCallback, useEffect, useState } from 'react';
 import {
-  FaCheckCircle,
-  FaExclamationTriangle,
-  FaLightbulb,
-  FaMagic,
-  FaRocket,
-  FaSearch,
-  FaStar,
+    FaCheckCircle,
+    FaExclamationTriangle,
+    FaLightbulb,
+    FaMagic,
+    FaRocket,
+    FaSearch,
+    FaStar,
 } from 'react-icons/fa';
 
 interface AwesomeStats {
