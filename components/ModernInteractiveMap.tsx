@@ -5,13 +5,12 @@ import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 // Google Maps types declaration
 declare global {
   interface Window {
-    google: typeof google;
+    google: any;
     initMap: () => void;
   }
 }
 
-// Import Google Maps types
-import type { Map, Marker } from 'google.maps';
+// Google Maps types - using any for now to avoid import issues
 
 interface Location {
   id: string;
@@ -29,8 +28,8 @@ const ModernInteractiveMap: React.FC = () => {
   const [activeFilter, setActiveFilter] = useState<string>('all');
   const [mapLoaded, setMapLoaded] = useState(false);
   const mapContainer = useRef<HTMLDivElement>(null);
-  const map = useRef<Map | null>(null);
-  const markers = useRef<Marker[]>([]);
+  const map = useRef<any>(null);
+  const markers = useRef<any[]>([]);
 
   const locations = useMemo((): Location[] => [
     {
@@ -140,8 +139,8 @@ const ModernInteractiveMap: React.FC = () => {
           // Create bounds for all locations
           const bounds = new LatLngBounds();
           
-          // Create markers for all locations
-          const newMarkers: Marker[] = [];
+                  // Create markers for all locations
+        const newMarkers: any[] = [];
           
           locations.forEach((location) => {
             const marker = new Marker({
