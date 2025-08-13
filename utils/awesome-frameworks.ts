@@ -5,7 +5,7 @@
 // Headless UI Components
 export {
     DialogPanel,
-    DialogTitle, Dialog as HeadlessDialog, Popover as HeadlessPopover, RadioGroup as HeadlessRadioGroup, Switch as HeadlessSwitch, Listbox,
+    DialogTitle as HeadlessDialogTitle, Dialog as HeadlessDialog, Popover as HeadlessPopover, RadioGroup as HeadlessRadioGroup, Switch as HeadlessSwitch, Listbox,
     ListboxButton,
     ListboxLabel,
     ListboxOption,
