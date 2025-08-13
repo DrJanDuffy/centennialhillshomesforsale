@@ -6,15 +6,36 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
+    "start": "next start",
     "lint": "next lint --fix",
+    "lint:check": "next lint",
+    "type-check": "tsc --noEmit",
+    "analyze": "cross-env ANALYZE=true next build",
+    "analyze:server": "cross-env ANALYZE=true next build && open .next/analyze/client.html",
+    "analyze:browser": "cross-env ANALYZE=true next build && open .next/analyze/client.html",
+    
     "biome:check": "biome check .",
     "biome:format": "biome format --write .",
     "biome:lint": "biome lint .",
     "biome:fix": "biome check --write .",
-    "type-check": "tsc --noEmit",
-    "analyze": "cross-env ANALYZE=true next build",
+    
     "vercel-build": "next build",
-    "vercel-dev": "next dev"
+    "vercel-dev": "next dev",
+    
+    "clean": "rm -rf .next out dist .vercel",
+    "clean:all": "npm run clean && rm -rf node_modules package-lock.json",
+    
+    "security:audit": "npm audit --audit-level=moderate",
+    "security:fix": "npm audit fix",
+    "deps:check": "npm outdated",
+    "deps:update": "npm update",
+    
+    "preview": "vercel --env preview",
+    "deploy:preview": "vercel --prod=false",
+    "deploy:production": "vercel --prod",
+    
+    "test:build": "npm run build && npm run start & sleep 10 && curl -f http://localhost:3000 > /dev/null && kill %1",
+    "test:vercel": "vercel --prod=false --yes"
   },
   "dependencies": {
     "@headlessui/react": "^2.2.7",
@@ -95,6 +116,10 @@
   "overrides": {
     "@types/react": "^18.3.12",
     "@types/react-dom": "^18.3.1"
+  },
+  "engines": {
+    "node": ">=18.0.0",
+    "npm": ">=9.0.0"
   },
   "keywords": [
     "real estate",

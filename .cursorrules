@@ -1,0 +1,92 @@
+# Cursor.ai Configuration for Cloud-Native Development
+# Optimized for Vercel, GitHub Actions, and Next.js
+
+## Project Context
+This is a Next.js real estate website for Centennial Hills, Las Vegas, deployed on Vercel with automated CI/CD via GitHub Actions.
+
+## Development Workflow
+- Use Vercel for all deployments (never run npm run build locally)
+- Push to GitHub to trigger automated deployments
+- Use feature branches for preview deployments
+- Main branch deploys to production automatically
+
+## Code Standards
+- Follow Next.js 14 best practices
+- Use TypeScript for all new code
+- Implement proper error boundaries
+- Use Tailwind CSS for styling
+- Follow React 18 patterns with hooks
+
+## File Organization
+- Components in `/components` directory
+- Pages in `/pages` directory
+- API routes in `/pages/api`
+- Utilities in `/utils` directory
+- Types in `/types` directory
+- Styles in `/styles` directory
+
+## Key Technologies
+- Next.js 14 (App Router not used - using Pages Router)
+- React 18 with hooks
+- TypeScript
+- Tailwind CSS
+- Vercel for deployment
+- GitHub Actions for CI/CD
+
+## Environment Variables
+- Never hardcode API keys
+- Use NEXT_PUBLIC_ prefix for client-side variables
+- Store secrets in Vercel dashboard and GitHub Secrets
+
+## Performance Guidelines
+- Implement lazy loading for images
+- Use Next.js Image component
+- Optimize bundle sizes
+- Monitor Core Web Vitals
+- Use Vercel Analytics
+
+## Security Practices
+- Validate all user inputs
+- Use proper CORS headers
+- Implement rate limiting for APIs
+- Sanitize data before rendering
+
+## Testing Strategy
+- Write unit tests for utilities
+- Test components in isolation
+- Use GitHub Actions for automated testing
+- Implement error boundary testing
+
+## Deployment Process
+1. Create feature branch
+2. Make changes and test locally
+3. Push to GitHub (triggers preview deployment)
+4. Create PR for review
+5. Merge to main (triggers production deployment)
+
+## Common Commands
+- `npm run dev` - Local development
+- `npm run build` - Build for production
+- `npm run lint` - Run ESLint
+- `npm run type-check` - TypeScript check
+- `npm run analyze` - Bundle analysis
+- `vercel --prod=false` - Deploy preview
+- `vercel --prod` - Deploy production
+
+## Error Handling
+- Use React Error Boundaries
+- Implement proper logging
+- Handle API failures gracefully
+- Provide user-friendly error messages
+
+## Accessibility
+- Use semantic HTML
+- Implement proper ARIA labels
+- Ensure keyboard navigation
+- Test with screen readers
+
+## SEO Optimization
+- Use proper meta tags
+- Implement structured data
+- Optimize for Core Web Vitals
+- Use Next.js built-in SEO features
