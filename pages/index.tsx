@@ -2,11 +2,15 @@ import Head from 'next/head';
 import Link from 'next/link';
 import Layout from '../components/Layout';
 import RealScoutListings from '../components/RealScoutListings';
+import HyperLocalHero from '../components/HyperLocalHero';
 import FeaturedInsight from '../components/rss/FeaturedInsight';
 
 export default function Home() {
   return (
     <Layout>
+      {/* HyperLocal Hero with RSS Integration */}
+      <HyperLocalHero />
+      
       <Head>
         <title>Centennial Hills Homes for Sale | Dr. Jan Duffy | Luxury Real Estate</title>
         <meta name="description" content="Discover luxury homes for sale in Centennial Hills, Las Vegas. Dr. Jan Duffy, Top 1% REALTOR®, specializes in luxury properties and master-planned communities." />
