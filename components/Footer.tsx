@@ -88,6 +88,29 @@ export default function Footer() {
                   <path fillRule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clipRule="evenodd" />
                 </svg>
               </Link>
+              
+              {/* RSS Feed Links */}
+              <div className="pt-3 border-t border-gray-700">
+                <p className="text-xs text-gray-400 mb-2">Subscribe to RSS Feeds:</p>
+                <div className="space-y-1">
+                  <a 
+                    href="/api/rss-feed" 
+                    className="block text-xs text-gray-400 hover:text-blue-400 transition-colors"
+                    title="Centennial Hills Market Insights RSS Feed"
+                  >
+                    📊 Market Insights RSS
+                  </a>
+                  <a 
+                    href="https://www.simplifyingthemarket.com/en/feed?a=956758-ef2edda2f940e018328655620ea05f18" 
+                    className="block text-xs text-gray-400 hover:text-blue-400 transition-colors"
+                    title="Simplifying the Market RSS Feed"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    🏠 Industry News RSS
+                  </a>
+                </div>
+              </div>
             </div>
           </div>
         </div>

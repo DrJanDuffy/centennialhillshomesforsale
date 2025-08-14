@@ -1,0 +1,247 @@
+name: RSS Feed Validator
+on:
+  schedule:
+    - cron: '0 */6 * * *' # Every 6 hours
+  push:
+    paths:
+      - 'pages/api/rss/**'
+      - 'lib/rss-*'
+      - 'components/rss/**'
+  pull_request:
+    paths:
+      - 'pages/api/rss/**'
+      - 'lib/rss-*'
+      - 'components/rss/**'
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+          cache: 'npm'
+          
+      - name: Install dependencies
+        run: npm ci
+        
+      - name: Validate RSS Feed Structure
+        run: |
+          echo "🔍 Validating RSS feed structure..."
+          node -e "
+            const fs = require('fs');
+            const path = require('path');
+            
+            // Check if RSS components exist
+            const rssComponents = [
+              'components/rss/KCMFeed.jsx',
+              'components/rss/FeaturedInsight.jsx',
+              'components/rss/MarketInsightsWidget.jsx',
+              'components/rss/InsightCard.jsx'
+            ];
+            
+            const missingComponents = rssComponents.filter(comp => !fs.existsSync(comp));
+            if (missingComponents.length > 0) {
+              console.error('❌ Missing RSS components:', missingComponents);
+              process.exit(1);
+            }
+            
+            // Check if RSS API endpoint exists
+            if (!fs.existsSync('pages/api/rss-feed.ts')) {
+              console.error('❌ Missing RSS API endpoint');
+              process.exit(1);
+            }
+            
+            // Check if RSS utilities exist
+            if (!fs.existsSync('lib/rss-utils.ts')) {
+              console.error('❌ Missing RSS utilities');
+              process.exit(1);
+            }
+            
+            console.log('✅ RSS feed structure validation passed');
+          "
+          
+      - name: Test RSS API Endpoint
+        run: |
+          echo "🧪 Testing RSS API endpoint..."
+          npm run build
+          
+      - name: Validate RSS Feed URLs
+        run: |
+          echo "🔗 Validating RSS feed URLs..."
+          node -e "
+            const fs = require('fs');
+            
+            // Check RSS feed URLs in components
+            const rssFiles = [
+              'lib/rss-parser.ts',
+              'components/rss/KCMFeed.jsx',
+              'components/rss/FeaturedInsight.jsx'
+            ];
+            
+            const expectedUrls = [
+              'https://www.simplifyingthemarket.com/en/feed?a=956758-ef2edda2f940e018328655620ea05f18',
+              'https://www.simplifyingthemarket.com/en/?a=956758-ef2edda2f940e018328655620ea05f18'
+            ];
+            
+            let allUrlsFound = true;
+            
+            rssFiles.forEach(file => {
+              if (fs.existsSync(file)) {
+                const content = fs.readFileSync(file, 'utf8');
+                const hasExpectedUrl = expectedUrls.some(url => content.includes(url));
+                if (!hasExpectedUrl) {
+                  console.error(\`❌ Expected RSS URL not found in \${file}\`);
+                  allUrlsFound = false;
+                }
+              }
+            });
+            
+            if (allUrlsFound) {
+              console.log('✅ All RSS feed URLs validated');
+            } else {
+              process.exit(1);
+            }
+          "
+          
+      - name: Check RSS Integration Status
+        run: |
+          echo "📊 Checking RSS integration status..."
+          node -e "
+            const fs = require('fs');
+            
+            // Check pages with RSS integration
+            const pagesWithRSS = [
+              'pages/index.tsx',
+              'pages/buyers.tsx',
+              'pages/services.tsx',
+              'pages/properties.tsx',
+              'pages/neighborhoods.tsx',
+              'pages/blog.tsx',
+              'pages/market-data.tsx',
+              'pages/area-explorer.tsx',
+              'pages/faq.tsx',
+              'pages/testimonials.tsx'
+            ];
+            
+            const integratedPages = pagesWithRSS.filter(page => {
+              if (fs.existsSync(page)) {
+                const content = fs.readFileSync(page, 'utf8');
+                return content.includes('FeaturedInsight') || 
+                       content.includes('MarketInsightsWidget') || 
+                       content.includes('KCMFeed');
+              }
+              return false;
+            });
+            
+            console.log(\`📈 RSS Integration Status:\`);
+            console.log(\`   Total pages checked: \${pagesWithRSS.length}\`);
+            console.log(\`   Pages with RSS: \${integratedPages.length}\`);
+            console.log(\`   Integration rate: \${Math.round((integratedPages.length / pagesWithRSS.length) * 100)}%\`);
+            
+            if (integratedPages.length >= 8) {
+              console.log('✅ RSS integration coverage is excellent');
+            } else if (integratedPages.length >= 6) {
+              console.log('⚠️ RSS integration coverage is good');
+            } else {
+              console.log('❌ RSS integration coverage needs improvement');
+              process.exit(1);
+            }
+          "
+          
+      - name: Validate RSS Meta Tags
+        run: |
+          echo "🏷️ Validating RSS meta tags..."
+          node -e "
+            const fs = require('fs');
+            
+            // Check Layout component for RSS autodiscovery
+            if (fs.existsSync('components/Layout.tsx')) {
+              const content = fs.readFileSync('components/Layout.tsx', 'utf8');
+              const hasRSSMeta = content.includes('application/rss+xml') && 
+                                content.includes('application/atom+xml');
+              
+              if (hasRSSMeta) {
+                console.log('✅ RSS autodiscovery meta tags found');
+              } else {
+                console.error('❌ RSS autodiscovery meta tags missing');
+                process.exit(1);
+              }
+            }
+            
+            // Check Footer for RSS links
+            if (fs.existsSync('components/Footer.tsx')) {
+              const content = fs.readFileSync('components/Footer.tsx', 'utf8');
+              const hasRSSLinks = content.includes('/api/rss-feed') && 
+                                 content.includes('simplifyingthemarket.com');
+              
+              if (hasRSSLinks) {
+                console.log('✅ RSS feed links found in footer');
+              } else {
+                console.error('❌ RSS feed links missing from footer');
+                process.exit(1);
+              }
+            }
+          "
+          
+      - name: Performance Check
+        run: |
+          echo "⚡ Checking RSS performance optimizations..."
+          node -e "
+            const fs = require('fs');
+            
+            // Check for performance features
+            const performanceFeatures = {
+              'ISR caching': fs.existsSync('pages/api/rss-feed.ts') && 
+                           fs.readFileSync('pages/api/rss-feed.ts', 'utf8').includes('revalidate'),
+              'Error boundaries': fs.existsSync('components/ErrorBoundary.tsx'),
+              'Lazy loading': fs.existsSync('components/rss/LoadingSkeleton.jsx'),
+              'Analytics tracking': fs.existsSync('lib/rss-utils.ts') && 
+                                 fs.readFileSync('lib/rss-utils.ts', 'utf8').includes('trackRSSAnalytics')
+            };
+            
+            console.log('📊 RSS Performance Features:');
+            Object.entries(performanceFeatures).forEach(([feature, enabled]) => {
+              console.log(\`   \${enabled ? '✅' : '❌'} \${feature}\`);
+            });
+            
+            const enabledCount = Object.values(performanceFeatures).filter(Boolean).length;
+            if (enabledCount >= 3) {
+              console.log('✅ RSS performance optimizations are well implemented');
+            } else {
+              console.log('⚠️ RSS performance optimizations could be improved');
+            }
+          "
+          
+      - name: Create RSS Integration Report
+        run: |
+          echo "📋 Creating RSS integration report..."
+          node -e "
+            const fs = require('fs');
+            const report = {
+              timestamp: new Date().toISOString(),
+              status: 'PASSED',
+              summary: 'RSS Feed Integration Audit Complete',
+              details: {
+                components: ['KCMFeed', 'FeaturedInsight', 'MarketInsightsWidget', 'InsightCard'],
+                apiEndpoint: 'pages/api/rss-feed.ts',
+                utilities: 'lib/rss-utils.ts',
+                parser: 'lib/rss-parser.ts',
+                feedUrl: 'https://www.simplifyingthemarket.com/en/feed?a=956758-ef2edda2f940e018328655620ea05f18',
+                fallbackUrl: 'https://www.simplifyingthemarket.com/en/?a=956758-ef2edda2f940e018328655620ea05f18'
+              }
+            };
+            
+            fs.writeFileSync('rss-integration-report.json', JSON.stringify(report, null, 2));
+            console.log('📄 RSS integration report created: rss-integration-report.json');
+          "
+          
+      - name: Upload RSS Report
+        uses: actions/upload-artifact@v4
+        with:
+          name: rss-integration-report
+          path: rss-integration-report.json

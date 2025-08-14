@@ -60,6 +60,11 @@ const Layout: React.FC<LayoutProps> = ({
         <meta name="twitter:title" content={title} />
         <meta name="twitter:description" content={description} />
         
+        {/* RSS Feed Autodiscovery */}
+        <link rel="alternate" type="application/rss+xml" title="Centennial Hills Market Insights RSS Feed" href="https://centennialhillshomesforsale.com/api/rss-feed" />
+        <link rel="alternate" type="application/atom+xml" title="Centennial Hills Market Insights Atom Feed" href="https://centennialhillshomesforsale.com/api/rss-feed" />
+        <link rel="feed" type="application/rss+xml" title="Real Estate Market Insights" href="https://www.simplifyingthemarket.com/en/feed?a=956758-ef2edda2f940e018328655620ea05f18" />
+        
         {/* Structured Data */}
         {structuredData && (
           <script

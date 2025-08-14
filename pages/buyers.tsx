@@ -1,5 +1,7 @@
 import Layout from '@/components/Layout';
 import RealScoutListings from '@/components/RealScoutListings';
+import FeaturedInsight from '@/components/rss/FeaturedInsight';
+import MarketInsightsWidget from '@/components/rss/MarketInsightsWidget';
 import {
     ArrowRight,
     CheckCircle,
@@ -235,6 +237,51 @@ const BuyersPage: React.FC = () => {
               priceMax={1500000}
               propertyTypes="SFR,MF"
               listingStatus="For Sale"
+            />
+          </div>
+        </section>
+
+        {/* Market Insights for Buyers */}
+        <section className="py-16 bg-gray-50">
+          <div className="container mx-auto px-4">
+            <div className="text-center mb-12">
+              <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+                Stay Informed with Market Insights
+              </h2>
+              <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+                Get the latest real estate market trends and insights to make informed buying decisions
+              </p>
+            </div>
+            
+            <div className="max-w-6xl mx-auto">
+              <FeaturedInsight 
+                title="Latest Market Insight for Buyers"
+                subtitle="Expert analysis to guide your home buying decisions"
+                theme="blue"
+                enableAnalytics={true}
+                enablePerformance={true}
+              />
+            </div>
+          </div>
+        </section>
+
+        {/* Market Trends Widget */}
+        <section className="py-16 bg-white">
+          <div className="container mx-auto px-4">
+            <div className="text-center mb-12">
+              <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+                Current Market Trends
+              </h2>
+              <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+                Track real-time market data and trends affecting Centennial Hills real estate
+              </p>
+            </div>
+            
+            <MarketInsightsWidget 
+              maxArticles={6}
+              showFeatured={true}
+              enableAnalytics={true}
+              enablePerformance={true}
             />
           </div>
         </section>

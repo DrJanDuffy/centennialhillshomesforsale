@@ -3,6 +3,8 @@ import GoogleTagManager from '../components/GoogleTagManager';
 import Layout from '../components/Layout';
 import ModernFeaturedProperties from '../components/ModernFeaturedProperties';
 import RealScoutListings from '../components/RealScoutListings';
+import FeaturedInsight from '../components/rss/FeaturedInsight';
+import MarketInsightsWidget from '../components/rss/MarketInsightsWidget';
 
 export default function Properties() {
   return (
@@ -414,6 +416,51 @@ export default function Properties() {
               priceMax={2000000}
               propertyTypes="SFR,MF,TC"
               listingStatus="For Sale"
+            />
+          </div>
+        </section>
+
+        {/* Market Insights for Properties */}
+        <section className="section bg-white">
+          <div className="container">
+            <div className="text-center mb-12 lg:mb-16">
+              <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-primary-color mb-6 lg:mb-8">
+                Market Insights for Property Buyers
+              </h2>
+              <p className="text-lg lg:text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
+                Stay informed with the latest market trends and analysis to make informed property decisions
+              </p>
+            </div>
+            
+            <div className="max-w-6xl mx-auto">
+              <FeaturedInsight 
+                title="Latest Property Market Analysis"
+                subtitle="Expert insights to guide your property investment decisions"
+                theme="purple"
+                enableAnalytics={true}
+                enablePerformance={true}
+              />
+            </div>
+          </div>
+        </section>
+
+        {/* Market Trends Widget */}
+        <section className="section bg-gray-50">
+          <div className="container">
+            <div className="text-center mb-12 lg:mb-16">
+              <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-primary-color mb-6 lg:mb-8">
+                Current Market Trends
+              </h2>
+              <p className="text-lg lg:text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
+                Track real-time market data and trends affecting Centennial Hills property values
+              </p>
+            </div>
+            
+            <MarketInsightsWidget 
+              maxArticles={5}
+              showFeatured={true}
+              enableAnalytics={true}
+              enablePerformance={true}
             />
           </div>
         </section>

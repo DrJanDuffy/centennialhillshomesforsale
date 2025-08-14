@@ -2,6 +2,8 @@ import Head from 'next/head';
 import Layout from '../components/Layout';
 import ModernInteractiveMap from '../components/ModernInteractiveMap';
 import RealScoutListings from '../components/RealScoutListings';
+import FeaturedInsight from '../components/rss/FeaturedInsight';
+import MarketInsightsWidget from '../components/rss/MarketInsightsWidget';
 
 export default function AreaExplorer() {
   return (
@@ -395,6 +397,51 @@ export default function AreaExplorer() {
               priceMax={2000000}
               propertyTypes="SFR,MF,TC"
               listingStatus="For Sale"
+            />
+          </div>
+        </section>
+
+        {/* Market Insights for Area Explorer */}
+        <section className="py-16 bg-white">
+          <div className="container mx-auto px-4">
+            <div className="text-center mb-12">
+              <h2 className="text-3xl font-bold text-gray-800 mb-6">
+                Market Insights for This Area
+              </h2>
+              <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+                Stay informed with the latest market trends and analysis for Centennial Hills
+              </p>
+            </div>
+            
+            <div className="max-w-6xl mx-auto">
+              <FeaturedInsight 
+                title="Latest Area Market Analysis"
+                subtitle="Expert insights to guide your area selection"
+                theme="orange"
+                enableAnalytics={true}
+                enablePerformance={true}
+              />
+            </div>
+          </div>
+        </section>
+
+        {/* Market Trends Widget */}
+        <section className="py-16 bg-gray-50">
+          <div className="container mx-auto px-4">
+            <div className="text-center mb-12">
+              <h2 className="text-3xl font-bold text-gray-800 mb-6">
+                Current Market Trends
+              </h2>
+              <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+                Track real-time market data and trends affecting this area
+              </p>
+            </div>
+            
+            <MarketInsightsWidget 
+              maxArticles={4}
+              showFeatured={true}
+              enableAnalytics={true}
+              enablePerformance={true}
             />
           </div>
         </section>

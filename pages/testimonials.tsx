@@ -4,6 +4,8 @@ import Link from 'next/link';
 import { FaQuoteLeft, FaStar } from 'react-icons/fa';
 import Layout from '../components/Layout';
 import RealScoutListings from '../components/RealScoutListings';
+import FeaturedInsight from '../components/rss/FeaturedInsight';
+import MarketInsightsWidget from '../components/rss/MarketInsightsWidget';
 
 export default function Testimonials() {
   const testimonials = [
@@ -245,6 +247,49 @@ export default function Testimonials() {
               priceMax={2000000}
               propertyTypes="SFR,MF"
               listingStatus="For Sale"
+            />
+          </div>
+        </motion.section>
+
+        {/* Market Insights for Testimonials */}
+        <motion.section
+          className="market-insights-section"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.85, duration: 0.6 }}
+        >
+          <div className="container">
+            <h2>Stay Informed with Market Insights</h2>
+            <p>Get the latest real estate trends and analysis to make informed decisions</p>
+            
+            <div className="max-w-6xl mx-auto">
+              <FeaturedInsight 
+                title="Latest Market Analysis"
+                subtitle="Expert insights to guide your real estate decisions"
+                theme="green"
+                enableAnalytics={true}
+                enablePerformance={true}
+              />
+            </div>
+          </div>
+        </motion.section>
+
+        {/* Market Trends Widget */}
+        <motion.section
+          className="market-trends-section"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.87, duration: 0.6 }}
+        >
+          <div className="container">
+            <h2>Current Market Trends</h2>
+            <p>Track real-time market data and trends affecting Centennial Hills real estate</p>
+            
+            <MarketInsightsWidget 
+              maxArticles={4}
+              showFeatured={true}
+              enableAnalytics={true}
+              enablePerformance={true}
             />
           </div>
         </motion.section>

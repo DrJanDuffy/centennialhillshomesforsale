@@ -1,6 +1,8 @@
 import Head from 'next/head';
 import Layout from '../components/Layout';
 import RealScoutListings from '../components/RealScoutListings';
+import KCMFeed from '../components/rss/KCMFeed';
+import MarketInsightsWidget from '../components/rss/MarketInsightsWidget';
 
 export default function MarketData() {
   return (
@@ -346,6 +348,51 @@ export default function MarketData() {
               priceMax={3000000}
               propertyTypes="SFR,MF,TC"
               listingStatus="For Sale"
+            />
+          </div>
+        </section>
+
+        {/* Live Market Insights from RSS Feed */}
+        <section className="py-16 bg-white">
+          <div className="container mx-auto px-4">
+            <div className="text-center mb-12">
+              <h2 className="text-3xl font-bold text-gray-800 mb-6">
+                Live Market Insights
+              </h2>
+              <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+                Real-time market analysis and trends from industry experts
+              </p>
+            </div>
+            
+            <div className="max-w-6xl mx-auto">
+              <KCMFeed 
+                maxArticles={6}
+                showFeatured={true}
+                enableAnalytics={true}
+                enablePerformance={true}
+                layout="grid"
+              />
+            </div>
+          </div>
+        </section>
+
+        {/* Market Trends Widget */}
+        <section className="py-16 bg-gray-50">
+          <div className="container mx-auto px-4">
+            <div className="text-center mb-12">
+              <h2 className="text-3xl font-bold text-gray-800 mb-6">
+                Current Market Trends
+              </h2>
+              <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+                Track real-time market data and trends affecting Centennial Hills real estate
+              </p>
+            </div>
+            
+            <MarketInsightsWidget 
+              maxArticles={5}
+              showFeatured={true}
+              enableAnalytics={true}
+              enablePerformance={true}
             />
           </div>
         </section>

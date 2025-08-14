@@ -181,6 +181,16 @@ export const rssParser = new RSSParser();
 
 // Helper function to fetch and parse KCM feed
 export async function fetchKCMFeed(): Promise<RSSFeedData> {
+  // Primary RSS feed URL from Simplifying the Market
   const feedUrl = 'https://www.simplifyingthemarket.com/en/feed?a=956758-ef2edda2f940e018328655620ea05f18';
-  return rssParser.parseFeed(feedUrl);
+  
+  try {
+    return await rssParser.parseFeed(feedUrl);
+  } catch (error) {
+    console.warn('Primary RSS feed failed, trying alternative URL:', error);
+    
+    // Fallback to alternative URL if primary fails
+    const alternativeUrl = 'https://www.simplifyingthemarket.com/en/?a=956758-ef2edda2f940e018328655620ea05f18';
+    return await rssParser.parseFeed(alternativeUrl);
+  }
 }
