@@ -56,11 +56,13 @@ const GoogleTagManager: React.FC<GoogleTagManagerProps> = ({
       const trackPhoneClicks = (event: Event) => {
         const target = event.target as HTMLAnchorElement;
         if (target.tagName === 'A' && target.href?.startsWith('tel:')) {
-          window.gtag('event', 'phone_click', {
-            event_category: 'Contact',
-            event_label: target.href,
-            value: 1,
-          });
+          if (typeof window.gtag === 'function') {
+            window.gtag('event', 'phone_click', {
+              event_category: 'Contact',
+              event_label: target.href,
+              value: 1,
+            });
+          }
         }
       };
 
@@ -75,11 +77,13 @@ const GoogleTagManager: React.FC<GoogleTagManagerProps> = ({
       const trackFormSubmissions = (event: Event) => {
         const form = event.target as HTMLFormElement;
         if (form.tagName === 'FORM') {
-          window.gtag('event', 'form_submit', {
-            event_category: 'Lead Generation',
-            event_label: form.action || 'contact_form',
-            value: 10,
-          });
+          if (typeof window.gtag === 'function') {
+            window.gtag('event', 'form_submit', {
+              event_category: 'Lead Generation',
+              event_label: form.action || 'contact_form',
+              value: 10,
+            });
+          }
         }
       };
 
