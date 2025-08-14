@@ -105,7 +105,7 @@ export default function HyperLocalHero() {
     return updates;
   };
 
-  const getFallbackContent = () => {
+  const getFallbackContent = useCallback(() => {
     return [
       {
         title: 'Centennial Hills Real Estate Market Shows Strong Growth',
@@ -120,7 +120,7 @@ export default function HyperLocalHero() {
         }
       }
     ];
-  };
+  }, []);
 
   const fetchAndLocalizeContent = useCallback(async () => {
     try {
@@ -265,12 +265,12 @@ export default function HyperLocalHero() {
 
               {/* CTA Buttons */}
               <div className="hero-ctas">
-                <button className="cta-primary">
-                  See How This Affects Your Home Value
-                </button>
-                <button className="cta-secondary">
-                  Get Personalized Market Report
-                </button>
+                                 <button type="button" className="cta-primary">
+                   See How This Affects Your Home Value
+                 </button>
+                 <button type="button" className="cta-secondary">
+                   Get Personalized Market Report
+                 </button>
               </div>
             </div>
 
@@ -355,7 +355,7 @@ export default function HyperLocalHero() {
 function AnimatedActivityFeed() {
   const [activities, setActivities] = useState([]);
   
-  const generateActivity = () => {
+  const generateActivity = useCallback(() => {
     const activityTypes = [
       'New listing in Providence',
       'Property sold in Centennial Hills',
@@ -369,7 +369,7 @@ function AnimatedActivityFeed() {
       time: new Date().toLocaleTimeString(),
       text: activityTypes[Math.floor(Math.random() * activityTypes.length)]
     };
-  };
+  }, []);
   
   useEffect(() => {
     // Simulate real-time activities
@@ -378,7 +378,7 @@ function AnimatedActivityFeed() {
       setActivities(prev => [newActivity, ...prev.slice(0, 2)]);
     }, 4000);
     return () => clearInterval(interval);
-  }, []);
+  }, [generateActivity]);
 
   return (
     <div className="activity-list">
