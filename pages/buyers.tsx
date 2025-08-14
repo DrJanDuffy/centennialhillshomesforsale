@@ -279,7 +279,6 @@ const BuyersPage: React.FC = () => {
             
             <MarketInsightsWidget 
               maxArticles={6}
-              showFeatured={true}
               enableAnalytics={true}
               enablePerformance={true}
             />

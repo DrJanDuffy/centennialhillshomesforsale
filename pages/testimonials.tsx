@@ -287,7 +287,6 @@ export default function Testimonials() {
             
             <MarketInsightsWidget 
               maxArticles={4}
-              showFeatured={true}
               enableAnalytics={true}
               enablePerformance={true}
             />

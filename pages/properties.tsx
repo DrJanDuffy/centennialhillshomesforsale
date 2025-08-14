@@ -1,5 +1,5 @@
 import Head from 'next/head';
-import GoogleTagManager from '../components/GoogleTagManager';
+
 import Layout from '../components/Layout';
 import ModernFeaturedProperties from '../components/ModernFeaturedProperties';
 import RealScoutListings from '../components/RealScoutListings';
@@ -205,7 +205,7 @@ export default function Properties() {
       </Head>
 
       <Layout title="Centennial Hills Luxury Properties | Dr. Jan Duffy" description="Discover luxury homes for sale in Centennial Hills, Las Vegas. Browse our featured properties with stunning mountain views, modern amenities, and exceptional quality.">
-        <GoogleTagManager />
+
         
         {/* Hero Section */}
         <section className="relative py-20 lg:py-32 bg-gradient-to-br from-primary-color via-primary-dark to-primary-light overflow-hidden">
@@ -458,7 +458,6 @@ export default function Properties() {
             
             <MarketInsightsWidget 
               maxArticles={5}
-              showFeatured={true}
               enableAnalytics={true}
               enablePerformance={true}
             />

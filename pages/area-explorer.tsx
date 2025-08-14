@@ -439,7 +439,6 @@ export default function AreaExplorer() {
             
             <MarketInsightsWidget 
               maxArticles={4}
-              showFeatured={true}
               enableAnalytics={true}
               enablePerformance={true}
             />
