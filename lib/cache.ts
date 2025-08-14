@@ -77,6 +77,15 @@ class Cache {
       stale: staleEntries,
     };
   }
+
+  // Delete cache entries by pattern
+  deleteByPattern(pattern: string): void {
+    this.store.forEach((_, key) => {
+      if (key.includes(pattern)) {
+        this.delete(key);
+      }
+    });
+  }
 }
 
 // Global cache instance
@@ -126,17 +135,13 @@ export async function getCachedData<T>(
   }
 }
 
-  // Helper function to invalidate cache
-  export function invalidateCache(pattern?: string): void {
-    if (pattern) {
-      // Delete keys matching pattern
-      cache.store.forEach((_, key) => {
-        if (key.includes(pattern)) {
-          cache.delete(key);
-        }
-      });
-    } else {
-      // Clear all cache
-      cache.clear();
-    }
+// Helper function to invalidate cache
+export function invalidateCache(pattern?: string): void {
+  if (pattern) {
+    // Delete keys matching pattern
+    cache.deleteByPattern(pattern);
+  } else {
+    // Clear all cache
+    cache.clear();
   }
+}

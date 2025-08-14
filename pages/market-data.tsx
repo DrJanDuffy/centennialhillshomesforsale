@@ -191,7 +191,7 @@ export default function MarketData() {
                 </div>
                 <h3 className="text-xl font-semibold text-gray-800 mb-2">Interactive Charts Coming Soon</h3>
                 <p className="text-gray-600">
-                  We're working on interactive charts to show you real-time market data and trends.
+                  We&apos;re working on interactive charts to show you real-time market data and trends.
                 </p>
               </div>
             </div>

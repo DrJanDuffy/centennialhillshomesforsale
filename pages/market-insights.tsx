@@ -158,7 +158,7 @@ export default function MarketInsights() {
                 Why Market Insights Matter
               </h2>
               <p className="text-lg text-gray-600 max-w-3xl mx-auto">
-                In today's dynamic real estate market, staying informed is not just an advantage—it's essential
+                In today&apos;s dynamic real estate market, staying informed is not just an advantage—it&apos;s essential
               </p>
             </div>
             
@@ -205,7 +205,7 @@ export default function MarketInsights() {
                 </p>
                 <div className="bg-white p-4 rounded-lg">
                   <p className="text-sm text-gray-600 italic">
-                    "Market insights help you understand not just what's happening, but why it's happening 
+                    &quot;Market insights help you understand not just what&apos;s happening, but why it&apos;s happening 
                     and what it means for your real estate decisions."
                   </p>
                   <p className="text-sm text-gray-800 font-medium mt-2">— Dr. Jan Duffy</p>
