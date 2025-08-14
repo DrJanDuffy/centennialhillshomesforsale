@@ -287,8 +287,8 @@ export default function Neighborhoods() {
               <p className="text-xl text-gray-600 max-w-3xl mx-auto">
                 Stay informed with the latest market trends and analysis for Centennial Hills communities
               </p>
-            </div>
-            
+          </div>
+
             <div className="max-w-6xl mx-auto">
               <FeaturedInsight 
                 title="Latest Neighborhood Market Analysis"
@@ -311,11 +311,10 @@ export default function Neighborhoods() {
               <p className="text-xl text-gray-600 max-w-3xl mx-auto">
                 Track real-time market data and trends affecting neighborhood property values
               </p>
-            </div>
-            
+          </div>
+
             <MarketInsightsWidget 
               maxArticles={4}
-              showFeatured={true}
               enableAnalytics={true}
               enablePerformance={true}
             />
@@ -341,7 +340,7 @@ export default function Neighborhoods() {
             </div>
           </div>
         </section>
-      </Layout>
+    </Layout>
     </>
   );
 }

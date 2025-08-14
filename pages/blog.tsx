@@ -266,7 +266,6 @@ const BlogPage: React.FC = () => {
                 showFeatured={true}
                 enableAnalytics={true}
                 enablePerformance={true}
-                layout="grid"
               />
             </div>
           </div>
@@ -286,7 +285,6 @@ const BlogPage: React.FC = () => {
             
             <MarketInsightsWidget 
               maxArticles={6}
-              showFeatured={true}
               enableAnalytics={true}
               enablePerformance={true}
             />

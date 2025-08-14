@@ -153,7 +153,6 @@ export default function FAQ() {
             
             <MarketInsightsWidget 
               maxArticles={4}
-              showFeatured={true}
               enableAnalytics={true}
               enablePerformance={true}
             />

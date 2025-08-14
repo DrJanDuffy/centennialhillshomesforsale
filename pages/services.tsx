@@ -239,7 +239,6 @@ export default function Services() {
             
             <MarketInsightsWidget 
               maxArticles={4}
-              showFeatured={true}
               enableAnalytics={true}
               enablePerformance={true}
             />

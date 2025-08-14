@@ -285,13 +285,3 @@ export interface RSSCacheData {
   timestamp: number;
   ttl: number;
 }
-
-// Global type declarations for external libraries
-declare global {
-  interface Window {
-    gtag?: (...args: any[]) => void;
-    webVitals?: {
-      track: (metric: string, value: number, metadata?: any) => void;
-    };
-  }
-}

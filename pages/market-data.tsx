@@ -370,7 +370,6 @@ export default function MarketData() {
                 showFeatured={true}
                 enableAnalytics={true}
                 enablePerformance={true}
-                layout="grid"
               />
             </div>
           </div>
@@ -390,7 +389,6 @@ export default function MarketData() {
             
             <MarketInsightsWidget 
               maxArticles={5}
-              showFeatured={true}
               enableAnalytics={true}
               enablePerformance={true}
             />
