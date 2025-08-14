@@ -97,6 +97,8 @@ export default function Footer() {
                     href="/api/rss-feed" 
                     className="block text-xs text-gray-400 hover:text-blue-400 transition-colors"
                     title="Centennial Hills Market Insights RSS Feed"
+                    target="_blank"
+                    rel="noopener noreferrer"
                   >
                     📊 Market Insights RSS
                   </a>
