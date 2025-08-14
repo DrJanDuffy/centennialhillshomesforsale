@@ -190,10 +190,10 @@ export default function About() {
           <div className="container mx-auto px-4">
             <div className="text-center mb-12">
               <h2 className="text-3xl font-bold text-gray-800 mb-6">
-                Dr. Jan Duffy's Current Listings
+                Dr. Jan Duffy&apos;s Current Listings
               </h2>
               <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-                Browse the latest properties I'm representing in Centennial Hills and surrounding areas
+                Browse the latest properties I&apos;m representing in Centennial Hills and surrounding areas
               </p>
             </div>
             

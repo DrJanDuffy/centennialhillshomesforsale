@@ -1,5 +1,5 @@
 // components/HyperLocalHero.jsx
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 export default function HyperLocalHero() {
@@ -122,16 +122,7 @@ export default function HyperLocalHero() {
     ];
   };
 
-  useEffect(() => {
-    fetchAndLocalizeContent();
-    // Rotate headlines every 5 seconds
-    const interval = setInterval(() => {
-      setCurrentHeadline((prev) => (prev + 1) % Math.max(localizedContent.length, 1));
-    }, 5000);
-    return () => clearInterval(interval);
-  }, [localizedContent.length]);
-
-  const fetchAndLocalizeContent = async () => {
+  const fetchAndLocalizeContent = useCallback(async () => {
     try {
       // Fetch KCM RSS feed
       const response = await fetch('/api/rss-feed');
@@ -158,7 +149,16 @@ export default function HyperLocalHero() {
       // Fallback to static local content
       setLocalizedContent(getFallbackContent());
     }
-  };
+  }, []);
+
+  useEffect(() => {
+    fetchAndLocalizeContent();
+    // Rotate headlines every 5 seconds
+    const interval = setInterval(() => {
+      setCurrentHeadline((prev) => (prev + 1) % Math.max(localizedContent.length, 1));
+    }, 5000);
+    return () => clearInterval(interval);
+  }, [localizedContent.length, fetchAndLocalizeContent]);
 
   return (
     <section className="hyperlocal-hero">

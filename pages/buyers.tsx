@@ -226,7 +226,7 @@ const BuyersPage: React.FC = () => {
                 Current Properties for Buyers
               </h2>
               <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-                Browse our latest listings to see what's available in your preferred areas
+                Browse our latest listings to see what&apos;s available in your preferred areas
               </p>
             </div>
             

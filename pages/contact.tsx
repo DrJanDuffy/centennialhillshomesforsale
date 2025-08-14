@@ -42,7 +42,7 @@ export default function Contact() {
                 Featured Properties
               </h2>
               <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-                Browse our current listings while you're here - these properties won't last long!
+                Browse our current listings while you&apos;re here - these properties won&apos;t last long!
               </p>
             </div>
             
