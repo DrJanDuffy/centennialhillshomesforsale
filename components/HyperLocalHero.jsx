@@ -8,7 +8,7 @@ export default function HyperLocalHero() {
   const [localStats, setLocalStats] = useState(null);
 
   // Localization mapping for Centennial Hills
-  const localizeContent = (kcmArticle) => {
+  const localizeContent = useCallback((kcmArticle) => {
     const localizations = {
       // National to Local keyword mapping
       'housing market': 'Centennial Hills real estate market',
@@ -58,7 +58,7 @@ export default function HyperLocalHero() {
         priceChange: '+5.2%',
       }
     };
-  };
+  }, []);
 
   const generateLocalStat = () => {
     const stats = [
@@ -149,7 +149,7 @@ export default function HyperLocalHero() {
       // Fallback to static local content
       setLocalizedContent(getFallbackContent());
     }
-  }, []);
+  }, [localizeContent, getFallbackContent]);
 
   useEffect(() => {
     fetchAndLocalizeContent();

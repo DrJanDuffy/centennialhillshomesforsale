@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useCallback } from 'react';
 import {
   FaArrowUp,
   FaChartLine,
@@ -97,10 +97,10 @@ export default function StatisticalWidget({
     },
   ];
 
-  const getComparisonWidth = (percentage: string) => {
+  const getComparisonWidth = useCallback((percentage: string) => {
     const num = parseInt(percentage.replace('%', ''));
     return `${Math.min(Math.max(num, 0), 100)}%`;
-  };
+  }, []);
 
   // Set CSS custom properties for comparison progress bars
   useEffect(() => {

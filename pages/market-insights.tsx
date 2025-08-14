@@ -206,7 +206,7 @@ export default function MarketInsights() {
                 <div className="bg-white p-4 rounded-lg">
                   <p className="text-sm text-gray-600 italic">
                     &quot;Market insights help you understand not just what&apos;s happening, but why it&apos;s happening 
-                    and what it means for your real estate decisions."
+                    and what it means for your real estate decisions.&quot;
                   </p>
                   <p className="text-sm text-gray-800 font-medium mt-2">— Dr. Jan Duffy</p>
                 </div>

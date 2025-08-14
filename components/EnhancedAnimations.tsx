@@ -440,7 +440,7 @@ export const EnhancedFormField: React.FC<EnhancedFormFieldProps> = ({
 };
 
 // Export all components
-export default {
+const EnhancedAnimations = {
   EnhancedAnimation,
   StaggerContainer,
   ScrollAnimation,
@@ -449,3 +449,5 @@ export default {
   EnhancedButton,
   EnhancedFormField,
 };
+
+export default EnhancedAnimations;
