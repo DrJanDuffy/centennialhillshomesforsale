@@ -1,6 +1,7 @@
 import Head from 'next/head';
 import Layout from '../components/Layout';
 import RealScoutListings from '../components/RealScoutListings';
+import { getPageSchema } from '../lib/business-schema';
 
 export default function About() {
   return (
@@ -10,114 +11,11 @@ export default function About() {
         <meta name="description" content="Meet Dr. Jan Duffy, Top 1% REALTOR® specializing in luxury homes and master-planned communities in Centennial Hills, Las Vegas. Over 20 years of real estate expertise." />
         <meta name="keywords" content="Dr. Jan Duffy, Top 1% REALTOR, luxury real estate Las Vegas, Centennial Hills realtor, Providence neighborhood expert, Skye Canyon specialist" />
         
-        {/* Schema.org markup for better SEO */}
+        {/* Enhanced Business Schema for SEO */}
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
-            __html: JSON.stringify({
-              "@context": "https://schema.org",
-              "@type": "Person",
-              "@id": "https://centennialhillshomesforsale.com/#person",
-              "name": "Dr. Jan Duffy",
-              "alternateName": "Jan Duffy",
-              "description": "Dr. Jan Duffy is a Top 1% REALTOR® specializing in luxury homes and master-planned communities in Centennial Hills, Las Vegas. With over 20 years of experience, she has helped hundreds of families find their dream homes.",
-              "url": "https://centennialhillshomesforsale.com",
-              "telephone": "(702) 903-1952",
-              "email": "jan@centennialhillshomes.com",
-              "jobTitle": "REALTOR®",
-              "worksFor": {
-                "@type": "Organization",
-                "@id": "https://centennialhillshomesforsale.com/#organization",
-                "name": "Berkshire Hathaway HomeServices Nevada Properties"
-              },
-              "knowsAbout": [
-                "Real Estate",
-                "Luxury Homes",
-                "Centennial Hills",
-                "Las Vegas Real Estate",
-                "Property Investment",
-                "Home Buying",
-                "Home Selling",
-                "Market Analysis",
-                "Master-Planned Communities",
-                "New Construction",
-                "Property Marketing",
-                "Client Relations"
-              ],
-              "hasCredential": [
-                {
-                  "@type": "EducationalOccupationalCredential",
-                  "credentialCategory": "Professional License",
-                  "name": "Nevada Real Estate License"
-                },
-                {
-                  "@type": "EducationalOccupationalCredential",
-                  "credentialCategory": "certification",
-                  "name": "Certified Luxury Home Marketing Specialist"
-                },
-                {
-                  "@type": "EducationalOccupationalCredential",
-                  "credentialCategory": "certification",
-                  "name": "Certified Residential Specialist (CRS)"
-                },
-                {
-                  "@type": "EducationalOccupationalCredential",
-                  "credentialCategory": "certification",
-                  "name": "Accredited Buyer's Representative (ABR)"
-                }
-              ],
-              "memberOf": [
-                {
-                  "@type": "Organization",
-                  "name": "Greater Las Vegas Association of REALTORS"
-                },
-                {
-                  "@type": "Organization",
-                  "name": "Nevada Association of REALTORS"
-                },
-                {
-                  "@type": "Organization",
-                  "name": "National Association of REALTORS®"
-                },
-                {
-                  "@type": "Organization",
-                  "name": "Berkshire Hathaway HomeServices Network"
-                }
-              ],
-              "sameAs": [
-                "https://www.facebook.com/centennialhillshomes",
-                "https://www.instagram.com/drjanduffy_realtor",
-                "https://www.linkedin.com/company/california-to-vegas-homes"
-              ],
-              "award": [
-                "Top 1% REALTOR® in Las Vegas Valley",
-                "Million Dollar Club Member",
-                "Excellence in Customer Service Award",
-                "Outstanding Sales Performance Recognition"
-              ],
-              "specialization": [
-                "Luxury Home Sales",
-                "New Construction Properties",
-                "Master-Planned Communities",
-                "Investment Properties",
-                "First-Time Home Buyers",
-                "Relocation Services",
-                "Property Marketing",
-                "Market Analysis"
-              ],
-              "yearsOfExperience": "20+",
-              "numberOfPropertiesSold": "500+",
-              "clientSatisfactionRate": "98%",
-              "address": {
-                "@type": "PostalAddress",
-                "streetAddress": "Centennial Hills",
-                "addressLocality": "Las Vegas",
-                "addressRegion": "NV",
-                "postalCode": "89149",
-                "addressCountry": "US"
-              },
-              "image": "https://centennialhillshomesforsale.com/images/dr-jan-duffy.jpg"
-            })
+            __html: JSON.stringify(getPageSchema('about'))
           }}
         />
       </Head>

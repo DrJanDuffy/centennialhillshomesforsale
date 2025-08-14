@@ -4,6 +4,7 @@ import Layout from '../components/Layout';
 import RealScoutListings from '../components/RealScoutListings';
 import HyperLocalHero from '../components/HyperLocalHero';
 import FeaturedInsight from '../components/rss/FeaturedInsight';
+import { getPageSchema } from '../lib/business-schema';
 
 export default function Home() {
   return (
@@ -16,152 +17,15 @@ export default function Home() {
         <meta name="description" content="Discover luxury homes for sale in Centennial Hills, Las Vegas. Dr. Jan Duffy, Top 1% REALTOR®, specializes in luxury properties and master-planned communities." />
         <meta name="keywords" content="Centennial Hills homes for sale, luxury real estate Las Vegas, Dr. Jan Duffy, Providence neighborhood, Skye Canyon, northwest Las Vegas" />
         
-        {/* Schema.org markup for better SEO */}
+        {/* Enhanced Business Schema for SEO */}
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
-            __html: JSON.stringify({
-              "@context": "https://schema.org",
-              "@type": "WebSite",
-              "name": "Centennial Hills Homes for Sale",
-              "description": "Luxury homes for sale in Centennial Hills, Las Vegas featuring master-planned communities with stunning mountain views and exceptional quality.",
-              "url": "https://centennialhillshomesforsale.com",
-              "potentialAction": {
-                "@type": "SearchAction",
-                "target": "https://centennialhillshomesforsale.com/properties?search={search_term_string}",
-                "query-input": "required name=search_term_string"
-              },
-              "publisher": {
-                "@type": "RealEstateAgent",
-                "@id": "https://centennialhillshomesforsale.com/#realestateagent",
-                "name": "Dr. Jan Duffy",
-                "description": "Top 1% REALTOR® specializing in luxury homes and master-planned communities in Centennial Hills, Las Vegas",
-                "url": "https://centennialhillshomesforsale.com",
-                "telephone": "(702) 903-1952",
-                "email": "jan@centennialhillshomes.com",
-                "address": {
-                  "@type": "PostalAddress",
-                  "streetAddress": "Centennial Hills",
-                  "addressLocality": "Las Vegas",
-                  "addressRegion": "NV",
-                  "postalCode": "89149",
-                  "addressCountry": "US"
-                },
-                "knowsAbout": [
-                  "Luxury Homes",
-                  "Investment Properties", 
-                  "First-Time Buyers",
-                  "Master-Planned Communities",
-                  "Centennial Hills Real Estate",
-                  "Providence Neighborhood",
-                  "Skye Canyon Development",
-                  "Northwest Las Vegas Properties",
-                  "New Construction Homes",
-                  "Property Valuation",
-                  "Market Analysis",
-                  "Real Estate Investment"
-                ],
-                "hasCredential": [
-                  {
-                    "@type": "EducationalOccupationalCredential",
-                    "credentialCategory": "Professional License",
-                    "name": "Nevada Real Estate License"
-                  },
-                  {
-                    "@type": "EducationalOccupationalCredential",
-                    "credentialCategory": "certification",
-                    "name": "Certified Luxury Home Marketing Specialist"
-                  },
-                  {
-                    "@type": "EducationalOccupationalCredential",
-                    "credentialCategory": "certification",
-                    "name": "Certified Residential Specialist (CRS)"
-                  },
-                  {
-                    "@type": "EducationalOccupationalCredential",
-                    "credentialCategory": "certification",
-                    "name": "Accredited Buyer's Representative (ABR)"
-                  }
-                ],
-                "memberOf": [
-                  {
-                    "@type": "Organization",
-                    "name": "Greater Las Vegas Association of REALTORS"
-                  },
-                  {
-                    "@type": "Organization",
-                    "name": "Nevada Association of REALTORS"
-                  },
-                  {
-                    "@type": "Organization",
-                    "name": "National Association of REALTORS®"
-                  },
-                  {
-                    "@type": "Organization",
-                    "name": "Berkshire Hathaway HomeServices Network"
-                  }
-                ]
-              }
-            })
+            __html: JSON.stringify(getPageSchema('home'))
           }}
         />
         
-        {/* RealEstateAgent Schema */}
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify({
-              "@context": "https://schema.org",
-              "@type": "RealEstateAgent",
-              "@id": "https://centennialhillshomesforsale.com/#realestateagent",
-              "name": "Dr. Jan Duffy",
-              "description": "Top 1% REALTOR® specializing in luxury homes and master-planned communities in Centennial Hills, Las Vegas",
-              "url": "https://centennialhillshomesforsale.com",
-              "telephone": "(702) 903-1952",
-              "email": "jan@centennialhillshomes.com",
-              "address": {
-                "@type": "PostalAddress",
-                "streetAddress": "Centennial Hills",
-                "addressLocality": "Las Vegas",
-                "addressRegion": "NV",
-                "postalCode": "89149",
-                "addressCountry": "US"
-              },
-              "areaServed": [
-                {
-                  "@type": "Place",
-                  "name": "Centennial Hills",
-                  "address": {
-                    "@type": "PostalAddress",
-                    "addressLocality": "Las Vegas",
-                    "addressRegion": "NV",
-                    "postalCode": "89149"
-                  }
-                },
-                {
-                  "@type": "Place",
-                  "name": "Providence",
-                  "address": {
-                    "@type": "PostalAddress",
-                    "addressLocality": "Las Vegas",
-                    "addressRegion": "NV",
-                    "postalCode": "89149"
-                  }
-                },
-                {
-                  "@type": "Place",
-                  "name": "Skye Canyon",
-                  "address": {
-                    "@type": "PostalAddress",
-                    "addressLocality": "Las Vegas",
-                    "addressRegion": "NV",
-                    "postalCode": "89166"
-                  }
-                }
-              ]
-            })
-          }}
-        />
+
       </Head>
 
       {/* Hero Section */}
