@@ -1,6 +1,7 @@
 import Head from 'next/head';
 import Layout from '../components/Layout';
 import RealScoutListings from '../components/RealScoutListings';
+import { getPageSchema } from '../lib/business-schema';
 
 export default function Contact() {
   return (
@@ -10,141 +11,11 @@ export default function Contact() {
         <meta name="description" content="Contact Dr. Jan Duffy, Top 1% REALTOR® for Centennial Hills real estate. Call (702) 903-1952 or fill out our contact form for luxury homes and master-planned communities." />
         <meta name="keywords" content="contact Dr. Jan Duffy, Centennial Hills realtor, luxury real estate Las Vegas, Providence neighborhood, Skye Canyon, northwest Las Vegas" />
         
-        {/* Schema.org markup for better SEO */}
+        {/* Enhanced Business Schema for SEO */}
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
-            __html: JSON.stringify({
-              "@context": "https://schema.org",
-              "@type": "ContactPage",
-              "name": "Contact Dr. Jan Duffy",
-              "description": "Contact information and form for Dr. Jan Duffy, Top 1% REALTOR® specializing in luxury homes and master-planned communities in Centennial Hills, Las Vegas.",
-              "url": "https://centennialhillshomesforsale.com/contact",
-              "mainEntity": {
-                "@type": "RealEstateAgent",
-                "@id": "https://centennialhillshomesforsale.com/#realestateagent",
-                "name": "Dr. Jan Duffy",
-                "description": "Top 1% REALTOR® specializing in luxury homes and master-planned communities in Centennial Hills, Las Vegas",
-                "url": "https://centennialhillshomesforsale.com",
-                "telephone": "(702) 903-1952",
-                "email": "jan@centennialhillshomes.com",
-                "address": {
-                  "@type": "PostalAddress",
-                  "streetAddress": "Centennial Hills",
-                  "addressLocality": "Las Vegas",
-                  "addressRegion": "NV",
-                  "postalCode": "89149",
-                  "addressCountry": "US"
-                },
-                "knowsAbout": [
-                  "Luxury Homes",
-                  "Investment Properties",
-                  "First-Time Buyers",
-                  "Master-Planned Communities",
-                  "Centennial Hills Real Estate",
-                  "Providence Neighborhood",
-                  "Skye Canyon Development",
-                  "Northwest Las Vegas Properties",
-                  "New Construction Homes",
-                  "Property Valuation",
-                  "Market Analysis",
-                  "Real Estate Investment"
-                ],
-                "hasCredential": [
-                  {
-                    "@type": "EducationalOccupationalCredential",
-                    "credentialCategory": "Professional License",
-                    "name": "Nevada Real Estate License"
-                  },
-                  {
-                    "@type": "EducationalOccupationalCredential",
-                    "credentialCategory": "certification",
-                    "name": "Certified Luxury Home Marketing Specialist"
-                  },
-                  {
-                    "@type": "EducationalOccupationalCredential",
-                    "credentialCategory": "certification",
-                    "name": "Certified Residential Specialist (CRS)"
-                  },
-                  {
-                    "@type": "EducationalOccupationalCredential",
-                    "credentialCategory": "certification",
-                    "name": "Accredited Buyer's Representative (ABR)"
-                  }
-                ],
-                "memberOf": [
-                  {
-                    "@type": "Organization",
-                    "name": "Greater Las Vegas Association of REALTORS"
-                  },
-                  {
-                    "@type": "Organization",
-                    "name": "Nevada Association of REALTORS"
-                  },
-                  {
-                    "@type": "Organization",
-                    "name": "National Association of REALTORS®"
-                  },
-                  {
-                    "@type": "Organization",
-                    "name": "Berkshire Hathaway HomeServices Network"
-                  }
-                ],
-                "aggregateRating": {
-                  "@type": "AggregateRating",
-                  "ratingValue": "4.9",
-                  "reviewCount": "127",
-                  "bestRating": "5"
-                },
-                "award": [
-                  "Top 1% REALTOR® in Las Vegas Valley",
-                  "Million Dollar Club Member",
-                  "Excellence in Customer Service Award",
-                  "Outstanding Sales Performance Recognition"
-                ],
-                "specialization": [
-                  "Luxury Home Sales",
-                  "New Construction Properties",
-                  "Master-Planned Communities",
-                  "Investment Properties",
-                  "First-Time Home Buyers",
-                  "Relocation Services",
-                  "Property Marketing",
-                  "Market Analysis"
-                ],
-                "yearsOfExperience": "20+",
-                "numberOfPropertiesSold": "500+",
-                "clientSatisfactionRate": "98%"
-              },
-              "contactPoint": [
-                {
-                  "@type": "ContactPoint",
-                  "telephone": "(702) 903-1952",
-                  "contactType": "customer service",
-                  "availableLanguage": "English",
-                  "hoursAvailable": {
-                    "@type": "OpeningHoursSpecification",
-                    "dayOfWeek": [
-                      "Monday",
-                      "Tuesday", 
-                      "Wednesday",
-                      "Thursday",
-                      "Friday",
-                      "Saturday",
-                      "Sunday"
-                    ],
-                    "opens": "08:00",
-                    "closes": "20:00"
-                  }
-                },
-                {
-                  "@type": "ContactPoint",
-                  "email": "jan@centennialhillshomes.com",
-                  "contactType": "customer service",
-                  "availableLanguage": "English"
-                }
-              ]
-            })
+            __html: JSON.stringify(getPageSchema('contact'))
           }}
         />
       </Head>
