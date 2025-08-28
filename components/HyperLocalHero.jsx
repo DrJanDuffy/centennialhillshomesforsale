@@ -282,11 +282,11 @@ export default function HyperLocalHero() {
               <div className="market-stats-grid">
                 <motion.div 
                   className="stat-card"
-                  animate={{ scale: [1, 1.02, 1] }}
+                  animate={{ scale: [1, 1.01, 1] }}
                   transition={{ duration: 2, repeat: Infinity }}
                 >
-                  <div className="w-6 h-6 bg-blue-100 rounded-md flex items-center justify-center mx-auto mb-2">
-                    <svg className="w-4 h-4 text-blue-600" fill="currentColor" viewBox="0 0 24 24">
+                  <div className="w-5 h-5 bg-blue-100 rounded-md flex items-center justify-center mx-auto mb-2">
+                    <svg className="w-3 h-3 text-blue-600" fill="currentColor" viewBox="0 0 24 24">
                       <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
                     </svg>
                   </div>
@@ -297,11 +297,11 @@ export default function HyperLocalHero() {
 
                 <motion.div 
                   className="stat-card"
-                  animate={{ scale: [1, 1.02, 1] }}
+                  animate={{ scale: [1, 1.01, 1] }}
                   transition={{ duration: 2, delay: 0.5, repeat: Infinity }}
                 >
-                  <div className="w-6 h-6 bg-green-100 rounded-md flex items-center justify-center mx-auto mb-2">
-                    <svg className="w-4 h-4 text-green-600" fill="currentColor" viewBox="0 0 24 24">
+                  <div className="w-5 h-5 bg-green-100 rounded-md flex items-center justify-center mx-auto mb-2">
+                    <svg className="w-3 h-3 text-green-600" fill="currentColor" viewBox="0 0 24 24">
                       <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"/>
                     </svg>
                   </div>
@@ -312,11 +312,11 @@ export default function HyperLocalHero() {
 
                 <motion.div 
                   className="stat-card"
-                  animate={{ scale: [1, 1.02, 1] }}
+                  animate={{ scale: [1, 1.01, 1] }}
                   transition={{ duration: 2, delay: 1, repeat: Infinity }}
                 >
-                  <div className="w-6 h-6 bg-purple-100 rounded-md flex items-center justify-center mx-auto mb-2">
-                    <svg className="w-4 h-4 text-purple-600" fill="currentColor" viewBox="0 0 24 24">
+                  <div className="w-5 h-5 bg-purple-100 rounded-md flex items-center justify-center mx-auto mb-2">
+                    <svg className="w-3 h-3 text-purple-600" fill="currentColor" viewBox="0 0 24 24">
                       <path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8z"/>
                       <path d="M12.5 7H11v6l5.25 3.15.75-1.23-4.5-2.67z"/>
                     </svg>
@@ -328,11 +328,11 @@ export default function HyperLocalHero() {
 
                 <motion.div 
                   className="stat-card"
-                  animate={{ scale: [1, 1.02, 1] }}
+                  animate={{ scale: [1, 1.01, 1] }}
                   transition={{ duration: 2, delay: 1.5, repeat: Infinity }}
                 >
-                  <div className="w-6 h-6 bg-orange-100 rounded-md flex items-center justify-center mx-auto mb-2">
-                    <svg className="w-4 h-4 text-orange-600" fill="currentColor" viewBox="0 0 24 24">
+                  <div className="w-5 h-5 bg-orange-100 rounded-md flex items-center justify-center mx-auto mb-2">
+                    <svg className="w-3 h-3 text-orange-600" fill="currentColor" viewBox="0 0 24 24">
                       <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
                     </svg>
                   </div>
