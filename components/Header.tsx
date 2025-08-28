@@ -31,9 +31,11 @@ export default function Header() {
           {/* Logo and Brand */}
           <div className="flex-shrink-0">
             <Link href="/" className="flex items-center space-x-3">
-              {/* Logo Placeholder - Text-based */}
-              <div className="w-10 h-10 sm:w-12 sm:h-12 md:w-16 md:h-16 bg-blue-600 rounded-lg flex items-center justify-center flex-shrink-0 shadow-md">
-                <span className="text-white font-bold text-sm sm:text-base md:text-lg">JD</span>
+              {/* Logo Placeholder - Icon-based */}
+              <div className="w-10 h-10 sm:w-12 sm:h-12 md:w-16 md:h-16 bg-gradient-to-br from-blue-600 to-blue-700 rounded-xl flex items-center justify-center flex-shrink-0 shadow-lg">
+                <svg className="w-6 h-6 sm:w-7 sm:h-7 md:w-8 md:h-8 text-white" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M19 7c0-1.103-.897-2-2-2h-3v2h3v2.765l-3.447 4.018c-.34.39-.553.895-.553 1.47V19h4v2h-6v-4.765c0-.575-.213-1.08-.553-1.47L7 9.765V7h3V5H7c-1.103 0-2 .897-2 2v2.765l3.447 4.018c.34.39.553.895.553 1.47V19H5v2h4v-4.765c0-.575.213-1.08.553-1.47L13 9.765V7z"/>
+                </svg>
               </div>
               
               {/* Brand Text */}
