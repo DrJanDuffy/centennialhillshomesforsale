@@ -28,7 +28,7 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
-  opacity: 0.3;
+  opacity: 0.5;
 }
 
 /* Ensure Next.js Image component works properly */
@@ -39,7 +39,7 @@
 
 .hero-bg-image > div > img {
   object-fit: cover !important;
-  opacity: 0.3;
+  opacity: 0.5;
 }
 
 /* Responsive image sizing */
