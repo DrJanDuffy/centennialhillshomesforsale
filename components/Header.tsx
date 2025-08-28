@@ -31,6 +31,12 @@ export default function Header() {
           {/* Logo and Brand */}
           <div className="flex-shrink-0">
             <Link href="/" className="flex items-center space-x-3">
+              {/* Logo Placeholder - Text-based */}
+              <div className="w-10 h-10 sm:w-12 sm:h-12 md:w-16 md:h-16 bg-blue-600 rounded-lg flex items-center justify-center flex-shrink-0 shadow-md">
+                <span className="text-white font-bold text-sm sm:text-base md:text-lg">JD</span>
+              </div>
+              
+              {/* Brand Text */}
               <div className="text-center">
                 <h1 className="text-xl sm:text-2xl font-bold text-gray-900">
                   Dr. Jan Duffy

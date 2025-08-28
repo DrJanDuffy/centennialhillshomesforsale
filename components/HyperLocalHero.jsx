@@ -1,6 +1,7 @@
 // components/HyperLocalHero.jsx
-import { useState, useEffect, useCallback } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { AnimatePresence, motion } from 'framer-motion';
+import Image from 'next/image';
+import { useCallback, useEffect, useState } from 'react';
 
 export default function HyperLocalHero() {
   const [currentHeadline, setCurrentHeadline] = useState(0);
@@ -164,24 +165,18 @@ export default function HyperLocalHero() {
     <section className="hyperlocal-hero">
       {/* Dynamic Background with Ken Burns Effect */}
       <div className="hero-backgrounds">
-        <motion.div 
-          className="hero-bg-image"
-          animate={{ 
-            scale: [1, 1.1, 1],
-            x: [0, -20, 0],
-          }}
-          transition={{ 
-            duration: 20,
-            repeat: Infinity,
-            ease: "linear"
-          }}
-        >
-          <img 
-            src="/images/centennial-hills-aerial.jpg" 
-            alt="Centennial Hills"
+        <div className="hero-bg-image">
+          <Image
+            src="/apple-touch-icon.png"
+            alt="Centennial Hills Real Estate"
+            fill
+            sizes="100vw"
+            className="object-cover opacity-30"
+            priority
+            quality={85}
           />
-        </motion.div>
-        <div className="hero-gradient-overlay" />
+        </div>
+        <div className="hero-gradient-overlay"></div>
       </div>
 
       <div className="hero-content">
