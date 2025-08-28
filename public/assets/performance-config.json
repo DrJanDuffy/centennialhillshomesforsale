@@ -1,0 +1,39 @@
+{
+  "imageOptimization": {
+    "hero": {
+      "maxWidth": 1200,
+      "maxSizeKB": 200,
+      "formats": ["webp", "jpg"],
+      "quality": 85
+    },
+    "properties": {
+      "maxWidth": 800,
+      "maxSizeKB": 150,
+      "formats": ["webp", "jpg"],
+      "quality": 80
+    },
+    "thumbnails": {
+      "maxWidth": 400,
+      "maxSizeKB": 50,
+      "formats": ["webp", "jpg"],
+      "quality": 75
+    }
+  },
+  "caching": {
+    "static": "1 year",
+    "images": "1 month",
+    "icons": "6 months",
+    "logos": "1 year"
+  },
+  "compression": {
+    "enabled": true,
+    "gzip": true,
+    "brotli": true,
+    "minify": true
+  },
+  "cdn": {
+    "enabled": true,
+    "domains": ["cdn.centennialhillshomesforsale.com"],
+    "fallback": true
+  }
+}

@@ -1,0 +1,44 @@
+# Asset Optimization - Exclude unnecessary files
+
+# Temporary files
+*.tmp
+*.temp
+*.cache
+
+# Original high-resolution images (keep optimized versions only)
+*-original.*
+*-fullsize.*
+*-raw.*
+
+# Backup files
+*.bak
+*.backup
+
+# Thumbnail caches
+thumbnails/
+.cache/
+
+# Image processing logs
+*.log
+
+# Development files
+*.psd
+*.ai
+*.sketch
+
+# Large video files (keep in separate repo)
+*.mp4
+*.mov
+*.avi
+
+# Audio files
+*.mp3
+*.wav
+
+# Keep optimized assets
+!*.webp
+!*.jpg
+!*.jpeg
+!*.png
+!*.svg
+!*.gif
