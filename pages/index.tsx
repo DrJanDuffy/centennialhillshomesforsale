@@ -1,8 +1,8 @@
 import Head from 'next/head';
 import Link from 'next/link';
+import HyperLocalHero from '../components/HyperLocalHero';
 import Layout from '../components/Layout';
 import RealScoutListings from '../components/RealScoutListings';
-import HyperLocalHero from '../components/HyperLocalHero';
 import FeaturedInsight from '../components/rss/FeaturedInsight';
 import { getPageSchema } from '../lib/business-schema';
 
@@ -28,30 +28,7 @@ export default function Home() {
 
       </Head>
 
-      {/* Hero Section */}
-      <section className="relative py-20 lg:py-32 bg-gradient-to-br from-blue-900 via-blue-800 to-blue-700 overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-r from-blue-900/80 via-blue-800/60 to-blue-700/40"></div>
-        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-white">
-          <h1 className="text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold mb-8 leading-tight">
-            Discover Your Dream Home in
-            <span className="block text-blue-200 mt-2">Centennial Hills</span>
-          </h1>
-          
-          <p className="text-lg md:text-xl lg:text-2xl text-blue-100 mb-12 max-w-3xl mx-auto leading-relaxed">
-            Luxury homes in Las Vegas&apos; most prestigious master-planned community. 
-            Expert guidance from Dr. Jan Duffy, Top 1% REALTOR®.
-          </p>
 
-          <div className="flex flex-col sm:flex-row gap-4 lg:gap-6 justify-center">
-            <Link href="/properties" className="bg-white text-blue-600 hover:bg-gray-100 px-8 lg:px-10 py-3 lg:py-4 rounded-lg font-semibold transition-all duration-300 transform hover:scale-105 text-base lg:text-lg">
-              Browse Properties
-            </Link>
-            <Link href="/contact" className="border-2 border-white text-white hover:bg-white hover:text-blue-600 px-8 lg:px-10 py-3 lg:py-4 rounded-lg font-semibold transition-all duration-300 transform hover:scale-105 text-base lg:text-lg">
-              Schedule a Consultation
-            </Link>
-          </div>
-        </div>
-      </section>
 
       {/* Quick Navigation Cards */}
       <section className="py-16 bg-gray-50">
@@ -69,8 +46,8 @@ export default function Home() {
             {/* Properties Card */}
             <Link href="/properties" className="group">
               <div className="bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 p-6 lg:p-8 text-center">
-                <div className="w-16 h-16 lg:w-20 lg:h-20 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-6 group-hover:bg-blue-200 transition-colors">
-                  <svg className="w-8 h-8 lg:w-10 lg:h-10 text-blue-600" fill="currentColor" viewBox="0 0 24 24">
+                <div className="w-12 h-12 lg:w-14 lg:h-14 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-6 group-hover:bg-blue-200 transition-colors">
+                  <svg className="w-6 h-6 lg:w-7 lg:h-7 text-blue-600" fill="currentColor" viewBox="0 0 24 24">
                     <path d="M19 7c0-1.103-.897-2-2-2h-3v2h3v2.765l-3.447 4.018c-.34.39-.553.895-.553 1.47V19h4v2h-6v-4.765c0-.575-.213-1.08-.553-1.47L7 9.765V7h3V5H7c-1.103 0-2 .897-2 2v2.765l3.447 4.018c.34.39.553.895.553 1.47V19H5v2h4v-4.765c0-.575.213-1.08.553-1.47L13 9.765V7z"/>
                   </svg>
                 </div>
@@ -87,8 +64,8 @@ export default function Home() {
             {/* Neighborhoods Card */}
             <Link href="/neighborhoods" className="group">
               <div className="bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 p-6 lg:p-8 text-center">
-                <div className="w-16 h-16 lg:w-20 lg:h-20 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-6 group-hover:bg-green-200 transition-colors">
-                  <svg className="w-8 h-8 lg:w-10 lg:h-10 text-green-600" fill="currentColor" viewBox="0 0 24 24">
+                <div className="w-12 h-12 lg:w-14 lg:h-14 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-6 group-hover:bg-green-200 transition-colors">
+                  <svg className="w-6 h-6 lg:w-7 lg:h-7 text-green-600" fill="currentColor" viewBox="0 0 24 24">
                     <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
                   </svg>
                 </div>
@@ -105,8 +82,8 @@ export default function Home() {
             {/* Market Data Card */}
             <Link href="/market-data" className="group">
               <div className="bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 p-6 lg:p-8 text-center">
-                <div className="w-16 h-16 lg:w-20 lg:h-20 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-6 group-hover:bg-purple-200 transition-colors">
-                  <svg className="w-8 h-8 lg:w-10 lg:h-10 text-purple-600" fill="currentColor" viewBox="0 0 24 24">
+                <div className="w-12 h-12 lg:w-14 lg:h-14 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-6 group-hover:bg-purple-200 transition-colors">
+                  <svg className="w-6 h-6 lg:w-7 lg:h-7 text-purple-600" fill="currentColor" viewBox="0 0 24 24">
                     <path d="M3 13h2v-2H3v2zm0 4h2v-2H3v2zm0-8h2V7H3v2zm4 4h14v-2H7v2zm0 4h14v-2H7v2zM7 7v2h14V7H7z"/>
                   </svg>
                 </div>
@@ -123,8 +100,8 @@ export default function Home() {
             {/* Area Explorer Card */}
             <Link href="/area-explorer" className="group">
               <div className="bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 p-6 lg:p-8 text-center">
-                <div className="w-16 h-16 lg:w-20 lg:h-20 bg-orange-100 rounded-full flex items-center justify-center mx-auto mb-6 group-hover:bg-orange-200 transition-colors">
-                  <svg className="w-8 h-8 lg:w-10 lg:h-10 text-orange-600" fill="currentColor" viewBox="0 0 24 24">
+                <div className="w-12 h-12 lg:w-14 lg:h-14 bg-orange-100 rounded-full flex items-center justify-center mx-auto mb-6 group-hover:bg-orange-200 transition-colors">
+                  <svg className="w-6 h-6 lg:w-7 lg:h-7 text-orange-600" fill="currentColor" viewBox="0 0 24 24">
                     <path d="M20.5 3l-.16.03L15 5.1 9 3 3.36 4.9c-.21.07-.36.25-.36.48V20.5c0 .28.22.5.5.5l.16-.03L9 18.9l6 2.1 5.64-1.9c.21-.07.36-.25.36-.48V3.5c0-.28-.22-.5-.5-.5zM15 19l-6-2.11V5l6 2.11V19z"/>
                   </svg>
                 </div>
@@ -186,8 +163,8 @@ export default function Home() {
               </div>
             </div>
             <div className="text-center">
-              <div className="w-64 h-64 mx-auto bg-gradient-to-br from-blue-100 to-blue-200 rounded-full flex items-center justify-center">
-                <svg className="w-32 h-32 text-blue-600" fill="currentColor" viewBox="0 0 24 24">
+              <div className="w-48 h-48 mx-auto bg-gradient-to-br from-blue-100 to-blue-200 rounded-full flex items-center justify-center">
+                <svg className="w-24 h-24 text-blue-600" fill="currentColor" viewBox="0 0 24 24">
                   <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
                 </svg>
               </div>
