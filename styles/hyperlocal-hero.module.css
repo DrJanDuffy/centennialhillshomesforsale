@@ -150,25 +150,23 @@
   color: white;
 }
 
+/* Hero Title */
 .hero-title {
-  font-size: 3.5rem;
+  font-size: 2.5rem;
   font-weight: 800;
+  color: white;
+  margin-bottom: 1.5rem;
   line-height: 1.1;
-  margin-bottom: 2rem;
-  display: flex;
-  flex-direction: column;
 }
 
 .title-static {
-  color: #e5e7eb;
+  display: block;
+  margin-bottom: 0.5rem;
 }
 
 .title-dynamic {
-  color: #3b82f6;
-  background: linear-gradient(135deg, #3b82f6, #60a5fa);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  display: block;
+  color: #60a5fa;
 }
 
 /* Insights Carousel */
