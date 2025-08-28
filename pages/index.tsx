@@ -70,7 +70,9 @@ export default function Home() {
             <Link href="/properties" className="group">
               <div className="bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 p-6 lg:p-8 text-center">
                 <div className="w-16 h-16 lg:w-20 lg:h-20 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-6 group-hover:bg-blue-200 transition-colors">
-                  <span className="text-2xl lg:text-3xl">🏠</span>
+                  <svg className="w-8 h-8 lg:w-10 lg:h-10 text-blue-600" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M19 7c0-1.103-.897-2-2-2h-3v2h3v2.765l-3.447 4.018c-.34.39-.553.895-.553 1.47V19h4v2h-6v-4.765c0-.575-.213-1.08-.553-1.47L7 9.765V7h3V5H7c-1.103 0-2 .897-2 2v2.765l3.447 4.018c.34.39.553.895.553 1.47V19H5v2h4v-4.765c0-.575.213-1.08.553-1.47L13 9.765V7z"/>
+                  </svg>
                 </div>
                 <h3 className="text-xl lg:text-2xl font-bold text-gray-900 mb-4">Available Properties</h3>
                 <p className="text-gray-600 mb-6">
@@ -86,7 +88,9 @@ export default function Home() {
             <Link href="/neighborhoods" className="group">
               <div className="bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 p-6 lg:p-8 text-center">
                 <div className="w-16 h-16 lg:w-20 lg:h-20 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-6 group-hover:bg-green-200 transition-colors">
-                  <span className="text-2xl lg:text-3xl">🌄</span>
+                  <svg className="w-8 h-8 lg:w-10 lg:h-10 text-green-600" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                  </svg>
                 </div>
                 <h3 className="text-xl lg:text-2xl font-bold text-gray-900 mb-4">Neighborhoods</h3>
                 <p className="text-gray-600 mb-6">
@@ -102,7 +106,9 @@ export default function Home() {
             <Link href="/market-data" className="group">
               <div className="bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 p-6 lg:p-8 text-center">
                 <div className="w-16 h-16 lg:w-20 lg:h-20 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-6 group-hover:bg-purple-200 transition-colors">
-                  <span className="text-2xl lg:text-3xl">📊</span>
+                  <svg className="w-8 h-8 lg:w-10 lg:h-10 text-purple-600" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M3 13h2v-2H3v2zm0 4h2v-2H3v2zm0-8h2V7H3v2zm4 4h14v-2H7v2zm0 4h14v-2H7v2zM7 7v2h14V7H7z"/>
+                  </svg>
                 </div>
                 <h3 className="text-xl lg:text-2xl font-bold text-gray-900 mb-4">Market Trends</h3>
                 <p className="text-gray-600 mb-6">
@@ -118,7 +124,9 @@ export default function Home() {
             <Link href="/area-explorer" className="group">
               <div className="bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 p-6 lg:p-8 text-center">
                 <div className="w-16 h-16 lg:w-20 lg:h-20 bg-orange-100 rounded-full flex items-center justify-center mx-auto mb-6 group-hover:bg-orange-200 transition-colors">
-                  <span className="text-2xl lg:text-3xl">🗺️</span>
+                  <svg className="w-8 h-8 lg:w-10 lg:h-10 text-orange-600" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M20.5 3l-.16.03L15 5.1 9 3 3.36 4.9c-.21.07-.36.25-.36.48V20.5c0 .28.22.5.5.5l.16-.03L9 18.9l6 2.1 5.64-1.9c.21-.07.36-.25.36-.48V3.5c0-.28-.22-.5-.5-.5zM15 19l-6-2.11V5l6 2.11V19z"/>
+                  </svg>
                 </div>
                 <h3 className="text-xl lg:text-2xl font-bold text-gray-900 mb-4">Area Explorer</h3>
                 <p className="text-gray-600 mb-6">
@@ -179,19 +187,27 @@ export default function Home() {
             </div>
             <div className="text-center">
               <div className="w-64 h-64 mx-auto bg-gradient-to-br from-blue-100 to-blue-200 rounded-full flex items-center justify-center">
-                <span className="text-6xl">👩‍💼</span>
+                <svg className="w-32 h-32 text-blue-600" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
+                </svg>
               </div>
               <div className="mt-6 space-y-2">
                 <div className="flex items-center justify-center gap-2">
-                  <span className="text-yellow-500">⭐</span>
+                  <svg className="w-5 h-5 text-yellow-500" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                  </svg>
                   <span className="text-gray-700">Top 1% REALTOR®</span>
                 </div>
                 <div className="flex items-center justify-center gap-2">
-                  <span className="text-green-500">✅</span>
+                  <svg className="w-5 h-5 text-green-500" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/>
+                  </svg>
                   <span className="text-gray-700">500+ Homes Sold</span>
                 </div>
                 <div className="flex items-center justify-center gap-2">
-                  <span className="text-blue-500">🏆</span>
+                  <svg className="w-5 h-5 text-blue-500" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                  </svg>
                   <span className="text-gray-700">15+ Years Experience</span>
                 </div>
               </div>
