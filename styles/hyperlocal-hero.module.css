@@ -31,6 +31,30 @@
   opacity: 0.3;
 }
 
+/* Ensure Next.js Image component works properly */
+.hero-bg-image > div {
+  width: 100% !important;
+  height: 100% !important;
+}
+
+.hero-bg-image > div > img {
+  object-fit: cover !important;
+  opacity: 0.3;
+}
+
+/* Responsive image sizing */
+@media (max-width: 768px) {
+  .hero-bg-image > div > img {
+    object-position: center center;
+  }
+}
+
+@media (min-width: 769px) {
+  .hero-bg-image > div > img {
+    object-position: center 20%;
+  }
+}
+
 .hero-gradient-overlay {
   position: absolute;
   top: 0;
@@ -70,6 +94,7 @@
   padding: 0.75rem 1.5rem;
   border-radius: 8px;
   margin-bottom: 3rem;
+  -webkit-backdrop-filter: blur(10px);
   backdrop-filter: blur(10px);
   border: 1px solid rgba(220, 38, 38, 0.3);
 }
@@ -155,6 +180,7 @@
   background: rgba(255, 255, 255, 0.1);
   padding: 2rem;
   border-radius: 16px;
+  -webkit-backdrop-filter: blur(20px);
   backdrop-filter: blur(20px);
   border: 1px solid rgba(255, 255, 255, 0.2);
 }
@@ -252,6 +278,7 @@
   background: rgba(255, 255, 255, 0.95);
   border-radius: 20px;
   padding: 2rem;
+  -webkit-backdrop-filter: blur(20px);
   backdrop-filter: blur(20px);
   border: 1px solid rgba(255, 255, 255, 0.3);
   box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
@@ -370,6 +397,7 @@
   background: rgba(255, 255, 255, 0.1);
   border-radius: 8px;
   padding: 1rem;
+  -webkit-backdrop-filter: blur(20px);
   backdrop-filter: blur(20px);
   border: 1px solid rgba(255, 255, 255, 0.2);
   overflow: hidden;
