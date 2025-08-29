@@ -238,16 +238,16 @@ export default function EnhancedFooter() {
               {/* Social Media Links */}
               <div className="flex items-center space-x-4">
                 <span className="text-sm text-gray-600 dark:text-gray-400 mr-2">Follow us:</span>
-                                 {socialLinks.map((social) => (
-                   <Link
-                     key={social.name}
-                     href={social.href}
-                     className={`p-2 rounded-lg bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-400 transition-all duration-200 hover:bg-blue-100 dark:hover:bg-blue-900/20 ${social.color}`}
-                     aria-label={social.name}
-                   >
-                     <span className="text-xl">{social.icon}</span>
-                   </Link>
-                 ))}
+                {socialLinks.map((social) => (
+                  <Link
+                    key={social.name}
+                    href={social.href}
+                    className={`p-2 rounded-lg bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-400 transition-all duration-200 hover:bg-blue-100 dark:hover:bg-blue-900/20 ${social.color}`}
+                    aria-label={social.name}
+                  >
+                    <span className="text-xl">{social.icon}</span>
+                  </Link>
+                ))}
               </div>
 
               {/* Copyright */}

@@ -6,7 +6,6 @@ import Layout from '../components/Layout';
 import RealScoutListings from '../components/RealScoutListings';
 import FeaturedInsight from '../components/rss/FeaturedInsight';
 
-
 export default function Home() {
   return (
     <Layout>

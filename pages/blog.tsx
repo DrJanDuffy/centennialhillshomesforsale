@@ -92,11 +92,7 @@ const BlogPage: React.FC = () => {
   ];
 
   return (
-    <Layout
-      title="Real Estate Blog | Centennial Hills Market Insights | Dr. Jan Duffy"
-      description="Stay informed with the latest real estate insights, market updates, and neighborhood guides for Centennial Hills, Providence, and Skye Canyon."
-      canonical="https://centennialhillshomesforsale.com/blog/"
-    >
+    <Layout>
       <div className="min-h-screen bg-gray-50">
         {/* Hero Section */}
         <section className="bg-gradient-to-r from-blue-600 to-blue-800 text-white">
@@ -183,7 +179,7 @@ const BlogPage: React.FC = () => {
 
                 {/* Load More Button */}
                 <div className="text-center mt-12">
-                  <button className="px-8 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors font-semibold">
+                  <button type="button" className="px-8 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors font-semibold">
                     Load More Articles
                   </button>
                 </div>

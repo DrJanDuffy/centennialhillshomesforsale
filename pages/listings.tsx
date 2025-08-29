@@ -4,11 +4,7 @@ import Layout from '../components/Layout';
 
 export default function Listings() {
   return (
-    <Layout
-      title="Centennial Hills Homes For Sale | Current Listings | Dr. Jan Duffy REALTOR®"
-      description="Browse current homes for sale in Centennial Hills, Providence, and Skye Canyon. Expert real estate listings with Dr. Jan Duffy, top 1% Las Vegas REALTOR®. Call (702) 903-1952."
-      canonical="https://centennialhillshomesforsale.com/listings/"
-    >
+    <Layout>
       <main className="container">
         <motion.section
           className="hero-section"

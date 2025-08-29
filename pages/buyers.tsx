@@ -77,11 +77,7 @@ const BuyersPage: React.FC = () => {
   ];
 
   return (
-    <Layout
-      title="Home Buyers Guide | Centennial Hills Real Estate | Dr. Jan Duffy"
-      description="Expert guidance for homebuyers in Centennial Hills, Providence, and Skye Canyon. Get professional support from Dr. Jan Duffy, Top 1% REALTOR®."
-      canonical="https://centennialhillshomesforsale.com/buyers/"
-    >
+    <Layout>
       <div className="min-h-screen bg-gray-50">
         {/* Hero Section */}
         <section className="bg-gradient-to-r from-blue-600 to-blue-800 text-white">
