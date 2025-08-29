@@ -212,10 +212,7 @@ export default function Properties() {
         />
       </Head>
 
-      <Layout
-        title="Centennial Hills Luxury Properties | Dr. Jan Duffy"
-        description="Discover luxury homes for sale in Centennial Hills, Las Vegas. Browse our featured properties with stunning mountain views, modern amenities, and exceptional quality."
-      >
+      <Layout>
         {/* Hero Section */}
         <section className="relative py-20 lg:py-32 bg-gradient-to-br from-primary-color via-primary-dark to-primary-light overflow-hidden">
           <div className="absolute inset-0 bg-gradient-to-r from-primary-color/80 via-primary-dark/60 to-primary-light/40"></div>

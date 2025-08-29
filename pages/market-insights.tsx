@@ -5,11 +5,7 @@ import Layout from '../components/Layout';
 
 export default function MarketInsights() {
   return (
-    <Layout
-      title="Market Insights & Real Estate News | Centennial Hills | Dr. Jan Duffy"
-      description="Stay informed with the latest real estate market insights, trends, and analysis for Centennial Hills, Las Vegas. Expert market commentary from Dr. Jan Duffy."
-      canonical="https://centennialhillshomesforsale.com/market-insights/"
-    >
+    <Layout>
       <Head>
         <meta
           name="keywords"

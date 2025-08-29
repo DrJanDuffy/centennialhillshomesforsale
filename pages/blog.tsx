@@ -179,7 +179,10 @@ const BlogPage: React.FC = () => {
 
                 {/* Load More Button */}
                 <div className="text-center mt-12">
-                  <button type="button" className="px-8 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors font-semibold">
+                  <button
+                    type="button"
+                    className="px-8 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors font-semibold"
+                  >
                     Load More Articles
                   </button>
                 </div>
