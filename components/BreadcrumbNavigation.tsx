@@ -1,7 +1,6 @@
 import { ChevronRight, Home } from 'lucide-react';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import type React from 'react';
 import { useEffect, useMemo, useRef } from 'react';
 
 interface BreadcrumbItem {

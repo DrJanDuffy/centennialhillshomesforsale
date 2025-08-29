@@ -56,7 +56,6 @@ export interface FUBProperty {
 class FollowUpBossAPI {
   private apiKey: string;
   private baseUrl: string;
-  private accountId: string;
 
   constructor() {
     this.apiKey = process.env.NEXT_PUBLIC_FUB_API_KEY || 'fka_0N4mnN0gI0wiplmBLtC4TTO93R9CDV83W7';

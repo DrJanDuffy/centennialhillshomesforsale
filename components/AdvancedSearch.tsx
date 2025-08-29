@@ -1,5 +1,4 @@
 import { motion } from 'framer-motion';
-import type React from 'react';
 import { useId, useState } from 'react';
 
 interface SearchFilters {
@@ -44,7 +43,7 @@ export default function AdvancedSearch() {
     console.log('Searching with filters:', filters);
   };
 
-  const featuresId = 'features-select';
+  const _featuresId = 'features-select';
 
   return (
     <motion.div

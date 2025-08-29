@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import React, { useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { trackRSSAnalytics, trackRSSPerformance } from '../../lib/rss-utils';
 import KCMFeed from './KCMFeed';
 

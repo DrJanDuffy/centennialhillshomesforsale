@@ -5,9 +5,9 @@
  * Analyzes Next.js bundle size and provides optimization recommendations
  */
 
-const fs = require('fs');
-const path = require('path');
-const { execSync } = require('child_process');
+const fs = require('node:fs');
+const path = require('node:path');
+const { execSync } = require('node:child_process');
 
 console.log('🔍 Analyzing bundle size...\n');
 

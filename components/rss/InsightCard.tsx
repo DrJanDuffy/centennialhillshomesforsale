@@ -85,8 +85,6 @@ export default function InsightCard({
       className={`${cardVariants[variant]} ${className} cursor-pointer`}
       onClick={handleCardClick}
       onKeyPress={handleKeyPress}
-      tabIndex={0}
-      role="button"
       aria-label={`Read article: ${article.title}`}
     >
       <div className={contentVariants[variant]}>

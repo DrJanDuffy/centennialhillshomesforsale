@@ -1,7 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { Filter, Heart, Home, MapPin, Search, Star } from 'lucide-react';
+import { Filter, Heart, Home, MapPin, Search } from 'lucide-react';
 import Image from 'next/image';
 import type React from 'react';
 import { useEffect, useState } from 'react';
@@ -222,7 +222,7 @@ export const EnhancedPropertySearch: React.FC<PropertySearchProps> = ({
       }
 
       if (searchFilters.bedrooms && searchFilters.bedrooms !== 'any') {
-        const minBedrooms = parseInt(searchFilters.bedrooms);
+        const minBedrooms = parseInt(searchFilters.bedrooms, 10);
         if (property.bedrooms < minBedrooms) {
           return false;
         }

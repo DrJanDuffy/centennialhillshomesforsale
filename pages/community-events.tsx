@@ -162,8 +162,7 @@ export default function CommunityEvents() {
                   '@type': 'Event',
                   name: event.title,
                   description: event.description,
-                  startDate:
-                    event.date + 'T' + event.time.split(' - ')[0].replace(' ', '').toLowerCase(),
+                  startDate: `${event.date}T${event.time.split(' - ')[0].replace(' ', '').toLowerCase()}`,
                   location: {
                     '@type': 'Place',
                     name: event.location,

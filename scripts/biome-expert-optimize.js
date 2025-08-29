@@ -5,9 +5,9 @@
  * Advanced code quality, performance, and security optimization
  */
 
-const { execSync } = require('child_process');
-const fs = require('fs');
-const path = require('path');
+const { execSync } = require('node:child_process');
+const fs = require('node:fs');
+const path = require('node:path');
 
 console.log('🏠 Expert Biome Optimization for Centennial Hills Homes\n');
 
@@ -64,7 +64,7 @@ class BiomeExpertOptimizer {
       // Run comprehensive Biome check
       execSync('npx @biomejs/biome check . --verbose', { stdio: 'inherit' });
       console.log('  ✅ Biome check completed');
-    } catch (error) {
+    } catch (_error) {
       console.log('  ⚠️  Biome found issues that need attention');
     }
 
@@ -72,7 +72,7 @@ class BiomeExpertOptimizer {
     try {
       execSync('npx @biomejs/biome format --write .', { stdio: 'inherit' });
       console.log('  ✅ Code formatting completed');
-    } catch (error) {
+    } catch (_error) {
       console.log('  ⚠️  Formatting issues detected');
     }
 
@@ -80,7 +80,7 @@ class BiomeExpertOptimizer {
     try {
       execSync('npx @biomejs/biome check --write .', { stdio: 'inherit' });
       console.log('  ✅ Auto-fix completed');
-    } catch (error) {
+    } catch (_error) {
       console.log('  ⚠️  Some issues require manual attention');
     }
   }

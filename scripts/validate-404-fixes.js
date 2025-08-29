@@ -97,7 +97,7 @@ async function testRedirect(from, to) {
 
     if (response.status >= 300 && response.status < 400) {
       const location = response.headers.location;
-      if (location && location.includes(to)) {
+      if (location?.includes(to)) {
         console.log(`✅ Redirect ${from} → ${to}: ${response.status}`);
         return { status: 'success', code: response.status };
       } else {
@@ -111,7 +111,7 @@ async function testRedirect(from, to) {
   } catch (error) {
     if (error.response && error.response.status >= 300 && error.response.status < 400) {
       const location = error.response.headers.location;
-      if (location && location.includes(to)) {
+      if (location?.includes(to)) {
         console.log(`✅ Redirect ${from} → ${to}: ${error.response.status}`);
         return { status: 'success', code: error.response.status };
       } else {

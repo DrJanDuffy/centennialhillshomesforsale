@@ -79,7 +79,7 @@ class RSSParser {
     }
 
     return items
-      .filter((item) => item && item.title)
+      .filter((item) => item?.title)
       .map((item, index) => {
         const content = this.cleanContent(item.content || item.description || '');
         const imageUrl = this.extractImageUrl(content);
@@ -148,7 +148,7 @@ class RSSParser {
   private formatDate(dateString: string): string {
     try {
       const date = new Date(dateString);
-      if (isNaN(date.getTime())) {
+      if (Number.isNaN(date.getTime())) {
         return new Date().toISOString();
       }
       return date.toISOString();

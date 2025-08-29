@@ -5,7 +5,7 @@
 export const formatDate = (dateString: string): string => {
   try {
     const date = new Date(dateString);
-    if (isNaN(date.getTime())) {
+    if (Number.isNaN(date.getTime())) {
       return new Date().toLocaleDateString('en-US', {
         year: 'numeric',
         month: 'short',

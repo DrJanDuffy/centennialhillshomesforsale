@@ -5,9 +5,9 @@
  * Provides comprehensive insights into bundle sizes and optimization opportunities
  */
 
-const fs = require('fs');
-const path = require('path');
-const { execSync } = require('child_process');
+const fs = require('node:fs');
+const path = require('node:path');
+const { execSync } = require('node:child_process');
 
 console.log('🚀 Centennial Hills Homes - Bundle Analysis');
 console.log('============================================\n');
@@ -73,9 +73,7 @@ try {
   });
 
   // Analyze vendor modules
-  const vendorModules = modules.filter(
-    (module) => module.name && module.name.includes('node_modules')
-  );
+  const vendorModules = modules.filter((module) => module.name?.includes('node_modules'));
   const vendorSize = vendorModules.reduce((sum, module) => sum + (module.size || 0), 0);
 
   console.log(`\n📦 Vendor Modules: ${vendorModules.length}`);
