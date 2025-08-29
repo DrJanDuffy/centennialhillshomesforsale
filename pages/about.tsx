@@ -2,6 +2,8 @@ import Head from 'next/head';
 import Layout from '../components/Layout';
 import RealScoutListings from '../components/RealScoutListings';
 import { getPageSchema } from '../lib/business-schema';
+import SimpleInteriorGallery from '../components/SimpleInteriorGallery';
+import { getPhotosForPage } from '../utils/interiorPhotos';
 
 export default function About() {
   return (
@@ -249,6 +251,18 @@ export default function About() {
                 </ul>
               </div>
             </div>
+          </div>
+        </section>
+
+        {/* Interior Design Showcase */}
+        <section className="py-16 bg-white">
+          <div className="container mx-auto px-4">
+            <SimpleInteriorGallery
+              photos={getPhotosForPage('homepage')}
+              title="Interior Design Excellence"
+              subtitle="See the quality and craftsmanship that defines luxury living in Centennial Hills homes"
+              maxPhotos={6}
+            />
           </div>
         </section>
 
