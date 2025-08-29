@@ -338,19 +338,19 @@ export const EnhancedContactForm: React.FC<ContactFormProps> = ({
 
           {/* Preferred Contact Method */}
           <div className="form-field">
-            <label className="block text-sm font-medium text-gray-700 mb-2">
+            <label htmlFor="contact-method" className="block text-sm font-medium text-gray-700 mb-2">
               Preferred Contact Method
             </label>
             <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
               {contactOptions.map((option) => (
-                <label key={option.value} className="flex items-center">
+                <label key={option.value} className="flex items-center space-x-2 cursor-pointer">
                   <input
                     type="radio"
-                    name="preferredContact"
+                    name="contactMethod"
                     value={option.value}
-                    checked={formData.preferredContact === option.value}
-                    onChange={(e) => handleInputChange('preferredContact', e.target.value)}
-                    className="mr-2"
+                    checked={formData.contactMethod === option.value}
+                    onChange={handleInputChange}
+                    className="text-blue-600 focus:ring-blue-500"
                   />
                   <span className="text-sm text-gray-700">{option.label}</span>
                 </label>
