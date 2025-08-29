@@ -1,13 +1,8 @@
 'use client';
 
-import {
-  ChevronLeftIcon,
-  ChevronRightIcon,
-  StarIcon,
-} from '@heroicons/react/24/outline';
+import { ChevronLeftIcon, ChevronRightIcon, StarIcon } from '@heroicons/react/24/outline';
 import { AnimatePresence, motion } from 'framer-motion';
 import { useEffect, useState } from 'react';
-
 
 const testimonials = [
   {
@@ -76,7 +71,6 @@ export default function InteractiveTestimonials() {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isAutoPlaying, setIsAutoPlaying] = useState(true);
 
-
   useEffect(() => {
     if (!isAutoPlaying) return;
 
@@ -134,10 +128,10 @@ export default function InteractiveTestimonials() {
             className="relative"
           >
             <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-2xl p-8 md:p-12 relative overflow-hidden">
-                             {/* Background Quote Icon */}
-               <div className="absolute top-4 right-4 text-blue-100 dark:text-blue-900/20">
-                 <span className="text-6xl font-serif">"</span>
-               </div>
+              {/* Background Quote Icon */}
+              <div className="absolute top-4 right-4 text-blue-100 dark:text-blue-900/20">
+                <span className="text-6xl font-serif">"</span>
+              </div>
 
               {/* Rating */}
               <div className="flex items-center mb-6">

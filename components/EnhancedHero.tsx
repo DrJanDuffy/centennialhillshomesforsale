@@ -169,7 +169,7 @@ export default function EnhancedHero() {
             variants={itemVariants}
             className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16"
           >
-                         {features.map((feature) => {
+            {features.map((feature) => {
               const Icon = feature.icon;
               return (
                 <motion.div
@@ -211,7 +211,7 @@ export default function EnhancedHero() {
               { number: '$2.5B+', label: 'Total Value' },
               { number: '98%', label: 'Client Satisfaction' },
               { number: '15+', label: 'Years Experience' },
-                         ].map((stat) => (
+            ].map((stat) => (
               <motion.div
                 key={stat.label}
                 variants={itemVariants}
