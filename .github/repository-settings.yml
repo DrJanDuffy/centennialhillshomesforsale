@@ -1,0 +1,114 @@
+# Repository Settings for Auto-Merge
+# This file defines repository-wide settings that support auto-merge functionality
+
+# Repository features
+features:
+  # Enable auto-merge for the repository
+  auto_merge: true
+  
+  # Enable squash merging as default
+  squash_merge: true
+  
+  # Enable rebase merging
+  rebase_merge: true
+  
+  # Enable merge commits
+  merge_commit: false
+  
+  # Enable deletion of head branches after merge
+  delete_branch_on_merge: true
+  
+  # Enable auto-delete head branches
+  auto_delete_head_branches: true
+
+# Branch protection defaults
+branch_protection:
+  # Require pull request reviews before merging
+  require_pull_request_reviews: true
+  
+  # Required approving review count
+  required_approving_review_count: 1
+  
+  # Dismiss stale reviews when new commits are pushed
+  dismiss_stale_reviews: true
+  
+  # Require review from code owners
+  require_code_owner_reviews: false
+  
+  # Require last push approval
+  require_last_push_approval: true
+  
+  # Require conversation resolution before merging
+  required_conversation_resolution: true
+  
+  # Require status checks to pass before merging
+  require_status_checks: true
+  
+  # Require branches to be up to date before merging
+  require_branches_to_be_up_to_date: true
+  
+  # Require linear history
+  require_linear_history: false
+  
+  # Allow force pushes
+  allow_force_pushes: false
+  
+  # Allow deletions
+  allow_deletions: false
+  
+  # Block creations
+  block_creations: false
+  
+  # Lock branch
+  lock_branch: false
+
+# Auto-merge preferences
+auto_merge_preferences:
+  # Default merge method (squash, merge, rebase)
+  default_merge_method: "squash"
+  
+  # Auto-merge delay (in minutes) to allow for last-minute changes
+  auto_merge_delay: 0
+  
+  # Enable auto-merge for specific branch patterns
+  enabled_branches:
+    - "main"
+    - "develop"
+    - "feature/*"
+    - "hotfix/*"
+    - "release/*"
+  
+  # Disable auto-merge for specific branch patterns
+  disabled_branches:
+    - "dependabot/*"
+    - "renovate/*"
+  
+  # Required status checks for auto-merge
+  required_status_checks:
+    - "Code Quality & Performance"
+    - "Vercel Deployment Pipeline"
+  
+  # Required review count for auto-merge
+  required_review_count: 1
+  
+  # Auto-merge conditions
+  conditions:
+    - "All required status checks must pass"
+    - "At least one approving review required"
+    - "No merge conflicts"
+    - "Branch must be up to date with base"
+    - "Conversation must be resolved"
+
+# Notification settings
+notifications:
+  # Notify on auto-merge success
+  auto_merge_success: true
+  
+  # Notify on auto-merge failure
+  auto_merge_failure: true
+  
+  # Notify on auto-merge disabled
+  auto_merge_disabled: true
+  
+  # Notify on branch protection rule changes
+  branch_protection_changes: true
