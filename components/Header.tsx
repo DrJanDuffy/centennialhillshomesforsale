@@ -61,6 +61,15 @@ export default function Header() {
             <Link href="/neighborhoods" className={`text-gray-700 hover:text-blue-600 transition-colors ${router.pathname === '/neighborhoods' ? 'text-blue-600 font-semibold' : ''}`}>
               Neighborhoods
             </Link>
+            <Link href="/local-business-directory" className={`text-gray-700 hover:text-blue-600 transition-colors ${router.pathname === '/local-business-directory' ? 'text-blue-600 font-semibold' : ''}`}>
+              Local Businesses
+            </Link>
+            <Link href="/community-events" className={`text-gray-700 hover:text-blue-600 transition-colors ${router.pathname === '/community-events' ? 'text-blue-600 font-semibold' : ''}`}>
+              Community Events
+            </Link>
+            <Link href="/neighborhood-comparison" className={`text-gray-700 hover:text-blue-600 transition-colors ${router.pathname === '/neighborhood-comparison' ? 'text-blue-600 font-semibold' : ''}`}>
+              Compare Areas
+            </Link>
             <Link href="/market-data" className={`text-gray-700 hover:text-blue-600 transition-colors ${router.pathname === '/market-data' ? 'text-blue-600 font-semibold' : ''}`}>
               Market Data
             </Link>
@@ -115,6 +124,15 @@ export default function Header() {
               </Link>
               <Link href="/neighborhoods" onClick={closeMenu} className={`text-gray-700 hover:text-blue-600 transition-colors ${router.pathname === '/neighborhoods' ? 'text-blue-600 font-semibold' : ''}`}>
                 Neighborhoods
+              </Link>
+              <Link href="/local-business-directory" onClick={closeMenu} className={`text-gray-700 hover:text-blue-600 transition-colors ${router.pathname === '/local-business-directory' ? 'text-blue-600 font-semibold' : ''}`}>
+                Local Businesses
+              </Link>
+              <Link href="/community-events" onClick={closeMenu} className={`text-gray-700 hover:text-blue-600 transition-colors ${router.pathname === '/community-events' ? 'text-blue-600 font-semibold' : ''}`}>
+                Community Events
+              </Link>
+              <Link href="/neighborhood-comparison" onClick={closeMenu} className={`text-gray-700 hover:text-blue-600 transition-colors ${router.pathname === '/neighborhood-comparison' ? 'text-blue-600 font-semibold' : ''}`}>
+                Compare Areas
               </Link>
               <Link href="/market-data" onClick={closeMenu} className={`text-gray-700 hover:text-blue-600 transition-colors ${router.pathname === '/market-data' ? 'text-blue-600 font-semibold' : ''}`}>
                 Market Data
