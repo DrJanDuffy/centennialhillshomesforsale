@@ -462,14 +462,31 @@ export const EnhancedPropertySearch: React.FC<PropertySearchProps> = ({
         >
           <div className="text-center mb-8">
             <h3 className="text-2xl font-bold text-gray-800 mb-2">Search Results</h3>
-            <p className="text-gray-600">
+            <p className="text-gray-600 mb-4">
               Found {searchResults.length} properties matching your criteria
             </p>
+
+            {/* Favorites Toggle */}
+            <div className="flex justify-center items-center gap-4 mb-4">
+              <button
+                onClick={() => setShowFavoritesOnly(!showFavoritesOnly)}
+                className={`inline-flex items-center px-4 py-2 rounded-lg font-medium transition-colors ${
+                  showFavoritesOnly
+                    ? 'bg-red-100 text-red-700 border-2 border-red-300'
+                    : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                }`}
+              >
+                <Heart
+                  className={`w-4 h-4 mr-2 ${showFavoritesOnly ? 'fill-current' : ''}`}
+                />
+                {showFavoritesOnly ? 'Show All' : 'Show Favorites'} ({favorites.size})
+              </button>
+            </div>
           </div>
 
-          {searchResults.length > 0 ? (
+          {getFilteredResults().length > 0 ? (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {searchResults.map((property, index) => (
+              {getFilteredResults().map((property, index) => (
                 <motion.div
                   key={property.id}
                   initial={{ opacity: 0, y: 20 }}
@@ -517,8 +534,26 @@ export const EnhancedPropertySearch: React.FC<PropertySearchProps> = ({
                       <EnhancedButton variant="primary" size="sm" className="flex-1">
                         View Details
                       </EnhancedButton>
+                      <button
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          toggleFavorite(property.id);
+                        }}
+                        className={`p-2 rounded-lg border transition-colors ${
+                          favorites.has(property.id)
+                            ? 'bg-red-50 border-red-200 text-red-600'
+                            : 'bg-gray-50 border-gray-200 text-gray-600 hover:bg-gray-100'
+                        }`}
+                        aria-label={
+                          favorites.has(property.id) ? 'Remove from favorites' : 'Add to favorites'
+                        }
+                      >
+                        <Heart
+                          className={`w-4 h-4 ${favorites.has(property.id) ? 'fill-current' : ''}`}
+                        />
+                      </button>
                       <EnhancedButton variant="outline" size="sm">
-                        Save
+                        Compare
                       </EnhancedButton>
                     </div>
                   </div>

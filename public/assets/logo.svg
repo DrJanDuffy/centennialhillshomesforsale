@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 60" fill="currentColor">
+  <!-- House icon -->
+  <path d="M15 25 L35 15 L35 35 L45 35 L45 10 L40 10 L30 5 L20 10 L15 10 Z" fill="#2563eb"/>
+  <rect x="20" y="35" width="20" height="15" fill="#1e40af"/>
+
+  <!-- Text -->
+  <text x="60" y="25" font-family="Arial, sans-serif" font-size="18" font-weight="bold" fill="#1f2937">
+    Centennial Hills
+  </text>
+  <text x="60" y="42" font-family="Arial, sans-serif" font-size="12" fill="#6b7280">
+    Homes For Sale
+  </text>
+
+  <!-- Star accent -->
+  <polygon points="50,15 52,20 57,20 53,23 55,28 50,25 45,28 47,23 43,20 48,20" fill="#fbbf24"/>
+</svg>
