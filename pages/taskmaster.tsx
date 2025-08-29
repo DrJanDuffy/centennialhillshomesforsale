@@ -28,10 +28,7 @@ const TaskMasterPage: React.FC = () => {
   };
 
   return (
-    <Layout
-      title="TaskMaster AI Dashboard - Centennial Hills Homes"
-      description="Real-time AI optimization dashboard for Centennial Hills real estate website"
-    >
+    <Layout>
       <div className="taskmaster-page">
         <div className="max-w-7xl mx-auto px-6 py-8">
           <div className={`taskmaster-header ${isVisible ? 'animate-slide-in-up' : ''}`}>
