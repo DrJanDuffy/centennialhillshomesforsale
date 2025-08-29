@@ -1,20 +1,26 @@
-import Image from 'next/image';
-import { useEffect, useRef, useState } from 'react';
+'use client';
+
+import { useState, useEffect, useRef } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { useTheme } from '../contexts/ThemeContext';
 
 interface OptimizedImageProps {
   src: string;
   alt: string;
-  width?: number;
-  height?: number;
-  priority?: boolean;
+  width: number;
+  height: number;
   className?: string;
-  placeholder?: 'blur' | 'empty';
-  quality?: number;
+  priority?: boolean;
+  placeholder?: 'blur' | 'empty' | 'shimmer';
   sizes?: string;
-  fill?: boolean;
-  lazy?: boolean;
+  quality?: number;
   onLoad?: () => void;
   onError?: () => void;
+}
+
+interface ImageDimensions {
+  width: number;
+  height: number;
 }
 
 export default function OptimizedImage({
@@ -22,136 +28,221 @@ export default function OptimizedImage({
   alt,
   width,
   height,
-  priority = false,
   className = '',
-  placeholder = 'empty',
+  priority = false,
+  placeholder = 'shimmer',
+  sizes = '(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw',
   quality = 85,
-  sizes = '100vw',
-  fill = false,
-  lazy = true,
   onLoad,
-  onError,
+  onError
 }: OptimizedImageProps) {
+  const { isDark } = useTheme();
   const [isLoaded, setIsLoaded] = useState(false);
   const [hasError, setHasError] = useState(false);
-  const [isInView, setIsInView] = useState(priority);
-  const imageRef = useRef<HTMLDivElement>(null);
+  const [imageSrc, setImageSrc] = useState<string>('');
+  const [placeholderSrc, setPlaceholderSrc] = useState<string>('');
+  const imgRef = useRef<HTMLImageElement>(null);
+  const observerRef = useRef<IntersectionObserver | null>(null);
 
-  // Intersection Observer for lazy loading
-  useEffect(() => {
-    if (priority || !lazy) return;
-
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setIsInView(true);
-          observer.disconnect();
-        }
-      },
-      {
-        rootMargin: '50px', // Start loading 50px before image comes into view
-        threshold: 0.1,
-      }
-    );
-
-    if (imageRef.current) {
-      observer.observe(imageRef.current);
+  // Generate optimized image URLs
+  const generateOptimizedSrc = (originalSrc: string, targetWidth: number, targetHeight: number, format: 'webp' | 'avif' | 'jpeg' = 'webp') => {
+    // If it's already an external URL (like Unsplash), optimize it
+    if (originalSrc.includes('unsplash.com')) {
+      const baseUrl = originalSrc.split('?')[0];
+      return `${baseUrl}?w=${targetWidth}&h=${targetHeight}&fit=crop&fm=${format}&q=${quality}`;
     }
+    
+    // For local images, we'd use a CDN or image optimization service
+    // For now, return the original src
+    return originalSrc;
+  };
 
-    return () => observer.disconnect();
-  }, [priority, lazy]);
+  // Generate placeholder
+  const generatePlaceholder = (w: number, h: number) => {
+    if (placeholder === 'empty') {
+      return `data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 ${w} ${h}'%3E%3Crect width='${w}' height='${h}' fill='${isDark ? '%23374151' : '%23f3f4f6'}'/%3E%3C/svg%3E`;
+    }
+    
+    if (placeholder === 'shimmer') {
+      return `data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 ${w} ${h}'%3E%3Cdefs%3E%3ClinearGradient id='shimmer' x1='0%25' y1='0%25' x2='100%25' y2='0%25'%3E%3Cstop offset='0%25' style='stop-color:${isDark ? '%23374151' : '%23f3f4f6'};stop-opacity:1' /%3E%3Cstop offset='50%25' style='stop-color:${isDark ? '%234b5563' : '%23e5e7eb'};stop-opacity:1' /%3E%3Cstop offset='100%25' style='stop-color:${isDark ? '%23374151' : '%23f3f4f6'};stop-opacity:1' /%3E%3C/stop%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='${w}' height='${h}' fill='url(%23shimmer)'/%3E%3CanimateTransform attributeName='transform' type='translate' values='-${w} 0;${w} 0' dur='1.5s' repeatCount='indefinite'/%3E%3C/svg%3E`;
+    }
+    
+    return `data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 ${w} ${h}'%3E%3Crect width='${w}' height='${h}' fill='${isDark ? '%23374151' : '%23f3f4f6'}'/%3E%3C/svg%3E`;
+  };
 
-  // Handle image load
+  // Generate srcset for responsive images
+  const generateSrcSet = (originalSrc: string, baseWidth: number, baseHeight: number) => {
+    const breakpoints = [320, 640, 768, 1024, 1280, 1536];
+    const formats = ['webp', 'avif'];
+    
+    let srcSet = '';
+    
+    formats.forEach((format, formatIndex) => {
+      if (formatIndex > 0) srcSet += ', ';
+      
+      breakpoints.forEach((breakpoint, index) => {
+        if (index > 0) srcSet += ', ';
+        const optimizedSrc = generateOptimizedSrc(originalSrc, breakpoint, Math.round((breakpoint / baseWidth) * baseHeight), format as 'webp' | 'avif' | 'jpeg');
+        srcSet += `${optimizedSrc} ${breakpoint}w`;
+      });
+    });
+    
+    return srcSet;
+  };
+
+  useEffect(() => {
+    // Set initial placeholder
+    setPlaceholderSrc(generatePlaceholder(width, height));
+    
+    // Generate optimized image sources
+    const webpSrc = generateOptimizedSrc(src, width, height, 'webp');
+    const avifSrc = generateOptimizedSrc(src, width, height, 'avif');
+    const jpegSrc = generateOptimizedSrc(src, width, height, 'jpeg');
+    
+    // Set the primary source (WebP for modern browsers)
+    setImageSrc(webpSrc);
+    
+    // Set up intersection observer for lazy loading
+    if (!priority && imgRef.current) {
+      observerRef.current = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              // Load the image when it comes into view
+              const img = entry.target as HTMLImageElement;
+              img.src = webpSrc;
+              observerRef.current?.unobserve(img);
+            }
+          });
+        },
+        {
+          rootMargin: '50px 0px',
+          threshold: 0.1
+        }
+      );
+      
+      observerRef.current.observe(imgRef.current);
+    } else if (priority) {
+      // Load immediately for priority images
+      setImageSrc(webpSrc);
+    }
+    
+    return () => {
+      if (observerRef.current) {
+        observerRef.current.disconnect();
+      }
+    };
+  }, [src, width, height, priority, isDark]);
+
   const handleLoad = () => {
     setIsLoaded(true);
     onLoad?.();
   };
 
-  // Handle image error
   const handleError = () => {
     setHasError(true);
     onError?.();
   };
 
-  // Generate optimized srcSet for different formats
-  const _generateSrcSet = (baseSrc: string) => {
-    if (!baseSrc.includes('unsplash.com') && !baseSrc.includes('pixabay.com')) {
-      return baseSrc;
+  const handleImageClick = () => {
+    // Open image in lightbox or full view
+    if (isLoaded && !hasError) {
+      window.open(src, '_blank');
     }
-
-    const widths = [640, 750, 828, 1080, 1200, 1920, 2048];
-    return widths.map((w) => `${baseSrc}?w=${w}&q=${quality}&format=webp ${w}w`).join(', ');
   };
 
-  // Fallback image for errors
-  if (hasError) {
-    return (
-      <div
-        className={`bg-gray-200 flex items-center justify-center ${className}`}
-        style={{ width: fill ? '100%' : width, height: fill ? '100%' : height }}
-      >
-        <div className="text-gray-500 text-center p-4">
-          <svg className="w-12 h-12 mx-auto mb-2" fill="currentColor" viewBox="0 0 24 24">
-            <path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z" />
-          </svg>
-          <p className="text-sm">Image failed to load</p>
-        </div>
-      </div>
-    );
-  }
-
-  // Loading placeholder
-  if (!isInView) {
-    return (
-      <div
-        ref={imageRef}
-        className={`bg-gray-200 animate-pulse ${className}`}
-        style={{ width: fill ? '100%' : width, height: fill ? '100%' : height }}
-      />
-    );
-  }
-
   return (
-    <div ref={imageRef} className={`relative ${className}`}>
-      <Image
-        src={src}
+    <div className={`relative overflow-hidden ${className}`}>
+      {/* Placeholder */}
+      <AnimatePresence>
+        {!isLoaded && !hasError && (
+          <motion.div
+            initial={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.3 }}
+            className="absolute inset-0"
+          >
+            <img
+              src={placeholderSrc}
+              alt=""
+              className="w-full h-full object-cover"
+              aria-hidden="true"
+            />
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      {/* Main Image */}
+      <motion.img
+        ref={imgRef}
+        src={priority ? imageSrc : placeholderSrc}
         alt={alt}
-        width={fill ? undefined : width}
-        height={fill ? undefined : height}
-        fill={fill}
-        priority={priority}
-        quality={quality}
+        width={width}
+        height={height}
+        className={`w-full h-full object-cover transition-opacity duration-300 ${
+          isLoaded ? 'opacity-100' : 'opacity-0'
+        } ${hasError ? 'hidden' : ''}`}
         sizes={sizes}
-        placeholder={placeholder}
-        className={`transition-opacity duration-300 ${isLoaded ? 'opacity-100' : 'opacity-0'}`}
+        loading={priority ? 'eager' : 'lazy'}
         onLoad={handleLoad}
         onError={handleError}
-        // Performance optimizations
-        loading={priority ? 'eager' : 'lazy'}
-        decoding="async"
+        onClick={handleImageClick}
+        style={{ cursor: isLoaded && !hasError ? 'pointer' : 'default' }}
       />
 
-      {/* Loading skeleton */}
-      {!isLoaded && <div className="absolute inset-0 bg-gray-200 animate-pulse" />}
+      {/* Error State */}
+      <AnimatePresence>
+        {hasError && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="absolute inset-0 bg-gray-100 dark:bg-gray-800 flex items-center justify-center"
+          >
+            <div className="text-center text-gray-500 dark:text-gray-400">
+              <svg className="w-12 h-12 mx-auto mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+              </svg>
+              <p className="text-sm">Image unavailable</p>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      {/* Loading Indicator */}
+      <AnimatePresence>
+        {!isLoaded && !hasError && (
+          <motion.div
+            initial={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.3 }}
+            className="absolute inset-0 bg-gray-100 dark:bg-gray-800 flex items-center justify-center"
+          >
+            <div className="text-center text-gray-500 dark:text-gray-400">
+              <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-500 mx-auto mb-2"></div>
+              <p className="text-sm">Loading...</p>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      {/* Image Info Overlay (on hover) */}
+      <AnimatePresence>
+        {isLoaded && !hasError && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            whileHover={{ opacity: 1 }}
+            className="absolute inset-0 bg-black bg-opacity-0 hover:bg-opacity-20 transition-all duration-300 flex items-end"
+          >
+            <div className="w-full p-4 text-white opacity-0 hover:opacity-100 transition-opacity duration-300">
+              <div className="bg-black bg-opacity-50 rounded-lg p-2 text-xs">
+                <p className="font-medium">{alt}</p>
+                <p className="text-gray-300">{width} × {height}</p>
+              </div>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
-  );
-}
-
-// Specialized image components for common use cases
-export function HeroImage(props: Omit<OptimizedImageProps, 'priority' | 'lazy'>) {
-  return <OptimizedImage {...props} priority={true} lazy={false} />;
-}
-
-export function LazyImage(props: Omit<OptimizedImageProps, 'lazy'>) {
-  return <OptimizedImage {...props} lazy={true} />;
-}
-
-export function ThumbnailImage(props: Omit<OptimizedImageProps, 'quality' | 'sizes'>) {
-  return (
-    <OptimizedImage
-      {...props}
-      quality={75}
-      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-    />
   );
 }
