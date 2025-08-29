@@ -1,6 +1,6 @@
 import { ChevronDown, ChevronUp } from 'lucide-react';
 import type React from 'react';
-import { useState, useRef, useEffect, useMemo } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 
 interface FAQItem {
   question: string;
@@ -14,25 +14,41 @@ interface FAQSectionProps {
   showCategories?: boolean;
 }
 
-export default function FAQSection({ title = 'Frequently Asked Questions', items, showCategories = false }: FAQSectionProps) {
+export default function FAQSection({
+  title = 'Frequently Asked Questions',
+  items,
+  showCategories = false,
+}: FAQSectionProps) {
   const [openItems, setOpenItems] = useState<number[]>([]);
   const scriptRef = useRef<HTMLDivElement>(null);
 
-  const faqSchema = useMemo(() => ({
-    '@context': 'https://schema.org',
-    '@type': 'FAQPage',
-    mainEntity: items.map((item) => ({
-      '@type': 'Question',
-      name: item.question,
-      acceptedAnswer: {
-        '@type': 'Answer',
-        text: item.answer,
-      },
-    })),
-  }), [items]);
+  // Generate FAQ schema markup
+  const faqSchema = useMemo(
+    () => ({
+      '@context': 'https://schema.org',
+      '@type': 'FAQPage',
+      mainEntity: items.map((item) => ({
+        '@type': 'Question',
+        name: item.question,
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: item.answer,
+        },
+      })),
+    }),
+    [items]
+  );
 
+  // Inject schema markup
   useEffect(() => {
-    if (scriptRef.current) {
+    if (scriptRef.current && faqSchema) {
+      // Remove any existing script
+      const existingScript = scriptRef.current.querySelector('script');
+      if (existingScript) {
+        existingScript.remove();
+      }
+
+      // Create new script element
       const script = document.createElement('script');
       script.type = 'application/ld+json';
       script.textContent = JSON.stringify(faqSchema);
@@ -45,20 +61,6 @@ export default function FAQSection({ title = 'Frequently Asked Questions', items
       prev.includes(index) ? prev.filter((i) => i !== index) : [...prev, index]
     );
   };
-
-  // Generate FAQ schema markup
-  // const faqSchema = {
-  //   '@context': 'https://schema.org',
-  //   '@type': 'FAQPage',
-  //   mainEntity: items.map((item) => ({
-  //     '@type': 'Question',
-  //     name: item.question,
-  //     acceptedAnswer: {
-  //       '@type': 'Answer',
-  //       text: item.answer,
-  //     },
-  //   })),
-  // };
 
   // Group items by category if needed
   const groupedItems = showCategories
@@ -76,13 +78,8 @@ export default function FAQSection({ title = 'Frequently Asked Questions', items
   return (
     <section className="py-16 bg-gray-50">
       <div className="container mx-auto px-4">
-        {/* Schema Markup */}
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify(faqSchema),
-          }}
-        />
+        {/* Schema Markup Container */}
+        <div ref={scriptRef} style={{ display: 'none' }} />
 
         <div className="max-w-4xl mx-auto">
           <div className="text-center mb-12">
@@ -110,26 +107,26 @@ export default function FAQSection({ title = 'Frequently Asked Questions', items
                         type="button"
                         onClick={() => toggleItem(globalIndex)}
                         className="w-full px-6 py-4 text-left flex items-center justify-between hover:bg-gray-50 transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-inset"
-                        aria-expanded={isOpen ? 'true' : 'false'}
-                        aria-controls={`faq-answer-${globalIndex}`}
+                        aria-expanded={isOpen}
+                        aria-controls={`faq-content-${globalIndex}`}
                       >
                         <span className="text-lg font-semibold text-gray-900 pr-4">
                           {item.question}
                         </span>
                         {isOpen ? (
-                          <ChevronUp className="w-5 h-5 text-gray-500 flex-shrink-0" />
+                          <ChevronUp className="ml-2 h-4 w-4" />
                         ) : (
-                          <ChevronDown className="w-5 h-5 text-gray-500 flex-shrink-0" />
+                          <ChevronDown className="ml-2 h-4 w-4" />
                         )}
                       </button>
 
                       <div
-                        id={`faq-answer-${globalIndex}`}
-                        className={`px-6 transition-all duration-300 ease-in-out ${
-                          isOpen ? 'pb-4 opacity-100' : 'h-0 opacity-0 overflow-hidden'
+                        id={`faq-content-${globalIndex}`}
+                        className={`overflow-hidden transition-all duration-300 ${
+                          isOpen ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'
                         }`}
                       >
-                        <div className="text-gray-600 leading-relaxed">{item.answer}</div>
+                        <div className="px-6 pb-4 text-gray-600">{item.answer}</div>
                       </div>
                     </div>
                   );
@@ -141,4 +138,4 @@ export default function FAQSection({ title = 'Frequently Asked Questions', items
       </div>
     </section>
   );
-};
+}
