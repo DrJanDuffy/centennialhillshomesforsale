@@ -57,7 +57,13 @@ export function getMemoryUsage(): string {
     const memory = (performance as Performance & { memory: PerformanceMemory }).memory;
     return `Used: ${Math.round(memory.usedJSHeapSize / 1048576)}MB, Total: ${Math.round(memory.totalJSHeapSize / 1048576)}MB`;
   }
-  return 'Memory usage not available';
+  return 'Memory API not supported';
+}
+
+interface PerformanceMemory {
+  totalJSHeapSize: number;
+  usedJSHeapSize: number;
+  jsHeapSizeLimit: number;
 }
 
 // Bundle size optimization helper
