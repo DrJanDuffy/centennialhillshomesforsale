@@ -8,6 +8,19 @@ export default function HyperLocalHero() {
   const [localizedContent, setLocalizedContent] = useState([]);
   const [_localStats, setLocalStats] = useState(null);
 
+  // Generate local statistics
+  const generateLocalStat = () => {
+    const stats = [
+      'homes are selling 15% faster than last quarter',
+      'luxury properties under $1M see multiple offers',
+      'new construction comprises 30% of current inventory',
+      'average price per square foot reached $285',
+      'golf course properties command 20% premiums',
+      'mountain view homes appreciate 7% annually',
+    ];
+    return stats[Math.floor(Math.random() * stats.length)];
+  };
+
   // Localization mapping for Centennial Hills
   const localizeContent = useCallback(
     (kcmArticle) => {
@@ -61,20 +74,8 @@ export default function HyperLocalHero() {
         },
       };
     },
-    [generateLocalStat]
+    []
   );
-
-  const generateLocalStat = () => {
-    const stats = [
-      'homes are selling 15% faster than last quarter',
-      'luxury properties under $1M see multiple offers',
-      'new construction comprises 30% of current inventory',
-      'average price per square foot reached $285',
-      'golf course properties command 20% premiums',
-      'mountain view homes appreciate 7% annually',
-    ];
-    return stats[Math.floor(Math.random() * stats.length)];
-  };
 
   const getDynamicTitlePart = (headlineIndex) => {
     const dynamicParts = [
