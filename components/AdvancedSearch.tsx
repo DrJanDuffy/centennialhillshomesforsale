@@ -9,6 +9,7 @@ interface SearchFilters {
   sqft: number;
   propertyType: string;
   neighborhood: string;
+  features: string[];
 }
 
 export default function AdvancedSearch() {
@@ -20,6 +21,7 @@ export default function AdvancedSearch() {
     sqft: 0,
     propertyType: 'all',
     neighborhood: 'all',
+    features: [],
   });
 
   const [isExpanded, setIsExpanded] = useState(false);
@@ -35,6 +37,8 @@ export default function AdvancedSearch() {
     // Implement search logic here
     console.log('Searching with filters:', filters);
   };
+
+  const featuresId = 'features-select';
 
   return (
     <motion.div
@@ -180,10 +184,30 @@ export default function AdvancedSearch() {
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">Features</label>
+            <label htmlFor={featuresId} className="block text-sm font-medium text-gray-700 mb-2">
+              Features
+            </label>
             <div className="space-y-2">
               <label className="flex items-center">
-                <input type="checkbox" className="mr-2" />
+                <input
+                  type="checkbox"
+                  id={`${featuresId}-pool`}
+                  className="mr-2"
+                  checked={filters.features.includes('pool')}
+                  onChange={(e) => {
+                    if (e.target.checked) {
+                      setFilters({
+                        ...filters,
+                        features: [...filters.features, 'pool'],
+                      });
+                    } else {
+                      setFilters({
+                        ...filters,
+                        features: filters.features.filter((f) => f !== 'pool'),
+                      });
+                    }
+                  }}
+                />
                 Pool
               </label>
               <label className="flex items-center">

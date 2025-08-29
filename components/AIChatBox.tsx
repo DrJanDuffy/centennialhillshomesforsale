@@ -9,6 +9,16 @@ interface Message {
   timestamp: Date;
 }
 
+interface PropertyBehaviour {
+  add: (feature: string) => void;
+  remove: (feature: string) => void;
+  has: (feature: string) => boolean;
+}
+
+interface WindowWithPropertyBehaviour extends Window {
+  propertyBehaviour?: PropertyBehaviour;
+}
+
 const AIChatBox: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [messages, setMessages] = useState<Message[]>([
@@ -76,8 +86,8 @@ const AIChatBox: React.FC = () => {
         );
 
         // Capture interests for recommendations
-        if (typeof window !== 'undefined' && (window as any).propertyBehaviour) {
-          const propertyBehaviour = (window as any).propertyBehaviour;
+        if (typeof window !== 'undefined' && (window as WindowWithPropertyBehaviour).propertyBehaviour) {
+          const propertyBehaviour = (window as WindowWithPropertyBehaviour).propertyBehaviour;
           if (/school|college|elementary/i.test(question)) {
             propertyBehaviour.add('feature:school');
           }

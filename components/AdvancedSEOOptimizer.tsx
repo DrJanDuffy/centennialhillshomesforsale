@@ -235,38 +235,23 @@ const AdvancedSEOOptimizer: React.FC<AdvancedSEOOptimizerProps> = ({
   };
 
   useEffect(() => {
-    // Performance tracking for SEO metrics
-    if (typeof window !== 'undefined') {
-      // Track Core Web Vitals
-      const observer = new PerformanceObserver((list) => {
-        for (const entry of list.getEntries()) {
-          if ('value' in entry) {
-            console.log(
-              `SEO Metric - ${entry.name}: ${(entry as PerformanceEntry & { value: number }).value}ms`
-            );
-          } else {
-            console.log(`SEO Metric - ${entry.name}: ${entry.entryType}`);
-          }
-        }
-      });
+    if (scriptRef.current) {
+      // Safely inject structured data scripts
+      const injectScript = (schema: object, id: string) => {
+        const script = document.createElement('script');
+        script.type = 'application/ld+json';
+        script.id = id;
+        script.textContent = JSON.stringify(schema);
+        scriptRef.current?.appendChild(script);
+      };
 
-      try {
-        observer.observe({
-          entryTypes: ['largest-contentful-paint', 'first-input', 'cumulative-layout-shift'],
-        });
-      } catch {
-        console.log('Performance observer not supported');
-      }
-
-      // Schema.org structured data validation
-      const structuredDataElements = document.querySelectorAll(
-        'script[type="application/ld+json"]'
-      );
-      console.log(`SEO: ${structuredDataElements.length} structured data elements found`);
-
-      return () => observer.disconnect();
+      // Inject all schemas
+      injectScript(localBusinessSchema, 'local-business-schema');
+      injectScript(faqSchema, 'faq-schema');
+      injectScript(serviceSchema, 'service-schema');
+      injectScript(getBreadcrumbSchema(), 'breadcrumb-schema');
     }
-  }, []);
+  }, [localBusinessSchema, faqSchema, serviceSchema]);
 
   return (
     <Head>
