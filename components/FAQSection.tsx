@@ -80,13 +80,11 @@ const FAQSection: React.FC<FAQSectionProps> = ({
               )}
 
               <div className="space-y-4">
-                {categoryItems.map((item) => {
-                  const globalIndex = items.indexOf(item);
-                  const isOpen = openItems.includes(globalIndex);
-
+                {categoryItems.map((item, globalIndex) => {
+                  const isOpen = openItems.has(globalIndex);
                   return (
                     <div
-                      key={globalIndex}
+                      key={`${category}-${globalIndex}-${item.question.substring(0, 20)}`}
                       className="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden"
                     >
                       <button
@@ -125,5 +123,4 @@ const FAQSection: React.FC<FAQSectionProps> = ({
     </section>
   );
 };
-
 export default FAQSection;

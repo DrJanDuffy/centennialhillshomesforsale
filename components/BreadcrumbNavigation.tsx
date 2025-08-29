@@ -2,7 +2,7 @@ import { ChevronRight, Home } from 'lucide-react';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import type React from 'react';
-import { useEffect, useRef, useMemo } from 'react';
+import { useEffect, useMemo, useRef } from 'react';
 
 interface BreadcrumbItem {
   name: string;
@@ -14,39 +14,25 @@ interface BreadcrumbNavigationProps {
   showHome?: boolean;
 }
 
-const BreadcrumbNavigation: React.FC<BreadcrumbNavigationProps> = ({
-  items = [],
-  showHome = true,
-}) => {
+export default function BreadcrumbNavigation({ items }: BreadcrumbNavigationProps) {
   const router = useRouter();
   const scriptRef = useRef<HTMLDivElement>(null);
 
   // Generate breadcrumbs based on current path
   const generateBreadcrumbs = (): BreadcrumbItem[] => {
-    const pathSegments = router.asPath.split('/').filter((segment) => segment);
-    const breadcrumbs: BreadcrumbItem[] = [];
-
-    if (showHome) {
-      breadcrumbs.push({
-        name: 'Home',
-        href: '/',
-      });
-    }
+    const pathSegments = router.asPath.split('/').filter(Boolean);
+    const breadcrumbs: BreadcrumbItem[] = [
+      { name: 'Home', href: '/' },
+    ];
 
     let currentPath = '';
     pathSegments.forEach((segment) => {
       currentPath += `/${segment}`;
-
-      // Convert segment to readable name
       const name = segment
         .split('-')
         .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
         .join(' ');
-
-      breadcrumbs.push({
-        name,
-        href: currentPath,
-      });
+      breadcrumbs.push({ name, href: currentPath });
     });
 
     return breadcrumbs;
@@ -54,16 +40,19 @@ const BreadcrumbNavigation: React.FC<BreadcrumbNavigationProps> = ({
 
   const breadcrumbItems = items.length > 0 ? items : generateBreadcrumbs();
 
-  const breadcrumbSchema = useMemo(() => ({
-    '@context': 'https://schema.org',
-    '@type': 'BreadcrumbList',
-    itemListElement: breadcrumbItems.map((item, index) => ({
-      '@type': 'ListItem',
-      position: index + 1,
-      name: item.name,
-      item: `https://centennialhillshomesforsale.com${item.href}`,
-    })),
-  }), [breadcrumbItems]);
+  const breadcrumbSchema = useMemo(
+    () => ({
+      '@context': 'https://schema.org',
+      '@type': 'BreadcrumbList',
+      itemListElement: breadcrumbItems.map((item, index) => ({
+        '@type': 'ListItem',
+        position: index + 1,
+        name: item.name,
+        item: `https://centennialhillshomesforsale.com${item.href}`,
+      })),
+    }),
+    [breadcrumbItems]
+  );
 
   useEffect(() => {
     if (scriptRef.current) {
@@ -76,13 +65,8 @@ const BreadcrumbNavigation: React.FC<BreadcrumbNavigationProps> = ({
 
   return (
     <>
-      {/* Schema Markup */}
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify(breadcrumbSchema),
-        }}
-      />
+      {/* Structured Data Container */}
+      <div ref={scriptRef} style={{ display: 'none' }} />
 
       {/* Visual Breadcrumb Navigation */}
       <nav className="bg-gray-50 border-b border-gray-200" aria-label="Breadcrumb">
@@ -114,5 +98,3 @@ const BreadcrumbNavigation: React.FC<BreadcrumbNavigationProps> = ({
     </>
   );
 };
-
-export default BreadcrumbNavigation;

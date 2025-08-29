@@ -1,4 +1,6 @@
 import Head from 'next/head';
+import type React from 'react';
+import { useEffect, useId, useMemo, useRef } from 'react';
 import GoogleAnalytics from './GoogleAnalytics';
 import GoogleSearchConsole from './GoogleSearchConsole';
 
@@ -28,50 +30,62 @@ export default function EnhancedSEO({
   propertyData,
   structuredData = [],
 }: EnhancedSEOProps) {
+  const scriptRef = useRef<HTMLDivElement>(null);
+  const containerId = useId();
+
   const siteUrl = 'https://centennialhillshomesforsale.com';
   const fullCanonicalUrl =
     canonicalUrl || (typeof window !== 'undefined' ? window.location.href : siteUrl);
   const fullOgImage = ogImage.startsWith('http') ? ogImage : `${siteUrl}${ogImage}`;
 
-  // Enhanced structured data
-  const defaultStructuredData = {
-    '@context': 'https://schema.org',
-    '@type': pageType === 'property' ? 'Product' : 'WebPage',
-    name: title,
-    description: description,
-    url: fullCanonicalUrl,
-    image: fullOgImage,
-    publisher: {
-      '@type': 'Organization',
-      '@id': `${siteUrl}/#organization`,
-    },
-    isPartOf: {
-      '@type': 'WebSite',
-      '@id': `${siteUrl}/#website`,
-    },
-    ...(neighborhood && {
-      about: {
-        '@type': 'Place',
-        name: `${neighborhood}, Las Vegas, NV`,
-        address: {
-          '@type': 'PostalAddress',
-          addressLocality: 'Las Vegas',
-          addressRegion: 'NV',
-          addressCountry: 'US',
-        },
+  const defaultStructuredData = useMemo(
+    () => ({
+      '@context': 'https://schema.org',
+      '@type': 'RealEstateAgent',
+      name: 'Centennial Hills Homes',
+      description: 'Premium Real Estate Services in Centennial Hills, Las Vegas',
+      url: 'https://centennialhillshomesforsale.com',
+      telephone: '+1-702-555-0123',
+      address: {
+        '@type': 'PostalAddress',
+        streetAddress: '123 Centennial Hills Blvd',
+        addressLocality: 'Las Vegas',
+        addressRegion: 'NV',
+        postalCode: '89149',
+        addressCountry: 'US',
       },
-    }),
-    ...(propertyData && {
-      offers: {
-        '@type': 'Offer',
-        price: propertyData.price,
-        priceCurrency: 'USD',
-        availability: 'https://schema.org/InStock',
+      geo: {
+        '@type': 'GeoCoordinates',
+        latitude: 36.1699,
+        longitude: -115.1398,
       },
+      areaServed: 'Centennial Hills, Las Vegas, NV',
+      serviceType: 'Real Estate Services',
+      priceRange: '$$',
     }),
-  };
+    []
+  );
 
-  const allStructuredData = [defaultStructuredData, ...structuredData];
+  const allStructuredData = useMemo(
+    () => [defaultStructuredData, ...structuredData],
+    [defaultStructuredData, structuredData]
+  );
+
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      const scriptRef = document.getElementById(containerId);
+      if (scriptRef) {
+        // Safely inject structured data scripts
+        allStructuredData.forEach((data, index) => {
+          const script = document.createElement('script');
+          script.type = 'application/ld+json';
+          script.id = `structured-data-${index}`;
+          script.textContent = JSON.stringify(data);
+          scriptRef.appendChild(script);
+        });
+      }
+    }
+  }, [allStructuredData, containerId]);
 
   return (
     <>
@@ -129,15 +143,8 @@ export default function EnhancedSEO({
         <link rel="dns-prefetch" href="//www.google-analytics.com" />
 
         {/* Structured Data */}
-        {allStructuredData.map((data, index) => (
-          <script
-            key={index}
-            type="application/ld+json"
-            dangerouslySetInnerHTML={{
-              __html: JSON.stringify(data),
-            }}
-          />
-        ))}
+        {/* Structured Data Container */}
+        <div id={containerId} style={{ display: 'none' }} />
       </Head>
 
       {/* Google Services */}
