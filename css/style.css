@@ -1395,4 +1395,165 @@ iframe {
   .resources__container {
     grid-template-columns: 1fr;
   }
+/* ************HYPERLOCAL AMENITIES SECTIONS************ */
+
+.golf-amenities,
+.trails-amenities {
+  padding: 5rem 0;
+  background-color: #f8f9fa;
+}
+
+.amenities-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+  margin-top: 3rem;
+}
+
+.amenity-card {
+  background: white;
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.amenity-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+}
+
+.amenity-card h3 {
+  color: #303a4d;
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+}
+
+.amenity-card p {
+  color: #666;
+  line-height: 1.6;
+}
+
+/* ************PROPERTY IMAGES GRID************ */
+
+.property-images-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 1.5rem;
+  margin-top: 2rem;
+}
+
+.property-images-grid .loading-placeholder {
+  grid-column: 1 / -1;
+  text-align: center;
+  padding: 3rem;
+  background: #f8f9fa;
+  border-radius: 8px;
+  color: #666;
+  font-style: italic;
+}
+
+/* ************INSIGHTS GRID************ */
+
+.insights-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+  margin-top: 3rem;
+}
+
+.insight-card {
+  background: white;
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  border-left: 4px solid #303a4d;
+}
+
+.insight-card h3 {
+  color: #303a4d;
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+}
+
+.insight-card p {
+  color: #666;
+  line-height: 1.6;
+}
+
+/* ************OVERVIEW GRID************ */
+
+.overview-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 3rem;
+  margin-top: 2rem;
+}
+
+.overview-content p {
+  margin-bottom: 1.5rem;
+  line-height: 1.7;
+  color: #555;
+}
+
+.quick-stats {
+  background: #f8f9fa;
+  padding: 2rem;
+  border-radius: 8px;
+}
+
+.quick-stats h3 {
+  color: #303a4d;
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-bottom: 1.5rem;
+}
+
+.quick-stats ul {
+  list-style: none;
+  padding: 0;
+}
+
+.quick-stats li {
+  margin-bottom: 1rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid #e1e4eb;
+}
+
+.quick-stats li:last-child {
+  border-bottom: none;
+  margin-bottom: 0;
+}
+
+.quick-stats strong {
+  color: #303a4d;
+  font-weight: 600;
+}
+
+/* ************MOBILE RESPONSIVE************ */
+
+@media (max-width: 768px) {
+  .overview-grid {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  .amenities-grid,
+  .insights-grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+
+  .property-images-grid {
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 1rem;
+  }
+
+  .amenity-card,
+  .insight-card {
+    padding: 1.5rem;
+  }
+}
 }

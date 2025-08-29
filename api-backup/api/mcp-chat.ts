@@ -20,7 +20,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse<
   }
 
   try {
-    const { message, context }: ChatRequest = req.body;
+    const { message }: ChatRequest = req.body;
 
     if (!message) {
       return res.status(400).json({ success: false, error: 'Message is required' });

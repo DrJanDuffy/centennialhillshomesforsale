@@ -1,10 +1,10 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { Filter, Home, MapPin, Search } from 'lucide-react';
+import { Filter, Heart, Home, MapPin, Search, Star } from 'lucide-react';
 import Image from 'next/image';
 import type React from 'react';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { EnhancedButton, EnhancedFormField } from './EnhancedAnimations';
 
 interface Property {
@@ -53,6 +53,8 @@ export const EnhancedPropertySearch: React.FC<PropertySearchProps> = ({
   const [isSearching, setIsSearching] = useState(false);
   const [searchResults, setSearchResults] = useState<Property[]>([]);
   const [hasSearched, setHasSearched] = useState(false);
+  const [favorites, setFavorites] = useState<Set<string>>(new Set());
+  const [showFavoritesOnly, setShowFavoritesOnly] = useState(false);
 
   // Location options
   const locationOptions = [
@@ -251,6 +253,44 @@ export const EnhancedPropertySearch: React.FC<PropertySearchProps> = ({
     clearFilters();
     setShowAdvancedFilters(false);
   };
+
+  // Favorites functionality
+  const toggleFavorite = (propertyId: string) => {
+    setFavorites(prev => {
+      const newFavorites = new Set(prev);
+      if (newFavorites.has(propertyId)) {
+        newFavorites.delete(propertyId);
+      } else {
+        newFavorites.add(propertyId);
+      }
+      return newFavorites;
+    });
+  };
+
+  const getFilteredResults = () => {
+    if (showFavoritesOnly) {
+      return searchResults.filter(property => favorites.has(property.id));
+    }
+    return searchResults;
+  };
+
+  // Load favorites from localStorage on component mount
+  useEffect(() => {
+    const savedFavorites = localStorage.getItem('propertyFavorites');
+    if (savedFavorites) {
+      try {
+        const favoritesArray = JSON.parse(savedFavorites);
+        setFavorites(new Set(favoritesArray));
+      } catch (error) {
+        console.error('Error loading favorites from localStorage:', error);
+      }
+    }
+  }, []);
+
+  // Save favorites to localStorage whenever favorites change
+  useEffect(() => {
+    localStorage.setItem('propertyFavorites', JSON.stringify([...favorites]));
+  }, [favorites]);
 
   return (
     <div className={`enhanced-property-search ${className}`}>

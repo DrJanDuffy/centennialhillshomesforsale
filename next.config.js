@@ -19,6 +19,9 @@ const nextConfig = {
     minimumCacheTTL: 60,
     dangerouslyAllowSVG: true,
     contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",
+    // Performance optimizations
+    deviceSizes: [640, 750, 828, 1080, 1200, 1920, 2048, 3840],
+    imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
   },
 
   // Production optimizations
@@ -29,7 +32,12 @@ const nextConfig = {
   // Experimental features for Vercel
   experimental: {
     optimizeCss: true,
-    optimizePackageImports: ['@radix-ui/react-icons', 'lucide-react'],
+    optimizePackageImports: [
+      '@radix-ui/react-icons', 
+      'lucide-react',
+      '@heroicons/react',
+      'framer-motion'
+    ],
     turbo: {
       rules: {
         '*.svg': {
@@ -38,6 +46,9 @@ const nextConfig = {
         },
       },
     },
+    // Performance optimizations
+    optimizeServerReact: true,
+    serverComponentsExternalPackages: ['@prisma/client'],
   },
 
   webpack: (config, { isServer, dev, webpack }) => {
@@ -59,13 +70,13 @@ const nextConfig = {
       };
     }
 
-    // Optimized chunk splitting for Vercel
+    // Enhanced chunk splitting for Vercel
     config.optimization = {
       ...config.optimization,
       splitChunks: {
         chunks: 'all',
         minSize: 20000,
-        maxSize: 250000,
+        maxSize: 200000, // Reduced for better caching
         cacheGroups: {
           default: false,
           vendors: false,
@@ -83,6 +94,13 @@ const nextConfig = {
             enforce: true,
             reuseExistingChunk: true,
           },
+          ui: {
+            test: /[\\/]node_modules[\\/](@radix-ui|@headlessui)[\\/]/,
+            name: 'ui',
+            priority: 30,
+            enforce: true,
+            reuseExistingChunk: true,
+          },
           lib: {
             test(module) {
               return module.size() > 160000 && /node_modules[/\\]/.test(module.identifier());
@@ -92,7 +110,7 @@ const nextConfig = {
               hash.update(module.libIdent?.({ context: 'dir' }) || module.identifier());
               return hash.digest('hex').substring(0, 8);
             },
-            priority: 30,
+            priority: 25,
             minChunks: 1,
             reuseExistingChunk: true,
           },
@@ -113,12 +131,16 @@ const nextConfig = {
       usedExports: true,
       sideEffects: false,
       concatenateModules: true,
+      // Tree shaking improvements
+      providedExports: true,
+      innerGraph: true,
     };
 
     // Tree shaking for better bundle size
     if (!dev) {
       config.optimization.usedExports = true;
       config.optimization.sideEffects = false;
+      config.optimization.innerGraph = true;
     }
 
     // Production optimizations

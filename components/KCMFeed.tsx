@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
+import Image from 'next/image';
 import { KCMArticle, RSSFeedData } from '../lib/rss-parser';
 
 interface KCMFeedProps {
@@ -128,11 +129,14 @@ function FeaturedArticleCard({ article }: { article: KCMArticle }) {
       <div className="md:flex">
         {article.imageUrl && (
           <div className="md:w-1/3">
-            <img
+            <Image
               src={article.imageUrl}
               alt={article.title}
+              width={400}
+              height={300}
               className="w-full h-48 md:h-full object-cover"
               loading="lazy"
+              sizes="(max-width: 768px) 100vw, 33vw"
             />
           </div>
         )}
