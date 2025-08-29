@@ -52,7 +52,7 @@ const AIContentOptimizer: React.FC<AIContentOptimizerProps> = ({
       <div className="ai-parsing-data">
         <div data-ai-type="factual-statements">
           {aiOptimizedData.factualStatements.map((fact, index) => (
-            <p key={index} data-ai-fact={index}>
+            <p key={`fact-${fact.substring(0, 20)}-${index}`} data-ai-fact={index}>
               {fact}
             </p>
           ))}
@@ -68,7 +68,7 @@ const AIContentOptimizer: React.FC<AIContentOptimizerProps> = ({
 
         <div data-ai-type="citations">
           {aiOptimizedData.citations.map((citation, index) => (
-            <cite key={index} data-ai-citation={index}>
+            <cite key={`citation-${citation.substring(0, 20)}-${index}`} data-ai-citation={index}>
               {citation}
             </cite>
           ))}

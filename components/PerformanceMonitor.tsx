@@ -1,7 +1,7 @@
 'use client';
 
-import { getMemoryUsage } from '@/utils/performance';
 import { useEffect, useState } from 'react';
+import { getMemoryUsage } from '@/utils/performance';
 
 interface PerformanceMetrics {
   fcp: number;

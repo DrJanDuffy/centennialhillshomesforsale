@@ -1,7 +1,8 @@
 import { Bath, Bed, Eye, Heart, MapPin, Share2, Square } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
-import React, { useCallback, useMemo, useState } from 'react';
+import type React from 'react';
+import { useCallback, useMemo, useState } from 'react';
 
 interface Property {
   id: string;

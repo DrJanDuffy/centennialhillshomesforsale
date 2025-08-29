@@ -100,6 +100,7 @@ const AIRealEstateChat: React.FC = () => {
     return (
       <div className="fixed bottom-6 right-6 z-50">
         <button
+          type="button"
           onClick={() => setIsOpen(true)}
           className="bg-gradient-to-r from-blue-600 to-blue-700 text-white p-4 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105"
           aria-label="Open AI Chat"
@@ -122,6 +123,7 @@ const AIRealEstateChat: React.FC = () => {
           <p className="text-sm opacity-90">Real Estate Assistant</p>
         </div>
         <button
+          type="button"
           onClick={() => setIsOpen(false)}
           className="text-white hover:bg-white hover:bg-opacity-20 rounded-full p-2 transition-colors"
           aria-label="Close chat"
@@ -175,7 +177,8 @@ const AIRealEstateChat: React.FC = () => {
           <div className="flex flex-wrap gap-1">
             {quickQuestions.map((question, index) => (
               <button
-                key={index}
+                type="button"
+                key={`question-${question.substring(0, 20)}-${index}`}
                 onClick={() => handleQuickQuestion(question)}
                 className="text-xs bg-blue-50 text-blue-700 px-2 py-1 rounded-full hover:bg-blue-100 transition-colors"
               >
@@ -199,6 +202,7 @@ const AIRealEstateChat: React.FC = () => {
             disabled={isLoading}
           />
           <button
+            type="button"
             onClick={sendMessage}
             disabled={!inputValue.trim() || isLoading}
             className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"

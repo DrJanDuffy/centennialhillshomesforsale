@@ -1,5 +1,5 @@
 // Market Dashboard Charts
-document.addEventListener('DOMContentLoaded', function () {
+document.addEventListener('DOMContentLoaded', () => {
   // Sample data - replace with calls to your own analytics endpoint later
   const priceData = {
     labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
@@ -49,7 +49,7 @@ document.addEventListener('DOMContentLoaded', function () {
             mode: 'index',
             intersect: false,
             callbacks: {
-              label: function (context) {
+              label: (context) => {
                 if (title === 'Average Sale Price') {
                   return `$${(context.parsed.y / 1000).toFixed(0)}k`;
                 } else if (title === 'Active Listings') {
@@ -70,7 +70,7 @@ document.addEventListener('DOMContentLoaded', function () {
             grid: { color: '#e5e7eb' },
             ticks: {
               color: '#6b7280',
-              callback: function (value) {
+              callback: (value) => {
                 if (title === 'Average Sale Price') {
                   return `$${(value / 1000).toFixed(0)}k`;
                 } else if (title === 'Active Listings') {

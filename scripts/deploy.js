@@ -1,5 +1,6 @@
-
-#!/usr/bin/env node
+#
+!/usr/bin / env
+node;
 
 const { execSync } = require('node:child_process');
 const fs = require('node:fs');
@@ -11,13 +12,13 @@ console.log('=====================================');
 const deploymentConfig = {
   buildDir: 'out',
   port: 5000,
-  host: '0.0.0.0'
+  host: '0.0.0.0',
 };
 
 try {
   // Step 1: Clean previous builds
   console.log('🧹 Cleaning previous builds...');
-  ['out', '.next', 'public'].forEach(dir => {
+  ['out', '.next', 'public'].forEach((dir) => {
     if (fs.existsSync(dir)) {
       execSync(`rm -rf ${dir}`, { stdio: 'inherit' });
     }
@@ -36,7 +37,7 @@ try {
   console.log('📊 Verifying deployment assets...');
   const criticalFiles = ['index.html', 'manifest.json', 'robots.txt', 'sitemap.xml'];
   const buildPath = deploymentConfig.buildDir;
-  
+
   if (!fs.existsSync(buildPath)) {
     throw new Error(`Build directory ${buildPath} not found`);
   }
@@ -44,7 +45,7 @@ try {
   const fileCount = fs.readdirSync(buildPath).length;
   console.log(`✅ Build successful: ${fileCount} files generated`);
 
-  criticalFiles.forEach(file => {
+  criticalFiles.forEach((file) => {
     const filePath = path.join(buildPath, file);
     if (fs.existsSync(filePath)) {
       const size = Math.round(fs.statSync(filePath).size / 1024);
@@ -59,25 +60,32 @@ try {
   const indexPath = path.join(buildPath, 'index.html');
   if (fs.existsSync(indexPath)) {
     const indexSize = fs.statSync(indexPath).size;
-    if (indexSize < 500000) { // 500KB threshold
-      console.log(`✅ Index.html size optimized: ${Math.round(indexSize/1024)}KB`);
+    if (indexSize < 500000) {
+      // 500KB threshold
+      console.log(`✅ Index.html size optimized: ${Math.round(indexSize / 1024)}KB`);
     } else {
-      console.log(`⚠️  Index.html is large: ${Math.round(indexSize/1024)}KB - consider optimization`);
+      console.log(
+        `⚠️  Index.html is large: ${Math.round(indexSize / 1024)}KB - consider optimization`
+      );
     }
   }
 
   // Step 6: Start production server
   console.log('🌐 Starting production server...');
-  console.log(`🔗 Server will be available at: http://${deploymentConfig.host}:${deploymentConfig.port}`);
-  
-  execSync(`npx serve ${buildPath} -s -l ${deploymentConfig.port} --cors --host ${deploymentConfig.host}`, { 
-    stdio: 'inherit' 
-  });
+  console.log(
+    `🔗 Server will be available at: http://${deploymentConfig.host}:${deploymentConfig.port}`
+  );
 
+  execSync(
+    `npx serve ${buildPath} -s -l ${deploymentConfig.port} --cors --host ${deploymentConfig.host}`,
+    {
+      stdio: 'inherit',
+    }
+  );
 } catch (error) {
   console.error('❌ Deployment failed:', error.message);
   console.log('🔄 Attempting emergency fallback...');
-  
+
   try {
     execSync('npm run dev', { stdio: 'inherit' });
   } catch (fallbackError) {

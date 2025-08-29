@@ -1,7 +1,7 @@
 'use client';
 
-import { useEffect, useCallback } from 'react';
 import Script from 'next/script';
+import { useCallback, useEffect } from 'react';
 
 interface GoogleTagManagerProps {
   gaId: string;

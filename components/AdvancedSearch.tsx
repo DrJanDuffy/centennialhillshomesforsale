@@ -45,6 +45,7 @@ export default function AdvancedSearch() {
       <div className="flex items-center justify-between mb-6">
         <h2 className="text-2xl font-bold text-gray-900">Advanced Property Search</h2>
         <button
+          type="button"
           onClick={() => setIsExpanded(!isExpanded)}
           className="text-blue-600 hover:text-blue-800 transition-colors"
         >

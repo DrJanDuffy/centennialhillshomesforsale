@@ -1,7 +1,7 @@
 import { Award, Calendar, Mail, MapPin, Phone, Star, TrendingUp, Users } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
-import React from 'react';
+import type React from 'react';
 
 const ModernAboutSection: React.FC = () => {
   const achievements = [

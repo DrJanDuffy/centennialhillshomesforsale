@@ -1,5 +1,6 @@
 import { MessageCircle, Send, X } from 'lucide-react';
-import React, { useCallback, useEffect, useRef, useState } from 'react';
+import type React from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 
 interface Message {
   id: string;

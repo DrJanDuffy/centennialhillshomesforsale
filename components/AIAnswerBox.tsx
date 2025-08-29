@@ -39,7 +39,7 @@ export default function AIAnswerBox({
             <h4>Key Statistics</h4>
             <div className="stats-grid">
               {statistics.map((stat, index) => (
-                <div key={index} className="stat-item">
+                <div key={`stat-${stat.label}-${index}`} className="stat-item">
                   <span className="stat-label">{stat.label}</span>
                   <span className={`stat-value ${stat.trend || ''}`}>
                     {stat.value}
@@ -58,7 +58,7 @@ export default function AIAnswerBox({
             <h4>Sources</h4>
             <ul>
               {sources.map((source, index) => (
-                <li key={index}>
+                <li key={`source-${source.link || source.text}-${index}`}>
                   {source.link ? (
                     <a href={source.link} target="_blank" rel="noopener noreferrer">
                       {source.text}

@@ -1,8 +1,8 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
-import { KCMArticle, RSSFeedData } from '../lib/rss-parser';
+import React, { useEffect, useState } from 'react';
+import type { KCMArticle, RSSFeedData } from '../lib/rss-parser';
 
 interface KCMFeedProps {
   maxArticles?: number;

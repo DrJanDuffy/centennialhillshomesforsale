@@ -1,5 +1,6 @@
-
-#!/usr/bin/env node
+#
+!/usr/bin / env
+node;
 
 const fs = require('node:fs');
 
@@ -11,15 +12,14 @@ const healthChecks = {
   config: false,
   build: false,
   seo: false,
-  performance: false
+  performance: false,
 };
 
 // Check 1: Dependencies
 console.log('\n📦 Checking dependencies...');
 try {
   const packageJson = JSON.parse(fs.readFileSync('package.json', 'utf8'));
-  const hasEssentialDeps = packageJson.dependencies?.next && 
-                          packageJson.dependencies.react;
+  const hasEssentialDeps = packageJson.dependencies?.next && packageJson.dependencies.react;
 
   if (hasEssentialDeps) {
     healthChecks.dependencies = true;
@@ -35,7 +35,10 @@ try {
 console.log('\n⚙️  Checking configuration...');
 try {
   const nextConfigContent = fs.readFileSync('next.config.js', 'utf8');
-  if (nextConfigContent.includes('output: \'export\'') && nextConfigContent.includes('trailingSlash: true')) {
+  if (
+    nextConfigContent.includes("output: 'export'") &&
+    nextConfigContent.includes('trailingSlash: true')
+  ) {
     healthChecks.config = true;
     console.log('✅ Next.js configuration optimized');
   } else {
@@ -51,7 +54,7 @@ console.log('\n🔨 Checking build readiness...');
 try {
   const pagesExist = fs.existsSync('pages') && fs.readdirSync('pages').length > 0;
   const componentsExist = fs.existsSync('components') && fs.readdirSync('components').length > 0;
-  
+
   if (pagesExist && componentsExist) {
     healthChecks.build = true;
     console.log('✅ Build structure verified');
@@ -68,7 +71,7 @@ try {
   const sitemapExists = fs.existsSync('public/sitemap.xml');
   const robotsExists = fs.existsSync('public/robots.txt');
   const manifestExists = fs.existsSync('public/manifest.json');
-  
+
   if (sitemapExists && robotsExists && manifestExists) {
     healthChecks.seo = true;
     console.log('✅ SEO files present');
@@ -84,9 +87,9 @@ try {
 console.log('\n⚡ Performance indicators...');
 const componentsDir = 'components';
 if (fs.existsSync(componentsDir)) {
-  const componentCount = fs.readdirSync(componentsDir).filter(file => 
-    file.endsWith('.tsx') || file.endsWith('.ts')
-  ).length;
+  const componentCount = fs
+    .readdirSync(componentsDir)
+    .filter((file) => file.endsWith('.tsx') || file.endsWith('.ts')).length;
   if (componentCount < 50) {
     healthChecks.performance = true;
     console.log(`✅ Component count optimized: ${componentCount} components`);

@@ -4,7 +4,7 @@ import { motion } from 'framer-motion';
 import { Filter, Heart, Home, MapPin, Search, Star } from 'lucide-react';
 import Image from 'next/image';
 import type React from 'react';
-import { useState, useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { EnhancedButton, EnhancedFormField } from './EnhancedAnimations';
 
 interface Property {

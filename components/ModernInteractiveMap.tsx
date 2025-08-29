@@ -1,6 +1,7 @@
 import { MapPin, Navigation } from 'lucide-react';
 import Image from 'next/image';
-import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import type React from 'react';
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 
 // Google Maps types declaration
 declare global {

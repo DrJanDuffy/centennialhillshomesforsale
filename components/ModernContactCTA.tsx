@@ -1,6 +1,6 @@
 import { ArrowRight, Calendar, Mail, MapPin, Phone } from 'lucide-react';
 import Link from 'next/link';
-import React from 'react';
+import type React from 'react';
 
 const ModernContactCTA: React.FC = () => {
   return (

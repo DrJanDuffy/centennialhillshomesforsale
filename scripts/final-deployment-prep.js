@@ -1,5 +1,6 @@
-
-#!/usr/bin/env node
+#
+!/usr/bin / env
+node;
 
 const fs = require('node:fs');
 const _path = require('node:path');
@@ -10,17 +11,17 @@ console.log('================================');
 // Check critical files
 const criticalFiles = [
   'public/manifest.json',
-  'public/robots.txt', 
+  'public/robots.txt',
   'public/sitemap.xml',
   'public/apple-touch-icon.png',
   'public/enhanced-business-schema.json',
-  'next.config.js'
+  'next.config.js',
 ];
 
 console.log('📋 Checking critical files...');
 let allFilesPresent = true;
 
-criticalFiles.forEach(file => {
+criticalFiles.forEach((file) => {
   if (fs.existsSync(file)) {
     console.log(`✅ ${file}`);
   } else {
@@ -46,11 +47,9 @@ try {
 
 // Check environment variables
 console.log('\n🔐 Environment variables check...');
-const requiredEnvVars = [
-  'NEXT_PUBLIC_GA_MEASUREMENT_ID'
-];
+const requiredEnvVars = ['NEXT_PUBLIC_GA_MEASUREMENT_ID'];
 
-requiredEnvVars.forEach(envVar => {
+requiredEnvVars.forEach((envVar) => {
   if (process.env[envVar]) {
     console.log(`✅ ${envVar} is set`);
   } else {
@@ -62,9 +61,9 @@ requiredEnvVars.forEach(envVar => {
 console.log('\n📦 Checking package.json scripts...');
 try {
   const packageJson = JSON.parse(fs.readFileSync('package.json', 'utf8'));
-  
+
   const requiredScripts = ['build', 'start', 'dev'];
-  requiredScripts.forEach(script => {
+  requiredScripts.forEach((script) => {
     if (packageJson.scripts?.[script]) {
       console.log(`✅ Script "${script}" present`);
     } else {
@@ -101,19 +100,16 @@ const deploymentSummary = {
     analytics: true,
     localOptimization: true,
     generativeAI: true,
-    performance: true
+    performance: true,
   },
   nextSteps: [
     'Click Run button to deploy',
     'Add domain in Replit deployment settings',
     'Submit sitemap to Google Search Console',
-    'Verify analytics tracking'
-  ]
+    'Verify analytics tracking',
+  ],
 };
 
-fs.writeFileSync(
-  'deployment-summary.json',
-  JSON.stringify(deploymentSummary, null, 2)
-);
+fs.writeFileSync('deployment-summary.json', JSON.stringify(deploymentSummary, null, 2));
 
 console.log('\n📄 Deployment summary saved to deployment-summary.json');

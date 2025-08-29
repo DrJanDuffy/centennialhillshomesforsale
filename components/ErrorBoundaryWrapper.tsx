@@ -84,12 +84,14 @@ class ErrorBoundaryWrapper extends Component<Props, State> {
               )}
               <div className="flex gap-2 justify-center">
                 <button
+                  type="button"
                   onClick={this.handleRetry}
                   className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
                 >
                   Try Again
                 </button>
                 <button
+                  type="button"
                   onClick={() => window.location.reload()}
                   className="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
                 >

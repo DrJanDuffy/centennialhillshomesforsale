@@ -1,5 +1,5 @@
-import { NextApiRequest, NextApiResponse } from 'next';
-import { fubAPI, FUBContact } from '../../../lib/follow-up-boss';
+import type { NextApiRequest, NextApiResponse } from 'next';
+import { type FUBContact, fubAPI } from '../../../lib/follow-up-boss';
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   if (req.method !== 'POST') {
