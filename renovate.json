@@ -1,0 +1,170 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "extends": [
+    "config:base",
+    "customManagers:biomeVersions",
+    ":semanticCommits",
+    ":semanticCommitTypeAll(chore)",
+    ":semanticCommitScope(deps)",
+    ":enablePreCommit",
+    ":enableRenovateDashboard",
+    ":rebaseWhenStale",
+    ":maintainLockFilesWeekly",
+    ":prHourlyLimitNone",
+    ":prConcurrentLimitNone"
+  ],
+  "schedule": ["before 4am on monday", "before 4am on wednesday", "before 4am on friday"],
+  "timezone": "America/Los_Angeles",
+  "packageRules": [
+    {
+      "matchPackageNames": ["@biomejs/biome"],
+      "groupName": "Biome updates",
+      "groupSlug": "biome",
+      "commitMessageAction": "update",
+      "commitMessageTopic": "Biome",
+      "commitMessageExtra": "to {{newVersion}}",
+      "labels": ["dependencies", "biome", "automated"],
+      "assignees": ["@geneb"],
+      "reviewers": ["@geneb"],
+      "automerge": true,
+      "automergeType": "pr",
+      "platformAutomerge": true
+    },
+    {
+      "matchPackageNames": ["next", "react", "react-dom"],
+      "groupName": "Next.js and React updates",
+      "groupSlug": "nextjs-react",
+      "labels": ["dependencies", "nextjs", "react", "automated"],
+      "assignees": ["@geneb"],
+      "reviewers": ["@geneb"],
+      "automerge": false,
+      "rangeStrategy": "bump"
+    },
+    {
+      "matchPackageNames": ["typescript", "@types/node"],
+      "groupName": "TypeScript updates",
+      "groupSlug": "typescript",
+      "labels": ["dependencies", "typescript", "automated"],
+      "assignees": ["@geneb"],
+      "reviewers": ["@geneb"],
+      "automerge": false,
+      "rangeStrategy": "bump"
+    },
+    {
+      "matchPackageNames": ["tailwindcss", "autoprefixer", "postcss"],
+      "groupName": "CSS tooling updates",
+      "groupSlug": "css-tooling",
+      "labels": ["dependencies", "css", "tailwind", "automated"],
+      "assignees": ["@geneb"],
+      "reviewers": ["@geneb"],
+      "automerge": true,
+      "automergeType": "pr"
+    },
+    {
+      "matchPackageNames": ["framer-motion", "lucide-react"],
+      "groupName": "UI library updates",
+      "groupSlug": "ui-libraries",
+      "labels": ["dependencies", "ui", "automated"],
+      "assignees": ["@geneb"],
+      "reviewers": ["@geneb"],
+      "automerge": true,
+      "automergeType": "pr"
+    },
+    {
+      "matchPackageNames": ["@vercel/analytics", "web-vitals"],
+      "groupName": "Performance monitoring updates",
+      "groupSlug": "performance",
+      "labels": ["dependencies", "performance", "analytics", "automated"],
+      "assignees": ["@geneb"],
+      "reviewers": ["@geneb"],
+      "automerge": true,
+      "automergeType": "pr"
+    },
+    {
+      "matchPackageNames": ["eslint", "prettier"],
+      "enabled": false,
+      "description": "Disabled - migrated to Biome"
+    },
+    {
+      "matchDepTypes": ["devDependencies"],
+      "groupName": "dev dependencies",
+      "groupSlug": "dev-deps",
+      "labels": ["dependencies", "dev", "automated"],
+      "assignees": ["@geneb"],
+      "reviewers": ["@geneb"],
+      "automerge": true,
+      "automergeType": "pr"
+    },
+    {
+      "matchDepTypes": ["dependencies"],
+      "groupName": "production dependencies",
+      "groupSlug": "prod-deps",
+      "labels": ["dependencies", "production", "automated"],
+      "assignees": ["@geneb"],
+      "reviewers": ["@geneb"],
+      "automerge": false
+    }
+  ],
+  "assignees": ["@geneb"],
+  "reviewers": ["@geneb"],
+  "labels": ["dependencies", "automated"],
+  "commitMessagePrefix": "chore(deps):",
+  "commitMessageAction": "update",
+  "commitMessageTopic": "{{depName}}",
+  "commitMessageExtra": "to {{newVersion}}",
+  "prTitle": "chore(deps): update {{depName}} to {{newVersion}}",
+  "prBodyTemplate": "## 🤖 Automated Dependency Update\n\nThis PR was automatically created by [Renovate](https://github.com/renovatebot/renovate).\n\n### 📦 What's Changed\n- **Package:** {{depName}}\n- **From:** {{currentVersion}}\n- **To:** {{newVersion}}\n\n### ✅ Checks\n- [ ] Tests pass\n- [ ] Build succeeds\n- [ ] No breaking changes detected\n- [ ] Biome checks pass\n\n### 🚀 Deployment\nThis update will be automatically deployed to Vercel once merged.\n\n---\n*This is an automated PR. Please review and merge if everything looks good.*",
+  "prConcurrentLimit": 5,
+  "prHourlyLimit": 10,
+  "rebaseWhen": "behind-base-branch",
+  "rebaseLabel": "rebase",
+  "rebaseConflictedPrs": true,
+  "lockFileMaintenance": {
+    "enabled": true,
+    "schedule": ["before 4am on monday"]
+  },
+  "vulnerabilityAlerts": {
+    "enabled": true,
+    "schedule": ["at any time"],
+    "assignees": ["@geneb"],
+    "labels": ["security", "vulnerability", "urgent"]
+  },
+  "rangeStrategy": "auto",
+  "bumpVersion": "patch",
+  "includeForks": false,
+  "requireConfig": true,
+  "onboarding": true,
+  "requireBaseBranches": ["main"],
+  "baseBranches": ["main"],
+  "enabledManagers": ["npm", "github-actions"],
+  "git-submodules": {
+    "enabled": true
+  },
+  "hostRules": [
+    {
+      "hostType": "github",
+      "token": "{{env.GITHUB_TOKEN}}"
+    }
+  ],
+  "platformAutomerge": true,
+  "automerge": false,
+  "automergeType": "pr",
+  "automergeStrategy": "squash",
+  "automergeComment": "🤖 This PR has been automatically merged by Renovate.",
+  "ignorePaths": [
+    "**/node_modules/**",
+    "**/bower_components/**",
+    "**/vendor/**",
+    "**/examples/**",
+    "**/docs/**",
+    "**/test/**",
+    "**/tests/**",
+    "**/*.min.js",
+    "**/*.bundle.js"
+  ],
+  "postUpdateOptions": ["npmDedupe", "reconstructLockfile"],
+  "constraints": {
+    "node": ">=20.0.0"
+  },
+  "packageManager": "npm"
+}

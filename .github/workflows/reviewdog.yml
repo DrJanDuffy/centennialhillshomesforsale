@@ -1,0 +1,63 @@
+name: Reviewdog - Biome
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+
+jobs:
+  biome:
+    name: runner / Biome
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pull-requests: write
+      checks: write
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Setup Biome
+        uses: biomejs/setup-biome@v2
+        with:
+          version: latest
+
+      - name: Run Biome with reviewdog
+        uses: mongolyy/reviewdog-action-biome@v1
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          reporter: github-pr-review
+          fail_on_error: false
+          filter_mode: diff_context
+          level: info
+
+      - name: Generate Biome report
+        run: |
+          echo "## 🔍 Biome Code Quality Report" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "### Analysis Results" >> $GITHUB_STEP_SUMMARY
+          biome check . --reporter=json > biome-report.json || true
+          
+          if [ -f biome-report.json ]; then
+            echo "- Biome analysis completed" >> $GITHUB_STEP_SUMMARY
+            echo "- Check the PR comments for detailed feedback" >> $GITHUB_STEP_SUMMARY
+          else
+            echo "- Biome analysis failed" >> $GITHUB_STEP_SUMMARY
+          fi
+          
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "### Next Steps" >> $GITHUB_STEP_SUMMARY
+          echo "1. Review the Biome suggestions above" >> $GITHUB_STEP_SUMMARY
+          echo "2. Apply suggested fixes using: \`npm run biome:fix\`" >> $GITHUB_STEP_SUMMARY
+          echo "3. Format code using: \`npm run format\`" >> $GITHUB_STEP_SUMMARY

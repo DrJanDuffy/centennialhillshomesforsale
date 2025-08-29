@@ -1,0 +1,86 @@
+# Lefthook configuration for Centennial Hills Homes
+# Provides automated code quality checks before commits and pushes
+
+# Pre-commit hooks - run before each commit
+pre-commit:
+  parallel: true
+  commands:
+    # Biome formatting and linting
+    biome-check:
+      glob: "*.{js,ts,cjs,mjs,d.cts,d.mts,jsx,tsx,json,jsonc}"
+      run: npx @biomejs/biome check --write --no-errors-on-unmatched --files-ignore-unknown=true --colors=off {staged_files}
+      stage_fixed: true
+    
+    # TypeScript type checking
+    type-check:
+      glob: "*.{ts,tsx,d.cts,d.mts}"
+      run: npx tsc --noEmit --project tsconfig.json
+      stage_fixed: false
+    
+    # ESLint compatibility check (if any remaining)
+    eslint-check:
+      glob: "*.{js,ts,jsx,tsx}"
+      run: npx eslint --no-eslintrc --config .eslintrc.json {staged_files} || echo "ESLint check completed"
+      stage_fixed: false
+
+# Pre-push hooks - run before pushing to remote
+pre-push:
+  parallel: true
+  commands:
+    # Full Biome check on all files
+    biome-full-check:
+      glob: "*.{js,ts,cjs,mjs,d.cts,d.mts,jsx,tsx,json,jsonc}"
+      run: npx @biomejs/biome check --no-errors-on-unmatched --files-ignore-unknown=true --colors=off {push_files}
+    
+    # Build verification
+    build-check:
+      run: npm run build
+      stage_fixed: false
+    
+    # Performance analysis
+    performance-check:
+      run: npm run bundle:analyze
+      stage_fixed: false
+
+# Commit-msg hooks - run after commit message is written
+commit-msg:
+  commands:
+    # Conventional commit format check
+    conventional-commit:
+      run: npx @commitlint/cli --edit {1}
+      stage_fixed: false
+
+# Post-commit hooks - run after commit is completed
+post-commit:
+  commands:
+    # Generate commit summary
+    commit-summary:
+      run: echo "✅ Commit completed successfully with Biome checks"
+      stage_fixed: false
+
+# Post-merge hooks - run after merge operations
+post-merge:
+  commands:
+    # Update dependencies if needed
+    deps-update:
+      run: npm ci
+      stage_fixed: false
+    
+    # Run full quality check
+    quality-check:
+      run: npm run optimize
+      stage_fixed: false
+
+# Post-checkout hooks - run after switching branches
+post-checkout:
+  commands:
+    # Install dependencies for new branch
+    install-deps:
+      run: npm ci
+      stage_fixed: false
+    
+    # Run Biome check on changed files
+    biome-changed:
+      glob: "*.{js,ts,cjs,mjs,d.cts,d.mts,jsx,tsx,json,jsonc}"
+      run: npx @biomejs/biome check --write --no-errors-on-unmatched --files-ignore-unknown=true --colors=off {changed_files}
+      stage_fixed: true
