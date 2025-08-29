@@ -41,6 +41,37 @@ export default function PerformanceMonitor() {
     ttfb: { good: 800, poor: 1800 },
   };
 
+  // Check if metrics meet thresholds and generate alerts
+  const checkThreshold = useCallback(
+    (metric: string, value: number, threshold: { good: number; poor: number }) => {
+      let alertType: 'warning' | 'error' | 'info' = 'info';
+      let message = '';
+
+      if (value > threshold.poor) {
+        alertType = 'error';
+        message = `${metric.toUpperCase()} is poor (${value.toFixed(2)}). Consider optimization.`;
+      } else if (value > threshold.good) {
+        alertType = 'warning';
+        message = `${metric.toUpperCase()} needs improvement (${value.toFixed(2)}).`;
+      } else {
+        alertType = 'info';
+        message = `${metric.toUpperCase()} is good (${value.toFixed(2)}).`;
+      }
+
+      const alert: PerformanceAlert = {
+        type: alertType,
+        metric,
+        value,
+        threshold: threshold.good,
+        message,
+        timestamp: new Date(),
+      };
+
+      setAlerts((prev) => [alert, ...prev.slice(0, 9)]); // Keep last 10 alerts
+    },
+    []
+  );
+
   // Measure First Contentful Paint (FCP)
   const measureFCP = useCallback(() => {
     if ('PerformanceObserver' in window) {
@@ -80,9 +111,12 @@ export default function PerformanceMonitor() {
       const observer = new PerformanceObserver((list) => {
         const entries = list.getEntries();
         entries.forEach((entry) => {
-          const fid = entry.processingStart - entry.startTime;
-          setMetrics((prev) => ({ ...prev, fid }));
-          checkThreshold('fid', fid, thresholds.fid);
+          const performanceEntry = entry as any;
+          if (performanceEntry.processingStart) {
+            const fid = performanceEntry.processingStart - entry.startTime;
+            setMetrics((prev) => ({ ...prev, fid }));
+            checkThreshold('fid', fid, thresholds.fid);
+          }
         });
       });
       observer.observe({ entryTypes: ['first-input'] });
@@ -124,37 +158,6 @@ export default function PerformanceMonitor() {
     }
   }, [checkThreshold]);
 
-  // Check if metrics meet thresholds and generate alerts
-  const checkThreshold = useCallback(
-    (metric: string, value: number, threshold: { good: number; poor: number }) => {
-      let alertType: 'warning' | 'error' | 'info' = 'info';
-      let message = '';
-
-      if (value > threshold.poor) {
-        alertType = 'error';
-        message = `${metric.toUpperCase()} is poor (${value.toFixed(2)}). Consider optimization.`;
-      } else if (value > threshold.good) {
-        alertType = 'warning';
-        message = `${metric.toUpperCase()} needs improvement (${value.toFixed(2)}).`;
-      } else {
-        alertType = 'info';
-        message = `${metric.toUpperCase()} is good (${value.toFixed(2)}).`;
-      }
-
-      const alert: PerformanceAlert = {
-        type: alertType,
-        metric,
-        value,
-        threshold: threshold.good,
-        message,
-        timestamp: new Date(),
-      };
-
-      setAlerts((prev) => [alert, ...prev.slice(0, 9)]); // Keep last 10 alerts
-    },
-    []
-  );
-
   // Start performance monitoring
   const startMonitoring = useCallback(() => {
     setIsMonitoring(true);
@@ -174,7 +177,7 @@ export default function PerformanceMonitor() {
   const getPerformanceScore = useCallback(() => {
     const scores = Object.entries(metrics).map(([key, value]) => {
       if (!value || !thresholds[key as keyof typeof thresholds]) return 100;
-
+      
       const threshold = thresholds[key as keyof typeof thresholds];
       if (value <= threshold.good) return 100;
       if (value <= threshold.poor) return 50;
@@ -183,14 +186,14 @@ export default function PerformanceMonitor() {
 
     const validScores = scores.filter((score) => score !== 100);
     if (validScores.length === 0) return 100;
-
+    
     return Math.round(validScores.reduce((sum, score) => sum + score, 0) / validScores.length);
   }, [metrics]);
 
   // Get metric status
   const getMetricStatus = useCallback((metric: string, value: number | null) => {
     if (!value || !thresholds[metric as keyof typeof thresholds]) return 'unknown';
-
+    
     const threshold = thresholds[metric as keyof typeof thresholds];
     if (value <= threshold.good) return 'good';
     if (value <= threshold.poor) return 'needs-improvement';
@@ -210,10 +213,10 @@ export default function PerformanceMonitor() {
 
   // Send performance data to analytics (if configured)
   useEffect(() => {
-    if (typeof window !== 'undefined' && window.gtag) {
+    if (typeof window !== 'undefined' && (window as any).gtag) {
       Object.entries(metrics).forEach(([key, value]) => {
         if (value) {
-          window.gtag('event', 'performance_metric', {
+          (window as any).gtag('event', 'performance_metric', {
             metric_name: key,
             value: Math.round(value),
             performance_score: getPerformanceScore(),
@@ -232,6 +235,7 @@ export default function PerformanceMonitor() {
             Score: <span className="font-semibold text-blue-600">{getPerformanceScore()}/100</span>
           </div>
           <button
+            type="button"
             onClick={isMonitoring ? stopMonitoring : startMonitoring}
             className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
               isMonitoring
@@ -283,7 +287,7 @@ export default function PerformanceMonitor() {
           <div className="space-y-2">
             {alerts.map((alert, index) => (
               <div
-                key={index}
+                key={`alert-${alert.metric}-${index}`}
                 className={`p-3 rounded-lg border-l-4 ${
                   alert.type === 'error'
                     ? 'bg-red-50 border-red-400 text-red-800'
