@@ -72,38 +72,40 @@ class FollowUpBossAPI {
       const response = await fetch(`${this.baseUrl}/people`, {
         method: 'POST',
         headers: {
-          'Authorization': `Bearer ${this.apiKey}`,
+          Authorization: `Bearer ${this.apiKey}`,
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          people: [{
-            firstName: leadData.firstName,
-            lastName: leadData.lastName,
-            emails: [{ value: leadData.email, type: 'work' }],
-            phones: [{ value: leadData.phone, type: 'work' }],
-            tags: [
-              'Website Lead',
-              'Centennial Hills',
-              leadData.propertyInterest || 'General Inquiry',
-              leadData.timeline || 'Not Specified',
-              leadData.budget || 'Not Specified'
-            ],
-            customFields: {
-              'Property Interest': leadData.propertyInterest || 'General Inquiry',
-              'Timeline': leadData.timeline || 'Not Specified',
-              'Budget': leadData.budget || 'Not Specified',
-              'Preferred Contact': leadData.preferredContact || 'Any',
-              'Neighborhood': leadData.neighborhood || 'Centennial Hills',
-              'Property Type': leadData.propertyType || 'Not Specified',
-              'Lead Source': leadData.source || 'Website',
-              'Trigger': leadData.trigger || 'Contact Form',
-              'Message': leadData.message || '',
-              'Submission Time': leadData.timestamp || new Date().toISOString()
+          people: [
+            {
+              firstName: leadData.firstName,
+              lastName: leadData.lastName,
+              emails: [{ value: leadData.email, type: 'work' }],
+              phones: [{ value: leadData.phone, type: 'work' }],
+              tags: [
+                'Website Lead',
+                'Centennial Hills',
+                leadData.propertyInterest || 'General Inquiry',
+                leadData.timeline || 'Not Specified',
+                leadData.budget || 'Not Specified',
+              ],
+              customFields: {
+                'Property Interest': leadData.propertyInterest || 'General Inquiry',
+                Timeline: leadData.timeline || 'Not Specified',
+                Budget: leadData.budget || 'Not Specified',
+                'Preferred Contact': leadData.preferredContact || 'Any',
+                Neighborhood: leadData.neighborhood || 'Centennial Hills',
+                'Property Type': leadData.propertyType || 'Not Specified',
+                'Lead Source': leadData.source || 'Website',
+                Trigger: leadData.trigger || 'Contact Form',
+                Message: leadData.message || '',
+                'Submission Time': leadData.timestamp || new Date().toISOString(),
+              },
+              source: leadData.source || 'Website',
+              type: 'Person',
             },
-            source: leadData.source || 'Website',
-            type: 'Person'
-          }]
-        })
+          ],
+        }),
       });
 
       if (!response.ok) {
@@ -112,21 +114,20 @@ class FollowUpBossAPI {
       }
 
       const data = await response.json();
-      
+
       // Log successful lead creation
       console.log('Follow Up Boss Lead Created:', data);
-      
+
       return {
         success: true,
         data: data,
-        message: 'Lead created successfully'
+        message: 'Lead created successfully',
       };
-
     } catch (error) {
       console.error('Follow Up Boss API Error:', error);
       return {
         success: false,
-        error: error instanceof Error ? error.message : 'Unknown error occurred'
+        error: error instanceof Error ? error.message : 'Unknown error occurred',
       };
     }
   }
@@ -139,29 +140,27 @@ class FollowUpBossAPI {
       const response = await fetch(`${this.baseUrl}/people`, {
         method: 'POST',
         headers: {
-          'Authorization': `Bearer ${this.apiKey}`,
+          Authorization: `Bearer ${this.apiKey}`,
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          people: [{
-            firstName: contactData.firstName,
-            lastName: contactData.lastName,
-            emails: [{ value: contactData.email, type: 'work' }],
-            phones: [{ value: contactData.phone, type: 'work' }],
-            tags: [
-              'Website Contact',
-              'Centennial Hills',
-              ...(contactData.tags || [])
-            ],
-            customFields: {
-              'Contact Source': 'Website',
-              'Contact Time': new Date().toISOString(),
-              ...contactData.customFields
+          people: [
+            {
+              firstName: contactData.firstName,
+              lastName: contactData.lastName,
+              emails: [{ value: contactData.email, type: 'work' }],
+              phones: [{ value: contactData.phone, type: 'work' }],
+              tags: ['Website Contact', 'Centennial Hills', ...(contactData.tags || [])],
+              customFields: {
+                'Contact Source': 'Website',
+                'Contact Time': new Date().toISOString(),
+                ...contactData.customFields,
+              },
+              source: 'Website',
+              type: 'Person',
             },
-            source: 'Website',
-            type: 'Person'
-          }]
-        })
+          ],
+        }),
       });
 
       if (!response.ok) {
@@ -170,18 +169,17 @@ class FollowUpBossAPI {
       }
 
       const data = await response.json();
-      
+
       return {
         success: true,
         data: data,
-        message: 'Contact created successfully'
+        message: 'Contact created successfully',
       };
-
     } catch (error) {
       console.error('Follow Up Boss API Error:', error);
       return {
         success: false,
-        error: error instanceof Error ? error.message : 'Unknown error occurred'
+        error: error instanceof Error ? error.message : 'Unknown error occurred',
       };
     }
   }
@@ -194,27 +192,29 @@ class FollowUpBossAPI {
       const response = await fetch(`${this.baseUrl}/properties`, {
         method: 'POST',
         headers: {
-          'Authorization': `Bearer ${this.apiKey}`,
+          Authorization: `Bearer ${this.apiKey}`,
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          properties: [{
-            address: propertyData.address,
-            price: propertyData.price,
-            bedrooms: propertyData.bedrooms,
-            bathrooms: propertyData.bathrooms,
-            squareFeet: propertyData.squareFeet,
-            propertyType: propertyData.propertyType,
-            status: propertyData.status,
-            description: propertyData.description,
-            images: propertyData.images,
-            customFields: {
-              'Listed By': 'Dr. Jan Duffy',
-              'Neighborhood': 'Centennial Hills',
-              'List Date': new Date().toISOString()
-            }
-          }]
-        })
+          properties: [
+            {
+              address: propertyData.address,
+              price: propertyData.price,
+              bedrooms: propertyData.bedrooms,
+              bathrooms: propertyData.bathrooms,
+              squareFeet: propertyData.squareFeet,
+              propertyType: propertyData.propertyType,
+              status: propertyData.status,
+              description: propertyData.description,
+              images: propertyData.images,
+              customFields: {
+                'Listed By': 'Dr. Jan Duffy',
+                Neighborhood: 'Centennial Hills',
+                'List Date': new Date().toISOString(),
+              },
+            },
+          ],
+        }),
       });
 
       if (!response.ok) {
@@ -223,18 +223,17 @@ class FollowUpBossAPI {
       }
 
       const data = await response.json();
-      
+
       return {
         success: true,
         data: data,
-        message: 'Property created successfully'
+        message: 'Property created successfully',
       };
-
     } catch (error) {
       console.error('Follow Up Boss API Error:', error);
       return {
         success: false,
-        error: error instanceof Error ? error.message : 'Unknown error occurred'
+        error: error instanceof Error ? error.message : 'Unknown error occurred',
       };
     }
   }
@@ -244,13 +243,16 @@ class FollowUpBossAPI {
    */
   async searchContacts(searchTerm: string): Promise<FUBResponse> {
     try {
-      const response = await fetch(`${this.baseUrl}/people/search?q=${encodeURIComponent(searchTerm)}`, {
-        method: 'GET',
-        headers: {
-          'Authorization': `Bearer ${this.apiKey}`,
-          'Content-Type': 'application/json',
+      const response = await fetch(
+        `${this.baseUrl}/people/search?q=${encodeURIComponent(searchTerm)}`,
+        {
+          method: 'GET',
+          headers: {
+            Authorization: `Bearer ${this.apiKey}`,
+            'Content-Type': 'application/json',
+          },
         }
-      });
+      );
 
       if (!response.ok) {
         const errorData = await response.json();
@@ -258,18 +260,17 @@ class FollowUpBossAPI {
       }
 
       const data = await response.json();
-      
+
       return {
         success: true,
         data: data,
-        message: 'Search completed successfully'
+        message: 'Search completed successfully',
       };
-
     } catch (error) {
       console.error('Follow Up Boss API Error:', error);
       return {
         success: false,
-        error: error instanceof Error ? error.message : 'Unknown error occurred'
+        error: error instanceof Error ? error.message : 'Unknown error occurred',
       };
     }
   }
@@ -282,7 +283,7 @@ class FollowUpBossAPI {
       const response = await fetch(`${this.baseUrl}/people/${contactId}`, {
         method: 'PUT',
         headers: {
-          'Authorization': `Bearer ${this.apiKey}`,
+          Authorization: `Bearer ${this.apiKey}`,
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
@@ -291,8 +292,8 @@ class FollowUpBossAPI {
           emails: updateData.email ? [{ value: updateData.email, type: 'work' }] : undefined,
           phones: updateData.phone ? [{ value: updateData.phone, type: 'work' }] : undefined,
           tags: updateData.tags,
-          customFields: updateData.customFields
-        })
+          customFields: updateData.customFields,
+        }),
       });
 
       if (!response.ok) {
@@ -301,18 +302,17 @@ class FollowUpBossAPI {
       }
 
       const data = await response.json();
-      
+
       return {
         success: true,
         data: data,
-        message: 'Contact updated successfully'
+        message: 'Contact updated successfully',
       };
-
     } catch (error) {
       console.error('Follow Up Boss API Error:', error);
       return {
         success: false,
-        error: error instanceof Error ? error.message : 'Unknown error occurred'
+        error: error instanceof Error ? error.message : 'Unknown error occurred',
       };
     }
   }
@@ -325,10 +325,10 @@ class FollowUpBossAPI {
       const response = await fetch(`${this.baseUrl}/people/${contactId}/tags`, {
         method: 'POST',
         headers: {
-          'Authorization': `Bearer ${this.apiKey}`,
+          Authorization: `Bearer ${this.apiKey}`,
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ tags })
+        body: JSON.stringify({ tags }),
       });
 
       if (!response.ok) {
@@ -337,18 +337,17 @@ class FollowUpBossAPI {
       }
 
       const data = await response.json();
-      
+
       return {
         success: true,
         data: data,
-        message: 'Tags added successfully'
+        message: 'Tags added successfully',
       };
-
     } catch (error) {
       console.error('Follow Up Boss API Error:', error);
       return {
         success: false,
-        error: error instanceof Error ? error.message : 'Unknown error occurred'
+        error: error instanceof Error ? error.message : 'Unknown error occurred',
       };
     }
   }
@@ -361,9 +360,9 @@ class FollowUpBossAPI {
       const response = await fetch(`${this.baseUrl}/people/${contactId}`, {
         method: 'GET',
         headers: {
-          'Authorization': `Bearer ${this.apiKey}`,
+          Authorization: `Bearer ${this.apiKey}`,
           'Content-Type': 'application/json',
-        }
+        },
       });
 
       if (!response.ok) {
@@ -372,18 +371,17 @@ class FollowUpBossAPI {
       }
 
       const data = await response.json();
-      
+
       return {
         success: true,
         data: data,
-        message: 'Contact retrieved successfully'
+        message: 'Contact retrieved successfully',
       };
-
     } catch (error) {
       console.error('Follow Up Boss API Error:', error);
       return {
         success: false,
-        error: error instanceof Error ? error.message : 'Unknown error occurred'
+        error: error instanceof Error ? error.message : 'Unknown error occurred',
       };
     }
   }
@@ -396,35 +394,34 @@ class FollowUpBossAPI {
       const response = await fetch(`${this.baseUrl}/people/search?q=test`, {
         method: 'GET',
         headers: {
-          'Authorization': `Bearer ${this.apiKey}`,
+          Authorization: `Bearer ${this.apiKey}`,
           'Content-Type': 'application/json',
-        }
+        },
       });
 
       if (response.status === 401) {
         return {
           success: false,
-          error: 'Invalid API key'
+          error: 'Invalid API key',
         };
       }
 
       if (response.status === 403) {
         return {
           success: false,
-          error: 'API key does not have required permissions'
+          error: 'API key does not have required permissions',
         };
       }
 
       return {
         success: true,
-        message: 'API connection successful'
+        message: 'API connection successful',
       };
-
     } catch (error) {
       console.error('Follow Up Boss API Connection Test Error:', error);
       return {
         success: false,
-        error: error instanceof Error ? error.message : 'Connection failed'
+        error: error instanceof Error ? error.message : 'Connection failed',
       };
     }
   }
@@ -442,7 +439,7 @@ export const {
   updateContact,
   addTagsToContact,
   getContact,
-  testConnection
+  testConnection,
 } = fubAPI;
 
 export default fubAPI;

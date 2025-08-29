@@ -17,88 +17,96 @@ interface LocalBusiness {
 
 const localBusinesses: LocalBusiness[] = [
   {
-    name: "Centennial Hills Golf Club",
-    category: "Golf Course",
-    description: "Championship golf course featuring TPC Las Vegas layout with pro shop, dining, and golf instruction.",
-    address: "6608 Centennial Hills Dr, Las Vegas, NV 89149",
-    phone: "(702) 341-1000",
-    website: "https://www.centennialhillsgolf.com",
+    name: 'Centennial Hills Golf Club',
+    category: 'Golf Course',
+    description:
+      'Championship golf course featuring TPC Las Vegas layout with pro shop, dining, and golf instruction.',
+    address: '6608 Centennial Hills Dr, Las Vegas, NV 89149',
+    phone: '(702) 341-1000',
+    website: 'https://www.centennialhillsgolf.com',
     rating: 4.5,
     reviewCount: 234,
-    image: "/assets/icons/golf-course.svg"
+    image: '/assets/icons/golf-course.svg',
   },
   {
-    name: "Centennial Hills Shopping Center",
-    category: "Shopping",
-    description: "Full-service shopping center with grocery stores, restaurants, pharmacies, and retail shops.",
-    address: "6608 Centennial Hills Dr, Las Vegas, NV 89149",
-    phone: "(702) 341-2000",
+    name: 'Centennial Hills Shopping Center',
+    category: 'Shopping',
+    description:
+      'Full-service shopping center with grocery stores, restaurants, pharmacies, and retail shops.',
+    address: '6608 Centennial Hills Dr, Las Vegas, NV 89149',
+    phone: '(702) 341-2000',
     rating: 4.2,
     reviewCount: 456,
-    image: "/assets/icons/shopping.svg"
+    image: '/assets/icons/shopping.svg',
   },
   {
-    name: "Centennial Hills Medical Center",
-    category: "Healthcare",
-    description: "Comprehensive medical facility offering primary care, urgent care, and specialty services.",
-    address: "6608 Centennial Hills Dr, Las Vegas, NV 89149",
-    phone: "(702) 341-3000",
+    name: 'Centennial Hills Medical Center',
+    category: 'Healthcare',
+    description:
+      'Comprehensive medical facility offering primary care, urgent care, and specialty services.',
+    address: '6608 Centennial Hills Dr, Las Vegas, NV 89149',
+    phone: '(702) 341-3000',
     rating: 4.3,
     reviewCount: 189,
-    image: "/assets/icons/medical.svg"
+    image: '/assets/icons/medical.svg',
   },
   {
-    name: "Centennial Hills Elementary School",
-    category: "Education",
-    description: "Award-winning public elementary school serving grades K-5 with excellent academic programs.",
-    address: "6608 Centennial Hills Dr, Las Vegas, NV 89149",
-    phone: "(702) 341-4000",
+    name: 'Centennial Hills Elementary School',
+    category: 'Education',
+    description:
+      'Award-winning public elementary school serving grades K-5 with excellent academic programs.',
+    address: '6608 Centennial Hills Dr, Las Vegas, NV 89149',
+    phone: '(702) 341-4000',
     rating: 4.6,
     reviewCount: 78,
-    image: "/assets/icons/school.svg"
+    image: '/assets/icons/school.svg',
   },
   {
-    name: "Centennial Hills Fitness Center",
-    category: "Fitness",
-    description: "State-of-the-art fitness facility with gym equipment, classes, and personal training services.",
-    address: "6608 Centennial Hills Dr, Las Vegas, NV 89149",
-    phone: "(702) 341-5000",
+    name: 'Centennial Hills Fitness Center',
+    category: 'Fitness',
+    description:
+      'State-of-the-art fitness facility with gym equipment, classes, and personal training services.',
+    address: '6608 Centennial Hills Dr, Las Vegas, NV 89149',
+    phone: '(702) 341-5000',
     rating: 4.4,
     reviewCount: 312,
-    image: "/assets/icons/fitness.svg"
+    image: '/assets/icons/fitness.svg',
   },
   {
-    name: "Centennial Hills Real Estate",
-    category: "Real Estate",
-    description: "Professional real estate services specializing in Centennial Hills property sales and rentals.",
-    address: "6608 Centennial Hills Dr, Las Vegas, NV 89149",
-    phone: "(702) 341-6000",
+    name: 'Centennial Hills Real Estate',
+    category: 'Real Estate',
+    description:
+      'Professional real estate services specializing in Centennial Hills property sales and rentals.',
+    address: '6608 Centennial Hills Dr, Las Vegas, NV 89149',
+    phone: '(702) 341-6000',
     rating: 4.8,
     reviewCount: 67,
-    image: "/assets/icons/real-estate.svg"
-  }
+    image: '/assets/icons/real-estate.svg',
+  },
 ];
 
 const categories = [
-  "All Categories",
-  "Golf Course",
-  "Shopping",
-  "Healthcare",
-  "Education",
-  "Fitness",
-  "Real Estate",
-  "Dining",
-  "Services"
+  'All Categories',
+  'Golf Course',
+  'Shopping',
+  'Healthcare',
+  'Education',
+  'Fitness',
+  'Real Estate',
+  'Dining',
+  'Services',
 ];
 
 export default function LocalBusinessDirectory() {
-  const [selectedCategory, setSelectedCategory] = React.useState("All Categories");
-  const [searchTerm, setSearchTerm] = React.useState("");
+  const [selectedCategory, setSelectedCategory] = React.useState('All Categories');
+  const [searchTerm, setSearchTerm] = React.useState('');
 
-  const filteredBusinesses = localBusinesses.filter(business => {
-    const matchesCategory = selectedCategory === "All Categories" || business.category === selectedCategory;
-    const matchesSearch = business.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                         business.description.toLowerCase().includes(searchTerm.toLowerCase());
+  const filteredBusinesses = localBusinesses.filter((business) => {
+    const matchesCategory =
+      selectedCategory === 'All Categories' || business.category === selectedCategory;
+    const matchesSearch =
+      business.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      business.description.toLowerCase().includes(searchTerm.toLowerCase());
     return matchesCategory && matchesSearch;
   });
 
@@ -106,44 +114,51 @@ export default function LocalBusinessDirectory() {
     <Layout>
       <Head>
         <title>Centennial Hills Local Business Directory | Las Vegas Services & Amenities</title>
-        <meta name="description" content="Complete directory of local businesses in Centennial Hills, Las Vegas. Find restaurants, healthcare, shopping, schools, and services near your home." />
-        <meta name="keywords" content="Centennial Hills businesses, Las Vegas local directory, restaurants, healthcare, shopping, schools, services" />
+        <meta
+          name="description"
+          content="Complete directory of local businesses in Centennial Hills, Las Vegas. Find restaurants, healthcare, shopping, schools, and services near your home."
+        />
+        <meta
+          name="keywords"
+          content="Centennial Hills businesses, Las Vegas local directory, restaurants, healthcare, shopping, schools, services"
+        />
 
         {/* Local Business Schema */}
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
             __html: JSON.stringify({
-              "@context": "https://schema.org",
-              "@type": "ItemList",
-              "name": "Centennial Hills Local Business Directory",
-              "description": "Comprehensive directory of businesses and services in Centennial Hills, Las Vegas",
-              "url": "https://centennialhillshomesforsale.com/local-business-directory",
-              "itemListElement": localBusinesses.map((business, index) => ({
-                "@type": "ListItem",
-                "position": index + 1,
-                "item": {
-                  "@type": "LocalBusiness",
-                  "name": business.name,
-                  "description": business.description,
-                  "address": {
-                    "@type": "PostalAddress",
-                    "streetAddress": business.address.split(',')[0],
-                    "addressLocality": "Las Vegas",
-                    "addressRegion": "NV",
-                    "postalCode": "89149",
-                    "addressCountry": "US"
+              '@context': 'https://schema.org',
+              '@type': 'ItemList',
+              name: 'Centennial Hills Local Business Directory',
+              description:
+                'Comprehensive directory of businesses and services in Centennial Hills, Las Vegas',
+              url: 'https://centennialhillshomesforsale.com/local-business-directory',
+              itemListElement: localBusinesses.map((business, index) => ({
+                '@type': 'ListItem',
+                position: index + 1,
+                item: {
+                  '@type': 'LocalBusiness',
+                  name: business.name,
+                  description: business.description,
+                  address: {
+                    '@type': 'PostalAddress',
+                    streetAddress: business.address.split(',')[0],
+                    addressLocality: 'Las Vegas',
+                    addressRegion: 'NV',
+                    postalCode: '89149',
+                    addressCountry: 'US',
                   },
-                  "telephone": business.phone,
-                  "url": business.website,
-                  "aggregateRating": {
-                    "@type": "AggregateRating",
-                    "ratingValue": business.rating,
-                    "reviewCount": business.reviewCount
-                  }
-                }
-              }))
-            })
+                  telephone: business.phone,
+                  url: business.website,
+                  aggregateRating: {
+                    '@type': 'AggregateRating',
+                    ratingValue: business.rating,
+                    reviewCount: business.reviewCount,
+                  },
+                },
+              })),
+            }),
           }}
         />
       </Head>
@@ -181,8 +196,10 @@ export default function LocalBusinessDirectory() {
                     onChange={(e) => setSelectedCategory(e.target.value)}
                     className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                   >
-                    {categories.map(category => (
-                      <option key={category} value={category}>{category}</option>
+                    {categories.map((category) => (
+                      <option key={category} value={category}>
+                        {category}
+                      </option>
                     ))}
                   </select>
                 </div>
@@ -195,9 +212,7 @@ export default function LocalBusinessDirectory() {
         <section className="py-16 bg-white">
           <div className="container mx-auto px-4">
             <div className="text-center mb-12">
-              <h2 className="text-3xl font-bold text-gray-800 mb-4">
-                Local Businesses & Services
-              </h2>
+              <h2 className="text-3xl font-bold text-gray-800 mb-4">Local Businesses & Services</h2>
               <p className="text-xl text-gray-600 max-w-3xl mx-auto">
                 Supporting local businesses that make Centennial Hills a great place to live
               </p>
@@ -205,17 +220,26 @@ export default function LocalBusinessDirectory() {
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
               {filteredBusinesses.map((business, index) => (
-                <div key={index} className="bg-white border border-gray-200 rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition-shadow">
+                <div
+                  key={index}
+                  className="bg-white border border-gray-200 rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition-shadow"
+                >
                   <div className="p-6">
                     <div className="flex items-center mb-4">
                       <div className="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mr-4">
-                        <svg className="w-6 h-6 text-blue-600" fill="currentColor" viewBox="0 0 24 24">
-                          <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                        <svg
+                          className="w-6 h-6 text-blue-600"
+                          fill="currentColor"
+                          viewBox="0 0 24 24"
+                        >
+                          <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z" />
                         </svg>
                       </div>
                       <div>
                         <h3 className="text-lg font-semibold text-gray-800">{business.name}</h3>
-                        <span className="text-sm text-blue-600 font-medium">{business.category}</span>
+                        <span className="text-sm text-blue-600 font-medium">
+                          {business.category}
+                        </span>
                       </div>
                     </div>
 
@@ -226,13 +250,13 @@ export default function LocalBusinessDirectory() {
                     <div className="space-y-2 mb-4">
                       <div className="flex items-center text-sm text-gray-600">
                         <svg className="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 24 24">
-                          <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
+                          <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z" />
                         </svg>
                         {business.address}
                       </div>
                       <div className="flex items-center text-sm text-gray-600">
                         <svg className="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 24 24">
-                          <path d="M6.62 10.79c1.44 2.83 3.76 5.15 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/>
+                          <path d="M6.62 10.79c1.44 2.83 3.76 5.15 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z" />
                         </svg>
                         {business.phone}
                       </div>
@@ -242,8 +266,13 @@ export default function LocalBusinessDirectory() {
                       <div className="flex items-center">
                         <div className="flex text-yellow-400 mr-1">
                           {[...Array(5)].map((_, i) => (
-                            <svg key={i} className={`w-4 h-4 ${i < Math.floor(business.rating) ? 'text-yellow-400' : 'text-gray-300'}`} fill="currentColor" viewBox="0 0 24 24">
-                              <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                            <svg
+                              key={i}
+                              className={`w-4 h-4 ${i < Math.floor(business.rating) ? 'text-yellow-400' : 'text-gray-300'}`}
+                              fill="currentColor"
+                              viewBox="0 0 24 24"
+                            >
+                              <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
                             </svg>
                           ))}
                         </div>
@@ -278,11 +307,10 @@ export default function LocalBusinessDirectory() {
         {/* CTA Section */}
         <section className="py-16 bg-blue-900 text-white">
           <div className="container mx-auto px-4 text-center">
-            <h2 className="text-3xl font-bold mb-6">
-              Own a Business in Centennial Hills?
-            </h2>
+            <h2 className="text-3xl font-bold mb-6">Own a Business in Centennial Hills?</h2>
             <p className="text-xl mb-8 max-w-2xl mx-auto">
-              Get listed in our local business directory and connect with the growing Centennial Hills community
+              Get listed in our local business directory and connect with the growing Centennial
+              Hills community
             </p>
             <Link
               href="/contact"

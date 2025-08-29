@@ -7,43 +7,43 @@ export function track404Error(url, referrer = '') {
     referrer: referrer,
     timestamp: new Date().toISOString(),
     userAgent: typeof window !== 'undefined' ? window.navigator.userAgent : 'server',
-    pathname: typeof window !== 'undefined' ? window.location.pathname : 'server'
+    pathname: typeof window !== 'undefined' ? window.location.pathname : 'server',
   };
-  
+
   // Send to Google Analytics
   if (typeof window !== 'undefined' && window.gtag) {
     window.gtag('event', 'exception', {
       description: `404_error: ${url}`,
       fatal: false,
       custom_map: {
-        'cd1': 'error_type',
-        'cd2': 'error_url',
-        'cd3': 'referrer'
+        cd1: 'error_type',
+        cd2: 'error_url',
+        cd3: 'referrer',
       },
       custom_parameters: {
-        'error_type': '404',
-        'error_url': url,
-        'referrer': referrer
-      }
+        error_type: '404',
+        error_url: url,
+        referrer: referrer,
+      },
     });
   }
-  
+
   // Send to error tracking service in production
   if (process.env.NODE_ENV === 'production') {
     fetch('/api/log-error', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(errorData)
-    }).catch(err => {
+      body: JSON.stringify(errorData),
+    }).catch((err) => {
       console.error('Failed to log error:', err);
     });
   }
-  
+
   // Log to console in development
   if (process.env.NODE_ENV === 'development') {
     console.error('404 Error tracked:', errorData);
   }
-  
+
   return errorData;
 }
 
@@ -54,38 +54,38 @@ export function trackPageError(error, pageInfo = {}) {
     stack: error.stack,
     pageInfo: pageInfo,
     timestamp: new Date().toISOString(),
-    userAgent: typeof window !== 'undefined' ? window.navigator.userAgent : 'server'
+    userAgent: typeof window !== 'undefined' ? window.navigator.userAgent : 'server',
   };
-  
+
   // Send to Google Analytics
   if (typeof window !== 'undefined' && window.gtag) {
     window.gtag('event', 'exception', {
       description: `Page error: ${error.message || error}`,
       fatal: true,
       custom_parameters: {
-        'error_type': 'page_error',
-        'error_message': error.message || error.toString(),
-        'page_url': pageInfo.url || 'unknown'
-      }
+        error_type: 'page_error',
+        error_message: error.message || error.toString(),
+        page_url: pageInfo.url || 'unknown',
+      },
     });
   }
-  
+
   // Send to error tracking service in production
   if (process.env.NODE_ENV === 'production') {
     fetch('/api/log-error', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(errorData)
-    }).catch(err => {
+      body: JSON.stringify(errorData),
+    }).catch((err) => {
       console.error('Failed to log error:', err);
     });
   }
-  
+
   // Log to console in development
   if (process.env.NODE_ENV === 'development') {
     console.error('Page Error tracked:', errorData);
   }
-  
+
   return errorData;
 }
 
@@ -96,25 +96,25 @@ export function trackPerformanceIssue(metric, value, threshold) {
     value: value,
     threshold: threshold,
     timestamp: new Date().toISOString(),
-    url: typeof window !== 'undefined' ? window.location.href : 'server'
+    url: typeof window !== 'undefined' ? window.location.href : 'server',
   };
-  
+
   // Send to Google Analytics
   if (typeof window !== 'undefined' && window.gtag) {
     window.gtag('event', 'performance_issue', {
       custom_parameters: {
-        'metric': metric,
-        'value': value,
-        'threshold': threshold
-      }
+        metric: metric,
+        value: value,
+        threshold: threshold,
+      },
     });
   }
-  
+
   // Log to console in development
   if (process.env.NODE_ENV === 'development') {
     console.warn('Performance issue tracked:', issueData);
   }
-  
+
   return issueData;
 }
 
@@ -125,33 +125,33 @@ export function trackUserJourney(step, data = {}) {
     data: data,
     timestamp: new Date().toISOString(),
     url: typeof window !== 'undefined' ? window.location.href : 'server',
-    sessionId: getSessionId()
+    sessionId: getSessionId(),
   };
-  
+
   // Send to Google Analytics
   if (typeof window !== 'undefined' && window.gtag) {
     window.gtag('event', 'user_journey', {
       custom_parameters: {
-        'step': step,
-        'session_id': getSessionId(),
-        ...data
-      }
+        step: step,
+        session_id: getSessionId(),
+        ...data,
+      },
     });
   }
-  
+
   // Store in localStorage for session tracking
   if (typeof window !== 'undefined') {
     const journey = JSON.parse(localStorage.getItem('userJourney') || '[]');
     journey.push(journeyData);
     localStorage.setItem('userJourney', JSON.stringify(journey.slice(-50))); // Keep last 50 steps
   }
-  
+
   return journeyData;
 }
 
 function getSessionId() {
   if (typeof window === 'undefined') return 'server';
-  
+
   let sessionId = localStorage.getItem('sessionId');
   if (!sessionId) {
     sessionId = `session_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
@@ -162,19 +162,19 @@ function getSessionId() {
 
 export function getErrorSummary() {
   if (typeof window === 'undefined') return null;
-  
+
   const errors = JSON.parse(localStorage.getItem('errorLog') || '[]');
   const summary = {
     totalErrors: errors.length,
     errorTypes: {},
     recentErrors: errors.slice(-10),
-    lastError: errors[errors.length - 1] || null
+    lastError: errors[errors.length - 1] || null,
   };
-  
-  errors.forEach(error => {
+
+  errors.forEach((error) => {
     summary.errorTypes[error.type] = (summary.errorTypes[error.type] || 0) + 1;
   });
-  
+
   return summary;
 }
 
@@ -206,7 +206,7 @@ class ErrorTracker {
       context: context,
       timestamp: new Date().toISOString(),
       stack: error.stack,
-      url: typeof window !== 'undefined' ? window.location.href : 'server'
+      url: typeof window !== 'undefined' ? window.location.href : 'server',
     };
 
     // Store error in localStorage
@@ -228,7 +228,7 @@ class ErrorTracker {
 
   getErrors() {
     if (typeof window === 'undefined') return [];
-    
+
     try {
       const stored = localStorage.getItem('errorLog');
       return stored ? JSON.parse(stored) : [];

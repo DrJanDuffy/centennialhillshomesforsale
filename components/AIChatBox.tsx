@@ -15,8 +15,8 @@ const AIChatBox: React.FC = () => {
       id: '1',
       text: 'Hi! I&apos;m Dr. Jan Duffy&apos;s AI assistant. How can I help you with Centennial Hills real estate today?',
       from: 'assistant',
-      timestamp: new Date()
-    }
+      timestamp: new Date(),
+    },
   ]);
   const [inputValue, setInputValue] = useState('');
   const [isLoading, setIsLoading] = useState(false);
@@ -38,65 +38,71 @@ const AIChatBox: React.FC = () => {
       id: Date.now().toString(),
       text,
       from,
-      timestamp: new Date()
+      timestamp: new Date(),
     };
-    setMessages(prev => [...prev, newMessage]);
+    setMessages((prev) => [...prev, newMessage]);
   }, []);
 
-  const handleSubmit = useCallback(async (e: React.FormEvent) => {
-    e.preventDefault();
-    const question = inputValue.trim();
-    if (!question || isLoading) return;
+  const handleSubmit = useCallback(
+    async (e: React.FormEvent) => {
+      e.preventDefault();
+      const question = inputValue.trim();
+      if (!question || isLoading) return;
 
-    // Add user message
-    addMessage(question, 'user');
-    setInputValue('');
-    setIsLoading(true);
+      // Add user message
+      addMessage(question, 'user');
+      setInputValue('');
+      setIsLoading(true);
 
-    try {
-      // Call Perplexity API endpoint
-      const response = await fetch('/api/perplexity', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ prompt: question }),
-      });
+      try {
+        // Call Perplexity API endpoint
+        const response = await fetch('/api/perplexity', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ prompt: question }),
+        });
 
-      if (!response.ok) {
-        throw new Error('API request failed');
+        if (!response.ok) {
+          throw new Error('API request failed');
+        }
+
+        const data = await response.json();
+        addMessage(
+          data.reply || 'I apologize, but I couldn&apos;t generate a response at this time.',
+          'assistant'
+        );
+
+        // Capture interests for recommendations
+        if (typeof window !== 'undefined' && (window as any).propertyBehaviour) {
+          const propertyBehaviour = (window as any).propertyBehaviour;
+          if (/school|college|elementary/i.test(question)) {
+            propertyBehaviour.add('feature:school');
+          }
+          if (/pool|spa/i.test(question)) {
+            propertyBehaviour.add('feature:pool');
+          }
+          if (/price|budget|cost/i.test(question)) {
+            propertyBehaviour.add('feature:price');
+          }
+          if (/neighborhood|area|community/i.test(question)) {
+            propertyBehaviour.add('feature:neighborhood');
+          }
+          if (/park|trail|outdoor/i.test(question)) {
+            propertyBehaviour.add('feature:outdoor');
+          }
+        }
+      } catch (error) {
+        console.error('Chat error:', error);
+        addMessage('Sorry, something went wrong – please try again later.', 'assistant');
+      } finally {
+        setIsLoading(false);
+        inputRef.current?.focus();
       }
-
-      const data = await response.json();
-      addMessage(data.reply || 'I apologize, but I couldn&apos;t generate a response at this time.', 'assistant');
-
-      // Capture interests for recommendations
-      if (typeof window !== 'undefined' && (window as any).propertyBehaviour) {
-        const propertyBehaviour = (window as any).propertyBehaviour;
-        if (/school|college|elementary/i.test(question)) {
-          propertyBehaviour.add('feature:school');
-        }
-        if (/pool|spa/i.test(question)) {
-          propertyBehaviour.add('feature:pool');
-        }
-        if (/price|budget|cost/i.test(question)) {
-          propertyBehaviour.add('feature:price');
-        }
-        if (/neighborhood|area|community/i.test(question)) {
-          propertyBehaviour.add('feature:neighborhood');
-        }
-        if (/park|trail|outdoor/i.test(question)) {
-          propertyBehaviour.add('feature:outdoor');
-        }
-      }
-    } catch (error) {
-      console.error('Chat error:', error);
-      addMessage('Sorry, something went wrong – please try again later.', 'assistant');
-    } finally {
-      setIsLoading(false);
-      inputRef.current?.focus();
-    }
-  }, [inputValue, isLoading, addMessage]);
+    },
+    [inputValue, isLoading, addMessage]
+  );
 
   const toggleChat = useCallback(() => {
     setIsOpen(!isOpen);
@@ -116,8 +122,8 @@ const AIChatBox: React.FC = () => {
         type="button"
         onClick={toggleChat}
         className={`fixed bottom-6 right-6 z-50 p-4 rounded-full shadow-lg transition-all duration-300 ${
-          isOpen 
-            ? 'bg-red-500 hover:bg-red-600 text-white' 
+          isOpen
+            ? 'bg-red-500 hover:bg-red-600 text-white'
             : 'bg-blue-600 hover:bg-blue-700 text-white'
         }`}
         aria-label={isOpen ? 'Close chat' : 'Open chat'}
@@ -156,15 +162,20 @@ const AIChatBox: React.FC = () => {
                   }`}
                 >
                   <p className="text-sm">{message.text}</p>
-                  <p className={`text-xs mt-1 ${
-                    message.from === 'assistant' ? 'text-gray-500' : 'text-blue-100'
-                  }`}>
-                    {message.timestamp.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
+                  <p
+                    className={`text-xs mt-1 ${
+                      message.from === 'assistant' ? 'text-gray-500' : 'text-blue-100'
+                    }`}
+                  >
+                    {message.timestamp.toLocaleTimeString([], {
+                      hour: '2-digit',
+                      minute: '2-digit',
+                    })}
                   </p>
                 </div>
               </div>
             ))}
-            
+
             {/* Loading indicator */}
             {isLoading && (
               <div className="flex justify-start">
@@ -176,7 +187,7 @@ const AIChatBox: React.FC = () => {
                 </div>
               </div>
             )}
-            
+
             <div ref={messagesEndRef} />
           </div>
 
@@ -201,10 +212,14 @@ const AIChatBox: React.FC = () => {
                 <span className="hidden sm:inline">Send</span>
               </button>
             </div>
-            
+
             {/* Quick Questions */}
             <div className="mt-3 flex flex-wrap gap-2">
-              {['What&apos;s the average home price?', 'Tell me about schools', 'Show me neighborhoods'].map((question) => (
+              {[
+                'What&apos;s the average home price?',
+                'Tell me about schools',
+                'Show me neighborhoods',
+              ].map((question) => (
                 <button
                   key={question}
                   type="button"

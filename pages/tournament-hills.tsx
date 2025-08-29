@@ -36,40 +36,41 @@ export default function TournamentHills() {
           type="application/ld+json"
           dangerouslySetInnerHTML={{
             __html: JSON.stringify({
-              "@context": "https://schema.org",
-              "@type": "Place",
-              "name": "Tournament Hills",
-              "description": "Luxury golf course community in Las Vegas featuring championship golf, custom homes, and resort-style amenities",
-              "address": {
-                "@type": "PostalAddress",
-                "addressLocality": "Las Vegas",
-                "addressRegion": "NV",
-                "postalCode": "89149",
-                "addressCountry": "US"
+              '@context': 'https://schema.org',
+              '@type': 'Place',
+              name: 'Tournament Hills',
+              description:
+                'Luxury golf course community in Las Vegas featuring championship golf, custom homes, and resort-style amenities',
+              address: {
+                '@type': 'PostalAddress',
+                addressLocality: 'Las Vegas',
+                addressRegion: 'NV',
+                postalCode: '89149',
+                addressCountry: 'US',
               },
-              "geo": {
-                "@type": "GeoCoordinates",
-                "latitude": "36.268",
-                "longitude": "-115.328"
+              geo: {
+                '@type': 'GeoCoordinates',
+                latitude: '36.268',
+                longitude: '-115.328',
               },
-              "amenityFeature": [
+              amenityFeature: [
                 {
-                  "@type": "LocationFeatureSpecification",
-                  "name": "Championship Golf Course",
-                  "value": true
+                  '@type': 'LocationFeatureSpecification',
+                  name: 'Championship Golf Course',
+                  value: true,
                 },
                 {
-                  "@type": "LocationFeatureSpecification",
-                  "name": "Resort-Style Amenities",
-                  "value": true
+                  '@type': 'LocationFeatureSpecification',
+                  name: 'Resort-Style Amenities',
+                  value: true,
                 },
                 {
-                  "@type": "LocationFeatureSpecification",
-                  "name": "Mountain Views",
-                  "value": true
-                }
-              ]
-            })
+                  '@type': 'LocationFeatureSpecification',
+                  name: 'Mountain Views',
+                  value: true,
+                },
+              ],
+            }),
           }}
         />
       </Head>
@@ -108,12 +109,14 @@ export default function TournamentHills() {
                 <p>
                   Tournament Hills represents the pinnacle of golf course living in Las Vegas. This
                   prestigious community is centered around the championship Bear's Best Golf Course,
-                  offering residents the opportunity to live on one of Nevada's most renowned golf courses.
+                  offering residents the opportunity to live on one of Nevada's most renowned golf
+                  courses.
                 </p>
                 <p>
-                  Home to PGA Tour professionals and golf enthusiasts alike, Tournament Hills features
-                  custom-built luxury homes ranging from $500K to $2M+. The community offers stunning
-                  mountain views, championship golf, and proximity to all the amenities of Centennial Hills.
+                  Home to PGA Tour professionals and golf enthusiasts alike, Tournament Hills
+                  features custom-built luxury homes ranging from $500K to $2M+. The community
+                  offers stunning mountain views, championship golf, and proximity to all the
+                  amenities of Centennial Hills.
                 </p>
               </div>
               <div className="quick-stats">
@@ -156,22 +159,22 @@ export default function TournamentHills() {
               <div className="amenity-card">
                 <h3>Bear's Best Golf Course</h3>
                 <p>
-                  Championship 18-hole golf course designed by renowned golf course architect.
-                  Home to professional tournaments and a challenging par 72 layout.
+                  Championship 18-hole golf course designed by renowned golf course architect. Home
+                  to professional tournaments and a challenging par 72 layout.
                 </p>
               </div>
               <div className="amenity-card">
                 <h3>Resort-Style Clubhouse</h3>
                 <p>
-                  Full-service clubhouse with fine dining, pro shop, fitness center,
-                  and social amenities for residents and guests.
+                  Full-service clubhouse with fine dining, pro shop, fitness center, and social
+                  amenities for residents and guests.
                 </p>
               </div>
               <div className="amenity-card">
                 <h3>Golf Course Living</h3>
                 <p>
-                  Many homes offer direct golf course views and proximity to fairways,
-                  creating an unparalleled golf lifestyle experience.
+                  Many homes offer direct golf course views and proximity to fairways, creating an
+                  unparalleled golf lifestyle experience.
                 </p>
               </div>
             </div>
@@ -190,22 +193,22 @@ export default function TournamentHills() {
               <div className="insight-card">
                 <h3>Golf Course Premium</h3>
                 <p>
-                  Homes with golf course views command 15-25% premium pricing compared
-                  to similar homes without direct course access.
+                  Homes with golf course views command 15-25% premium pricing compared to similar
+                  homes without direct course access.
                 </p>
               </div>
               <div className="insight-card">
                 <h3>Year-Round Appeal</h3>
                 <p>
-                  Strong demand from golf enthusiasts, retirees, and luxury home buyers
-                  seeking championship golf living.
+                  Strong demand from golf enthusiasts, retirees, and luxury home buyers seeking
+                  championship golf living.
                 </p>
               </div>
               <div className="insight-card">
                 <h3>Appreciation Potential</h3>
                 <p>
-                  Historic 12% annual appreciation driven by limited inventory and
-                  growing demand for golf course communities.
+                  Historic 12% annual appreciation driven by limited inventory and growing demand
+                  for golf course communities.
                 </p>
               </div>
             </div>

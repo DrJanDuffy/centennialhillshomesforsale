@@ -59,7 +59,7 @@ class RSSParser {
       }
 
       const articles = this.parseArticles(channel.item || channel.entry || []);
-      
+
       return {
         title: channel.title || 'Market Insights',
         description: channel.description || 'Latest real estate market insights',
@@ -79,7 +79,7 @@ class RSSParser {
     }
 
     return items
-      .filter(item => item && item.title)
+      .filter((item) => item && item.title)
       .map((item, index) => {
         const content = this.cleanContent(item.content || item.description || '');
         const imageUrl = this.extractImageUrl(content);
@@ -105,7 +105,7 @@ class RSSParser {
 
   private cleanContent(content: string): string {
     if (!content) return '';
-    
+
     // Remove HTML tags but preserve line breaks
     let cleaned = content
       .replace(/<script[^>]*>[\s\S]*?<\/script>/gi, '')
@@ -116,7 +116,7 @@ class RSSParser {
 
     // Decode HTML entities
     cleaned = this.decodeHtmlEntities(cleaned);
-    
+
     return cleaned;
   }
 
@@ -132,11 +132,11 @@ class RSSParser {
 
   private generateExcerpt(content: string, maxLength: number): string {
     if (!content) return '';
-    
+
     const words = content.split(' ');
     if (words.length <= maxLength / 5) return content;
-    
-             return `${words.slice(0, Math.floor(maxLength / 5)).join(' ')}...`;
+
+    return `${words.slice(0, Math.floor(maxLength / 5)).join(' ')}...`;
   }
 
   private calculateReadTime(content: string): number {
@@ -182,15 +182,17 @@ export const rssParser = new RSSParser();
 // Helper function to fetch and parse KCM feed
 export async function fetchKCMFeed(): Promise<RSSFeedData> {
   // Primary RSS feed URL from Simplifying the Market
-  const feedUrl = 'https://www.simplifyingthemarket.com/en/feed?a=956758-ef2edda2f940e018328655620ea05f18';
-  
+  const feedUrl =
+    'https://www.simplifyingthemarket.com/en/feed?a=956758-ef2edda2f940e018328655620ea05f18';
+
   try {
     return await rssParser.parseFeed(feedUrl);
   } catch (error) {
     console.warn('Primary RSS feed failed, trying alternative URL:', error);
-    
+
     // Fallback to alternative URL if primary fails
-    const alternativeUrl = 'https://www.simplifyingthemarket.com/en/?a=956758-ef2edda2f940e018328655620ea05f18';
+    const alternativeUrl =
+      'https://www.simplifyingthemarket.com/en/?a=956758-ef2edda2f940e018328655620ea05f18';
     return await rssParser.parseFeed(alternativeUrl);
   }
 }

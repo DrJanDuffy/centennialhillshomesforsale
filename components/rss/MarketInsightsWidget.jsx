@@ -5,7 +5,7 @@ import Link from 'next/link';
 import { trackRSSAnalytics, trackRSSPerformance } from '../../lib/rss-utils';
 import KCMFeed from './KCMFeed';
 
-export default function MarketInsightsWidget({ 
+export default function MarketInsightsWidget({
   className = '',
   title = 'Latest Market Insights',
   subtitle = 'Stay informed with expert real estate analysis',
@@ -14,7 +14,7 @@ export default function MarketInsightsWidget({
   showRefreshButton = true,
   enableAnalytics = true,
   enablePerformance = true,
-  theme = 'light'
+  theme = 'light',
 }) {
   const [isExpanded, setIsExpanded] = useState(false);
   const [lastRefresh, setLastRefresh] = useState(null);
@@ -24,14 +24,14 @@ export default function MarketInsightsWidget({
   useEffect(() => {
     if (enablePerformance) {
       const startTime = performance.now();
-      
+
       return () => {
         const loadTime = performance.now() - startTime;
         trackRSSPerformance('widget_load_time', loadTime, {
           component: 'MarketInsightsWidget',
           variant,
           maxArticles,
-          theme
+          theme,
         });
       };
     }
@@ -40,40 +40,52 @@ export default function MarketInsightsWidget({
   // Handle refresh
   const handleRefresh = useCallback(() => {
     setLastRefresh(new Date().toISOString());
-    setInteractionCount(prev => prev + 1);
-    
+    setInteractionCount((prev) => prev + 1);
+
     if (enableAnalytics) {
-      trackRSSAnalytics('widget_refresh', { id: 'market-insights-widget' }, {
-        variant,
-        maxArticles,
-        theme,
-        interactionCount: interactionCount + 1
-      });
+      trackRSSAnalytics(
+        'widget_refresh',
+        { id: 'market-insights-widget' },
+        {
+          variant,
+          maxArticles,
+          theme,
+          interactionCount: interactionCount + 1,
+        }
+      );
     }
   }, [enableAnalytics, variant, maxArticles, theme, interactionCount]);
 
   // Handle expand/collapse
   const handleToggleExpand = useCallback(() => {
-    setIsExpanded(prev => !prev);
-    
+    setIsExpanded((prev) => !prev);
+
     if (enableAnalytics) {
-      trackRSSAnalytics('widget_toggle', { id: 'market-insights-widget' }, {
-        action: isExpanded ? 'collapse' : 'expand',
-        variant,
-        maxArticles,
-        theme
-      });
+      trackRSSAnalytics(
+        'widget_toggle',
+        { id: 'market-insights-widget' },
+        {
+          action: isExpanded ? 'collapse' : 'expand',
+          variant,
+          maxArticles,
+          theme,
+        }
+      );
     }
   }, [enableAnalytics, isExpanded, variant, maxArticles, theme]);
 
   // Handle view all click
   const handleViewAll = useCallback(() => {
     if (enableAnalytics) {
-      trackRSSAnalytics('widget_view_all', { id: 'market-insights-widget' }, {
-        variant,
-        maxArticles,
-        theme
-      });
+      trackRSSAnalytics(
+        'widget_view_all',
+        { id: 'market-insights-widget' },
+        {
+          variant,
+          maxArticles,
+          theme,
+        }
+      );
     }
   }, [enableAnalytics, variant, maxArticles, theme]);
 
@@ -85,7 +97,7 @@ export default function MarketInsightsWidget({
       subtitle: 'text-gray-600',
       icon: 'bg-blue-100 text-blue-600',
       button: 'bg-blue-600 hover:bg-blue-700 text-white',
-      buttonOutline: 'border-blue-600 text-blue-600 hover:bg-blue-600 hover:text-white'
+      buttonOutline: 'border-blue-600 text-blue-600 hover:bg-blue-600 hover:text-white',
     },
     dark: {
       container: 'bg-gray-800 border border-gray-700',
@@ -93,7 +105,7 @@ export default function MarketInsightsWidget({
       subtitle: 'text-gray-300',
       icon: 'bg-blue-900 text-blue-300',
       button: 'bg-blue-600 hover:bg-blue-700 text-white',
-      buttonOutline: 'border-blue-400 text-blue-400 hover:bg-blue-400 hover:text-gray-900'
+      buttonOutline: 'border-blue-400 text-blue-400 hover:bg-blue-400 hover:text-gray-900',
     },
     gradient: {
       container: 'bg-gradient-to-br from-blue-50 to-indigo-100 border border-blue-200',
@@ -101,8 +113,8 @@ export default function MarketInsightsWidget({
       subtitle: 'text-gray-700',
       icon: 'bg-blue-500 text-white',
       button: 'bg-blue-600 hover:bg-blue-700 text-white',
-      buttonOutline: 'border-blue-600 text-blue-600 hover:bg-blue-600 hover:text-white'
-    }
+      buttonOutline: 'border-blue-600 text-blue-600 hover:bg-blue-600 hover:text-white',
+    },
   };
 
   const currentTheme = themeVariants[theme] || themeVariants.light;
@@ -112,16 +124,20 @@ export default function MarketInsightsWidget({
       {/* Header */}
       <div className="flex items-center justify-between mb-4">
         <div className="flex items-center">
-          <div className={`w-8 h-8 rounded-full flex items-center justify-center mr-3 ${currentTheme.icon}`}>
+          <div
+            className={`w-8 h-8 rounded-full flex items-center justify-center mr-3 ${currentTheme.icon}`}
+          >
             <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
-              <path fillRule="evenodd" d="M3 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z" clipRule="evenodd" />
+              <path
+                fillRule="evenodd"
+                d="M3 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z"
+                clipRule="evenodd"
+              />
             </svg>
           </div>
           <div>
             <h3 className={`text-lg font-semibold ${currentTheme.header}`}>{title}</h3>
-            {subtitle && (
-              <p className={`text-sm ${currentTheme.subtitle}`}>{subtitle}</p>
-            )}
+            {subtitle && <p className={`text-sm ${currentTheme.subtitle}`}>{subtitle}</p>}
           </div>
         </div>
 
@@ -136,7 +152,11 @@ export default function MarketInsightsWidget({
               aria-label="Refresh market insights"
             >
               <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
-                <path fillRule="evenodd" d="M4 2a1 1 0 011 1v2.101a7.002 7.002 0 0111.601 2.566 1 1 0 11-1.885.666A5.002 5.002 0 005.999 7H9a1 1 0 010 2H4a1 1 0 01-1-1V3a1 1 0 011-1zm.008 9.057a1 1 0 011.276.61A5.002 5.002 0 0014.001 13H11a1 1 0 110-2h5a1 1 0 011 1v5a1 1 0 11-2 0v-2.101a7.002 7.002 0 01-11.601-2.566 1 1 0 01.61-1.276z" clipRule="evenodd" />
+                <path
+                  fillRule="evenodd"
+                  d="M4 2a1 1 0 011 1v2.101a7.002 7.002 0 0111.601 2.566 1 1 0 11-1.885.666A5.002 5.002 0 005.999 7H9a1 1 0 010 2H4a1 1 0 01-1-1V3a1 1 0 011-1zm.008 9.057a1 1 0 011.276.61A5.002 5.002 0 0014.001 13H11a1 1 0 110-2h5a1 1 0 011 1v5a1 1 0 11-2 0v-2.101a7.002 7.002 0 01-11.601-2.566 1 1 0 01.61-1.276z"
+                  clipRule="evenodd"
+                />
               </svg>
             </button>
           )}
@@ -148,12 +168,16 @@ export default function MarketInsightsWidget({
             title={isExpanded ? 'Collapse' : 'Expand'}
             aria-label={isExpanded ? 'Collapse widget' : 'Expand widget'}
           >
-            <svg 
-              className={`w-4 h-4 transition-transform duration-200 ${isExpanded ? 'rotate-180' : ''}`} 
-              fill="currentColor" 
+            <svg
+              className={`w-4 h-4 transition-transform duration-200 ${isExpanded ? 'rotate-180' : ''}`}
+              fill="currentColor"
               viewBox="0 0 20 20"
             >
-              <path fillRule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clipRule="evenodd" />
+              <path
+                fillRule="evenodd"
+                d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                clipRule="evenodd"
+              />
             </svg>
           </button>
         </div>
@@ -167,9 +191,11 @@ export default function MarketInsightsWidget({
       )}
 
       {/* Content */}
-      <div className={`transition-all duration-300 ${isExpanded ? 'max-h-none' : 'max-h-96 overflow-hidden'}`}>
-        <KCMFeed 
-          maxArticles={maxArticles} 
+      <div
+        className={`transition-all duration-300 ${isExpanded ? 'max-h-none' : 'max-h-96 overflow-hidden'}`}
+      >
+        <KCMFeed
+          maxArticles={maxArticles}
           showFeatured={false}
           variant={variant}
           enableAnalytics={enableAnalytics}
@@ -188,8 +214,17 @@ export default function MarketInsightsWidget({
             className={`inline-flex items-center ${currentTheme.buttonOutline} px-4 py-2 rounded-lg font-medium transition-all duration-200 text-sm`}
           >
             View All Insights
-            <svg className="w-4 h-4 ml-1" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
-              <path fillRule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clipRule="evenodd" />
+            <svg
+              className="w-4 h-4 ml-1"
+              fill="currentColor"
+              viewBox="0 0 20 20"
+              aria-hidden="true"
+            >
+              <path
+                fillRule="evenodd"
+                d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"
+                clipRule="evenodd"
+              />
             </svg>
           </Link>
 
@@ -201,7 +236,11 @@ export default function MarketInsightsWidget({
             </span>
             <span className="flex items-center">
               <svg className="w-3 h-3 mr-1" fill="currentColor" viewBox="0 0 20 20">
-                <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clipRule="evenodd" />
+                <path
+                  fillRule="evenodd"
+                  d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z"
+                  clipRule="evenodd"
+                />
               </svg>
               {maxArticles} articles
             </span>
@@ -229,14 +268,14 @@ export default function MarketInsightsWidget({
 export const WidgetVariants = {
   DEFAULT: 'default',
   COMPACT: 'compact',
-  MINIMAL: 'minimal'
+  MINIMAL: 'minimal',
 };
 
 // Theme options
 export const WidgetThemes = {
   LIGHT: 'light',
   DARK: 'dark',
-  GRADIENT: 'gradient'
+  GRADIENT: 'gradient',
 };
 
 // Enhanced widget with additional features
@@ -269,16 +308,12 @@ export function EnhancedMarketInsightsWidget(props) {
   };
 
   return (
-    <div 
-      id="enhanced-market-insights-widget" 
+    <div
+      id="enhanced-market-insights-widget"
       onMouseEnter={handleInteraction}
       className="transition-all duration-500"
     >
-      <MarketInsightsWidget 
-        {...props} 
-        isVisible={isVisible} 
-        hasInteracted={hasInteracted} 
-      />
+      <MarketInsightsWidget {...props} isVisible={isVisible} hasInteracted={hasInteracted} />
     </div>
   );
 }

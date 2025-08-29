@@ -2,18 +2,18 @@
 
 import { motion } from 'framer-motion';
 import { useState, useCallback } from 'react';
-import { 
-  User, 
-  Mail, 
-  Phone, 
-  MessageSquare, 
-  Home, 
-  Calendar, 
-  DollarSign, 
+import {
+  User,
+  Mail,
+  Phone,
+  MessageSquare,
+  Home,
+  Calendar,
+  DollarSign,
   MapPin,
   CheckCircle,
   AlertCircle,
-  Loader2
+  Loader2,
 } from 'lucide-react';
 
 export interface FUBFormData {
@@ -60,10 +60,10 @@ export const FollowUpBossForm: React.FC<FUBFormProps> = ({
   formType = 'lead',
   source = 'Website',
   trigger = 'Contact Form',
-  successMessage = 'Thank you! We\'ll contact you within 1 hour.',
+  successMessage = "Thank you! We'll contact you within 1 hour.",
   errorMessage = 'Something went wrong. Please try again.',
   submitButtonText = 'Submit',
-  theme = 'blue'
+  theme = 'blue',
 }) => {
   const [formData, setFormData] = useState<FUBFormData>({
     firstName: '',
@@ -78,7 +78,7 @@ export const FollowUpBossForm: React.FC<FUBFormProps> = ({
     neighborhood: 'Centennial Hills',
     propertyType: 'single-family',
     source,
-    trigger
+    trigger,
   });
 
   const [errors, setErrors] = useState<Partial<FUBFormData>>({});
@@ -152,23 +152,23 @@ export const FollowUpBossForm: React.FC<FUBFormProps> = ({
     blue: {
       primary: 'bg-blue-600 hover:bg-blue-700',
       secondary: 'bg-blue-50 text-blue-800',
-      accent: 'border-blue-200 focus:border-blue-500'
+      accent: 'border-blue-200 focus:border-blue-500',
     },
     green: {
       primary: 'bg-green-600 hover:bg-green-700',
       secondary: 'bg-green-50 text-green-800',
-      accent: 'border-green-200 focus:border-green-500'
+      accent: 'border-green-200 focus:border-green-500',
     },
     purple: {
       primary: 'bg-purple-600 hover:bg-purple-700',
       secondary: 'bg-purple-50 text-purple-800',
-      accent: 'border-purple-200 focus:border-purple-500'
+      accent: 'border-purple-200 focus:border-purple-500',
     },
     orange: {
       primary: 'bg-orange-600 hover:bg-orange-700',
       secondary: 'bg-orange-50 text-orange-800',
-      accent: 'border-orange-200 focus:border-orange-500'
-    }
+      accent: 'border-orange-200 focus:border-orange-500',
+    },
   };
 
   const currentTheme = themeColors[theme];
@@ -201,66 +201,72 @@ export const FollowUpBossForm: React.FC<FUBFormProps> = ({
     return Object.keys(newErrors).length === 0;
   }, [formData]);
 
-  const handleInputChange = useCallback((name: keyof FUBFormData, value: string) => {
-    setFormData(prev => ({ ...prev, [name]: value }));
-    
-    // Clear error when user starts typing
-    if (errors[name]) {
-      setErrors(prev => ({ ...prev, [name]: '' }));
-    }
-  }, [errors]);
+  const handleInputChange = useCallback(
+    (name: keyof FUBFormData, value: string) => {
+      setFormData((prev) => ({ ...prev, [name]: value }));
 
-  const handleSubmit = useCallback(async (e: React.FormEvent) => {
-    e.preventDefault();
-    
-    if (!validateForm()) {
-      return;
-    }
-
-    setIsSubmitting(true);
-    setSubmitError('');
-
-    try {
-      // Determine API endpoint based on form type
-      const endpoint = formType === 'lead' ? '/api/fub/create-lead' : '/api/fub/create-contact';
-      
-      const response = await fetch(endpoint, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          ...formData,
-          timestamp: new Date().toISOString()
-        }),
-      });
-
-      const result = await response.json();
-
-      if (result.success) {
-        setIsSubmitted(true);
-        if (onSubmit) {
-          onSubmit(formData);
-        }
-        
-        // Track successful submission
-        if (typeof window !== 'undefined' && window.gtag) {
-          window.gtag('event', 'form_submit', {
-            event_category: 'Lead Generation',
-            event_label: `${formType}_form`,
-            value: 10
-          });
-        }
-      } else {
-        setSubmitError(result.error || errorMessage);
+      // Clear error when user starts typing
+      if (errors[name]) {
+        setErrors((prev) => ({ ...prev, [name]: '' }));
       }
-    } catch (error) {
-      console.error('Form submission error:', error);
-      setSubmitError('Network error. Please try again.');
-    } finally {
-      setIsSubmitting(false);
-    }
-  }, [formData, validateForm, formType, onSubmit, errorMessage]);
+    },
+    [errors]
+  );
+
+  const handleSubmit = useCallback(
+    async (e: React.FormEvent) => {
+      e.preventDefault();
+
+      if (!validateForm()) {
+        return;
+      }
+
+      setIsSubmitting(true);
+      setSubmitError('');
+
+      try {
+        // Determine API endpoint based on form type
+        const endpoint = formType === 'lead' ? '/api/fub/create-lead' : '/api/fub/create-contact';
+
+        const response = await fetch(endpoint, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            ...formData,
+            timestamp: new Date().toISOString(),
+          }),
+        });
+
+        const result = await response.json();
+
+        if (result.success) {
+          setIsSubmitted(true);
+          if (onSubmit) {
+            onSubmit(formData);
+          }
+
+          // Track successful submission
+          if (typeof window !== 'undefined' && window.gtag) {
+            window.gtag('event', 'form_submit', {
+              event_category: 'Lead Generation',
+              event_label: `${formType}_form`,
+              value: 10,
+            });
+          }
+        } else {
+          setSubmitError(result.error || errorMessage);
+        }
+      } catch (error) {
+        console.error('Form submission error:', error);
+        setSubmitError('Network error. Please try again.');
+      } finally {
+        setIsSubmitting(false);
+      }
+    },
+    [formData, validateForm, formType, onSubmit, errorMessage]
+  );
 
   const resetForm = useCallback(() => {
     setFormData({
@@ -276,7 +282,7 @@ export const FollowUpBossForm: React.FC<FUBFormProps> = ({
       neighborhood: 'Centennial Hills',
       propertyType: 'single-family',
       source,
-      trigger
+      trigger,
     });
     setErrors({});
     setIsSubmitted(false);
@@ -293,7 +299,7 @@ export const FollowUpBossForm: React.FC<FUBFormProps> = ({
         <div className="text-6xl mb-4">🎉</div>
         <h3 className="text-2xl font-bold text-gray-900 mb-4">Thank You!</h3>
         <p className="text-gray-600 mb-6">{successMessage}</p>
-        
+
         <div className={`${currentTheme.secondary} rounded-lg p-4 mb-6`}>
           <p className="text-sm">
             <strong>Next Steps:</strong>
@@ -429,7 +435,10 @@ export const FollowUpBossForm: React.FC<FUBFormProps> = ({
           <>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div>
-                <label htmlFor="propertyInterest" className="block text-sm font-medium text-gray-700 mb-2">
+                <label
+                  htmlFor="propertyInterest"
+                  className="block text-sm font-medium text-gray-700 mb-2"
+                >
                   <Home className="w-4 h-4 inline mr-2" />
                   Property Interest
                 </label>
@@ -439,7 +448,7 @@ export const FollowUpBossForm: React.FC<FUBFormProps> = ({
                   onChange={(e) => handleInputChange('propertyInterest', e.target.value)}
                   className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors"
                 >
-                  {propertyInterestOptions.map(option => (
+                  {propertyInterestOptions.map((option) => (
                     <option key={option.value} value={option.value}>
                       {option.label}
                     </option>
@@ -448,7 +457,10 @@ export const FollowUpBossForm: React.FC<FUBFormProps> = ({
               </div>
 
               <div>
-                <label htmlFor="neighborhood" className="block text-sm font-medium text-gray-700 mb-2">
+                <label
+                  htmlFor="neighborhood"
+                  className="block text-sm font-medium text-gray-700 mb-2"
+                >
                   <MapPin className="w-4 h-4 inline mr-2" />
                   Preferred Neighborhood
                 </label>
@@ -458,7 +470,7 @@ export const FollowUpBossForm: React.FC<FUBFormProps> = ({
                   onChange={(e) => handleInputChange('neighborhood', e.target.value)}
                   className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors"
                 >
-                  {neighborhoodOptions.map(option => (
+                  {neighborhoodOptions.map((option) => (
                     <option key={option.value} value={option.value}>
                       {option.label}
                     </option>
@@ -469,7 +481,10 @@ export const FollowUpBossForm: React.FC<FUBFormProps> = ({
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div>
-                <label htmlFor="propertyType" className="block text-sm font-medium text-gray-700 mb-2">
+                <label
+                  htmlFor="propertyType"
+                  className="block text-sm font-medium text-gray-700 mb-2"
+                >
                   <Home className="w-4 h-4 inline mr-2" />
                   Property Type
                 </label>
@@ -479,7 +494,7 @@ export const FollowUpBossForm: React.FC<FUBFormProps> = ({
                   onChange={(e) => handleInputChange('propertyType', e.target.value)}
                   className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors"
                 >
-                  {propertyTypeOptions.map(option => (
+                  {propertyTypeOptions.map((option) => (
                     <option key={option.value} value={option.value}>
                       {option.label}
                     </option>
@@ -488,7 +503,10 @@ export const FollowUpBossForm: React.FC<FUBFormProps> = ({
               </div>
 
               <div>
-                <label htmlFor="preferredContact" className="block text-sm font-medium text-gray-700 mb-2">
+                <label
+                  htmlFor="preferredContact"
+                  className="block text-sm font-medium text-gray-700 mb-2"
+                >
                   <Phone className="w-4 h-4 inline mr-2" />
                   Preferred Contact Method
                 </label>
@@ -498,7 +516,7 @@ export const FollowUpBossForm: React.FC<FUBFormProps> = ({
                   onChange={(e) => handleInputChange('preferredContact', e.target.value)}
                   className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors"
                 >
-                  {contactOptions.map(option => (
+                  {contactOptions.map((option) => (
                     <option key={option.value} value={option.value}>
                       {option.label}
                     </option>
@@ -524,7 +542,7 @@ export const FollowUpBossForm: React.FC<FUBFormProps> = ({
                   onChange={(e) => handleInputChange('budget', e.target.value)}
                   className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors"
                 >
-                  {budgetOptions.map(option => (
+                  {budgetOptions.map((option) => (
                     <option key={option.value} value={option.value}>
                       {option.label}
                     </option>
@@ -545,7 +563,7 @@ export const FollowUpBossForm: React.FC<FUBFormProps> = ({
                   onChange={(e) => handleInputChange('timeline', e.target.value)}
                   className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors"
                 >
-                  {timelineOptions.map(option => (
+                  {timelineOptions.map((option) => (
                     <option key={option.value} value={option.value}>
                       {option.label}
                     </option>
@@ -603,8 +621,9 @@ export const FollowUpBossForm: React.FC<FUBFormProps> = ({
 
         {/* Privacy Notice */}
         <p className="text-xs text-gray-500 text-center">
-          By submitting this form, you agree to receive communications from Dr. Jan Duffy regarding your real estate inquiry. 
-          Your information will be kept confidential and used only for the purpose of assisting you with your real estate needs.
+          By submitting this form, you agree to receive communications from Dr. Jan Duffy regarding
+          your real estate inquiry. Your information will be kept confidential and used only for the
+          purpose of assisting you with your real estate needs.
         </p>
       </form>
     </motion.div>

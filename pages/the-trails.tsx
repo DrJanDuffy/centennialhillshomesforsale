@@ -36,40 +36,41 @@ export default function TheTrails() {
           type="application/ld+json"
           dangerouslySetInnerHTML={{
             __html: JSON.stringify({
-              "@context": "https://schema.org",
-              "@type": "Place",
-              "name": "The Trails",
-              "description": "Family-friendly master-planned community in Centennial Hills featuring walking trails, parks, and excellent schools",
-              "address": {
-                "@type": "PostalAddress",
-                "addressLocality": "Las Vegas",
-                "addressRegion": "NV",
-                "postalCode": "89149",
-                "addressCountry": "US"
+              '@context': 'https://schema.org',
+              '@type': 'Place',
+              name: 'The Trails',
+              description:
+                'Family-friendly master-planned community in Centennial Hills featuring walking trails, parks, and excellent schools',
+              address: {
+                '@type': 'PostalAddress',
+                addressLocality: 'Las Vegas',
+                addressRegion: 'NV',
+                postalCode: '89149',
+                addressCountry: 'US',
               },
-              "geo": {
-                "@type": "GeoCoordinates",
-                "latitude": "36.268",
-                "longitude": "-115.328"
+              geo: {
+                '@type': 'GeoCoordinates',
+                latitude: '36.268',
+                longitude: '-115.328',
               },
-              "amenityFeature": [
+              amenityFeature: [
                 {
-                  "@type": "LocationFeatureSpecification",
-                  "name": "Walking Trails",
-                  "value": true
+                  '@type': 'LocationFeatureSpecification',
+                  name: 'Walking Trails',
+                  value: true,
                 },
                 {
-                  "@type": "LocationFeatureSpecification",
-                  "name": "Community Parks",
-                  "value": true
+                  '@type': 'LocationFeatureSpecification',
+                  name: 'Community Parks',
+                  value: true,
                 },
                 {
-                  "@type": "LocationFeatureSpecification",
-                  "name": "Top-Rated Schools",
-                  "value": true
-                }
-              ]
-            })
+                  '@type': 'LocationFeatureSpecification',
+                  name: 'Top-Rated Schools',
+                  value: true,
+                },
+              ],
+            }),
           }}
         />
       </Head>
@@ -89,8 +90,9 @@ export default function TheTrails() {
           <div className="container">
             <h1>The Trails Las Vegas Real Estate</h1>
             <p className="hero-subtitle">
-              Discover family-friendly living in this master-planned community featuring scenic walking trails,
-              beautiful parks, and award-winning schools in the heart of Centennial Hills.
+              Discover family-friendly living in this master-planned community featuring scenic
+              walking trails, beautiful parks, and award-winning schools in the heart of Centennial
+              Hills.
             </p>
           </div>
         </motion.section>
@@ -106,14 +108,15 @@ export default function TheTrails() {
             <div className="overview-grid">
               <div className="overview-content">
                 <p>
-                  The Trails represents the perfect blend of suburban tranquility and modern convenience.
-                  This master-planned community is renowned for its extensive network of walking trails,
-                  lush parks, and strong sense of community.
+                  The Trails represents the perfect blend of suburban tranquility and modern
+                  convenience. This master-planned community is renowned for its extensive network
+                  of walking trails, lush parks, and strong sense of community.
                 </p>
                 <p>
-                  Located in the desirable 89149 zip code, The Trails offers residents easy access to
-                  shopping, dining, and entertainment while maintaining a peaceful, family-oriented atmosphere.
-                  Home prices range from $550K to $1.5M with diverse architectural styles.
+                  Located in the desirable 89149 zip code, The Trails offers residents easy access
+                  to shopping, dining, and entertainment while maintaining a peaceful,
+                  family-oriented atmosphere. Home prices range from $550K to $1.5M with diverse
+                  architectural styles.
                 </p>
               </div>
               <div className="quick-stats">
@@ -170,8 +173,8 @@ export default function TheTrails() {
               <div className="amenity-card">
                 <h3>Family-Friendly Environment</h3>
                 <p>
-                  Safe, welcoming community with active neighborhood watch programs and
-                  strong community involvement in local events and activities.
+                  Safe, welcoming community with active neighborhood watch programs and strong
+                  community involvement in local events and activities.
                 </p>
               </div>
             </div>
@@ -190,22 +193,22 @@ export default function TheTrails() {
               <div className="insight-card">
                 <h3>Family Appeal</h3>
                 <p>
-                  Strong demand from families seeking safe, amenity-rich communities with
-                  excellent schools and recreational opportunities.
+                  Strong demand from families seeking safe, amenity-rich communities with excellent
+                  schools and recreational opportunities.
                 </p>
               </div>
               <div className="insight-card">
                 <h3>Trail Premium</h3>
                 <p>
-                  Homes with direct trail access command 10-15% premium pricing due to
-                  the high value residents place on outdoor recreation.
+                  Homes with direct trail access command 10-15% premium pricing due to the high
+                  value residents place on outdoor recreation.
                 </p>
               </div>
               <div className="insight-card">
                 <h3>Stable Appreciation</h3>
                 <p>
-                  Consistent 7-9% annual appreciation driven by strong family demand and
-                  limited new construction in established communities.
+                  Consistent 7-9% annual appreciation driven by strong family demand and limited new
+                  construction in established communities.
                 </p>
               </div>
             </div>

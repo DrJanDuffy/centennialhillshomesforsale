@@ -193,8 +193,8 @@ export default function Services() {
           <div className="container">
             <h2>Current Property Listings</h2>
             <p>Browse our latest properties while exploring our services</p>
-            
-            <RealScoutListings 
+
+            <RealScoutListings
               priceMin={400000}
               priceMax={2000000}
               propertyTypes="SFR,MF,TC"
@@ -213,9 +213,9 @@ export default function Services() {
           <div className="container">
             <h2>Stay Informed with Market Insights</h2>
             <p>Get the latest real estate trends and analysis to make informed decisions</p>
-            
+
             <div className="max-w-6xl mx-auto">
-              <FeaturedInsight 
+              <FeaturedInsight
                 title="Latest Market Analysis"
                 subtitle="Expert insights to guide your real estate decisions"
                 theme="green"
@@ -236,12 +236,8 @@ export default function Services() {
           <div className="container">
             <h2>Current Market Trends</h2>
             <p>Track real-time market data and trends affecting Las Vegas real estate</p>
-            
-            <MarketInsightsWidget 
-              maxArticles={4}
-              enableAnalytics={true}
-              enablePerformance={true}
-            />
+
+            <MarketInsightsWidget maxArticles={4} enableAnalytics={true} enablePerformance={true} />
           </div>
         </motion.section>
 

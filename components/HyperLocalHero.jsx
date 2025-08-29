@@ -15,17 +15,17 @@ export default function HyperLocalHero() {
       'housing market': 'Centennial Hills real estate market',
       'home prices': 'Centennial Hills home values',
       'mortgage rates': 'Las Vegas mortgage rates',
-      'inventory': 'Northwest Las Vegas inventory',
-      'buyers': 'Centennial Hills homebuyers',
-      'sellers': 'Providence and Skye Canyon sellers',
+      inventory: 'Northwest Las Vegas inventory',
+      buyers: 'Centennial Hills homebuyers',
+      sellers: 'Providence and Skye Canyon sellers',
       'interest rates': 'Nevada VA and conventional loan rates',
       'home sales': 'Centennial Hills property sales',
       'real estate': 'Las Vegas luxury real estate',
-      'housing': 'master-planned community homes',
-      'nationwide': 'throughout Centennial Hills',
+      housing: 'master-planned community homes',
+      nationwide: 'throughout Centennial Hills',
       'across the country': 'in Northwest Las Vegas',
-      'national': 'Las Vegas metropolitan',
-      'Americans': 'Las Vegas residents',
+      national: 'Las Vegas metropolitan',
+      Americans: 'Las Vegas residents',
     };
 
     let localizedTitle = kcmArticle.title;
@@ -57,7 +57,7 @@ export default function HyperLocalHero() {
         daysOnMarket: '21',
         inventoryChange: '+12%',
         priceChange: '+5.2%',
-      }
+      },
     };
   }, []);
 
@@ -80,7 +80,7 @@ export default function HyperLocalHero() {
       'Investment Opportunity',
       'Luxury Home Specialist',
       'Neighborhood Guide',
-      'Market Trend Analyst'
+      'Market Trend Analyst',
     ];
     return dynamicParts[headlineIndex % dynamicParts.length];
   };
@@ -88,8 +88,8 @@ export default function HyperLocalHero() {
   const getNeighborhoodMetric = (neighborhood) => {
     const metrics = {
       'Centennial Hills': 'Median: $725K',
-      'Providence': 'Median: $680K',
-      'Skye Canyon': 'Median: $890K'
+      Providence: 'Median: $680K',
+      'Skye Canyon': 'Median: $890K',
     };
     return metrics[neighborhood] || 'Median: $750K';
   };
@@ -101,7 +101,7 @@ export default function HyperLocalHero() {
       { neighborhood: 'Skye Canyon', message: 'New construction phase 2 now available' },
       { neighborhood: 'Centennial Hills', message: 'Golf course homes up 8% this quarter' },
       { neighborhood: 'Providence', message: 'Inventory increased 15% month-over-month' },
-      { neighborhood: 'Skye Canyon', message: 'Mountain view premiums reach 25%' }
+      { neighborhood: 'Skye Canyon', message: 'Mountain view premiums reach 25%' },
     ];
     return updates;
   };
@@ -110,7 +110,8 @@ export default function HyperLocalHero() {
     return [
       {
         title: 'Centennial Hills Real Estate Market Shows Strong Growth',
-        excerpt: 'The luxury real estate market in Centennial Hills continues to outperform regional averages with strong buyer demand and limited inventory.',
+        excerpt:
+          'The luxury real estate market in Centennial Hills continues to outperform regional averages with strong buyer demand and limited inventory.',
         localContext: 'Local experts report homes are selling 15% faster than last quarter.',
         neighborhoods: ['Centennial Hills', 'Providence', 'Skye Canyon'],
         localMetrics: {
@@ -118,8 +119,8 @@ export default function HyperLocalHero() {
           daysOnMarket: '21',
           inventoryChange: '+12%',
           priceChange: '+5.2%',
-        }
-      }
+        },
+      },
     ];
   }, []);
 
@@ -128,22 +129,22 @@ export default function HyperLocalHero() {
       // Fetch KCM RSS feed
       const response = await fetch('/api/rss-feed');
       const data = await response.json();
-      
+
       if (data.articles && data.articles.length > 0) {
         // Localize each article
-        const localized = data.articles.slice(0, 5).map(item => localizeContent(item));
+        const localized = data.articles.slice(0, 5).map((item) => localizeContent(item));
         setLocalizedContent(localized);
       } else {
         // Fallback to static local content
         setLocalizedContent(getFallbackContent());
       }
-      
+
       // Fetch local market stats (placeholder for now)
       setLocalStats({
         medianPrice: '$725,000',
         activeListings: 247,
         daysOnMarket: 21,
-        saleListRatio: '98.7%'
+        saleListRatio: '98.7%',
       });
     } catch (error) {
       console.error('Failed to fetch content:', error);
@@ -235,21 +236,18 @@ export default function HyperLocalHero() {
                       exit={{ opacity: 0 }}
                       className="insight-content"
                     >
-                      <p className="insight-excerpt">
-                        {localizedContent[currentHeadline].excerpt}
-                      </p>
+                      <p className="insight-excerpt">{localizedContent[currentHeadline].excerpt}</p>
                       <p className="local-context">
-                        <strong>Local Impact:</strong> {localizedContent[currentHeadline].localContext}
+                        <strong>Local Impact:</strong>{' '}
+                        {localizedContent[currentHeadline].localContext}
                       </p>
-                      
+
                       {/* Neighborhood-Specific Stats */}
                       <div className="neighborhood-stats">
-                        {localizedContent[currentHeadline].neighborhoods.map(hood => (
+                        {localizedContent[currentHeadline].neighborhoods.map((hood) => (
                           <div key={hood} className="hood-stat">
                             <span className="hood-name">{hood}</span>
-                            <span className="hood-metric">
-                              {getNeighborhoodMetric(hood)}
-                            </span>
+                            <span className="hood-metric">{getNeighborhoodMetric(hood)}</span>
                           </div>
                         ))}
                       </div>
@@ -260,12 +258,12 @@ export default function HyperLocalHero() {
 
               {/* CTA Buttons */}
               <div className="hero-ctas">
-                                 <button type="button" className="cta-primary">
-                   See How This Affects Your Home Value
-                 </button>
-                 <button type="button" className="cta-secondary">
-                   Get Personalized Market Report
-                 </button>
+                <button type="button" className="cta-primary">
+                  See How This Affects Your Home Value
+                </button>
+                <button type="button" className="cta-secondary">
+                  Get Personalized Market Report
+                </button>
               </div>
             </div>
 
@@ -273,21 +271,19 @@ export default function HyperLocalHero() {
             <div className="hero-market-dashboard">
               <div className="dashboard-header">
                 <h3>Centennial Hills Live Market</h3>
-                <span className="last-updated">
-                  Updated {new Date().toLocaleTimeString()}
-                </span>
+                <span className="last-updated">Updated {new Date().toLocaleTimeString()}</span>
               </div>
 
               {/* Animated Stats */}
               <div className="market-stats-grid">
-                <motion.div 
+                <motion.div
                   className="stat-card"
                   animate={{ scale: [1, 1.01, 1] }}
                   transition={{ duration: 2, repeat: Infinity }}
                 >
                   <div className="w-5 h-5 bg-blue-100 rounded-md flex items-center justify-center mx-auto mb-2">
                     <svg className="w-3 h-3 text-blue-600" fill="currentColor" viewBox="0 0 24 24">
-                      <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                      <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z" />
                     </svg>
                   </div>
                   <span className="stat-label">Median Price</span>
@@ -295,14 +291,14 @@ export default function HyperLocalHero() {
                   <span className="stat-change positive">+5.2%</span>
                 </motion.div>
 
-                <motion.div 
+                <motion.div
                   className="stat-card"
                   animate={{ scale: [1, 1.01, 1] }}
                   transition={{ duration: 2, delay: 0.5, repeat: Infinity }}
                 >
                   <div className="w-5 h-5 bg-green-100 rounded-md flex items-center justify-center mx-auto mb-2">
                     <svg className="w-3 h-3 text-green-600" fill="currentColor" viewBox="0 0 24 24">
-                      <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"/>
+                      <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z" />
                     </svg>
                   </div>
                   <span className="stat-label">Active Listings</span>
@@ -310,15 +306,19 @@ export default function HyperLocalHero() {
                   <span className="stat-change positive">+12</span>
                 </motion.div>
 
-                <motion.div 
+                <motion.div
                   className="stat-card"
                   animate={{ scale: [1, 1.01, 1] }}
                   transition={{ duration: 2, delay: 1, repeat: Infinity }}
                 >
                   <div className="w-5 h-5 bg-purple-100 rounded-md flex items-center justify-center mx-auto mb-2">
-                    <svg className="w-3 h-3 text-purple-600" fill="currentColor" viewBox="0 0 24 24">
-                      <path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8z"/>
-                      <path d="M12.5 7H11v6l5.25 3.15.75-1.23-4.5-2.67z"/>
+                    <svg
+                      className="w-3 h-3 text-purple-600"
+                      fill="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8z" />
+                      <path d="M12.5 7H11v6l5.25 3.15.75-1.23-4.5-2.67z" />
                     </svg>
                   </div>
                   <span className="stat-label">Days on Market</span>
@@ -326,14 +326,18 @@ export default function HyperLocalHero() {
                   <span className="stat-change negative">-3</span>
                 </motion.div>
 
-                <motion.div 
+                <motion.div
                   className="stat-card"
                   animate={{ scale: [1, 1.01, 1] }}
                   transition={{ duration: 2, delay: 1.5, repeat: Infinity }}
                 >
                   <div className="w-5 h-5 bg-orange-100 rounded-md flex items-center justify-center mx-auto mb-2">
-                    <svg className="w-3 h-3 text-orange-600" fill="currentColor" viewBox="0 0 24 24">
-                      <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                    <svg
+                      className="w-3 h-3 text-orange-600"
+                      fill="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z" />
                     </svg>
                   </div>
                   <span className="stat-label">Sale/List Ratio</span>
@@ -347,7 +351,7 @@ export default function HyperLocalHero() {
                 <div className="flex items-center gap-2 mb-3">
                   <div className="w-5 h-5 bg-blue-100 rounded-md flex items-center justify-center">
                     <svg className="w-3 h-3 text-blue-600" fill="currentColor" viewBox="0 0 24 24">
-                      <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                      <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z" />
                     </svg>
                   </div>
                   <h4>Live Activity</h4>
@@ -377,28 +381,28 @@ export default function HyperLocalHero() {
 // Helper Components
 function AnimatedActivityFeed() {
   const [activities, setActivities] = useState([]);
-  
+
   const generateActivity = useCallback(() => {
     const activityTypes = [
       'New listing in Providence',
       'Property sold in Centennial Hills',
       'Price reduction in Skye Canyon',
       'New construction available',
-      'Open house scheduled'
+      'Open house scheduled',
     ];
-    
+
     return {
       id: Date.now() + Math.random(),
       time: new Date().toLocaleTimeString(),
-      text: activityTypes[Math.floor(Math.random() * activityTypes.length)]
+      text: activityTypes[Math.floor(Math.random() * activityTypes.length)],
     };
   }, []);
-  
+
   useEffect(() => {
     // Simulate real-time activities
     const interval = setInterval(() => {
       const newActivity = generateActivity();
-      setActivities(prev => [newActivity, ...prev.slice(0, 2)]);
+      setActivities((prev) => [newActivity, ...prev.slice(0, 2)]);
     }, 4000);
     return () => clearInterval(interval);
   }, [generateActivity]);

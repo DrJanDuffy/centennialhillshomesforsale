@@ -241,8 +241,8 @@ export default function Testimonials() {
           <div className="container">
             <h2>Featured Properties</h2>
             <p>Browse our latest listings while reading client testimonials</p>
-            
-            <RealScoutListings 
+
+            <RealScoutListings
               priceMin={500000}
               priceMax={2000000}
               propertyTypes="SFR,MF"
@@ -261,9 +261,9 @@ export default function Testimonials() {
           <div className="container">
             <h2>Stay Informed with Market Insights</h2>
             <p>Get the latest real estate trends and analysis to make informed decisions</p>
-            
+
             <div className="max-w-6xl mx-auto">
-              <FeaturedInsight 
+              <FeaturedInsight
                 title="Latest Market Analysis"
                 subtitle="Expert insights to guide your real estate decisions"
                 theme="green"
@@ -284,12 +284,8 @@ export default function Testimonials() {
           <div className="container">
             <h2>Current Market Trends</h2>
             <p>Track real-time market data and trends affecting Centennial Hills real estate</p>
-            
-            <MarketInsightsWidget 
-              maxArticles={4}
-              enableAnalytics={true}
-              enablePerformance={true}
-            />
+
+            <MarketInsightsWidget maxArticles={4} enableAnalytics={true} enablePerformance={true} />
           </div>
         </motion.section>
 

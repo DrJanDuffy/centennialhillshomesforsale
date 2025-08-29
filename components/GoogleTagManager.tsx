@@ -14,13 +14,15 @@ const GoogleTagManager: React.FC<GoogleTagManagerProps> = ({ gaId }) => {
       window.gtag('event', 'view_item', {
         event_category: 'Property',
         event_label: propertyId,
-        items: [{
-          item_id: propertyId,
-          item_name: propertyData.title || 'Property',
-          item_category: propertyData.type || 'Real Estate',
-          price: propertyData.price,
-          currency: 'USD'
-        }]
+        items: [
+          {
+            item_id: propertyId,
+            item_name: propertyData.title || 'Property',
+            item_category: propertyData.type || 'Real Estate',
+            price: propertyData.price,
+            currency: 'USD',
+          },
+        ],
       });
     }
   }, []);
@@ -32,7 +34,7 @@ const GoogleTagManager: React.FC<GoogleTagManagerProps> = ({ gaId }) => {
         search_term: searchTerm,
         event_category: 'Property Search',
         event_label: 'Website Search',
-        custom_parameters: filters
+        custom_parameters: filters,
       });
     }
   }, []);
@@ -46,8 +48,8 @@ const GoogleTagManager: React.FC<GoogleTagManagerProps> = ({ gaId }) => {
         value: 10,
         custom_parameters: {
           source: source,
-          lead_type: leadType
-        }
+          lead_type: leadType,
+        },
       });
     }
   }, []);
@@ -61,8 +63,8 @@ const GoogleTagManager: React.FC<GoogleTagManagerProps> = ({ gaId }) => {
         value: 5,
         custom_parameters: {
           context: context,
-          phone_number: phoneNumber
-        }
+          phone_number: phoneNumber,
+        },
       });
     }
   }, []);
@@ -134,7 +136,7 @@ const GoogleTagManager: React.FC<GoogleTagManagerProps> = ({ gaId }) => {
         src={`https://www.googletagmanager.com/gtag/js?id=${gaId}`}
         strategy="afterInteractive"
       />
-      
+
       {/* Google Analytics Configuration */}
       <Script id="google-analytics" strategy="afterInteractive">
         {`

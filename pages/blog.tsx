@@ -252,16 +252,14 @@ const BlogPage: React.FC = () => {
         <section className="py-16 bg-gray-50">
           <div className="container mx-auto px-4">
             <div className="text-center mb-12">
-              <h2 className="text-3xl font-bold text-gray-900 mb-4">
-                Live Market Insights
-              </h2>
+              <h2 className="text-3xl font-bold text-gray-900 mb-4">Live Market Insights</h2>
               <p className="text-xl text-gray-600 max-w-3xl mx-auto">
                 Real-time market analysis and trends from industry experts
               </p>
             </div>
-            
+
             <div className="max-w-6xl mx-auto">
-              <KCMFeed 
+              <KCMFeed
                 maxArticles={8}
                 showFeatured={true}
                 enableAnalytics={true}
@@ -275,19 +273,13 @@ const BlogPage: React.FC = () => {
         <section className="py-16 bg-white">
           <div className="container mx-auto px-4">
             <div className="text-center mb-12">
-              <h2 className="text-3xl font-bold text-gray-900 mb-4">
-                Current Market Trends
-              </h2>
+              <h2 className="text-3xl font-bold text-gray-900 mb-4">Current Market Trends</h2>
               <p className="text-xl text-gray-600 max-w-3xl mx-auto">
                 Track real-time market data and trends affecting Centennial Hills real estate
               </p>
             </div>
-            
-            <MarketInsightsWidget 
-              maxArticles={6}
-              enableAnalytics={true}
-              enablePerformance={true}
-            />
+
+            <MarketInsightsWidget maxArticles={6} enableAnalytics={true} enablePerformance={true} />
           </div>
         </section>
 
@@ -295,15 +287,13 @@ const BlogPage: React.FC = () => {
         <section className="py-16 bg-white">
           <div className="container mx-auto px-4">
             <div className="text-center mb-12">
-              <h2 className="text-3xl font-bold text-gray-900 mb-4">
-                Featured Properties
-              </h2>
+              <h2 className="text-3xl font-bold text-gray-900 mb-4">Featured Properties</h2>
               <p className="text-xl text-gray-600 max-w-3xl mx-auto">
                 Browse our latest listings while reading our latest market insights
               </p>
             </div>
-            
-            <RealScoutListings 
+
+            <RealScoutListings
               priceMin={500000}
               priceMax={2000000}
               propertyTypes="SFR,MF"

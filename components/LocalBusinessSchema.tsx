@@ -247,7 +247,7 @@ export default function LocalBusinessSchema({
       {
         '@type': 'EducationalOccupationalCredential',
         credentialCategory: 'certification',
-        name: 'Accredited Buyer\'s Representative (ABR)',
+        name: "Accredited Buyer's Representative (ABR)",
       },
       {
         '@type': 'EducationalOccupationalCredential',

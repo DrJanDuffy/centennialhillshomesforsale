@@ -1,10 +1,7 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 import { fubAPI, FUBLead } from '../../../lib/follow-up-boss';
 
-export default async function handler(
-  req: NextApiRequest,
-  res: NextApiResponse
-) {
+export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   if (req.method !== 'POST') {
     return res.status(405).json({ error: 'Method not allowed' });
   }
@@ -15,7 +12,7 @@ export default async function handler(
     // Validate required fields
     if (!leadData.firstName || !leadData.lastName || !leadData.email || !leadData.phone) {
       return res.status(400).json({
-        error: 'Missing required fields: firstName, lastName, email, phone'
+        error: 'Missing required fields: firstName, lastName, email, phone',
       });
     }
 
@@ -24,7 +21,7 @@ export default async function handler(
       ...leadData,
       timestamp: leadData.timestamp || new Date().toISOString(),
       source: leadData.source || 'Website API',
-      trigger: leadData.trigger || 'API Submission'
+      trigger: leadData.trigger || 'API Submission',
     };
 
     // Create lead in Follow Up Boss
@@ -36,27 +33,26 @@ export default async function handler(
         name: `${enrichedLeadData.firstName} ${enrichedLeadData.lastName}`,
         email: enrichedLeadData.email,
         phone: enrichedLeadData.phone,
-        timestamp: enrichedLeadData.timestamp
+        timestamp: enrichedLeadData.timestamp,
       });
 
       return res.status(200).json({
         success: true,
         message: 'Lead created successfully',
-        data: result.data
+        data: result.data,
       });
     } else {
       console.error('Failed to create lead in Follow Up Boss:', result.error);
       return res.status(500).json({
         success: false,
-        error: result.error || 'Failed to create lead'
+        error: result.error || 'Failed to create lead',
       });
     }
-
   } catch (error) {
     console.error('API Error creating lead:', error);
     return res.status(500).json({
       success: false,
-      error: 'Internal server error'
+      error: 'Internal server error',
     });
   }
 }

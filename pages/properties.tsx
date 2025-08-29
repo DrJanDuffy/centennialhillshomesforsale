@@ -11,202 +11,211 @@ export default function Properties() {
     <>
       <Head>
         <title>Luxury Properties for Sale | Centennial Hills Real Estate | Dr. Jan Duffy</title>
-        <meta name="description" content="Discover luxury properties for sale in Centennial Hills, Las Vegas. Browse our curated selection of premium homes with stunning mountain views and exceptional quality." />
-        <meta name="keywords" content="luxury properties for sale, Centennial Hills homes, premium real estate Las Vegas, Dr. Jan Duffy, luxury homes" />
-        
+        <meta
+          name="description"
+          content="Discover luxury properties for sale in Centennial Hills, Las Vegas. Browse our curated selection of premium homes with stunning mountain views and exceptional quality."
+        />
+        <meta
+          name="keywords"
+          content="luxury properties for sale, Centennial Hills homes, premium real estate Las Vegas, Dr. Jan Duffy, luxury homes"
+        />
+
         {/* Schema.org markup for better SEO */}
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
             __html: JSON.stringify({
-              "@context": "https://schema.org",
-              "@type": "RealEstateListing",
-              "name": "Centennial Hills Luxury Properties",
-              "description": "Luxury properties for sale in Centennial Hills, Las Vegas featuring master-planned communities with stunning mountain views and exceptional quality.",
-              "url": "https://centennialhillshomesforsale.com/properties",
-              "provider": {
-                "@type": "RealEstateAgent",
-                "@id": "https://centennialhillshomesforsale.com/#realestateagent",
-                "name": "Dr. Jan Duffy",
-                "description": "Top 1% REALTOR® specializing in luxury homes and master-planned communities in Centennial Hills, Las Vegas",
-                "url": "https://centennialhillshomesforsale.com",
-                "telephone": "(702) 903-1952",
-                "email": "jan@centennialhillshomes.com",
-                "address": {
-                  "@type": "PostalAddress",
-                  "streetAddress": "Centennial Hills",
-                  "addressLocality": "Las Vegas",
-                  "addressRegion": "NV",
-                  "postalCode": "89149",
-                  "addressCountry": "US"
+              '@context': 'https://schema.org',
+              '@type': 'RealEstateListing',
+              name: 'Centennial Hills Luxury Properties',
+              description:
+                'Luxury properties for sale in Centennial Hills, Las Vegas featuring master-planned communities with stunning mountain views and exceptional quality.',
+              url: 'https://centennialhillshomesforsale.com/properties',
+              provider: {
+                '@type': 'RealEstateAgent',
+                '@id': 'https://centennialhillshomesforsale.com/#realestateagent',
+                name: 'Dr. Jan Duffy',
+                description:
+                  'Top 1% REALTOR® specializing in luxury homes and master-planned communities in Centennial Hills, Las Vegas',
+                url: 'https://centennialhillshomesforsale.com',
+                telephone: '(702) 903-1952',
+                email: 'jan@centennialhillshomes.com',
+                address: {
+                  '@type': 'PostalAddress',
+                  streetAddress: 'Centennial Hills',
+                  addressLocality: 'Las Vegas',
+                  addressRegion: 'NV',
+                  postalCode: '89149',
+                  addressCountry: 'US',
                 },
-                "knowsAbout": [
-                  "Luxury Homes",
-                  "Investment Properties",
-                  "First-Time Buyers",
-                  "Master-Planned Communities",
-                  "Centennial Hills Real Estate",
-                  "Providence Neighborhood",
-                  "Skye Canyon Development",
-                  "Northwest Las Vegas Properties",
-                  "New Construction Homes",
-                  "Property Valuation",
-                  "Market Analysis",
-                  "Real Estate Investment"
+                knowsAbout: [
+                  'Luxury Homes',
+                  'Investment Properties',
+                  'First-Time Buyers',
+                  'Master-Planned Communities',
+                  'Centennial Hills Real Estate',
+                  'Providence Neighborhood',
+                  'Skye Canyon Development',
+                  'Northwest Las Vegas Properties',
+                  'New Construction Homes',
+                  'Property Valuation',
+                  'Market Analysis',
+                  'Real Estate Investment',
                 ],
-                "hasCredential": [
+                hasCredential: [
                   {
-                    "@type": "EducationalOccupationalCredential",
-                    "credentialCategory": "Professional License",
-                    "name": "Nevada Real Estate License"
+                    '@type': 'EducationalOccupationalCredential',
+                    credentialCategory: 'Professional License',
+                    name: 'Nevada Real Estate License',
                   },
                   {
-                    "@type": "EducationalOccupationalCredential",
-                    "credentialCategory": "certification",
-                    "name": "Certified Luxury Home Marketing Specialist"
+                    '@type': 'EducationalOccupationalCredential',
+                    credentialCategory: 'certification',
+                    name: 'Certified Luxury Home Marketing Specialist',
                   },
                   {
-                    "@type": "EducationalOccupationalCredential",
-                    "credentialCategory": "certification",
-                    "name": "Certified Residential Specialist (CRS)"
+                    '@type': 'EducationalOccupationalCredential',
+                    credentialCategory: 'certification',
+                    name: 'Certified Residential Specialist (CRS)',
                   },
                   {
-                    "@type": "EducationalOccupationalCredential",
-                    "credentialCategory": "certification",
-                    "name": "Accredited Buyer's Representative (ABR)"
-                  }
+                    '@type': 'EducationalOccupationalCredential',
+                    credentialCategory: 'certification',
+                    name: "Accredited Buyer's Representative (ABR)",
+                  },
                 ],
-                "memberOf": [
+                memberOf: [
                   {
-                    "@type": "Organization",
-                    "name": "Greater Las Vegas Association of REALTORS"
+                    '@type': 'Organization',
+                    name: 'Greater Las Vegas Association of REALTORS',
                   },
                   {
-                    "@type": "Organization",
-                    "name": "Nevada Association of REALTORS"
+                    '@type': 'Organization',
+                    name: 'Nevada Association of REALTORS',
                   },
                   {
-                    "@type": "Organization",
-                    "name": "National Association of REALTORS®"
+                    '@type': 'Organization',
+                    name: 'National Association of REALTORS®',
                   },
                   {
-                    "@type": "Organization",
-                    "name": "Berkshire Hathaway HomeServices Network"
-                  }
+                    '@type': 'Organization',
+                    name: 'Berkshire Hathaway HomeServices Network',
+                  },
                 ],
-                "aggregateRating": {
-                  "@type": "AggregateRating",
-                  "ratingValue": "4.9",
-                  "reviewCount": "127",
-                  "bestRating": "5"
+                aggregateRating: {
+                  '@type': 'AggregateRating',
+                  ratingValue: '4.9',
+                  reviewCount: '127',
+                  bestRating: '5',
                 },
-                "award": [
-                  "Top 1% REALTOR® in Las Vegas Valley",
-                  "Million Dollar Club Member",
-                  "Excellence in Customer Service Award",
-                  "Outstanding Sales Performance Recognition"
+                award: [
+                  'Top 1% REALTOR® in Las Vegas Valley',
+                  'Million Dollar Club Member',
+                  'Excellence in Customer Service Award',
+                  'Outstanding Sales Performance Recognition',
                 ],
-                "specialization": [
-                  "Luxury Home Sales",
-                  "New Construction Properties",
-                  "Master-Planned Communities",
-                  "Investment Properties",
-                  "First-Time Home Buyers",
-                  "Relocation Services",
-                  "Property Marketing",
-                  "Market Analysis"
+                specialization: [
+                  'Luxury Home Sales',
+                  'New Construction Properties',
+                  'Master-Planned Communities',
+                  'Investment Properties',
+                  'First-Time Home Buyers',
+                  'Relocation Services',
+                  'Property Marketing',
+                  'Market Analysis',
                 ],
-                "yearsOfExperience": "20+",
-                "numberOfPropertiesSold": "500+",
-                "clientSatisfactionRate": "98%"
+                yearsOfExperience: '20+',
+                numberOfPropertiesSold: '500+',
+                clientSatisfactionRate: '98%',
               },
-              "category": "Luxury Properties",
-              "location": {
-                "@type": "Place",
-                "name": "Centennial Hills, Las Vegas, NV",
-                "geo": {
-                  "@type": "GeoCoordinates",
-                  "latitude": "36.268",
-                  "longitude": "-115.328"
+              category: 'Luxury Properties',
+              location: {
+                '@type': 'Place',
+                name: 'Centennial Hills, Las Vegas, NV',
+                geo: {
+                  '@type': 'GeoCoordinates',
+                  latitude: '36.268',
+                  longitude: '-115.328',
                 },
-                "address": {
-                  "@type": "PostalAddress",
-                  "streetAddress": "Centennial Hills",
-                  "addressLocality": "Las Vegas",
-                  "addressRegion": "NV",
-                  "postalCode": "89149",
-                  "addressCountry": "US"
-                }
+                address: {
+                  '@type': 'PostalAddress',
+                  streetAddress: 'Centennial Hills',
+                  addressLocality: 'Las Vegas',
+                  addressRegion: 'NV',
+                  postalCode: '89149',
+                  addressCountry: 'US',
+                },
               },
-              "amenityFeature": [
+              amenityFeature: [
                 {
-                  "@type": "LocationFeatureSpecification",
-                  "name": "Mountain Views",
-                  "value": true
+                  '@type': 'LocationFeatureSpecification',
+                  name: 'Mountain Views',
+                  value: true,
                 },
                 {
-                  "@type": "LocationFeatureSpecification",
-                  "name": "Master-Planned Community",
-                  "value": true
+                  '@type': 'LocationFeatureSpecification',
+                  name: 'Master-Planned Community',
+                  value: true,
                 },
                 {
-                  "@type": "LocationFeatureSpecification",
-                  "name": "Golf Course Access",
-                  "value": true
+                  '@type': 'LocationFeatureSpecification',
+                  name: 'Golf Course Access',
+                  value: true,
                 },
                 {
-                  "@type": "LocationFeatureSpecification",
-                  "name": "Shopping Centers",
-                  "value": true
+                  '@type': 'LocationFeatureSpecification',
+                  name: 'Shopping Centers',
+                  value: true,
                 },
                 {
-                  "@type": "LocationFeatureSpecification",
-                  "name": "Top-Rated Schools",
-                  "value": true
+                  '@type': 'LocationFeatureSpecification',
+                  name: 'Top-Rated Schools',
+                  value: true,
                 },
                 {
-                  "@type": "LocationFeatureSpecification",
-                  "name": "Parks and Recreation",
-                  "value": true
+                  '@type': 'LocationFeatureSpecification',
+                  name: 'Parks and Recreation',
+                  value: true,
                 },
                 {
-                  "@type": "LocationFeatureSpecification",
-                  "name": "Security Systems",
-                  "value": true
+                  '@type': 'LocationFeatureSpecification',
+                  name: 'Security Systems',
+                  value: true,
                 },
                 {
-                  "@type": "LocationFeatureSpecification",
-                  "name": "Smart Home Features",
-                  "value": true
-                }
+                  '@type': 'LocationFeatureSpecification',
+                  name: 'Smart Home Features',
+                  value: true,
+                },
               ],
-              "floorSize": {
-                "@type": "QuantitativeValue",
-                "minValue": "2000",
-                "maxValue": "8000",
-                "unitCode": "SQFT"
+              floorSize: {
+                '@type': 'QuantitativeValue',
+                minValue: '2000',
+                maxValue: '8000',
+                unitCode: 'SQFT',
               },
-              "numberOfRooms": {
-                "@type": "QuantitativeValue",
-                "minValue": "3",
-                "maxValue": "6"
+              numberOfRooms: {
+                '@type': 'QuantitativeValue',
+                minValue: '3',
+                maxValue: '6',
               },
-              "priceSpecification": {
-                "@type": "PriceSpecification",
-                "priceCurrency": "USD",
-                "minPrice": "300000",
-                "maxPrice": "5000000"
+              priceSpecification: {
+                '@type': 'PriceSpecification',
+                priceCurrency: 'USD',
+                minPrice: '300000',
+                maxPrice: '5000000',
               },
-              "datePosted": "2024-01-01",
-              "availability": "https://schema.org/InStock"
-            })
+              datePosted: '2024-01-01',
+              availability: 'https://schema.org/InStock',
+            }),
           }}
         />
       </Head>
 
-      <Layout title="Centennial Hills Luxury Properties | Dr. Jan Duffy" description="Discover luxury homes for sale in Centennial Hills, Las Vegas. Browse our featured properties with stunning mountain views, modern amenities, and exceptional quality.">
-
-        
+      <Layout
+        title="Centennial Hills Luxury Properties | Dr. Jan Duffy"
+        description="Discover luxury homes for sale in Centennial Hills, Las Vegas. Browse our featured properties with stunning mountain views, modern amenities, and exceptional quality."
+      >
         {/* Hero Section */}
         <section className="relative py-20 lg:py-32 bg-gradient-to-br from-primary-color via-primary-dark to-primary-light overflow-hidden">
           <div className="absolute inset-0 bg-gradient-to-r from-primary-color/80 via-primary-dark/60 to-primary-light/40"></div>
@@ -216,7 +225,8 @@ export default function Properties() {
               <span className="block text-secondary-color mt-2">Centennial Hills</span>
             </h1>
             <p className="text-xl lg:text-2xl text-blue-100 max-w-4xl mx-auto leading-relaxed">
-              Experience the finest in Las Vegas luxury living with our curated selection of premium properties
+              Experience the finest in Las Vegas luxury living with our curated selection of premium
+              properties
             </p>
           </div>
         </section>
@@ -240,7 +250,10 @@ export default function Properties() {
             <div className="card max-w-4xl mx-auto p-6 lg:p-8">
               <form className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 lg:gap-6">
                 <div>
-                  <label htmlFor="propertyType" className="block text-sm font-medium text-gray-700 mb-2">
+                  <label
+                    htmlFor="propertyType"
+                    className="block text-sm font-medium text-gray-700 mb-2"
+                  >
                     Property Type
                   </label>
                   <select
@@ -256,7 +269,10 @@ export default function Properties() {
                 </div>
 
                 <div>
-                  <label htmlFor="priceRange" className="block text-sm font-medium text-gray-700 mb-2">
+                  <label
+                    htmlFor="priceRange"
+                    className="block text-sm font-medium text-gray-700 mb-2"
+                  >
                     Price Range
                   </label>
                   <select
@@ -272,7 +288,10 @@ export default function Properties() {
                 </div>
 
                 <div>
-                  <label htmlFor="bedrooms" className="block text-sm font-medium text-gray-700 mb-2">
+                  <label
+                    htmlFor="bedrooms"
+                    className="block text-sm font-medium text-gray-700 mb-2"
+                  >
                     Bedrooms
                   </label>
                   <select
@@ -287,7 +306,10 @@ export default function Properties() {
                 </div>
 
                 <div>
-                  <label htmlFor="bathrooms" className="block text-sm font-medium text-gray-700 mb-2">
+                  <label
+                    htmlFor="bathrooms"
+                    className="block text-sm font-medium text-gray-700 mb-2"
+                  >
                     Bathrooms
                   </label>
                   <select
@@ -318,7 +340,10 @@ export default function Properties() {
                 </div>
 
                 <div className="md:col-span-2 lg:col-span-1">
-                  <label htmlFor="features" className="block text-sm font-medium text-gray-700 mb-2">
+                  <label
+                    htmlFor="features"
+                    className="block text-sm font-medium text-gray-700 mb-2"
+                  >
                     Features
                   </label>
                   <select
@@ -335,7 +360,10 @@ export default function Properties() {
               </form>
 
               <div className="mt-6 lg:mt-8 text-center">
-                <button type="button" className="bg-secondary-color hover:bg-secondary-dark text-white px-8 lg:px-10 py-3 lg:py-4 rounded-lg font-semibold transition-all duration-300 transform hover:scale-105 text-base lg:text-lg">
+                <button
+                  type="button"
+                  className="bg-secondary-color hover:bg-secondary-dark text-white px-8 lg:px-10 py-3 lg:py-4 rounded-lg font-semibold transition-all duration-300 transform hover:scale-105 text-base lg:text-lg"
+                >
                   Search Properties
                 </button>
               </div>
@@ -351,7 +379,8 @@ export default function Properties() {
                 What Makes Our Properties Special
               </h2>
               <p className="text-lg lg:text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
-                Every home in our portfolio is carefully selected for quality, location, and lifestyle appeal
+                Every home in our portfolio is carefully selected for quality, location, and
+                lifestyle appeal
               </p>
             </div>
 
@@ -360,7 +389,9 @@ export default function Properties() {
                 <div className="w-16 h-16 lg:w-20 lg:h-20 bg-secondary-color rounded-full flex items-center justify-center mx-auto mb-4">
                   <span className="text-2xl lg:text-3xl">🏔️</span>
                 </div>
-                <h3 className="text-lg lg:text-xl font-semibold text-primary-color mb-2">Mountain Views</h3>
+                <h3 className="text-lg lg:text-xl font-semibold text-primary-color mb-2">
+                  Mountain Views
+                </h3>
                 <p className="text-sm lg:text-base text-gray-600">
                   Stunning vistas of the Spring Mountains and Red Rock Canyon
                 </p>
@@ -370,7 +401,9 @@ export default function Properties() {
                 <div className="w-16 h-16 lg:w-20 lg:h-20 bg-secondary-color rounded-full flex items-center justify-center mx-auto mb-4">
                   <span className="text-2xl lg:text-3xl">🏊</span>
                 </div>
-                <h3 className="text-lg lg:text-xl font-semibold text-primary-color mb-2">Resort Amenities</h3>
+                <h3 className="text-lg lg:text-xl font-semibold text-primary-color mb-2">
+                  Resort Amenities
+                </h3>
                 <p className="text-sm lg:text-base text-gray-600">
                   Pools, spas, and luxury features that rival high-end resorts
                 </p>
@@ -380,7 +413,9 @@ export default function Properties() {
                 <div className="w-16 h-16 lg:w-20 lg:h-20 bg-secondary-color rounded-full flex items-center justify-center mx-auto mb-4">
                   <span className="text-2xl lg:text-3xl">🎯</span>
                 </div>
-                <h3 className="text-lg lg:text-xl font-semibold text-primary-color mb-2">Prime Location</h3>
+                <h3 className="text-lg lg:text-xl font-semibold text-primary-color mb-2">
+                  Prime Location
+                </h3>
                 <p className="text-sm lg:text-base text-gray-600">
                   Convenient access to shopping, dining, and entertainment
                 </p>
@@ -390,7 +425,9 @@ export default function Properties() {
                 <div className="w-16 h-16 lg:w-20 lg:h-20 bg-secondary-color rounded-full flex items-center justify-center mx-auto mb-4">
                   <span className="text-2xl lg:text-3xl">⭐</span>
                 </div>
-                <h3 className="text-lg lg:text-xl font-semibold text-primary-color mb-2">Quality Construction</h3>
+                <h3 className="text-lg lg:text-xl font-semibold text-primary-color mb-2">
+                  Quality Construction
+                </h3>
                 <p className="text-sm lg:text-base text-gray-600">
                   Built to the highest standards with premium materials
                 </p>
@@ -410,8 +447,8 @@ export default function Properties() {
                 Browse our real-time property listings with advanced search and filter capabilities
               </p>
             </div>
-            
-            <RealScoutListings 
+
+            <RealScoutListings
               priceMin={500000}
               priceMax={2000000}
               propertyTypes="SFR,MF,TC"
@@ -428,12 +465,13 @@ export default function Properties() {
                 Market Insights for Property Buyers
               </h2>
               <p className="text-lg lg:text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
-                Stay informed with the latest market trends and analysis to make informed property decisions
+                Stay informed with the latest market trends and analysis to make informed property
+                decisions
               </p>
             </div>
-            
+
             <div className="max-w-6xl mx-auto">
-              <FeaturedInsight 
+              <FeaturedInsight
                 title="Latest Property Market Analysis"
                 subtitle="Expert insights to guide your property investment decisions"
                 theme="purple"
@@ -455,12 +493,8 @@ export default function Properties() {
                 Track real-time market data and trends affecting Centennial Hills property values
               </p>
             </div>
-            
-            <MarketInsightsWidget 
-              maxArticles={5}
-              enableAnalytics={true}
-              enablePerformance={true}
-            />
+
+            <MarketInsightsWidget maxArticles={5} enableAnalytics={true} enablePerformance={true} />
           </div>
         </section>
 
@@ -474,10 +508,16 @@ export default function Properties() {
               Let Dr. Jan Duffy help you discover the perfect luxury property in Centennial Hills
             </p>
             <div className="flex flex-col sm:flex-row gap-4 lg:gap-6 justify-center">
-              <button type="button" className="bg-white text-secondary-color hover:bg-gray-100 px-8 lg:px-10 py-3 lg:py-4 rounded-lg font-semibold transition-all duration-300 transform hover:scale-105 text-base lg:text-lg">
+              <button
+                type="button"
+                className="bg-white text-secondary-color hover:bg-gray-100 px-8 lg:px-10 py-3 lg:py-4 rounded-lg font-semibold transition-all duration-300 transform hover:scale-105 text-base lg:text-lg"
+              >
                 Schedule a Viewing
               </button>
-              <button type="button" className="border-2 border-white text-white hover:bg-white hover:text-secondary-color px-8 lg:px-10 py-3 lg:py-4 rounded-lg font-semibold transition-all duration-300 transform hover:scale-105 text-base lg:text-lg">
+              <button
+                type="button"
+                className="border-2 border-white text-white hover:bg-white hover:text-secondary-color px-8 lg:px-10 py-3 lg:py-4 rounded-lg font-semibold transition-all duration-300 transform hover:scale-105 text-base lg:text-lg"
+              >
                 Get Property Alerts
               </button>
             </div>

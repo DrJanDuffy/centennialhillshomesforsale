@@ -256,7 +256,7 @@ export const EnhancedPropertySearch: React.FC<PropertySearchProps> = ({
 
   // Favorites functionality
   const toggleFavorite = (propertyId: string) => {
-    setFavorites(prev => {
+    setFavorites((prev) => {
       const newFavorites = new Set(prev);
       if (newFavorites.has(propertyId)) {
         newFavorites.delete(propertyId);
@@ -269,7 +269,7 @@ export const EnhancedPropertySearch: React.FC<PropertySearchProps> = ({
 
   const getFilteredResults = () => {
     if (showFavoritesOnly) {
-      return searchResults.filter(property => favorites.has(property.id));
+      return searchResults.filter((property) => favorites.has(property.id));
     }
     return searchResults;
   };
@@ -476,9 +476,7 @@ export const EnhancedPropertySearch: React.FC<PropertySearchProps> = ({
                     : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
                 }`}
               >
-                <Heart
-                  className={`w-4 h-4 mr-2 ${showFavoritesOnly ? 'fill-current' : ''}`}
-                />
+                <Heart className={`w-4 h-4 mr-2 ${showFavoritesOnly ? 'fill-current' : ''}`} />
                 {showFavoritesOnly ? 'Show All' : 'Show Favorites'} ({favorites.size})
               </button>
             </div>

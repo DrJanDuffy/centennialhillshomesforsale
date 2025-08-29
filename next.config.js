@@ -33,10 +33,10 @@ const nextConfig = {
   experimental: {
     optimizeCss: true,
     optimizePackageImports: [
-      '@radix-ui/react-icons', 
+      '@radix-ui/react-icons',
       'lucide-react',
       '@heroicons/react',
-      'framer-motion'
+      'framer-motion',
     ],
     turbo: {
       rules: {
@@ -148,7 +148,7 @@ const nextConfig = {
       // Enable bundle analyzer in production builds
       if (process.env.ANALYZE === 'true') {
         const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
-        
+
         config.plugins.push(
           new BundleAnalyzerPlugin({
             analyzerMode: 'static',

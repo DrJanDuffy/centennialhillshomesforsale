@@ -2,10 +2,10 @@
 
 import React, { useCallback, useEffect, useState } from 'react';
 
-export default function PerformanceDashboard({ 
+export default function PerformanceDashboard({
   className = '',
   showRealTime = true,
-  refreshInterval = 5000
+  refreshInterval = 5000,
 }) {
   const [metrics, setMetrics] = useState({
     loadTime: 0,
@@ -13,7 +13,7 @@ export default function PerformanceDashboard({
     errorRate: 0,
     articleCount: 0,
     lastUpdate: null,
-    performanceScore: 0
+    performanceScore: 0,
   });
   const [isVisible, setIsVisible] = useState(false);
 
@@ -41,44 +41,44 @@ export default function PerformanceDashboard({
     try {
       // Get RSS performance data from window
       const rssData = window.rssPerformanceData || [];
-      
+
       if (rssData.length > 0) {
         const recentData = rssData.slice(-10); // Last 10 entries
-        
+
         const loadTimes = recentData
-          .filter(item => item.metric === 'component_load_time')
-          .map(item => item.value);
-        
-        const avgLoadTime = loadTimes.length > 0 
-          ? loadTimes.reduce((a, b) => a + b, 0) / loadTimes.length 
-          : 0;
-        
-        const cacheData = recentData
-          .filter(item => item.metric === 'feed_view_cached' || item.metric === 'feed_view_fresh');
-        
-        const cacheHits = cacheData.filter(item => item.metric === 'feed_view_cached').length;
+          .filter((item) => item.metric === 'component_load_time')
+          .map((item) => item.value);
+
+        const avgLoadTime =
+          loadTimes.length > 0 ? loadTimes.reduce((a, b) => a + b, 0) / loadTimes.length : 0;
+
+        const cacheData = recentData.filter(
+          (item) => item.metric === 'feed_view_cached' || item.metric === 'feed_view_fresh'
+        );
+
+        const cacheHits = cacheData.filter((item) => item.metric === 'feed_view_cached').length;
         const totalRequests = cacheData.length;
         const cacheHitRate = totalRequests > 0 ? (cacheHits / totalRequests) * 100 : 0;
-        
-        const errors = recentData.filter(item => item.metric === 'feed_error').length;
+
+        const errors = recentData.filter((item) => item.metric === 'feed_error').length;
         const errorRate = totalRequests > 0 ? (errors / totalRequests) * 100 : 0;
-        
+
         // Calculate performance score (0-100)
         let score = 100;
         if (avgLoadTime > 1000) score -= 20; // Penalty for slow loading
         if (avgLoadTime > 2000) score -= 20; // Additional penalty
         if (cacheHitRate < 50) score -= 15; // Penalty for low cache hit rate
         if (errorRate > 10) score -= 25; // Penalty for high error rate
-        
+
         score = Math.max(0, score);
-        
+
         setMetrics({
           loadTime: Math.round(avgLoadTime),
           cacheHitRate: Math.round(cacheHitRate),
           errorRate: Math.round(errorRate),
           articleCount: recentData.length,
           lastUpdate: new Date().toISOString(),
-          performanceScore: score
+          performanceScore: score,
         });
       }
     } catch (error) {
@@ -90,7 +90,7 @@ export default function PerformanceDashboard({
   useEffect(() => {
     if (showRealTime && isVisible) {
       collectMetrics();
-      
+
       const interval = setInterval(collectMetrics, refreshInterval);
       return () => clearInterval(interval);
     }
@@ -111,10 +111,7 @@ export default function PerformanceDashboard({
   };
 
   return (
-    <div 
-      id="performance-dashboard"
-      className={`bg-white rounded-12px shadow-md p-6 ${className}`}
-    >
+    <div id="performance-dashboard" className={`bg-white rounded-12px shadow-md p-6 ${className}`}>
       <div className="flex items-center justify-between mb-6">
         <h3 className="text-lg font-semibold text-gray-900">Performance Dashboard</h3>
         <div className="flex items-center space-x-2">
@@ -126,7 +123,9 @@ export default function PerformanceDashboard({
       {/* Performance Score */}
       <div className="mb-6">
         <div className="text-center">
-          <div className={`inline-flex items-center justify-center w-20 h-20 rounded-full ${getScoreBg(metrics.performanceScore)} mb-3`}>
+          <div
+            className={`inline-flex items-center justify-center w-20 h-20 rounded-full ${getScoreBg(metrics.performanceScore)} mb-3`}
+          >
             <span className={`text-2xl font-bold ${getScoreColor(metrics.performanceScore)}`}>
               {metrics.performanceScore}
             </span>
@@ -141,17 +140,17 @@ export default function PerformanceDashboard({
           <div className="text-2xl font-bold text-blue-600">{metrics.loadTime}ms</div>
           <div className="text-xs text-gray-500">Avg Load Time</div>
         </div>
-        
+
         <div className="text-center">
           <div className="text-2xl font-bold text-green-600">{metrics.cacheHitRate}%</div>
           <div className="text-xs text-gray-500">Cache Hit Rate</div>
         </div>
-        
+
         <div className="text-center">
           <div className="text-2xl font-bold text-red-600">{metrics.errorRate}%</div>
           <div className="text-xs text-gray-500">Error Rate</div>
         </div>
-        
+
         <div className="text-center">
           <div className="text-2xl font-bold text-purple-600">{metrics.articleCount}</div>
           <div className="text-xs text-gray-500">Data Points</div>
@@ -163,41 +162,65 @@ export default function PerformanceDashboard({
         <div className="flex items-center justify-between">
           <span className="text-sm text-gray-600">Load Time</span>
           <div className="flex items-center space-x-2">
-            <div className={`w-3 h-3 rounded-full ${
-              metrics.loadTime < 500 ? 'bg-green-500' : 
-              metrics.loadTime < 1000 ? 'bg-yellow-500' : 'bg-red-500'
-            }`}></div>
+            <div
+              className={`w-3 h-3 rounded-full ${
+                metrics.loadTime < 500
+                  ? 'bg-green-500'
+                  : metrics.loadTime < 1000
+                    ? 'bg-yellow-500'
+                    : 'bg-red-500'
+              }`}
+            ></div>
             <span className="text-xs text-gray-500">
-              {metrics.loadTime < 500 ? 'Excellent' : 
-               metrics.loadTime < 1000 ? 'Good' : 'Needs Improvement'}
+              {metrics.loadTime < 500
+                ? 'Excellent'
+                : metrics.loadTime < 1000
+                  ? 'Good'
+                  : 'Needs Improvement'}
             </span>
           </div>
         </div>
-        
+
         <div className="flex items-center justify-between">
           <span className="text-sm text-gray-600">Cache Efficiency</span>
           <div className="flex items-center space-x-2">
-            <div className={`w-3 h-3 rounded-full ${
-              metrics.cacheHitRate > 70 ? 'bg-green-500' : 
-              metrics.cacheHitRate > 40 ? 'bg-yellow-500' : 'bg-red-500'
-            }`}></div>
+            <div
+              className={`w-3 h-3 rounded-full ${
+                metrics.cacheHitRate > 70
+                  ? 'bg-green-500'
+                  : metrics.cacheHitRate > 40
+                    ? 'bg-yellow-500'
+                    : 'bg-red-500'
+              }`}
+            ></div>
             <span className="text-xs text-gray-500">
-              {metrics.cacheHitRate > 70 ? 'Excellent' : 
-               metrics.cacheHitRate > 40 ? 'Good' : 'Needs Improvement'}
+              {metrics.cacheHitRate > 70
+                ? 'Excellent'
+                : metrics.cacheHitRate > 40
+                  ? 'Good'
+                  : 'Needs Improvement'}
             </span>
           </div>
         </div>
-        
+
         <div className="flex items-center justify-between">
           <span className="text-sm text-gray-600">Error Rate</span>
           <div className="flex items-center space-x-2">
-            <div className={`w-3 h-3 rounded-full ${
-              metrics.errorRate < 5 ? 'bg-green-500' : 
-              metrics.errorRate < 15 ? 'bg-yellow-500' : 'bg-red-500'
-            }`}></div>
+            <div
+              className={`w-3 h-3 rounded-full ${
+                metrics.errorRate < 5
+                  ? 'bg-green-500'
+                  : metrics.errorRate < 15
+                    ? 'bg-yellow-500'
+                    : 'bg-red-500'
+              }`}
+            ></div>
             <span className="text-xs text-gray-500">
-              {metrics.errorRate < 5 ? 'Excellent' : 
-               metrics.errorRate < 15 ? 'Good' : 'Needs Improvement'}
+              {metrics.errorRate < 5
+                ? 'Excellent'
+                : metrics.errorRate < 15
+                  ? 'Good'
+                  : 'Needs Improvement'}
             </span>
           </div>
         </div>
@@ -216,9 +239,7 @@ export default function PerformanceDashboard({
       <div className="mt-4 p-3 bg-blue-50 rounded-lg">
         <h4 className="text-sm font-medium text-blue-900 mb-2">Recommendations</h4>
         <ul className="text-xs text-blue-800 space-y-1">
-          {metrics.loadTime > 1000 && (
-            <li>• Consider implementing lazy loading for RSS feeds</li>
-          )}
+          {metrics.loadTime > 1000 && <li>• Consider implementing lazy loading for RSS feeds</li>}
           {metrics.cacheHitRate < 50 && (
             <li>• Increase cache TTL and implement better caching strategies</li>
           )}
@@ -245,9 +266,9 @@ export function CompactPerformanceWidget({ className = '' }) {
         if (rssData.length > 0) {
           const recentData = rssData.slice(-5);
           const loadTimes = recentData
-            .filter(item => item.metric === 'component_load_time')
-            .map(item => item.value);
-          
+            .filter((item) => item.metric === 'component_load_time')
+            .map((item) => item.value);
+
           if (loadTimes.length > 0) {
             const avgLoadTime = loadTimes.reduce((a, b) => a + b, 0) / loadTimes.length;
             let newScore = 100;
@@ -280,10 +301,9 @@ export function CompactPerformanceWidget({ className = '' }) {
       </div>
       <div className="mt-2">
         <div className="w-full bg-gray-200 rounded-full h-2">
-          <div 
+          <div
             className={`h-2 rounded-full transition-all duration-300 ${
-              score >= 80 ? 'bg-green-600' : 
-              score >= 60 ? 'bg-yellow-600' : 'bg-red-600'
+              score >= 80 ? 'bg-green-600' : score >= 60 ? 'bg-yellow-600' : 'bg-red-600'
             }`}
             style={{ width: `${score}%` }}
           ></div>

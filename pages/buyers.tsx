@@ -3,15 +3,15 @@ import RealScoutListings from '@/components/RealScoutListings';
 import FeaturedInsight from '@/components/rss/FeaturedInsight';
 import MarketInsightsWidget from '@/components/rss/MarketInsightsWidget';
 import {
-    ArrowRight,
-    CheckCircle,
-    DollarSign,
-    FileText,
-    Mail,
-    MapPin,
-    Phone,
-    Search,
-    Star,
+  ArrowRight,
+  CheckCircle,
+  DollarSign,
+  FileText,
+  Mail,
+  MapPin,
+  Phone,
+  Search,
+  Star,
 } from 'lucide-react';
 import Link from 'next/link';
 import type React from 'react';
@@ -231,8 +231,8 @@ const BuyersPage: React.FC = () => {
                 Browse our latest listings to see what&apos;s available in your preferred areas
               </p>
             </div>
-            
-            <RealScoutListings 
+
+            <RealScoutListings
               priceMin={500000}
               priceMax={1500000}
               propertyTypes="SFR,MF"
@@ -249,12 +249,13 @@ const BuyersPage: React.FC = () => {
                 Stay Informed with Market Insights
               </h2>
               <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-                Get the latest real estate market trends and insights to make informed buying decisions
+                Get the latest real estate market trends and insights to make informed buying
+                decisions
               </p>
             </div>
-            
+
             <div className="max-w-6xl mx-auto">
-              <FeaturedInsight 
+              <FeaturedInsight
                 title="Latest Market Insight for Buyers"
                 subtitle="Expert analysis to guide your home buying decisions"
                 theme="blue"
@@ -276,12 +277,8 @@ const BuyersPage: React.FC = () => {
                 Track real-time market data and trends affecting Centennial Hills real estate
               </p>
             </div>
-            
-            <MarketInsightsWidget 
-              maxArticles={6}
-              enableAnalytics={true}
-              enablePerformance={true}
-            />
+
+            <MarketInsightsWidget maxArticles={6} enableAnalytics={true} enablePerformance={true} />
           </div>
         </section>
 

@@ -15,48 +15,59 @@ interface Neighborhood {
 }
 
 const ModernNeighborhoods: React.FC = () => {
-  const neighborhoods = useMemo((): Neighborhood[] => [
-    {
-      name: 'Centennial Hills',
-      description: 'Las Vegas&apos; most prestigious master-planned community featuring luxury homes with mountain views and world-class amenities.',
-      image: 'https://images.unsplash.com/photo-1564013799919-ab600027ffc6?w=800&h=600&fit=crop&q=75',
-      href: '/centennial-hills',
-      features: ['Mountain Views', 'Golf Course Access', 'Top Schools', 'Shopping Centers'],
-      priceRange: '$750k - $2M+',
-      homesCount: 150,
-      rating: 4.9
-    },
-    {
-      name: 'Providence',
-      description: 'Family-friendly neighborhood with excellent schools, parks, and community events in a safe, welcoming environment.',
-      image: 'https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=800&h=600&fit=crop&q=75',
-      href: '/providence-las-vegas',
-      features: ['Family-Oriented', 'Excellent Schools', 'Community Parks', 'Walking Trails'],
-      priceRange: '$500k - $1.2M',
-      homesCount: 89,
-      rating: 4.8
-    },
-    {
-      name: 'Skye Canyon',
-      description: 'Outdoor lifestyle community with hiking trails, parks, and active living opportunities for nature enthusiasts.',
-      image: 'https://images.unsplash.com/photo-1600607687644-c7171b42498b?w=800&h=600&fit=crop&q=75',
-      href: '/skye-canyon',
-      features: ['Hiking Trails', 'Outdoor Recreation', 'Modern Homes', 'Community Events'],
-      priceRange: '$600k - $1.5M',
-      homesCount: 75,
-      rating: 4.7
-    },
-    {
-      name: 'Northwest Las Vegas',
-      description: 'Growing area with new construction, shopping centers, and easy access to major highways and attractions.',
-      image: 'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=800&h=600&fit=crop&q=75',
-      href: '/northwest-las-vegas',
-      features: ['New Construction', 'Shopping Centers', 'Easy Access', 'Growth Area'],
-      priceRange: '$400k - $1M',
-      homesCount: 200,
-      rating: 4.6
-    }
-  ], []);
+  const neighborhoods = useMemo(
+    (): Neighborhood[] => [
+      {
+        name: 'Centennial Hills',
+        description:
+          'Las Vegas&apos; most prestigious master-planned community featuring luxury homes with mountain views and world-class amenities.',
+        image:
+          'https://images.unsplash.com/photo-1564013799919-ab600027ffc6?w=800&h=600&fit=crop&q=75',
+        href: '/centennial-hills',
+        features: ['Mountain Views', 'Golf Course Access', 'Top Schools', 'Shopping Centers'],
+        priceRange: '$750k - $2M+',
+        homesCount: 150,
+        rating: 4.9,
+      },
+      {
+        name: 'Providence',
+        description:
+          'Family-friendly neighborhood with excellent schools, parks, and community events in a safe, welcoming environment.',
+        image:
+          'https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=800&h=600&fit=crop&q=75',
+        href: '/providence-las-vegas',
+        features: ['Family-Oriented', 'Excellent Schools', 'Community Parks', 'Walking Trails'],
+        priceRange: '$500k - $1.2M',
+        homesCount: 89,
+        rating: 4.8,
+      },
+      {
+        name: 'Skye Canyon',
+        description:
+          'Outdoor lifestyle community with hiking trails, parks, and active living opportunities for nature enthusiasts.',
+        image:
+          'https://images.unsplash.com/photo-1600607687644-c7171b42498b?w=800&h=600&fit=crop&q=75',
+        href: '/skye-canyon',
+        features: ['Hiking Trails', 'Outdoor Recreation', 'Modern Homes', 'Community Events'],
+        priceRange: '$600k - $1.5M',
+        homesCount: 75,
+        rating: 4.7,
+      },
+      {
+        name: 'Northwest Las Vegas',
+        description:
+          'Growing area with new construction, shopping centers, and easy access to major highways and attractions.',
+        image:
+          'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=800&h=600&fit=crop&q=75',
+        href: '/northwest-las-vegas',
+        features: ['New Construction', 'Shopping Centers', 'Easy Access', 'Growth Area'],
+        priceRange: '$400k - $1M',
+        homesCount: 200,
+        rating: 4.6,
+      },
+    ],
+    []
+  );
 
   const handleNeighborhoodClick = useCallback((neighborhoodName: string) => {
     // Analytics tracking could be added here
@@ -73,7 +84,8 @@ const ModernNeighborhoods: React.FC = () => {
             <span className="block text-secondary-color mt-2">Featured Neighborhoods</span>
           </h2>
           <p className="text-lg lg:text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
-            Discover the unique character and lifestyle each community offers in the Centennial Hills area
+            Discover the unique character and lifestyle each community offers in the Centennial
+            Hills area
           </p>
         </div>
 
@@ -98,7 +110,7 @@ const ModernNeighborhoods: React.FC = () => {
                   blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAABAAEDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAUEAEAAAAAAAAAAAAAAAAAAAAA/8QAFQEBAQAAAAAAAAAAAAAAAAAAAAX/xAAUEQEAAAAAAAAAAAAAAAAAAAAA/9oADAMBAAIRAxEAPwCdABmX/9k="
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
-                
+
                 {/* Rating Badge */}
                 <div className="absolute top-4 right-4 bg-white/90 backdrop-blur-sm rounded-full px-3 py-1 flex items-center gap-1">
                   <Star className="w-4 h-4 text-yellow-500 fill-current" />
@@ -110,11 +122,15 @@ const ModernNeighborhoods: React.FC = () => {
               <div className="p-6 lg:p-8">
                 <div className="flex items-center gap-2 mb-4">
                   <MapPin className="w-5 h-5 text-secondary-color" />
-                  <h3 className="text-xl lg:text-2xl font-bold text-primary-color">{neighborhood.name}</h3>
+                  <h3 className="text-xl lg:text-2xl font-bold text-primary-color">
+                    {neighborhood.name}
+                  </h3>
                 </div>
-                
-                <p className="text-gray-600 mb-6 line-clamp-3 leading-relaxed">{neighborhood.description}</p>
-                
+
+                <p className="text-gray-600 mb-6 line-clamp-3 leading-relaxed">
+                  {neighborhood.description}
+                </p>
+
                 {/* Features */}
                 <div className="mb-6">
                   <div className="flex flex-wrap gap-2">
@@ -135,7 +151,9 @@ const ModernNeighborhoods: React.FC = () => {
                     <Home className="w-4 h-4" />
                     <span>{neighborhood.homesCount} homes</span>
                   </div>
-                  <div className="font-semibold text-secondary-color">{neighborhood.priceRange}</div>
+                  <div className="font-semibold text-secondary-color">
+                    {neighborhood.priceRange}
+                  </div>
                 </div>
 
                 {/* CTA Button */}
@@ -154,7 +172,8 @@ const ModernNeighborhoods: React.FC = () => {
               Ready to Find Your Perfect Neighborhood?
             </h3>
             <p className="text-lg lg:text-xl text-blue-100 mb-8 max-w-2xl mx-auto leading-relaxed">
-              Let Dr. Jan Duffy guide you through the best communities in Centennial Hills and help you find your dream home.
+              Let Dr. Jan Duffy guide you through the best communities in Centennial Hills and help
+              you find your dream home.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 lg:gap-6 justify-center">
               <Link

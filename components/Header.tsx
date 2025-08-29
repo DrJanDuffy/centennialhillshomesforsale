@@ -25,7 +25,9 @@ export default function Header() {
   };
 
   return (
-    <header className={`bg-white shadow-sm transition-all duration-300 ${isScrolled ? 'py-2' : 'py-4'}`}>
+    <header
+      className={`bg-white shadow-sm transition-all duration-300 ${isScrolled ? 'py-2' : 'py-4'}`}
+    >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between">
           {/* Logo and Brand */}
@@ -33,63 +35,99 @@ export default function Header() {
             <Link href="/" className="flex items-center space-x-3">
               {/* Logo Placeholder - Icon-based */}
               <div className="w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 bg-gradient-to-br from-blue-600 to-blue-700 rounded-lg flex items-center justify-center flex-shrink-0 shadow-md">
-                <svg className="w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6 text-white" fill="currentColor" viewBox="0 0 24 24">
-                  <path d="M19 7c0-1.103-.897-2-2-2h-3v2h3v2.765l-3.447 4.018c-.34.39-.553.895-.553 1.47V19h4v2h-6v-4.765c0-.575-.213-1.08-.553-1.47L7 9.765V7h3V5H7c-1.103 0-2 .897-2 2v2.765l3.447 4.018c.34.39.553.895.553 1.47V19H5v2h4v-4.765c0-.575.213-1.08.553-1.47L13 9.765V7z"/>
+                <svg
+                  className="w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6 text-white"
+                  fill="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path d="M19 7c0-1.103-.897-2-2-2h-3v2h3v2.765l-3.447 4.018c-.34.39-.553.895-.553 1.47V19h4v2h-6v-4.765c0-.575-.213-1.08-.553-1.47L7 9.765V7h3V5H7c-1.103 0-2 .897-2 2v2.765l3.447 4.018c.34.39.553.895.553 1.47V19H5v2h4v-4.765c0-.575.213-1.08.553-1.47L13 9.765V7z" />
                 </svg>
               </div>
-              
+
               {/* Brand Text */}
               <div className="text-center">
-                <h1 className="text-xl sm:text-2xl font-bold text-gray-900">
-                  Dr. Jan Duffy
-                </h1>
-                <p className="text-sm text-gray-600">
-                  REALTOR® | Centennial Hills Expert
-                </p>
+                <h1 className="text-xl sm:text-2xl font-bold text-gray-900">Dr. Jan Duffy</h1>
+                <p className="text-sm text-gray-600">REALTOR® | Centennial Hills Expert</p>
               </div>
             </Link>
           </div>
 
           {/* Desktop Navigation */}
           <nav className="hidden md:flex items-center space-x-8">
-            <Link href="/" className={`text-gray-700 hover:text-blue-600 transition-colors ${router.pathname === '/' ? 'text-blue-600 font-semibold' : ''}`}>
+            <Link
+              href="/"
+              className={`text-gray-700 hover:text-blue-600 transition-colors ${router.pathname === '/' ? 'text-blue-600 font-semibold' : ''}`}
+            >
               Home
             </Link>
-            <Link href="/properties" className={`text-gray-700 hover:text-blue-600 transition-colors ${router.pathname === '/properties' ? 'text-blue-600 font-semibold' : ''}`}>
+            <Link
+              href="/properties"
+              className={`text-gray-700 hover:text-blue-600 transition-colors ${router.pathname === '/properties' ? 'text-blue-600 font-semibold' : ''}`}
+            >
               Properties
             </Link>
-            <Link href="/neighborhoods" className={`text-gray-700 hover:text-blue-600 transition-colors ${router.pathname === '/neighborhoods' ? 'text-blue-600 font-semibold' : ''}`}>
+            <Link
+              href="/neighborhoods"
+              className={`text-gray-700 hover:text-blue-600 transition-colors ${router.pathname === '/neighborhoods' ? 'text-blue-600 font-semibold' : ''}`}
+            >
               Neighborhoods
             </Link>
-            <Link href="/local-business-directory" className={`text-gray-700 hover:text-blue-600 transition-colors ${router.pathname === '/local-business-directory' ? 'text-blue-600 font-semibold' : ''}`}>
+            <Link
+              href="/local-business-directory"
+              className={`text-gray-700 hover:text-blue-600 transition-colors ${router.pathname === '/local-business-directory' ? 'text-blue-600 font-semibold' : ''}`}
+            >
               Local Businesses
             </Link>
-            <Link href="/community-events" className={`text-gray-700 hover:text-blue-600 transition-colors ${router.pathname === '/community-events' ? 'text-blue-600 font-semibold' : ''}`}>
+            <Link
+              href="/community-events"
+              className={`text-gray-700 hover:text-blue-600 transition-colors ${router.pathname === '/community-events' ? 'text-blue-600 font-semibold' : ''}`}
+            >
               Community Events
             </Link>
-            <Link href="/neighborhood-comparison" className={`text-gray-700 hover:text-blue-600 transition-colors ${router.pathname === '/neighborhood-comparison' ? 'text-blue-600 font-semibold' : ''}`}>
+            <Link
+              href="/neighborhood-comparison"
+              className={`text-gray-700 hover:text-blue-600 transition-colors ${router.pathname === '/neighborhood-comparison' ? 'text-blue-600 font-semibold' : ''}`}
+            >
               Compare Areas
             </Link>
-            <Link href="/market-data" className={`text-gray-700 hover:text-blue-600 transition-colors ${router.pathname === '/market-data' ? 'text-blue-600 font-semibold' : ''}`}>
+            <Link
+              href="/market-data"
+              className={`text-gray-700 hover:text-blue-600 transition-colors ${router.pathname === '/market-data' ? 'text-blue-600 font-semibold' : ''}`}
+            >
               Market Data
             </Link>
-            <Link href="/area-explorer" className={`text-gray-700 hover:text-blue-600 transition-colors ${router.pathname === '/area-explorer' ? 'text-blue-600 font-semibold' : ''}`}>
+            <Link
+              href="/area-explorer"
+              className={`text-gray-700 hover:text-blue-600 transition-colors ${router.pathname === '/area-explorer' ? 'text-blue-600 font-semibold' : ''}`}
+            >
               Area Explorer
             </Link>
-            <Link href="/faq-schema" className={`text-gray-700 hover:text-blue-600 transition-colors ${router.pathname === '/faq-schema' ? 'text-blue-600 font-semibold' : ''}`}>
+            <Link
+              href="/faq-schema"
+              className={`text-gray-700 hover:text-blue-600 transition-colors ${router.pathname === '/faq-schema' ? 'text-blue-600 font-semibold' : ''}`}
+            >
               FAQ
             </Link>
-            <Link href="/about" className={`text-gray-700 hover:text-blue-600 transition-colors ${router.pathname === '/about' ? 'text-blue-600 font-semibold' : ''}`}>
+            <Link
+              href="/about"
+              className={`text-gray-700 hover:text-blue-600 transition-colors ${router.pathname === '/about' ? 'text-blue-600 font-semibold' : ''}`}
+            >
               About
             </Link>
-            <Link href="/contact" className={`text-gray-700 hover:text-blue-600 transition-colors ${router.pathname === '/contact' ? 'text-blue-600 font-semibold' : ''}`}>
+            <Link
+              href="/contact"
+              className={`text-gray-700 hover:text-blue-600 transition-colors ${router.pathname === '/contact' ? 'text-blue-600 font-semibold' : ''}`}
+            >
               Contact
             </Link>
           </nav>
 
           {/* CTA Button */}
           <div className="hidden md:block">
-            <Link href="/contact" className="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition-colors">
+            <Link
+              href="/contact"
+              className="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition-colors"
+            >
               Get Started
             </Link>
           </div>
@@ -101,11 +139,27 @@ export default function Header() {
               className="text-gray-700 hover:text-blue-600 p-2"
               aria-label="Toggle menu"
             >
-              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+              <svg
+                className="w-6 h-6"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+                aria-hidden="true"
+              >
                 {isMenuOpen ? (
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M6 18L18 6M6 6l12 12"
+                  />
                 ) : (
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M4 6h16M4 12h16M4 18h16"
+                  />
                 )}
               </svg>
             </button>
@@ -116,41 +170,89 @@ export default function Header() {
         {isMenuOpen && (
           <div className="md:hidden mt-4 pb-4 border-t border-gray-200">
             <nav className="flex flex-col space-y-4 pt-4">
-              <Link href="/" onClick={closeMenu} className={`text-gray-700 hover:text-blue-600 transition-colors ${router.pathname === '/' ? 'text-blue-600 font-semibold' : ''}`}>
+              <Link
+                href="/"
+                onClick={closeMenu}
+                className={`text-gray-700 hover:text-blue-600 transition-colors ${router.pathname === '/' ? 'text-blue-600 font-semibold' : ''}`}
+              >
                 Home
               </Link>
-              <Link href="/properties" onClick={closeMenu} className={`text-gray-700 hover:text-blue-600 transition-colors ${router.pathname === '/properties' ? 'text-blue-600 font-semibold' : ''}`}>
+              <Link
+                href="/properties"
+                onClick={closeMenu}
+                className={`text-gray-700 hover:text-blue-600 transition-colors ${router.pathname === '/properties' ? 'text-blue-600 font-semibold' : ''}`}
+              >
                 Properties
               </Link>
-              <Link href="/neighborhoods" onClick={closeMenu} className={`text-gray-700 hover:text-blue-600 transition-colors ${router.pathname === '/neighborhoods' ? 'text-blue-600 font-semibold' : ''}`}>
+              <Link
+                href="/neighborhoods"
+                onClick={closeMenu}
+                className={`text-gray-700 hover:text-blue-600 transition-colors ${router.pathname === '/neighborhoods' ? 'text-blue-600 font-semibold' : ''}`}
+              >
                 Neighborhoods
               </Link>
-              <Link href="/local-business-directory" onClick={closeMenu} className={`text-gray-700 hover:text-blue-600 transition-colors ${router.pathname === '/local-business-directory' ? 'text-blue-600 font-semibold' : ''}`}>
+              <Link
+                href="/local-business-directory"
+                onClick={closeMenu}
+                className={`text-gray-700 hover:text-blue-600 transition-colors ${router.pathname === '/local-business-directory' ? 'text-blue-600 font-semibold' : ''}`}
+              >
                 Local Businesses
               </Link>
-              <Link href="/community-events" onClick={closeMenu} className={`text-gray-700 hover:text-blue-600 transition-colors ${router.pathname === '/community-events' ? 'text-blue-600 font-semibold' : ''}`}>
+              <Link
+                href="/community-events"
+                onClick={closeMenu}
+                className={`text-gray-700 hover:text-blue-600 transition-colors ${router.pathname === '/community-events' ? 'text-blue-600 font-semibold' : ''}`}
+              >
                 Community Events
               </Link>
-              <Link href="/neighborhood-comparison" onClick={closeMenu} className={`text-gray-700 hover:text-blue-600 transition-colors ${router.pathname === '/neighborhood-comparison' ? 'text-blue-600 font-semibold' : ''}`}>
+              <Link
+                href="/neighborhood-comparison"
+                onClick={closeMenu}
+                className={`text-gray-700 hover:text-blue-600 transition-colors ${router.pathname === '/neighborhood-comparison' ? 'text-blue-600 font-semibold' : ''}`}
+              >
                 Compare Areas
               </Link>
-              <Link href="/market-data" onClick={closeMenu} className={`text-gray-700 hover:text-blue-600 transition-colors ${router.pathname === '/market-data' ? 'text-blue-600 font-semibold' : ''}`}>
+              <Link
+                href="/market-data"
+                onClick={closeMenu}
+                className={`text-gray-700 hover:text-blue-600 transition-colors ${router.pathname === '/market-data' ? 'text-blue-600 font-semibold' : ''}`}
+              >
                 Market Data
               </Link>
-              <Link href="/area-explorer" onClick={closeMenu} className={`text-gray-700 hover:text-blue-600 transition-colors ${router.pathname === '/area-explorer' ? 'text-blue-600 font-semibold' : ''}`}>
+              <Link
+                href="/area-explorer"
+                onClick={closeMenu}
+                className={`text-gray-700 hover:text-blue-600 transition-colors ${router.pathname === '/area-explorer' ? 'text-blue-600 font-semibold' : ''}`}
+              >
                 Area Explorer
               </Link>
-              <Link href="/faq-schema" onClick={closeMenu} className={`text-gray-700 hover:text-blue-600 transition-colors ${router.pathname === '/faq-schema' ? 'text-blue-600 font-semibold' : ''}`}>
+              <Link
+                href="/faq-schema"
+                onClick={closeMenu}
+                className={`text-gray-700 hover:text-blue-600 transition-colors ${router.pathname === '/faq-schema' ? 'text-blue-600 font-semibold' : ''}`}
+              >
                 FAQ
               </Link>
-              <Link href="/about" onClick={closeMenu} className={`text-gray-700 hover:text-blue-600 transition-colors ${router.pathname === '/about' ? 'text-blue-600 font-semibold' : ''}`}>
+              <Link
+                href="/about"
+                onClick={closeMenu}
+                className={`text-gray-700 hover:text-blue-600 transition-colors ${router.pathname === '/about' ? 'text-blue-600 font-semibold' : ''}`}
+              >
                 About
               </Link>
-              <Link href="/contact" onClick={closeMenu} className={`text-gray-700 hover:text-blue-600 transition-colors ${router.pathname === '/contact' ? 'text-blue-600 font-semibold' : ''}`}>
+              <Link
+                href="/contact"
+                onClick={closeMenu}
+                className={`text-gray-700 hover:text-blue-600 transition-colors ${router.pathname === '/contact' ? 'text-blue-600 font-semibold' : ''}`}
+              >
                 Contact
               </Link>
               <div className="pt-4">
-                <Link href="/contact" onClick={closeMenu} className="block w-full bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition-colors text-center">
+                <Link
+                  href="/contact"
+                  onClick={closeMenu}
+                  className="block w-full bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition-colors text-center"
+                >
                   Get Started
                 </Link>
               </div>

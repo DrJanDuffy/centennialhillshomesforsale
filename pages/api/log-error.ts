@@ -18,10 +18,7 @@ interface ErrorLogData {
   sessionId?: string;
 }
 
-export default async function handler(
-  req: NextApiRequest,
-  res: NextApiResponse
-) {
+export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   if (req.method !== 'POST') {
     return res.status(405).json({ message: 'Method not allowed' });
   }
@@ -57,8 +54,8 @@ export default async function handler(
           body: JSON.stringify({
             ...errorData,
             environment: process.env.NODE_ENV,
-            domain: 'centennialhillshomesforsale.com'
-          })
+            domain: 'centennialhillshomesforsale.com',
+          }),
         });
       } catch (webhookError) {
         console.error('Failed to send to webhook:', webhookError);
@@ -66,18 +63,20 @@ export default async function handler(
     }
 
     // Return success
-    res.status(200).json({ 
+    res.status(200).json({
       message: 'Error logged successfully',
-      timestamp: new Date().toISOString()
+      timestamp: new Date().toISOString(),
     });
-
   } catch (error) {
     console.error('Error in log-error API:', error);
-    res.status(500).json({ 
+    res.status(500).json({
       message: 'Internal server error',
-      error: process.env.NODE_ENV === 'development' ? 
-        (error instanceof Error ? error.message : 'Unknown error') : 
-        'Unknown error'
+      error:
+        process.env.NODE_ENV === 'development'
+          ? error instanceof Error
+            ? error.message
+            : 'Unknown error'
+          : 'Unknown error',
     });
   }
 }
