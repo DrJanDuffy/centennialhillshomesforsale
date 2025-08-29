@@ -45,7 +45,7 @@ class GlobalErrorHandler {
           if (tagName === 'img' || tagName === 'script' || tagName === 'link') {
             errorTracker.trackError(
               new Error(
-                `Failed to load ${tagName}: ${(target as any).src || (target as any).href}`
+                `Failed to load ${tagName}: ${(target as HTMLElementWithSrc).src || (target as HTMLElementWithSrc).href}`
               ),
               'ResourceLoading'
             );
@@ -87,3 +87,8 @@ class GlobalErrorHandler {
 }
 
 export default GlobalErrorHandler;
+
+interface HTMLElementWithSrc extends HTMLElement {
+  src?: string;
+  href?: string;
+}

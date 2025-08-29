@@ -2,6 +2,7 @@ import { ChevronRight, Home } from 'lucide-react';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import type React from 'react';
+import { useEffect, useRef, useMemo } from 'react';
 
 interface BreadcrumbItem {
   name: string;
@@ -18,6 +19,7 @@ const BreadcrumbNavigation: React.FC<BreadcrumbNavigationProps> = ({
   showHome = true,
 }) => {
   const router = useRouter();
+  const scriptRef = useRef<HTMLDivElement>(null);
 
   // Generate breadcrumbs based on current path
   const generateBreadcrumbs = (): BreadcrumbItem[] => {
@@ -52,8 +54,7 @@ const BreadcrumbNavigation: React.FC<BreadcrumbNavigationProps> = ({
 
   const breadcrumbItems = items.length > 0 ? items : generateBreadcrumbs();
 
-  // Generate schema markup for breadcrumbs
-  const breadcrumbSchema = {
+  const breadcrumbSchema = useMemo(() => ({
     '@context': 'https://schema.org',
     '@type': 'BreadcrumbList',
     itemListElement: breadcrumbItems.map((item, index) => ({
@@ -62,7 +63,16 @@ const BreadcrumbNavigation: React.FC<BreadcrumbNavigationProps> = ({
       name: item.name,
       item: `https://centennialhillshomesforsale.com${item.href}`,
     })),
-  };
+  }), [breadcrumbItems]);
+
+  useEffect(() => {
+    if (scriptRef.current) {
+      const script = document.createElement('script');
+      script.type = 'application/ld+json';
+      script.textContent = JSON.stringify(breadcrumbSchema);
+      scriptRef.current.appendChild(script);
+    }
+  }, [breadcrumbSchema]);
 
   return (
     <>

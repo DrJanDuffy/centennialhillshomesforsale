@@ -228,23 +228,24 @@ const AwesomeHero: React.FC = () => {
         {/* Floating Stars */}
         {[...Array(6)].map((_, i) => (
           <motion.div
-            key={i}
+            key={`floating-star-${i}`}
             className="absolute text-white/20"
             style={{
               left: `${Math.random() * 100}%`,
               top: `${Math.random() * 100}%`,
+              fontSize: `${Math.random() * 20 + 10}px`,
             }}
             animate={{
               y: [0, -20, 0],
               opacity: [0.2, 0.5, 0.2],
             }}
             transition={{
-              duration: 3 + Math.random() * 2,
+              duration: Math.random() * 3 + 2,
               repeat: Infinity,
               delay: Math.random() * 2,
             }}
           >
-            <Star className="w-4 h-4" />
+            ⭐
           </motion.div>
         ))}
       </div>
