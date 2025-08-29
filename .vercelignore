@@ -1,168 +1,60 @@
-# Dependencies and build artifacts
-node_modules
-.next
-out
-dist
-build
-coverage
-.vercel
-
-# Development and IDE files
-.env
-.env.*
+# Development files
 .env.local
 .env.development
 .env.test
 .env.production
-*.log
-.DS_Store
-.vscode
-.idea
-.cursor
-*.tsbuildinfo
 
-# Documentation and scripts
-*.md
-!README.md
-docs
-scripts
-attached_assets
-api-backup
+# Build artifacts
+.next/
+out/
+dist/
+build/
 
-# Testing and development
-tests
-test-*.js
-fix-*.js
-deploy-*.js
-cleanup-*.js
-parse-*.js
-configure-*.js
-taskmaster-*.js
-*.ps1
+# Dependencies
+node_modules/
 
-# Configuration files (not needed in production)
-.biomeignore
-biome.json
-replit.toml
-.replit
-wrangler.toml
-.github
-
-# Temporary and backup files
-tmp
-temp
-*.backup
-*.bak
-*.tmp
-
-# Large assets that should be served from CDN
-public/data/*.json
-public/*.txt
-public/*.md
-
-# Development-specific files
-UI-FIXES-IMPLEMENTATION.md
-DEPLOYMENT-*.md
-audit-report*.md
-BROWSER-COMPATIBILITY.md
-VERCEL-OPTIMIZATION-GUIDE.md
-env-template.txt
-
-# Git and version control
-.git
-.gitignore
-.gitattributes
-
-# Local development files
-*.local
-.local
-local.*
-
-# Performance analysis files
-.next/analyze/
-webpack-stats.json
-bundle-analysis.html
-
-# Cursor.ai specific files
-.cursorrules
-.cursor/
-cursor-*
-
-# OS generated files
-Thumbs.db
-ehthumbs.db
-Desktop.ini
-
-# Package manager files
-yarn.lock
-pnpm-lock.yaml
-package-lock.json.backup
-
-# Editor files
-*.swp
-*.swo
-*~
-
-# Logs
-logs
+# Development tools
+.vscode/
+.idea/
 *.log
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
-lerna-debug.log*
 
-# Runtime data
-pids
-*.pid
-*.seed
-*.pid.lock
+# Testing
+coverage/
+.nyc_output/
+.jest/
 
-# Coverage directory used by tools like istanbul
-coverage
-*.lcov
+# Documentation
+*.md
+docs/
 
-# nyc test coverage
-.nyc_output
+# Scripts
+scripts/
+deploy-*.js
+fix-*.js
+cleanup-*.js
 
-# Dependency directories
-jspm_packages/
+# Backup files
+api-backup/
+*.backup
+*.bak
 
-# Optional npm cache directory
-.npm
+# Temporary files
+*.tmp
+*.temp
+.DS_Store
+Thumbs.db
 
-# Optional eslint cache
-.eslintcache
+# Analysis files
+bundle-analysis.html
+webpack-stats.json
 
-# Microbundle cache
-.rpt2_cache/
-.rts2_cache_cjs/
-.rts2_cache_es/
-.rts2_cache_umd/
+# Git
+.git/
+.gitignore
 
-# Optional REPL history
-.node_repl_history
-
-# Output of 'npm pack'
-*.tgz
-
-# Yarn Integrity file
-.yarn-integrity
-
-# parcel-bundler cache (https://parceljs.org/)
-.cache
-.parcel-cache
-
-# Next.js build output
-.next
-
-# Nuxt.js build / generate output
-.nuxt
-dist
-
-# Storybook build outputs
-.out
-.storybook-out
-
-# Temporary folders
-tmp/
-temp/ 
+# Local configuration
+*.local
+local-* 

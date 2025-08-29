@@ -1,6 +1,6 @@
 import Head from 'next/head';
 import { useRouter } from 'next/router';
-import type React from 'react';
+import React from 'react';
 import Footer from './Footer';
 import Header from './Header';
 
@@ -11,16 +11,6 @@ interface LayoutProps {
   canonical?: string;
   image?: string;
   structuredData?: Record<string, unknown>;
-  isPropertyPage?: boolean;
-  propertyData?: {
-    address: string;
-    price: number;
-    bedrooms: number;
-    bathrooms: number;
-    sqft: number;
-    neighborhood: string;
-    images: string[];
-  };
 }
 
 const Layout: React.FC<LayoutProps> = ({
@@ -29,8 +19,6 @@ const Layout: React.FC<LayoutProps> = ({
   description = 'Discover luxury homes for sale in Centennial Hills, Las Vegas. Dr. Jan Duffy, Top 1% REALTOR®, specializes in Providence, Skye Canyon, and Northwest Las Vegas luxury real estate.',
   canonical,
   structuredData,
-  isPropertyPage = false,
-  propertyData,
 }) => {
   const router = useRouter();
   const currentUrl = canonical || `https://centennialhillshomesforsale.com${router.asPath}`;

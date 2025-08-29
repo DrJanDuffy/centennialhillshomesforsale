@@ -29,7 +29,12 @@
     "deploy:preview": "vercel --prod=false",
     "deploy:production": "vercel --prod",
     "test:build": "npm run build && npm run start & sleep 10 && curl -f http://localhost:3000 > /dev/null && kill %1",
-    "test:vercel": "vercel --prod=false --yes"
+    "test:vercel": "vercel --prod=false --yes",
+    "optimize": "npm run biome:fix && npm run lint && npm run type-check",
+    "pre-commit": "npm run optimize",
+    "performance:audit": "npm run analyze && npm run build",
+    "bundle:size": "npm run build && npx @next/bundle-analyzer .next/static/chunks",
+    "check:all": "npm run optimize && npm run security:audit && npm run deps:check"
   },
   "dependencies": {
     "@headlessui/react": "^2.2.7",
