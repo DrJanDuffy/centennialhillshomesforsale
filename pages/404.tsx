@@ -1,7 +1,7 @@
 import Head from 'next/head';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 import Layout from '../components/Layout';
 
 export default function Custom404() {

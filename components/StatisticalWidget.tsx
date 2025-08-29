@@ -98,7 +98,7 @@ export default function StatisticalWidget({
   ];
 
   const getComparisonWidth = useCallback((percentage: string) => {
-    const num = parseInt(percentage.replace('%', ''));
+    const num = parseInt(percentage.replace('%', ''), 10);
     return `${Math.min(Math.max(num, 0), 100)}%`;
   }, []);
 

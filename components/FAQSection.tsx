@@ -1,5 +1,4 @@
 import { ChevronDown, ChevronUp } from 'lucide-react';
-import type React from 'react';
 import { useEffect, useMemo, useRef, useState } from 'react';
 
 interface FAQItem {

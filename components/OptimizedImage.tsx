@@ -1,5 +1,4 @@
 import Image from 'next/image';
-import type React from 'react';
 import { useEffect, useRef, useState } from 'react';
 
 interface OptimizedImageProps {
@@ -75,7 +74,7 @@ export default function OptimizedImage({
   };
 
   // Generate optimized srcSet for different formats
-  const generateSrcSet = (baseSrc: string) => {
+  const _generateSrcSet = (baseSrc: string) => {
     if (!baseSrc.includes('unsplash.com') && !baseSrc.includes('pixabay.com')) {
       return baseSrc;
     }

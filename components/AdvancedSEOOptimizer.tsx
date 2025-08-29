@@ -1,6 +1,6 @@
 import Head from 'next/head';
 import type React from 'react';
-import { useEffect, useRef, useMemo } from 'react';
+import { useEffect, useRef } from 'react';
 
 interface AdvancedSEOOptimizerProps {
   pageType: 'home' | 'property' | 'neighborhood' | 'service';
@@ -252,7 +252,7 @@ const AdvancedSEOOptimizer: React.FC<AdvancedSEOOptimizerProps> = ({
       injectScript(serviceSchema, 'service-schema');
       injectScript(getBreadcrumbSchema(), 'breadcrumb-schema');
     }
-  }, [localBusinessSchema, faqSchema, serviceSchema]);
+  }, [localBusinessSchema, serviceSchema, getBreadcrumbSchema]);
 
   return (
     <Head>

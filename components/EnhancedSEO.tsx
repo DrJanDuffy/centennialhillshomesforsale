@@ -1,5 +1,4 @@
 import Head from 'next/head';
-import type React from 'react';
 import { useEffect, useId, useMemo, useRef } from 'react';
 import GoogleAnalytics from './GoogleAnalytics';
 import GoogleSearchConsole from './GoogleSearchConsole';
@@ -30,7 +29,7 @@ export default function EnhancedSEO({
   propertyData,
   structuredData = [],
 }: EnhancedSEOProps) {
-  const scriptRef = useRef<HTMLDivElement>(null);
+  const _scriptRef = useRef<HTMLDivElement>(null);
   const containerId = useId();
 
   const siteUrl = 'https://centennialhillshomesforsale.com';

@@ -1,7 +1,7 @@
 'use client';
 
 import Image from 'next/image';
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import type { KCMArticle, RSSFeedData } from '../lib/rss-parser';
 
 interface KCMFeedProps {
