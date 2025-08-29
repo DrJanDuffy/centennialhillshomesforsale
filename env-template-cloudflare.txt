@@ -1,0 +1,16 @@
+# Cloudflare Environment Configuration Template
+# Copy this file to .env.local and fill in your actual values
+
+# Cloudflare Configuration
+CLOUDFLARE_API_KEY=006a036208c6527a48175ccf9393d794509e3
+CLOUDFLARE_EMAIL=drduffy@bhhsnv.com
+CLOUDFLARE_ZONE_ID=ee98107e4df3984ca1593206046598da
+CLOUDFLARE_ACCOUNT_ID=2cc579c1ec9e426ed585e933ebf4753b
+
+# Next.js Environment (Client-side accessible)
+NEXT_PUBLIC_CLOUDFLARE_API_KEY=006a036208c6527a48175ccf9393d794509e3
+NEXT_PUBLIC_CLOUDFLARE_EMAIL=drduffy@bhhsnv.com
+NEXT_PUBLIC_VERCEL_ENV=development
+
+# Important: Never commit .env.local to version control!
+# This file is already in your .gitignore

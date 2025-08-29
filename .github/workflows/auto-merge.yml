@@ -1,0 +1,148 @@
+name: Auto-Merge Pull Requests
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened, ready_for_review]
+  check_suite:
+    types: [completed]
+  status:
+  workflow_run:
+    workflows: ["Code Quality & Performance", "Vercel Deployment Pipeline"]
+    types: [completed]
+
+env:
+  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+jobs:
+  auto-merge:
+    name: Auto-Merge PR
+    runs-on: ubuntu-latest
+    if: github.event.pull_request.auto_merge_enabled == true
+    permissions:
+      contents: write
+      pull-requests: write
+      checks: read
+      statuses: read
+
+    steps:
+      - name: Check if PR is ready for merge
+        id: check-status
+        run: |
+          # Get the PR details
+          PR_NUMBER="${{ github.event.pull_request.number }}"
+          REPO="${{ github.repository }}"
+          
+          # Check if all required status checks have passed
+          echo "Checking status for PR #$PR_NUMBER..."
+          
+          # Get the latest commit SHA
+          COMMIT_SHA="${{ github.event.pull_request.head.sha }}"
+          
+          # Check if all required status checks are passing
+          STATUS_CHECK=$(curl -s -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
+            "https://api.github.com/repos/$REPO/commits/$COMMIT_SHA/status")
+          
+          echo "Status check response: $STATUS_CHECK"
+          
+          # Check if all statuses are success
+          ALL_SUCCESS=$(echo "$STATUS_CHECK" | jq -r '.statuses[] | select(.state != "success") | .state' | head -1)
+          
+          if [ -z "$ALL_SUCCESS" ]; then
+            echo "✅ All status checks are passing"
+            echo "ready=true" >> $GITHUB_OUTPUT
+          else
+            echo "❌ Some status checks are not passing: $ALL_SUCCESS"
+            echo "ready=false" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Check if PR has required reviews
+        id: check-reviews
+        if: steps.check-status.outputs.ready == 'true'
+        run: |
+          PR_NUMBER="${{ github.event.pull_request.number }}"
+          REPO="${{ github.repository }}"
+          
+          # Get reviews for the PR
+          REVIEWS=$(curl -s -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
+            "https://api.github.com/repos/$REPO/pulls/$PR_NUMBER/reviews")
+          
+          # Count approved reviews
+          APPROVED_COUNT=$(echo "$REVIEWS" | jq -r '.[] | select(.state == "approved") | .id' | wc -l)
+          
+          echo "Found $APPROVED_COUNT approved reviews"
+          
+          if [ "$APPROVED_COUNT" -ge 1 ]; then
+            echo "✅ PR has required reviews"
+            echo "reviews_ready=true" >> $GITHUB_OUTPUT
+          else
+            echo "❌ PR missing required reviews"
+            echo "reviews_ready=false" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Check if PR is up to date
+        id: check-up-to-date
+        if: steps.check-reviews.outputs.reviews_ready == 'true'
+        run: |
+          PR_NUMBER="${{ github.event.pull_request.number }}"
+          REPO="${{ github.repository }}"
+          
+          # Check if PR is up to date with base branch
+          PR_DETAILS=$(curl -s -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
+            "https://api.github.com/repos/$REPO/pulls/$PR_NUMBER")
+          
+          MERGEABLE=$(echo "$PR_DETAILS" | jq -r '.mergeable')
+          
+          if [ "$MERGEABLE" = "true" ]; then
+            echo "✅ PR is up to date and can be merged"
+            echo "up_to_date=true" >> $GITHUB_OUTPUT
+          else
+            echo "❌ PR is not up to date or has conflicts"
+            echo "up_to_date=false" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Auto-merge PR
+        if: steps.check-up-to-date.outputs.up_to_date == 'true'
+        run: |
+          PR_NUMBER="${{ github.event.pull_request.number }}"
+          REPO="${{ github.repository }}"
+          
+          echo "🚀 Auto-merging PR #$PR_NUMBER..."
+          
+          # Attempt to merge the PR
+          MERGE_RESPONSE=$(curl -s -X PUT \
+            -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
+            -H "Accept: application/vnd.github.v3+json" \
+            -d '{"merge_method": "squash"}' \
+            "https://api.github.com/repos/$REPO/pulls/$PR_NUMBER/merge")
+          
+          MERGE_SUCCESS=$(echo "$MERGE_RESPONSE" | jq -r '.merged')
+          
+          if [ "$MERGE_SUCCESS" = "true" ]; then
+            echo "✅ PR #$PR_NUMBER successfully auto-merged!"
+            
+            # Add a comment to the PR
+            curl -s -X POST \
+              -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
+              -H "Accept: application/vnd.github.v3+json" \
+              -d "{\"body\": \"🤖 **Auto-merge completed successfully!**\n\nThis PR has been automatically merged after all requirements were met:\n- ✅ All status checks passed\n- ✅ Required reviews completed\n- ✅ No conflicts detected\n\n**Merge Method:** Squash and merge\n**Merged at:** $(date -u)\n\n---\n*This was an automated merge by GitHub Actions*\"}" \
+              "https://api.github.com/repos/$REPO/issues/$PR_NUMBER/comments"
+          else
+            echo "❌ Failed to auto-merge PR #$PR_NUMBER"
+            echo "Response: $MERGE_RESPONSE"
+            exit 1
+          fi
+
+      - name: Handle merge failure
+        if: failure() && steps.check-up-to-date.outputs.up_to_date == 'true'
+        run: |
+          PR_NUMBER="${{ github.event.pull_request.number }}"
+          REPO="${{ github.repository }}"
+          
+          echo "⚠️ Auto-merge failed for PR #$PR_NUMBER"
+          
+          # Add a comment explaining the failure
+          curl -s -X POST \
+            -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
+            -H "Accept: application/vnd.github.v3+json" \
+            -d "{\"body\": \"⚠️ **Auto-merge failed**\n\nThis PR met all requirements but failed to merge automatically. This could be due to:\n- Temporary GitHub API issues\n- Repository state changes\n- Permission issues\n\n**Action Required:** Please try merging manually or contact a maintainer.\n\n---\n*This was an automated message from GitHub Actions*\"}" \
+            "https://api.github.com/repos/$REPO/issues/$PR_NUMBER/comments"

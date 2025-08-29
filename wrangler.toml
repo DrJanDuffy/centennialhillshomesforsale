@@ -1,8 +1,0 @@
-name = "centennialhillshomesforsale"
-compatibility_date = "2025-03-23"
-pages_build_output_dir = "out"
-
-[env.production]
-vars = { NODE_ENV = "production", SITE_URL = "https://centennialhillshomesforsale.com" }
-
-# Remove the routes section since we're using Vercel for DNS management 
