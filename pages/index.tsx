@@ -1,16 +1,17 @@
 import Head from 'next/head';
 import Link from 'next/link';
-import HyperLocalHero from '../components/HyperLocalHero';
+
+import EnhancedHero from '../components/EnhancedHero';
 import Layout from '../components/Layout';
 import RealScoutListings from '../components/RealScoutListings';
 import FeaturedInsight from '../components/rss/FeaturedInsight';
-import { getPageSchema } from '../lib/business-schema';
+
 
 export default function Home() {
   return (
     <Layout>
-      {/* HyperLocal Hero with RSS Integration */}
-      <HyperLocalHero />
+      {/* Enhanced Hero with Modern Design */}
+      <EnhancedHero />
 
       <Head>
         <title>Centennial Hills Homes for Sale | Dr. Jan Duffy | Luxury Real Estate</title>
@@ -24,12 +25,7 @@ export default function Home() {
         />
 
         {/* Enhanced Business Schema for SEO */}
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify(getPageSchema('home')),
-          }}
-        />
+        <script type="application/ld+json" id="business-schema" />
       </Head>
 
       {/* Quick Navigation Cards */}
