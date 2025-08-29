@@ -1,6 +1,6 @@
 #
 !/usr/bin / env
-node;
+node
 
 const fs = require('node:fs');
 const _path = require('node:path');

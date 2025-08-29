@@ -1,6 +1,6 @@
 #
 !/usr/bin / env
-node;
+node
 
 /**
  * PRD Parser for Centennial Hills Homes Website
