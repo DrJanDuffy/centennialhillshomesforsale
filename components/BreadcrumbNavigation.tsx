@@ -21,9 +21,7 @@ export default function BreadcrumbNavigation({ items }: BreadcrumbNavigationProp
   // Generate breadcrumbs based on current path
   const generateBreadcrumbs = (): BreadcrumbItem[] => {
     const pathSegments = router.asPath.split('/').filter(Boolean);
-    const breadcrumbs: BreadcrumbItem[] = [
-      { name: 'Home', href: '/' },
-    ];
+    const breadcrumbs: BreadcrumbItem[] = [{ name: 'Home', href: '/' }];
 
     let currentPath = '';
     pathSegments.forEach((segment) => {
@@ -97,4 +95,4 @@ export default function BreadcrumbNavigation({ items }: BreadcrumbNavigationProp
       </nav>
     </>
   );
-};
+}

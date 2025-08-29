@@ -1,6 +1,6 @@
 import Head from 'next/head';
 import type React from 'react';
-import { useEffect } from 'react';
+import { useEffect, useRef, useMemo } from 'react';
 
 interface AdvancedSEOOptimizerProps {
   pageType: 'home' | 'property' | 'neighborhood' | 'service';
@@ -16,6 +16,7 @@ const AdvancedSEOOptimizer: React.FC<AdvancedSEOOptimizerProps> = ({
   pageDescription,
   pageUrl,
 }) => {
+  const scriptRef = useRef<HTMLDivElement>(null);
   const siteUrl = 'https://centennialhillshomesforsale.com';
   const fullCanonicalUrl =
     pageUrl || `${siteUrl}${typeof window !== 'undefined' ? window.location.pathname : ''}`;
