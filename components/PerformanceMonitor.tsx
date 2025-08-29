@@ -177,7 +177,7 @@ export default function PerformanceMonitor() {
   const getPerformanceScore = useCallback(() => {
     const scores = Object.entries(metrics).map(([key, value]) => {
       if (!value || !thresholds[key as keyof typeof thresholds]) return 100;
-      
+
       const threshold = thresholds[key as keyof typeof thresholds];
       if (value <= threshold.good) return 100;
       if (value <= threshold.poor) return 50;
@@ -186,14 +186,14 @@ export default function PerformanceMonitor() {
 
     const validScores = scores.filter((score) => score !== 100);
     if (validScores.length === 0) return 100;
-    
+
     return Math.round(validScores.reduce((sum, score) => sum + score, 0) / validScores.length);
   }, [metrics]);
 
   // Get metric status
   const getMetricStatus = useCallback((metric: string, value: number | null) => {
     if (!value || !thresholds[metric as keyof typeof thresholds]) return 'unknown';
-    
+
     const threshold = thresholds[metric as keyof typeof thresholds];
     if (value <= threshold.good) return 'good';
     if (value <= threshold.poor) return 'needs-improvement';

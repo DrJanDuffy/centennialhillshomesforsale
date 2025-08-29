@@ -22,60 +22,57 @@ export default function HyperLocalHero() {
   };
 
   // Localization mapping for Centennial Hills
-  const localizeContent = useCallback(
-    (kcmArticle) => {
-      const localizations = {
-        // National to Local keyword mapping
-        'housing market': 'Centennial Hills real estate market',
-        'home prices': 'Centennial Hills home values',
-        'mortgage rates': 'Las Vegas mortgage rates',
-        inventory: 'Northwest Las Vegas inventory',
-        buyers: 'Centennial Hills homebuyers',
-        sellers: 'Providence and Skye Canyon sellers',
-        'interest rates': 'Nevada VA and conventional loan rates',
-        'home sales': 'Centennial Hills property sales',
-        'real estate': 'Las Vegas luxury real estate',
-        housing: 'master-planned community homes',
-        nationwide: 'throughout Centennial Hills',
-        'across the country': 'in Northwest Las Vegas',
-        national: 'Las Vegas metropolitan',
-        Americans: 'Las Vegas residents',
-      };
+  const localizeContent = useCallback((kcmArticle) => {
+    const localizations = {
+      // National to Local keyword mapping
+      'housing market': 'Centennial Hills real estate market',
+      'home prices': 'Centennial Hills home values',
+      'mortgage rates': 'Las Vegas mortgage rates',
+      inventory: 'Northwest Las Vegas inventory',
+      buyers: 'Centennial Hills homebuyers',
+      sellers: 'Providence and Skye Canyon sellers',
+      'interest rates': 'Nevada VA and conventional loan rates',
+      'home sales': 'Centennial Hills property sales',
+      'real estate': 'Las Vegas luxury real estate',
+      housing: 'master-planned community homes',
+      nationwide: 'throughout Centennial Hills',
+      'across the country': 'in Northwest Las Vegas',
+      national: 'Las Vegas metropolitan',
+      Americans: 'Las Vegas residents',
+    };
 
-      let localizedTitle = kcmArticle.title;
-      let localizedExcerpt = kcmArticle.excerpt;
+    let localizedTitle = kcmArticle.title;
+    let localizedExcerpt = kcmArticle.excerpt;
 
-      // Replace national terms with local ones
-      Object.entries(localizations).forEach(([national, local]) => {
-        const regex = new RegExp(national, 'gi');
-        localizedTitle = localizedTitle.replace(regex, local);
-        localizedExcerpt = localizedExcerpt.replace(regex, local);
-      });
+    // Replace national terms with local ones
+    Object.entries(localizations).forEach(([national, local]) => {
+      const regex = new RegExp(national, 'gi');
+      localizedTitle = localizedTitle.replace(regex, local);
+      localizedExcerpt = localizedExcerpt.replace(regex, local);
+    });
 
-      // Add local context to national trends
-      const localContexts = [
-        `This trend is particularly strong in Providence, where ${generateLocalStat()}.`,
-        `Centennial Hills continues to outperform with ${generateLocalStat()}.`,
-        `Local experts in Skye Canyon report ${generateLocalStat()}.`,
-        `Northwest Las Vegas shows ${generateLocalStat()}.`,
-      ];
+    // Add local context to national trends
+    const localContexts = [
+      `This trend is particularly strong in Providence, where ${generateLocalStat()}.`,
+      `Centennial Hills continues to outperform with ${generateLocalStat()}.`,
+      `Local experts in Skye Canyon report ${generateLocalStat()}.`,
+      `Northwest Las Vegas shows ${generateLocalStat()}.`,
+    ];
 
-      return {
-        ...kcmArticle,
-        title: localizedTitle,
-        excerpt: localizedExcerpt,
-        localContext: localContexts[Math.floor(Math.random() * localContexts.length)],
-        neighborhoods: ['Centennial Hills', 'Providence', 'Skye Canyon'],
-        localMetrics: {
-          medianPrice: '$725,000',
-          daysOnMarket: '21',
-          inventoryChange: '+12%',
-          priceChange: '+5.2%',
-        },
-      };
-    },
-    []
-  );
+    return {
+      ...kcmArticle,
+      title: localizedTitle,
+      excerpt: localizedExcerpt,
+      localContext: localContexts[Math.floor(Math.random() * localContexts.length)],
+      neighborhoods: ['Centennial Hills', 'Providence', 'Skye Canyon'],
+      localMetrics: {
+        medianPrice: '$725,000',
+        daysOnMarket: '21',
+        inventoryChange: '+12%',
+        priceChange: '+5.2%',
+      },
+    };
+  }, []);
 
   const getDynamicTitlePart = (headlineIndex) => {
     const dynamicParts = [
