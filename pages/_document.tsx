@@ -108,21 +108,11 @@ export default function Document() {
           }}
         />
 
-        {/* ==== MAP LIBRARY (Google Maps) ==== */}
-        <script
-          src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDt84u_m6IGyrNZ9Eyc2W0fAIx6yD3peTo&callback=initMap&libraries=places"
-          async
-          defer
-        ></script>
-
         {/* ==== CHART.JS & AXIOS (bundled via webpack) ==== */}
         {/* Removed CDN calls - now bundled with webpack optimization */}
 
         {/* ==== MARKET CHARTS (custom functionality) ==== */}
         <script src="/js/market-charts.js" defer></script>
-
-        {/* ==== PROPERTY MAP (Google Maps property listings) ==== */}
-        <script src="/js/property-map.js" defer></script>
 
         {/* (Optional) If you ever want Recharts (React) instead of Chart.js, uncomment the line below */}
         {/* <script src="https://unpkg.com/recharts/umd/Recharts.min.js" defer></script> */}

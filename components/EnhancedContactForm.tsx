@@ -1,395 +1,559 @@
 'use client';
 
-import { motion } from 'framer-motion';
-import { Mail, MapPin, Phone, Send } from 'lucide-react';
-import type React from 'react';
+import { CheckCircleIcon, ExclamationCircleIcon } from '@heroicons/react/24/outline';
+import { motion, AnimatePresence } from 'framer-motion';
 import { useState } from 'react';
-import { EnhancedButton, EnhancedFormField } from './EnhancedAnimations';
+import { useTheme } from '../contexts/ThemeContext';
 
-interface ContactFormData {
+interface FormData {
   firstName: string;
   lastName: string;
   email: string;
   phone: string;
+  propertyType: string;
+  budget: string;
+  timeline: string;
   message: string;
-  propertyInterest?: string;
-  timeline?: string;
-  budget?: string;
-  preferredContact?: string;
+  preferredContact: string;
+  newsletter: boolean;
 }
 
-interface ContactFormProps {
-  onSubmit?: (data: ContactFormData) => void;
-  className?: string;
-  showPropertyFields?: boolean;
-  title?: string;
-  description?: string;
+interface FormErrors {
+  [key: string]: string;
 }
 
-export const EnhancedContactForm: React.FC<ContactFormProps> = ({
-  onSubmit,
-  className = '',
-  showPropertyFields = false,
-  title = 'Get in Touch',
-  description = 'Ready to find your dream home? Contact us for personalized assistance.',
-}) => {
-  const [formData, setFormData] = useState<ContactFormData>({
+const propertyTypes = [
+  'Single Family Home',
+  'Townhouse',
+  'Condominium',
+  'Luxury Estate',
+  'Investment Property',
+  'Land',
+  'Other'
+];
+
+const budgetRanges = [
+  'Under $500K',
+  '$500K - $750K',
+  '$750K - $1M',
+  '$1M - $1.5M',
+  '$1.5M - $2M',
+  '$2M+'
+];
+
+const timelineOptions = [
+  'Immediately',
+  'Within 30 days',
+  'Within 3 months',
+  'Within 6 months',
+  'Just exploring',
+  'No specific timeline'
+];
+
+const preferredContactMethods = [
+  'Phone',
+  'Email',
+  'Text',
+  'Any method'
+];
+
+export default function EnhancedContactForm() {
+  const { isDark } = useTheme();
+  const [formData, setFormData] = useState<FormData>({
     firstName: '',
     lastName: '',
     email: '',
     phone: '',
+    propertyType: '',
+    budget: '',
+    timeline: '',
     message: '',
+    preferredContact: '',
+    newsletter: false
   });
 
-  const [errors, setErrors] = useState<Partial<ContactFormData>>({});
+  const [errors, setErrors] = useState<FormErrors>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [activeField, setActiveField] = useState<string>('');
 
-  // Property interest options
-  const propertyInterestOptions = [
-    { value: 'buying', label: 'Buying a Home' },
-    { value: 'selling', label: 'Selling a Home' },
-    { value: 'investing', label: 'Real Estate Investment' },
-    { value: 'renting', label: 'Renting a Property' },
-    { value: 'general', label: 'General Inquiry' },
-  ];
-
-  // Timeline options
-  const timelineOptions = [
-    { value: 'immediate', label: 'Immediately (0-30 days)' },
-    { value: '1-3-months', label: '1-3 months' },
-    { value: '3-6-months', label: '3-6 months' },
-    { value: '6-12-months', label: '6-12 months' },
-    { value: 'planning', label: 'Just planning ahead' },
-  ];
-
-  // Budget options
-  const budgetOptions = [
-    { value: '300-500', label: '$300K - $500K' },
-    { value: '500-750', label: '$500K - $750K' },
-    { value: '750-1000', label: '$750K - $1M' },
-    { value: '1000-1500', label: '$1M - $1.5M' },
-    { value: '1500+', label: '$1.5M+' },
-    { value: 'undecided', label: 'Not sure yet' },
-  ];
-
-  // Preferred contact options
-  const contactOptions = [
-    { value: 'email', label: 'Email' },
-    { value: 'phone', label: 'Phone Call' },
-    { value: 'text', label: 'Text Message' },
-    { value: 'any', label: 'Any method' },
-  ];
-
-  const validateForm = (): boolean => {
-    const newErrors: Partial<ContactFormData> = {};
-
-    // Required field validation
-    if (!formData.firstName.trim()) {
-      newErrors.firstName = 'First name is required';
+  const validateField = (name: string, value: string): string => {
+    switch (name) {
+      case 'firstName':
+        return value.trim() ? '' : 'First name is required';
+      case 'lastName':
+        return value.trim() ? '' : 'Last name is required';
+      case 'email': {
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        return emailRegex.test(value) ? '' : 'Please enter a valid email address';
+      }
+      case 'phone': {
+        const phoneRegex = /^[\+]?[1-9][\d]{0,15}$/;
+        return phoneRegex.test(value.replace(/[\s\-\(\)]/g, '')) ? '' : 'Please enter a valid phone number';
+      }
+      case 'propertyType':
+        return value ? '' : 'Please select a property type';
+      case 'budget':
+        return value ? '' : 'Please select a budget range';
+      case 'timeline':
+        return value ? '' : 'Please select a timeline';
+      case 'preferredContact':
+        return value ? '' : 'Please select a preferred contact method';
+      default:
+        return '';
     }
-
-    if (!formData.lastName.trim()) {
-      newErrors.lastName = 'Last name is required';
-    }
-
-    if (!formData.email.trim()) {
-      newErrors.email = 'Email is required';
-    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
-      newErrors.email = 'Please enter a valid email address';
-    }
-
-    if (!formData.phone.trim()) {
-      newErrors.phone = 'Phone number is required';
-    } else if (!/^[+]?[1-9][\d]{0,15}$/.test(formData.phone.replace(/[\s\-()]/g, ''))) {
-      newErrors.phone = 'Please enter a valid phone number';
-    }
-
-    if (!formData.message.trim()) {
-      newErrors.message = 'Message is required';
-    } else if (formData.message.trim().length < 10) {
-      newErrors.message = 'Message must be at least 10 characters long';
-    }
-
-    setErrors(newErrors);
-    return Object.keys(newErrors).length === 0;
   };
 
-  const handleInputChange = (name: keyof ContactFormData, value: string) => {
-    setFormData((prev) => ({
-      ...prev,
-      [name]: value,
-    }));
-
-    // Clear error when user starts typing
+  const handleInputChange = (name: string, value: string | boolean) => {
+    setFormData(prev => ({ ...prev, [name]: value }));
+    
     if (errors[name]) {
-      setErrors((prev) => ({
-        ...prev,
-        [name]: undefined,
-      }));
+      const error = validateField(name, typeof value === 'string' ? value : '');
+      if (error) {
+        setErrors(prev => ({ ...prev, [name]: error }));
+      } else {
+        setErrors(prev => {
+          const newErrors = { ...prev };
+          delete newErrors[name];
+          return newErrors;
+        });
+      }
     }
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    
+    // Validate all fields
+    const newErrors: FormErrors = {};
+    Object.keys(formData).forEach(key => {
+      if (key !== 'message' && key !== 'newsletter') {
+        const error = validateField(key, formData[key as keyof FormData] as string);
+        if (error) newErrors[key] = error;
+      }
+    });
 
-    if (!validateForm()) {
+    if (Object.keys(newErrors).length > 0) {
+      setErrors(newErrors);
       return;
     }
 
     setIsSubmitting(true);
-
-    try {
-      // Simulate API call
-      await new Promise((resolve) => setTimeout(resolve, 2000));
-
-      // Call parent callback if provided
-      if (onSubmit) {
-        onSubmit(formData);
-      }
-
-      // Show success state
-      setIsSubmitted(true);
-
-      // Reset form after delay
-      setTimeout(() => {
-        setIsSubmitted(false);
-        setFormData({
-          firstName: '',
-          lastName: '',
-          email: '',
-          phone: '',
-          message: '',
-        });
-      }, 5000);
-    } catch (error) {
-      console.error('Form submission failed:', error);
-      // Handle error state
-    } finally {
-      setIsSubmitting(false);
-    }
+    
+    // Simulate API call
+    await new Promise(resolve => setTimeout(resolve, 2000));
+    
+    setIsSubmitting(false);
+    setIsSubmitted(true);
+    
+    // Reset form after 5 seconds
+    setTimeout(() => {
+      setIsSubmitted(false);
+      setFormData({
+        firstName: '',
+        lastName: '',
+        email: '',
+        phone: '',
+        propertyType: '',
+        budget: '',
+        timeline: '',
+        message: '',
+        preferredContact: '',
+        newsletter: false
+      });
+    }, 5000);
   };
+
+  const inputClasses = (fieldName: string) => `
+    w-full px-4 py-3 border-2 rounded-lg transition-all duration-200 focus:outline-none
+    ${activeField === fieldName 
+      ? 'border-blue-500 ring-4 ring-blue-500/20' 
+      : errors[fieldName] 
+        ? 'border-red-500 ring-4 ring-red-500/20' 
+        : 'border-gray-300 dark:border-gray-600'
+    }
+    ${isDark ? 'bg-gray-800 text-white' : 'bg-white text-gray-900'}
+    ${isDark ? 'focus:bg-gray-700' : 'focus:bg-blue-50'}
+  `;
+
+  const labelClasses = (fieldName: string) => `
+    block text-sm font-medium mb-2 transition-colors duration-200
+    ${activeField === fieldName 
+      ? 'text-blue-600 dark:text-blue-400' 
+      : errors[fieldName] 
+        ? 'text-red-600 dark:text-red-400' 
+        : 'text-gray-700 dark:text-gray-300'
+    }
+  `;
 
   if (isSubmitted) {
     return (
       <motion.div
         initial={{ opacity: 0, scale: 0.9 }}
         animate={{ opacity: 1, scale: 1 }}
-        className="text-center py-12 bg-green-50 rounded-2xl"
+        className="text-center py-16"
       >
-        <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
-          <Send className="w-8 h-8 text-green-600" />
-        </div>
-        <h3 className="text-2xl font-bold text-green-800 mb-2">Message Sent Successfully!</h3>
-        <p className="text-green-600 mb-4">
-          Thank you for contacting us. Dr. Jan Duffy will get back to you within 24 hours.
+        <motion.div
+          initial={{ scale: 0 }}
+          animate={{ scale: 1 }}
+          transition={{ delay: 0.2, type: "spring", stiffness: 200 }}
+          className="w-20 h-20 bg-green-100 dark:bg-green-900/20 rounded-full flex items-center justify-center mx-auto mb-6"
+        >
+          <CheckCircleIcon className="w-12 h-12 text-green-600 dark:text-green-400" />
+        </motion.div>
+        <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">
+          Thank You!
+        </h3>
+        <p className="text-gray-600 dark:text-gray-400 max-w-md mx-auto">
+          Your message has been sent successfully. Dr. Jan Duffy will contact you within 24 hours to discuss your real estate needs.
         </p>
-        <EnhancedButton onClick={() => setIsSubmitted(false)} variant="outline" size="lg">
-          Send Another Message
-        </EnhancedButton>
       </motion.div>
     );
   }
 
   return (
-    <div className={`enhanced-contact-form ${className}`}>
-      <motion.div
-        className="bg-white rounded-2xl shadow-2xl p-8"
-        initial={{ opacity: 0, y: 50 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8 }}
-        viewport={{ once: true }}
-      >
-        {/* Header */}
-        <div className="text-center mb-8">
-          <h2 className="text-3xl font-bold text-gray-800 mb-4">{title}</h2>
-          <p className="text-gray-600 max-w-2xl mx-auto">{description}</p>
-        </div>
+    <section className="py-16 bg-gradient-to-br from-gray-50 to-blue-50 dark:from-gray-900 dark:to-blue-900/20">
+      <div className="container mx-auto px-4">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+          className="text-center mb-12"
+        >
+          <h2 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-6">
+            Get in Touch
+          </h2>
+          <p className="text-xl text-gray-600 dark:text-gray-400 max-w-3xl mx-auto">
+            Ready to find your dream home in Centennial Hills? Let's start the conversation. 
+            Fill out the form below and Dr. Jan Duffy will personally reach out to you.
+          </p>
+        </motion.div>
 
-        {/* Contact Information */}
-        <div className="grid md:grid-cols-3 gap-6 mb-8 p-6 bg-blue-50 rounded-xl">
-          <div className="text-center">
-            <div className="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-3">
-              <Phone className="w-6 h-6 text-blue-600" />
-            </div>
-            <h3 className="font-semibold text-gray-800 mb-1">Phone</h3>
-            <p className="text-blue-600">(702) 555-0123</p>
-          </div>
-
-          <div className="text-center">
-            <div className="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-3">
-              <Mail className="w-6 h-6 text-blue-600" />
-            </div>
-            <h3 className="font-semibold text-gray-800 mb-1">Email</h3>
-            <p className="text-blue-600">jan@centennialhillshomesforsale.com</p>
-          </div>
-
-          <div className="text-center">
-            <div className="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-3">
-              <MapPin className="w-6 h-6 text-blue-600" />
-            </div>
-            <h3 className="font-semibold text-gray-800 mb-1">Office</h3>
-            <p className="text-blue-600">Centennial Hills, Las Vegas</p>
-          </div>
-        </div>
-
-        {/* Contact Form */}
-        <form onSubmit={handleSubmit} className="space-y-6">
-          {/* Basic Information */}
-          <div className="grid md:grid-cols-2 gap-6">
-            <EnhancedFormField
-              label="First Name"
-              name="firstName"
-              type="text"
-              value={formData.firstName}
-              onChange={(value) => handleInputChange('firstName', value)}
-              placeholder="Enter your first name"
-              required
-              error={errors.firstName}
-            />
-
-            <EnhancedFormField
-              label="Last Name"
-              name="lastName"
-              type="text"
-              value={formData.lastName}
-              onChange={(value) => handleInputChange('lastName', value)}
-              placeholder="Enter your last name"
-              required
-              error={errors.lastName}
-            />
-          </div>
-
-          <div className="grid md:grid-cols-2 gap-6">
-            <EnhancedFormField
-              label="Email Address"
-              name="email"
-              type="email"
-              value={formData.email}
-              onChange={(value) => handleInputChange('email', value)}
-              placeholder="Enter your email address"
-              required
-              error={errors.email}
-            />
-
-            <EnhancedFormField
-              label="Phone Number"
-              name="phone"
-              type="tel"
-              value={formData.phone}
-              onChange={(value) => handleInputChange('phone', value)}
-              placeholder="Enter your phone number"
-              required
-              error={errors.phone}
-            />
-          </div>
-
-          {/* Property Interest Fields */}
-          {showPropertyFields && (
-            <motion.div
-              initial={{ opacity: 0, height: 0 }}
-              animate={{ opacity: 1, height: 'auto' }}
-              transition={{ duration: 0.3 }}
-              className="grid md:grid-cols-3 gap-6 p-6 bg-gray-50 rounded-lg"
-            >
-              <EnhancedFormField
-                label="Property Interest"
-                name="propertyInterest"
-                type="select"
-                value={formData.propertyInterest || ''}
-                onChange={(value) => handleInputChange('propertyInterest', value)}
-                options={propertyInterestOptions}
-                placeholder="What are you looking for?"
-              />
-
-              <EnhancedFormField
-                label="Timeline"
-                name="timeline"
-                type="select"
-                value={formData.timeline || ''}
-                onChange={(value) => handleInputChange('timeline', value)}
-                options={timelineOptions}
-                placeholder="When do you plan to move?"
-              />
-
-              <EnhancedFormField
-                label="Budget Range"
-                name="budget"
-                type="select"
-                value={formData.budget || ''}
-                onChange={(value) => handleInputChange('budget', value)}
-                options={budgetOptions}
-                placeholder="What's your budget?"
-              />
-            </motion.div>
-          )}
-
-          {/* Message */}
-          <EnhancedFormField
-            label="Message"
-            name="message"
-            type="textarea"
-            value={formData.message}
-            onChange={(value) => handleInputChange('message', value)}
-            placeholder="Tell us about your real estate needs, questions, or how we can help you..."
-            required
-            error={errors.message}
-          />
-
-          {/* Preferred Contact Method */}
-          <div className="form-field">
-            <label
-              htmlFor="contact-method"
-              className="block text-sm font-medium text-gray-700 mb-2"
-            >
-              Preferred Contact Method
-            </label>
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
-              {contactOptions.map((option) => (
-                <label key={option.value} className="flex items-center space-x-2 cursor-pointer">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6, delay: 0.2 }}
+          className="max-w-4xl mx-auto"
+        >
+          <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-2xl p-8 md:p-12">
+            <form onSubmit={handleSubmit} className="space-y-6">
+              {/* Personal Information */}
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div>
+                  <label htmlFor="firstName" className={labelClasses('firstName')}>
+                    First Name *
+                  </label>
                   <input
-                    type="radio"
-                    name="preferredContact"
-                    value={option.value}
-                    checked={formData.preferredContact === option.value}
-                    onChange={(e) => handleInputChange('preferredContact', e.target.value)}
-                    className="text-blue-600 focus:ring-blue-500"
+                    type="text"
+                    id="firstName"
+                    value={formData.firstName}
+                    onChange={(e) => handleInputChange('firstName', e.target.value)}
+                    onFocus={() => setActiveField('firstName')}
+                    onBlur={() => setActiveField('')}
+                    className={inputClasses('firstName')}
+                    placeholder="Enter your first name"
                   />
-                  <span className="text-sm text-gray-700">{option.label}</span>
+                  <AnimatePresence>
+                    {errors.firstName && (
+                      <motion.div
+                        initial={{ opacity: 0, height: 0 }}
+                        animate={{ opacity: 1, height: 'auto' }}
+                        exit={{ opacity: 0, height: 0 }}
+                        className="flex items-center mt-2 text-red-600 dark:text-red-400 text-sm"
+                      >
+                        <ExclamationCircleIcon className="w-4 h-4 mr-1" />
+                        {errors.firstName}
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+                </div>
+
+                <div>
+                  <label htmlFor="lastName" className={labelClasses('lastName')}>
+                    Last Name *
+                  </label>
+                  <input
+                    type="text"
+                    id="lastName"
+                    value={formData.lastName}
+                    onChange={(e) => handleInputChange('lastName', e.target.value)}
+                    onFocus={() => setActiveField('lastName')}
+                    onBlur={() => setActiveField('')}
+                    className={inputClasses('lastName')}
+                    placeholder="Enter your last name"
+                  />
+                  <AnimatePresence>
+                    {errors.lastName && (
+                      <motion.div
+                        initial={{ opacity: 0, height: 0 }}
+                        animate={{ opacity: 1, height: 'auto' }}
+                        exit={{ opacity: 0, height: 0 }}
+                        className="flex items-center mt-2 text-red-600 dark:text-red-400 text-sm"
+                      >
+                        <ExclamationCircleIcon className="w-4 h-4 mr-1" />
+                        {errors.lastName}
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+                </div>
+              </div>
+
+              {/* Contact Information */}
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div>
+                  <label htmlFor="email" className={labelClasses('email')}>
+                    Email Address *
+                  </label>
+                  <input
+                    type="email"
+                    id="email"
+                    value={formData.email}
+                    onChange={(e) => handleInputChange('email', e.target.value)}
+                    onFocus={() => setActiveField('email')}
+                    onBlur={() => setActiveField('')}
+                    className={inputClasses('email')}
+                    placeholder="your.email@example.com"
+                  />
+                  <AnimatePresence>
+                    {errors.email && (
+                      <motion.div
+                        initial={{ opacity: 0, height: 0 }}
+                        animate={{ opacity: 1, height: 'auto' }}
+                        exit={{ opacity: 0, height: 0 }}
+                        className="flex items-center mt-2 text-red-600 dark:text-red-400 text-sm"
+                      >
+                        <ExclamationCircleIcon className="w-4 h-4 mr-1" />
+                        {errors.email}
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+                </div>
+
+                <div>
+                  <label htmlFor="phone" className={labelClasses('phone')}>
+                    Phone Number *
+                  </label>
+                  <input
+                    type="tel"
+                    id="phone"
+                    value={formData.phone}
+                    onChange={(e) => handleInputChange('phone', e.target.value)}
+                    onFocus={() => setActiveField('phone')}
+                    onBlur={() => setActiveField('')}
+                    className={inputClasses('phone')}
+                    placeholder="(702) 555-0123"
+                  />
+                  <AnimatePresence>
+                    {errors.phone && (
+                      <motion.div
+                        initial={{ opacity: 0, height: 0 }}
+                        animate={{ opacity: 1, height: 'auto' }}
+                        exit={{ opacity: 0, height: 0 }}
+                        className="flex items-center mt-2 text-red-600 dark:text-red-400 text-sm"
+                      >
+                        <ExclamationCircleIcon className="w-4 h-4 mr-1" />
+                        {errors.phone}
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+                </div>
+              </div>
+
+              {/* Property Preferences */}
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div>
+                  <label htmlFor="propertyType" className={labelClasses('propertyType')}>
+                    Property Type *
+                  </label>
+                  <select
+                    id="propertyType"
+                    value={formData.propertyType}
+                    onChange={(e) => handleInputChange('propertyType', e.target.value)}
+                    onFocus={() => setActiveField('propertyType')}
+                    onBlur={() => setActiveField('')}
+                    className={inputClasses('propertyType')}
+                  >
+                    <option value="">Select type</option>
+                    {propertyTypes.map((type) => (
+                      <option key={type} value={type}>{type}</option>
+                    ))}
+                  </select>
+                  <AnimatePresence>
+                    {errors.propertyType && (
+                      <motion.div
+                        initial={{ opacity: 0, height: 0 }}
+                        animate={{ opacity: 1, height: 'auto' }}
+                        exit={{ opacity: 0, height: 0 }}
+                        className="flex items-center mt-2 text-red-600 dark:text-red-400 text-sm"
+                      >
+                        <ExclamationCircleIcon className="w-4 h-4 mr-1" />
+                        {errors.propertyType}
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+                </div>
+
+                <div>
+                  <label htmlFor="budget" className={labelClasses('budget')}>
+                    Budget Range *
+                  </label>
+                  <select
+                    id="budget"
+                    value={formData.budget}
+                    onChange={(e) => handleInputChange('budget', e.target.value)}
+                    onFocus={() => setActiveField('budget')}
+                    onBlur={() => setActiveField('')}
+                    className={inputClasses('budget')}
+                  >
+                    <option value="">Select budget</option>
+                    {budgetRanges.map((range) => (
+                      <option key={range} value={range}>{range}</option>
+                    ))}
+                  </select>
+                  <AnimatePresence>
+                    {errors.budget && (
+                      <motion.div
+                        initial={{ opacity: 0, height: 0 }}
+                        animate={{ opacity: 1, height: 'auto' }}
+                        exit={{ opacity: 0, height: 0 }}
+                        className="flex items-center mt-2 text-red-600 dark:text-red-400 text-sm"
+                      >
+                        <ExclamationCircleIcon className="w-4 h-4 mr-1" />
+                        {errors.budget}
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+                </div>
+
+                <div>
+                  <label htmlFor="timeline" className={labelClasses('timeline')}>
+                    Timeline *
+                  </label>
+                  <select
+                    id="timeline"
+                    value={formData.timeline}
+                    onChange={(e) => handleInputChange('timeline', e.target.value)}
+                    onFocus={() => setActiveField('timeline')}
+                    onBlur={() => setActiveField('')}
+                    className={inputClasses('timeline')}
+                  >
+                    <option value="">Select timeline</option>
+                    {timelineOptions.map((option) => (
+                      <option key={option} value={option}>{option}</option>
+                    ))}
+                  </select>
+                  <AnimatePresence>
+                    {errors.timeline && (
+                      <motion.div
+                        initial={{ opacity: 0, height: 0 }}
+                        animate={{ opacity: 1, height: 'auto' }}
+                        exit={{ opacity: 0, height: 0 }}
+                        className="flex items-center mt-2 text-red-600 dark:text-red-400 text-sm"
+                      >
+                        <ExclamationCircleIcon className="w-4 h-4 mr-1" />
+                        {errors.timeline}
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+                </div>
+              </div>
+
+              {/* Additional Information */}
+              <div>
+                <label htmlFor="message" className={labelClasses('message')}>
+                  Additional Details
                 </label>
-              ))}
-            </div>
-          </div>
+                <textarea
+                  id="message"
+                  value={formData.message}
+                  onChange={(e) => handleInputChange('message', e.target.value)}
+                  onFocus={() => setActiveField('message')}
+                  onBlur={() => setActiveField('')}
+                  rows={4}
+                  className={inputClasses('message')}
+                  placeholder="Tell us more about your requirements, preferred neighborhoods, or any specific features you're looking for..."
+                />
+              </div>
 
-          {/* Submit Button */}
-          <div className="text-center">
-            <EnhancedButton
-              type="submit"
-              loading={isSubmitting}
-              variant="primary"
-              size="lg"
-              className="min-w-[200px]"
-              disabled={isSubmitting}
-            >
-              <Send className="w-5 h-5 mr-2" />
-              {isSubmitting ? 'Sending Message...' : 'Send Message'}
-            </EnhancedButton>
-          </div>
+              {/* Preferences */}
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div>
+                  <label htmlFor="preferredContact" className={labelClasses('preferredContact')}>
+                    Preferred Contact Method *
+                  </label>
+                  <select
+                    id="preferredContact"
+                    value={formData.preferredContact}
+                    onChange={(e) => handleInputChange('preferredContact', e.target.value)}
+                    onFocus={() => setActiveField('preferredContact')}
+                    onBlur={() => setActiveField('')}
+                    className={inputClasses('preferredContact')}
+                  >
+                    <option value="">Select method</option>
+                    {preferredContactMethods.map((method) => (
+                      <option key={method} value={method}>{method}</option>
+                    ))}
+                  </select>
+                  <AnimatePresence>
+                    {errors.preferredContact && (
+                      <motion.div
+                        initial={{ opacity: 0, height: 0 }}
+                        animate={{ opacity: 1, height: 'auto' }}
+                        exit={{ opacity: 0, height: 0 }}
+                        className="flex items-center mt-2 text-red-600 dark:text-red-400 text-sm"
+                      >
+                        <ExclamationCircleIcon className="w-4 h-4 mr-1" />
+                        {errors.preferredContact}
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+                </div>
 
-          {/* Privacy Notice */}
-          <div className="text-center text-sm text-gray-500">
-            <p>
-              By submitting this form, you agree to our{' '}
-              <a href="/privacy" className="text-blue-600 hover:underline">
-                Privacy Policy
-              </a>
-              . We respect your privacy and will never share your information with third parties.
-            </p>
+                <div className="flex items-center">
+                  <label className="flex items-center cursor-pointer">
+                    <input
+                      type="checkbox"
+                      checked={formData.newsletter}
+                      onChange={(e) => handleInputChange('newsletter', e.target.checked)}
+                      className="w-5 h-5 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
+                    />
+                    <span className="ml-3 text-sm text-gray-700 dark:text-gray-300">
+                      Subscribe to our newsletter for market updates and exclusive listings
+                    </span>
+                  </label>
+                </div>
+              </div>
+
+              {/* Submit Button */}
+              <div className="pt-6">
+                <motion.button
+                  type="submit"
+                  disabled={isSubmitting}
+                  whileHover={{ scale: 1.02 }}
+                  whileTap={{ scale: 0.98 }}
+                  className={`
+                    w-full py-4 px-8 bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800
+                    text-white font-semibold text-lg rounded-lg transition-all duration-200
+                    disabled:opacity-50 disabled:cursor-not-allowed
+                    shadow-lg hover:shadow-xl transform hover:-translate-y-1
+                  `}
+                >
+                  {isSubmitting ? (
+                    <div className="flex items-center justify-center">
+                      <div className="animate-spin rounded-full h-6 w-6 border-b-2 border-white mr-3"></div>
+                      Sending Message...
+                    </div>
+                  ) : (
+                    'Send Message'
+                  )}
+                </motion.button>
+              </div>
+            </form>
           </div>
-        </form>
-      </motion.div>
-    </div>
+        </motion.div>
+      </div>
+    </section>
   );
-};
-
-export default EnhancedContactForm;
+}
