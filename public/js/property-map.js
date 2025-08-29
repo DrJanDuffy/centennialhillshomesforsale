@@ -172,7 +172,7 @@ function initMap() {
 window.initMap = initMap;
 
 // Initialize map when DOM is ready
-document.addEventListener('DOMContentLoaded', function () {
+document.addEventListener('DOMContentLoaded', () => {
   // Check if Google Maps is loaded
   if (typeof google !== 'undefined' && google.maps) {
     initMap();

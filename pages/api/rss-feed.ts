@@ -1,6 +1,6 @@
-import { NextApiRequest, NextApiResponse } from 'next';
+import type { NextApiRequest, NextApiResponse } from 'next';
 import { CACHE_KEYS, CACHE_TTL, getCachedData } from '../../lib/cache';
-import { RSSFeedData, fetchKCMFeed } from '../../lib/rss-parser';
+import { fetchKCMFeed, type RSSFeedData } from '../../lib/rss-parser';
 
 export default async function handler(
   req: NextApiRequest,

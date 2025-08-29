@@ -1,7 +1,8 @@
 import { Home, MapPin, Star } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
-import React, { useCallback, useMemo } from 'react';
+import type React from 'react';
+import { useCallback, useMemo } from 'react';
 
 interface Neighborhood {
   name: string;

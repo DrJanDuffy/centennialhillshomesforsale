@@ -3,9 +3,9 @@ import Link from 'next/link';
 import { FaBuilding, FaChartLine, FaHandshake, FaHome, FaKey, FaUsers } from 'react-icons/fa';
 import Layout from '../components/Layout';
 import RealScoutListings from '../components/RealScoutListings';
-import SEOOptimized from '../components/SEOOptimized';
 import FeaturedInsight from '../components/rss/FeaturedInsight';
 import MarketInsightsWidget from '../components/rss/MarketInsightsWidget';
+import SEOOptimized from '../components/SEOOptimized';
 
 const services = [
   {

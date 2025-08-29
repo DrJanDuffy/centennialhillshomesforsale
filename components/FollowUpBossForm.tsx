@@ -1,20 +1,20 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { useState, useCallback } from 'react';
 import {
-  User,
-  Mail,
-  Phone,
-  MessageSquare,
-  Home,
-  Calendar,
-  DollarSign,
-  MapPin,
-  CheckCircle,
   AlertCircle,
+  Calendar,
+  CheckCircle,
+  DollarSign,
+  Home,
   Loader2,
+  Mail,
+  MapPin,
+  MessageSquare,
+  Phone,
+  User,
 } from 'lucide-react';
+import { useCallback, useState } from 'react';
 
 export interface FUBFormData {
   firstName: string;
@@ -193,7 +193,7 @@ export const FollowUpBossForm: React.FC<FUBFormProps> = ({
 
     if (!formData.phone.trim()) {
       newErrors.phone = 'Phone number is required';
-    } else if (!/^[\+]?[1-9][\d]{0,15}$/.test(formData.phone.replace(/[\s\-\(\)]/g, ''))) {
+    } else if (!/^[+]?[1-9][\d]{0,15}$/.test(formData.phone.replace(/[\s\-()]/g, ''))) {
       newErrors.phone = 'Please enter a valid phone number';
     }
 

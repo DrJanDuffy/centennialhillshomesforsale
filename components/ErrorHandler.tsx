@@ -51,12 +51,14 @@ class ErrorHandler extends Component<Props, State> {
               <h2>Something went wrong</h2>
               <p>Please try refreshing the page or contact support if the issue persists.</p>
               <button
+                type="button"
                 onClick={this.handleRetry}
                 className="error-handler-btn error-handler-btn-primary"
               >
                 Try Again
               </button>
               <button
+                type="button"
                 onClick={() => window.location.reload()}
                 className="error-handler-btn error-handler-btn-secondary"
               >

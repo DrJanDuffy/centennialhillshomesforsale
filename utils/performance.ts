@@ -1,9 +1,7 @@
-/**
- * Performance optimization utilities
- */
+// Performance optimization utilities for real estate website
 
 // Debounce function for performance optimization
-export function debounce<T extends (...args: any[]) => any>(
+export function debounce<T extends (...args: unknown[]) => unknown>(
   func: T,
   wait: number
 ): (...args: Parameters<T>) => void {
@@ -15,7 +13,7 @@ export function debounce<T extends (...args: any[]) => any>(
 }
 
 // Throttle function for performance optimization
-export function throttle<T extends (...args: any[]) => any>(
+export function throttle<T extends (...args: unknown[]) => unknown>(
   func: T,
   limit: number
 ): (...args: Parameters<T>) => void {
@@ -24,18 +22,21 @@ export function throttle<T extends (...args: any[]) => any>(
     if (!inThrottle) {
       func(...args);
       inThrottle = true;
-      setTimeout(() => (inThrottle = false), limit);
+      setTimeout(() => {
+        inThrottle = false;
+      }, limit);
     }
   };
 }
 
-// Intersection Observer for lazy loading
+// Intersection Observer utility for lazy loading
 export function createIntersectionObserver(
   callback: IntersectionObserverCallback,
   options: IntersectionObserverInit = {}
 ): IntersectionObserver {
   return new IntersectionObserver(callback, {
-    rootMargin: '50px',
+    root: null,
+    rootMargin: '0px',
     threshold: 0.1,
     ...options,
   });
@@ -43,20 +44,17 @@ export function createIntersectionObserver(
 
 // Performance measurement utility
 export function measurePerformance<T>(name: string, fn: () => T): T {
-  if (process.env.NODE_ENV === 'development') {
-    const start = performance.now();
-    const result = fn();
-    const end = performance.now();
-    console.log(`${name} took ${end - start}ms`);
-    return result;
-  }
-  return fn();
+  const start = performance.now();
+  const result = fn();
+  const end = performance.now();
+  console.log(`${name} took ${end - start} milliseconds`);
+  return result;
 }
 
-// Memory usage monitoring
+// Memory usage utility
 export function getMemoryUsage(): string {
   if (typeof performance !== 'undefined' && 'memory' in performance) {
-    const memory = (performance as any).memory;
+    const memory = (performance as Performance & { memory: PerformanceMemory }).memory;
     return `Used: ${Math.round(memory.usedJSHeapSize / 1048576)}MB, Total: ${Math.round(memory.totalJSHeapSize / 1048576)}MB`;
   }
   return 'Memory usage not available';
@@ -68,15 +66,15 @@ export function optimizeImports<T>(imports: T[]): T[] {
 }
 
 // Cache utility for expensive operations
-export function createCache<K, V>(maxSize: number = 100): Map<K, V> {
+export function createCache<K, V>(_maxSize: number = 100): Map<K, V> {
   return new Map<K, V>();
 }
 
 // Performance budget checker
-export function checkPerformanceBudget(actual: number, budget: number, metric: string): boolean {
-  const isWithinBudget = actual <= budget;
+export function checkPerformanceBudget(metric: string, value: number, budget: number): boolean {
+  const isWithinBudget = value <= budget;
   if (!isWithinBudget) {
-    console.warn(`${metric} exceeded budget: ${actual}ms > ${budget}ms`);
+    console.warn(`Performance budget exceeded for ${metric}: ${value} > ${budget}`);
   }
   return isWithinBudget;
 }

@@ -173,12 +173,15 @@ const AwesomeHero: React.FC = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.8 }}
           >
-            <button className="btn btn-accent btn-lg group">
+            <button type="button" className="btn btn-accent btn-lg group">
               <Search className="w-5 h-5 mr-2 group-hover:scale-110 transition-transform" />
               Start Your Search
               <ArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" />
             </button>
-            <button className="btn btn-outline btn-lg group text-white border-white hover:bg-white hover:text-primary-color">
+            <button
+              type="button"
+              className="btn btn-outline btn-lg group text-white border-white hover:bg-white hover:text-primary-color"
+            >
               <Play className="w-5 h-5 mr-2 group-hover:scale-110 transition-transform" />
               Watch Our Story
             </button>
@@ -298,7 +301,7 @@ const AwesomeHero: React.FC = () => {
               </select>
             </div>
             <div className="form-group">
-              <button className="btn btn-primary w-full h-full">
+              <button type="button" className="btn btn-primary w-full h-full">
                 <Search className="w-5 h-5 mr-2" />
                 Search
               </button>

@@ -1,5 +1,6 @@
-
-#!/usr/bin/env node
+#
+!/usr/bin / env
+node;
 
 const fs = require('node:fs');
 const path = require('node:path');
@@ -12,72 +13,73 @@ const validationResults = {
   errors: 0,
   warnings: 0,
   seoIssues: 0,
-  fixed: 0
+  fixed: 0,
 };
 
 // Critical realtor website requirements
 const _realtorRequirements = {
   seo: {
     required: ['title', 'meta description', 'h1', 'structured data'],
-    realEstateSpecific: ['property schema', 'local business schema', 'agent schema']
+    realEstateSpecific: ['property schema', 'local business schema', 'agent schema'],
   },
   compliance: {
     required: ['license disclosure', 'MLS disclaimer', 'equal housing'],
-    recommended: ['privacy policy', 'terms of service']
+    recommended: ['privacy policy', 'terms of service'],
   },
   functionality: {
     required: ['contact forms', 'property search', 'lead capture'],
-    recommended: ['mortgage calculator', 'market reports']
-  }
+    recommended: ['mortgage calculator', 'market reports'],
+  },
 };
 
 // Get all pages to validate
 const pagesDir = 'pages';
-const pages = fs.readdirSync(pagesDir)
-  .filter(file => file.endsWith('.tsx'))
-  .filter(file => !file.startsWith('_'));
+const pages = fs
+  .readdirSync(pagesDir)
+  .filter((file) => file.endsWith('.tsx'))
+  .filter((file) => !file.startsWith('_'));
 
 console.log(`📄 Found ${pages.length} pages to validate...`);
 
-pages.forEach(pageFile => {
+pages.forEach((pageFile) => {
   const pagePath = path.join(pagesDir, pageFile);
   const content = fs.readFileSync(pagePath, 'utf8');
   const pageName = pageFile.replace('.tsx', '');
-  
+
   console.log(`\n🔍 Validating ${pageName}...`);
   validationResults.pages++;
-  
+
   // Check for SEO elements
   const hasSEO = content.includes('<Head>') || content.includes('EnhancedSEO');
   const _hasTitle = content.includes('<title>') || content.includes('title=');
   const _hasDescription = content.includes('description=');
-  
+
   if (!hasSEO) {
     console.log(`  ❌ Missing SEO component`);
     validationResults.seoIssues++;
   } else {
     console.log(`  ✅ SEO component present`);
   }
-  
+
   // Check for realtor-specific content
   const hasAgentInfo = content.includes('Jan Duffy') || content.includes('REALTOR');
   const hasLocalFocus = content.includes('Centennial Hills') || content.includes('Las Vegas');
   const _hasLicenseInfo = content.includes('Nevada') || content.includes('license');
-  
+
   if (!hasAgentInfo) {
     console.log(`  ⚠️  Missing agent information`);
     validationResults.warnings++;
   }
-  
+
   if (!hasLocalFocus) {
     console.log(`  ⚠️  Missing local market focus`);
     validationResults.warnings++;
   }
-  
+
   // Check for contact information
   const hasPhone = content.includes('702-903-1952') || content.includes('phone');
   const hasEmail = content.includes('jan@') || content.includes('email');
-  
+
   if (!hasPhone && !hasEmail) {
     console.log(`  ❌ Missing contact information`);
     validationResults.errors++;
@@ -89,16 +91,15 @@ pages.forEach(pageFile => {
 // Check components for realtor compliance
 console.log('\n🧩 Validating Components...');
 const componentsDir = 'components';
-const components = fs.readdirSync(componentsDir)
-  .filter(file => file.endsWith('.tsx'));
+const components = fs.readdirSync(componentsDir).filter((file) => file.endsWith('.tsx'));
 
 let hasLeadCapture = false;
 let hasMortgageCalc = false;
 let hasPropertySearch = false;
 
-components.forEach(componentFile => {
+components.forEach((componentFile) => {
   const componentContent = fs.readFileSync(path.join(componentsDir, componentFile), 'utf8');
-  
+
   if (componentContent.includes('LeadCapture') || componentContent.includes('lead')) {
     hasLeadCapture = true;
   }
@@ -119,8 +120,8 @@ console.log('\n⚖️  Checking Legal Compliance...');
 const requiredLegalPages = ['privacy', 'terms', 'disclosures'];
 let legalCompliance = 0;
 
-requiredLegalPages.forEach(legalPage => {
-  const exists = pages.some(page => page.toLowerCase().includes(legalPage));
+requiredLegalPages.forEach((legalPage) => {
+  const exists = pages.some((page) => page.toLowerCase().includes(legalPage));
   console.log(`  ${exists ? '✅' : '❌'} ${legalPage} page`);
   if (exists) legalCompliance++;
 });
@@ -135,7 +136,9 @@ console.log(`🔍 SEO issues: ${validationResults.seoIssues}`);
 console.log(`⚖️  Legal compliance: ${legalCompliance}/3 pages`);
 
 const overallScore = Math.round(
-  ((validationResults.pages - validationResults.errors - validationResults.seoIssues) / validationResults.pages) * 100
+  ((validationResults.pages - validationResults.errors - validationResults.seoIssues) /
+    validationResults.pages) *
+    100
 );
 
 console.log(`\n🎯 Overall Score: ${overallScore}%`);
@@ -158,9 +161,9 @@ const detailedReport = {
   compliance: {
     legalPages: legalCompliance,
     seoCompliance: validationResults.pages - validationResults.seoIssues,
-    functionalCompliance: (hasLeadCapture + hasMortgageCalc + hasPropertySearch)
+    functionalCompliance: hasLeadCapture + hasMortgageCalc + hasPropertySearch,
   },
-  recommendations: []
+  recommendations: [],
 };
 
 if (validationResults.errors > 0) {

@@ -1,5 +1,6 @@
-
-#!/usr/bin/env node
+#
+!/usr/bin / env
+node;
 
 const fs = require('node:fs');
 const _path = require('node:path');
@@ -12,7 +13,7 @@ const checks = {
   essentialFiles: false,
   staticAssets: false,
   seoFiles: false,
-  security: false
+  security: false,
 };
 
 // Check 1: Build Output Directory
@@ -28,7 +29,7 @@ if (fs.existsSync('out') && fs.readdirSync('out').length > 0) {
 // Check 2: Essential Files
 console.log('\n📄 Checking essential files...');
 const essentialFiles = ['out/index.html', 'out/404.html', 'out/manifest.json', 'out/robots.txt'];
-const missingFiles = essentialFiles.filter(file => !fs.existsSync(file));
+const missingFiles = essentialFiles.filter((file) => !fs.existsSync(file));
 
 if (missingFiles.length === 0) {
   checks.essentialFiles = true;
@@ -40,7 +41,7 @@ if (missingFiles.length === 0) {
 // Check 3: Static Assets
 console.log('\n🖼️ Checking static assets...');
 const staticDirs = ['out/_next/static', 'out/images'];
-const hasStaticAssets = staticDirs.some(dir => fs.existsSync(dir));
+const hasStaticAssets = staticDirs.some((dir) => fs.existsSync(dir));
 
 if (hasStaticAssets) {
   checks.staticAssets = true;
@@ -53,7 +54,7 @@ if (hasStaticAssets) {
 // Check 4: SEO Files
 console.log('\n🔍 Checking SEO optimization...');
 const seoFiles = ['out/sitemap.xml', 'out/enhanced-business-schema.json'];
-const hasSeoFiles = seoFiles.some(file => fs.existsSync(file));
+const hasSeoFiles = seoFiles.some((file) => fs.existsSync(file));
 
 if (hasSeoFiles) {
   checks.seoFiles = true;
@@ -66,7 +67,10 @@ if (hasSeoFiles) {
 console.log('\n🔒 Checking security configuration...');
 if (fs.existsSync('next.config.js')) {
   const configContent = fs.readFileSync('next.config.js', 'utf8');
-  if (configContent.includes('X-Content-Type-Options') && configContent.includes('X-Frame-Options')) {
+  if (
+    configContent.includes('X-Content-Type-Options') &&
+    configContent.includes('X-Frame-Options')
+  ) {
     checks.security = true;
     console.log('✅ Security headers configured');
   } else {
@@ -86,7 +90,7 @@ console.log(`Overall Readiness: ${readinessScore}% (${passedChecks}/${totalCheck
 
 Object.entries(checks).forEach(([check, passed]) => {
   const status = passed ? '✅' : '❌';
-  const checkName = check.replace(/([A-Z])/g, ' $1').replace(/^./, str => str.toUpperCase());
+  const checkName = check.replace(/([A-Z])/g, ' $1').replace(/^./, (str) => str.toUpperCase());
   console.log(`${status} ${checkName}`);
 });
 

@@ -1,11 +1,11 @@
-import Layout from '@/components/Layout';
-import RealScoutListings from '@/components/RealScoutListings';
-import KCMFeed from '@/components/rss/KCMFeed';
-import MarketInsightsWidget from '@/components/rss/MarketInsightsWidget';
 import { ArrowRight, Calendar, Clock, DollarSign, Home, MapPin, User } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
 import type React from 'react';
+import Layout from '@/components/Layout';
+import RealScoutListings from '@/components/RealScoutListings';
+import KCMFeed from '@/components/rss/KCMFeed';
+import MarketInsightsWidget from '@/components/rss/MarketInsightsWidget';
 
 const BlogPage: React.FC = () => {
   const blogPosts = [

@@ -90,6 +90,7 @@ const FAQSection: React.FC<FAQSectionProps> = ({
                       className="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden"
                     >
                       <button
+                        type="button"
                         onClick={() => toggleItem(globalIndex)}
                         className="w-full px-6 py-4 text-left flex items-center justify-between hover:bg-gray-50 transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-inset"
                         aria-expanded={isOpen ? 'true' : 'false'}

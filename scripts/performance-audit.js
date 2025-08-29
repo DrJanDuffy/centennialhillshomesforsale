@@ -1,5 +1,6 @@
-
-#!/usr/bin/env node
+#
+!/usr/bin / env
+node;
 
 const fs = require('node:fs');
 const path = require('node:path');
@@ -11,7 +12,7 @@ const performanceMetrics = {
   bundleSize: 0,
   imageOptimization: 0,
   codeEfficiency: 0,
-  loadingStrategy: 0
+  loadingStrategy: 0,
 };
 
 // Check bundle size and dependencies
@@ -20,16 +21,14 @@ try {
   const packageJson = JSON.parse(fs.readFileSync('package.json', 'utf8'));
   const depCount = Object.keys(packageJson.dependencies || {}).length;
   const devDepCount = Object.keys(packageJson.devDependencies || {}).length;
-  
+
   console.log(`  📋 Dependencies: ${depCount}`);
   console.log(`  🛠️  Dev dependencies: ${devDepCount}`);
-  
+
   // Check for heavy dependencies
   const heavyDeps = ['lodash', 'moment', 'jquery'];
-  const foundHeavyDeps = heavyDeps.filter(dep => 
-    packageJson.dependencies?.[dep]
-  );
-  
+  const foundHeavyDeps = heavyDeps.filter((dep) => packageJson.dependencies?.[dep]);
+
   if (foundHeavyDeps.length > 0) {
     console.log(`  ⚠️  Heavy dependencies found: ${foundHeavyDeps.join(', ')}`);
     performanceMetrics.bundleSize = 60;
@@ -50,18 +49,18 @@ let optimizedImages = 0;
 
 if (fs.existsSync(publicDir)) {
   const files = fs.readdirSync(publicDir, { recursive: true });
-  const imageFiles = files.filter(file => 
-    typeof file === 'string' && /\.(jpg|jpeg|png|gif|webp|svg)$/i.test(file)
+  const imageFiles = files.filter(
+    (file) => typeof file === 'string' && /\.(jpg|jpeg|png|gif|webp|svg)$/i.test(file)
   );
-  
+
   totalImages = imageFiles.length;
-  optimizedImages = imageFiles.filter(file => 
-    file.includes('.webp') || file.includes('-optimized') || file.includes('@2x')
+  optimizedImages = imageFiles.filter(
+    (file) => file.includes('.webp') || file.includes('-optimized') || file.includes('@2x')
   ).length;
-  
+
   console.log(`  📊 Total images: ${totalImages}`);
   console.log(`  ✅ Optimized images: ${optimizedImages}`);
-  
+
   if (totalImages > 0) {
     const optimizationRate = (optimizedImages / totalImages) * 100;
     performanceMetrics.imageOptimization = optimizationRate;
@@ -76,31 +75,31 @@ let efficientComponents = 0;
 let totalComponents = 0;
 
 if (fs.existsSync(componentsDir)) {
-  const componentFiles = fs.readdirSync(componentsDir)
-    .filter(file => file.endsWith('.tsx'));
-  
+  const componentFiles = fs.readdirSync(componentsDir).filter((file) => file.endsWith('.tsx'));
+
   totalComponents = componentFiles.length;
-  
-  componentFiles.forEach(file => {
+
+  componentFiles.forEach((file) => {
     const content = fs.readFileSync(path.join(componentsDir, file), 'utf8');
-    
+
     // Check for performance optimizations
     const hasUseMemo = content.includes('useMemo');
     const hasUseCallback = content.includes('useCallback');
     const hasLazyLoading = content.includes('lazy') || content.includes('Suspense');
     const hasDynamicImport = content.includes('dynamic');
-    
-    const optimizations = [hasUseMemo, hasUseCallback, hasLazyLoading, hasDynamicImport]
-      .filter(Boolean).length;
-    
+
+    const optimizations = [hasUseMemo, hasUseCallback, hasLazyLoading, hasDynamicImport].filter(
+      Boolean
+    ).length;
+
     if (optimizations >= 1) {
       efficientComponents++;
     }
   });
-  
+
   const efficiencyRate = totalComponents > 0 ? (efficientComponents / totalComponents) * 100 : 0;
   performanceMetrics.codeEfficiency = efficiencyRate;
-  
+
   console.log(`  📋 Total components: ${totalComponents}`);
   console.log(`  ⚡ Optimized components: ${efficientComponents}`);
   console.log(`  🎯 Efficiency rate: ${Math.round(efficiencyRate)}%`);
@@ -113,29 +112,31 @@ let loadingScore = 0;
 
 if (fs.existsSync(indexPath)) {
   const indexContent = fs.readFileSync(indexPath, 'utf8');
-  
+
   const strategies = {
     'Code splitting': indexContent.includes('dynamic') || indexContent.includes('lazy'),
     'Image optimization': indexContent.includes('next/image') || indexContent.includes('loading='),
-    'Font optimization': indexContent.includes('next/font') || indexContent.includes('font-display'),
-    'Preloading': indexContent.includes('preload') || indexContent.includes('prefetch'),
-    'Error boundaries': indexContent.includes('ErrorBoundary')
+    'Font optimization':
+      indexContent.includes('next/font') || indexContent.includes('font-display'),
+    Preloading: indexContent.includes('preload') || indexContent.includes('prefetch'),
+    'Error boundaries': indexContent.includes('ErrorBoundary'),
   };
-  
+
   Object.entries(strategies).forEach(([strategy, implemented]) => {
     console.log(`  ${implemented ? '✅' : '❌'} ${strategy}`);
     if (implemented) loadingScore += 20;
   });
-  
+
   performanceMetrics.loadingStrategy = loadingScore;
 }
 
 // Calculate overall performance score
 const overallScore = Math.round(
-  (performanceMetrics.bundleSize + 
-   performanceMetrics.imageOptimization + 
-   performanceMetrics.codeEfficiency + 
-   performanceMetrics.loadingStrategy) / 4
+  (performanceMetrics.bundleSize +
+    performanceMetrics.imageOptimization +
+    performanceMetrics.codeEfficiency +
+    performanceMetrics.loadingStrategy) /
+    4
 );
 
 console.log('\n📊 PERFORMANCE SUMMARY');
@@ -179,8 +180,8 @@ const performanceReport = {
   recommendations: {
     critical: overallScore < 70 ? ['Bundle size optimization', 'Image optimization'] : [],
     medium: overallScore < 85 ? ['Loading strategy improvement', 'Code efficiency'] : [],
-    low: ['Progressive enhancement', 'Advanced caching']
-  }
+    low: ['Progressive enhancement', 'Advanced caching'],
+  },
 };
 
 fs.writeFileSync('performance-report.json', JSON.stringify(performanceReport, null, 2));

@@ -173,7 +173,10 @@ const AnalyticsDashboard: React.FC = () => {
         </h3>
         <ul className="space-y-2">
           {analyticsData.topPages.map((page, index) => (
-            <li key={index} className="flex items-center justify-between text-gray-800">
+            <li
+              key={`page-${page.page}-${index}`}
+              className="flex items-center justify-between text-gray-800"
+            >
               <span>{page.page}</span>
               <span>{page.views} views</span>
             </li>
@@ -194,7 +197,10 @@ const AnalyticsDashboard: React.FC = () => {
         </h3>
         <ul className="space-y-2">
           {analyticsData.trafficSources.map((source, index) => (
-            <li key={index} className="flex items-center justify-between text-gray-800">
+            <li
+              key={`source-${source.source}-${index}`}
+              className="flex items-center justify-between text-gray-800"
+            >
               <span>{source.source}</span>
               <span>{source.percentage}%</span>
             </li>

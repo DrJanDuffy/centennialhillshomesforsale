@@ -1,4 +1,4 @@
-import { NextApiRequest, NextApiResponse } from 'next';
+import type { NextApiRequest, NextApiResponse } from 'next';
 import { fubAPI } from '../../../lib/follow-up-boss';
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {

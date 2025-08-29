@@ -1,7 +1,8 @@
 import { Home, MapPin, Search, TrendingUp } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
-import React, { useCallback, useMemo, useState } from 'react';
+import type React from 'react';
+import { useCallback, useMemo, useState } from 'react';
 
 interface ModernHeroProps {
   onSearchSubmit?: (searchData: SearchData) => void;

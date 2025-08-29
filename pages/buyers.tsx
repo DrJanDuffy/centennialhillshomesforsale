@@ -1,7 +1,3 @@
-import Layout from '@/components/Layout';
-import RealScoutListings from '@/components/RealScoutListings';
-import FeaturedInsight from '@/components/rss/FeaturedInsight';
-import MarketInsightsWidget from '@/components/rss/MarketInsightsWidget';
 import {
   ArrowRight,
   CheckCircle,
@@ -15,6 +11,10 @@ import {
 } from 'lucide-react';
 import Link from 'next/link';
 import type React from 'react';
+import Layout from '@/components/Layout';
+import RealScoutListings from '@/components/RealScoutListings';
+import FeaturedInsight from '@/components/rss/FeaturedInsight';
+import MarketInsightsWidget from '@/components/rss/MarketInsightsWidget';
 
 const BuyersPage: React.FC = () => {
   const buyerServices = [

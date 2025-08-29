@@ -1,7 +1,8 @@
 import { ChevronLeft, ChevronRight, Quote, Star } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
-import React, { useEffect, useState } from 'react';
+import type React from 'react';
+import { useEffect, useState } from 'react';
 
 interface Testimonial {
   id: string;
