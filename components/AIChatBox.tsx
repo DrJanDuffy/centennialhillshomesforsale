@@ -86,7 +86,10 @@ const AIChatBox: React.FC = () => {
         );
 
         // Capture interests for recommendations
-        if (typeof window !== 'undefined' && (window as WindowWithPropertyBehaviour).propertyBehaviour) {
+        if (
+          typeof window !== 'undefined' &&
+          (window as WindowWithPropertyBehaviour).propertyBehaviour
+        ) {
           const propertyBehaviour = (window as WindowWithPropertyBehaviour).propertyBehaviour;
           if (/school|college|elementary/i.test(question)) {
             propertyBehaviour.add('feature:school');
