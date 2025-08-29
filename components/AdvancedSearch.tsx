@@ -94,7 +94,7 @@ export default function AdvancedSearch() {
               <select
                 id={bedroomsId}
                 value={filters.bedrooms}
-                onChange={(e) => handleFilterChange('bedrooms', parseInt(e.target.value))}
+                onChange={(e) => handleFilterChange('bedrooms', parseInt(e.target.value, 10))}
                 className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                 aria-label="Select minimum number of bedrooms"
               >
@@ -115,7 +115,7 @@ export default function AdvancedSearch() {
               <select
                 id={bathroomsId}
                 value={filters.bathrooms}
-                onChange={(e) => handleFilterChange('bathrooms', parseInt(e.target.value))}
+                onChange={(e) => handleFilterChange('bathrooms', parseInt(e.target.value, 10))}
                 className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                 aria-label="Select minimum number of bathrooms"
               >

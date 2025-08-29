@@ -30,12 +30,10 @@ const ErrorDashboard: React.FC = () => {
         <div className="error-success">✅ No errors tracked</div>
       ) : (
         errors.map((error, index) => (
-          <div key={index} className="error-item">
+          <div key={`error-${error.message.substring(0, 20)}-${index}`} className="error-item">
             <div className="error-title">ERROR</div>
             <div>{error.message}</div>
-            <div className="error-details">
-              {error.component} - {error.timestamp}
-            </div>
+            <div className="error-timestamp">{new Date(error.timestamp).toLocaleString()}</div>
           </div>
         ))
       )}

@@ -9,12 +9,11 @@ import {
   MapPin,
   Play,
   Search,
-  Star,
   TrendingUp,
   Users,
 } from 'lucide-react';
 import type React from 'react';
-import { useEffect, useState } from 'react';
+import { useEffect, useId, useState } from 'react';
 
 const AwesomeHero: React.FC = () => {
   const [isVideoLoaded, setIsVideoLoaded] = useState(false);
@@ -86,6 +85,21 @@ const AwesomeHero: React.FC = () => {
   const handleVideoLoad = () => {
     setIsVideoLoaded(true);
   };
+
+  // Generate unique IDs for form elements
+  const locationId = useId();
+  const priceId = useId();
+  const bedroomsId = useId();
+
+  // Create unique keys for floating stars
+  const floatingStars = [
+    { id: 'star-1', top: '10%', left: '15%', delay: 0 },
+    { id: 'star-2', top: '25%', left: '85%', delay: 0.5 },
+    { id: 'star-3', top: '60%', left: '10%', delay: 1 },
+    { id: 'star-4', top: '80%', left: '80%', delay: 1.5 },
+    { id: 'star-5', top: '40%', left: '50%', delay: 2 },
+    { id: 'star-6', top: '15%', left: '70%', delay: 2.5 },
+  ];
 
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
@@ -226,23 +240,22 @@ const AwesomeHero: React.FC = () => {
       {/* Floating Elements */}
       <div className="absolute inset-0 pointer-events-none">
         {/* Floating Stars */}
-        {[...Array(6)].map((_, i) => (
+        {floatingStars.map((star) => (
           <motion.div
-            key={`floating-star-${i}`}
+            key={star.id}
             className="absolute text-white/20"
             style={{
-              left: `${Math.random() * 100}%`,
-              top: `${Math.random() * 100}%`,
-              fontSize: `${Math.random() * 20 + 10}px`,
+              top: star.top,
+              left: star.left,
             }}
             animate={{
               y: [0, -20, 0],
               opacity: [0.2, 0.5, 0.2],
             }}
             transition={{
-              duration: Math.random() * 3 + 2,
+              duration: 3,
               repeat: Infinity,
-              delay: Math.random() * 2,
+              delay: star.delay,
             }}
           >
             ⭐
@@ -263,21 +276,22 @@ const AwesomeHero: React.FC = () => {
           </h2>
           <div className="grid md:grid-cols-4 gap-6">
             <div className="form-group">
-              <label className="form-label" htmlFor="hero-location">
+              <label htmlFor={locationId} className="block text-sm font-medium text-gray-700 mb-2">
                 Location
               </label>
-              <select id="hero-location" className="form-input" aria-label="Select location">
+              <select id={locationId} className="form-input" aria-label="Select location">
                 <option>All Areas</option>
                 <option>Centennial Hills</option>
                 <option>Providence</option>
                 <option>Skye Canyon</option>
+                <option>Northwest Las Vegas</option>
               </select>
             </div>
             <div className="form-group">
-              <label className="form-label" htmlFor="hero-price">
+              <label htmlFor={priceId} className="block text-sm font-medium text-gray-700 mb-2">
                 Price Range
               </label>
-              <select id="hero-price" className="form-input" aria-label="Select price range">
+              <select id={priceId} className="form-input" aria-label="Select price range">
                 <option>Any Price</option>
                 <option>$300K - $500K</option>
                 <option>$500K - $750K</option>
@@ -286,19 +300,16 @@ const AwesomeHero: React.FC = () => {
               </select>
             </div>
             <div className="form-group">
-              <label className="form-label" htmlFor="hero-bedrooms">
+              <label htmlFor={bedroomsId} className="block text-sm font-medium text-gray-700 mb-2">
                 Bedrooms
               </label>
-              <select
-                id="hero-bedrooms"
-                className="form-input"
-                aria-label="Select number of bedrooms"
-              >
+              <select id={bedroomsId} className="form-input" aria-label="Select number of bedrooms">
                 <option>Any</option>
                 <option>1+</option>
                 <option>2+</option>
                 <option>3+</option>
                 <option>4+</option>
+                <option>5+</option>
               </select>
             </div>
             <div className="form-group">

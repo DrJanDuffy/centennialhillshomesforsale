@@ -1,6 +1,6 @@
 import { ChevronDown, ChevronUp } from 'lucide-react';
 import type React from 'react';
-import { useState } from 'react';
+import { useState, useRef, useEffect, useMemo } from 'react';
 
 interface FAQItem {
   question: string;
@@ -14,21 +14,11 @@ interface FAQSectionProps {
   showCategories?: boolean;
 }
 
-const FAQSection: React.FC<FAQSectionProps> = ({
-  title = 'Frequently Asked Questions',
-  items,
-  showCategories = false,
-}) => {
+export default function FAQSection({ title = 'Frequently Asked Questions', items, showCategories = false }: FAQSectionProps) {
   const [openItems, setOpenItems] = useState<number[]>([]);
+  const scriptRef = useRef<HTMLDivElement>(null);
 
-  const toggleItem = (index: number) => {
-    setOpenItems((prev) =>
-      prev.includes(index) ? prev.filter((i) => i !== index) : [...prev, index]
-    );
-  };
-
-  // Generate FAQ schema markup
-  const faqSchema = {
+  const faqSchema = useMemo(() => ({
     '@context': 'https://schema.org',
     '@type': 'FAQPage',
     mainEntity: items.map((item) => ({
@@ -39,7 +29,36 @@ const FAQSection: React.FC<FAQSectionProps> = ({
         text: item.answer,
       },
     })),
+  }), [items]);
+
+  useEffect(() => {
+    if (scriptRef.current) {
+      const script = document.createElement('script');
+      script.type = 'application/ld+json';
+      script.textContent = JSON.stringify(faqSchema);
+      scriptRef.current.appendChild(script);
+    }
+  }, [faqSchema]);
+
+  const toggleItem = (index: number) => {
+    setOpenItems((prev) =>
+      prev.includes(index) ? prev.filter((i) => i !== index) : [...prev, index]
+    );
   };
+
+  // Generate FAQ schema markup
+  // const faqSchema = {
+  //   '@context': 'https://schema.org',
+  //   '@type': 'FAQPage',
+  //   mainEntity: items.map((item) => ({
+  //     '@type': 'Question',
+  //     name: item.question,
+  //     acceptedAnswer: {
+  //       '@type': 'Answer',
+  //       text: item.answer,
+  //     },
+  //   })),
+  // };
 
   // Group items by category if needed
   const groupedItems = showCategories
@@ -81,7 +100,7 @@ const FAQSection: React.FC<FAQSectionProps> = ({
 
               <div className="space-y-4">
                 {categoryItems.map((item, globalIndex) => {
-                  const isOpen = openItems.has(globalIndex);
+                  const isOpen = openItems.includes(globalIndex);
                   return (
                     <div
                       key={`${category}-${globalIndex}-${item.question.substring(0, 20)}`}
@@ -123,4 +142,3 @@ const FAQSection: React.FC<FAQSectionProps> = ({
     </section>
   );
 };
-export default FAQSection;
