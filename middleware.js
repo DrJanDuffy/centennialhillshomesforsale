@@ -27,7 +27,7 @@ const validPaths = [
   '/business-verification',
   '/local-business-optimization',
   '/seo-improvements',
-  '/taskmaster'
+  '/taskmaster',
 ];
 
 // Common typos and variations that should redirect
@@ -47,19 +47,19 @@ const redirectMap = {
   '/las-vegas': '/centennial-hills',
   '/centennial': '/centennial-hills',
   '/providence': '/providence-las-vegas',
-  '/skye': '/skye-canyon'
+  '/skye': '/skye-canyon',
 };
 
 export function middleware(request) {
   const url = request.nextUrl.clone();
   const pathname = url.pathname;
   const hostname = request.headers.get('host') || '';
-  
+
   // Log all requests for monitoring (optional)
   if (process.env.NODE_ENV === 'development') {
     console.log(`Middleware processing: ${pathname} from ${hostname}`);
   }
-  
+
   // Handle HTTP to HTTPS redirects
   if (request.headers.get('x-forwarded-proto') === 'http') {
     const httpsUrl = new URL(request.url);
@@ -67,7 +67,7 @@ export function middleware(request) {
     console.log(`Redirecting HTTP to HTTPS: ${request.url} → ${httpsUrl.toString()}`);
     return NextResponse.redirect(httpsUrl, 301); // Permanent redirect
   }
-  
+
   // Handle www to non-www redirects
   if (hostname.startsWith('www.')) {
     const nonWwwHostname = hostname.replace(/^www\./, '');
@@ -76,7 +76,7 @@ export function middleware(request) {
     console.log(`Redirecting www to non-www: ${request.url} → ${nonWwwUrl.toString()}`);
     return NextResponse.redirect(nonWwwUrl, 301); // Permanent redirect
   }
-  
+
   // Handle common typos and variations
   if (redirectMap[pathname]) {
     const destination = redirectMap[pathname];
@@ -84,7 +84,7 @@ export function middleware(request) {
     url.pathname = destination;
     return NextResponse.redirect(url, 301); // Permanent redirect
   }
-  
+
   // Handle trailing slashes (remove them)
   if (pathname !== '/' && pathname.endsWith('/')) {
     const newPathname = pathname.slice(0, -1);
@@ -92,28 +92,30 @@ export function middleware(request) {
     url.pathname = newPathname;
     return NextResponse.redirect(url, 301);
   }
-  
+
   // Handle search queries (redirect to home with noindex)
   if (pathname === '/search' || pathname.startsWith('/search?')) {
     console.log(`Blocking search query: ${pathname}`);
     url.pathname = '/';
     return NextResponse.redirect(url, 302); // Temporary redirect
   }
-  
+
   // Log potential 404s for monitoring
-  if (!validPaths.includes(pathname) && 
-      !pathname.startsWith('/_next/') && 
-      !pathname.startsWith('/api/') &&
-      !pathname.includes('.')) {
+  if (
+    !validPaths.includes(pathname) &&
+    !pathname.startsWith('/_next/') &&
+    !pathname.startsWith('/api/') &&
+    !pathname.includes('.')
+  ) {
     console.warn(`Potential 404 path detected: ${pathname}`);
-    
+
     // Optional: Send to monitoring service
     if (process.env.NODE_ENV === 'production') {
       // You could send this to an error tracking service
       console.error(`404 detected: ${pathname}`);
     }
   }
-  
+
   return NextResponse.next();
 }
 

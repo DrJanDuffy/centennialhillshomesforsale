@@ -50,8 +50,8 @@ export default function Document() {
         <link rel="dns-prefetch" href="//www.google-analytics.com" />
 
         {/* RealScout Web Components Script and Styles */}
-        <script 
-          src="https://em.realscout.com/widgets/realscout-web-components.umd.js" 
+        <script
+          src="https://em.realscout.com/widgets/realscout-web-components.umd.js"
           type="module"
           defer
         />
@@ -109,7 +109,11 @@ export default function Document() {
         />
 
         {/* ==== MAP LIBRARY (Google Maps) ==== */}
-        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDt84u_m6IGyrNZ9Eyc2W0fAIx6yD3peTo&callback=initMap&libraries=places" async defer></script>
+        <script
+          src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDt84u_m6IGyrNZ9Eyc2W0fAIx6yD3peTo&callback=initMap&libraries=places"
+          async
+          defer
+        ></script>
 
         {/* ==== CHART.JS & AXIOS (bundled via webpack) ==== */}
         {/* Removed CDN calls - now bundled with webpack optimization */}

@@ -36,7 +36,7 @@ const ModernAboutSection: React.FC = () => {
                 sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 50vw"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent"></div>
-              
+
               {/* Experience Badge */}
               <div className="absolute bottom-6 left-6 bg-white/95 backdrop-blur-sm rounded-xl p-4 text-center">
                 <div className="text-2xl lg:text-3xl font-bold text-secondary-color">15+</div>
@@ -54,7 +54,9 @@ const ModernAboutSection: React.FC = () => {
                     className="card bg-white p-4 lg:p-6 text-center hover:shadow-xl transition-shadow duration-300"
                   >
                     <IconComponent className="w-6 h-6 lg:w-8 lg:h-8 text-secondary-color mx-auto mb-2 lg:mb-3" />
-                    <div className="text-base lg:text-lg font-bold text-primary-color">{achievement.value}</div>
+                    <div className="text-base lg:text-lg font-bold text-primary-color">
+                      {achievement.value}
+                    </div>
                     <div className="text-xs lg:text-sm text-gray-600">{achievement.label}</div>
                   </div>
                 );
@@ -68,11 +70,13 @@ const ModernAboutSection: React.FC = () => {
             <div>
               <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-primary-color mb-6 lg:mb-8">
                 Meet Dr. Jan Duffy
-                <span className="block text-secondary-color mt-2">Your Trusted Real Estate Expert</span>
+                <span className="block text-secondary-color mt-2">
+                  Your Trusted Real Estate Expert
+                </span>
               </h2>
               <p className="text-lg lg:text-xl text-gray-600 leading-relaxed">
-                As a Top 1% REALTOR® with over 15 years of experience in the Las Vegas market, 
-                I specialize in helping families find their perfect home in Centennial Hills and 
+                As a Top 1% REALTOR® with over 15 years of experience in the Las Vegas market, I
+                specialize in helping families find their perfect home in Centennial Hills and
                 surrounding communities.
               </p>
             </div>
@@ -97,8 +101,8 @@ const ModernAboutSection: React.FC = () => {
                 Local Market Expertise
               </h3>
               <p className="text-gray-600 mb-6 leading-relaxed">
-                Deep knowledge of Centennial Hills, Providence, and Skye Canyon neighborhoods. 
-                I understand the unique characteristics, school districts, and amenities that make 
+                Deep knowledge of Centennial Hills, Providence, and Skye Canyon neighborhoods. I
+                understand the unique characteristics, school districts, and amenities that make
                 each community special.
               </p>
               <div className="flex flex-wrap gap-2 lg:gap-3">

@@ -9,7 +9,8 @@ export default function Footer() {
           <div className="col-span-1 md:col-span-2">
             <h3 className="text-lg font-semibold mb-4">Dr. Jan Duffy</h3>
             <p className="text-gray-300 mb-4">
-              Top 1% REALTOR® specializing in luxury homes and master-planned communities in Centennial Hills, Las Vegas.
+              Top 1% REALTOR® specializing in luxury homes and master-planned communities in
+              Centennial Hills, Las Vegas.
             </p>
             <div className="space-y-2 text-sm text-gray-300">
               <p>📍 Centennial Hills, Las Vegas, NV</p>
@@ -23,17 +24,26 @@ export default function Footer() {
             <h4 className="text-lg font-semibold mb-4">Quick Links</h4>
             <ul className="space-y-2">
               <li>
-                <Link href="/properties" className="text-gray-300 hover:text-white transition-colors">
+                <Link
+                  href="/properties"
+                  className="text-gray-300 hover:text-white transition-colors"
+                >
                   Properties
                 </Link>
               </li>
               <li>
-                <Link href="/neighborhoods" className="text-gray-300 hover:text-white transition-colors">
+                <Link
+                  href="/neighborhoods"
+                  className="text-gray-300 hover:text-white transition-colors"
+                >
                   Neighborhoods
                 </Link>
               </li>
               <li>
-                <Link href="/market-data" className="text-gray-300 hover:text-white transition-colors">
+                <Link
+                  href="/market-data"
+                  className="text-gray-300 hover:text-white transition-colors"
+                >
                   Market Data
                 </Link>
               </li>
@@ -65,7 +75,10 @@ export default function Footer() {
                 </Link>
               </li>
               <li>
-                <Link href="/faq-schema" className="text-gray-300 hover:text-white transition-colors">
+                <Link
+                  href="/faq-schema"
+                  className="text-gray-300 hover:text-white transition-colors"
+                >
                   FAQ
                 </Link>
               </li>
@@ -79,22 +92,26 @@ export default function Footer() {
               <p className="text-sm text-gray-300 mb-3">
                 Stay informed with the latest real estate trends and market analysis
               </p>
-              <Link 
-                href="/market-insights" 
+              <Link
+                href="/market-insights"
                 className="inline-flex items-center bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg text-sm font-medium transition-colors duration-200"
               >
                 View Latest Insights
                 <svg className="w-4 h-4 ml-2" fill="currentColor" viewBox="0 0 20 20">
-                  <path fillRule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clipRule="evenodd" />
+                  <path
+                    fillRule="evenodd"
+                    d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"
+                    clipRule="evenodd"
+                  />
                 </svg>
               </Link>
-              
+
               {/* RSS Feed Links */}
               <div className="pt-3 border-t border-gray-700">
                 <p className="text-xs text-gray-400 mb-2">Subscribe to RSS Feeds:</p>
                 <div className="space-y-1">
-                  <a 
-                    href="/api/rss-feed" 
+                  <a
+                    href="/api/rss-feed"
                     className="block text-xs text-gray-400 hover:text-blue-400 transition-colors"
                     title="Centennial Hills Market Insights RSS Feed"
                     target="_blank"
@@ -102,8 +119,8 @@ export default function Footer() {
                   >
                     📊 Market Insights RSS
                   </a>
-                  <a 
-                    href="https://www.simplifyingthemarket.com/en/feed?a=956758-ef2edda2f940e018328655620ea05f18" 
+                  <a
+                    href="https://www.simplifyingthemarket.com/en/feed?a=956758-ef2edda2f940e018328655620ea05f18"
                     className="block text-xs text-gray-400 hover:text-blue-400 transition-colors"
                     title="Simplifying the Market RSS Feed"
                     target="_blank"

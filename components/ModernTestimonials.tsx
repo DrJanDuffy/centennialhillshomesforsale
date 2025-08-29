@@ -23,41 +23,49 @@ const ModernTestimonials: React.FC = () => {
       name: 'Sarah & Michael Johnson',
       location: 'Centennial Hills',
       rating: 5,
-      content: 'Dr. Jan Duffy made our home buying experience absolutely seamless. Her knowledge of the Centennial Hills market is unmatched, and she found us the perfect family home within our budget. We couldn&apos;t be happier!',
-      image: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop&crop=face',
+      content:
+        'Dr. Jan Duffy made our home buying experience absolutely seamless. Her knowledge of the Centennial Hills market is unmatched, and she found us the perfect family home within our budget. We couldn&apos;t be happier!',
+      image:
+        'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop&crop=face',
       propertyType: 'Luxury Family Home',
-      salePrice: '$875,000'
+      salePrice: '$875,000',
     },
     {
       id: '2',
       name: 'David Chen',
       location: 'Providence',
       rating: 5,
-      content: 'As a first-time homebuyer, I was nervous about the process. Dr. Duffy guided me through every step with patience and expertise. She found me a beautiful home in Providence that exceeded my expectations.',
-      image: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150&h=150&fit=crop&crop=face',
+      content:
+        'As a first-time homebuyer, I was nervous about the process. Dr. Duffy guided me through every step with patience and expertise. She found me a beautiful home in Providence that exceeded my expectations.',
+      image:
+        'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150&h=150&fit=crop&crop=face',
       propertyType: 'First Home',
-      salePrice: '$650,000'
+      salePrice: '$650,000',
     },
     {
       id: '3',
       name: 'Jennifer & Robert Martinez',
       location: 'Skye Canyon',
       rating: 5,
-      content: 'We were looking to downsize and Dr. Duffy found us the perfect home in Skye Canyon. Her attention to detail and understanding of our needs made all the difference. Highly recommend!',
-      image: 'https://images.unsplash.com/photo-1494790108755-2616b612b786?w=150&h=150&fit=crop&crop=face',
+      content:
+        'We were looking to downsize and Dr. Duffy found us the perfect home in Skye Canyon. Her attention to detail and understanding of our needs made all the difference. Highly recommend!',
+      image:
+        'https://images.unsplash.com/photo-1494790108755-2616b612b786?w=150&h=150&fit=crop&crop=face',
       propertyType: 'Downsized Home',
-      salePrice: '$720,000'
+      salePrice: '$720,000',
     },
     {
       id: '4',
       name: 'Thomas Williams',
       location: 'Northwest Las Vegas',
       rating: 5,
-      content: 'Dr. Duffy helped me sell my home above asking price in just 8 days! Her marketing strategy and negotiation skills are incredible. She truly is the best REALTOR in the area.',
-      image: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=150&h=150&fit=crop&crop=face',
+      content:
+        'Dr. Duffy helped me sell my home above asking price in just 8 days! Her marketing strategy and negotiation skills are incredible. She truly is the best REALTOR in the area.',
+      image:
+        'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=150&h=150&fit=crop&crop=face',
       propertyType: 'Sold Home',
-      salePrice: '$1,200,000'
-    }
+      salePrice: '$1,200,000',
+    },
   ];
 
   useEffect(() => {
@@ -91,7 +99,8 @@ const ModernTestimonials: React.FC = () => {
             <span className="block text-blue-200 mt-2">Say About Us</span>
           </h2>
           <p className="text-lg lg:text-xl text-blue-100 max-w-3xl mx-auto leading-relaxed">
-            Don&apos;t just take our word for it - hear from families who found their dream homes with Dr. Jan Duffy
+            Don&apos;t just take our word for it - hear from families who found their dream homes
+            with Dr. Jan Duffy
           </p>
         </div>
 
@@ -108,7 +117,10 @@ const ModernTestimonials: React.FC = () => {
               {/* Rating Stars */}
               <div className="flex justify-center mb-6 lg:mb-8">
                 {[...Array(currentTestimonial.rating)].map((_, i) => (
-                  <Star key={`star-${currentTestimonial.id}-${i}`} className="w-5 h-5 lg:w-6 lg:h-6 text-yellow-400 fill-current" />
+                  <Star
+                    key={`star-${currentTestimonial.id}-${i}`}
+                    className="w-5 h-5 lg:w-6 lg:h-6 text-yellow-400 fill-current"
+                  />
                 ))}
               </div>
 
@@ -129,17 +141,25 @@ const ModernTestimonials: React.FC = () => {
                   />
                 </div>
                 <div className="text-left">
-                  <div className="font-bold text-gray-900 text-base lg:text-lg">{currentTestimonial.name}</div>
-                  <div className="text-secondary-color text-sm lg:text-base">{currentTestimonial.location}</div>
+                  <div className="font-bold text-gray-900 text-base lg:text-lg">
+                    {currentTestimonial.name}
+                  </div>
+                  <div className="text-secondary-color text-sm lg:text-base">
+                    {currentTestimonial.location}
+                  </div>
                 </div>
               </div>
 
               {/* Property Details */}
               <div className="bg-blue-50 rounded-xl p-4 lg:p-6 inline-block">
                 <div className="text-sm text-gray-600">Property Type</div>
-                <div className="font-semibold text-primary-color text-base lg:text-lg">{currentTestimonial.propertyType}</div>
+                <div className="font-semibold text-primary-color text-base lg:text-lg">
+                  {currentTestimonial.propertyType}
+                </div>
                 <div className="text-sm text-gray-600 mt-1 lg:mt-2">Sale Price</div>
-                <div className="font-bold text-primary-color text-lg lg:text-xl">{currentTestimonial.salePrice}</div>
+                <div className="font-bold text-primary-color text-lg lg:text-xl">
+                  {currentTestimonial.salePrice}
+                </div>
               </div>
             </div>
 
@@ -170,9 +190,7 @@ const ModernTestimonials: React.FC = () => {
                 type="button"
                 onClick={() => goToTestimonial(index)}
                 className={`w-3 h-3 rounded-full transition-all duration-300 ${
-                  index === currentIndex
-                    ? 'bg-white scale-125'
-                    : 'bg-white/50 hover:bg-white/75'
+                  index === currentIndex ? 'bg-white scale-125' : 'bg-white/50 hover:bg-white/75'
                 }`}
                 aria-label={`Go to testimonial ${index + 1}`}
               />
@@ -187,7 +205,7 @@ const ModernTestimonials: React.FC = () => {
               Ready to Join Our Happy Clients?
             </h3>
             <p className="text-blue-100 mb-8 max-w-2xl mx-auto leading-relaxed text-base lg:text-lg">
-              Let Dr. Jan Duffy help you find your perfect home in Centennial Hills and experience 
+              Let Dr. Jan Duffy help you find your perfect home in Centennial Hills and experience
               the same exceptional service our clients rave about.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 lg:gap-6 justify-center">

@@ -5,7 +5,8 @@
 /* ===== GLOBAL STYLES ===== */
 
 /* Base HTML and Body Styles */
-html, body {
+html,
+body {
   overflow-x: hidden;
   scroll-behavior: smooth;
 }
@@ -20,11 +21,11 @@ html, body {
   .container {
     @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
   }
-  
+
   .section {
     @apply py-16 md:py-20 lg:py-24;
   }
-  
+
   .card {
     @apply bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300;
   }

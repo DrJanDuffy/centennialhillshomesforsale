@@ -12,65 +12,65 @@ function initMap() {
       {
         featureType: 'poi',
         elementType: 'labels',
-        stylers: [{ visibility: 'off' }]
-      }
-    ]
+        stylers: [{ visibility: 'off' }],
+      },
+    ],
   });
 
   // ---- SAMPLE PROPERTY DATA -------------------------------------------------
   const properties = [
     {
       id: 1,
-      title: "11773 Golden Moments Ave",
-      price: "$850,000",
+      title: '11773 Golden Moments Ave',
+      price: '$850,000',
       lat: 36.274,
-      lng: -115.320,
-      url: "/featured-home",
-      type: "Single Family",
+      lng: -115.32,
+      url: '/featured-home',
+      type: 'Single Family',
       beds: 4,
       baths: 3,
-      sqft: 2800
+      sqft: 2800,
     },
     {
       id: 2,
-      title: "5678 Centennial Hills Blvd",
-      price: "$1,200,000",
-      lat: 36.250,
-      lng: -115.340,
-      url: "/listing/5678-centennial-hills-blvd",
-      type: "Luxury Home",
+      title: '5678 Centennial Hills Blvd',
+      price: '$1,200,000',
+      lat: 36.25,
+      lng: -115.34,
+      url: '/listing/5678-centennial-hills-blvd',
+      type: 'Luxury Home',
       beds: 5,
       baths: 4,
-      sqft: 4200
+      sqft: 4200,
     },
     {
       id: 3,
-      title: "1234 Providence Way",
-      price: "$750,000",
+      title: '1234 Providence Way',
+      price: '$750,000',
       lat: 36.285,
       lng: -115.271,
-      url: "/listing/1234-providence-way",
-      type: "Family Home",
+      url: '/listing/1234-providence-way',
+      type: 'Family Home',
       beds: 3,
       baths: 2.5,
-      sqft: 2200
+      sqft: 2200,
     },
     {
       id: 4,
-      title: "7890 Skye Canyon Dr",
-      price: "$950,000",
+      title: '7890 Skye Canyon Dr',
+      price: '$950,000',
       lat: 36.287,
       lng: -115.275,
-      url: "/listing/7890-skye-canyon-dr",
-      type: "Modern Home",
+      url: '/listing/7890-skye-canyon-dr',
+      type: 'Modern Home',
       beds: 4,
       baths: 3.5,
-      sqft: 3100
-    }
+      sqft: 3100,
+    },
   ];
 
   // ---- MARKERS -------------------------------------------------------------
-  properties.forEach(p => {
+  properties.forEach((p) => {
     // Create custom marker icon
     const markerIcon = {
       path: google.maps.SymbolPath.CIRCLE,
@@ -78,7 +78,7 @@ function initMap() {
       fillColor: '#2563eb',
       fillOpacity: 0.9,
       strokeColor: '#FFFFFF',
-      strokeWeight: 2
+      strokeWeight: 2,
     };
 
     const marker = new google.maps.Marker({
@@ -111,7 +111,7 @@ function initMap() {
 
     const infoWindow = new google.maps.InfoWindow({
       content: infoContent,
-      maxWidth: 300
+      maxWidth: 300,
     });
 
     // Show info window on marker click
@@ -121,9 +121,9 @@ function initMap() {
       map.addListener('click', () => {
         infoWindow.close();
       });
-      
+
       infoWindow.open(map, marker);
-      
+
       // Record interest for recommendations
       if (window.propertyBehaviour) {
         window.propertyBehaviour.add(`location:${p.id}`);
@@ -135,7 +135,7 @@ function initMap() {
       marker.setIcon({
         ...markerIcon,
         scale: 12,
-        fillOpacity: 1
+        fillOpacity: 1,
       });
     });
 
@@ -148,18 +148,18 @@ function initMap() {
   const input = document.getElementById('property-search');
   if (input) {
     const searchBox = new google.maps.places.SearchBox(input);
-    
+
     searchBox.addListener('places_changed', () => {
       const places = searchBox.getPlaces();
       if (places.length === 0) return;
 
       const bounds = new google.maps.LatLngBounds();
-      places.forEach(place => {
+      places.forEach((place) => {
         if (!place.geometry || !place.geometry.location) return;
-        
+
         bounds.extend(place.geometry.location);
       });
-      
+
       map.fitBounds(bounds);
       if (bounds.getNorthEast().equals(bounds.getSouthWest())) {
         map.setZoom(15);
@@ -172,7 +172,7 @@ function initMap() {
 window.initMap = initMap;
 
 // Initialize map when DOM is ready
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
   // Check if Google Maps is loaded
   if (typeof google !== 'undefined' && google.maps) {
     initMap();

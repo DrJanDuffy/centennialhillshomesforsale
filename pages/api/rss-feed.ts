@@ -12,23 +12,19 @@ export default async function handler(
 
   try {
     // Get cached data with fallback
-    const feedData = await getCachedData(
-      CACHE_KEYS.KCM_FEED,
-      fetchKCMFeed,
-      CACHE_TTL.FEED
-    );
+    const feedData = await getCachedData(CACHE_KEYS.KCM_FEED, fetchKCMFeed, CACHE_TTL.FEED);
 
     // Set cache headers for CDN and browser caching
     res.setHeader('Cache-Control', 'public, s-maxage=3600, stale-while-revalidate=86400');
     res.setHeader('Content-Type', 'application/json');
-    
+
     return res.status(200).json(feedData);
   } catch (error) {
     console.error('Error fetching RSS feed:', error);
-    
+
     // Return error response
-    return res.status(500).json({ 
-      error: 'Failed to fetch market insights. Please try again later.' 
+    return res.status(500).json({
+      error: 'Failed to fetch market insights. Please try again later.',
     });
   }
 }

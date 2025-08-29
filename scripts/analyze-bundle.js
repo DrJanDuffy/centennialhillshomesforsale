@@ -26,10 +26,10 @@ try {
   const staticDir = path.join('.next', 'static', 'chunks');
   if (fs.existsSync(staticDir)) {
     const files = fs.readdirSync(staticDir);
-    const jsFiles = files.filter(file => file.endsWith('.js'));
-    
+    const jsFiles = files.filter((file) => file.endsWith('.js'));
+
     console.log('\n📦 Bundle sizes:');
-    jsFiles.forEach(file => {
+    jsFiles.forEach((file) => {
       const filePath = path.join(staticDir, file);
       const stats = fs.statSync(filePath);
       const sizeKB = (stats.size / 1024).toFixed(2);
@@ -50,7 +50,6 @@ try {
 
   console.log('\n✅ Bundle analysis complete!');
   console.log('📁 Check .next/analyze/ for detailed reports');
-
 } catch (error) {
   console.error('❌ Bundle analysis failed:', error.message);
   process.exit(1);

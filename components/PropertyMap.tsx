@@ -26,10 +26,10 @@ interface PropertyMapProps {
   showSearch?: boolean;
 }
 
-const PropertyMap: React.FC<PropertyMapProps> = ({ 
-  properties = [], 
-  height = "h-96",
-  showSearch = true 
+const PropertyMap: React.FC<PropertyMapProps> = ({
+  properties = [],
+  height = 'h-96',
+  showSearch = true,
 }) => {
   const mapContainer = useRef<HTMLDivElement>(null);
   const map = useRef<any>(null);
@@ -39,52 +39,52 @@ const PropertyMap: React.FC<PropertyMapProps> = ({
   const defaultProperties: Property[] = [
     {
       id: 1,
-      title: "11773 Golden Moments Ave",
-      price: "$850,000",
+      title: '11773 Golden Moments Ave',
+      price: '$850,000',
       lat: 36.274,
-      lng: -115.320,
-      url: "/featured-home",
-      type: "Single Family",
+      lng: -115.32,
+      url: '/featured-home',
+      type: 'Single Family',
       beds: 4,
       baths: 3,
-      sqft: 2800
+      sqft: 2800,
     },
     {
       id: 2,
-      title: "5678 Centennial Hills Blvd",
-      price: "$1,200,000",
-      lat: 36.250,
-      lng: -115.340,
-      url: "/listing/5678-centennial-hills-blvd",
-      type: "Luxury Home",
+      title: '5678 Centennial Hills Blvd',
+      price: '$1,200,000',
+      lat: 36.25,
+      lng: -115.34,
+      url: '/listing/5678-centennial-hills-blvd',
+      type: 'Luxury Home',
       beds: 5,
       baths: 4,
-      sqft: 4200
+      sqft: 4200,
     },
     {
       id: 3,
-      title: "1234 Providence Way",
-      price: "$750,000",
+      title: '1234 Providence Way',
+      price: '$750,000',
       lat: 36.285,
       lng: -115.271,
-      url: "/listing/1234-providence-way",
-      type: "Family Home",
+      url: '/listing/1234-providence-way',
+      type: 'Family Home',
       beds: 3,
       baths: 2.5,
-      sqft: 2200
+      sqft: 2200,
     },
     {
       id: 4,
-      title: "7890 Skye Canyon Dr",
-      price: "$950,000",
+      title: '7890 Skye Canyon Dr',
+      price: '$950,000',
       lat: 36.287,
       lng: -115.275,
-      url: "/listing/7890-skye-canyon-dr",
-      type: "Modern Home",
+      url: '/listing/7890-skye-canyon-dr',
+      type: 'Modern Home',
       beds: 4,
       baths: 3.5,
-      sqft: 3100
-    }
+      sqft: 3100,
+    },
   ];
 
   const propertiesToShow = properties.length > 0 ? properties : defaultProperties;
@@ -94,12 +94,12 @@ const PropertyMap: React.FC<PropertyMapProps> = ({
 
     const initMap = () => {
       try {
-                         if (typeof window !== 'undefined' && window.google && window.google.maps) {
+        if (typeof window !== 'undefined' && window.google && window.google.maps) {
           const { Map: GoogleMap, Marker, InfoWindow, SearchBox } = window.google.maps;
 
           const center = { lat: 36.268, lng: -115.328 }; // Centennial Hills centre
 
-                     const newMap = new GoogleMap(mapContainer.current!, {
+          const newMap = new GoogleMap(mapContainer.current!, {
             zoom: 11,
             center,
             mapTypeId: 'roadmap',
@@ -107,21 +107,21 @@ const PropertyMap: React.FC<PropertyMapProps> = ({
               {
                 featureType: 'poi',
                 elementType: 'labels',
-                stylers: [{ visibility: 'off' }]
-              }
-            ]
+                stylers: [{ visibility: 'off' }],
+              },
+            ],
           });
 
           // Create markers for all properties
           const newMarkers: any[] = [];
-          propertiesToShow.forEach(property => {
+          propertiesToShow.forEach((property) => {
             const markerIcon = {
               path: window.google.maps.SymbolPath.CIRCLE,
               scale: 10,
               fillColor: '#2563eb',
               fillOpacity: 0.9,
               strokeColor: '#FFFFFF',
-              strokeWeight: 2
+              strokeWeight: 2,
             };
 
             const marker = new Marker({
@@ -154,7 +154,7 @@ const PropertyMap: React.FC<PropertyMapProps> = ({
 
             const infoWindow = new InfoWindow({
               content: infoContent,
-              maxWidth: 300
+              maxWidth: 300,
             });
 
             // Show info window on marker click
@@ -164,9 +164,9 @@ const PropertyMap: React.FC<PropertyMapProps> = ({
               newMap.addListener('click', () => {
                 infoWindow.close();
               });
-              
+
               infoWindow.open(newMap, marker);
-              
+
               // Record interest for recommendations
               if ((window as any).propertyBehaviour) {
                 (window as any).propertyBehaviour.add(`location:${property.id}`);
@@ -178,7 +178,7 @@ const PropertyMap: React.FC<PropertyMapProps> = ({
               marker.setIcon({
                 ...markerIcon,
                 scale: 12,
-                fillOpacity: 1
+                fillOpacity: 1,
               });
             });
 
@@ -197,7 +197,7 @@ const PropertyMap: React.FC<PropertyMapProps> = ({
             const searchInput = document.getElementById('property-search');
             if (searchInput) {
               const searchBox = new SearchBox(searchInput);
-              
+
               searchBox.addListener('places_changed', () => {
                 const places = searchBox.getPlaces();
                 if (places.length === 0) return;
@@ -205,10 +205,10 @@ const PropertyMap: React.FC<PropertyMapProps> = ({
                 const bounds = new window.google.maps.LatLngBounds();
                 places.forEach((place: any) => {
                   if (!place.geometry || !place.geometry.location) return;
-                  
+
                   bounds.extend(place.geometry.location);
                 });
-                
+
                 newMap.fitBounds(bounds);
                 if (bounds.getNorthEast().equals(bounds.getSouthWest())) {
                   newMap.setZoom(15);
@@ -216,7 +216,6 @@ const PropertyMap: React.FC<PropertyMapProps> = ({
               });
             }
           }
-
         } else {
           // If Google Maps isn't loaded yet, wait a bit and try again
           setTimeout(initMap, 100);
@@ -232,7 +231,7 @@ const PropertyMap: React.FC<PropertyMapProps> = ({
     return () => {
       if (map.current) {
         // Clean up markers
-        markers.current.forEach(marker => {
+        markers.current.forEach((marker) => {
           window.google.maps.event.clearInstanceListeners(marker);
         });
         markers.current = [];
@@ -252,14 +251,10 @@ const PropertyMap: React.FC<PropertyMapProps> = ({
           />
         </div>
       )}
-      
+
       <div className={`relative ${height} rounded-xl overflow-hidden`}>
-        <div 
-          ref={mapContainer} 
-          className="w-full h-full"
-          style={{ minHeight: '384px' }}
-        />
-        
+        <div ref={mapContainer} className="w-full h-full" style={{ minHeight: '384px' }} />
+
         {/* Loading overlay */}
         <div className="absolute inset-0 bg-gradient-to-br from-blue-50 to-blue-100 flex items-center justify-center">
           <div className="text-center">

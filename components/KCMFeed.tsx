@@ -10,10 +10,10 @@ interface KCMFeedProps {
   className?: string;
 }
 
-export default function KCMFeed({ 
-  maxArticles = 5, 
-  showFeatured = false, 
-  className = '' 
+export default function KCMFeed({
+  maxArticles = 5,
+  showFeatured = false,
+  className = '',
 }: KCMFeedProps) {
   const [feedData, setFeedData] = useState<RSSFeedData | null>(null);
   const [loading, setLoading] = useState(true);
@@ -24,12 +24,12 @@ export default function KCMFeed({
       try {
         setLoading(true);
         setError(null);
-        
+
         const response = await fetch('/api/rss-feed');
         if (!response.ok) {
           throw new Error('Failed to fetch market insights');
         }
-        
+
         const data: RSSFeedData = await response.json();
         setFeedData(data);
       } catch (err) {
@@ -45,13 +45,13 @@ export default function KCMFeed({
 
   if (loading) {
     return (
-              <div className={`animate-pulse ${className}`}>
-          <div className="space-y-4">
-            {Array.from({ length: maxArticles }, (_, i) => (
-              <div key={`skeleton-${i}`} className="bg-gray-200 rounded-12px h-32"></div>
-            ))}
-          </div>
+      <div className={`animate-pulse ${className}`}>
+        <div className="space-y-4">
+          {Array.from({ length: maxArticles }, (_, i) => (
+            <div key={`skeleton-${i}`} className="bg-gray-200 rounded-12px h-32"></div>
+          ))}
         </div>
+      </div>
     );
   }
 
@@ -60,12 +60,17 @@ export default function KCMFeed({
       <div className={`bg-red-50 border border-red-200 rounded-12px p-4 ${className}`}>
         <div className="flex items-center">
           <svg className="w-5 h-5 text-red-400 mr-2" fill="currentColor" viewBox="0 0 20 20">
-            <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clipRule="evenodd" />
+            <path
+              fillRule="evenodd"
+              d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z"
+              clipRule="evenodd"
+            />
           </svg>
           <p className="text-red-800 text-sm">
-            {error}.             <button 
+            {error}.{' '}
+            <button
               type="button"
-              onClick={() => window.location.reload()} 
+              onClick={() => window.location.reload()}
               className="underline hover:no-underline"
             >
               Try again
@@ -79,7 +84,9 @@ export default function KCMFeed({
   if (!feedData || !feedData.articles.length) {
     return (
       <div className={`bg-gray-50 border border-gray-200 rounded-12px p-4 ${className}`}>
-        <p className="text-gray-600 text-sm text-center">No market insights available at the moment.</p>
+        <p className="text-gray-600 text-sm text-center">
+          No market insights available at the moment.
+        </p>
       </div>
     );
   }
@@ -108,9 +115,9 @@ export default function KCMFeed({
       <div className="mt-6 text-center">
         <p className="text-xs text-gray-500">
           Market insights provided by{' '}
-          <a 
-            href="https://www.simplifyingthemarket.com" 
-            target="_blank" 
+          <a
+            href="https://www.simplifyingthemarket.com"
+            target="_blank"
             rel="noopener noreferrer"
             className="text-blue-600 hover:text-blue-800 underline"
           >
@@ -145,25 +152,19 @@ function FeaturedArticleCard({ article }: { article: KCMArticle }) {
             <span className="bg-blue-100 text-blue-800 text-xs font-medium px-2.5 py-0.5 rounded-full">
               {article.category}
             </span>
-            <span className="text-gray-500 text-sm ml-3">
-              {formatDate(article.publishedAt)}
-            </span>
+            <span className="text-gray-500 text-sm ml-3">{formatDate(article.publishedAt)}</span>
           </div>
-          
-          <h3 className="text-xl font-bold text-gray-900 mb-3 line-clamp-2">
-            {article.title}
-          </h3>
-          
-          <p className="text-gray-600 mb-4 line-clamp-3">
-            {article.excerpt}
-          </p>
-          
+
+          <h3 className="text-xl font-bold text-gray-900 mb-3 line-clamp-2">{article.title}</h3>
+
+          <p className="text-gray-600 mb-4 line-clamp-3">{article.excerpt}</p>
+
           <div className="flex items-center justify-between">
             <div className="flex items-center text-sm text-gray-500">
               <span className="mr-4">By {article.author}</span>
               <span>{article.readTime} min read</span>
             </div>
-            
+
             <a
               href={article.link}
               target="_blank"
@@ -188,27 +189,23 @@ function ArticleCard({ article, compact = false }: { article: KCMArticle; compac
           <span className="bg-green-100 text-green-800 text-xs font-medium px-2 py-0.5 rounded-full">
             {article.category}
           </span>
-          <span className="text-gray-500 text-xs ml-2">
-            {formatDate(article.publishedAt)}
-          </span>
+          <span className="text-gray-500 text-xs ml-2">{formatDate(article.publishedAt)}</span>
         </div>
-        
-        <h4 className={`font-semibold text-gray-900 mb-2 ${compact ? 'text-sm' : 'text-base'} line-clamp-2`}>
+
+        <h4
+          className={`font-semibold text-gray-900 mb-2 ${compact ? 'text-sm' : 'text-base'} line-clamp-2`}
+        >
           {article.title}
         </h4>
-        
-        {!compact && (
-          <p className="text-gray-600 text-sm mb-3 line-clamp-2">
-            {article.excerpt}
-          </p>
-        )}
-        
+
+        {!compact && <p className="text-gray-600 text-sm mb-3 line-clamp-2">{article.excerpt}</p>}
+
         <div className="flex items-center justify-between">
           <div className="flex items-center text-xs text-gray-500">
             <span className="mr-3">By {article.author}</span>
             <span>{article.readTime} min</span>
           </div>
-          
+
           <a
             href={article.link}
             target="_blank"
@@ -230,15 +227,15 @@ function formatDate(dateString: string): string {
     const now = new Date();
     const diffTime = Math.abs(now.getTime() - date.getTime());
     const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
-    
+
     if (diffDays === 1) return 'Today';
     if (diffDays === 2) return 'Yesterday';
     if (diffDays <= 7) return `${diffDays - 1} days ago`;
-    
-    return date.toLocaleDateString('en-US', { 
-      month: 'short', 
+
+    return date.toLocaleDateString('en-US', {
+      month: 'short',
       day: 'numeric',
-      year: date.getFullYear() !== now.getFullYear() ? 'numeric' : undefined
+      year: date.getFullYear() !== now.getFullYear() ? 'numeric' : undefined,
     });
   } catch {
     return 'Recent';

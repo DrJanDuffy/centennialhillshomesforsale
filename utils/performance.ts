@@ -42,10 +42,7 @@ export function createIntersectionObserver(
 }
 
 // Performance measurement utility
-export function measurePerformance<T>(
-  name: string,
-  fn: () => T
-): T {
+export function measurePerformance<T>(name: string, fn: () => T): T {
   if (process.env.NODE_ENV === 'development') {
     const start = performance.now();
     const result = fn();
@@ -71,23 +68,15 @@ export function optimizeImports<T>(imports: T[]): T[] {
 }
 
 // Cache utility for expensive operations
-export function createCache<K, V>(
-  maxSize: number = 100
-): Map<K, V> {
+export function createCache<K, V>(maxSize: number = 100): Map<K, V> {
   return new Map<K, V>();
 }
 
 // Performance budget checker
-export function checkPerformanceBudget(
-  actual: number,
-  budget: number,
-  metric: string
-): boolean {
+export function checkPerformanceBudget(actual: number, budget: number, metric: string): boolean {
   const isWithinBudget = actual <= budget;
   if (!isWithinBudget) {
-    console.warn(
-      `${metric} exceeded budget: ${actual}ms > ${budget}ms`
-    );
+    console.warn(`${metric} exceeded budget: ${actual}ms > ${budget}ms`);
   }
   return isWithinBudget;
 }

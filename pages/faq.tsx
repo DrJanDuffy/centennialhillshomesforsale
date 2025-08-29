@@ -127,9 +127,9 @@ export default function FAQ() {
           <div className="container">
             <h2>Stay Informed with Market Insights</h2>
             <p>Get the latest real estate trends and analysis to help answer your questions</p>
-            
+
             <div className="max-w-6xl mx-auto">
-              <FeaturedInsight 
+              <FeaturedInsight
                 title="Latest Market Analysis"
                 subtitle="Expert insights to guide your real estate decisions"
                 theme="blue"
@@ -150,12 +150,8 @@ export default function FAQ() {
           <div className="container">
             <h2>Current Market Trends</h2>
             <p>Track real-time market data and trends affecting Centennial Hills real estate</p>
-            
-            <MarketInsightsWidget 
-              maxArticles={4}
-              enableAnalytics={true}
-              enablePerformance={true}
-            />
+
+            <MarketInsightsWidget maxArticles={4} enableAnalytics={true} enablePerformance={true} />
           </div>
         </motion.section>
 

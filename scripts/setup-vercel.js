@@ -75,27 +75,29 @@ function deployPreview() {
 // Get project information
 function getProjectInfo() {
   try {
-    const projectJson = JSON.parse(fs.readFileSync(path.join(process.cwd(), '.vercel', 'project.json'), 'utf8'));
+    const projectJson = JSON.parse(
+      fs.readFileSync(path.join(process.cwd(), '.vercel', 'project.json'), 'utf8')
+    );
     console.log('\n📊 Project Information:');
     console.log(`   Project ID: ${projectJson.projectId}`);
     console.log(`   Org ID: ${projectJson.orgId}`);
     console.log(`   Project Name: ${projectJson.projectName}`);
-    
+
     // Read .vercelignore
     const vercelignorePath = path.join(process.cwd(), '.vercelignore');
     if (fs.existsSync(vercelignorePath)) {
-      const ignoredFiles = fs.readFileSync(vercelignorePath, 'utf8')
+      const ignoredFiles = fs
+        .readFileSync(vercelignorePath, 'utf8')
         .split('\n')
-        .filter(line => line.trim() && !line.startsWith('#'))
-        .length;
+        .filter((line) => line.trim() && !line.startsWith('#')).length;
       console.log(`   Ignored Files: ${ignoredFiles} patterns`);
     }
-    
+
     return projectJson;
-      } catch {
-      console.log('❌ Could not read project information');
-      return null;
-    }
+  } catch {
+    console.log('❌ Could not read project information');
+    return null;
+  }
 }
 
 // Setup environment variables
@@ -136,13 +138,13 @@ function setupGitHubSecrets() {
 // Main setup function
 async function main() {
   console.log('Starting Vercel project setup...\n');
-  
+
   // Check Vercel CLI
   if (!checkVercelCLI()) {
     console.log('\n❌ Setup cannot continue without Vercel CLI');
     process.exit(1);
   }
-  
+
   // Check if already linked
   if (checkProjectLink()) {
     const projectInfo = getProjectInfo();
@@ -153,24 +155,24 @@ async function main() {
       return;
     }
   }
-  
+
   // Link project
   if (!linkProject()) {
     console.log('\n❌ Setup failed at linking step');
     process.exit(1);
   }
-  
+
   // Get project info
   const projectInfo = getProjectInfo();
   if (!projectInfo) {
     console.log('\n❌ Could not retrieve project information');
     process.exit(1);
   }
-  
+
   // Setup instructions
   setupEnvironmentVariables();
   setupGitHubSecrets();
-  
+
   // Deploy preview
   console.log('\n🚀 Deploying preview deployment...');
   if (deployPreview()) {
@@ -188,7 +190,7 @@ async function main() {
 
 // Run setup
 if (require.main === module) {
-  main().catch(error => {
+  main().catch((error) => {
     console.error('❌ Setup failed:', error.message);
     process.exit(1);
   });
@@ -201,5 +203,5 @@ module.exports = {
   deployPreview,
   getProjectInfo,
   setupEnvironmentVariables,
-  setupGitHubSecrets
+  setupGitHubSecrets,
 };

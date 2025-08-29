@@ -17,7 +17,8 @@
 }
 
 @keyframes skeleton-pulse {
-  0%, 100% {
+  0%,
+  100% {
     opacity: 1;
   }
   50% {
@@ -72,7 +73,9 @@
 
 .cardHover:hover {
   transform: translateY(-4px);
-  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  box-shadow:
+    0 20px 25px -5px rgba(0, 0, 0, 0.1),
+    0 10px 10px -5px rgba(0, 0, 0, 0.04);
 }
 
 /* Featured article styles */
@@ -81,7 +84,7 @@
 }
 
 .featuredArticle::before {
-  content: '';
+  content: "";
   position: absolute;
   top: 0;
   left: 0;
@@ -130,7 +133,7 @@
 }
 
 .actionButton::before {
-  content: '';
+  content: "";
   position: absolute;
   top: 0;
   left: -100%;
@@ -168,9 +171,16 @@
 }
 
 @keyframes error-shake {
-  0%, 100% { transform: translateX(0); }
-  25% { transform: translateX(-5px); }
-  75% { transform: translateX(5px); }
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+  25% {
+    transform: translateX(-5px);
+  }
+  75% {
+    transform: translateX(5px);
+  }
 }
 
 /* Success states */
@@ -180,9 +190,17 @@
 }
 
 @keyframes success-bounce {
-  0% { transform: scale(0.8); opacity: 0; }
-  50% { transform: scale(1.05); }
-  100% { transform: scale(1); opacity: 1; }
+  0% {
+    transform: scale(0.8);
+    opacity: 0;
+  }
+  50% {
+    transform: scale(1.05);
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
 }
 
 /* Responsive grid */
@@ -206,19 +224,19 @@
   .rssGrid {
     grid-template-columns: 1fr;
   }
-  
+
   .rssGridCompact {
     grid-template-columns: 1fr;
   }
-  
+
   .rssGridMinimal {
     grid-template-columns: 1fr;
   }
-  
+
   .featuredArticle {
     @apply flex-col;
   }
-  
+
   .articleImage {
     @apply w-full h-48;
   }
@@ -229,11 +247,11 @@
   .rssGrid {
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   }
-  
+
   .rssGridCompact {
     grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
   }
-  
+
   .rssGridMinimal {
     grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
   }
@@ -244,11 +262,11 @@
   .rssGrid {
     grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
   }
-  
+
   .rssGridCompact {
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   }
-  
+
   .rssGridMinimal {
     grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
   }
@@ -259,18 +277,19 @@
   .rssContainer {
     @apply text-white;
   }
-  
+
   .skeletonPulse {
     animation: skeleton-pulse-dark 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
   }
-  
+
   .skeletonShimmer {
     background: linear-gradient(90deg, #374151 25%, #4b5563 50%, #374151 75%);
   }
 }
 
 @keyframes skeleton-pulse-dark {
-  0%, 100% {
+  0%,
+  100% {
     opacity: 1;
   }
   50% {
@@ -283,16 +302,16 @@
   .rssContainer {
     @apply text-black bg-white;
   }
-  
+
   .cardHover:hover {
     transform: none;
     box-shadow: none;
   }
-  
+
   .actionButton {
     @apply border border-gray-300 text-gray-700;
   }
-  
+
   .loadingOverlay,
   .loadingSpinner {
     display: none;
@@ -304,7 +323,7 @@
   .tag {
     @apply border-2 border-current;
   }
-  
+
   .actionButton {
     @apply border-2 border-current;
   }
@@ -320,11 +339,11 @@
     animation: none;
     transition: none;
   }
-  
+
   .articleImage img {
     transition: none;
   }
-  
+
   .actionButton::before {
     display: none;
   }

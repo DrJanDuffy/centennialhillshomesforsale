@@ -17,27 +17,36 @@ const ModernHero: React.FC<ModernHeroProps> = ({ onSearchSubmit }) => {
   const [searchData, setSearchData] = useState<SearchData>({
     location: 'Centennial Hills',
     propertyType: 'All Properties',
-    priceRange: 'Any Price'
+    priceRange: 'Any Price',
   });
 
-  const handleSearch = useCallback((e: React.FormEvent) => {
-    e.preventDefault();
-    onSearchSubmit?.(searchData);
-  }, [searchData, onSearchSubmit]);
+  const handleSearch = useCallback(
+    (e: React.FormEvent) => {
+      e.preventDefault();
+      onSearchSubmit?.(searchData);
+    },
+    [searchData, onSearchSubmit]
+  );
 
-  const popularAreas = useMemo(() => [
-    { name: 'Centennial Hills', href: '/centennial-hills' },
-    { name: 'Providence', href: '/providence-las-vegas' },
-    { name: 'Skye Canyon', href: '/skye-canyon' },
-    { name: 'Northwest Las Vegas', href: '/northwest-las-vegas' }
-  ], []);
+  const popularAreas = useMemo(
+    () => [
+      { name: 'Centennial Hills', href: '/centennial-hills' },
+      { name: 'Providence', href: '/providence-las-vegas' },
+      { name: 'Skye Canyon', href: '/skye-canyon' },
+      { name: 'Northwest Las Vegas', href: '/northwest-las-vegas' },
+    ],
+    []
+  );
 
-  const stats = useMemo(() => [
-    { value: '500+', label: 'Homes Sold' },
-    { value: '$2.5B+', label: 'Total Volume' },
-    { value: '15+', label: 'Years Experience' },
-    { value: '98%', label: 'Client Satisfaction' }
-  ], []);
+  const stats = useMemo(
+    () => [
+      { value: '500+', label: 'Homes Sold' },
+      { value: '$2.5B+', label: 'Total Volume' },
+      { value: '15+', label: 'Years Experience' },
+      { value: '98%', label: 'Client Satisfaction' },
+    ],
+    []
+  );
 
   return (
     <section className="relative min-h-screen bg-gradient-to-br from-primary-color via-primary-dark to-primary-light overflow-hidden">
@@ -64,11 +73,11 @@ const ModernHero: React.FC<ModernHeroProps> = ({ onSearchSubmit }) => {
             Discover Your Dream Home in
             <span className="block text-blue-200 mt-2">Centennial Hills</span>
           </h1>
-          
+
           {/* Subtitle */}
           <p className="text-lg md:text-xl lg:text-2xl text-blue-100 mb-12 max-w-3xl mx-auto leading-relaxed">
-            Luxury homes in Las Vegas&apos; most prestigious master-planned community. 
-            Expert guidance from Dr. Jan Duffy, Top 1% REALTOR®.
+            Luxury homes in Las Vegas&apos; most prestigious master-planned community. Expert
+            guidance from Dr. Jan Duffy, Top 1% REALTOR®.
           </p>
 
           {/* Search Form */}
@@ -77,12 +86,14 @@ const ModernHero: React.FC<ModernHeroProps> = ({ onSearchSubmit }) => {
               <div className="grid grid-cols-1 md:grid-cols-3 gap-4 lg:gap-6">
                 {/* Location */}
                 <div className="relative">
-                  <label htmlFor="location-select" className="sr-only">Location</label>
+                  <label htmlFor="location-select" className="sr-only">
+                    Location
+                  </label>
                   <MapPin className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
                   <select
                     id="location-select"
                     value={searchData.location}
-                    onChange={(e) => setSearchData({...searchData, location: e.target.value})}
+                    onChange={(e) => setSearchData({ ...searchData, location: e.target.value })}
                     className="w-full pl-10 pr-4 py-3 lg:py-4 border border-gray-300 rounded-lg focus:ring-2 focus:ring-secondary-color focus:border-transparent transition-all duration-300 text-sm lg:text-base"
                   >
                     <option value="Centennial Hills">Centennial Hills</option>
@@ -94,12 +105,14 @@ const ModernHero: React.FC<ModernHeroProps> = ({ onSearchSubmit }) => {
 
                 {/* Property Type */}
                 <div className="relative">
-                  <label htmlFor="property-type-select" className="sr-only">Property Type</label>
+                  <label htmlFor="property-type-select" className="sr-only">
+                    Property Type
+                  </label>
                   <Home className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
                   <select
                     id="property-type-select"
                     value={searchData.propertyType}
-                    onChange={(e) => setSearchData({...searchData, propertyType: e.target.value})}
+                    onChange={(e) => setSearchData({ ...searchData, propertyType: e.target.value })}
                     className="w-full pl-10 pr-4 py-3 lg:py-4 border border-gray-300 rounded-lg focus:ring-2 focus:ring-secondary-color focus:border-transparent transition-all duration-300 text-sm lg:text-base"
                   >
                     <option value="All Properties">All Properties</option>
@@ -112,12 +125,14 @@ const ModernHero: React.FC<ModernHeroProps> = ({ onSearchSubmit }) => {
 
                 {/* Price Range */}
                 <div className="relative">
-                  <label htmlFor="price-range-select" className="sr-only">Price Range</label>
+                  <label htmlFor="price-range-select" className="sr-only">
+                    Price Range
+                  </label>
                   <TrendingUp className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
                   <select
                     id="price-range-select"
                     value={searchData.priceRange}
-                    onChange={(e) => setSearchData({...searchData, priceRange: e.target.value})}
+                    onChange={(e) => setSearchData({ ...searchData, priceRange: e.target.value })}
                     className="w-full pl-10 pr-4 py-3 lg:py-4 border border-gray-300 rounded-lg focus:ring-2 focus:ring-secondary-color focus:border-transparent transition-all duration-300 text-sm lg:text-base"
                   >
                     <option value="Any Price">Any Price</option>
@@ -128,7 +143,7 @@ const ModernHero: React.FC<ModernHeroProps> = ({ onSearchSubmit }) => {
                   </select>
                 </div>
               </div>
-              
+
               <button
                 type="submit"
                 className="w-full md:w-auto bg-secondary-color hover:bg-secondary-dark text-white font-semibold py-3 lg:py-4 px-8 lg:px-12 rounded-lg transition-all duration-300 transform hover:scale-105 flex items-center justify-center gap-2 focus:outline-none focus:ring-2 focus:ring-secondary-color focus:ring-offset-2 text-base lg:text-lg"

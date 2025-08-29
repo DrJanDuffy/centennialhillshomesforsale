@@ -129,7 +129,7 @@ export async function getCachedData<T>(
       console.warn(`Using stale cache data for ${key} due to fetch error:`, error);
       return staleData;
     }
-    
+
     // If no stale data available, re-throw the error
     throw error;
   }

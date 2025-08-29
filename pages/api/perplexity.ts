@@ -16,10 +16,7 @@ interface PerplexityError {
   };
 }
 
-export default async function handler(
-  req: NextApiRequest,
-  res: NextApiResponse
-) {
+export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   if (req.method !== 'POST') {
     return res.status(405).json({ error: 'Method not allowed' });
   }
@@ -35,28 +32,31 @@ export default async function handler(
     // PERPLEXITY API CALL
     // --------------------------------------------------------------
     const response = await axios.post<PerplexityResponse>(
-      'https://api.perplexity.ai/chat/completions',   // <-- official endpoint
+      'https://api.perplexity.ai/chat/completions', // <-- official endpoint
       {
-        model: 'llama-3-sonar-small-32k-online',   // pick any model you have access to
+        model: 'llama-3-sonar-small-32k-online', // pick any model you have access to
         messages: [
-          { role: 'system', content: `You are a helpful real‑estate assistant specialized in Centennial Hills, Las Vegas. Give concise, friendly answers and reference local schools, parks, and price ranges when relevant.` },
-          { role: 'user',   content: prompt }
+          {
+            role: 'system',
+            content: `You are a helpful real‑estate assistant specialized in Centennial Hills, Las Vegas. Give concise, friendly answers and reference local schools, parks, and price ranges when relevant.`,
+          },
+          { role: 'user', content: prompt },
         ],
         temperature: 0.6,
-        max_tokens: 300
+        max_tokens: 300,
       },
       {
         headers: {
           // Perplexity expects the key in the Authorization header:
           Authorization: `Bearer ${process.env.PERPLEXITY_API_KEY}`,
-          'Content-Type': 'application/json'
-        }
+          'Content-Type': 'application/json',
+        },
       }
     );
 
     // Perplexity returns a `choices` array with `message.content`
-    const reply = response.data.choices?.[0]?.message?.content?.trim() || 
-                  'I could not generate a response.';
+    const reply =
+      response.data.choices?.[0]?.message?.content?.trim() || 'I could not generate a response.';
 
     res.status(200).json({ reply });
   } catch (error: unknown) {

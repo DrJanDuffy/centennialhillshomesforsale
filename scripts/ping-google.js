@@ -7,23 +7,22 @@ const urls = [
   'https://centennialhillshomesforsale.com/properties',
   'https://centennialhillshomesforsale.com/market-data',
   'https://centennialhillshomesforsale.com/area-explorer',
-  'https://centennialhillshomesforsale.com/faq-schema'
+  'https://centennialhillshomesforsale.com/faq-schema',
 ];
 
 async function pingGoogle() {
   console.log('🚀 Starting Google ping process...\n');
-  
+
   for (const url of urls) {
     try {
       // First, check if the page is accessible
       const response = await axios.get(url);
       console.log(`✅ Page accessible: ${url} (Status: ${response.status})`);
-      
+
       // Ping Google about the page
       const pingUrl = `https://www.google.com/ping?sitemap=${encodeURIComponent(url)}`;
       await axios.get(pingUrl);
       console.log(`✅ Pinged Google for: ${url}`);
-      
     } catch (error) {
       if (error.response) {
         console.error(`❌ Page error ${error.response.status}: ${url}`);
@@ -32,7 +31,7 @@ async function pingGoogle() {
       }
     }
   }
-  
+
   // Ping Google about the main sitemap
   try {
     const sitemapUrl = 'https://centennialhillshomesforsale.com/sitemap.xml';
@@ -42,7 +41,7 @@ async function pingGoogle() {
   } catch (error) {
     console.error(`❌ Failed to ping sitemap: ${error.message}`);
   }
-  
+
   console.log('\n🎯 Google ping process completed!');
   console.log('\n📋 Next steps:');
   console.log('1. Go to Google Search Console');

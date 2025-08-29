@@ -9,14 +9,14 @@ export const formatDate = (dateString: string): string => {
       return new Date().toLocaleDateString('en-US', {
         year: 'numeric',
         month: 'short',
-        day: 'numeric'
+        day: 'numeric',
       });
     }
-    
+
     const now = new Date();
     const diffTime = Math.abs(now.getTime() - date.getTime());
     const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
-    
+
     if (diffDays === 0) {
       return 'Today';
     } else if (diffDays === 1) {
@@ -30,7 +30,7 @@ export const formatDate = (dateString: string): string => {
       return date.toLocaleDateString('en-US', {
         year: 'numeric',
         month: 'short',
-        day: 'numeric'
+        day: 'numeric',
       });
     }
   } catch {
@@ -40,7 +40,7 @@ export const formatDate = (dateString: string): string => {
 
 export const formatReadTime = (readTime: number): string => {
   if (readTime <= 0) return '';
-  
+
   if (readTime < 1) {
     return '< 1 min read';
   } else if (readTime === 1) {
@@ -60,7 +60,7 @@ export const cacheRSSData = (key: string, data: any, ttl: number = RSS_CACHE_TTL
     const cacheData = {
       data,
       timestamp: Date.now(),
-      ttl
+      ttl,
     };
     localStorage.setItem(cacheKey, JSON.stringify(cacheData));
   } catch (error) {
@@ -72,18 +72,18 @@ export const getCachedRSSData = (key: string): any | null => {
   try {
     const cacheKey = `${RSS_CACHE_PREFIX}${key}`;
     const cached = localStorage.getItem(cacheKey);
-    
+
     if (!cached) return null;
-    
+
     const cacheData = JSON.parse(cached);
     const now = Date.now();
-    
+
     // Check if cache is expired
     if (now - cacheData.timestamp > cacheData.ttl) {
       localStorage.removeItem(cacheKey);
       return null;
     }
-    
+
     return cacheData.data;
   } catch (error) {
     console.warn('Failed to retrieve cached RSS data:', error);
@@ -98,7 +98,7 @@ export const clearRSSCache = (key?: string): void => {
       localStorage.removeItem(cacheKey);
     } else {
       // Clear all RSS cache
-      Object.keys(localStorage).forEach(k => {
+      Object.keys(localStorage).forEach((k) => {
         if (k.startsWith(RSS_CACHE_PREFIX)) {
           localStorage.removeItem(k);
         }
@@ -110,11 +110,7 @@ export const clearRSSCache = (key?: string): void => {
 };
 
 // Analytics tracking utilities
-export const trackRSSAnalytics = (
-  event: string, 
-  data: any, 
-  metadata: any = {}
-): void => {
+export const trackRSSAnalytics = (event: string, data: any, metadata: any = {}): void => {
   try {
     // Google Analytics 4 event tracking
     if (typeof window !== 'undefined' && window.gtag) {
@@ -122,10 +118,10 @@ export const trackRSSAnalytics = (
         ...data,
         ...metadata,
         event_category: 'RSS_Feed',
-        event_label: metadata.variant || 'default'
+        event_label: metadata.variant || 'default',
       });
     }
-    
+
     // Custom analytics tracking
     const analyticsEvent = {
       event,
@@ -133,9 +129,9 @@ export const trackRSSAnalytics = (
       metadata,
       timestamp: new Date().toISOString(),
       url: window?.location?.href || '',
-      userAgent: window?.navigator?.userAgent || ''
+      userAgent: window?.navigator?.userAgent || '',
     };
-    
+
     // Send to custom analytics endpoint if available
     if (process.env.NEXT_PUBLIC_ANALYTICS_ENDPOINT) {
       fetch(process.env.NEXT_PUBLIC_ANALYTICS_ENDPOINT, {
@@ -143,12 +139,12 @@ export const trackRSSAnalytics = (
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(analyticsEvent)
+        body: JSON.stringify(analyticsEvent),
       }).catch(() => {
         // Silently fail if analytics endpoint is unavailable
       });
     }
-    
+
     // Console logging for development
     if (process.env.NODE_ENV === 'development') {
       console.log('RSS Analytics Event:', analyticsEvent);
@@ -159,17 +155,13 @@ export const trackRSSAnalytics = (
 };
 
 // Performance tracking utilities
-export const trackRSSPerformance = (
-  metric: string, 
-  value: number, 
-  metadata: any = {}
-): void => {
+export const trackRSSPerformance = (metric: string, value: number, metadata: any = {}): void => {
   try {
     // Web Vitals tracking
     if (typeof window !== 'undefined' && window.webVitals) {
       window.webVitals.track(metric, value, metadata);
     }
-    
+
     // Custom performance tracking
     const performanceEvent = {
       metric,
@@ -177,9 +169,9 @@ export const trackRSSPerformance = (
       metadata,
       timestamp: new Date().toISOString(),
       url: window?.location?.href || '',
-      userAgent: window?.navigator?.userAgent || ''
+      userAgent: window?.navigator?.userAgent || '',
     };
-    
+
     // Send to performance monitoring endpoint if available
     if (process.env.NEXT_PUBLIC_PERFORMANCE_ENDPOINT) {
       fetch(process.env.NEXT_PUBLIC_PERFORMANCE_ENDPOINT, {
@@ -187,12 +179,12 @@ export const trackRSSPerformance = (
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(performanceEvent)
+        body: JSON.stringify(performanceEvent),
       }).catch(() => {
         // Silently fail if performance endpoint is unavailable
       });
     }
-    
+
     // Console logging for development
     if (process.env.NODE_ENV === 'development') {
       console.log('RSS Performance Metric:', performanceEvent);
@@ -206,31 +198,32 @@ export const trackRSSPerformance = (
 export const validateRSSData = (data: any): boolean => {
   if (!data || typeof data !== 'object') return false;
   if (!Array.isArray(data.articles)) return false;
-  
-  return data.articles.every(article => 
-    article && 
-    typeof article === 'object' &&
-    typeof article.title === 'string' &&
-    typeof article.link === 'string'
+
+  return data.articles.every(
+    (article) =>
+      article &&
+      typeof article === 'object' &&
+      typeof article.title === 'string' &&
+      typeof article.link === 'string'
   );
 };
 
 // RSS feed error handling utilities
 export const handleRSSError = (error: any, context: string = 'RSS Feed'): string => {
   console.error(`${context} Error:`, error);
-  
+
   if (error.name === 'TypeError' && error.message.includes('fetch')) {
     return 'Network error. Please check your connection and try again.';
   }
-  
+
   if (error.status === 404) {
     return 'Feed not found. Please try again later.';
   }
-  
+
   if (error.status >= 500) {
     return 'Server error. Please try again later.';
   }
-  
+
   return 'An unexpected error occurred. Please try again.';
 };
 
@@ -241,23 +234,23 @@ export const retryRSSFetch = async (
   delay: number = 1000
 ): Promise<any> => {
   let lastError: any;
-  
+
   for (let attempt = 1; attempt <= maxRetries; attempt++) {
     try {
       return await fetchFn();
     } catch (error) {
       lastError = error;
-      
+
       if (attempt === maxRetries) {
         throw error;
       }
-      
+
       // Exponential backoff
       const waitTime = delay * Math.pow(2, attempt - 1);
-      await new Promise(resolve => setTimeout(resolve, waitTime));
+      await new Promise((resolve) => setTimeout(resolve, waitTime));
     }
   }
-  
+
   throw lastError;
 };
 

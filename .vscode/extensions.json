@@ -2,7 +2,7 @@
   "recommendations": [
     "formulahendry.auto-rename-tag",
     "bradlc.vscode-tailwindcss",
-    "esbenp.prettier-vscode",
+    "biomejs.biome",
     "ms-vscode.vscode-typescript-next",
     "ms-vscode.vscode-json",
     "bradlc.vscode-tailwindcss",

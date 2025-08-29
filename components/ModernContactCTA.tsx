@@ -12,11 +12,11 @@ const ModernContactCTA: React.FC = () => {
             Ready to Find Your
             <span className="block text-blue-400 mt-2">Dream Home?</span>
           </h2>
-          
+
           {/* Subtitle */}
           <p className="text-lg lg:text-xl xl:text-2xl text-gray-300 mb-12 lg:mb-16 max-w-3xl mx-auto leading-relaxed">
-            Let Dr. Jan Duffy guide you through the Centennial Hills real estate market. 
-            Get personalized recommendations and expert guidance every step of the way.
+            Let Dr. Jan Duffy guide you through the Centennial Hills real estate market. Get
+            personalized recommendations and expert guidance every step of the way.
           </p>
 
           {/* Contact Methods Grid */}
@@ -27,7 +27,9 @@ const ModernContactCTA: React.FC = () => {
                 <Phone className="w-6 h-6 lg:w-8 lg:h-8 text-white" />
               </div>
               <h3 className="text-lg lg:text-xl font-bold text-white mb-3">Call Us</h3>
-              <p className="text-gray-300 mb-4 text-sm lg:text-base">Speak directly with Dr. Jan Duffy</p>
+              <p className="text-gray-300 mb-4 text-sm lg:text-base">
+                Speak directly with Dr. Jan Duffy
+              </p>
               <a
                 href="tel:+17025550123"
                 className="text-blue-400 hover:text-blue-300 font-semibold text-base lg:text-lg"
@@ -42,7 +44,9 @@ const ModernContactCTA: React.FC = () => {
                 <Mail className="w-6 h-6 lg:w-8 lg:h-8 text-white" />
               </div>
               <h3 className="text-lg lg:text-xl font-bold text-white mb-3">Email Us</h3>
-              <p className="text-gray-300 mb-4 text-sm lg:text-base">Send us your questions and requirements</p>
+              <p className="text-gray-300 mb-4 text-sm lg:text-base">
+                Send us your questions and requirements
+              </p>
               <a
                 href="mailto:jan.duffy@centennialhillshomes.com"
                 className="text-blue-400 hover:text-blue-300 font-semibold text-base lg:text-lg"
@@ -57,7 +61,9 @@ const ModernContactCTA: React.FC = () => {
                 <Calendar className="w-6 h-6 lg:w-8 lg:h-8 text-white" />
               </div>
               <h3 className="text-lg lg:text-xl font-bold text-white mb-3">Schedule Meeting</h3>
-              <p className="text-gray-300 mb-4 text-sm lg:text-base">Book a consultation at your convenience</p>
+              <p className="text-gray-300 mb-4 text-sm lg:text-base">
+                Book a consultation at your convenience
+              </p>
               <Link
                 href="/contact"
                 className="text-blue-400 hover:text-blue-300 font-semibold text-base lg:text-lg inline-flex items-center gap-2"
@@ -73,10 +79,10 @@ const ModernContactCTA: React.FC = () => {
               Start Your Home Search Today
             </h3>
             <p className="text-lg lg:text-xl text-blue-100 mb-8 lg:mb-10 max-w-2xl mx-auto leading-relaxed">
-              Whether you&apos;re buying, selling, or just exploring, Dr. Jan Duffy is here to help 
+              Whether you&apos;re buying, selling, or just exploring, Dr. Jan Duffy is here to help
               you navigate the Centennial Hills real estate market with confidence.
             </p>
-            
+
             <div className="flex flex-col sm:flex-row gap-4 lg:gap-6 justify-center">
               <Link
                 href="/contact"
@@ -98,7 +104,9 @@ const ModernContactCTA: React.FC = () => {
           <div className="mt-12 lg:mt-16 text-center">
             <div className="flex items-center justify-center gap-2 text-gray-400 mb-2 lg:mb-3">
               <MapPin className="w-4 h-4 lg:w-5 lg:h-5" />
-              <span className="text-sm lg:text-base">Serving Centennial Hills, Las Vegas & Surrounding Areas</span>
+              <span className="text-sm lg:text-base">
+                Serving Centennial Hills, Las Vegas & Surrounding Areas
+              </span>
             </div>
             <p className="text-gray-500 text-sm lg:text-base">
               Licensed REALTOR® in Nevada | Member of GLVAR | Top 1% Producer

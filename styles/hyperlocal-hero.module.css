@@ -120,8 +120,13 @@
 }
 
 @keyframes pulse {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0.5; }
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
 }
 
 .ticker-content {
@@ -428,8 +433,12 @@
 }
 
 @keyframes ticker-scroll {
-  0% { transform: translateX(100%); }
-  100% { transform: translateX(-100%); }
+  0% {
+    transform: translateX(100%);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
 }
 
 /* Responsive Design */
@@ -438,11 +447,11 @@
     grid-template-columns: 1fr;
     gap: 2rem;
   }
-  
+
   .hero-title {
     font-size: 2.5rem;
   }
-  
+
   .market-stats-grid {
     grid-template-columns: 1fr;
   }
@@ -452,31 +461,31 @@
   .container {
     padding: 0 1rem;
   }
-  
+
   .hero-title {
     font-size: 2rem;
   }
-  
+
   .hero-ctas {
     flex-direction: column;
   }
-  
+
   .cta-primary,
   .cta-secondary {
     width: 100%;
     text-align: center;
   }
-  
+
   .neighborhood-stats {
     grid-template-columns: 1fr;
   }
-  
+
   .breaking-news-ticker {
     flex-direction: column;
     text-align: center;
     gap: 0.5rem;
   }
-  
+
   .ticker-label {
     margin-right: 0;
     margin-bottom: 0.5rem;
@@ -487,19 +496,19 @@
   .hero-title {
     font-size: 1.75rem;
   }
-  
+
   .insight-content {
     padding: 1.5rem;
   }
-  
+
   .hero-market-dashboard {
     padding: 1.5rem;
   }
-  
+
   .stat-card {
     padding: 1rem;
   }
-  
+
   .stat-value {
     font-size: 1.25rem;
   }

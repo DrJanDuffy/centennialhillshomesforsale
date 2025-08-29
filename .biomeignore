@@ -1,46 +1,108 @@
-# Dependencies
+# Dependencies and build artifacts
 node_modules/
-.pnp
-.pnp.js
-
-# Production builds
 .next/
 out/
 dist/
 build/
+coverage/
+.vercel/
 
-# Public assets
-public/
-
-# Generated files
-*.min.js
-*.bundle.js
-*.map
-
-# Environment files
-.env*
-!.env.example
-
-# IDE and editor files
+# Development and IDE files
+.env
+.env.*
+*.log
+.DS_Store
 .vscode/
 .idea/
-*.swp
-*.swo
+.cursor/
+
+# Documentation and scripts
+*.md
+docs/
+scripts/
+attached_assets/
+api-backup/
+
+# Testing and development
+tests/
+test-*.js
+fix-*.js
+deploy-*.js
+parse-*.js
+configure-*.js
+taskmaster-*.js
+*.ps1
+
+# Configuration files (not needed in analysis)
+.biomeignore
+biome.json
+replit.toml
+.replit
+wrangler.toml
+.github/
+
+# Temporary and backup files
+tmp/
+temp/
+*.backup
+*.bak
+*.tmp
+
+# Large assets that should be served from CDN
+public/data/*.json
+public/*.txt
+public/*.md
+
+# Development-specific files
+UI-FIXES-IMPLEMENTATION.md
+DEPLOYMENT-*.md
+audit-report*.md
+BROWSER-COMPATIBILITY.md
+VERCEL-OPTIMIZATION-GUIDE.md
+env-template.txt
+
+# Git and version control
+.git
+.gitignore
+.gitattributes
+
+# Local development files
+*.local
+.local
+local.*
+
+# Performance analysis files
+.next/analyze/
+webpack-stats.json
+bundle-analysis.html
+
+# Cursor.ai specific files
+.cursorrules
+.cursor/
+cursor-*
 
 # OS generated files
-.DS_Store
-.DS_Store?
-._*
-.Spotlight-V100
-.Trashes
-ehthumbs.db
 Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# Package manager files
+yarn.lock
+pnpm-lock.yaml
+package-lock.json.backup
+
+# Editor files
+*.swp
+*.swo
+*~
 
 # Logs
+logs
 *.log
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+lerna-debug.log*
 
 # Runtime data
 pids
@@ -49,7 +111,7 @@ pids
 *.pid.lock
 
 # Coverage directory used by tools like istanbul
-coverage/
+coverage
 *.lcov
 
 # nyc test coverage
@@ -88,6 +150,7 @@ jspm_packages/
 
 # Nuxt.js build / generate output
 .nuxt
+dist
 
 # Storybook build outputs
 .out
