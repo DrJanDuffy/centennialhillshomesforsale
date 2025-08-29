@@ -5,6 +5,8 @@ import EnhancedHero from '../components/EnhancedHero';
 import Layout from '../components/Layout';
 import RealScoutListings from '../components/RealScoutListings';
 import FeaturedInsight from '../components/rss/FeaturedInsight';
+import SimpleInteriorGallery from '../components/SimpleInteriorGallery';
+import { getPhotosForPage } from '../utils/interiorPhotos';
 
 export default function Home() {
   return (
@@ -131,6 +133,18 @@ export default function Home() {
               </div>
             </Link>
           </div>
+        </div>
+      </section>
+
+      {/* Interior Inspiration Section */}
+      <section className="py-16 bg-gray-50">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <SimpleInteriorGallery
+            photos={getPhotosForPage('homepage')}
+            title="Interior Inspiration"
+            subtitle="Discover the stunning interior designs and premium finishes that make Centennial Hills homes truly special"
+            maxPhotos={6}
+          />
         </div>
       </section>
 

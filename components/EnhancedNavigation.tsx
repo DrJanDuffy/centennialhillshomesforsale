@@ -40,6 +40,7 @@ const navigation = [
       { name: 'Northwest Las Vegas', href: '/neighborhoods/northwest' },
     ],
   },
+  { name: 'Interior Photos', href: '/interior-photos', icon: BuildingOfficeIcon },
   { name: 'About', href: '/about', icon: UserGroupIcon },
   { name: 'Contact', href: '/contact', icon: PhoneIcon },
 ];

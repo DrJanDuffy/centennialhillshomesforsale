@@ -5,6 +5,8 @@ import ModernFeaturedProperties from '../components/ModernFeaturedProperties';
 import RealScoutListings from '../components/RealScoutListings';
 import FeaturedInsight from '../components/rss/FeaturedInsight';
 import MarketInsightsWidget from '../components/rss/MarketInsightsWidget';
+import SimpleInteriorGallery from '../components/SimpleInteriorGallery';
+import { getPhotosForPage } from '../utils/interiorPhotos';
 
 export default function Properties() {
   return (
@@ -430,6 +432,18 @@ export default function Properties() {
                 </p>
               </div>
             </div>
+          </div>
+        </section>
+
+        {/* Interior Inspiration for Properties */}
+        <section className="section bg-white">
+          <div className="container">
+            <SimpleInteriorGallery
+              photos={getPhotosForPage('properties')}
+              title="Interior Design Inspiration"
+              subtitle="Explore the stunning interior designs and premium finishes that define luxury living in Centennial Hills"
+              maxPhotos={9}
+            />
           </div>
         </section>
 

@@ -1,0 +1,163 @@
+{
+  "interiorPhotos": {
+    "livingRooms": [
+      {
+        "id": "lr-001",
+        "filename": "luxury-living-room-1.jpg",
+        "alt": "Elegant living room with floor-to-ceiling windows and mountain views",
+        "description": "Spacious open-concept living area with premium finishes",
+        "category": "livingRoom",
+        "style": "modern",
+        "tags": ["luxury", "open-concept", "mountain-views", "premium-finishes"]
+      },
+      {
+        "id": "lr-002",
+        "filename": "cozy-living-room-2.jpg",
+        "alt": "Warm and inviting family living room with fireplace",
+        "description": "Comfortable family space perfect for entertaining",
+        "category": "livingRoom",
+        "style": "traditional",
+        "tags": ["family-friendly", "fireplace", "warm", "entertaining"]
+      },
+      {
+        "id": "lr-003",
+        "filename": "contemporary-living-room-3.jpg",
+        "alt": "Sleek contemporary living room with minimalist design",
+        "description": "Modern aesthetic with clean lines and sophisticated decor",
+        "category": "livingRoom",
+        "style": "contemporary",
+        "tags": ["contemporary", "minimalist", "sleek", "sophisticated"]
+      }
+    ],
+    "kitchens": [
+      {
+        "id": "kit-001",
+        "filename": "gourmet-kitchen-1.jpg",
+        "alt": "Chef's dream kitchen with premium appliances and granite countertops",
+        "description": "Professional-grade kitchen perfect for culinary enthusiasts",
+        "category": "kitchen",
+        "style": "luxury",
+        "tags": ["gourmet", "premium-appliances", "granite", "chef-kitchen"]
+      },
+      {
+        "id": "kit-002",
+        "filename": "modern-kitchen-2.jpg",
+        "alt": "Modern kitchen with white cabinets and stainless steel appliances",
+        "description": "Clean, bright kitchen with contemporary design elements",
+        "category": "kitchen",
+        "style": "modern",
+        "tags": ["white-cabinets", "stainless-steel", "bright", "contemporary"]
+      },
+      {
+        "id": "kit-003",
+        "filename": "farmhouse-kitchen-3.jpg",
+        "alt": "Charming farmhouse kitchen with rustic elements",
+        "description": "Warm and welcoming kitchen with country charm",
+        "category": "kitchen",
+        "style": "farmhouse",
+        "tags": ["farmhouse", "rustic", "charming", "country-style"]
+      }
+    ],
+    "masterBedrooms": [
+      {
+        "id": "mb-001",
+        "filename": "luxury-master-suite-1.jpg",
+        "alt": "Luxurious master bedroom with king bed and mountain views",
+        "description": "Spacious master suite with premium amenities",
+        "category": "masterBedroom",
+        "style": "luxury",
+        "tags": ["luxury", "king-bed", "mountain-views", "spacious"]
+      },
+      {
+        "id": "mb-002",
+        "filename": "modern-master-bedroom-2.jpg",
+        "alt": "Modern master bedroom with clean lines and neutral palette",
+        "description": "Contemporary master suite with sophisticated design",
+        "category": "masterBedroom",
+        "style": "modern",
+        "tags": ["modern", "clean-lines", "neutral", "sophisticated"]
+      }
+    ],
+    "bathrooms": [
+      {
+        "id": "bath-001",
+        "filename": "spa-bathroom-1.jpg",
+        "alt": "Spa-like master bathroom with dual vanities and soaking tub",
+        "description": "Luxurious bathroom retreat with premium fixtures",
+        "category": "bathroom",
+        "style": "luxury",
+        "tags": ["spa-like", "dual-vanities", "soaking-tub", "luxury"]
+      },
+      {
+        "id": "bath-002",
+        "filename": "modern-bathroom-2.jpg",
+        "alt": "Modern bathroom with walk-in shower and floating vanity",
+        "description": "Contemporary bathroom with sleek design elements",
+        "category": "bathroom",
+        "style": "modern",
+        "tags": ["walk-in-shower", "floating-vanity", "modern", "sleek"]
+      }
+    ],
+    "diningRooms": [
+      {
+        "id": "dr-001",
+        "filename": "formal-dining-room-1.jpg",
+        "alt": "Elegant formal dining room with chandelier and large table",
+        "description": "Perfect for hosting dinner parties and special occasions",
+        "category": "diningRoom",
+        "style": "formal",
+        "tags": ["formal", "chandelier", "entertaining", "elegant"]
+      },
+      {
+        "id": "dr-002",
+        "filename": "casual-dining-area-2.jpg",
+        "alt": "Casual dining area with breakfast nook and natural light",
+        "description": "Cozy space for everyday meals and family gatherings",
+        "category": "diningRoom",
+        "style": "casual",
+        "tags": ["casual", "breakfast-nook", "natural-light", "family"]
+      }
+    ],
+    "homeOffices": [
+      {
+        "id": "office-001",
+        "filename": "home-office-1.jpg",
+        "alt": "Professional home office with built-in shelving and desk",
+        "description": "Productive workspace perfect for remote work",
+        "category": "homeOffice",
+        "style": "professional",
+        "tags": ["professional", "built-in-shelving", "remote-work", "productive"]
+      }
+    ],
+    "outdoorSpaces": [
+      {
+        "id": "outdoor-001",
+        "filename": "outdoor-living-area-1.jpg",
+        "alt": "Beautiful outdoor living space with fireplace and seating",
+        "description": "Perfect for enjoying Las Vegas weather and mountain views",
+        "category": "outdoor",
+        "style": "luxury",
+        "tags": ["outdoor-living", "fireplace", "mountain-views", "entertaining"]
+      }
+    ]
+  },
+  "photoCategories": [
+    "livingRoom",
+    "kitchen",
+    "masterBedroom",
+    "bathroom",
+    "diningRoom",
+    "homeOffice",
+    "outdoor"
+  ],
+  "styles": [
+    "modern",
+    "traditional",
+    "contemporary",
+    "luxury",
+    "farmhouse",
+    "casual",
+    "formal",
+    "professional"
+  ]
+}
