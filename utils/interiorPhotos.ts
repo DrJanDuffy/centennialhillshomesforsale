@@ -42,43 +42,50 @@ export function getAllInteriorPhotos(): InteriorPhoto[] {
 export function getPhotosByCategory(category: string): InteriorPhoto[] {
   const data = interiorPhotosData as InteriorPhotosData;
   const categoryKey = category as keyof typeof data.interiorPhotos;
-  
+
   if (categoryKey in data.interiorPhotos) {
     return data.interiorPhotos[categoryKey];
   }
-  
+
   return [];
 }
 
 // Get photos by style
 export function getPhotosByStyle(style: string): InteriorPhoto[] {
-  return getAllInteriorPhotos().filter(photo => photo.style === style);
+  return getAllInteriorPhotos().filter((photo) => photo.style === style);
 }
 
 // Get featured photos (mix of different categories)
 export function getFeaturedPhotos(count: number = 6): InteriorPhoto[] {
   const allPhotos = getAllInteriorPhotos();
   const featured: InteriorPhoto[] = [];
-  
+
   // Get one photo from each major category
-  const categories = ['livingRooms', 'kitchens', 'masterBedrooms', 'bathrooms', 'diningRooms', 'outdoorSpaces'];
-  
-  categories.forEach(category => {
+  const categories = [
+    'livingRooms',
+    'kitchens',
+    'masterBedrooms',
+    'bathrooms',
+    'diningRooms',
+    'outdoorSpaces',
+  ];
+
+  categories.forEach((category) => {
     const categoryPhotos = getPhotosByCategory(category);
     if (categoryPhotos.length > 0) {
       featured.push(categoryPhotos[0]);
     }
   });
-  
+
   // Fill remaining slots with random photos
   while (featured.length < count && allPhotos.length > featured.length) {
-    const remainingPhotos = allPhotos.filter(photo => !featured.find(f => f.id === photo.id));
+    const remainingPhotos = allPhotos.filter((photo) => !featured.find((f) => f.id === photo.id));
     if (remainingPhotos.length > 0) {
       const randomIndex = Math.floor(Math.random() * remainingPhotos.length);
       featured.push(remainingPhotos[randomIndex]);
     }
   }
-  
+
   return featured.slice(0, count);
 }
 

@@ -1,7 +1,11 @@
 import Head from 'next/head';
 import Layout from '../components/Layout';
 import SimpleInteriorGallery from '../components/SimpleInteriorGallery';
-import { getAllInteriorPhotos, getPhotosByCategory, getPhotosByStyle } from '../utils/interiorPhotos';
+import {
+  getAllInteriorPhotos,
+  getPhotosByCategory,
+  getPhotosByStyle,
+} from '../utils/interiorPhotos';
 
 export default function InteriorPhotos() {
   const allPhotos = getAllInteriorPhotos();
@@ -33,7 +37,8 @@ export default function InteriorPhotos() {
           <div className="container mx-auto px-4 text-center">
             <h1 className="text-4xl md:text-6xl font-bold mb-6">Interior Design Inspiration</h1>
             <p className="text-xl md:text-2xl mb-8 max-w-3xl mx-auto">
-              Discover the stunning interior designs and premium finishes that define luxury living in Centennial Hills
+              Discover the stunning interior designs and premium finishes that define luxury living
+              in Centennial Hills
             </p>
           </div>
         </section>
@@ -132,7 +137,8 @@ export default function InteriorPhotos() {
           <div className="container mx-auto px-4 text-center">
             <h2 className="text-3xl font-bold mb-6">Ready to See These Interiors in Person?</h2>
             <p className="text-xl mb-8 max-w-2xl mx-auto">
-              Schedule a private tour to experience the quality and craftsmanship of Centennial Hills luxury homes
+              Schedule a private tour to experience the quality and craftsmanship of Centennial
+              Hills luxury homes
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <a

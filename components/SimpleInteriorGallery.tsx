@@ -1,7 +1,7 @@
 'use client';
 
-import React from 'react';
 import Image from 'next/image';
+import React from 'react';
 
 interface InteriorPhoto {
   id: string;
@@ -25,7 +25,7 @@ export default function SimpleInteriorGallery({
   title,
   subtitle,
   maxPhotos,
-  className = ''
+  className = '',
 }: SimpleInteriorGalleryProps) {
   const displayPhotos = maxPhotos ? photos.slice(0, maxPhotos) : photos;
 
@@ -40,9 +40,7 @@ export default function SimpleInteriorGallery({
             </h2>
           )}
           {subtitle && (
-            <p className="text-lg lg:text-xl text-gray-600 max-w-3xl mx-auto">
-              {subtitle}
-            </p>
+            <p className="text-lg lg:text-xl text-gray-600 max-w-3xl mx-auto">{subtitle}</p>
           )}
         </div>
       )}
@@ -67,7 +65,9 @@ export default function SimpleInteriorGallery({
               </div>
               <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-4 text-white">
                 <h3 className="font-semibold text-lg mb-1">{photo.description}</h3>
-                <p className="text-sm opacity-90 capitalize">{photo.style} {photo.category}</p>
+                <p className="text-sm opacity-90 capitalize">
+                  {photo.style} {photo.category}
+                </p>
               </div>
             </div>
           </div>

@@ -1,8 +1,8 @@
 import Head from 'next/head';
 import Layout from '../components/Layout';
 import RealScoutListings from '../components/RealScoutListings';
-import { getPageSchema } from '../lib/business-schema';
 import SimpleInteriorGallery from '../components/SimpleInteriorGallery';
+import { getPageSchema } from '../lib/business-schema';
 import { getPhotosForPage } from '../utils/interiorPhotos';
 
 export default function About() {
