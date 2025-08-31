@@ -121,6 +121,8 @@
   },
   "devDependencies": {
     "@biomejs/biome": "^2.2.2",
+    "@commitlint/cli": "^19.8.1",
+    "@commitlint/config-conventional": "^19.8.1",
     "@next/bundle-analyzer": "^14.2.15",
     "@types/google.maps": "^3.58.1",
     "lefthook": "^1.12.3",
