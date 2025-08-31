@@ -32,15 +32,14 @@ pre-push:
       glob: "*.{js,ts,cjs,mjs,d.cts,d.mts,jsx,tsx,json,jsonc}"
       run: npx @biomejs/biome check --no-errors-on-unmatched --files-ignore-unknown=true --colors=off {push_files}
     
-    # Skip local build - let Vercel handle builds in production
+    # Skip local build and performance checks - let Vercel handle builds in production
     # build-check:
     #   run: npm run build
     #   stage_fixed: false
     
-    # Performance analysis
-    performance-check:
-      run: npm run bundle:analyze
-      stage_fixed: false
+    # performance-check:
+    #   run: npm run bundle:analyze
+    #   stage_fixed: false
 
 # Commit-msg hooks - run after commit message is written
 commit-msg:
