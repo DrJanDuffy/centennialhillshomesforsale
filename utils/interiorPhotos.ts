@@ -4,9 +4,18 @@ export interface InteriorPhoto {
   id: string;
   filename: string;
   alt: string;
+  title: string; // Added to match Photo interface
   description: string;
   category: string;
+  roomType: string; // Added to match Photo interface
   style: string;
+  colors: string[]; // Added to match Photo interface
+  features: string[]; // Added to match Photo interface
+  dimensions: {
+    // Added to match Photo interface
+    width: number;
+    height: number;
+  };
   tags: string[];
 }
 

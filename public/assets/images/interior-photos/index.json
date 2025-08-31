@@ -8,7 +8,15 @@
         "description": "Spacious open-concept living area with premium finishes",
         "category": "livingRoom",
         "style": "modern",
-        "tags": ["luxury", "open-concept", "mountain-views", "premium-finishes"]
+        "tags": ["luxury", "open-concept", "mountain-views", "premium-finishes"],
+        "title": "Elegant living room with floor-to-ceiling windows and mountain views",
+        "roomType": "Other",
+        "colors": ["Neutral", "Gray", "White"],
+        "features": ["Clean lines", "Open concept", "Premium finishes"],
+        "dimensions": {
+          "width": 1920,
+          "height": 1080
+        }
       },
       {
         "id": "lr-002",
@@ -17,7 +25,15 @@
         "description": "Comfortable family space perfect for entertaining",
         "category": "livingRoom",
         "style": "traditional",
-        "tags": ["family-friendly", "fireplace", "warm", "entertaining"]
+        "tags": ["family-friendly", "fireplace", "warm", "entertaining"],
+        "title": "Warm and inviting family living room with fireplace",
+        "roomType": "Other",
+        "colors": ["Warm", "Brown", "Beige"],
+        "features": ["Classic design", "Timeless appeal", "Quality craftsmanship"],
+        "dimensions": {
+          "width": 1920,
+          "height": 1080
+        }
       },
       {
         "id": "lr-003",
@@ -26,7 +42,15 @@
         "description": "Modern aesthetic with clean lines and sophisticated decor",
         "category": "livingRoom",
         "style": "contemporary",
-        "tags": ["contemporary", "minimalist", "sleek", "sophisticated"]
+        "tags": ["contemporary", "minimalist", "sleek", "sophisticated"],
+        "title": "Sleek contemporary living room with minimalist design",
+        "roomType": "Other",
+        "colors": ["Gray", "Black", "White"],
+        "features": ["Sleek design", "Modern amenities", "Sophisticated style"],
+        "dimensions": {
+          "width": 1920,
+          "height": 1080
+        }
       }
     ],
     "kitchens": [
@@ -37,7 +61,15 @@
         "description": "Professional-grade kitchen perfect for culinary enthusiasts",
         "category": "kitchen",
         "style": "luxury",
-        "tags": ["gourmet", "premium-appliances", "granite", "chef-kitchen"]
+        "tags": ["gourmet", "premium-appliances", "granite", "chef-kitchen"],
+        "title": "Chef's dream kitchen with premium appliances and granite countertops",
+        "roomType": "Other",
+        "colors": ["Neutral", "Gold", "Cream"],
+        "features": ["Premium materials", "High-end appliances", "Custom details"],
+        "dimensions": {
+          "width": 1920,
+          "height": 1080
+        }
       },
       {
         "id": "kit-002",
@@ -46,7 +78,15 @@
         "description": "Clean, bright kitchen with contemporary design elements",
         "category": "kitchen",
         "style": "modern",
-        "tags": ["white-cabinets", "stainless-steel", "bright", "contemporary"]
+        "tags": ["white-cabinets", "stainless-steel", "bright", "contemporary"],
+        "title": "Modern kitchen with white cabinets and stainless steel appliances",
+        "roomType": "Other",
+        "colors": ["Neutral", "Gray", "White"],
+        "features": ["Clean lines", "Open concept", "Premium finishes"],
+        "dimensions": {
+          "width": 1920,
+          "height": 1080
+        }
       },
       {
         "id": "kit-003",
@@ -55,7 +95,15 @@
         "description": "Warm and welcoming kitchen with country charm",
         "category": "kitchen",
         "style": "farmhouse",
-        "tags": ["farmhouse", "rustic", "charming", "country-style"]
+        "tags": ["farmhouse", "rustic", "charming", "country-style"],
+        "title": "Charming farmhouse kitchen with rustic elements",
+        "roomType": "Other",
+        "colors": ["White", "Wood", "Cream"],
+        "features": ["Rustic charm", "Country style", "Warm atmosphere"],
+        "dimensions": {
+          "width": 1920,
+          "height": 1080
+        }
       }
     ],
     "masterBedrooms": [
@@ -66,7 +114,15 @@
         "description": "Spacious master suite with premium amenities",
         "category": "masterBedroom",
         "style": "luxury",
-        "tags": ["luxury", "king-bed", "mountain-views", "spacious"]
+        "tags": ["luxury", "king-bed", "mountain-views", "spacious"],
+        "title": "Luxurious master bedroom with king bed and mountain views",
+        "roomType": "Other",
+        "colors": ["Neutral", "Gold", "Cream"],
+        "features": ["Premium materials", "High-end appliances", "Custom details"],
+        "dimensions": {
+          "width": 1920,
+          "height": 1080
+        }
       },
       {
         "id": "mb-002",
@@ -75,7 +131,15 @@
         "description": "Contemporary master suite with sophisticated design",
         "category": "masterBedroom",
         "style": "modern",
-        "tags": ["modern", "clean-lines", "neutral", "sophisticated"]
+        "tags": ["modern", "clean-lines", "neutral", "sophisticated"],
+        "title": "Modern master bedroom with clean lines and neutral palette",
+        "roomType": "Other",
+        "colors": ["Neutral", "Gray", "White"],
+        "features": ["Clean lines", "Open concept", "Premium finishes"],
+        "dimensions": {
+          "width": 1920,
+          "height": 1080
+        }
       }
     ],
     "bathrooms": [
@@ -86,7 +150,15 @@
         "description": "Luxurious bathroom retreat with premium fixtures",
         "category": "bathroom",
         "style": "luxury",
-        "tags": ["spa-like", "dual-vanities", "soaking-tub", "luxury"]
+        "tags": ["spa-like", "dual-vanities", "soaking-tub", "luxury"],
+        "title": "Spa-like master bathroom with dual vanities and soaking tub",
+        "roomType": "Other",
+        "colors": ["Neutral", "Gold", "Cream"],
+        "features": ["Premium materials", "High-end appliances", "Custom details"],
+        "dimensions": {
+          "width": 1920,
+          "height": 1080
+        }
       },
       {
         "id": "bath-002",
@@ -95,7 +167,15 @@
         "description": "Contemporary bathroom with sleek design elements",
         "category": "bathroom",
         "style": "modern",
-        "tags": ["walk-in-shower", "floating-vanity", "modern", "sleek"]
+        "tags": ["walk-in-shower", "floating-vanity", "modern", "sleek"],
+        "title": "Modern bathroom with walk-in shower and floating vanity",
+        "roomType": "Other",
+        "colors": ["Neutral", "Gray", "White"],
+        "features": ["Clean lines", "Open concept", "Premium finishes"],
+        "dimensions": {
+          "width": 1920,
+          "height": 1080
+        }
       }
     ],
     "diningRooms": [
@@ -106,7 +186,15 @@
         "description": "Perfect for hosting dinner parties and special occasions",
         "category": "diningRoom",
         "style": "formal",
-        "tags": ["formal", "chandelier", "entertaining", "elegant"]
+        "tags": ["formal", "chandelier", "entertaining", "elegant"],
+        "title": "Elegant formal dining room with chandelier and large table",
+        "roomType": "Other",
+        "colors": ["Neutral", "Gray"],
+        "features": ["Quality design", "Modern amenities"],
+        "dimensions": {
+          "width": 1920,
+          "height": 1080
+        }
       },
       {
         "id": "dr-002",
@@ -115,7 +203,15 @@
         "description": "Cozy space for everyday meals and family gatherings",
         "category": "diningRoom",
         "style": "casual",
-        "tags": ["casual", "breakfast-nook", "natural-light", "family"]
+        "tags": ["casual", "breakfast-nook", "natural-light", "family"],
+        "title": "Casual dining area with breakfast nook and natural light",
+        "roomType": "Other",
+        "colors": ["Neutral", "Gray"],
+        "features": ["Quality design", "Modern amenities"],
+        "dimensions": {
+          "width": 1920,
+          "height": 1080
+        }
       }
     ],
     "homeOffices": [
@@ -126,7 +222,15 @@
         "description": "Productive workspace perfect for remote work",
         "category": "homeOffice",
         "style": "professional",
-        "tags": ["professional", "built-in-shelving", "remote-work", "productive"]
+        "tags": ["professional", "built-in-shelving", "remote-work", "productive"],
+        "title": "Professional home office with built-in shelving and desk",
+        "roomType": "Other",
+        "colors": ["Neutral", "Gray"],
+        "features": ["Quality design", "Modern amenities"],
+        "dimensions": {
+          "width": 1920,
+          "height": 1080
+        }
       }
     ],
     "outdoorSpaces": [
@@ -137,7 +241,15 @@
         "description": "Perfect for enjoying Las Vegas weather and mountain views",
         "category": "outdoor",
         "style": "luxury",
-        "tags": ["outdoor-living", "fireplace", "mountain-views", "entertaining"]
+        "tags": ["outdoor-living", "fireplace", "mountain-views", "entertaining"],
+        "title": "Beautiful outdoor living space with fireplace and seating",
+        "roomType": "Other",
+        "colors": ["Neutral", "Gold", "Cream"],
+        "features": ["Premium materials", "High-end appliances", "Custom details"],
+        "dimensions": {
+          "width": 1920,
+          "height": 1080
+        }
       }
     ]
   },
