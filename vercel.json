@@ -6,17 +6,6 @@
 
   "redirects": [
     {
-      "source": "/:path*",
-      "has": [
-        {
-          "type": "host",
-          "value": "www.centennialhillshomesforsale.com"
-        }
-      ],
-      "destination": "https://centennialhillshomesforsale.com/:path*",
-      "permanent": true
-    },
-    {
       "source": "/search",
       "destination": "/",
       "permanent": false
