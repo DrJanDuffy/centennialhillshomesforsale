@@ -1,7 +1,7 @@
 'use client';
 
-import { useState, useEffect, useRef } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { AnimatePresence, motion } from 'framer-motion';
+import { useEffect, useRef, useState } from 'react';
 import { useTheme } from '../contexts/ThemeContext';
 
 interface OptimizedImageProps {
@@ -34,7 +34,7 @@ export default function OptimizedImage({
   sizes = '(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw',
   quality = 85,
   onLoad,
-  onError
+  onError,
 }: OptimizedImageProps) {
   const { isDark } = useTheme();
   const [isLoaded, setIsLoaded] = useState(false);
@@ -45,13 +45,18 @@ export default function OptimizedImage({
   const observerRef = useRef<IntersectionObserver | null>(null);
 
   // Generate optimized image URLs
-  const generateOptimizedSrc = (originalSrc: string, targetWidth: number, targetHeight: number, format: 'webp' | 'avif' | 'jpeg' = 'webp') => {
+  const generateOptimizedSrc = (
+    originalSrc: string,
+    targetWidth: number,
+    targetHeight: number,
+    format: 'webp' | 'avif' | 'jpeg' = 'webp'
+  ) => {
     // If it's already an external URL (like Unsplash), optimize it
     if (originalSrc.includes('unsplash.com')) {
       const baseUrl = originalSrc.split('?')[0];
       return `${baseUrl}?w=${targetWidth}&h=${targetHeight}&fit=crop&fm=${format}&q=${quality}`;
     }
-    
+
     // For local images, we'd use a CDN or image optimization service
     // For now, return the original src
     return originalSrc;
@@ -62,11 +67,11 @@ export default function OptimizedImage({
     if (placeholder === 'empty') {
       return `data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 ${w} ${h}'%3E%3Crect width='${w}' height='${h}' fill='${isDark ? '%23374151' : '%23f3f4f6'}'/%3E%3C/svg%3E`;
     }
-    
+
     if (placeholder === 'shimmer') {
       return `data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 ${w} ${h}'%3E%3Cdefs%3E%3ClinearGradient id='shimmer' x1='0%25' y1='0%25' x2='100%25' y2='0%25'%3E%3Cstop offset='0%25' style='stop-color:${isDark ? '%23374151' : '%23f3f4f6'};stop-opacity:1' /%3E%3Cstop offset='50%25' style='stop-color:${isDark ? '%234b5563' : '%23e5e7eb'};stop-opacity:1' /%3E%3Cstop offset='100%25' style='stop-color:${isDark ? '%23374151' : '%23f3f4f6'};stop-opacity:1' /%3E%3C/stop%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='${w}' height='${h}' fill='url(%23shimmer)'/%3E%3CanimateTransform attributeName='transform' type='translate' values='-${w} 0;${w} 0' dur='1.5s' repeatCount='indefinite'/%3E%3C/svg%3E`;
     }
-    
+
     return `data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 ${w} ${h}'%3E%3Crect width='${w}' height='${h}' fill='${isDark ? '%23374151' : '%23f3f4f6'}'/%3E%3C/svg%3E`;
   };
 
@@ -74,34 +79,39 @@ export default function OptimizedImage({
   const generateSrcSet = (originalSrc: string, baseWidth: number, baseHeight: number) => {
     const breakpoints = [320, 640, 768, 1024, 1280, 1536];
     const formats = ['webp', 'avif'];
-    
+
     let srcSet = '';
-    
+
     formats.forEach((format, formatIndex) => {
       if (formatIndex > 0) srcSet += ', ';
-      
+
       breakpoints.forEach((breakpoint, index) => {
         if (index > 0) srcSet += ', ';
-        const optimizedSrc = generateOptimizedSrc(originalSrc, breakpoint, Math.round((breakpoint / baseWidth) * baseHeight), format as 'webp' | 'avif' | 'jpeg');
+        const optimizedSrc = generateOptimizedSrc(
+          originalSrc,
+          breakpoint,
+          Math.round((breakpoint / baseWidth) * baseHeight),
+          format as 'webp' | 'avif' | 'jpeg'
+        );
         srcSet += `${optimizedSrc} ${breakpoint}w`;
       });
     });
-    
+
     return srcSet;
   };
 
   useEffect(() => {
     // Set initial placeholder
     setPlaceholderSrc(generatePlaceholder(width, height));
-    
+
     // Generate optimized image sources
     const webpSrc = generateOptimizedSrc(src, width, height, 'webp');
     const avifSrc = generateOptimizedSrc(src, width, height, 'avif');
     const jpegSrc = generateOptimizedSrc(src, width, height, 'jpeg');
-    
+
     // Set the primary source (WebP for modern browsers)
     setImageSrc(webpSrc);
-    
+
     // Set up intersection observer for lazy loading
     if (!priority && imgRef.current) {
       observerRef.current = new IntersectionObserver(
@@ -117,16 +127,16 @@ export default function OptimizedImage({
         },
         {
           rootMargin: '50px 0px',
-          threshold: 0.1
+          threshold: 0.1,
         }
       );
-      
+
       observerRef.current.observe(imgRef.current);
     } else if (priority) {
       // Load immediately for priority images
       setImageSrc(webpSrc);
     }
-    
+
     return () => {
       if (observerRef.current) {
         observerRef.current.disconnect();
@@ -200,8 +210,18 @@ export default function OptimizedImage({
             className="absolute inset-0 bg-gray-100 dark:bg-gray-800 flex items-center justify-center"
           >
             <div className="text-center text-gray-500 dark:text-gray-400">
-              <svg className="w-12 h-12 mx-auto mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+              <svg
+                className="w-12 h-12 mx-auto mb-2"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"
+                />
               </svg>
               <p className="text-sm">Image unavailable</p>
             </div>
@@ -237,7 +257,9 @@ export default function OptimizedImage({
             <div className="w-full p-4 text-white opacity-0 hover:opacity-100 transition-opacity duration-300">
               <div className="bg-black bg-opacity-50 rounded-lg p-2 text-xs">
                 <p className="font-medium">{alt}</p>
-                <p className="text-gray-300">{width} × {height}</p>
+                <p className="text-gray-300">
+                  {width} × {height}
+                </p>
               </div>
             </div>
           </motion.div>

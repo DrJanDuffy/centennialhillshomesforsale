@@ -1,6 +1,11 @@
 'use client';
 
-import { HomeIcon, MagnifyingGlassIcon, MapPinIcon, ArrowLeftIcon } from '@heroicons/react/24/outline';
+import {
+  ArrowLeftIcon,
+  HomeIcon,
+  MagnifyingGlassIcon,
+  MapPinIcon,
+} from '@heroicons/react/24/outline';
 import { motion } from 'framer-motion';
 import Link from 'next/link';
 import { useTheme } from '../contexts/ThemeContext';
@@ -14,22 +19,22 @@ export default function Custom404() {
       description: 'Explore our current listings',
       icon: HomeIcon,
       href: '/listings',
-      color: 'from-blue-500 to-blue-600'
+      color: 'from-blue-500 to-blue-600',
     },
     {
       title: 'Search Properties',
       description: 'Find your dream home',
       icon: MagnifyingGlassIcon,
       href: '/properties',
-      color: 'from-green-500 to-green-600'
+      color: 'from-green-500 to-green-600',
     },
     {
       title: 'Neighborhoods',
       description: 'Discover local areas',
       icon: MapPinIcon,
       href: '/neighborhoods',
-      color: 'from-purple-500 to-purple-600'
-    }
+      color: 'from-purple-500 to-purple-600',
+    },
   ];
 
   const containerVariants = {
@@ -37,9 +42,9 @@ export default function Custom404() {
     visible: {
       opacity: 1,
       transition: {
-        staggerChildren: 0.1
-      }
-    }
+        staggerChildren: 0.1,
+      },
+    },
   };
 
   const itemVariants = {
@@ -49,9 +54,9 @@ export default function Custom404() {
       y: 0,
       transition: {
         duration: 0.6,
-        ease: "easeOut"
-      }
-    }
+        ease: 'easeOut',
+      },
+    },
   };
 
   return (
@@ -61,21 +66,21 @@ export default function Custom404() {
         <motion.div
           initial={{ scale: 0, rotate: -180 }}
           animate={{ scale: 1, rotate: 0 }}
-          transition={{ duration: 0.8, type: "spring", stiffness: 100 }}
+          transition={{ duration: 0.8, type: 'spring', stiffness: 100 }}
           className="relative mb-8"
         >
           <div className="text-9xl md:text-[12rem] font-black text-transparent bg-clip-text bg-gradient-to-r from-blue-600 via-purple-600 to-indigo-600 dark:from-blue-400 dark:via-purple-400 dark:to-indigo-400">
             404
           </div>
           <motion.div
-            animate={{ 
+            animate={{
               scale: [1, 1.1, 1],
-              rotate: [0, 5, -5, 0]
+              rotate: [0, 5, -5, 0],
             }}
-            transition={{ 
+            transition={{
               duration: 2,
               repeat: Infinity,
-              repeatType: "reverse"
+              repeatType: 'reverse',
             }}
             className="absolute -top-4 -right-4 w-8 h-8 bg-red-500 rounded-full flex items-center justify-center"
           >
@@ -90,19 +95,19 @@ export default function Custom404() {
           animate="visible"
           className="mb-12"
         >
-          <motion.h1 
+          <motion.h1
             variants={itemVariants}
             className="text-4xl md:text-6xl font-bold text-gray-900 dark:text-white mb-6"
           >
             Oops! Page Not Found
           </motion.h1>
-          
-          <motion.p 
+
+          <motion.p
             variants={itemVariants}
             className="text-xl text-gray-600 dark:text-gray-400 max-w-2xl mx-auto mb-8"
           >
-            The page you're looking for seems to have wandered off into the Las Vegas desert. 
-            Don't worry though - we've got plenty of amazing homes waiting for you!
+            The page you're looking for seems to have wandered off into the Las Vegas desert. Don't
+            worry though - we've got plenty of amazing homes waiting for you!
           </motion.p>
 
           {/* Back Button */}
@@ -124,13 +129,13 @@ export default function Custom404() {
           animate="visible"
           className="mb-12"
         >
-          <motion.h2 
+          <motion.h2
             variants={itemVariants}
             className="text-2xl font-semibold text-gray-900 dark:text-white mb-8"
           >
             Here's Where You Can Go Instead
           </motion.h2>
-          
+
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {helpfulLinks.map((link, index) => {
               const Icon = link.icon;
@@ -145,15 +150,15 @@ export default function Custom404() {
                     href={link.href}
                     className="block p-6 bg-white dark:bg-gray-800 rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 border border-gray-100 dark:border-gray-700"
                   >
-                    <div className={`w-16 h-16 bg-gradient-to-r ${link.color} rounded-2xl flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform duration-300`}>
+                    <div
+                      className={`w-16 h-16 bg-gradient-to-r ${link.color} rounded-2xl flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform duration-300`}
+                    >
                       <Icon className="w-8 h-8 text-white" />
                     </div>
                     <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-2">
                       {link.title}
                     </h3>
-                    <p className="text-gray-600 dark:text-gray-400">
-                      {link.description}
-                    </p>
+                    <p className="text-gray-600 dark:text-gray-400">{link.description}</p>
                   </Link>
                 </motion.div>
               );
@@ -168,62 +173,50 @@ export default function Custom404() {
           animate="visible"
           className="bg-white dark:bg-gray-800 rounded-2xl p-8 shadow-xl border border-gray-100 dark:border-gray-700"
         >
-          <motion.h3 
+          <motion.h3
             variants={itemVariants}
             className="text-xl font-semibold text-gray-900 dark:text-white mb-6"
           >
             🏠 Fun Real Estate Facts
           </motion.h3>
-          
+
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 text-left">
-            <motion.div 
-              variants={itemVariants}
-              className="flex items-start space-x-3"
-            >
+            <motion.div variants={itemVariants} className="flex items-start space-x-3">
               <div className="w-3 h-3 bg-blue-500 rounded-full mt-2 flex-shrink-0"></div>
               <div>
                 <p className="text-gray-700 dark:text-gray-300">
-                  <strong>Centennial Hills</strong> is one of Las Vegas's fastest-growing areas, 
+                  <strong>Centennial Hills</strong> is one of Las Vegas's fastest-growing areas,
                   with new homes being built every month.
                 </p>
               </div>
             </motion.div>
-            
-            <motion.div 
-              variants={itemVariants}
-              className="flex items-start space-x-3"
-            >
+
+            <motion.div variants={itemVariants} className="flex items-start space-x-3">
               <div className="w-3 h-3 bg-green-500 rounded-full mt-2 flex-shrink-0"></div>
               <div>
                 <p className="text-gray-700 dark:text-gray-300">
-                  The average home in <strong>Providence</strong> sells within 15 days, 
-                  making it one of the most competitive markets.
+                  The average home in <strong>Providence</strong> sells within 15 days, making it
+                  one of the most competitive markets.
                 </p>
               </div>
             </motion.div>
-            
-            <motion.div 
-              variants={itemVariants}
-              className="flex items-start space-x-3"
-            >
+
+            <motion.div variants={itemVariants} className="flex items-start space-x-3">
               <div className="w-3 h-3 bg-purple-500 rounded-full mt-2 flex-shrink-0"></div>
               <div>
                 <p className="text-gray-700 dark:text-gray-300">
-                  <strong>Skye Canyon</strong> offers some of the best mountain views 
-                  in the entire Las Vegas valley.
+                  <strong>Skye Canyon</strong> offers some of the best mountain views in the entire
+                  Las Vegas valley.
                 </p>
               </div>
             </motion.div>
-            
-            <motion.div 
-              variants={itemVariants}
-              className="flex items-start space-x-3"
-            >
+
+            <motion.div variants={itemVariants} className="flex items-start space-x-3">
               <div className="w-3 h-3 bg-orange-500 rounded-full mt-2 flex-shrink-0"></div>
               <div>
                 <p className="text-gray-700 dark:text-gray-300">
-                  Dr. Jan Duffy has helped over <strong>500 families</strong> find their 
-                  dream homes in these neighborhoods.
+                  Dr. Jan Duffy has helped over <strong>500 families</strong> find their dream homes
+                  in these neighborhoods.
                 </p>
               </div>
             </motion.div>
