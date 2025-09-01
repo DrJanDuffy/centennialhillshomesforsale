@@ -1,160 +1,120 @@
+#!/usr/bin/env node
+
 /**
- * Fix Redirect Loop
- * This script removes problematic Cloudflare page rules that are causing redirect loops
+ * Redirect Loop Fix Script
+ * This script helps diagnose and fix redirect loop issues
  */
 
-const https = require('https');
+const dns = require('node:dns').promises;
+const https = require('node:https');
+const http = require('node:http');
 
-// Your Cloudflare credentials
-const API_KEY = '006a036208c6527a48175ccf9393d794509e3';
-const EMAIL = 'drduffy@bhhsnv.com';
-const ZONE_ID = 'ee98107e4df3984ca1593206046598da';
+const DOMAIN = 'centennialhillshomesforsale.com';
+const WWW_DOMAIN = `www.${DOMAIN}`;
 
-async function fixRedirectLoop() {
-  console.log('🔧 Fixing Redirect Loop Issue...\n');
+async function checkDNS() {
+  console.log('🔍 Checking DNS configuration...\n');
 
   try {
-    // 1. Get all current page rules
-    console.log('1️⃣ Getting current page rules...');
-    const pageRulesResponse = await makeRequest(`/client/v4/zones/${ZONE_ID}/pagerules`, 'GET');
+    // Check A records
+    const aRecords = await dns.resolve4(DOMAIN);
+    console.log(`✅ A records for ${DOMAIN}:`, aRecords);
 
-    if (pageRulesResponse.status === 200 && pageRulesResponse.data.success) {
-      const pageRules = pageRulesResponse.data.result;
-      console.log(`   📋 Found ${pageRules.length} page rules`);
+    const wwwARecords = await dns.resolve4(WWW_DOMAIN);
+    console.log(`✅ A records for ${WWW_DOMAIN}:`, wwwARecords);
 
-      // 2. Remove all page rules that could cause redirect loops
-      console.log('\n2️⃣ Removing problematic page rules...');
-      for (const rule of pageRules) {
-        try {
-          console.log(
-            `   🗑️ Removing rule: ${rule.target} -> ${rule.constraint?.value || 'unknown'}`
-          );
-          const deleteResponse = await makeRequest(
-            `/client/v4/zones/${ZONE_ID}/pagerules/${rule.id}`,
-            'DELETE'
-          );
-
-          if (deleteResponse.status === 200 && deleteResponse.data.success) {
-            console.log(`   ✅ Rule removed successfully`);
-          } else {
-            console.log(`   ⚠️ Rule removal failed: ${deleteResponse.status}`);
-          }
-        } catch (error) {
-          console.log(`   ⚠️ Error removing rule: ${error.message}`);
-        }
-      }
+    // Check CNAME records
+    try {
+      const cnameRecords = await dns.resolveCname(WWW_DOMAIN);
+      console.log(`✅ CNAME records for ${WWW_DOMAIN}:`, cnameRecords);
+    } catch (_error) {
+      console.log(`ℹ️  No CNAME records for ${WWW_DOMAIN}`);
     }
-
-    // 3. Clear Cloudflare cache to remove any cached redirects
-    console.log('\n3️⃣ Clearing Cloudflare cache...');
-    const purgeResponse = await makeRequest(`/client/v4/zones/${ZONE_ID}/purge_cache`, 'POST', {
-      purge_everything: true,
-    });
-
-    if (purgeResponse.status === 200 && purgeResponse.data.success) {
-      console.log('   ✅ Cache cleared successfully');
-    } else {
-      console.log('   ⚠️ Cache clear failed');
-    }
-
-    // 4. Set basic, safe settings
-    console.log('\n4️⃣ Setting safe, basic settings...');
-    await setSafeSettings();
-
-    console.log('\n🎉 Redirect loop fix completed!');
-    console.log('\n📋 Next steps:');
-    console.log('   - Wait 2-3 minutes for changes to propagate');
-    console.log('   - Clear your browser cookies and cache');
-    console.log('   - Try accessing your site again');
-    console.log('   - If still having issues, check DNS records in Cloudflare');
   } catch (error) {
-    console.error('❌ Error fixing redirect loop:', error.message);
+    console.error('❌ DNS resolution error:', error.message);
   }
 }
 
-async function setSafeSettings() {
-  const safeSettings = [
-    {
-      id: 'ssl',
-      value: 'full',
-    },
-    {
-      id: 'cache_level',
-      value: 'standard',
-    },
-    {
-      id: 'browser_cache_ttl',
-      value: 14400,
-    },
-    {
-      id: 'security_level',
-      value: 'medium',
-    },
-    {
-      id: 'min_tls_version',
-      value: '1.2',
-    },
+async function testRedirects() {
+  console.log('\n🔍 Testing redirects...\n');
+
+  const testUrls = [
+    `https://${DOMAIN}`,
+    `https://${WWW_DOMAIN}`,
+    `http://${DOMAIN}`,
+    `http://${WWW_DOMAIN}`,
   ];
 
-  for (const setting of safeSettings) {
+  for (const url of testUrls) {
     try {
-      const response = await makeRequest(
-        `/client/v4/zones/${ZONE_ID}/settings/${setting.id}`,
-        'PATCH',
-        {
-          value: setting.value,
-        }
-      );
-      if (response.status === 200 && response.data.success) {
-        console.log(`   ✅ Safe setting applied: ${setting.id} = ${setting.value}`);
-      }
+      await new Promise((resolve, _reject) => {
+        const client = url.startsWith('https') ? https : http;
+        const req = client.get(
+          url,
+          {
+            timeout: 10000,
+            followRedirect: false,
+          },
+          (res) => {
+            console.log(`${url}: ${res.statusCode} ${res.statusMessage}`);
+            if (res.headers.location) {
+              console.log(`  → Redirects to: ${res.headers.location}`);
+            }
+            resolve();
+          }
+        );
+
+        req.on('error', (error) => {
+          console.log(`${url}: ❌ Error - ${error.message}`);
+          resolve();
+        });
+
+        req.on('timeout', () => {
+          console.log(`${url}: ⏰ Timeout`);
+          req.destroy();
+          resolve();
+        });
+      });
     } catch (error) {
-      console.log(`   ⚠️ Setting update skipped: ${error.message}`);
+      console.log(`${url}: ❌ Failed - ${error.message}`);
     }
   }
 }
 
-function makeRequest(path, method = 'GET', data = null) {
-  return new Promise((resolve, reject) => {
-    const options = {
-      hostname: 'api.cloudflare.com',
-      path: path,
-      method: method,
-      headers: {
-        'X-Auth-Key': API_KEY,
-        'X-Auth-Email': EMAIL,
-        'Content-Type': 'application/json',
-      },
-    };
+function provideRecommendations() {
+  console.log('\n📋 Recommendations to fix redirect loops:\n');
 
-    const req = https.request(options, (res) => {
-      let responseData = '';
+  console.log('1. ✅ REMOVED www redirect from middleware.js');
+  console.log('2. ✅ ADDED www redirect rule to vercel.json');
+  console.log('3. 🔄 Deploy changes to Vercel');
+  console.log('4. 🧹 Clear browser cache and cookies');
+  console.log('5. 🔍 Test with incognito/private browsing');
 
-      res.on('data', (chunk) => {
-        responseData += chunk;
-      });
+  console.log('\n📝 Additional steps if issue persists:');
+  console.log('- Check Vercel dashboard for domain configuration');
+  console.log('- Verify DNS settings in your domain registrar');
+  console.log('- Ensure no conflicting redirects in Cloudflare (if using)');
+  console.log('- Check for any CDN redirect rules');
 
-      res.on('end', () => {
-        try {
-          const response = JSON.parse(responseData);
-          resolve({ status: res.statusCode, data: response });
-        } catch (error) {
-          resolve({ status: res.statusCode, data: { success: false, error: error.message } });
-        }
-      });
-    });
-
-    req.on('error', (error) => {
-      reject(new Error(`Request failed: ${error.message}`));
-    });
-
-    if (data) {
-      req.write(JSON.stringify(data));
-    }
-
-    req.end();
-  });
+  console.log('\n🚀 To deploy the fix:');
+  console.log('git add .');
+  console.log('git commit -m "Fix redirect loop by removing www redirect from middleware"');
+  console.log('git push origin main');
 }
 
-// Run the fix
-fixRedirectLoop();
+async function main() {
+  console.log('🔄 Redirect Loop Diagnostic Tool\n');
+  console.log('Domain:', DOMAIN);
+  console.log('WWW Domain:', WWW_DOMAIN);
+  console.log('='.repeat(50));
+
+  await checkDNS();
+  await testRedirects();
+  provideRecommendations();
+}
+
+if (require.main === module) {
+  main().catch(console.error);
+}
+
+module.exports = { checkDNS, testRedirects, provideRecommendations };

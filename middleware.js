@@ -68,14 +68,9 @@ export function middleware(request) {
     return NextResponse.redirect(httpsUrl, 301); // Permanent redirect
   }
 
-  // Handle www to non-www redirects
-  if (hostname.startsWith('www.')) {
-    const nonWwwHostname = hostname.replace(/^www\./, '');
-    const nonWwwUrl = new URL(request.url);
-    nonWwwUrl.hostname = nonWwwHostname;
-    console.log(`Redirecting www to non-www: ${request.url} → ${nonWwwUrl.toString()}`);
-    return NextResponse.redirect(nonWwwUrl, 301); // Permanent redirect
-  }
+  // REMOVED: www to non-www redirect logic to prevent redirect loops
+  // Your domain should be configured to use www as the primary domain
+  // If you need to redirect www to non-www, configure this at the DNS/CDN level instead
 
   // Handle common typos and variations
   if (redirectMap[pathname]) {
