@@ -1,21 +1,50 @@
+import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from '@/components/ui/card';
+import { Checkbox } from '@/components/ui/checkbox';
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from '@/components/ui/dialog';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
-import { Badge } from '@/components/ui/badge';
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/select';
 import { Separator } from '@/components/ui/separator';
+import {
+  Sheet,
+  SheetContent,
+  SheetDescription,
+  SheetHeader,
+  SheetTitle,
+  SheetTrigger,
+} from '@/components/ui/sheet';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { Checkbox } from '@/components/ui/checkbox';
-import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
-import { Sheet, SheetContent, SheetDescription, SheetHeader, SheetTitle, SheetTrigger } from '@/components/ui/sheet';
 
 export default function ShadcnTest() {
   return (
     <div className="container mx-auto p-8 space-y-8">
       <div className="text-center">
         <h1 className="text-4xl font-bold mb-4">shadcn/ui Real Estate Components</h1>
-        <p className="text-lg text-muted-foreground">Complete component library for your real estate website</p>
+        <p className="text-lg text-muted-foreground">
+          Complete component library for your real estate website
+        </p>
       </div>
 
       <Separator />
@@ -120,8 +149,9 @@ export default function ShadcnTest() {
                 <div className="space-y-4">
                   <div className="aspect-video bg-gradient-to-br from-blue-500 to-purple-600 rounded-lg"></div>
                   <p className="text-sm text-muted-foreground">
-                    This beautiful home features an open floor plan, gourmet kitchen, and master suite with 
-                    private balcony. Located in the prestigious Centennial Hills neighborhood.
+                    This beautiful home features an open floor plan, gourmet kitchen, and master
+                    suite with private balcony. Located in the prestigious Centennial Hills
+                    neighborhood.
                   </p>
                 </div>
               </DialogContent>
@@ -163,7 +193,9 @@ export default function ShadcnTest() {
             </div>
           </CardContent>
           <CardFooter>
-            <Button variant="outline" className="w-full">Contact Agent</Button>
+            <Button variant="outline" className="w-full">
+              Contact Agent
+            </Button>
           </CardFooter>
         </Card>
 
@@ -202,7 +234,9 @@ export default function ShadcnTest() {
             </div>
           </CardContent>
           <CardFooter>
-            <Button variant="secondary" className="w-full">Schedule Tour</Button>
+            <Button variant="secondary" className="w-full">
+              Schedule Tour
+            </Button>
           </CardFooter>
         </Card>
       </div>
@@ -223,9 +257,9 @@ export default function ShadcnTest() {
             </TabsList>
             <TabsContent value="overview" className="space-y-4">
               <p className="text-sm text-muted-foreground">
-                This stunning luxury home in Centennial Hills offers the perfect blend of comfort and elegance. 
-                With 4 bedrooms, 3.5 bathrooms, and 2,850 square feet of living space, this property provides 
-                ample room for families of all sizes.
+                This stunning luxury home in Centennial Hills offers the perfect blend of comfort
+                and elegance. With 4 bedrooms, 3.5 bathrooms, and 2,850 square feet of living space,
+                this property provides ample room for families of all sizes.
               </p>
               <div className="grid grid-cols-2 gap-4">
                 <div className="space-y-2">
@@ -250,7 +284,7 @@ export default function ShadcnTest() {
             </TabsContent>
             <TabsContent value="neighborhood" className="space-y-4">
               <p className="text-sm text-muted-foreground">
-                Centennial Hills is one of Las Vegas's most desirable master-planned communities, 
+                Centennial Hills is one of Las Vegas's most desirable master-planned communities,
                 offering excellent schools, shopping, and recreational facilities.
               </p>
             </TabsContent>
@@ -284,16 +318,24 @@ export default function ShadcnTest() {
           <SheetContent>
             <SheetHeader>
               <SheetTitle>Navigation Menu</SheetTitle>
-              <SheetDescription>
-                Browse our real estate services and listings
-              </SheetDescription>
+              <SheetDescription>Browse our real estate services and listings</SheetDescription>
             </SheetHeader>
             <div className="grid gap-4 py-4">
-              <Button variant="ghost" className="justify-start">Properties</Button>
-              <Button variant="ghost" className="justify-start">Neighborhoods</Button>
-              <Button variant="ghost" className="justify-start">Market Data</Button>
-              <Button variant="ghost" className="justify-start">About</Button>
-              <Button variant="ghost" className="justify-start">Contact</Button>
+              <Button variant="ghost" className="justify-start">
+                Properties
+              </Button>
+              <Button variant="ghost" className="justify-start">
+                Neighborhoods
+              </Button>
+              <Button variant="ghost" className="justify-start">
+                Market Data
+              </Button>
+              <Button variant="ghost" className="justify-start">
+                About
+              </Button>
+              <Button variant="ghost" className="justify-start">
+                Contact
+              </Button>
             </div>
           </SheetContent>
         </Sheet>

@@ -1,0 +1,69 @@
+Here's a highly detailed and specific prompt designed to generate a luxury real estate hero image of a modern home in Centennial Hills, Las Vegas, with the Spring Mountains backdrop, optimized for DALL-E 3, Midjourney, or similar AI image generators:
+
+---
+
+## Luxury Real Estate Hero Image Prompt: Centennial Hills Modern Oasis with Spring Mountains Vista
+
+**Concept:** A breathtaking, aspirational hero shot of an ultra-modern luxury home in Centennial Hills, Las Vegas, showcasing its seamless integration with the desert landscape and the majestic Spring Mountains as a dramatic backdrop. The image should evoke feelings of exclusivity, tranquility, and sophisticated desert living.
+
+**Overall Artistic Style:** Hyperrealistic, cinematic, architectural photography, with a touch of aspirational luxury and a warm, inviting glow. Emphasize clean lines, natural light, and the interplay of textures.
+
+**Time of Day:** Golden hour, late afternoon (approximately 1-1.5 hours before sunset). This will provide warm, raking light that highlights architectural details and casts long, soft shadows, creating depth and a sense of serenity. The sky should be a gradient of soft oranges, pinks, and blues.
+
+**Main Subject (The House):**
+
+*   **Architectural Style:** Ultra-modern, minimalist, clean lines, flat roofs, cantilevered sections, and large expanses of glass. Think concrete, steel, natural wood (darker tones like walnut or teak), and stone (light, natural tones like travertine or a refined limestone).
+*   **Color Palette:** Predominantly neutral and earthy tones – warm grays, charcoal, off-white, natural concrete, dark wood accents. Pops of subtle color can come from landscaping or interior lighting.
+*   **Lighting:**
+    *   **Exterior:** Strategically placed warm LED strip lighting under eaves, along pathways, and subtly uplighting architectural features. These lights should be on, creating a soft, inviting glow against the twilight sky.
+    *   **Interior (Visible):** Soft, warm, recessed lighting and perhaps a statement pendant light or chandelier visible through the large windows. The interior should feel occupied but not overly cluttered – perhaps a glimpse of a comfortable, minimalist living space.
+*   **Details:**
+    *   **Roof:** Flat, dark-colored, with a slight overhang.
+    *   **Windows:** Floor-to-ceiling, expansive, low-emissivity (low-E) glass, reflecting the sky and mountains subtly. Minimal frames.
+    *   **Entryway:** Grand, perhaps a large pivot door in dark wood or steel, subtly lit.
+    *   **Outdoor Living Spaces:**
+        *   **Infinity Pool:** A sleek, dark-tiled infinity-edge pool dominating the foreground or midground, reflecting the sky and mountains. The water should be perfectly still, a deep azure or black.
+        *   **Decking:** Expansive outdoor living spaces with large format pavers (light concrete or stone) or dark composite decking.
+        *   **Seating Area:** Minimalist outdoor furniture (e.g., low-slung, modern sectional in a neutral tone like charcoal or light gray fabric) with a fire pit (subtly lit with a warm flame) or a modern linear fireplace.
+        *   **Landscaping:** Drought-tolerant, desert-adapted plants (agaves, cacti, succulents, yucca, native grasses) artfully arranged in minimalist concrete planters or integrated into the natural desert stone landscaping. NO lush green lawns.
+
+**Setting (Centennial Hills, Las Vegas):**
+
+*   **Terrain:** Gently sloping desert terrain, with reddish-brown earth and natural rock outcroppings.
+*   **Vegetation:** Sparse, native desert flora – creosote bushes, Joshua trees (if appropriate for the specific elevation, but generally keep them subtle), low-lying desert shrubs.
+*   **Sense of Space:** Open, expansive, and private. The house should feel like it's nestled into the landscape, not imposed upon it.
+
+**Background (Spring Mountains):**
+
+*   **Prominence:** The Spring Mountains (e.g., Mt. Charleston, Red Rock Canyon peaks) should be a dominant feature in the background, majestic and slightly hazy with atmospheric perspective.
+*   **Lighting:** The peaks should be illuminated by the warm, setting sun, showcasing their rugged textures and varying shades of rock (reds, browns, grays). Snow-capped peaks are *not* desired for this specific prompt, unless specified for a winter scene. Assume clear, dry desert air.
+*   **Detail:** Enough detail to be recognizable but not so sharp that they compete with the house.
+
+**Composition & Perspective:**
+
+*   **Camera Angle:** Low eye-level or slightly elevated (drone-like perspective), looking towards the house and the mountains. This angle emphasizes the grandeur of both the architecture and the landscape.
+*   **Rule of Thirds:** Position the house and key elements (pool, mountains) strategically within the frame to create a balanced and dynamic composition.
+*   **Leading Lines:** Use the pool edge, pathways, or architectural lines to subtly draw the viewer's eye towards the house and the mountains.
+*   **Depth:** Utilize foreground elements (desert plants, pool edge) to create a sense of depth and scale.
+*   **Framing:** The open desert sky and the mountains should frame the house beautifully.
+
+**Atmosphere & Mood:**
+
+*   **Serene and Tranquil:** A sense of peaceful seclusion.
+*   **Luxurious and Aspirational:** High-end, exclusive living.
+*   **Warm and Inviting:** Despite the modern aesthetic, the lighting should make it feel like a comfortable home.
+*   **Connection to Nature:** Emphasize the seamless blend of indoor/outdoor living.
+
+**Specific DALL-E 3 / Midjourney Keywords & Modifiers:**
+
+*   `photorealistic`, `ultra-high definition`, `8K`, `cinematic lighting`, `architectural photography`, `award-winning photograph`, `epic scale`, `golden hour`, `twilight glow`, `razor sharp focus`, `bokeh background (subtle for mountains)`, `volumetric lighting (for interior)`, `hyper-detailed`, `texture rich`, `HDR`, `vivid colors`, `masterpiece`, `intricate details`, `no people`, `no vehicles`, `clean lines`, `minimalist design`, `desert modernism`, `luxury real estate`, `Centennial Hills Las Vegas`, `Spring Mountains backdrop`, `infinity pool`, `fire pit`, `desert landscaping`, `concrete and glass house`, `flat roof`, `cantilevered architecture`.
+
+**Negative Prompts (for Midjourney/DALL-E 3):**
+
+*   `blurry`, `grainy`, `distorted`, `ugly`, `deformed`, `cartoon`, `illustration`, `painting`, `drawing`, `sketch`, `low resolution`, `muddy colors`, `overly green lawn`, `traditional house`, `cluttered`, `overly bright`, `stormy sky`, `daytime (if not specific)`, `winter snow (on mountains, unless intended)`.
+
+---
+
+**Example Combined Prompt (for direct use):**
+
+"Ultra-photorealistic, 8K architectural photograph of an ultra-modern luxury home in Centennial Hills, Las Vegas, Nevada. The house features clean lines, flat roofs, expansive floor-to-ceiling glass windows, and a minimalist design using warm gray concrete, dark wood accents, and light natural stone. An infinity-edge pool with dark tiling perfectly reflects the golden hour sky and the majestic Spring Mountains in the background. Strategically placed warm LED lighting subtly illuminates the exterior and interior, creating an inviting glow. An elegant outdoor living area with a modern fire pit and low-slung furniture is visible on a large paver patio. The surrounding landscape consists of artfully arranged, drought-tolerant desert plants like agaves and yucca, integrated into the natural reddish-brown desert terrain. The Spring Mountains are prominent in the distant background, illuminated by the setting sun, showcasing their rugged textures against a gradient sky of soft oranges, pinks, and blues. Cinematic lighting, razor-sharp focus, epic scale, tranquil, luxurious, aspirational, no people, no vehicles, award-winning photograph, masterpiece."

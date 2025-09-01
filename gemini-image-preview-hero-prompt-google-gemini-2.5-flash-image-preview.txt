@@ -1,0 +1,50 @@
+Here's a detailed prompt for generating a luxury real estate hero image of a modern home in Centennial Hills, Las Vegas, with the Spring Mountains backdrop, optimized for AI image generation tools like DALL-E 3 or Midjourney:
+
+---
+
+**Prompt:**
+
+A breathtaking, photorealistic, wide-angle hero shot of a modern luxury home nestled in the Centennial Hills area of Las Vegas. The house is a masterpiece of contemporary architecture, featuring clean lines, expansive floor-to-ceiling glass walls, and a sophisticated material palette of concrete, dark wood accents (like Ipe or teak), and natural stone (such as large format travertine or slate).
+
+**House Details:**
+*   **Architecture:** Multi-level, emphasizing horizontal lines with cantilevered elements and deep overhangs for shade. Integrated smart lighting subtly illuminates architectural features.
+*   **Color Palette:** Primarily cool grays, warm charcoal, and natural wood tones, contrasted with vibrant green landscaping.
+*   **Lighting:** Warm, inviting interior lighting glows from within, visible through the large windows, suggesting comfort and elegance.
+*   **Outdoor Features:**
+    *   An infinity-edge swimming pool in the foreground, reflecting the blue sky and the distant mountains. The water should be a pristine turquoise.
+    *   A meticulously manicured modern desert landscape surrounds the home, incorporating drought-tolerant plants like agave, cacti (e.g., saguaro, barrel cactus), and ornamental grasses, arranged in geometric patterns.
+    *   A sleek, minimalist fire pit area with comfortable outdoor lounge seating (e.g., low-slung modern sofas in weather-resistant fabric) positioned to enjoy the view.
+    *   Subtle, integrated landscape lighting (downlights, path lights) that enhances the architectural features and pathways without being distracting.
+
+**Setting & Environment:**
+*   **Location:** Centennial Hills, Las Vegas. The immediate surroundings should reflect the high-desert environment – sparse, well-maintained natural desert flora beyond the immediate landscaping, and subtle, winding paved driveways.
+*   **Background:** The majestic, rugged peaks of the Spring Mountains (e.g., Mount Charleston, Mummy Mountain) dominate the distant background, their rocky contours detailed and slightly hazy, suggesting depth and distance. The mountains should be bathed in the warm, golden light of either dawn or dusk.
+*   **Sky:** A dramatic, yet clear sky.
+    *   **Option 1 (Golden Hour - Dusk):** Soft, warm hues of orange, pink, and purple blending into deep blue overhead. A few wispy cirrus clouds catching the last rays of sunlight.
+    *   **Option 2 (Golden Hour - Dawn):** Similar warm hues, with a sense of emerging light and crispness.
+    *   **Noon (Avoid):** Avoid harsh midday sun that creates strong shadows and flat lighting.
+
+**Lighting & Atmosphere:**
+*   **Time of Day:** Golden Hour (either sunrise or sunset). This is crucial for optimal lighting.
+*   **Light Quality:** Soft, directional, and volumetric. The sunlight should cast long, elegant shadows that define the architectural forms and landscape elements. Lens flare should be minimal, if present, it should be subtle and artistic.
+*   **Atmosphere:** Serene, luxurious, aspirational, and exclusive. The air should appear crisp and clear, allowing for sharp detail in the foreground and a gentle atmospheric perspective in the background.
+
+**Composition & Perspective:**
+*   **Angle:** Slightly elevated, wide-angle shot, as if taken from a drone or a nearby hillside, showcasing the entire property, the pool, and the stunning mountain backdrop.
+*   **Rule of Thirds:** The house should occupy a strong position, perhaps slightly off-center, with the pool leading the eye into the scene. The horizon line (where the desert meets the mountains) should align with a horizontal third line.
+*   **Depth of Field:** Deep depth of field, ensuring both the foreground elements (pool, landscaping) and the distant mountains are in sharp focus.
+*   **Focal Length:** Wide-angle lens (e.g., 16mm-24mm equivalent) to capture the expansive view.
+*   **Camera Settings (Implied):** Low ISO for minimal noise, moderate aperture (e.g., f/8-f/11) for sharpness throughout the scene, fast shutter speed to capture detail.
+
+**Style & Mood:**
+*   **Photorealistic:** Highly detailed, true-to-life rendering, indistinguishable from a professional photograph.
+*   **Cinematic:** A slight cinematic feel, with rich colors and dynamic lighting.
+*   **High-End Magazine Quality:** Evoking images found in Architectural Digest, Dwell, or luxury real estate publications.
+*   **No people or vehicles visible.** The focus is solely on the architecture and its integration with the environment.
+
+**Keywords to emphasize for AI:**
+*   `photorealistic`, `ultra-high definition`, `8K`, `cinematic`, `architectural photography`, `luxury real estate`, `modern architecture`, `infinity pool`, `desert landscape`, `Spring Mountains`, `Centennial Hills Las Vegas`, `golden hour`, `dramatic lighting`, `clean lines`, `concrete`, `wood accents`, `glass walls`, `serene`, `aspirational`, `wide angle`, `drone shot`.
+
+---
+
+This prompt is designed to provide enough detail for the AI to understand the desired aesthetic, composition, and specific elements, leading to a high-quality hero image.
