@@ -1,6 +1,11 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
 import { bingAPI } from '../../../utils/bing';
 
+interface SearchOptions {
+  count: number;
+  offset: number;
+}
+
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   // Only allow GET requests
   if (req.method !== 'GET') {
@@ -18,29 +23,32 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     }
 
     let searchQuery = '';
-    let searchOptions: any = {};
+    let searchOptions: SearchOptions = {
+      count: 10,
+      offset: 0,
+    };
 
     // Handle different search types
     if (type === 'real-estate' && location) {
       const result = await bingAPI.searchRealEstate(location as string, propertyType as string, {
-        count: count ? parseInt(count as string) : 20,
-        offset: offset ? parseInt(offset as string) : 0,
+        count: count ? parseInt(count as string, 10) : 20,
+        offset: offset ? parseInt(offset as string, 10) : 0,
       });
       return res.status(200).json(result);
     }
 
     if (type === 'news' && location) {
       const result = await bingAPI.searchRealEstateNews(location as string, {
-        count: count ? parseInt(count as string) : 10,
-        offset: offset ? parseInt(offset as string) : 0,
+        count: count ? parseInt(count as string, 10) : 10,
+        offset: offset ? parseInt(offset as string, 10) : 0,
       });
       return res.status(200).json(result);
     }
 
     if (type === 'images' && query) {
       const result = await bingAPI.searchPropertyImages(query as string, {
-        count: count ? parseInt(count as string) : 15,
-        offset: offset ? parseInt(offset as string) : 0,
+        count: count ? parseInt(count as string, 10) : 15,
+        offset: offset ? parseInt(offset as string, 10) : 0,
       });
       return res.status(200).json(result);
     }
@@ -49,8 +57,8 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     if (query) {
       searchQuery = query as string;
       searchOptions = {
-        count: count ? parseInt(count as string) : 10,
-        offset: offset ? parseInt(offset as string) : 0,
+        count: count ? parseInt(count as string, 10) : 10,
+        offset: offset ? parseInt(offset as string, 10) : 0,
       };
     } else {
       return res.status(400).json({
