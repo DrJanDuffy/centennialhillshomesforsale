@@ -1,0 +1,35 @@
+# Optimized Hero Image Prompts for AERIAL
+# Generated: 2025-09-01T19:26:29.400Z
+
+## DALL-E 3
+
+Here is the enhanced prompt:
+
+"Create a breathtaking aerial drone shot of luxury homes in Centennial Hills, Las Vegas, showcasing the master-planned community's sophisticated layout amidst a stunning Spring Mountain backdrop. Capture the serene desert landscape with majestic rock formations and lush landscaping. Feature modern, high-end homes with sparkling pools and meticulously manicured lawns, radiating opulence and refinement. The scene should be bathed in warm, golden hour light, with the sun casting a gentle, soft glow on the properties. Employ a professional real estate photography style, emphasizing the properties' curb appeal and community amenities. Deliver a high-resolution image with a 16:9 aspect ratio, capturing every detail of this exclusive Las Vegas neighborhood."
+
+---
+
+## Midjourney
+
+Here is the enhanced prompt:
+
+"Create a breathtaking aerial drone shot of luxury homes in Centennial Hills, Las Vegas, showcasing the master-planned community's sophisticated layout amidst a stunning Spring Mountain backdrop. Capture the serene desert landscape with majestic rock formations and lush landscaping. Feature modern, high-end homes with sparkling pools and meticulously manicured lawns, radiating opulence and refinement. The scene should be bathed in warm, golden hour light, with the sun casting a gentle, soft glow on the properties. Employ a professional real estate photography style, emphasizing the properties' curb appeal and community amenities. Deliver a high-resolution image with a 16:9 aspect ratio, capturing every detail of this exclusive Las Vegas neighborhood."
+
+---
+
+## Stable Diffusion
+
+Here is the enhanced prompt:
+
+"Create a breathtaking aerial drone shot of luxury homes in Centennial Hills, Las Vegas, showcasing the master-planned community's sophisticated layout amidst a stunning Spring Mountain backdrop. Capture the serene desert landscape with majestic rock formations and lush landscaping. Feature modern, high-end homes with sparkling pools and meticulously manicured lawns, radiating opulence and refinement. The scene should be bathed in warm, golden hour light, with the sun casting a gentle, soft glow on the properties. Employ a professional real estate photography style, emphasizing the properties' curb appeal and community amenities. Deliver a high-resolution image with a 16:9 aspect ratio, capturing every detail of this exclusive Las Vegas neighborhood."
+
+---
+
+## Adobe Firefly
+
+Here is the enhanced prompt:
+
+"Create a breathtaking aerial drone shot of luxury homes in Centennial Hills, Las Vegas, showcasing the master-planned community's sophisticated layout amidst a stunning Spring Mountain backdrop. Capture the serene desert landscape with majestic rock formations and lush landscaping. Feature modern, high-end homes with sparkling pools and meticulously manicured lawns, radiating opulence and refinement. The scene should be bathed in warm, golden hour light, with the sun casting a gentle, soft glow on the properties. Employ a professional real estate photography style, emphasizing the properties' curb appeal and community amenities. Deliver a high-resolution image with a 16:9 aspect ratio, capturing every detail of this exclusive Las Vegas neighborhood."
+
+---
+

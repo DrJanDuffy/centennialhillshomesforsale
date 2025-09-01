@@ -1,0 +1,60 @@
+"Here's a highly detailed and specific prompt for generating a luxury real estate hero image, designed for optimal results with tools like DALL-E 3 or Midjourney. It incorporates technical details, lighting, composition, and style instructions for a modern luxury home in Centennial Hills, Las Vegas, with the Spring Mountains backdrop.
+
+---
+
+**Prompt Title:** Centennial Hills Modern Luxury Estate - Golden Hour Grandeur
+
+---
+
+**Prompt:**
+
+**Core Concept:** A breathtaking, aspirational hero image of a contemporary luxury estate in Centennial Hills, Las Vegas, at golden hour, showcasing its architectural grandeur against the majestic Spring Mountains backdrop. The image should evoke feelings of exclusivity, tranquility, and sophisticated desert living.
+
+**Subject:** A single, large, multi-level modern luxury home.
+
+**Architectural Style:**
+*   **Dominant Materials:** Smooth, light-colored (off-white, pale gray, or very light beige) stucco/render, large expanses of floor-to-ceiling glass (tinted subtly for privacy/energy efficiency), dark bronze or matte black metal accents (window frames, pergolas, railings), and natural stone (light-colored, large format, stacked or clad, complementing the stucco).
+*   **Design Elements:** Clean lines, sharp angles, cantilevered sections, flat roofs with hidden drainage, large overhangs for shade, integrated outdoor living spaces (patios, balconies), minimalist landscaping.
+*   **Key Features:** Prominent, inviting entryway (perhaps with a large pivot door), multiple large windows and sliding glass doors, a visible infinity-edge pool, and integrated architectural lighting.
+
+**Setting & Environment:**
+*   **Location:** Centennial Hills, Las Vegas. The immediate foreground should be meticulously manicured, yet drought-tolerant desert landscaping.
+*   **Vegetation:** Sparse, elegant, well-maintained desert flora:
+    *   Mature, sculptural cacti (e.g., Saguaro, Organ Pipe), strategically placed.
+    *   Low-water succulents (e.g., Agave, Yucca) in minimalist planters or ground cover.
+    *   Small, elegant desert trees (e.g., Palo Verde, Desert Ironwood) with sparse canopies, not obscuring the house.
+    *   No lush green lawns; rather, finely crushed gravel, decomposed granite, or native rockscaping.
+*   **Background:** The Spring Mountains (specifically, the Red Rock Canyon area or similar formations) should be prominently visible, bathed in the warm, diffused light of golden hour. Their rugged, stratified peaks should provide a dramatic and natural contrast to the home's sleek lines.
+*   **Sky:** Clear, deep blue sky transitioning to warm oranges, pinks, and soft purples near the horizon, indicative of golden hour. A few wispy, high-altitude clouds are acceptable if they add to the beauty without distracting. No harsh midday sun or overcast conditions.
+
+**Time of Day & Lighting:**
+*   **Time:** Golden Hour (late afternoon, approximately 1 hour before sunset).
+*   **Directional Light:** Low, warm, directional sunlight coming from behind the camera (or slightly to the side), illuminating the front and side facades of the house, creating soft, long shadows that add depth and dimension.
+*   **Architectural Lighting:** Subtly illuminated. Warm, inviting interior lights glowing from within the large glass windows, suggesting warmth and luxury. Discreet, recessed exterior pathway lighting, uplighting on architectural features (e.g., columns, textured walls), and subtle pool lighting (submerged LEDs, not overly bright). The lighting should feel integrated and sophisticated, not overtly "on display."
+*   **Natural Glow:** The Spring Mountains should also catch the golden light, highlighting their textures and colors.
+
+**Composition & Perspective:**
+*   **Angle:** Low-angle, slightly wide-angle shot (e.g., 24mm-35mm equivalent on a full-frame camera), taken from a slightly elevated position (e.g., from a drone, but at a realistic height for a residential photo, not too high). This emphasizes the home's scale and grandeur while allowing the mountains to be a significant backdrop.
+*   **Rule of Thirds:** The home should occupy roughly the central two-thirds of the frame horizontally, with the Spring Mountains filling the upper background. The horizon line should be placed on a lower third.
+*   **Leading Lines:** Architectural lines of the home, pathways, or even the edge of the pool should subtly lead the eye towards the main entrance or a striking architectural feature.
+*   **Depth:** Foreground elements (landscaping, pool edge) create depth, leading the eye to the mid-ground (the house), and then to the background (the mountains).
+*   **No Distractions:** No cars, people, or extraneous objects. The focus is solely on the architecture and its seamless integration with the environment.
+
+**Atmosphere & Mood:**
+*   **Feeling:** Serene, exclusive, aspirational, sophisticated, tranquil, luxurious, inviting.
+*   **Tone:** Warm, rich, elegant.
+
+**Technical Details & Style:**
+*   **Photography Style:** High-end architectural photography.
+*   **Sharpness:** Extremely sharp and detailed throughout the entire frame, from foreground to background.
+*   **Dynamic Range:** Excellent dynamic range, with well-preserved highlights (no blown-out skies) and rich, detailed shadows (no crushed blacks).
+*   **Color Palette:** Warm and inviting. Dominant tones of desert earth tones (sands, light grays, muted greens), contrasted with the deep blues and purples of the mountains and the warm glow of the golden hour sky. Accents of dark bronze/black.
+*   **Reflections:** Subtle, artful reflections in the large glass windows, mirroring the sky or the mountains, adding depth and visual interest without obscuring the interior. The infinity pool surface should be perfectly still, reflecting the sky and elements of the home.
+*   **Post-Processing Aesthetic:** Clean, natural, and highly polished. No heavy filters or overly saturated colors. Subtle vignetting is acceptable if it enhances focus on the home.
+*   **Resolution:** Ultra high resolution, suitable for large-format printing.
+*   **Aspect Ratio:** 16:9 or 21:9 (cinematic widescreen) to emphasize the horizontal expanse and mountainous backdrop.
+
+**Negative Prompts (Avoid):**
+*   Cartoon, illustration, painting, sketch, drawing, low resolution, blurry, distorted, messy, cluttered, people, vehicles, power lines, excessive greenery, traditional architecture, gothic, Victorian, cluttered landscaping, harsh shadows, overexposed, underexposed, dark, gloomy, rainy, cloudy, fog, snow, urban sprawl, other buildings, street, commercial signage, fantastical elements, surreal, busy, noisy, poor composition, boring, mundane, generic, low quality, watermarks.
+
+---"
