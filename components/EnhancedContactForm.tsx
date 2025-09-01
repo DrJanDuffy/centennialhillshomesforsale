@@ -1,7 +1,7 @@
 'use client';
 
 import { CheckCircleIcon, ExclamationCircleIcon } from '@heroicons/react/24/outline';
-import { motion, AnimatePresence } from 'framer-motion';
+import { AnimatePresence, motion } from 'framer-motion';
 import { useState } from 'react';
 import { useTheme } from '../contexts/ThemeContext';
 
@@ -29,7 +29,7 @@ const propertyTypes = [
   'Luxury Estate',
   'Investment Property',
   'Land',
-  'Other'
+  'Other',
 ];
 
 const budgetRanges = [
@@ -38,7 +38,7 @@ const budgetRanges = [
   '$750K - $1M',
   '$1M - $1.5M',
   '$1.5M - $2M',
-  '$2M+'
+  '$2M+',
 ];
 
 const timelineOptions = [
@@ -47,15 +47,10 @@ const timelineOptions = [
   'Within 3 months',
   'Within 6 months',
   'Just exploring',
-  'No specific timeline'
+  'No specific timeline',
 ];
 
-const preferredContactMethods = [
-  'Phone',
-  'Email',
-  'Text',
-  'Any method'
-];
+const preferredContactMethods = ['Phone', 'Email', 'Text', 'Any method'];
 
 export default function EnhancedContactForm() {
   const { isDark } = useTheme();
@@ -69,7 +64,7 @@ export default function EnhancedContactForm() {
     timeline: '',
     message: '',
     preferredContact: '',
-    newsletter: false
+    newsletter: false,
   });
 
   const [errors, setErrors] = useState<FormErrors>({});
@@ -88,8 +83,10 @@ export default function EnhancedContactForm() {
         return emailRegex.test(value) ? '' : 'Please enter a valid email address';
       }
       case 'phone': {
-        const phoneRegex = /^[\+]?[1-9][\d]{0,15}$/;
-        return phoneRegex.test(value.replace(/[\s\-\(\)]/g, '')) ? '' : 'Please enter a valid phone number';
+        const phoneRegex = /^[+]?[1-9][\d]{0,15}$/;
+        return phoneRegex.test(value.replace(/[\s\-()]/g, ''))
+          ? ''
+          : 'Please enter a valid phone number';
       }
       case 'propertyType':
         return value ? '' : 'Please select a property type';
@@ -105,14 +102,14 @@ export default function EnhancedContactForm() {
   };
 
   const handleInputChange = (name: string, value: string | boolean) => {
-    setFormData(prev => ({ ...prev, [name]: value }));
-    
+    setFormData((prev) => ({ ...prev, [name]: value }));
+
     if (errors[name]) {
       const error = validateField(name, typeof value === 'string' ? value : '');
       if (error) {
-        setErrors(prev => ({ ...prev, [name]: error }));
+        setErrors((prev) => ({ ...prev, [name]: error }));
       } else {
-        setErrors(prev => {
+        setErrors((prev) => {
           const newErrors = { ...prev };
           delete newErrors[name];
           return newErrors;
@@ -123,10 +120,10 @@ export default function EnhancedContactForm() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    
+
     // Validate all fields
     const newErrors: FormErrors = {};
-    Object.keys(formData).forEach(key => {
+    Object.keys(formData).forEach((key) => {
       if (key !== 'message' && key !== 'newsletter') {
         const error = validateField(key, formData[key as keyof FormData] as string);
         if (error) newErrors[key] = error;
@@ -139,13 +136,13 @@ export default function EnhancedContactForm() {
     }
 
     setIsSubmitting(true);
-    
+
     // Simulate API call
-    await new Promise(resolve => setTimeout(resolve, 2000));
-    
+    await new Promise((resolve) => setTimeout(resolve, 2000));
+
     setIsSubmitting(false);
     setIsSubmitted(true);
-    
+
     // Reset form after 5 seconds
     setTimeout(() => {
       setIsSubmitted(false);
@@ -159,18 +156,19 @@ export default function EnhancedContactForm() {
         timeline: '',
         message: '',
         preferredContact: '',
-        newsletter: false
+        newsletter: false,
       });
     }, 5000);
   };
 
   const inputClasses = (fieldName: string) => `
     w-full px-4 py-3 border-2 rounded-lg transition-all duration-200 focus:outline-none
-    ${activeField === fieldName 
-      ? 'border-blue-500 ring-4 ring-blue-500/20' 
-      : errors[fieldName] 
-        ? 'border-red-500 ring-4 ring-red-500/20' 
-        : 'border-gray-300 dark:border-gray-600'
+    ${
+      activeField === fieldName
+        ? 'border-blue-500 ring-4 ring-blue-500/20'
+        : errors[fieldName]
+          ? 'border-red-500 ring-4 ring-red-500/20'
+          : 'border-gray-300 dark:border-gray-600'
     }
     ${isDark ? 'bg-gray-800 text-white' : 'bg-white text-gray-900'}
     ${isDark ? 'focus:bg-gray-700' : 'focus:bg-blue-50'}
@@ -178,11 +176,12 @@ export default function EnhancedContactForm() {
 
   const labelClasses = (fieldName: string) => `
     block text-sm font-medium mb-2 transition-colors duration-200
-    ${activeField === fieldName 
-      ? 'text-blue-600 dark:text-blue-400' 
-      : errors[fieldName] 
-        ? 'text-red-600 dark:text-red-400' 
-        : 'text-gray-700 dark:text-gray-300'
+    ${
+      activeField === fieldName
+        ? 'text-blue-600 dark:text-blue-400'
+        : errors[fieldName]
+          ? 'text-red-600 dark:text-red-400'
+          : 'text-gray-700 dark:text-gray-300'
     }
   `;
 
@@ -196,16 +195,15 @@ export default function EnhancedContactForm() {
         <motion.div
           initial={{ scale: 0 }}
           animate={{ scale: 1 }}
-          transition={{ delay: 0.2, type: "spring", stiffness: 200 }}
+          transition={{ delay: 0.2, type: 'spring', stiffness: 200 }}
           className="w-20 h-20 bg-green-100 dark:bg-green-900/20 rounded-full flex items-center justify-center mx-auto mb-6"
         >
           <CheckCircleIcon className="w-12 h-12 text-green-600 dark:text-green-400" />
         </motion.div>
-        <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">
-          Thank You!
-        </h3>
+        <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">Thank You!</h3>
         <p className="text-gray-600 dark:text-gray-400 max-w-md mx-auto">
-          Your message has been sent successfully. Dr. Jan Duffy will contact you within 24 hours to discuss your real estate needs.
+          Your message has been sent successfully. Dr. Jan Duffy will contact you within 24 hours to
+          discuss your real estate needs.
         </p>
       </motion.div>
     );
@@ -225,8 +223,8 @@ export default function EnhancedContactForm() {
             Get in Touch
           </h2>
           <p className="text-xl text-gray-600 dark:text-gray-400 max-w-3xl mx-auto">
-            Ready to find your dream home in Centennial Hills? Let's start the conversation. 
-            Fill out the form below and Dr. Jan Duffy will personally reach out to you.
+            Ready to find your dream home in Centennial Hills? Let's start the conversation. Fill
+            out the form below and Dr. Jan Duffy will personally reach out to you.
           </p>
         </motion.div>
 
@@ -377,7 +375,9 @@ export default function EnhancedContactForm() {
                   >
                     <option value="">Select type</option>
                     {propertyTypes.map((type) => (
-                      <option key={type} value={type}>{type}</option>
+                      <option key={type} value={type}>
+                        {type}
+                      </option>
                     ))}
                   </select>
                   <AnimatePresence>
@@ -409,7 +409,9 @@ export default function EnhancedContactForm() {
                   >
                     <option value="">Select budget</option>
                     {budgetRanges.map((range) => (
-                      <option key={range} value={range}>{range}</option>
+                      <option key={range} value={range}>
+                        {range}
+                      </option>
                     ))}
                   </select>
                   <AnimatePresence>
@@ -441,7 +443,9 @@ export default function EnhancedContactForm() {
                   >
                     <option value="">Select timeline</option>
                     {timelineOptions.map((option) => (
-                      <option key={option} value={option}>{option}</option>
+                      <option key={option} value={option}>
+                        {option}
+                      </option>
                     ))}
                   </select>
                   <AnimatePresence>
@@ -493,7 +497,9 @@ export default function EnhancedContactForm() {
                   >
                     <option value="">Select method</option>
                     {preferredContactMethods.map((method) => (
-                      <option key={method} value={method}>{method}</option>
+                      <option key={method} value={method}>
+                        {method}
+                      </option>
                     ))}
                   </select>
                   <AnimatePresence>
