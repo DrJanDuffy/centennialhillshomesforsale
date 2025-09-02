@@ -39,7 +39,9 @@ export default function Header() {
                   className="w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6 text-white"
                   fill="currentColor"
                   viewBox="0 0 24 24"
+                  aria-label="Real estate logo"
                 >
+                  <title>Real Estate Logo</title>
                   <path d="M19 7c0-1.103-.897-2-2-2h-3v2h3v2.765l-3.447 4.018c-.34.39-.553.895-.553 1.47V19h4v2h-6v-4.765c0-.575-.213-1.08-.553-1.47L7 9.765V7h3V5H7c-1.103 0-2 .897-2 2v2.765l3.447 4.018c.34.39.553.895.553 1.47V19H5v2h4v-4.765c0-.575.213-1.08.553-1.47L13 9.765V7z" />
                 </svg>
               </div>
@@ -135,6 +137,7 @@ export default function Header() {
           {/* Mobile Menu Button */}
           <div className="md:hidden">
             <button
+              type="button"
               onClick={toggleMenu}
               className="text-gray-700 hover:text-blue-600 p-2"
               aria-label="Toggle menu"

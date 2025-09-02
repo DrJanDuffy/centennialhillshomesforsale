@@ -51,7 +51,13 @@ interface PropertyListing {
 }
 
 const MapPinIcon = ({ className }: { className?: string }) => (
-  <svg className={className} fill="none" viewBox="0 0 24 24" stroke="currentColor">
+  <svg
+    className={className}
+    fill="none"
+    viewBox="0 0 24 24"
+    stroke="currentColor"
+    aria-hidden="true"
+  >
     <path
       strokeLinecap="round"
       strokeLinejoin="round"
@@ -68,7 +74,13 @@ const MapPinIcon = ({ className }: { className?: string }) => (
 );
 
 const CameraIcon = ({ className }: { className?: string }) => (
-  <svg className={className} fill="none" viewBox="0 0 24 24" stroke="currentColor">
+  <svg
+    className={className}
+    fill="none"
+    viewBox="0 0 24 24"
+    stroke="currentColor"
+    aria-hidden="true"
+  >
     <path
       strokeLinecap="round"
       strokeLinejoin="round"
@@ -85,7 +97,13 @@ const CameraIcon = ({ className }: { className?: string }) => (
 );
 
 const HeartIcon = ({ className }: { className?: string }) => (
-  <svg className={className} fill="none" viewBox="0 0 24 24" stroke="currentColor">
+  <svg
+    className={className}
+    fill="none"
+    viewBox="0 0 24 24"
+    stroke="currentColor"
+    aria-hidden="true"
+  >
     <path
       strokeLinecap="round"
       strokeLinejoin="round"
@@ -96,7 +114,13 @@ const HeartIcon = ({ className }: { className?: string }) => (
 );
 
 const ShareIcon = ({ className }: { className?: string }) => (
-  <svg className={className} fill="none" viewBox="0 0 24 24" stroke="currentColor">
+  <svg
+    className={className}
+    fill="none"
+    viewBox="0 0 24 24"
+    stroke="currentColor"
+    aria-hidden="true"
+  >
     <path
       strokeLinecap="round"
       strokeLinejoin="round"
@@ -107,7 +131,13 @@ const ShareIcon = ({ className }: { className?: string }) => (
 );
 
 const EyeIcon = ({ className }: { className?: string }) => (
-  <svg className={className} fill="none" viewBox="0 0 24 24" stroke="currentColor">
+  <svg
+    className={className}
+    fill="none"
+    viewBox="0 0 24 24"
+    stroke="currentColor"
+    aria-hidden="true"
+  >
     <path
       strokeLinecap="round"
       strokeLinejoin="round"
@@ -356,7 +386,11 @@ const RealScoutListings: React.FC<RealScoutListingsProps> = ({
           <Link href="/listings" className="btn btn-secondary">
             View All Listings
           </Link>
-          <button onClick={() => window.location.reload()} className="btn btn-outline">
+          <button
+            type="button"
+            onClick={() => window.location.reload()}
+            className="btn btn-outline"
+          >
             🔄 Refresh Page
           </button>
         </div>
@@ -402,6 +436,7 @@ const RealScoutListings: React.FC<RealScoutListingsProps> = ({
 
                 {/* Favorite Button */}
                 <button
+                  type="button"
                   onClick={() => toggleFavorite(listing.id)}
                   className="absolute top-3 right-3 bg-white bg-opacity-90 hover:bg-opacity-100 rounded-full p-2 transition-all"
                   aria-label={
@@ -452,9 +487,9 @@ const RealScoutListings: React.FC<RealScoutListingsProps> = ({
                 {/* Features */}
                 <div className="mb-3">
                   <div className="flex flex-wrap gap-1">
-                    {listing.features.slice(0, 3).map((feature, index) => (
+                    {listing.features.slice(0, 3).map((feature) => (
                       <span
-                        key={index}
+                        key={feature}
                         className="bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded"
                       >
                         {feature}
@@ -470,11 +505,15 @@ const RealScoutListings: React.FC<RealScoutListingsProps> = ({
 
                 {/* Action Buttons */}
                 <div className="flex space-x-2">
-                  <button className="flex-1 bg-blue-600 text-white py-2 px-3 rounded hover:bg-blue-700 transition-colors flex items-center justify-center text-sm">
+                  <button
+                    type="button"
+                    className="flex-1 bg-blue-600 text-white py-2 px-3 rounded hover:bg-blue-700 transition-colors flex items-center justify-center text-sm"
+                  >
                     <EyeIcon className="h-4 w-4 mr-1" />
                     View Details
                   </button>
                   <button
+                    type="button"
                     className="p-2 border border-gray-300 rounded hover:bg-gray-50 transition-colors"
                     aria-label="Share property"
                   >
