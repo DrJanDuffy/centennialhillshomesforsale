@@ -2,11 +2,11 @@ import Head from 'next/head';
 import Link from 'next/link';
 
 import AIHeroSection from '../components/AIHeroSection';
+import ConversionOptimizer from '../components/ConversionOptimizer';
 import Layout from '../components/Layout';
 import RealScoutListings from '../components/RealScoutListings';
 import FeaturedInsight from '../components/rss/FeaturedInsight';
 import SimpleInteriorGallery from '../components/SimpleInteriorGallery';
-import ConversionOptimizer from '../components/ConversionOptimizer';
 import { getPhotosForPage } from '../utils/interiorPhotos';
 
 export default function Home() {

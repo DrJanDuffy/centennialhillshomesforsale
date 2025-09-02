@@ -37,7 +37,7 @@ class AnalyticsTracker {
       formInteractions: 0,
       triggerActivations: [],
       funnelStage: 'awareness',
-      conversionValue: 0
+      conversionValue: 0,
     };
 
     this.initializeTracking();
@@ -55,7 +55,7 @@ class AnalyticsTracker {
       url: window.location.href,
       referrer: document.referrer,
       userAgent: navigator.userAgent,
-      timestamp: Date.now()
+      timestamp: Date.now(),
     });
 
     // Track time on site
@@ -73,7 +73,7 @@ class AnalyticsTracker {
 
   private startTimeTracking(): void {
     const startTime = Date.now();
-    
+
     setInterval(() => {
       this.metrics.timeOnSite = Math.floor((Date.now() - startTime) / 1000);
       this.updateEngagementScore();
@@ -83,7 +83,7 @@ class AnalyticsTracker {
     window.addEventListener('beforeunload', () => {
       this.track('time_on_site', {
         duration: this.metrics.timeOnSite,
-        engagementScore: this.metrics.engagementScore
+        engagementScore: this.metrics.engagementScore,
       });
     });
   }
@@ -95,7 +95,7 @@ class AnalyticsTracker {
       const scrollTop = window.pageYOffset;
       const docHeight = document.documentElement.scrollHeight - window.innerHeight;
       const scrollPercent = (scrollTop / docHeight) * 100;
-      
+
       if (scrollPercent > maxScrollDepth) {
         maxScrollDepth = scrollPercent;
         this.metrics.scrollDepth = maxScrollDepth;
@@ -131,7 +131,7 @@ class AnalyticsTracker {
         elementClass,
         elementId,
         elementText,
-        clickCount: this.metrics.clickCount
+        clickCount: this.metrics.clickCount,
       });
 
       // Track specific conversion actions
@@ -153,25 +153,32 @@ class AnalyticsTracker {
   }
 
   private trackFormInteractions(): void {
-    document.addEventListener('focus', (event) => {
-      const target = event.target as HTMLElement;
-      if (target.tagName.toLowerCase() === 'input' || target.tagName.toLowerCase() === 'textarea') {
-        this.metrics.formInteractions++;
-        this.updateEngagementScore();
+    document.addEventListener(
+      'focus',
+      (event) => {
+        const target = event.target as HTMLElement;
+        if (
+          target.tagName.toLowerCase() === 'input' ||
+          target.tagName.toLowerCase() === 'textarea'
+        ) {
+          this.metrics.formInteractions++;
+          this.updateEngagementScore();
 
-        this.track('form_interaction', {
-          fieldType: target.getAttribute('type') || 'text',
-          fieldName: target.getAttribute('name') || 'unknown',
-          formInteractions: this.metrics.formInteractions
-        });
-      }
-    }, true);
+          this.track('form_interaction', {
+            fieldType: target.getAttribute('type') || 'text',
+            fieldName: target.getAttribute('name') || 'unknown',
+            formInteractions: this.metrics.formInteractions,
+          });
+        }
+      },
+      true
+    );
 
     document.addEventListener('submit', (event) => {
       const target = event.target as HTMLFormElement;
       this.track('form_submit', {
         formId: target.id || 'unknown',
-        formClass: target.className || 'unknown'
+        formClass: target.className || 'unknown',
       });
       this.metrics.conversionValue += 15;
     });
@@ -180,19 +187,19 @@ class AnalyticsTracker {
   private updateEngagementScore(): void {
     // Calculate engagement score based on various metrics
     let score = 0;
-    
+
     // Time on site (max 30 points)
     score += Math.min(this.metrics.timeOnSite / 10, 30);
-    
+
     // Scroll depth (max 25 points)
     score += (this.metrics.scrollDepth / 100) * 25;
-    
+
     // Click count (max 20 points)
     score += Math.min(this.metrics.clickCount * 2, 20);
-    
+
     // Form interactions (max 15 points)
     score += Math.min(this.metrics.formInteractions * 5, 15);
-    
+
     // Trigger activations (max 10 points)
     score += Math.min(this.metrics.triggerActivations.length * 2, 10);
 
@@ -210,10 +217,10 @@ class AnalyticsTracker {
         clickCount: this.metrics.clickCount,
         formInteractions: this.metrics.formInteractions,
         funnelStage: this.metrics.funnelStage,
-        conversionValue: this.metrics.conversionValue
+        conversionValue: this.metrics.conversionValue,
       },
       timestamp: Date.now(),
-      sessionId: this.sessionId
+      sessionId: this.sessionId,
     };
 
     this.events.push(analyticsEvent);
@@ -221,7 +228,7 @@ class AnalyticsTracker {
     // Send to analytics (in production, this would go to your analytics service)
     if (typeof window !== 'undefined') {
       console.log('Analytics Event:', analyticsEvent);
-      
+
       // Example: Send to Google Analytics
       if (typeof gtag !== 'undefined') {
         gtag('event', event, properties);
@@ -233,10 +240,10 @@ class AnalyticsTracker {
     if (!this.metrics.triggerActivations.includes(triggerId)) {
       this.metrics.triggerActivations.push(triggerId);
       this.updateEngagementScore();
-      
+
       this.track('trigger_activation', {
         triggerId,
-        totalTriggers: this.metrics.triggerActivations.length
+        totalTriggers: this.metrics.triggerActivations.length,
       });
     }
   }
@@ -245,7 +252,7 @@ class AnalyticsTracker {
     this.metrics.funnelStage = stage;
     this.track('funnel_stage_change', {
       newStage: stage,
-      engagementScore: this.metrics.engagementScore
+      engagementScore: this.metrics.engagementScore,
     });
   }
 
@@ -280,10 +287,10 @@ export const getAnalytics = (): AnalyticsTracker => {
         formInteractions: 0,
         triggerActivations: [],
         funnelStage: 'awareness',
-        conversionValue: 0
+        conversionValue: 0,
       }),
       getEvents: () => [],
-      getSessionId: () => 'server-session'
+      getSessionId: () => 'server-session',
     } as AnalyticsTracker;
   }
 
