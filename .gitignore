@@ -164,3 +164,35 @@ dist
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+
+# Cleanup and temporary files
+*.log
+*.tmp
+*.temp
+.DS_Store
+Thumbs.db
+
+# Documentation files (moved to docs/)
+docs/
+
+# Image generation scripts (temporary)
+generate-hero-*.js
+test-*.js
+check-*.js
+setup-*.js
+find-*.js
+trigger-*.js
+improve-*.js
+clear-*.js
+fix-dns-*.js
+
+# Audit reports
+*-audit-report.json
+image-audit-report.json
+seo-audit-report.json
+
+# Environment files
+.env.local
+.env.production
+.env.development
