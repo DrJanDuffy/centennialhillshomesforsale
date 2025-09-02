@@ -1,0 +1,59 @@
+{
+  "imageOptimization": {
+    "quality": 85,
+    "formats": [
+      "webp",
+      "avif",
+      "jpeg"
+    ],
+    "sizes": [
+      640,
+      750,
+      828,
+      1080,
+      1200,
+      1920,
+      2048,
+      3840
+    ],
+    "placeholder": "blur"
+  },
+  "lazyLoading": {
+    "enabled": true,
+    "threshold": 0.1,
+    "rootMargin": "50px"
+  },
+  "preloading": {
+    "criticalImages": [
+      "/images/hero-image.jpg",
+      "/assets/images/property-gallery/luxury-estate-exterior-main.svg"
+    ],
+    "criticalFonts": [
+      "Inter",
+      "Playfair Display"
+    ]
+  },
+  "caching": {
+    "staticAssets": "1y",
+    "images": "30d",
+    "api": "5m"
+  },
+  "compression": {
+    "gzip": true,
+    "brotli": true,
+    "minify": true
+  },
+  "realEstate": {
+    "propertyImageSizes": {
+      "thumbnail": "300x200",
+      "medium": "600x400",
+      "large": "1200x800",
+      "hero": "1920x1080"
+    },
+    "galleryOptimization": {
+      "maxImages": 20,
+      "batchLoad": 5,
+      "preloadNext": true
+    }
+  }
+}
