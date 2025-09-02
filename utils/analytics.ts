@@ -279,30 +279,11 @@ let analyticsInstance: AnalyticsTracker | null = null;
 
 export const getAnalytics = (): AnalyticsTracker => {
   if (typeof window === 'undefined') {
-    // Return a complete mock instance for server-side rendering
+    // Return a simple mock instance for server-side rendering
     return {
-      // Required properties
-      sessionId: '',
-      events: [],
-      metrics: {
-        engagementScore: 0,
-        timeOnSite: 0,
-        scrollDepth: 0,
-        clickCount: 0,
-        formInteractions: 0,
-        triggerActivations: [],
-        funnelStage: 'discovery',
-        conversionValue: 0
-      },
-      
-      // Required methods
-      generateSessionId: () => '',
       track: () => {},
       trackTriggerActivation: () => {},
       updateFunnelStage: () => {},
-      calculateEngagementScore: () => 0,
-      updateScrollDepth: () => {},
-      endSession: () => {},
       getMetrics: () => ({
         engagementScore: 0,
         timeOnSite: 0,
@@ -310,12 +291,12 @@ export const getAnalytics = (): AnalyticsTracker => {
         clickCount: 0,
         formInteractions: 0,
         triggerActivations: [],
-        funnelStage: 'discovery',
-        conversionValue: 0
+        funnelStage: 'awareness',
+        conversionValue: 0,
       }),
       getEvents: () => [],
       getSessionId: () => 'server-session',
-    } as AnalyticsTracker;
+    } as unknown as AnalyticsTracker;
   }
 
   if (!analyticsInstance) {
