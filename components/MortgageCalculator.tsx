@@ -16,7 +16,11 @@ interface MortgageCalculation {
   loanTerm: number;
 }
 
-const MortgageCalculator: React.FC = () => {
+interface MortgageCalculatorProps {
+  className?: string;
+}
+
+const MortgageCalculator: React.FC<MortgageCalculatorProps> = ({ className = '' }) => {
   const [inputs, setInputs] = useState({
     homePrice: 650000,
     downPaymentPercent: 20,
@@ -71,7 +75,7 @@ const MortgageCalculator: React.FC = () => {
   };
 
   return (
-    <div className="bg-white rounded-xl shadow-lg p-6 mb-8">
+    <div className={`bg-white rounded-xl shadow-lg p-6 mb-8 ${className}`}>
       <div className="mb-6">
         <h2 className="text-2xl font-bold text-gray-900 flex items-center gap-2">
           💳 Mortgage Calculator
