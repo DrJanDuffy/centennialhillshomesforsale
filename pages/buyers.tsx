@@ -15,6 +15,7 @@ import Layout from '@/components/Layout';
 import RealScoutListings from '@/components/RealScoutListings';
 import FeaturedInsight from '@/components/rss/FeaturedInsight';
 import MarketInsightsWidget from '@/components/rss/MarketInsightsWidget';
+import RealScoutListingsSection from '../components/RealScoutListingsSection';
 
 const BuyersPage: React.FC = () => {
   const buyerServices = [
@@ -306,6 +307,11 @@ const BuyersPage: React.FC = () => {
           </div>
         </section>
       </div>
+      {/* RealScout Office Listings */}
+      <RealScoutListingsSection
+        title="Current Listings"
+        subtitle="Browse our latest property listings in Centennial Hills and surrounding areas"
+      />
     </Layout>
   );
 };

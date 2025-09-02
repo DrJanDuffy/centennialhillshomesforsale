@@ -6,7 +6,7 @@
  */
 
 const fs = require('node:fs');
-const path = require('node:path');
+const _path = require('node:path');
 
 console.log('🔧 FIXING REAL ESTATE WEBSITE ISSUES');
 console.log('====================================\n');
@@ -15,60 +15,57 @@ console.log('====================================\n');
 const fixes = {
   created: [],
   updated: [],
-  improved: []
+  improved: [],
 };
 
 // 1. CREATE PERFORMANCE CONFIGURATION
 function createPerformanceConfig() {
   console.log('⚡ Creating Performance Configuration...\n');
-  
+
   const performanceConfig = {
-    "imageOptimization": {
-      "quality": 85,
-      "formats": ["webp", "avif", "jpeg"],
-      "sizes": [640, 750, 828, 1080, 1200, 1920, 2048, 3840],
-      "placeholder": "blur"
+    imageOptimization: {
+      quality: 85,
+      formats: ['webp', 'avif', 'jpeg'],
+      sizes: [640, 750, 828, 1080, 1200, 1920, 2048, 3840],
+      placeholder: 'blur',
     },
-    "lazyLoading": {
-      "enabled": true,
-      "threshold": 0.1,
-      "rootMargin": "50px"
+    lazyLoading: {
+      enabled: true,
+      threshold: 0.1,
+      rootMargin: '50px',
     },
-    "preloading": {
-      "criticalImages": [
-        "/images/hero-image.jpg",
-        "/assets/images/property-gallery/luxury-estate-exterior-main.svg"
+    preloading: {
+      criticalImages: [
+        '/images/hero-image.jpg',
+        '/assets/images/property-gallery/luxury-estate-exterior-main.svg',
       ],
-      "criticalFonts": [
-        "Inter",
-        "Playfair Display"
-      ]
+      criticalFonts: ['Inter', 'Playfair Display'],
     },
-    "caching": {
-      "staticAssets": "1y",
-      "images": "30d",
-      "api": "5m"
+    caching: {
+      staticAssets: '1y',
+      images: '30d',
+      api: '5m',
     },
-    "compression": {
-      "gzip": true,
-      "brotli": true,
-      "minify": true
+    compression: {
+      gzip: true,
+      brotli: true,
+      minify: true,
     },
-    "realEstate": {
-      "propertyImageSizes": {
-        "thumbnail": "300x200",
-        "medium": "600x400", 
-        "large": "1200x800",
-        "hero": "1920x1080"
+    realEstate: {
+      propertyImageSizes: {
+        thumbnail: '300x200',
+        medium: '600x400',
+        large: '1200x800',
+        hero: '1920x1080',
       },
-      "galleryOptimization": {
-        "maxImages": 20,
-        "batchLoad": 5,
-        "preloadNext": true
-      }
-    }
+      galleryOptimization: {
+        maxImages: 20,
+        batchLoad: 5,
+        preloadNext: true,
+      },
+    },
   };
-  
+
   fs.writeFileSync('public/performance-config.json', JSON.stringify(performanceConfig, null, 2));
   fixes.created.push('Performance configuration');
   console.log('✅ Created performance-config.json');
@@ -77,15 +74,15 @@ function createPerformanceConfig() {
 // 2. ENHANCE PROPERTY CARD RESPONSIVENESS
 function enhancePropertyCardResponsiveness() {
   console.log('📱 Enhancing Property Card Responsiveness...\n');
-  
+
   const propertyCardPath = 'components/PropertyCard.tsx';
   if (!fs.existsSync(propertyCardPath)) {
     console.log('❌ PropertyCard.tsx not found');
     return;
   }
-  
+
   let content = fs.readFileSync(propertyCardPath, 'utf8');
-  
+
   // Add responsive improvements
   const responsiveImprovements = `
 // Enhanced responsive design for real estate
@@ -98,13 +95,13 @@ const responsiveClasses = {
   details: "text-sm sm:text-base md:text-lg",
   button: "w-full sm:w-auto px-4 py-2 sm:px-6 sm:py-3 text-sm sm:text-base"
 };`;
-  
+
   // Check if responsive classes are already enhanced
   if (!content.includes('responsiveClasses')) {
     // Add responsive classes object after imports
     const importEnd = content.indexOf('export default');
     if (importEnd > -1) {
-      content = content.slice(0, importEnd) + responsiveImprovements + '\n\n' + content.slice(importEnd);
+      content = `${content.slice(0, importEnd) + responsiveImprovements}\n\n${content.slice(importEnd)}`;
       fs.writeFileSync(propertyCardPath, content);
       fixes.updated.push('PropertyCard.tsx - Enhanced responsiveness');
       console.log('✅ Enhanced PropertyCard responsiveness');
@@ -117,7 +114,7 @@ const responsiveClasses = {
 // 3. CREATE VIRTUAL TOUR INTEGRATION
 function createVirtualTourIntegration() {
   console.log('🏠 Creating Virtual Tour Integration...\n');
-  
+
   const virtualTourComponent = `import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 
@@ -286,7 +283,7 @@ export default function VirtualTour({
 // 4. CREATE PROPERTY COMPARISON TOOL
 function createPropertyComparisonTool() {
   console.log('⚖️  Creating Property Comparison Tool...\n');
-  
+
   const comparisonComponent = `import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 
@@ -490,7 +487,7 @@ export default function PropertyComparison({ properties, className = '' }: Prope
 // 5. CREATE NEIGHBORHOOD SCHOOL RATINGS
 function createNeighborhoodSchoolRatings() {
   console.log('🏫 Creating Neighborhood School Ratings...\n');
-  
+
   const schoolRatingsComponent = `import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 
@@ -663,7 +660,7 @@ export default function SchoolRatings({ neighborhood, schools, className = '' }:
 // 6. CREATE PROPERTY VALUATION TOOL
 function createPropertyValuationTool() {
   console.log('💰 Creating Property Valuation Tool...\n');
-  
+
   const valuationComponent = `import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 
@@ -979,16 +976,16 @@ export default function PropertyValuation({ className = '' }: PropertyValuationP
 function generateFixesReport() {
   console.log('📊 FIXES REPORT');
   console.log('===============\n');
-  
+
   console.log(`✅ Created: ${fixes.created.length} components`);
-  fixes.created.forEach(item => console.log(`   • ${item}`));
-  
+  fixes.created.forEach((item) => console.log(`   • ${item}`));
+
   console.log(`\n🔄 Updated: ${fixes.updated.length} files`);
-  fixes.updated.forEach(item => console.log(`   • ${item}`));
-  
+  fixes.updated.forEach((item) => console.log(`   • ${item}`));
+
   console.log(`\n🚀 Improved: ${fixes.improved.length} features`);
-  fixes.improved.forEach(item => console.log(`   • ${item}`));
-  
+  fixes.improved.forEach((item) => console.log(`   • ${item}`));
+
   const totalFixes = fixes.created.length + fixes.updated.length + fixes.improved.length;
   console.log(`\n🎉 Total improvements: ${totalFixes}`);
   console.log('\n💡 Your real estate website now has professional-grade features!');
@@ -1004,7 +1001,6 @@ async function main() {
     createNeighborhoodSchoolRatings();
     createPropertyValuationTool();
     generateFixesReport();
-    
   } catch (error) {
     console.error('❌ Fixes failed:', error.message);
     process.exit(1);

@@ -2,6 +2,7 @@ import Head from 'next/head';
 import Layout from '../components/Layout';
 import ModernInteractiveMap from '../components/ModernInteractiveMap';
 import RealScoutListings from '../components/RealScoutListings';
+import RealScoutListingsSection from '../components/RealScoutListingsSection';
 import FeaturedInsight from '../components/rss/FeaturedInsight';
 import MarketInsightsWidget from '../components/rss/MarketInsightsWidget';
 
@@ -532,6 +533,11 @@ export default function AreaExplorer() {
             </div>
           </div>
         </section>
+        {/* RealScout Office Listings */}
+        <RealScoutListingsSection
+          title="Current Listings"
+          subtitle="Browse our latest property listings in Centennial Hills and surrounding areas"
+        />
       </Layout>
     </>
   );

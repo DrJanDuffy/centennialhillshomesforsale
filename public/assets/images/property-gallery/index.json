@@ -165,13 +165,7 @@
         "width": 1920,
         "height": 1080
       },
-      "amenities": [
-        "Parks",
-        "Schools",
-        "Shopping",
-        "Dining",
-        "Recreation"
-      ]
+      "amenities": ["Parks", "Schools", "Shopping", "Dining", "Recreation"]
     },
     {
       "id": "providence",
@@ -183,13 +177,7 @@
         "width": 1920,
         "height": 1080
       },
-      "amenities": [
-        "Gated Community",
-        "Clubhouse",
-        "Pool",
-        "Tennis",
-        "Golf"
-      ]
+      "amenities": ["Gated Community", "Clubhouse", "Pool", "Tennis", "Golf"]
     },
     {
       "id": "skye-canyon",
@@ -201,40 +189,16 @@
         "width": 1920,
         "height": 1080
       },
-      "amenities": [
-        "Hiking Trails",
-        "Parks",
-        "Community Center",
-        "Fitness",
-        "Nature"
-      ]
+      "amenities": ["Hiking Trails", "Parks", "Community Center", "Fitness", "Nature"]
     }
   ],
   "optimization": {
-    "formats": [
-      "webp",
-      "avif",
-      "jpeg"
-    ],
-    "breakpoints": [
-      320,
-      640,
-      768,
-      1024,
-      1280,
-      1920
-    ],
+    "formats": ["webp", "avif", "jpeg"],
+    "breakpoints": [320, 640, 768, 1024, 1280, 1920],
     "quality": 85,
     "compression": "progressive",
     "lazyLoading": true,
-    "priorityImages": [
-      "hero",
-      "exterior-main"
-    ],
-    "placeholderTypes": [
-      "shimmer",
-      "empty",
-      "blur"
-    ]
+    "priorityImages": ["hero", "exterior-main"],
+    "placeholderTypes": ["shimmer", "empty", "blur"]
   }
 }

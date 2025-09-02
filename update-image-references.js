@@ -6,25 +6,25 @@
  */
 
 const fs = require('node:fs');
-const path = require('node:path');
+const _path = require('node:path');
 
 console.log('🔄 Updating Image References in JSON Files...\n');
 
 // Update property gallery JSON
 function updatePropertyGalleryJSON() {
   const jsonPath = 'public/assets/images/property-gallery/index.json';
-  
+
   if (!fs.existsSync(jsonPath)) {
     console.log('❌ Property gallery JSON not found');
     return;
   }
 
   let content = fs.readFileSync(jsonPath, 'utf8');
-  
+
   // Replace all .jpg references with .svg
   const originalContent = content;
   content = content.replace(/\.jpg/g, '.svg');
-  
+
   if (content !== originalContent) {
     fs.writeFileSync(jsonPath, content);
     console.log('✅ Updated property gallery JSON references');

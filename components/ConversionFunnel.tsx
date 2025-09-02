@@ -1,5 +1,5 @@
 import type React from 'react';
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useState } from 'react';
 
 interface FunnelStage {
   id: string;
@@ -19,7 +19,7 @@ interface UserJourney {
 
 export const ConversionFunnel: React.FC = () => {
   const [currentStage, setCurrentStage] = useState<string>('awareness');
-  const [userJourney, setUserJourney] = useState<UserJourney[]>([]);
+  const [_userJourney, setUserJourney] = useState<UserJourney[]>([]);
   const [engagementScore, setEngagementScore] = useState(0);
   const [showPersonalizedCTA, setShowPersonalizedCTA] = useState(false);
 
@@ -65,29 +65,6 @@ export const ConversionFunnel: React.FC = () => {
     },
   ];
 
-  // Track user actions and calculate engagement score
-  const trackAction = useCallback(
-    (action: string) => {
-      const timestamp = Date.now();
-      const newAction: UserJourney = {
-        stage: currentStage,
-        timestamp,
-        actions: [action],
-        engagementScore: calculateEngagementScore(action),
-      };
-
-      setUserJourney((prev) => [...prev, newAction]);
-      setEngagementScore((prev) => prev + newAction.engagementScore);
-
-      // Check if user should advance to next stage
-      const currentStageData = funnelStages.find((s) => s.id === currentStage);
-      if (currentStageData && engagementScore > currentStageData.conversionRate) {
-        advanceToNextStage();
-      }
-    },
-    [currentStage, engagementScore]
-  );
-
   const calculateEngagementScore = (action: string): number => {
     const actionScores: { [key: string]: number } = {
       page_view: 1,
@@ -108,16 +85,38 @@ export const ConversionFunnel: React.FC = () => {
     return actionScores[action] || 1;
   };
 
-  const advanceToNextStage = () => {
-    const currentStageData = funnelStages.find((s) => s.id === currentStage);
-    if (currentStageData?.nextStage) {
-      setCurrentStage(currentStageData.nextStage);
-      setShowPersonalizedCTA(true);
+  const advanceToNextStage = useCallback(() => {
+    setCurrentStage((prev) => {
+      const currentIndex = funnelStages.findIndex((s) => s.id === prev);
+      if (currentIndex < funnelStages.length - 1) {
+        return funnelStages[currentIndex + 1].id;
+      }
+      return prev;
+    });
+  }, [funnelStages]);
 
-      // Hide personalized CTA after 5 seconds
-      setTimeout(() => setShowPersonalizedCTA(false), 5000);
-    }
-  };
+  // Track user actions and calculate engagement score
+  const trackAction = useCallback(
+    (action: string) => {
+      const timestamp = Date.now();
+      const newAction: UserJourney = {
+        stage: currentStage,
+        timestamp,
+        actions: [action],
+        engagementScore: calculateEngagementScore(action),
+      };
+
+      setUserJourney((prev) => [...prev, newAction]);
+      setEngagementScore((prev) => prev + newAction.engagementScore);
+
+      // Check if user should advance to next stage
+      const currentStageData = funnelStages.find((s) => s.id === currentStage);
+      if (currentStageData && engagementScore > currentStageData.conversionRate) {
+        advanceToNextStage();
+      }
+    },
+    [currentStage, engagementScore, advanceToNextStage, calculateEngagementScore]
+  );
 
   // Get current stage data
   const currentStageData = funnelStages.find((s) => s.id === currentStage);

@@ -16,7 +16,7 @@ const cleanupActions = {
   deleted: [],
   moved: [],
   created: [],
-  fixed: []
+  fixed: [],
 };
 
 // Check if file exists
@@ -61,16 +61,16 @@ function moveFile(from, to) {
 function auditPagesDirectory() {
   console.log('📄 AUDITING PAGES DIRECTORY');
   console.log('============================\n');
-  
+
   const pagesDir = 'pages';
   if (!dirExists(pagesDir)) {
     console.log('❌ Pages directory not found');
     return;
   }
-  
+
   const pages = fs.readdirSync(pagesDir);
   console.log(`📊 Found ${pages.length} files in pages directory:`);
-  pages.forEach(page => {
+  pages.forEach((page) => {
     const fullPath = path.join(pagesDir, page);
     const stats = fs.statSync(fullPath);
     if (stats.isDirectory()) {
@@ -86,16 +86,16 @@ function auditPagesDirectory() {
 function auditComponentsDirectory() {
   console.log('🧩 AUDITING COMPONENTS DIRECTORY');
   console.log('=================================\n');
-  
+
   const componentsDir = 'components';
   if (!dirExists(componentsDir)) {
     console.log('❌ Components directory not found');
     return;
   }
-  
+
   const components = fs.readdirSync(componentsDir);
   console.log(`📊 Found ${components.length} files in components directory:`);
-  components.forEach(component => {
+  components.forEach((component) => {
     const fullPath = path.join(componentsDir, component);
     const stats = fs.statSync(fullPath);
     if (stats.isDirectory()) {
@@ -111,21 +111,21 @@ function auditComponentsDirectory() {
 function auditPublicAssets() {
   console.log('📁 AUDITING PUBLIC ASSETS');
   console.log('==========================\n');
-  
+
   const publicDir = 'public';
   if (!dirExists(publicDir)) {
     console.log('❌ Public directory not found');
     return;
   }
-  
+
   function scanDirectory(dir, level = 0) {
     const items = fs.readdirSync(dir);
     const indent = '  '.repeat(level);
-    
-    items.forEach(item => {
+
+    items.forEach((item) => {
       const fullPath = path.join(dir, item);
       const stats = fs.statSync(fullPath);
-      
+
       if (stats.isDirectory()) {
         console.log(`${indent}📁 ${item}/`);
         scanDirectory(fullPath, level + 1);
@@ -135,7 +135,7 @@ function auditPublicAssets() {
       }
     });
   }
-  
+
   scanDirectory(publicDir);
   console.log('');
 }
@@ -144,21 +144,22 @@ function auditPublicAssets() {
 function cleanupUnusedScripts() {
   console.log('🧹 CLEANING UP UNUSED SCRIPTS');
   console.log('==============================\n');
-  
+
   const rootFiles = fs.readdirSync('.');
-  const scriptFiles = rootFiles.filter(file => 
-    file.endsWith('.js') && 
-    !file.startsWith('package') && 
-    !file.startsWith('next') &&
-    !file.startsWith('middleware') &&
-    !file.startsWith('vercel')
+  const scriptFiles = rootFiles.filter(
+    (file) =>
+      file.endsWith('.js') &&
+      !file.startsWith('package') &&
+      !file.startsWith('next') &&
+      !file.startsWith('middleware') &&
+      !file.startsWith('vercel')
   );
-  
+
   console.log(`📊 Found ${scriptFiles.length} script files in root:`);
-  scriptFiles.forEach(script => {
+  scriptFiles.forEach((script) => {
     console.log(`   📜 ${script}`);
   });
-  
+
   // Keep essential scripts, remove temporary ones
   const scriptsToKeep = [
     'audit-site-images.js',
@@ -166,24 +167,25 @@ function cleanupUnusedScripts() {
     'update-image-references.js',
     'optimize-hero-image.js',
     'fix-image-display.js',
-    'comprehensive-cleanup.js'
+    'comprehensive-cleanup.js',
   ];
-  
-  const scriptsToRemove = scriptFiles.filter(script => 
-    !scriptsToKeep.includes(script) && 
-    (script.includes('generate-hero') || 
-     script.includes('test-') || 
-     script.includes('check-') ||
-     script.includes('setup-') ||
-     script.includes('find-') ||
-     script.includes('trigger-') ||
-     script.includes('improve-') ||
-     script.includes('clear-') ||
-     script.includes('fix-dns'))
+
+  const scriptsToRemove = scriptFiles.filter(
+    (script) =>
+      !scriptsToKeep.includes(script) &&
+      (script.includes('generate-hero') ||
+        script.includes('test-') ||
+        script.includes('check-') ||
+        script.includes('setup-') ||
+        script.includes('find-') ||
+        script.includes('trigger-') ||
+        script.includes('improve-') ||
+        script.includes('clear-') ||
+        script.includes('fix-dns'))
   );
-  
+
   console.log(`\n🗑️  Removing ${scriptsToRemove.length} temporary scripts:`);
-  scriptsToRemove.forEach(script => {
+  scriptsToRemove.forEach((script) => {
     deleteFile(script);
   });
   console.log('');
@@ -193,7 +195,7 @@ function cleanupUnusedScripts() {
 function organizeImageAssets() {
   console.log('🖼️  ORGANIZING IMAGE ASSETS');
   console.log('===========================\n');
-  
+
   // Ensure proper directory structure
   const imageDirs = [
     'public/images',
@@ -201,30 +203,33 @@ function organizeImageAssets() {
     'public/assets/images/neighborhoods',
     'public/assets/images/interior-photos',
     'public/assets/icons',
-    'public/assets/icons/ui'
+    'public/assets/icons/ui',
   ];
-  
-  imageDirs.forEach(dir => {
+
+  imageDirs.forEach((dir) => {
     ensureDir(dir);
   });
-  
+
   // Check for misplaced images
   const publicDir = 'public';
   if (dirExists(publicDir)) {
     const allFiles = fs.readdirSync(publicDir, { withFileTypes: true });
-    
-    allFiles.forEach(file => {
-      if (file.isFile() && (file.name.endsWith('.jpg') || file.name.endsWith('.jpeg') || file.name.endsWith('.png'))) {
+
+    allFiles.forEach((file) => {
+      if (
+        file.isFile() &&
+        (file.name.endsWith('.jpg') || file.name.endsWith('.jpeg') || file.name.endsWith('.png'))
+      ) {
         const currentPath = path.join(publicDir, file.name);
         const targetPath = path.join('public/images', file.name);
-        
+
         if (currentPath !== targetPath) {
           moveFile(currentPath, targetPath);
         }
       }
     });
   }
-  
+
   console.log('');
 }
 
@@ -232,7 +237,7 @@ function organizeImageAssets() {
 function cleanupDocumentation() {
   console.log('📚 CLEANING UP DOCUMENTATION');
   console.log('=============================\n');
-  
+
   const docsToKeep = [
     'README.md',
     'package.json',
@@ -241,27 +246,24 @@ function cleanupDocumentation() {
     'tailwind.config.js',
     'components.json',
     'middleware.js',
-    'vercel.json'
+    'vercel.json',
   ];
-  
+
   const rootFiles = fs.readdirSync('.');
-  const docFiles = rootFiles.filter(file => 
-    file.endsWith('.md') && 
-    !docsToKeep.includes(file)
-  );
-  
+  const docFiles = rootFiles.filter((file) => file.endsWith('.md') && !docsToKeep.includes(file));
+
   console.log(`📊 Found ${docFiles.length} documentation files:`);
-  docFiles.forEach(doc => {
+  docFiles.forEach((doc) => {
     console.log(`   📄 ${doc}`);
   });
-  
+
   // Create docs directory and move documentation files
   ensureDir('docs');
-  docFiles.forEach(doc => {
+  docFiles.forEach((doc) => {
     const targetPath = path.join('docs', doc);
     moveFile(doc, targetPath);
   });
-  
+
   console.log('');
 }
 
@@ -269,23 +271,23 @@ function cleanupDocumentation() {
 function fixImageReferences() {
   console.log('🔗 FIXING IMAGE REFERENCES');
   console.log('===========================\n');
-  
+
   // Fix property gallery JSON to use SVG placeholders (since JPG files don't exist yet)
   const jsonPath = 'public/assets/images/property-gallery/index.json';
   if (fileExists(jsonPath)) {
     let content = fs.readFileSync(jsonPath, 'utf8');
     const originalContent = content;
-    
+
     // Replace .jpg with .svg since we only have SVG placeholders
     content = content.replace(/\.jpg/g, '.svg');
-    
+
     if (content !== originalContent) {
       fs.writeFileSync(jsonPath, content);
       cleanupActions.fixed.push(`🔗 Fixed image references in ${jsonPath}`);
       console.log(`✅ Fixed image references in property gallery JSON`);
     }
   }
-  
+
   console.log('');
 }
 
@@ -293,7 +295,7 @@ function fixImageReferences() {
 function cleanupConfigFiles() {
   console.log('⚙️  CLEANING UP CONFIG FILES');
   console.log('=============================\n');
-  
+
   const configFiles = [
     '.env.local',
     '.env.example',
@@ -301,11 +303,11 @@ function cleanupConfigFiles() {
     '.eslintrc.json',
     '.prettierrc',
     'tsconfig.json',
-    'next-env.d.ts'
+    'next-env.d.ts',
   ];
-  
+
   console.log('📊 Checking config files:');
-  configFiles.forEach(config => {
+  configFiles.forEach((config) => {
     if (fileExists(config)) {
       const stats = fs.statSync(config);
       console.log(`   ✅ ${config} (${stats.size} bytes)`);
@@ -313,7 +315,7 @@ function cleanupConfigFiles() {
       console.log(`   ❌ ${config} (missing)`);
     }
   });
-  
+
   console.log('');
 }
 
@@ -321,24 +323,25 @@ function cleanupConfigFiles() {
 function generateCleanupReport() {
   console.log('📊 CLEANUP REPORT');
   console.log('=================\n');
-  
+
   console.log(`✅ Created: ${cleanupActions.created.length} items`);
-  cleanupActions.created.forEach(action => console.log(`   ${action}`));
-  
+  cleanupActions.created.forEach((action) => console.log(`   ${action}`));
+
   console.log(`\n📦 Moved: ${cleanupActions.moved.length} items`);
-  cleanupActions.moved.forEach(action => console.log(`   ${action}`));
-  
+  cleanupActions.moved.forEach((action) => console.log(`   ${action}`));
+
   console.log(`\n🗑️  Deleted: ${cleanupActions.deleted.length} items`);
-  cleanupActions.deleted.forEach(action => console.log(`   ${action}`));
-  
+  cleanupActions.deleted.forEach((action) => console.log(`   ${action}`));
+
   console.log(`\n🔗 Fixed: ${cleanupActions.fixed.length} items`);
-  cleanupActions.fixed.forEach(action => console.log(`   ${action}`));
-  
-  const totalActions = cleanupActions.created.length + 
-                      cleanupActions.moved.length + 
-                      cleanupActions.deleted.length + 
-                      cleanupActions.fixed.length;
-  
+  cleanupActions.fixed.forEach((action) => console.log(`   ${action}`));
+
+  const totalActions =
+    cleanupActions.created.length +
+    cleanupActions.moved.length +
+    cleanupActions.deleted.length +
+    cleanupActions.fixed.length;
+
   console.log(`\n🎉 Total cleanup actions: ${totalActions}`);
   console.log('\n💡 Your website directory is now clean and organized!');
 }
@@ -355,7 +358,6 @@ async function main() {
     fixImageReferences();
     cleanupConfigFiles();
     generateCleanupReport();
-    
   } catch (error) {
     console.error('❌ Cleanup failed:', error.message);
     process.exit(1);

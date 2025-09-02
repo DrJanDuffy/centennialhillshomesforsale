@@ -1,4 +1,5 @@
-import React, { useEffect, useState, useCallback } from 'react';
+import type React from 'react';
+import { useEffect, useState } from 'react';
 
 interface EngagementMetrics {
   timeOnPage: number;
@@ -26,7 +27,9 @@ export const EngagementOptimizer: React.FC = () => {
   });
 
   const [activeTriggers, setActiveTriggers] = useState<string[]>([]);
-  const [userSegment, setUserSegment] = useState<'browser' | 'interested' | 'ready_to_buy'>('browser');
+  const [userSegment, setUserSegment] = useState<'browser' | 'interested' | 'ready_to_buy'>(
+    'browser'
+  );
 
   // Track user engagement
   useEffect(() => {
@@ -34,9 +37,9 @@ export const EngagementOptimizer: React.FC = () => {
     let scrollTimeout: NodeJS.Timeout;
 
     const updateTimeOnPage = () => {
-      setMetrics(prev => ({
+      setMetrics((prev) => ({
         ...prev,
-        timeOnPage: Math.floor((Date.now() - startTime) / 1000)
+        timeOnPage: Math.floor((Date.now() - startTime) / 1000),
       }));
     };
 
@@ -44,10 +47,10 @@ export const EngagementOptimizer: React.FC = () => {
       const scrollTop = window.pageYOffset;
       const docHeight = document.documentElement.scrollHeight - window.innerHeight;
       const scrollPercent = (scrollTop / docHeight) * 100;
-      
-      setMetrics(prev => ({
+
+      setMetrics((prev) => ({
         ...prev,
-        scrollDepth: Math.max(prev.scrollDepth, scrollPercent)
+        scrollDepth: Math.max(prev.scrollDepth, scrollPercent),
       }));
 
       // Clear existing timeout
@@ -55,22 +58,22 @@ export const EngagementOptimizer: React.FC = () => {
       scrollTimeout = setTimeout(() => {
         // User stopped scrolling - trigger engagement
         if (scrollPercent > 30 && !activeTriggers.includes('scroll_engagement')) {
-          setActiveTriggers(prev => [...prev, 'scroll_engagement']);
+          setActiveTriggers((prev) => [...prev, 'scroll_engagement']);
         }
       }, 2000);
     };
 
     const handleClick = () => {
-      setMetrics(prev => ({
+      setMetrics((prev) => ({
         ...prev,
-        clickCount: prev.clickCount + 1
+        clickCount: prev.clickCount + 1,
       }));
     };
 
     const handleMouseOver = () => {
-      setMetrics(prev => ({
+      setMetrics((prev) => ({
         ...prev,
-        hoverCount: prev.hoverCount + 1
+        hoverCount: prev.hoverCount + 1,
       }));
     };
 
@@ -110,65 +113,65 @@ export const EngagementOptimizer: React.FC = () => {
       type: 'urgency',
       condition: (m) => m.timeOnPage > 30 && m.scrollDepth > 20,
       component: UrgencyTimer,
-      priority: 1
+      priority: 1,
     },
     {
       id: 'social_proof',
       type: 'social_proof',
       condition: (m) => m.timeOnPage > 45 && m.clickCount > 3,
       component: SocialProofBanner,
-      priority: 2
+      priority: 2,
     },
     {
       id: 'scarcity_indicator',
       type: 'scarcity',
       condition: (m) => m.scrollDepth > 60 && userSegment === 'interested',
       component: ScarcityIndicator,
-      priority: 3
+      priority: 3,
     },
     {
       id: 'authority_badge',
       type: 'authority',
       condition: (m) => m.timeOnPage > 90,
       component: AuthorityBadge,
-      priority: 4
+      priority: 4,
     },
     {
       id: 'exit_intent',
       type: 'reciprocity',
       condition: (m) => m.scrollDepth > 30 && m.timeOnPage > 20,
       component: ExitIntentPopup,
-      priority: 5
-    }
+      priority: 5,
+    },
   ];
 
   // Activate triggers based on conditions
   useEffect(() => {
     const newTriggers = conversionTriggers
-      .filter(trigger => trigger.condition(metrics))
+      .filter((trigger) => trigger.condition(metrics))
       .sort((a, b) => a.priority - b.priority)
       .slice(0, 2) // Show max 2 triggers at once
-      .map(trigger => trigger.id);
+      .map((trigger) => trigger.id);
 
-    setActiveTriggers(prev => {
+    setActiveTriggers((prev) => {
       const combined = [...new Set([...prev, ...newTriggers])];
       return combined.slice(-3); // Keep only last 3 triggers
     });
-  }, [metrics, userSegment]);
+  }, [metrics, conversionTriggers.filter]);
 
   return (
     <div className="engagement-optimizer">
-      {activeTriggers.map(triggerId => {
-        const trigger = conversionTriggers.find(t => t.id === triggerId);
+      {activeTriggers.map((triggerId) => {
+        const trigger = conversionTriggers.find((t) => t.id === triggerId);
         if (!trigger) return null;
-        
+
         const TriggerComponent = trigger.component;
         return (
           <TriggerComponent
             key={triggerId}
             metrics={metrics}
             userSegment={userSegment}
-            onDismiss={() => setActiveTriggers(prev => prev.filter(id => id !== triggerId))}
+            onDismiss={() => setActiveTriggers((prev) => prev.filter((id) => id !== triggerId))}
           />
         );
       })}
@@ -186,7 +189,7 @@ const UrgencyTimer: React.FC<{
 
   useEffect(() => {
     const timer = setInterval(() => {
-      setTimeLeft(prev => {
+      setTimeLeft((prev) => {
         if (prev <= 0) {
           clearInterval(timer);
           return 0;
@@ -209,11 +212,11 @@ const UrgencyTimer: React.FC<{
       <div className="flex items-center space-x-2">
         <div className="w-3 h-3 bg-white rounded-full animate-ping"></div>
         <span className="font-bold">Limited Time Offer!</span>
-        <button onClick={onDismiss} className="ml-2 text-white/80 hover:text-white">×</button>
+        <button onClick={onDismiss} className="ml-2 text-white/80 hover:text-white">
+          ×
+        </button>
       </div>
-      <div className="text-2xl font-mono font-bold mt-1">
-        {formatTime(timeLeft)}
-      </div>
+      <div className="text-2xl font-mono font-bold mt-1">{formatTime(timeLeft)}</div>
       <div className="text-sm mt-1">Free consultation expires soon!</div>
     </div>
   );
@@ -226,16 +229,28 @@ const SocialProofBanner: React.FC<{
   onDismiss: () => void;
 }> = ({ onDismiss }) => {
   const [currentTestimonial, setCurrentTestimonial] = useState(0);
-  
+
   const testimonials = [
-    { name: "Sarah M.", location: "Centennial Hills", text: "Dr. Duffy helped us find our dream home in just 2 weeks!" },
-    { name: "Mike R.", location: "Providence", text: "Professional, knowledgeable, and made the process stress-free." },
-    { name: "Jennifer L.", location: "Skye Canyon", text: "Top 1% for a reason - exceeded all our expectations!" }
+    {
+      name: 'Sarah M.',
+      location: 'Centennial Hills',
+      text: 'Dr. Duffy helped us find our dream home in just 2 weeks!',
+    },
+    {
+      name: 'Mike R.',
+      location: 'Providence',
+      text: 'Professional, knowledgeable, and made the process stress-free.',
+    },
+    {
+      name: 'Jennifer L.',
+      location: 'Skye Canyon',
+      text: 'Top 1% for a reason - exceeded all our expectations!',
+    },
   ];
 
   useEffect(() => {
     const interval = setInterval(() => {
-      setCurrentTestimonial(prev => (prev + 1) % testimonials.length);
+      setCurrentTestimonial((prev) => (prev + 1) % testimonials.length);
     }, 4000);
 
     return () => clearInterval(interval);
@@ -249,20 +264,20 @@ const SocialProofBanner: React.FC<{
             <div className="flex text-yellow-400">
               {[...Array(5)].map((_, i) => (
                 <svg key={i} className="w-4 h-4 fill-current" viewBox="0 0 20 20">
-                  <path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/>
+                  <path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z" />
                 </svg>
               ))}
             </div>
             <span className="text-sm text-gray-600">5.0 (150+ reviews)</span>
           </div>
-          <p className="text-sm text-gray-800 mb-2">
-            "{testimonials[currentTestimonial].text}"
-          </p>
+          <p className="text-sm text-gray-800 mb-2">"{testimonials[currentTestimonial].text}"</p>
           <p className="text-xs text-gray-600">
             - {testimonials[currentTestimonial].name}, {testimonials[currentTestimonial].location}
           </p>
         </div>
-        <button onClick={onDismiss} className="ml-2 text-gray-400 hover:text-gray-600">×</button>
+        <button onClick={onDismiss} className="ml-2 text-gray-400 hover:text-gray-600">
+          ×
+        </button>
       </div>
     </div>
   );
@@ -274,14 +289,16 @@ const ScarcityIndicator: React.FC<{
   userSegment: string;
   onDismiss: () => void;
 }> = ({ onDismiss }) => {
-  const [propertiesLeft, setPropertiesLeft] = useState(3);
+  const [propertiesLeft, _setPropertiesLeft] = useState(3);
 
   return (
     <div className="fixed top-20 right-4 bg-orange-500 text-white p-3 rounded-lg shadow-lg z-50">
       <div className="flex items-center space-x-2">
         <div className="w-2 h-2 bg-white rounded-full animate-pulse"></div>
         <span className="font-semibold">Only {propertiesLeft} homes left!</span>
-        <button onClick={onDismiss} className="ml-2 text-white/80 hover:text-white">×</button>
+        <button onClick={onDismiss} className="ml-2 text-white/80 hover:text-white">
+          ×
+        </button>
       </div>
       <div className="text-xs mt-1">In your price range this month</div>
     </div>
@@ -299,14 +316,16 @@ const AuthorityBadge: React.FC<{
       <div className="flex items-center space-x-2">
         <div className="w-8 h-8 bg-white/20 rounded-full flex items-center justify-center">
           <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
-            <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
+            <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
           </svg>
         </div>
         <div>
           <div className="font-semibold text-sm">Top 1% REALTOR®</div>
           <div className="text-xs opacity-90">500+ Homes Sold</div>
         </div>
-        <button onClick={onDismiss} className="ml-2 text-white/80 hover:text-white">×</button>
+        <button onClick={onDismiss} className="ml-2 text-white/80 hover:text-white">
+          ×
+        </button>
       </div>
     </div>
   );

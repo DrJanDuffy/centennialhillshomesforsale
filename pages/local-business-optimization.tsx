@@ -3,6 +3,7 @@ import Head from 'next/head';
 import Link from 'next/link';
 import { FaCheckCircle, FaClock, FaMapMarkerAlt, FaPhone, FaStar } from 'react-icons/fa';
 import Layout from '../components/Layout';
+import RealScoutListingsSection from '../components/RealScoutListingsSection';
 
 export default function LocalBusinessOptimization() {
   const serviceAreas = [
@@ -252,6 +253,11 @@ export default function LocalBusinessOptimization() {
           </div>
         </motion.section>
       </main>
+      {/* RealScout Office Listings */}
+      <RealScoutListingsSection
+        title="Current Listings"
+        subtitle="Browse our latest property listings in Centennial Hills and surrounding areas"
+      />
     </Layout>
   );
 }

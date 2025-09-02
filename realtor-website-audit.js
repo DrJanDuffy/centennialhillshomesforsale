@@ -17,7 +17,7 @@ const auditResults = {
   high: [],
   medium: [],
   low: [],
-  recommendations: []
+  recommendations: [],
 };
 
 // Check if file exists
@@ -34,17 +34,17 @@ function dirExists(dirPath) {
 function auditCorePages() {
   console.log('📄 AUDITING CORE PAGES');
   console.log('======================\n');
-  
+
   const criticalPages = [
     { path: 'pages/index.tsx', name: 'Homepage', priority: 'critical' },
     { path: 'pages/listings.tsx', name: 'Property Listings', priority: 'critical' },
     { path: 'pages/contact.tsx', name: 'Contact', priority: 'critical' },
     { path: 'pages/about.tsx', name: 'About', priority: 'high' },
     { path: 'pages/services.tsx', name: 'Services', priority: 'high' },
-    { path: 'pages/testimonials.tsx', name: 'Testimonials', priority: 'high' }
+    { path: 'pages/testimonials.tsx', name: 'Testimonials', priority: 'high' },
   ];
-  
-  criticalPages.forEach(page => {
+
+  criticalPages.forEach((page) => {
     if (fileExists(page.path)) {
       const stats = fs.statSync(page.path);
       console.log(`✅ ${page.name}: ${stats.size} bytes`);
@@ -60,17 +60,17 @@ function auditCorePages() {
 function auditNeighborhoodPages() {
   console.log('🏘️  AUDITING NEIGHBORHOOD PAGES');
   console.log('===============================\n');
-  
+
   const neighborhoods = [
     'centennial-hills',
-    'providence-las-vegas', 
+    'providence-las-vegas',
     'skye-canyon',
     'the-trails',
     'tournament-hills',
-    'northwest-las-vegas'
+    'northwest-las-vegas',
   ];
-  
-  neighborhoods.forEach(neighborhood => {
+
+  neighborhoods.forEach((neighborhood) => {
     const pagePath = `pages/${neighborhood}.tsx`;
     if (fileExists(pagePath)) {
       const stats = fs.statSync(pagePath);
@@ -87,15 +87,15 @@ function auditNeighborhoodPages() {
 function auditLeadCapture() {
   console.log('📝 AUDITING LEAD CAPTURE');
   console.log('========================\n');
-  
+
   // Check for lead capture components
   const leadComponents = [
     'components/FollowUpBossForm.tsx',
     'components/LeadCaptureForm.tsx',
-    'components/EnhancedContactForm.tsx'
+    'components/EnhancedContactForm.tsx',
   ];
-  
-  leadComponents.forEach(component => {
+
+  leadComponents.forEach((component) => {
     if (fileExists(component)) {
       const stats = fs.statSync(component);
       console.log(`✅ ${path.basename(component)}: ${stats.size} bytes`);
@@ -104,7 +104,7 @@ function auditLeadCapture() {
       auditResults.critical.push(`Missing lead capture component: ${path.basename(component)}`);
     }
   });
-  
+
   // Check for Follow Up Boss integration
   if (fileExists('lib/follow-up-boss.ts')) {
     console.log('✅ Follow Up Boss API integration: Present');
@@ -119,14 +119,16 @@ function auditLeadCapture() {
 function auditPropertyDisplay() {
   console.log('🏠 AUDITING PROPERTY DISPLAY');
   console.log('============================\n');
-  
+
   // Check property gallery
   const galleryPath = 'public/assets/images/property-gallery';
   if (dirExists(galleryPath)) {
     const files = fs.readdirSync(galleryPath);
-    const imageFiles = files.filter(f => f.endsWith('.svg') || f.endsWith('.jpg') || f.endsWith('.jpeg'));
+    const imageFiles = files.filter(
+      (f) => f.endsWith('.svg') || f.endsWith('.jpg') || f.endsWith('.jpeg')
+    );
     console.log(`✅ Property Gallery: ${imageFiles.length} images`);
-    
+
     if (imageFiles.length < 10) {
       auditResults.medium.push('Property gallery needs more images (recommended: 15-20)');
     }
@@ -134,15 +136,15 @@ function auditPropertyDisplay() {
     console.log('❌ Property Gallery: MISSING');
     auditResults.critical.push('Missing property gallery directory');
   }
-  
+
   // Check property components
   const propertyComponents = [
     'components/PropertyCard.tsx',
     'components/ModernFeaturedProperties.tsx',
-    'components/SimpleInteriorGallery.tsx'
+    'components/SimpleInteriorGallery.tsx',
   ];
-  
-  propertyComponents.forEach(component => {
+
+  propertyComponents.forEach((component) => {
     if (fileExists(component)) {
       const stats = fs.statSync(component);
       console.log(`✅ ${path.basename(component)}: ${stats.size} bytes`);
@@ -158,16 +160,16 @@ function auditPropertyDisplay() {
 function auditSEO() {
   console.log('🔍 AUDITING SEO & LOCAL SEARCH');
   console.log('==============================\n');
-  
+
   // Check SEO components
   const seoComponents = [
     'components/GoogleSearchConsole.tsx',
     'components/SEOOptimized.tsx',
     'components/SEOAdvanced.tsx',
-    'components/LocalSEOBooster.tsx'
+    'components/LocalSEOBooster.tsx',
   ];
-  
-  seoComponents.forEach(component => {
+
+  seoComponents.forEach((component) => {
     if (fileExists(component)) {
       const stats = fs.statSync(component);
       console.log(`✅ ${path.basename(component)}: ${stats.size} bytes`);
@@ -176,7 +178,7 @@ function auditSEO() {
       auditResults.high.push(`Missing SEO component: ${path.basename(component)}`);
     }
   });
-  
+
   // Check for structured data
   if (fileExists('public/structured-data.json')) {
     console.log('✅ Structured Data: Present');
@@ -184,7 +186,7 @@ function auditSEO() {
     console.log('❌ Structured Data: MISSING');
     auditResults.high.push('Missing structured data for local business');
   }
-  
+
   // Check for sitemap
   if (fileExists('public/sitemap.xml')) {
     console.log('✅ Sitemap: Present');
@@ -192,7 +194,7 @@ function auditSEO() {
     console.log('❌ Sitemap: MISSING');
     auditResults.medium.push('Missing XML sitemap');
   }
-  
+
   // Check for robots.txt
   if (fileExists('public/robots.txt')) {
     console.log('✅ Robots.txt: Present');
@@ -207,7 +209,7 @@ function auditSEO() {
 function auditMobileResponsiveness() {
   console.log('📱 AUDITING MOBILE RESPONSIVENESS');
   console.log('=================================\n');
-  
+
   // Check if Tailwind CSS is properly configured
   if (fileExists('tailwind.config.js')) {
     console.log('✅ Tailwind CSS: Configured');
@@ -215,15 +217,15 @@ function auditMobileResponsiveness() {
     console.log('❌ Tailwind CSS: MISSING');
     auditResults.critical.push('Missing Tailwind CSS configuration');
   }
-  
+
   // Check for responsive components
   const responsiveComponents = [
     'components/EnhancedNavigation.tsx',
     'components/ModernHero.tsx',
-    'components/PropertyCard.tsx'
+    'components/PropertyCard.tsx',
   ];
-  
-  responsiveComponents.forEach(component => {
+
+  responsiveComponents.forEach((component) => {
     if (fileExists(component)) {
       const content = fs.readFileSync(component, 'utf8');
       if (content.includes('sm:') || content.includes('md:') || content.includes('lg:')) {
@@ -241,15 +243,15 @@ function auditMobileResponsiveness() {
 function auditPerformance() {
   console.log('⚡ AUDITING PERFORMANCE & ANALYTICS');
   console.log('===================================\n');
-  
+
   // Check for analytics
   const analyticsComponents = [
     'components/GoogleAnalytics.tsx',
     'components/GoogleTagManager.tsx',
-    'components/SafeGoogleAnalytics.tsx'
+    'components/SafeGoogleAnalytics.tsx',
   ];
-  
-  analyticsComponents.forEach(component => {
+
+  analyticsComponents.forEach((component) => {
     if (fileExists(component)) {
       const stats = fs.statSync(component);
       console.log(`✅ ${path.basename(component)}: ${stats.size} bytes`);
@@ -258,7 +260,7 @@ function auditPerformance() {
       auditResults.high.push(`Missing analytics component: ${path.basename(component)}`);
     }
   });
-  
+
   // Check for image optimization
   if (fileExists('components/OptimizedImage.tsx')) {
     console.log('✅ Image Optimization: Present');
@@ -266,7 +268,7 @@ function auditPerformance() {
     console.log('❌ Image Optimization: MISSING');
     auditResults.high.push('Missing image optimization component');
   }
-  
+
   // Check for performance config
   if (fileExists('public/performance-config.json')) {
     console.log('✅ Performance Config: Present');
@@ -281,7 +283,7 @@ function auditPerformance() {
 function auditRealEstateFeatures() {
   console.log('🏡 AUDITING REAL ESTATE FEATURES');
   console.log('================================\n');
-  
+
   // Check for mortgage calculator
   if (fileExists('components/MortgageCalculator.tsx')) {
     console.log('✅ Mortgage Calculator: Present');
@@ -289,7 +291,7 @@ function auditRealEstateFeatures() {
     console.log('❌ Mortgage Calculator: MISSING');
     auditResults.high.push('Missing mortgage calculator - critical for real estate');
   }
-  
+
   // Check for property search
   if (fileExists('components/EnhancedPropertySearch.tsx')) {
     console.log('✅ Property Search: Present');
@@ -297,7 +299,7 @@ function auditRealEstateFeatures() {
     console.log('❌ Mortgage Calculator: MISSING');
     auditResults.critical.push('Missing property search functionality');
   }
-  
+
   // Check for market data
   if (fileExists('pages/market-data.tsx')) {
     console.log('✅ Market Data: Present');
@@ -305,7 +307,7 @@ function auditRealEstateFeatures() {
     console.log('❌ Market Data: MISSING');
     auditResults.high.push('Missing market data page');
   }
-  
+
   // Check for RealScout integration
   if (fileExists('components/RealScoutListings.tsx')) {
     console.log('✅ RealScout Integration: Present');
@@ -313,7 +315,7 @@ function auditRealEstateFeatures() {
     console.log('❌ RealScout Integration: MISSING');
     auditResults.high.push('Missing RealScout MLS integration');
   }
-  
+
   // Check for interactive map
   if (fileExists('components/InteractivePropertyMap.tsx')) {
     console.log('✅ Interactive Map: Present');
@@ -328,34 +330,34 @@ function auditRealEstateFeatures() {
 function generateRecommendations() {
   console.log('💡 EXPERT RECOMMENDATIONS');
   console.log('=========================\n');
-  
+
   // Critical recommendations
   if (auditResults.critical.length > 0) {
     console.log('🚨 CRITICAL ISSUES (Fix Immediately):');
-    auditResults.critical.forEach(issue => {
+    auditResults.critical.forEach((issue) => {
       console.log(`   • ${issue}`);
     });
     console.log('');
   }
-  
+
   // High priority recommendations
   if (auditResults.high.length > 0) {
     console.log('⚠️  HIGH PRIORITY (Fix This Week):');
-    auditResults.high.forEach(issue => {
+    auditResults.high.forEach((issue) => {
       console.log(`   • ${issue}`);
     });
     console.log('');
   }
-  
+
   // Medium priority recommendations
   if (auditResults.medium.length > 0) {
     console.log('📋 MEDIUM PRIORITY (Fix This Month):');
-    auditResults.medium.forEach(issue => {
+    auditResults.medium.forEach((issue) => {
       console.log(`   • ${issue}`);
     });
     console.log('');
   }
-  
+
   // Expert recommendations
   console.log('🎯 EXPERT REAL ESTATE RECOMMENDATIONS:');
   console.log('   • Add virtual tour integration (Matterport/3D tours)');
@@ -375,7 +377,11 @@ function generateRecommendations() {
 function generateAuditReport() {
   const report = {
     timestamp: new Date().toISOString(),
-    totalIssues: auditResults.critical.length + auditResults.high.length + auditResults.medium.length + auditResults.low.length,
+    totalIssues:
+      auditResults.critical.length +
+      auditResults.high.length +
+      auditResults.medium.length +
+      auditResults.low.length,
     critical: auditResults.critical.length,
     high: auditResults.high.length,
     medium: auditResults.medium.length,
@@ -384,11 +390,11 @@ function generateAuditReport() {
       critical: auditResults.critical,
       high: auditResults.high,
       medium: auditResults.medium,
-      low: auditResults.low
+      low: auditResults.low,
     },
-    recommendations: auditResults.recommendations
+    recommendations: auditResults.recommendations,
   };
-  
+
   fs.writeFileSync('realtor-audit-report.json', JSON.stringify(report, null, 2));
   console.log('📊 Detailed audit report saved to: realtor-audit-report.json');
 }
@@ -406,10 +412,9 @@ async function main() {
     auditRealEstateFeatures();
     generateRecommendations();
     generateAuditReport();
-    
+
     console.log('🎉 Real Estate Website Audit Complete!');
     console.log('💡 Focus on critical and high priority issues first.');
-    
   } catch (error) {
     console.error('❌ Audit failed:', error.message);
     process.exit(1);

@@ -1,5 +1,3 @@
-import React from 'react';
-
 export const PropertyCardSkeleton = () => (
   <div className="bg-white rounded-lg shadow-lg overflow-hidden animate-pulse">
     <div className="h-48 bg-gray-200"></div>

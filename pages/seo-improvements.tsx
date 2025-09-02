@@ -8,6 +8,7 @@ import {
   FaStar,
 } from 'react-icons/fa';
 import Layout from '../components/Layout';
+import RealScoutListingsSection from '../components/RealScoutListingsSection';
 import SEOOptimized from '../components/SEOOptimized';
 
 export default function SEOImprovements() {
@@ -380,6 +381,11 @@ export default function SEOImprovements() {
           </div>
         </section>
       </div>
+      {/* RealScout Office Listings */}
+      <RealScoutListingsSection
+        title="Current Listings"
+        subtitle="Browse our latest property listings in Centennial Hills and surrounding areas"
+      />
     </Layout>
   );
 }

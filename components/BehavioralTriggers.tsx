@@ -1,5 +1,5 @@
 import type React from 'react';
-import { useCallback, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 
 interface TriggerConfig {
   id: string;
@@ -191,7 +191,7 @@ export const BehavioralTriggers: React.FC = () => {
     if (newTriggers.length > 0) {
       setActiveTriggers((prev) => [...prev, ...newTriggers].slice(-2)); // Max 2 active triggers
     }
-  }, [behavior, triggers, activeTriggers, triggerHistory]);
+  }, [triggers, activeTriggers, triggerHistory]);
 
   const dismissTrigger = (triggerId: string) => {
     setActiveTriggers((prev) => prev.filter((id) => id !== triggerId));

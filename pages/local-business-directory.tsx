@@ -2,6 +2,7 @@ import Head from 'next/head';
 import Link from 'next/link';
 import React from 'react';
 import Layout from '../components/Layout';
+import RealScoutListingsSection from '../components/RealScoutListingsSection';
 
 interface LocalBusiness {
   name: string;
@@ -321,6 +322,11 @@ export default function LocalBusinessDirectory() {
           </div>
         </section>
       </main>
+      {/* RealScout Office Listings */}
+      <RealScoutListingsSection
+        title="Current Listings"
+        subtitle="Browse our latest property listings in Centennial Hills and surrounding areas"
+      />
     </Layout>
   );
 }

@@ -6,7 +6,7 @@
  */
 
 const fs = require('node:fs');
-const path = require('node:path');
+const _path = require('node:path');
 
 console.log('📝 CREATING MISSING ESSENTIAL FILES');
 console.log('===================================\n');
@@ -44,19 +44,15 @@ NEXT_PUBLIC_SITE_NAME=Centennial Hills Homes for Sale
 // Create .eslintrc.json
 function createEslintConfig() {
   const eslintConfig = {
-    "extends": [
-      "next/core-web-vitals",
-      "eslint:recommended",
-      "@typescript-eslint/recommended"
-    ],
-    "parser": "@typescript-eslint/parser",
-    "plugins": ["@typescript-eslint"],
-    "rules": {
-      "@typescript-eslint/no-unused-vars": "warn",
-      "@typescript-eslint/no-explicit-any": "warn",
-      "prefer-const": "warn"
+    extends: ['next/core-web-vitals', 'eslint:recommended', '@typescript-eslint/recommended'],
+    parser: '@typescript-eslint/parser',
+    plugins: ['@typescript-eslint'],
+    rules: {
+      '@typescript-eslint/no-unused-vars': 'warn',
+      '@typescript-eslint/no-explicit-any': 'warn',
+      'prefer-const': 'warn',
     },
-    "ignorePatterns": ["node_modules/", ".next/", "out/", "build/"]
+    ignorePatterns: ['node_modules/', '.next/', 'out/', 'build/'],
   };
 
   fs.writeFileSync('.eslintrc.json', JSON.stringify(eslintConfig, null, 2));
@@ -66,12 +62,12 @@ function createEslintConfig() {
 // Create .prettierrc
 function createPrettierConfig() {
   const prettierConfig = {
-    "semi": true,
-    "trailingComma": "es5",
-    "singleQuote": true,
-    "printWidth": 80,
-    "tabWidth": 2,
-    "useTabs": false
+    semi: true,
+    trailingComma: 'es5',
+    singleQuote: true,
+    printWidth: 80,
+    tabWidth: 2,
+    useTabs: false,
   };
 
   fs.writeFileSync('.prettierrc', JSON.stringify(prettierConfig, null, 2));
@@ -116,11 +112,11 @@ seo-audit-report.json
 
   const gitignorePath = '.gitignore';
   let content = '';
-  
+
   if (fs.existsSync(gitignorePath)) {
     content = fs.readFileSync(gitignorePath, 'utf8');
   }
-  
+
   if (!content.includes('# Cleanup and temporary files')) {
     fs.appendFileSync(gitignorePath, gitignoreAdditions);
     console.log('✅ Updated .gitignore');
@@ -192,10 +188,9 @@ async function main() {
     createPrettierConfig();
     updateGitignore();
     createReadme();
-    
+
     console.log('\n🎉 All missing essential files created!');
     console.log('💡 Your project is now properly configured.');
-    
   } catch (error) {
     console.error('❌ Failed to create missing files:', error.message);
     process.exit(1);

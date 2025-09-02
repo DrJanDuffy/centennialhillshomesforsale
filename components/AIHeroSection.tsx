@@ -65,14 +65,16 @@ export default function AIHeroSection() {
           priority
           quality={90}
         />
-        
+
         {/* Dark Overlay for Text Readability */}
         <div className="absolute inset-0 bg-black/50" />
-        
+
         {/* Gradient Overlay for Enhanced Visual Appeal */}
         <div
           className={`absolute inset-0 bg-gradient-to-br ${
-            isDark ? 'from-gray-900/60 via-blue-900/40 to-gray-900/60' : 'from-blue-900/30 via-transparent to-green-900/30'
+            isDark
+              ? 'from-gray-900/60 via-blue-900/40 to-gray-900/60'
+              : 'from-blue-900/30 via-transparent to-green-900/30'
           }`}
         />
       </div>
@@ -132,7 +134,7 @@ export default function AIHeroSection() {
               <span className="relative z-10">Call 702-222-1964</span>
               <div className="absolute inset-0 bg-gradient-to-r from-blue-700 to-blue-800 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
             </motion.a>
-            
+
             <motion.a
               href="/properties"
               className="group relative px-8 py-4 bg-white/10 backdrop-blur-sm text-white font-semibold rounded-full border border-white/20 hover:bg-white/20 transition-all duration-300"
@@ -155,7 +157,9 @@ export default function AIHeroSection() {
                 className="group relative p-6 bg-white/10 backdrop-blur-sm rounded-2xl border border-white/20 hover:bg-white/20 transition-all duration-300"
                 whileHover={{ y: -5 }}
               >
-                <div className={`w-12 h-12 bg-gradient-to-r ${feature.color} rounded-xl flex items-center justify-center mb-4 mx-auto group-hover:scale-110 transition-transform duration-300`}>
+                <div
+                  className={`w-12 h-12 bg-gradient-to-r ${feature.color} rounded-xl flex items-center justify-center mb-4 mx-auto group-hover:scale-110 transition-transform duration-300`}
+                >
                   <feature.icon className="w-6 h-6 text-white" />
                 </div>
                 <h3 className="text-lg font-semibold text-white mb-2">{feature.title}</h3>
@@ -165,15 +169,9 @@ export default function AIHeroSection() {
           </motion.div>
 
           {/* Scroll Indicator */}
-          <motion.div
-            variants={itemVariants}
-            className="flex flex-col items-center text-white/60"
-          >
+          <motion.div variants={itemVariants} className="flex flex-col items-center text-white/60">
             <span className="text-sm mb-2">Scroll to explore</span>
-            <motion.div
-              animate={{ y: [0, 10, 0] }}
-              transition={{ duration: 2, repeat: Infinity }}
-            >
+            <motion.div animate={{ y: [0, 10, 0] }} transition={{ duration: 2, repeat: Infinity }}>
               <ChevronDownIcon className="w-6 h-6" />
             </motion.div>
           </motion.div>

@@ -1,9 +1,10 @@
-import { motion } from 'framer-motion'; // Single motion import
+import { motion } from 'framer-motion';
 import Head from 'next/head';
 import { useState } from 'react';
 import Layout from '../components/Layout';
 import NeighborhoodBar from '../components/NeighborhoodBar';
 import RealScoutListings from '../components/RealScoutListings';
+import RealScoutListingsSection from '../components/RealScoutListingsSection'; // Single motion import
 import SchoolInfo from '../components/SchoolInfo';
 
 export default function ProvidenceLasVegas() {
@@ -145,6 +146,11 @@ export default function ProvidenceLasVegas() {
           </div>
         </motion.section>
       </main>
+      {/* RealScout Office Listings */}
+      <RealScoutListingsSection
+        title="Current Listings"
+        subtitle="Browse our latest property listings in Centennial Hills and surrounding areas"
+      />
     </Layout>
   );
 }

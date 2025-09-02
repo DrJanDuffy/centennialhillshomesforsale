@@ -1,6 +1,7 @@
 import Head from 'next/head';
 import Layout from '../components/Layout';
 import RealScoutListings from '../components/RealScoutListings';
+import RealScoutListingsSection from '../components/RealScoutListingsSection';
 import { getPageSchema } from '../lib/business-schema';
 
 export default function Contact() {
@@ -386,6 +387,12 @@ export default function Contact() {
             </div>
           </div>
         </section>
+
+        {/* RealScout Office Listings */}
+        <RealScoutListingsSection
+          title="Current Listings"
+          subtitle="Browse our available properties while you're here"
+        />
       </Layout>
     </>
   );

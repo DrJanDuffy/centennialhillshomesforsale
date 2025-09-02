@@ -1,6 +1,7 @@
 import Head from 'next/head';
 import React from 'react';
 import Layout from '../components/Layout';
+import RealScoutListingsSection from '../components/RealScoutListingsSection';
 
 interface CommunityEvent {
   id: string;
@@ -390,6 +391,11 @@ export default function CommunityEvents() {
           </div>
         </section>
       </main>
+      {/* RealScout Office Listings */}
+      <RealScoutListingsSection
+        title="Current Listings"
+        subtitle="Browse our latest property listings in Centennial Hills and surrounding areas"
+      />
     </Layout>
   );
 }

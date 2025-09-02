@@ -1,11 +1,11 @@
-import React from 'react';
 import Head from 'next/head';
 import Layout from '../components/Layout';
-import VirtualTour from '../components/VirtualTour';
-import PropertyComparison from '../components/PropertyComparison';
-import SchoolRatings from '../components/SchoolRatings';
-import PropertyValuation from '../components/PropertyValuation';
 import MortgageCalculator from '../components/MortgageCalculator';
+import PropertyComparison from '../components/PropertyComparison';
+import PropertyValuation from '../components/PropertyValuation';
+import RealScoutListingsSection from '../components/RealScoutListingsSection';
+import SchoolRatings from '../components/SchoolRatings';
+import VirtualTour from '../components/VirtualTour';
 
 export default function RealEstateTools() {
   // Sample data for demonstration
@@ -20,7 +20,13 @@ export default function RealEstateTools() {
       lotSize: 0.35,
       yearBuilt: 2018,
       image: '/assets/images/property-gallery/luxury-estate-exterior-main.svg',
-      features: ['Granite Countertops', 'Hardwood Floors', 'Updated Kitchen', 'Master Suite', '2-Car Garage']
+      features: [
+        'Granite Countertops',
+        'Hardwood Floors',
+        'Updated Kitchen',
+        'Master Suite',
+        '2-Car Garage',
+      ],
     },
     {
       id: '2',
@@ -32,7 +38,13 @@ export default function RealEstateTools() {
       lotSize: 0.25,
       yearBuilt: 2015,
       image: '/assets/images/property-gallery/modern-home-exterior-main.svg',
-      features: ['Open Floor Plan', 'Stainless Appliances', 'Tile Floors', 'Covered Patio', 'Attached Garage']
+      features: [
+        'Open Floor Plan',
+        'Stainless Appliances',
+        'Tile Floors',
+        'Covered Patio',
+        'Attached Garage',
+      ],
     },
     {
       id: '3',
@@ -44,8 +56,8 @@ export default function RealEstateTools() {
       lotSize: 0.5,
       yearBuilt: 2020,
       image: '/assets/images/property-gallery/providence-villa-exterior-main.svg',
-      features: ['Custom Kitchen', 'Luxury Master Bath', 'Pool', 'Mountain Views', '3-Car Garage']
-    }
+      features: ['Custom Kitchen', 'Luxury Master Bath', 'Pool', 'Mountain Views', '3-Car Garage'],
+    },
   ];
 
   const sampleSchools = [
@@ -57,7 +69,7 @@ export default function RealEstateTools() {
       address: '123 School St, Las Vegas, NV 89149',
       phone: '(702) 555-0123',
       website: 'https://example.com',
-      programs: ['Gifted & Talented', 'STEM', 'Arts Integration']
+      programs: ['Gifted & Talented', 'STEM', 'Arts Integration'],
     },
     {
       name: 'Centennial Hills Middle School',
@@ -67,7 +79,7 @@ export default function RealEstateTools() {
       address: '456 Education Ave, Las Vegas, NV 89149',
       phone: '(702) 555-0456',
       website: 'https://example.com',
-      programs: ['Advanced Math', 'Robotics', 'Band']
+      programs: ['Advanced Math', 'Robotics', 'Band'],
     },
     {
       name: 'Centennial Hills High School',
@@ -77,8 +89,8 @@ export default function RealEstateTools() {
       address: '789 Learning Blvd, Las Vegas, NV 89149',
       phone: '(702) 555-0789',
       website: 'https://example.com',
-      programs: ['AP Courses', 'Sports', 'Drama', 'College Prep']
-    }
+      programs: ['AP Courses', 'Sports', 'Drama', 'College Prep'],
+    },
   ];
 
   const samplePhotos = [
@@ -86,19 +98,31 @@ export default function RealEstateTools() {
     '/assets/images/property-gallery/luxury-estate-kitchen.svg',
     '/assets/images/property-gallery/luxury-estate-living-room.svg',
     '/assets/images/property-gallery/luxury-estate-master-bedroom.svg',
-    '/assets/images/property-gallery/luxury-estate-bathroom.svg'
+    '/assets/images/property-gallery/luxury-estate-bathroom.svg',
   ];
 
   return (
     <Layout>
       <Head>
         <title>Real Estate Tools & Resources | Dr. Jan Duffy | Centennial Hills</title>
-        <meta name="description" content="Professional real estate tools including property valuation, virtual tours, school ratings, and mortgage calculators for Centennial Hills, Las Vegas." />
-        <meta name="keywords" content="real estate tools, property valuation, virtual tour, school ratings, mortgage calculator, Centennial Hills, Las Vegas" />
+        <meta
+          name="description"
+          content="Professional real estate tools including property valuation, virtual tours, school ratings, and mortgage calculators for Centennial Hills, Las Vegas."
+        />
+        <meta
+          name="keywords"
+          content="real estate tools, property valuation, virtual tour, school ratings, mortgage calculator, Centennial Hills, Las Vegas"
+        />
         <meta property="og:title" content="Real Estate Tools & Resources | Dr. Jan Duffy" />
-        <meta property="og:description" content="Professional real estate tools and resources for Centennial Hills home buyers and sellers." />
+        <meta
+          property="og:description"
+          content="Professional real estate tools and resources for Centennial Hills home buyers and sellers."
+        />
         <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://www.centennialhillshomesforsale.com/real-estate-tools" />
+        <meta
+          property="og:url"
+          content="https://www.centennialhillshomesforsale.com/real-estate-tools"
+        />
       </Head>
 
       <div className="min-h-screen bg-gray-50">
@@ -113,10 +137,14 @@ export default function RealEstateTools() {
                 Everything you need to make informed real estate decisions in Centennial Hills
               </p>
               <div className="flex flex-wrap justify-center gap-4">
-                <span className="bg-white/20 px-4 py-2 rounded-full text-sm">Property Valuation</span>
+                <span className="bg-white/20 px-4 py-2 rounded-full text-sm">
+                  Property Valuation
+                </span>
                 <span className="bg-white/20 px-4 py-2 rounded-full text-sm">Virtual Tours</span>
                 <span className="bg-white/20 px-4 py-2 rounded-full text-sm">School Ratings</span>
-                <span className="bg-white/20 px-4 py-2 rounded-full text-sm">Mortgage Calculator</span>
+                <span className="bg-white/20 px-4 py-2 rounded-full text-sm">
+                  Mortgage Calculator
+                </span>
               </div>
             </div>
           </div>
@@ -152,10 +180,7 @@ export default function RealEstateTools() {
               <h2 className="text-3xl font-bold text-gray-900 text-center mb-12">
                 Compare Properties Side by Side
               </h2>
-              <PropertyComparison
-                properties={sampleProperties}
-                className="max-w-6xl mx-auto"
-              />
+              <PropertyComparison properties={sampleProperties} className="max-w-6xl mx-auto" />
             </div>
           </div>
         </section>
@@ -191,11 +216,10 @@ export default function RealEstateTools() {
         {/* Call to Action */}
         <section className="py-16 bg-blue-600 text-white">
           <div className="container mx-auto px-4 text-center">
-            <h2 className="text-3xl font-bold mb-6">
-              Ready to Buy or Sell in Centennial Hills?
-            </h2>
+            <h2 className="text-3xl font-bold mb-6">Ready to Buy or Sell in Centennial Hills?</h2>
             <p className="text-xl mb-8 text-blue-100">
-              Let Dr. Jan Duffy help you navigate the Centennial Hills real estate market with professional expertise.
+              Let Dr. Jan Duffy help you navigate the Centennial Hills real estate market with
+              professional expertise.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <a
@@ -214,6 +238,11 @@ export default function RealEstateTools() {
           </div>
         </section>
       </div>
+      {/* RealScout Office Listings */}
+      <RealScoutListingsSection
+        title="Current Listings"
+        subtitle="Browse our latest property listings in Centennial Hills and surrounding areas"
+      />
     </Layout>
   );
 }

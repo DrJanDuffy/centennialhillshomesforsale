@@ -1,6 +1,7 @@
 import Head from 'next/head';
 import { ConversionFunnelPage } from '../components/ConversionOptimizer';
 import Layout from '../components/Layout';
+import RealScoutListingsSection from '../components/RealScoutListingsSection';
 
 export default function ConversionFunnelPageRoute() {
   return (
@@ -16,6 +17,11 @@ export default function ConversionFunnelPageRoute() {
 
       {/* Conversion Funnel with Full Optimization */}
       <ConversionFunnelPage />
+      {/* RealScout Office Listings */}
+      <RealScoutListingsSection
+        title="Current Listings"
+        subtitle="Browse our latest property listings in Centennial Hills and surrounding areas"
+      />
     </Layout>
   );
 }

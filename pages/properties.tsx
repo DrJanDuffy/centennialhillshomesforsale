@@ -3,6 +3,7 @@ import Head from 'next/head';
 import Layout from '../components/Layout';
 import ModernFeaturedProperties from '../components/ModernFeaturedProperties';
 import RealScoutListings from '../components/RealScoutListings';
+import RealScoutListingsSection from '../components/RealScoutListingsSection';
 import FeaturedInsight from '../components/rss/FeaturedInsight';
 import MarketInsightsWidget from '../components/rss/MarketInsightsWidget';
 import SimpleInteriorGallery from '../components/SimpleInteriorGallery';
@@ -534,6 +535,12 @@ export default function Properties() {
             </div>
           </div>
         </section>
+
+        {/* RealScout Office Listings */}
+        <RealScoutListingsSection
+          title="Complete Property Inventory"
+          subtitle="Explore our full selection of luxury homes and properties available in Centennial Hills"
+        />
       </Layout>
     </>
   );

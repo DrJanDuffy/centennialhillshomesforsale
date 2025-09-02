@@ -1,5 +1,4 @@
-import React, { useState } from 'react';
-import { motion } from 'framer-motion';
+import { useState } from 'react';
 
 interface VirtualTourProps {
   propertyId: string;
@@ -9,12 +8,12 @@ interface VirtualTourProps {
   className?: string;
 }
 
-export default function VirtualTour({ 
-  propertyId, 
-  tourUrl, 
-  matterportId, 
-  photos, 
-  className = '' 
+export default function VirtualTour({
+  propertyId,
+  tourUrl,
+  matterportId,
+  photos,
+  className = '',
 }: VirtualTourProps) {
   const [activeTour, setActiveTour] = useState<'matterport' | 'photos' | 'video'>('photos');
   const [currentPhotoIndex, setCurrentPhotoIndex] = useState(0);
@@ -35,8 +34,8 @@ export default function VirtualTour({
           <button
             onClick={() => setActiveTour('photos')}
             className={`flex-1 px-4 py-3 text-sm font-medium transition-colors ${
-              activeTour === 'photos' 
-                ? 'bg-blue-600 text-white' 
+              activeTour === 'photos'
+                ? 'bg-blue-600 text-white'
                 : 'bg-gray-50 text-gray-700 hover:bg-gray-100'
             }`}
           >
@@ -46,8 +45,8 @@ export default function VirtualTour({
             <button
               onClick={() => setActiveTour('matterport')}
               className={`flex-1 px-4 py-3 text-sm font-medium transition-colors ${
-                activeTour === 'matterport' 
-                  ? 'bg-blue-600 text-white' 
+                activeTour === 'matterport'
+                  ? 'bg-blue-600 text-white'
                   : 'bg-gray-50 text-gray-700 hover:bg-gray-100'
               }`}
             >
@@ -58,8 +57,8 @@ export default function VirtualTour({
             <button
               onClick={() => setActiveTour('video')}
               className={`flex-1 px-4 py-3 text-sm font-medium transition-colors ${
-                activeTour === 'video' 
-                  ? 'bg-blue-600 text-white' 
+                activeTour === 'video'
+                  ? 'bg-blue-600 text-white'
                   : 'bg-gray-50 text-gray-700 hover:bg-gray-100'
               }`}
             >
@@ -77,7 +76,7 @@ export default function VirtualTour({
                 alt={`Property photo ${currentPhotoIndex + 1}`}
                 className="w-full h-64 sm:h-80 md:h-96 lg:h-[500px] object-cover"
               />
-              
+
               {/* Navigation Arrows */}
               <button
                 onClick={prevPhoto}
@@ -93,7 +92,7 @@ export default function VirtualTour({
               >
                 →
               </button>
-              
+
               {/* Photo Counter */}
               <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 bg-black/50 text-white px-3 py-1 rounded-full text-sm">
                 {currentPhotoIndex + 1} / {photos.length}
@@ -138,8 +137,8 @@ export default function VirtualTour({
                   key={index}
                   onClick={() => setCurrentPhotoIndex(index)}
                   className={`flex-shrink-0 w-16 h-16 rounded-lg overflow-hidden border-2 transition-colors ${
-                    index === currentPhotoIndex 
-                      ? 'border-blue-600' 
+                    index === currentPhotoIndex
+                      ? 'border-blue-600'
                       : 'border-gray-200 hover:border-gray-300'
                   }`}
                 >
