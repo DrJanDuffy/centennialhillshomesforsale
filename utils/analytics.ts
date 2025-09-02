@@ -296,7 +296,7 @@ export const getAnalytics = (): AnalyticsTracker => {
       }),
       getEvents: () => [],
       getSessionId: () => 'server-session',
-    } as AnalyticsTracker;
+    } as unknown as AnalyticsTracker;
   }
 
   if (!analyticsInstance) {
