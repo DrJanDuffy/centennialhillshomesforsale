@@ -7,8 +7,8 @@
       "images": [
         {
           "id": "exterior-main",
-          "src": "/assets/images/property-gallery/luxury-estate-exterior-main.svg",
-          "alt": "Luxury estate exterior with mountain backdrop",
+          "src": "/assets/images/property-gallery/luxury-estate-exterior-main.jpg",
+          "alt": "Luxury estate exterior with modern design and landscaping",
           "width": 1920,
           "height": 1080,
           "priority": true,
@@ -16,8 +16,17 @@
         },
         {
           "id": "kitchen",
-          "src": "/assets/images/property-gallery/luxury-estate-kitchen.svg",
-          "alt": "Gourmet kitchen with granite countertops and stainless steel appliances",
+          "src": "/assets/images/property-gallery/luxury-estate-kitchen.jpg",
+          "alt": "Modern gourmet kitchen with dark countertops and stainless appliances",
+          "width": 1600,
+          "height": 1200,
+          "priority": false,
+          "category": "interior"
+        },
+        {
+          "id": "living-room",
+          "src": "/assets/images/property-gallery/luxury-estate-living-room.jpg",
+          "alt": "Spacious living room with built-in fireplace and modern design",
           "width": 1600,
           "height": 1200,
           "priority": false,
@@ -25,21 +34,30 @@
         },
         {
           "id": "master-bedroom",
-          "src": "/assets/images/property-gallery/luxury-estate-master-bedroom.svg",
-          "alt": "Master bedroom with mountain views and luxury finishes",
+          "src": "/assets/images/property-gallery/luxury-estate-master-bedroom.jpg",
+          "alt": "Master bedroom with built-in closet and modern bathroom access",
           "width": 1600,
           "height": 1200,
           "priority": false,
           "category": "interior"
         },
         {
-          "id": "pool",
-          "src": "/assets/images/property-gallery/luxury-estate-pool.svg",
-          "alt": "Resort-style pool with mountain views",
+          "id": "bathroom",
+          "src": "/assets/images/property-gallery/luxury-estate-bathroom.jpg",
+          "alt": "Master bathroom with double vanity and contemporary design",
           "width": 1600,
           "height": 1200,
           "priority": false,
-          "category": "amenities"
+          "category": "interior"
+        },
+        {
+          "id": "hallway",
+          "src": "/assets/images/property-gallery/luxury-estate-hallway.jpg",
+          "alt": "Interior hallway with wooden staircase and plantation shutters",
+          "width": 1600,
+          "height": 1200,
+          "priority": false,
+          "category": "interior"
         }
       ],
       "neighborhood": "Centennial Hills",
@@ -55,26 +73,35 @@
       "images": [
         {
           "id": "exterior-main",
-          "src": "/assets/images/property-gallery/modern-home-exterior-main.svg",
-          "alt": "Modern family home exterior with clean lines",
+          "src": "/assets/images/property-gallery/modern-home-exterior-main.jpg",
+          "alt": "Modern family home exterior with contemporary architecture",
           "width": 1920,
           "height": 1080,
           "priority": true,
           "category": "exterior"
         },
         {
-          "id": "living-room",
-          "src": "/assets/images/property-gallery/modern-home-living-room.svg",
-          "alt": "Open concept living room with large windows",
+          "id": "kitchen",
+          "src": "/assets/images/property-gallery/modern-home-kitchen.jpg",
+          "alt": "Contemporary kitchen with large island and black appliances",
           "width": 1600,
           "height": 1200,
           "priority": false,
           "category": "interior"
         },
         {
-          "id": "kitchen",
-          "src": "/assets/images/property-gallery/modern-home-kitchen.svg",
-          "alt": "Modern kitchen with island and breakfast nook",
+          "id": "living-room",
+          "src": "/assets/images/property-gallery/modern-home-living-room.jpg",
+          "alt": "Open concept living room with modern fireplace and natural light",
+          "width": 1600,
+          "height": 1200,
+          "priority": false,
+          "category": "interior"
+        },
+        {
+          "id": "bedroom",
+          "src": "/assets/images/property-gallery/modern-home-bedroom.jpg",
+          "alt": "Modern bedroom with neutral colors and contemporary design",
           "width": 1600,
           "height": 1200,
           "priority": false,
@@ -94,30 +121,30 @@
       "images": [
         {
           "id": "exterior-main",
-          "src": "/assets/images/property-gallery/providence-villa-exterior-main.svg",
-          "alt": "Luxury villa exterior with custom architecture",
+          "src": "/assets/images/property-gallery/providence-villa-exterior-main.jpg",
+          "alt": "Luxury villa exterior in prestigious Providence neighborhood",
           "width": 1920,
           "height": 1080,
           "priority": true,
           "category": "exterior"
         },
         {
-          "id": "wine-cellar",
-          "src": "/assets/images/property-gallery/providence-villa-wine-cellar.svg",
-          "alt": "Custom wine cellar with temperature control",
+          "id": "kitchen",
+          "src": "/assets/images/property-gallery/providence-villa-kitchen.jpg",
+          "alt": "Luxury kitchen with high-end appliances and custom cabinetry",
           "width": 1600,
           "height": 1200,
           "priority": false,
-          "category": "amenities"
+          "category": "interior"
         },
         {
-          "id": "home-theater",
-          "src": "/assets/images/property-gallery/providence-villa-home-theater.svg",
-          "alt": "Professional home theater with surround sound",
+          "id": "living-room",
+          "src": "/assets/images/property-gallery/providence-villa-living-room.jpg",
+          "alt": "Spacious living room with modern fireplace and open floor plan",
           "width": 1600,
           "height": 1200,
           "priority": false,
-          "category": "amenities"
+          "category": "interior"
         }
       ],
       "neighborhood": "Providence",
@@ -133,45 +160,81 @@
       "name": "Centennial Hills",
       "description": "Master-planned community with mountain views and family amenities",
       "heroImage": {
-        "src": "/assets/images/neighborhoods/centennial-hills-hero.svg",
-        "alt": "Centennial Hills neighborhood overview",
+        "src": "/assets/images/neighborhoods/centennial-hills-hero.jpg",
+        "alt": "Aerial view of Centennial Hills residential community",
         "width": 1920,
         "height": 1080
       },
-      "amenities": ["Parks", "Schools", "Shopping", "Dining", "Recreation"]
+      "amenities": [
+        "Parks",
+        "Schools",
+        "Shopping",
+        "Dining",
+        "Recreation"
+      ]
     },
     {
       "id": "providence",
       "name": "Providence",
       "description": "Exclusive gated community with luxury homes and resort-style living",
       "heroImage": {
-        "src": "/assets/images/neighborhoods/providence-hero.svg",
-        "alt": "Providence neighborhood entrance and landscaping",
+        "src": "/assets/images/neighborhoods/providence-hero.jpg",
+        "alt": "Providence gated community entrance and landscaping",
         "width": 1920,
         "height": 1080
       },
-      "amenities": ["Gated Community", "Clubhouse", "Pool", "Tennis", "Golf"]
+      "amenities": [
+        "Gated Community",
+        "Clubhouse",
+        "Pool",
+        "Tennis",
+        "Golf"
+      ]
     },
     {
       "id": "skye-canyon",
       "name": "Skye Canyon",
       "description": "Nature-inspired community with hiking trails and outdoor recreation",
       "heroImage": {
-        "src": "/assets/images/neighborhoods/skye-canyon-hero.svg",
-        "alt": "Skye Canyon natural landscape and trails",
+        "src": "/assets/images/neighborhoods/skye-canyon-hero.jpg",
+        "alt": "Skye Canyon community with natural landscape and hiking trails",
         "width": 1920,
         "height": 1080
       },
-      "amenities": ["Hiking Trails", "Parks", "Community Center", "Fitness", "Nature"]
+      "amenities": [
+        "Hiking Trails",
+        "Parks",
+        "Community Center",
+        "Fitness",
+        "Nature"
+      ]
     }
   ],
   "optimization": {
-    "formats": ["webp", "avif", "jpeg"],
-    "breakpoints": [320, 640, 768, 1024, 1280, 1920],
+    "formats": [
+      "webp",
+      "avif",
+      "jpeg"
+    ],
+    "breakpoints": [
+      320,
+      640,
+      768,
+      1024,
+      1280,
+      1920
+    ],
     "quality": 85,
     "compression": "progressive",
     "lazyLoading": true,
-    "priorityImages": ["hero", "exterior-main"],
-    "placeholderTypes": ["shimmer", "empty", "blur"]
+    "priorityImages": [
+      "hero",
+      "exterior-main"
+    ],
+    "placeholderTypes": [
+      "shimmer",
+      "empty",
+      "blur"
+    ]
   }
 }
