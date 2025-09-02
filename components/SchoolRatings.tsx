@@ -32,7 +32,9 @@ export default function SchoolRatings({ neighborhood, schools, className = '' }:
   };
 
   const getRatingStars = (rating: number) => {
-    return '★'.repeat(Math.floor(rating)) + '☆'.repeat(5 - Math.floor(rating));
+    const floorRating = Math.floor(Math.max(0, Math.min(5, rating)));
+    const emptyStars = Math.max(0, 5 - floorRating);
+    return '★'.repeat(floorRating) + '☆'.repeat(emptyStars);
   };
 
   return (
