@@ -23,11 +23,11 @@ const optimizations = {
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link rel="dns-prefetch" href="//images.unsplash.com">
         <link rel="dns-prefetch" href="//www.google-analytics.com">
-        <link rel="dns-prefetch" href="//em.realscout.com">`
-      }
-    ]
+        <link rel="dns-prefetch" href="//em.realscout.com">`,
+      },
+    ],
   },
-  
+
   loadingStates: {
     description: 'Add loading states for better UX',
     files: ['components/PropertyListings.tsx', 'components/RealScoutWidget.tsx'],
@@ -37,22 +37,23 @@ const optimizations = {
         replace: `<div className="flex items-center justify-center space-x-2">
           <div className="animate-spin rounded-full h-6 w-6 border-b-2 border-blue-600"></div>
           <span>Loading property listings...</span>
-        </div>`
-      }
-    ]
+        </div>`,
+      },
+    ],
   },
-  
+
   mobileOptimizations: {
     description: 'Optimize mobile interactions and touch targets',
     files: ['components/Navigation.tsx', 'components/PropertyCard.tsx'],
     changes: [
       {
         search: 'className="p-2 rounded-lg"',
-        replace: 'className="p-3 rounded-lg min-h-[44px] min-w-[44px] flex items-center justify-center"'
-      }
-    ]
+        replace:
+          'className="p-3 rounded-lg min-h-[44px] min-w-[44px] flex items-center justify-center"',
+      },
+    ],
   },
-  
+
   seoEnhancements: {
     description: 'Enhance SEO with better structured data',
     files: ['pages/index.tsx'],
@@ -85,24 +86,24 @@ const optimizations = {
             "reviewCount": "150"
           }
         }
-        </script>`
-      }
-    ]
-  }
+        </script>`,
+      },
+    ],
+  },
 };
 
 // Function to apply optimizations
 function applyOptimization(optimization) {
   console.log(`🔧 ${optimization.description}`);
-  
-  optimization.files.forEach(filePath => {
+
+  optimization.files.forEach((filePath) => {
     const fullPath = path.join(process.cwd(), filePath);
-    
+
     if (fs.existsSync(fullPath)) {
       let content = fs.readFileSync(fullPath, 'utf8');
       let modified = false;
-      
-      optimization.changes.forEach(change => {
+
+      optimization.changes.forEach((change) => {
         if (content.includes(change.search)) {
           content = content.replace(change.search, change.replace);
           modified = true;
@@ -111,7 +112,7 @@ function applyOptimization(optimization) {
           console.log(`   ⚠️  Pattern not found in: ${filePath}`);
         }
       });
-      
+
       if (modified) {
         fs.writeFileSync(fullPath, content);
       }
@@ -119,14 +120,14 @@ function applyOptimization(optimization) {
       console.log(`   ❌ File not found: ${filePath}`);
     }
   });
-  
+
   console.log('');
 }
 
 // Function to create performance monitoring component
 function createPerformanceMonitor() {
   console.log('📊 Creating performance monitoring component...');
-  
+
   const performanceMonitor = `import { useEffect } from 'react';
 
 export const PerformanceMonitor = () => {
@@ -173,7 +174,7 @@ export const PerformanceMonitor = () => {
 // Function to create loading skeleton component
 function createLoadingSkeleton() {
   console.log('💀 Creating loading skeleton component...');
-  
+
   const loadingSkeleton = `import React from 'react';
 
 export const PropertyCardSkeleton = () => (
@@ -207,7 +208,7 @@ export const PropertyListSkeleton = () => (
 // Function to create mobile optimization utilities
 function createMobileOptimizations() {
   console.log('📱 Creating mobile optimization utilities...');
-  
+
   const mobileUtils = `import { useEffect, useState } from 'react';
 
 export const useMobileDetection = () => {
@@ -271,15 +272,15 @@ export const useTouchOptimization = () => {
 async function main() {
   try {
     console.log('🎯 Applying critical optimizations...\n');
-    
+
     // Apply each optimization
     Object.values(optimizations).forEach(applyOptimization);
-    
+
     // Create new components
     createPerformanceMonitor();
     createLoadingSkeleton();
     createMobileOptimizations();
-    
+
     console.log('✅ Optimization complete!');
     console.log('\n📋 Next Steps:');
     console.log('   1. Test the changes locally');
@@ -287,7 +288,6 @@ async function main() {
     console.log('   3. Deploy to Vercel');
     console.log('   4. Monitor performance metrics');
     console.log('\n🚀 Your website should now be significantly faster and more user-friendly!');
-    
   } catch (error) {
     console.error('❌ Optimization failed:', error.message);
     process.exit(1);

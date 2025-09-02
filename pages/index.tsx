@@ -6,6 +6,7 @@ import Layout from '../components/Layout';
 import RealScoutListings from '../components/RealScoutListings';
 import FeaturedInsight from '../components/rss/FeaturedInsight';
 import SimpleInteriorGallery from '../components/SimpleInteriorGallery';
+import ConversionOptimizer from '../components/ConversionOptimizer';
 import { getPhotosForPage } from '../utils/interiorPhotos';
 
 export default function Home() {
@@ -269,6 +270,9 @@ export default function Home() {
           </div>
         </div>
       </section>
+
+      {/* Conversion Optimization Components */}
+      <ConversionOptimizer />
     </Layout>
   );
 }
