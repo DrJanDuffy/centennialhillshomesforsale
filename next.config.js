@@ -9,10 +9,15 @@ const nextConfig = {
   poweredByHeader: false,
   generateEtags: false,
   compress: true,
-  
+
   // Disable ESLint during build (using Biome instead)
   eslint: {
     ignoreDuringBuilds: true,
+  },
+  
+  // Force fresh build
+  generateBuildId: async () => {
+    return `build-${Date.now()}`;
   },
 
   // Image optimization for Vercel
