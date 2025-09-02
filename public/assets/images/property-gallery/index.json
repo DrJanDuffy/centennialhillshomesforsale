@@ -7,7 +7,7 @@
       "images": [
         {
           "id": "exterior-main",
-          "src": "/assets/images/property-gallery/luxury-estate-exterior-main.jpg",
+          "src": "/assets/images/property-gallery/luxury-estate-exterior-main.svg",
           "alt": "Luxury estate exterior with modern design and landscaping",
           "width": 1920,
           "height": 1080,
@@ -16,7 +16,7 @@
         },
         {
           "id": "kitchen",
-          "src": "/assets/images/property-gallery/luxury-estate-kitchen.jpg",
+          "src": "/assets/images/property-gallery/luxury-estate-kitchen.svg",
           "alt": "Modern gourmet kitchen with dark countertops and stainless appliances",
           "width": 1600,
           "height": 1200,
@@ -25,7 +25,7 @@
         },
         {
           "id": "living-room",
-          "src": "/assets/images/property-gallery/luxury-estate-living-room.jpg",
+          "src": "/assets/images/property-gallery/luxury-estate-living-room.svg",
           "alt": "Spacious living room with built-in fireplace and modern design",
           "width": 1600,
           "height": 1200,
@@ -34,7 +34,7 @@
         },
         {
           "id": "master-bedroom",
-          "src": "/assets/images/property-gallery/luxury-estate-master-bedroom.jpg",
+          "src": "/assets/images/property-gallery/luxury-estate-master-bedroom.svg",
           "alt": "Master bedroom with built-in closet and modern bathroom access",
           "width": 1600,
           "height": 1200,
@@ -43,7 +43,7 @@
         },
         {
           "id": "bathroom",
-          "src": "/assets/images/property-gallery/luxury-estate-bathroom.jpg",
+          "src": "/assets/images/property-gallery/luxury-estate-bathroom.svg",
           "alt": "Master bathroom with double vanity and contemporary design",
           "width": 1600,
           "height": 1200,
@@ -52,7 +52,7 @@
         },
         {
           "id": "hallway",
-          "src": "/assets/images/property-gallery/luxury-estate-hallway.jpg",
+          "src": "/assets/images/property-gallery/luxury-estate-hallway.svg",
           "alt": "Interior hallway with wooden staircase and plantation shutters",
           "width": 1600,
           "height": 1200,
@@ -73,7 +73,7 @@
       "images": [
         {
           "id": "exterior-main",
-          "src": "/assets/images/property-gallery/modern-home-exterior-main.jpg",
+          "src": "/assets/images/property-gallery/modern-home-exterior-main.svg",
           "alt": "Modern family home exterior with contemporary architecture",
           "width": 1920,
           "height": 1080,
@@ -82,7 +82,7 @@
         },
         {
           "id": "kitchen",
-          "src": "/assets/images/property-gallery/modern-home-kitchen.jpg",
+          "src": "/assets/images/property-gallery/modern-home-kitchen.svg",
           "alt": "Contemporary kitchen with large island and black appliances",
           "width": 1600,
           "height": 1200,
@@ -91,7 +91,7 @@
         },
         {
           "id": "living-room",
-          "src": "/assets/images/property-gallery/modern-home-living-room.jpg",
+          "src": "/assets/images/property-gallery/modern-home-living-room.svg",
           "alt": "Open concept living room with modern fireplace and natural light",
           "width": 1600,
           "height": 1200,
@@ -100,7 +100,7 @@
         },
         {
           "id": "bedroom",
-          "src": "/assets/images/property-gallery/modern-home-bedroom.jpg",
+          "src": "/assets/images/property-gallery/modern-home-bedroom.svg",
           "alt": "Modern bedroom with neutral colors and contemporary design",
           "width": 1600,
           "height": 1200,
@@ -121,7 +121,7 @@
       "images": [
         {
           "id": "exterior-main",
-          "src": "/assets/images/property-gallery/providence-villa-exterior-main.jpg",
+          "src": "/assets/images/property-gallery/providence-villa-exterior-main.svg",
           "alt": "Luxury villa exterior in prestigious Providence neighborhood",
           "width": 1920,
           "height": 1080,
@@ -130,7 +130,7 @@
         },
         {
           "id": "kitchen",
-          "src": "/assets/images/property-gallery/providence-villa-kitchen.jpg",
+          "src": "/assets/images/property-gallery/providence-villa-kitchen.svg",
           "alt": "Luxury kitchen with high-end appliances and custom cabinetry",
           "width": 1600,
           "height": 1200,
@@ -139,7 +139,7 @@
         },
         {
           "id": "living-room",
-          "src": "/assets/images/property-gallery/providence-villa-living-room.jpg",
+          "src": "/assets/images/property-gallery/providence-villa-living-room.svg",
           "alt": "Spacious living room with modern fireplace and open floor plan",
           "width": 1600,
           "height": 1200,
@@ -160,7 +160,7 @@
       "name": "Centennial Hills",
       "description": "Master-planned community with mountain views and family amenities",
       "heroImage": {
-        "src": "/assets/images/neighborhoods/centennial-hills-hero.jpg",
+        "src": "/assets/images/neighborhoods/centennial-hills-hero.svg",
         "alt": "Aerial view of Centennial Hills residential community",
         "width": 1920,
         "height": 1080
@@ -178,7 +178,7 @@
       "name": "Providence",
       "description": "Exclusive gated community with luxury homes and resort-style living",
       "heroImage": {
-        "src": "/assets/images/neighborhoods/providence-hero.jpg",
+        "src": "/assets/images/neighborhoods/providence-hero.svg",
         "alt": "Providence gated community entrance and landscaping",
         "width": 1920,
         "height": 1080
@@ -196,7 +196,7 @@
       "name": "Skye Canyon",
       "description": "Nature-inspired community with hiking trails and outdoor recreation",
       "heroImage": {
-        "src": "/assets/images/neighborhoods/skye-canyon-hero.jpg",
+        "src": "/assets/images/neighborhoods/skye-canyon-hero.svg",
         "alt": "Skye Canyon community with natural landscape and hiking trails",
         "width": 1920,
         "height": 1080
