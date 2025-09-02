@@ -1,27 +1,18 @@
 import type React from 'react';
 import BehavioralTriggers from './BehavioralTriggers';
-import ConversionFunnel from './ConversionFunnel';
-import EngagementOptimizer from './EngagementOptimizer';
-import { PerformanceMonitor } from './PerformanceMonitor';
 import SocialProofEngine from './SocialProofEngine';
 
 /**
- * Master Conversion Optimization Component
- * Combines all engagement and conversion optimization features
+ * Simplified Conversion Optimization Component
+ * Focuses on essential conversion features that work reliably
  */
 export const ConversionOptimizer: React.FC = () => {
   return (
     <>
-      {/* Performance Monitoring */}
-      <PerformanceMonitor />
-
-      {/* Engagement Optimization */}
-      <EngagementOptimizer />
-
-      {/* Behavioral Triggers */}
+      {/* Behavioral Triggers - Simple and effective */}
       <BehavioralTriggers />
 
-      {/* Social Proof Engine */}
+      {/* Social Proof Engine - Builds trust */}
       <SocialProofEngine />
     </>
   );
@@ -33,8 +24,6 @@ export const ConversionOptimizer: React.FC = () => {
 export const ConversionFunnelPage: React.FC = () => {
   return (
     <>
-      <PerformanceMonitor />
-      <ConversionFunnel />
       <BehavioralTriggers />
       <SocialProofEngine />
     </>
