@@ -235,8 +235,8 @@ class AnalyticsTracker {
       console.log('Analytics Event:', analyticsEvent);
 
       // Example: Send to Google Analytics
-      if (typeof window !== 'undefined' && typeof gtag !== 'undefined') {
-        gtag('event', event, properties);
+      if (typeof window !== 'undefined' && window.gtag) {
+        window.gtag('event', event, properties);
       }
     }
   }
