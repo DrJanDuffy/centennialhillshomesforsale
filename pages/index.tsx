@@ -1,7 +1,7 @@
 import Head from 'next/head';
 import Link from 'next/link';
 
-import EnhancedHero from '../components/EnhancedHero';
+import AIHeroSection from '../components/AIHeroSection';
 import Layout from '../components/Layout';
 import RealScoutListings from '../components/RealScoutListings';
 import FeaturedInsight from '../components/rss/FeaturedInsight';
@@ -11,8 +11,8 @@ import { getPhotosForPage } from '../utils/interiorPhotos';
 export default function Home() {
   return (
     <Layout>
-      {/* Enhanced Hero with Modern Design */}
-      <EnhancedHero />
+      {/* AI-Generated Hero with Luxury Real Estate Image */}
+      <AIHeroSection />
 
       <Head>
         <title>Centennial Hills Homes for Sale | Dr. Jan Duffy | Luxury Real Estate</title>

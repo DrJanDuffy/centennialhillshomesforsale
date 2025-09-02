@@ -56,10 +56,21 @@ export default function EnhancedHero() {
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
       {/* Background Elements */}
       <div className="absolute inset-0">
-        {/* Gradient Background */}
+        {/* AI-Generated Hero Image Background */}
+        <div
+          className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+          style={{
+            backgroundImage: `url('/images/hero-image.jpg')`,
+          }}
+        />
+        
+        {/* Dark Overlay for Text Readability */}
+        <div className="absolute inset-0 bg-black/40" />
+        
+        {/* Gradient Overlay for Enhanced Visual Appeal */}
         <div
           className={`absolute inset-0 bg-gradient-to-br ${
-            isDark ? 'from-gray-900 via-blue-900 to-gray-900' : 'from-blue-50 via-white to-green-50'
+            isDark ? 'from-gray-900/60 via-blue-900/40 to-gray-900/60' : 'from-blue-900/30 via-transparent to-green-900/30'
           }`}
         />
 
