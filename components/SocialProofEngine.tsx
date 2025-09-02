@@ -115,31 +115,37 @@ export const SocialProofEngine: React.FC = () => {
         },
       ];
 
-      const liveActivity = [
+      const liveActivity: Array<{
+        id: string;
+        type: 'viewing' | 'inquiry' | 'saved' | 'shared';
+        property: string;
+        timestamp: string;
+        location: string;
+      }> = [
         {
           id: '1',
-          type: 'viewing',
+          type: 'viewing' as const,
           property: 'Luxury Estate on Mountain View',
           timestamp: '2 minutes ago',
           location: 'Las Vegas, NV',
         },
         {
           id: '2',
-          type: 'inquiry',
+          type: 'inquiry' as const,
           property: 'Golf Course Home',
           timestamp: '5 minutes ago',
           location: 'Henderson, NV',
         },
         {
           id: '3',
-          type: 'saved',
+          type: 'saved' as const,
           property: 'Modern Family Home',
           timestamp: '8 minutes ago',
           location: 'Las Vegas, NV',
         },
         {
           id: '4',
-          type: 'shared',
+          type: 'shared' as const,
           property: 'Executive Condo',
           timestamp: '12 minutes ago',
           location: 'Las Vegas, NV',

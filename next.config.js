@@ -14,7 +14,7 @@ const nextConfig = {
   eslint: {
     ignoreDuringBuilds: true,
   },
-  
+
   // Force fresh build
   generateBuildId: async () => {
     return `build-${Date.now()}`;
