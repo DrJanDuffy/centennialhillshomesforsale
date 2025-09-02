@@ -41,6 +41,7 @@ const navigation = [
     ],
   },
   { name: 'Interior Photos', href: '/interior-photos', icon: BuildingOfficeIcon },
+  { name: 'Real Estate Tools', href: '/real-estate-tools', icon: BuildingOfficeIcon },
   { name: 'About', href: '/about', icon: UserGroupIcon },
   { name: 'Contact', href: '/contact', icon: PhoneIcon },
 ];
