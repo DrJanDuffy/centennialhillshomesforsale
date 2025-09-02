@@ -18,7 +18,7 @@ import {
   Star,
 } from 'lucide-react';
 import type React from 'react';
-import { useState } from 'react';
+import { useId, useState } from 'react';
 
 interface PropertyRecommendation {
   id: string;
@@ -49,6 +49,9 @@ const SmartPropertyRecommendations: React.FC<SmartPropertyRecommendationsProps> 
   const [showFilters, setShowFilters] = useState(false);
   const [sortBy, setSortBy] = useState<'match' | 'price' | 'date'>('match');
 
+  // Generate unique IDs for form elements
+  const sortSelectId = useId();
+
   const recommendations: PropertyRecommendation[] = [
     {
       id: '1',
@@ -68,7 +71,7 @@ const SmartPropertyRecommendations: React.FC<SmartPropertyRecommendationsProps> 
       features: ['Pool', 'Mountain Views', 'Gourmet Kitchen', 'Smart Home'],
       daysOnMarket: 8,
       pricePerSqft: 243,
-      image: '/images/providence-home-1.jpg',
+      image: '/assets/images/property-gallery/providence-villa-exterior-main.svg',
       status: 'active',
     },
     {
@@ -110,7 +113,7 @@ const SmartPropertyRecommendations: React.FC<SmartPropertyRecommendationsProps> 
       features: ['Open Floor Plan', 'Mountain Views', 'Upgraded Kitchen', 'Large Yard'],
       daysOnMarket: 15,
       pricePerSqft: 270,
-      image: '/images/skye-canyon-home-1.jpg',
+      image: '/assets/images/property-gallery/modern-home-exterior-main.svg',
       status: 'active',
     },
   ];
@@ -199,6 +202,7 @@ const SmartPropertyRecommendations: React.FC<SmartPropertyRecommendationsProps> 
               AI Recommendations
             </span>
             <button
+              type="button"
               onClick={() => setIsEnabled(!isEnabled)}
               className={`relative inline-flex h-8 w-16 items-center rounded-full transition-colors duration-300 ${
                 isEnabled ? 'bg-accent-color' : 'bg-tertiary'
@@ -236,6 +240,7 @@ const SmartPropertyRecommendations: React.FC<SmartPropertyRecommendationsProps> 
                 <div className="flex-1">
                   <div className="flex items-center gap-4 mb-4">
                     <button
+                      type="button"
                       onClick={() => setShowFilters(!showFilters)}
                       className="flex items-center gap-2 px-4 py-2 bg-tertiary rounded-lg hover:bg-secondary-color/10 transition-colors"
                     >
@@ -266,6 +271,7 @@ const SmartPropertyRecommendations: React.FC<SmartPropertyRecommendationsProps> 
                       >
                         {filters.map((filter) => (
                           <button
+                            type="button"
                             key={filter.key}
                             onClick={() => {
                               setSelectedFilters((prev) =>
@@ -291,11 +297,11 @@ const SmartPropertyRecommendations: React.FC<SmartPropertyRecommendationsProps> 
 
                 {/* Sort */}
                 <div className="flex items-center gap-2">
-                  <label htmlFor="sort-select" className="text-sm text-secondary">
+                  <label htmlFor={sortSelectId} className="text-sm text-secondary">
                     Sort by:
                   </label>
                   <select
-                    id="sort-select"
+                    id={sortSelectId}
                     value={sortBy}
                     onChange={(e) => setSortBy(e.target.value as 'match' | 'price' | 'date')}
                     className="px-3 py-2 bg-tertiary rounded-lg text-sm border-none focus:ring-2 focus:ring-accent-color/50"
@@ -340,6 +346,7 @@ const SmartPropertyRecommendations: React.FC<SmartPropertyRecommendationsProps> 
                     {/* Action Buttons */}
                     <div className="absolute top-4 right-4 flex gap-2">
                       <button
+                        type="button"
                         className="w-8 h-8 bg-white/20 backdrop-blur-md rounded-full flex items-center justify-center hover:bg-white/30 transition-colors"
                         aria-label="Add to favorites"
                         title="Add to favorites"
@@ -347,6 +354,7 @@ const SmartPropertyRecommendations: React.FC<SmartPropertyRecommendationsProps> 
                         <Heart className="w-4 h-4 text-white" />
                       </button>
                       <button
+                        type="button"
                         className="w-8 h-8 bg-white/20 backdrop-blur-md rounded-full flex items-center justify-center hover:bg-white/30 transition-colors"
                         aria-label="Share property"
                         title="Share property"
@@ -410,8 +418,11 @@ const SmartPropertyRecommendations: React.FC<SmartPropertyRecommendationsProps> 
                         Why We Recommend This Property:
                       </h4>
                       <ul className="space-y-1">
-                        {recommendation.reasons.slice(0, 2).map((reason, idx) => (
-                          <li key={idx} className="text-xs text-secondary flex items-start gap-2">
+                        {recommendation.reasons.slice(0, 2).map((reason) => (
+                          <li
+                            key={reason}
+                            className="text-xs text-secondary flex items-start gap-2"
+                          >
                             <div className="w-1 h-1 bg-accent-color rounded-full mt-1.5 flex-shrink-0"></div>
                             {reason}
                           </li>
@@ -422,9 +433,9 @@ const SmartPropertyRecommendations: React.FC<SmartPropertyRecommendationsProps> 
                     {/* Features */}
                     <div className="mb-4">
                       <div className="flex flex-wrap gap-1">
-                        {recommendation.features.slice(0, 3).map((feature, idx) => (
+                        {recommendation.features.slice(0, 3).map((feature) => (
                           <span
-                            key={idx}
+                            key={feature}
                             className="bg-tertiary text-secondary px-2 py-1 rounded text-xs"
                           >
                             {feature}
@@ -435,12 +446,13 @@ const SmartPropertyRecommendations: React.FC<SmartPropertyRecommendationsProps> 
 
                     {/* Action Buttons */}
                     <div className="flex gap-3">
-                      <button className="btn btn-primary flex-1 group">
+                      <button type="button" className="btn btn-primary flex-1 group">
                         <Eye className="w-4 h-4 mr-2 group-hover:scale-110 transition-transform" />
                         View Details
                         <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
                       </button>
                       <button
+                        type="button"
                         className="btn btn-outline"
                         aria-label="Contact about this property"
                         title="Contact about this property"
@@ -474,7 +486,11 @@ const SmartPropertyRecommendations: React.FC<SmartPropertyRecommendationsProps> 
                 <p className="text-secondary mb-4">
                   Try adjusting your filters or contact us for personalized recommendations
                 </p>
-                <button onClick={() => setSelectedFilters([])} className="btn btn-primary">
+                <button
+                  type="button"
+                  onClick={() => setSelectedFilters([])}
+                  className="btn btn-primary"
+                >
                   Clear Filters
                 </button>
               </motion.div>
@@ -488,7 +504,7 @@ const SmartPropertyRecommendations: React.FC<SmartPropertyRecommendationsProps> 
               viewport={{ once: true }}
               className="text-center mt-12"
             >
-              <button className="btn btn-accent btn-lg group">
+              <button type="button" className="btn btn-accent btn-lg group">
                 <Sparkles className="w-5 h-5 mr-2 group-hover:scale-110 transition-transform" />
                 Get More Recommendations
                 <ArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" />
@@ -510,7 +526,9 @@ const SmartPropertyRecommendations: React.FC<SmartPropertyRecommendationsProps> 
             <p className="text-secondary mb-4">
               Use our advanced search filters to find your perfect home
             </p>
-            <button className="btn btn-primary">Start Manual Search</button>
+            <button type="button" className="btn btn-primary">
+              Start Manual Search
+            </button>
           </motion.div>
         )}
       </div>
