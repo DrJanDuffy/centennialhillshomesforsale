@@ -105,7 +105,9 @@ const SchoolInfo: React.FC<SchoolInfoProps> = ({ neighborhood = 'Centennial Hill
   const schools = schoolsData[neighborhood] || schoolsData['Centennial Hills'];
 
   const getStarRating = (rating: number) => {
-    return '★'.repeat(rating) + '☆'.repeat(10 - rating);
+    const floorRating = Math.floor(Math.max(0, Math.min(10, rating)));
+    const emptyStars = Math.max(0, 10 - floorRating);
+    return '★'.repeat(floorRating) + '☆'.repeat(emptyStars);
   };
 
   return (
