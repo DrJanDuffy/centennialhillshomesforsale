@@ -227,7 +227,7 @@ export const EnhancedImage: React.FC<EnhancedImageProps> = ({
   width,
   height,
   priority = false,
-  fallback = '/images/placeholder-property.jpg',
+  fallback = '/assets/images/property-gallery/modern-home-exterior-main.svg',
 }) => {
   const [imageSrc, setImageSrc] = React.useState(priority ? src : fallback);
   const [isLoading, setIsLoading] = React.useState(!priority);
