@@ -7,6 +7,9 @@ declare global {
     };
   }
 
+  // Global gtag function for Google Analytics
+  function gtag(...args: any[]): void;
+
   namespace JSX {
     interface IntrinsicElements {
       'realscout-office-listings': React.DetailedHTMLProps<
