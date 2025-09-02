@@ -3,7 +3,7 @@
  * This script tests the API endpoints that you can control through Cursor.ai
  */
 
-const https = require('https');
+const https = require('node:https');
 
 // Your Cloudflare credentials
 const API_KEY = '006a036208c6527a48175ccf9393d794509e3';

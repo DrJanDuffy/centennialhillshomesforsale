@@ -80,7 +80,7 @@ const aiTools = [
 function displayPrompt(type) {
   console.log(`\n🎨 ${type.toUpperCase()} HERO IMAGE PROMPT:\n`);
   console.log(prompts[type]);
-  console.log('\n' + '='.repeat(80) + '\n');
+  console.log(`\n${'='.repeat(80)}\n`);
 }
 
 function displayAITools() {
@@ -124,7 +124,6 @@ switch (command) {
   case 'tools':
     displayAITools();
     break;
-  case 'help':
   default:
     console.log('\n🏠 CENTENNIAL HILLS HERO IMAGE GENERATOR\n');
     console.log('Usage: node generate-hero-image.js [command]\n');
@@ -142,4 +141,3 @@ switch (command) {
 console.log(
   '\n✨ Happy generating! Your new hero image will make your real estate website shine! ✨\n'
 );
-

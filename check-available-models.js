@@ -22,9 +22,9 @@ async function checkAvailableModels() {
     const response = await fetch('https://openrouter.ai/api/v1/models', {
       method: 'GET',
       headers: {
-        'Authorization': `Bearer ${OPENROUTER_API_KEY}`,
-        'Content-Type': 'application/json'
-      }
+        Authorization: `Bearer ${OPENROUTER_API_KEY}`,
+        'Content-Type': 'application/json',
+      },
     });
 
     if (!response.ok) {
@@ -35,16 +35,16 @@ async function checkAvailableModels() {
     }
 
     const data = await response.json();
-    
+
     console.log('📋 Available models:');
-    const geminiModels = data.data.filter(model => 
-      model.id.toLowerCase().includes('gemini') || 
-      model.id.toLowerCase().includes('google')
+    const geminiModels = data.data.filter(
+      (model) =>
+        model.id.toLowerCase().includes('gemini') || model.id.toLowerCase().includes('google')
     );
-    
+
     if (geminiModels.length > 0) {
       console.log('\n🎯 Gemini/Google models found:');
-      geminiModels.forEach(model => {
+      geminiModels.forEach((model) => {
         console.log(`• ${model.id} - ${model.name || 'No description'}`);
       });
     } else {
@@ -52,16 +52,17 @@ async function checkAvailableModels() {
     }
 
     // Also check for image generation models
-    const imageModels = data.data.filter(model => 
-      model.id.toLowerCase().includes('image') || 
-      model.id.toLowerCase().includes('dall') ||
-      model.id.toLowerCase().includes('midjourney') ||
-      model.id.toLowerCase().includes('stable')
+    const imageModels = data.data.filter(
+      (model) =>
+        model.id.toLowerCase().includes('image') ||
+        model.id.toLowerCase().includes('dall') ||
+        model.id.toLowerCase().includes('midjourney') ||
+        model.id.toLowerCase().includes('stable')
     );
-    
+
     if (imageModels.length > 0) {
       console.log('\n🎨 Image generation models found:');
-      imageModels.forEach(model => {
+      imageModels.forEach((model) => {
         console.log(`• ${model.id} - ${model.name || 'No description'}`);
       });
     } else {
@@ -70,16 +71,16 @@ async function checkAvailableModels() {
 
     // Show some general models that might work
     console.log('\n📋 Some general models that might work:');
-    const generalModels = data.data.filter(model => 
-      model.id.includes('gpt') || 
-      model.id.includes('claude') ||
-      model.id.includes('llama')
-    ).slice(0, 10);
-    
-    generalModels.forEach(model => {
+    const generalModels = data.data
+      .filter(
+        (model) =>
+          model.id.includes('gpt') || model.id.includes('claude') || model.id.includes('llama')
+      )
+      .slice(0, 10);
+
+    generalModels.forEach((model) => {
       console.log(`• ${model.id} - ${model.name || 'No description'}`);
     });
-
   } catch (error) {
     console.error('❌ Error checking models:', error.message);
   }

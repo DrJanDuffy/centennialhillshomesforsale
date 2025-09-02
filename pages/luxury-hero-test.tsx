@@ -16,4 +16,3 @@ const LuxuryHeroTest: React.FC = () => {
 };
 
 export default LuxuryHeroTest;
-

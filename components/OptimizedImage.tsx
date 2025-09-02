@@ -76,7 +76,7 @@ export default function OptimizedImage({
   };
 
   // Generate srcset for responsive images
-  const generateSrcSet = (originalSrc: string, baseWidth: number, baseHeight: number) => {
+  const _generateSrcSet = (originalSrc: string, baseWidth: number, baseHeight: number) => {
     const breakpoints = [320, 640, 768, 1024, 1280, 1536];
     const formats = ['webp', 'avif'];
 
@@ -106,8 +106,8 @@ export default function OptimizedImage({
 
     // Generate optimized image sources
     const webpSrc = generateOptimizedSrc(src, width, height, 'webp');
-    const avifSrc = generateOptimizedSrc(src, width, height, 'avif');
-    const jpegSrc = generateOptimizedSrc(src, width, height, 'jpeg');
+    const _avifSrc = generateOptimizedSrc(src, width, height, 'avif');
+    const _jpegSrc = generateOptimizedSrc(src, width, height, 'jpeg');
 
     // Set the primary source (WebP for modern browsers)
     setImageSrc(webpSrc);
@@ -142,7 +142,7 @@ export default function OptimizedImage({
         observerRef.current.disconnect();
       }
     };
-  }, [src, width, height, priority, isDark]);
+  }, [src, width, height, priority, generateOptimizedSrc, generatePlaceholder]);
 
   const handleLoad = () => {
     setIsLoaded(true);
@@ -174,7 +174,7 @@ export default function OptimizedImage({
           >
             <img
               src={placeholderSrc}
-              alt=""
+              alt="Loading placeholder"
               className="w-full h-full object-cover"
               aria-hidden="true"
             />

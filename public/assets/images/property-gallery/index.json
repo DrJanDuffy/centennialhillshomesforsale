@@ -7,7 +7,7 @@
       "images": [
         {
           "id": "exterior-main",
-          "src": "/assets/images/property-gallery/luxury-estate-exterior-main.jpg",
+          "src": "/assets/images/property-gallery/luxury-estate-exterior-main.svg",
           "alt": "Luxury estate exterior with mountain backdrop",
           "width": 1920,
           "height": 1080,
@@ -16,7 +16,7 @@
         },
         {
           "id": "kitchen",
-          "src": "/assets/images/property-gallery/luxury-estate-kitchen.jpg",
+          "src": "/assets/images/property-gallery/luxury-estate-kitchen.svg",
           "alt": "Gourmet kitchen with granite countertops and stainless steel appliances",
           "width": 1600,
           "height": 1200,
@@ -25,7 +25,7 @@
         },
         {
           "id": "master-bedroom",
-          "src": "/assets/images/property-gallery/luxury-estate-master-bedroom.jpg",
+          "src": "/assets/images/property-gallery/luxury-estate-master-bedroom.svg",
           "alt": "Master bedroom with mountain views and luxury finishes",
           "width": 1600,
           "height": 1200,
@@ -34,7 +34,7 @@
         },
         {
           "id": "pool",
-          "src": "/assets/images/property-gallery/luxury-estate-pool.jpg",
+          "src": "/assets/images/property-gallery/luxury-estate-pool.svg",
           "alt": "Resort-style pool with mountain views",
           "width": 1600,
           "height": 1200,
@@ -55,7 +55,7 @@
       "images": [
         {
           "id": "exterior-main",
-          "src": "/assets/images/property-gallery/modern-home-exterior-main.jpg",
+          "src": "/assets/images/property-gallery/modern-home-exterior-main.svg",
           "alt": "Modern family home exterior with clean lines",
           "width": 1920,
           "height": 1080,
@@ -64,7 +64,7 @@
         },
         {
           "id": "living-room",
-          "src": "/assets/images/property-gallery/modern-home-living-room.jpg",
+          "src": "/assets/images/property-gallery/modern-home-living-room.svg",
           "alt": "Open concept living room with large windows",
           "width": 1600,
           "height": 1200,
@@ -73,7 +73,7 @@
         },
         {
           "id": "kitchen",
-          "src": "/assets/images/property-gallery/modern-home-kitchen.jpg",
+          "src": "/assets/images/property-gallery/modern-home-kitchen.svg",
           "alt": "Modern kitchen with island and breakfast nook",
           "width": 1600,
           "height": 1200,
@@ -94,7 +94,7 @@
       "images": [
         {
           "id": "exterior-main",
-          "src": "/assets/images/property-gallery/providence-villa-exterior-main.jpg",
+          "src": "/assets/images/property-gallery/providence-villa-exterior-main.svg",
           "alt": "Luxury villa exterior with custom architecture",
           "width": 1920,
           "height": 1080,
@@ -103,7 +103,7 @@
         },
         {
           "id": "wine-cellar",
-          "src": "/assets/images/property-gallery/providence-villa-wine-cellar.jpg",
+          "src": "/assets/images/property-gallery/providence-villa-wine-cellar.svg",
           "alt": "Custom wine cellar with temperature control",
           "width": 1600,
           "height": 1200,
@@ -112,7 +112,7 @@
         },
         {
           "id": "home-theater",
-          "src": "/assets/images/property-gallery/providence-villa-home-theater.jpg",
+          "src": "/assets/images/property-gallery/providence-villa-home-theater.svg",
           "alt": "Professional home theater with surround sound",
           "width": 1600,
           "height": 1200,
@@ -133,7 +133,7 @@
       "name": "Centennial Hills",
       "description": "Master-planned community with mountain views and family amenities",
       "heroImage": {
-        "src": "/assets/images/neighborhoods/centennial-hills-hero.jpg",
+        "src": "/assets/images/neighborhoods/centennial-hills-hero.svg",
         "alt": "Centennial Hills neighborhood overview",
         "width": 1920,
         "height": 1080
@@ -145,7 +145,7 @@
       "name": "Providence",
       "description": "Exclusive gated community with luxury homes and resort-style living",
       "heroImage": {
-        "src": "/assets/images/neighborhoods/providence-hero.jpg",
+        "src": "/assets/images/neighborhoods/providence-hero.svg",
         "alt": "Providence neighborhood entrance and landscaping",
         "width": 1920,
         "height": 1080
@@ -157,7 +157,7 @@
       "name": "Skye Canyon",
       "description": "Nature-inspired community with hiking trails and outdoor recreation",
       "heroImage": {
-        "src": "/assets/images/neighborhoods/skye-canyon-hero.jpg",
+        "src": "/assets/images/neighborhoods/skye-canyon-hero.svg",
         "alt": "Skye Canyon natural landscape and trails",
         "width": 1920,
         "height": 1080

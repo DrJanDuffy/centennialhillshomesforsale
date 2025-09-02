@@ -22,10 +22,10 @@ async function testImageAnalysis() {
     const response = await fetch('https://openrouter.ai/api/v1/chat/completions', {
       method: 'POST',
       headers: {
-        'Authorization': `Bearer ${OPENROUTER_API_KEY}`,
+        Authorization: `Bearer ${OPENROUTER_API_KEY}`,
         'Content-Type': 'application/json',
         'HTTP-Referer': 'https://centennialhillshomesforsale.com',
-        'X-Title': 'Centennial Hills Real Estate Hero Image Generator'
+        'X-Title': 'Centennial Hills Real Estate Hero Image Generator',
       },
       body: JSON.stringify({
         model: 'google/gemini-2.5-flash-image-preview:free',
@@ -35,18 +35,18 @@ async function testImageAnalysis() {
             content: [
               {
                 type: 'text',
-                text: 'What is in this image?'
+                text: 'What is in this image?',
               },
               {
                 type: 'image_url',
                 image_url: {
-                  url: 'https://upload.wikimedia.org/wikipedia/commons/thumb/d/dd/Gfp-wisconsin-madison-the-nature-boardwalk.jpg/2560px-Gfp-wisconsin-madison-the-nature-boardwalk.jpg'
-                }
-              }
-            ]
-          }
-        ]
-      })
+                  url: 'https://upload.wikimedia.org/wikipedia/commons/thumb/d/dd/Gfp-wisconsin-madison-the-nature-boardwalk.jpg/2560px-Gfp-wisconsin-madison-the-nature-boardwalk.jpg',
+                },
+              },
+            ],
+          },
+        ],
+      }),
     });
 
     if (!response.ok) {
@@ -60,7 +60,6 @@ async function testImageAnalysis() {
     console.log('✅ Image analysis successful!');
     console.log('📝 Analysis result:');
     console.log(data.choices[0].message.content);
-
   } catch (error) {
     console.error('❌ Error testing image analysis:', error.message);
   }

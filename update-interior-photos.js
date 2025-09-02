@@ -3,8 +3,8 @@
  * This script adds missing properties to match the Photo interface
  */
 
-const fs = require('fs');
-const path = require('path');
+const fs = require('node:fs');
+const path = require('node:path');
 
 // Read the current JSON file
 const jsonPath = path.join(__dirname, 'public/assets/images/interior-photos/index.json');

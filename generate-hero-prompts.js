@@ -5,9 +5,9 @@
  * Generates optimized prompts for AI image generation tools
  */
 
-const https = require('https');
-const fs = require('fs');
-const path = require('path');
+const https = require('node:https');
+const fs = require('node:fs');
+const _path = require('node:path');
 
 // Configuration
 const OPENROUTER_API_KEY = process.env.OPENROUTER_API_KEY || 'your-api-key-here';
@@ -129,7 +129,7 @@ Return only the enhanced prompt, no additional text.`,
   try {
     const response = await makeApiRequest('/chat/completions', enhancementRequest);
 
-    if (response.choices && response.choices[0] && response.choices[0].message) {
+    if (response.choices?.[0]?.message) {
       return response.choices[0].message.content.trim();
     } else {
       throw new Error('Invalid response format from API');
@@ -202,7 +202,7 @@ async function generateOptimizedPrompts(type = 'primary') {
     // Display the enhanced prompt
     console.log(`\n🎨 ENHANCED PROMPT FOR ${type.toUpperCase()}:\n`);
     console.log(enhancedPrompt);
-    console.log('\n' + '='.repeat(80) + '\n');
+    console.log(`\n${'='.repeat(80)}\n`);
 
     return filename;
   } catch (error) {
@@ -240,4 +240,3 @@ if (args.includes('--help') || args.includes('-h')) {
     process.exit(1);
   });
 }
-

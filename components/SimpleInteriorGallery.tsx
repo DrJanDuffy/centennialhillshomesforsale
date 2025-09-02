@@ -163,7 +163,7 @@ const SimpleInteriorGallery: React.FC<SimpleInteriorGalleryProps> = ({
       '1560448205-4d9f8c8c9cba', // Outdoor
     ];
 
-    const photoIndex = parseInt(photo.id) - 1;
+    const photoIndex = parseInt(photo.id, 10) - 1;
     const photoId = photoIds[photoIndex % photoIds.length];
 
     return `https://images.unsplash.com/photo-${photoId}?w=${width}&h=${height}&fit=crop&q=80&auto=format`;

@@ -5,8 +5,8 @@
  * This script will attempt to generate a luxury real estate hero image
  */
 
-const fs = require('fs');
-const path = require('path');
+const fs = require('node:fs');
+const path = require('node:path');
 
 // Load environment variables
 require('dotenv').config({ path: '.env.local' });
@@ -26,26 +26,26 @@ async function generateHeroImage() {
 
   try {
     console.log('🚀 Sending request to OpenRouter with GPT-5...');
-    
+
     const response = await fetch('https://openrouter.ai/api/v1/chat/completions', {
       method: 'POST',
       headers: {
-        'Authorization': `Bearer ${OPENROUTER_API_KEY}`,
+        Authorization: `Bearer ${OPENROUTER_API_KEY}`,
         'Content-Type': 'application/json',
         'HTTP-Referer': 'https://centennialhillshomesforsale.com',
-        'X-Title': 'Centennial Hills Real Estate Hero Image Generator'
+        'X-Title': 'Centennial Hills Real Estate Hero Image Generator',
       },
       body: JSON.stringify({
         model: 'openai/gpt-5',
         messages: [
           {
             role: 'user',
-            content: `Generate a high-quality real estate hero image with this detailed description: ${prompt}. Please provide the image as a base64 encoded string or direct URL.`
-          }
+            content: `Generate a high-quality real estate hero image with this detailed description: ${prompt}. Please provide the image as a base64 encoded string or direct URL.`,
+          },
         ],
         max_tokens: 4000,
-        temperature: 0.7
-      })
+        temperature: 0.7,
+      }),
     });
 
     if (!response.ok) {
@@ -57,18 +57,18 @@ async function generateHeroImage() {
 
     const data = await response.json();
     console.log('✅ Response received from GPT-5!');
-    console.log('📝 Response preview:', JSON.stringify(data, null, 2).substring(0, 500) + '...');
+    console.log('📝 Response preview:', `${JSON.stringify(data, null, 2).substring(0, 500)}...`);
 
     // Check if we got an image URL or base64 data
-    if (data.choices && data.choices[0] && data.choices[0].message) {
+    if (data.choices?.[0]?.message) {
       const messageContent = data.choices[0].message.content;
       console.log('📄 Message content type:', typeof messageContent);
-      
+
       if (typeof messageContent === 'string') {
         // Try to extract image URL or base64 from the response
         const urlMatch = messageContent.match(/https?:\/\/[^\s]+\.(jpg|jpeg|png|webp)/i);
         const base64Match = messageContent.match(/data:image\/[^;]+;base64,([A-Za-z0-9+/=]+)/);
-        
+
         if (urlMatch) {
           const imageUrl = urlMatch[0];
           console.log('🖼️  Found image URL:', imageUrl);
@@ -78,7 +78,9 @@ async function generateHeroImage() {
           console.log('🖼️  Found base64 image data');
           await saveBase64Image(base64Data);
         } else {
-          console.log('⚠️  No image found in response. GPT-5 may not support direct image generation through OpenRouter.');
+          console.log(
+            '⚠️  No image found in response. GPT-5 may not support direct image generation through OpenRouter.'
+          );
           console.log('📝 Full response:', messageContent);
           console.log('\n🔄 Trying alternative approach...');
           await tryAlternativeGeneration();
@@ -91,10 +93,9 @@ async function generateHeroImage() {
       console.log('❌ No valid response structure found');
       console.log('📝 Full response:', JSON.stringify(data, null, 2));
     }
-
   } catch (error) {
     console.error('❌ Error generating image:', error.message);
-    
+
     if (error.message.includes('API request failed')) {
       console.log('\n🔧 Troubleshooting:');
       console.log('1. Check your OpenRouter API key in .env.local');
@@ -108,15 +109,14 @@ async function generateHeroImage() {
 async function downloadAndSaveImage(imageUrl) {
   try {
     console.log('📥 Downloading image from URL...');
-    
+
     const imageResponse = await fetch(imageUrl);
     if (!imageResponse.ok) {
       throw new Error('Failed to download image from URL');
     }
-    
+
     const imageBuffer = await imageResponse.arrayBuffer();
     await saveImageBuffer(imageBuffer);
-    
   } catch (error) {
     console.error('❌ Error downloading image:', error.message);
   }
@@ -125,10 +125,9 @@ async function downloadAndSaveImage(imageUrl) {
 async function saveBase64Image(base64Data) {
   try {
     console.log('💾 Saving base64 image...');
-    
+
     const imageBuffer = Buffer.from(base64Data, 'base64');
     await saveImageBuffer(imageBuffer);
-    
   } catch (error) {
     console.error('❌ Error saving base64 image:', error.message);
   }
@@ -141,60 +140,60 @@ async function saveImageBuffer(imageBuffer) {
     fs.mkdirSync(imagesDir, { recursive: true });
     console.log('📁 Created public/images directory');
   }
-  
+
   // Save the image
   const imagePath = path.join(imagesDir, 'hero-image.jpg');
   fs.writeFileSync(imagePath, Buffer.from(imageBuffer));
-  
+
   const stats = fs.statSync(imagePath);
   const fileSizeKB = Math.round(stats.size / 1024);
-  
+
   console.log('🎉 Hero image saved successfully!');
   console.log(`📁 Location: ${imagePath}`);
   console.log(`📏 File size: ${fileSizeKB} KB`);
   console.log(`📅 Generated: ${new Date().toLocaleString()}`);
-  
+
   if (fileSizeKB > 1000) {
     console.log('⚠️  Large file size detected. Consider optimizing for web use.');
   }
-  
+
   console.log('\n🌐 Test your hero section at: http://localhost:3000/luxury-hero-test');
   console.log('✨ Your luxury real estate hero section is ready! ✨');
 }
 
 async function tryAlternativeGeneration() {
   console.log('🔄 Attempting alternative generation method...');
-  
+
   try {
     // Try a different approach - ask GPT-4o to create a DALL-E prompt
     const response = await fetch('https://openrouter.ai/api/v1/chat/completions', {
       method: 'POST',
       headers: {
-        'Authorization': `Bearer ${OPENROUTER_API_KEY}`,
+        Authorization: `Bearer ${OPENROUTER_API_KEY}`,
         'Content-Type': 'application/json',
         'HTTP-Referer': 'https://centennialhillshomesforsale.com',
-        'X-Title': 'Centennial Hills Real Estate Hero Image Generator'
+        'X-Title': 'Centennial Hills Real Estate Hero Image Generator',
       },
       body: JSON.stringify({
         model: 'openai/gpt-5',
         messages: [
           {
             role: 'user',
-            content: `I need you to help me create a detailed prompt for generating a luxury real estate hero image using DALL-E 3. Please provide a very detailed, specific prompt that I can use with DALL-E 3. The image should be of a modern luxury home in Centennial Hills, Las Vegas with Spring Mountains backdrop. Make the prompt extremely detailed and specific for best results with DALL-E 3.`
-          }
+            content: `I need you to help me create a detailed prompt for generating a luxury real estate hero image using DALL-E 3. Please provide a very detailed, specific prompt that I can use with DALL-E 3. The image should be of a modern luxury home in Centennial Hills, Las Vegas with Spring Mountains backdrop. Make the prompt extremely detailed and specific for best results with DALL-E 3.`,
+          },
         ],
         max_tokens: 2000,
-        temperature: 0.7
-      })
+        temperature: 0.7,
+      }),
     });
 
     if (response.ok) {
       const data = await response.json();
-      if (data.choices && data.choices[0] && data.choices[0].message) {
+      if (data.choices?.[0]?.message) {
         const enhancedPrompt = data.choices[0].message.content;
         console.log('✨ Enhanced DALL-E 3 prompt generated by GPT-5:');
         console.log('📝', enhancedPrompt);
-        
+
         // Save the enhanced prompt to a file
         fs.writeFileSync('dalle3-hero-prompt.txt', enhancedPrompt);
         console.log('💾 Enhanced DALL-E 3 prompt saved to: dalle3-hero-prompt.txt');
