@@ -1,4 +1,5 @@
-import React, { useEffect, useState, useCallback } from 'react';
+import type React from 'react';
+import { useCallback, useEffect, useState } from 'react';
 
 interface TriggerConfig {
   id: string;
@@ -29,7 +30,7 @@ export const BehavioralTriggers: React.FC = () => {
     exitIntent: false,
     returning: false,
     deviceType: 'desktop',
-    referrer: ''
+    referrer: '',
   });
 
   const [activeTriggers, setActiveTriggers] = useState<string[]>([]);
@@ -42,7 +43,7 @@ export const BehavioralTriggers: React.FC = () => {
 
     // Detect device type
     const deviceType = window.innerWidth < 768 ? 'mobile' : 'desktop';
-    
+
     // Check if returning user
     const returning = localStorage.getItem('centennial_hills_visitor') !== null;
     if (!returning) {
@@ -52,17 +53,17 @@ export const BehavioralTriggers: React.FC = () => {
     // Get referrer
     const referrer = document.referrer || 'direct';
 
-    setBehavior(prev => ({
+    setBehavior((prev) => ({
       ...prev,
       deviceType,
       returning,
-      referrer
+      referrer,
     }));
 
     const updateTimeOnSite = () => {
-      setBehavior(prev => ({
+      setBehavior((prev) => ({
         ...prev,
-        timeOnSite: Math.floor((Date.now() - startTime) / 1000)
+        timeOnSite: Math.floor((Date.now() - startTime) / 1000),
       }));
     };
 
@@ -70,32 +71,32 @@ export const BehavioralTriggers: React.FC = () => {
       const scrollTop = window.pageYOffset;
       const docHeight = document.documentElement.scrollHeight - window.innerHeight;
       const scrollPercent = (scrollTop / docHeight) * 100;
-      
-      setBehavior(prev => ({
+
+      setBehavior((prev) => ({
         ...prev,
-        scrollDepth: Math.max(prev.scrollDepth, scrollPercent)
+        scrollDepth: Math.max(prev.scrollDepth, scrollPercent),
       }));
 
       clearTimeout(scrollTimeout);
       scrollTimeout = setTimeout(() => {
         // User stopped scrolling
         if (scrollPercent > 30) {
-          setBehavior(prev => ({ ...prev, exitIntent: true }));
+          setBehavior((prev) => ({ ...prev, exitIntent: true }));
         }
       }, 3000);
     };
 
     const handleClick = () => {
-      setBehavior(prev => ({
+      setBehavior((prev) => ({
         ...prev,
-        clickCount: prev.clickCount + 1
+        clickCount: prev.clickCount + 1,
       }));
     };
 
     const handleFormInteraction = () => {
-      setBehavior(prev => ({
+      setBehavior((prev) => ({
         ...prev,
-        formInteractions: prev.formInteractions + 1
+        formInteractions: prev.formInteractions + 1,
       }));
     };
 
@@ -125,7 +126,7 @@ export const BehavioralTriggers: React.FC = () => {
       condition: () => !behavior.returning && behavior.timeOnSite > 10,
       component: FirstTimeVisitorOffer,
       priority: 1,
-      cooldown: 60
+      cooldown: 60,
     },
     {
       id: 'high_engagement',
@@ -133,7 +134,7 @@ export const BehavioralTriggers: React.FC = () => {
       condition: () => behavior.scrollDepth > 70 && behavior.clickCount > 5,
       component: HighEngagementOffer,
       priority: 2,
-      cooldown: 30
+      cooldown: 30,
     },
     {
       id: 'mobile_user',
@@ -141,7 +142,7 @@ export const BehavioralTriggers: React.FC = () => {
       condition: () => behavior.deviceType === 'mobile' && behavior.timeOnSite > 20,
       component: MobileOptimizedOffer,
       priority: 3,
-      cooldown: 45
+      cooldown: 45,
     },
     {
       id: 'form_abandonment',
@@ -149,7 +150,7 @@ export const BehavioralTriggers: React.FC = () => {
       condition: () => behavior.formInteractions > 0 && behavior.timeOnSite > 30,
       component: FormAbandonmentRecovery,
       priority: 4,
-      cooldown: 15
+      cooldown: 15,
     },
     {
       id: 'exit_intent',
@@ -157,7 +158,7 @@ export const BehavioralTriggers: React.FC = () => {
       condition: () => behavior.exitIntent && behavior.timeOnSite > 15,
       component: ExitIntentOffer,
       priority: 5,
-      cooldown: 20
+      cooldown: 20,
     },
     {
       id: 'returning_visitor',
@@ -165,8 +166,8 @@ export const BehavioralTriggers: React.FC = () => {
       condition: () => behavior.returning && behavior.timeOnSite > 5,
       component: ReturningVisitorOffer,
       priority: 6,
-      cooldown: 90
-    }
+      cooldown: 90,
+    },
   ];
 
   // Check and activate triggers
@@ -174,34 +175,34 @@ export const BehavioralTriggers: React.FC = () => {
     const now = Date.now();
     const newTriggers: string[] = [];
 
-    triggers.forEach(trigger => {
+    triggers.forEach((trigger) => {
       const lastShown = triggerHistory[trigger.id] || 0;
-      const cooldownExpired = (now - lastShown) > (trigger.cooldown * 60 * 1000);
-      
+      const cooldownExpired = now - lastShown > trigger.cooldown * 60 * 1000;
+
       if (trigger.condition() && cooldownExpired && !activeTriggers.includes(trigger.id)) {
         newTriggers.push(trigger.id);
-        setTriggerHistory(prev => ({
+        setTriggerHistory((prev) => ({
           ...prev,
-          [trigger.id]: now
+          [trigger.id]: now,
         }));
       }
     });
 
     if (newTriggers.length > 0) {
-      setActiveTriggers(prev => [...prev, ...newTriggers].slice(-2)); // Max 2 active triggers
+      setActiveTriggers((prev) => [...prev, ...newTriggers].slice(-2)); // Max 2 active triggers
     }
   }, [behavior, triggers, activeTriggers, triggerHistory]);
 
   const dismissTrigger = (triggerId: string) => {
-    setActiveTriggers(prev => prev.filter(id => id !== triggerId));
+    setActiveTriggers((prev) => prev.filter((id) => id !== triggerId));
   };
 
   return (
     <div className="behavioral-triggers">
-      {activeTriggers.map(triggerId => {
-        const trigger = triggers.find(t => t.id === triggerId);
+      {activeTriggers.map((triggerId) => {
+        const trigger = triggers.find((t) => t.id === triggerId);
         if (!trigger) return null;
-        
+
         const TriggerComponent = trigger.component;
         return (
           <TriggerComponent
@@ -226,7 +227,7 @@ const FirstTimeVisitorOffer: React.FC<{
         <div className="flex items-center space-x-2 mb-2">
           <div className="w-6 h-6 bg-white/20 rounded-full flex items-center justify-center">
             <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
-              <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
+              <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
             </svg>
           </div>
           <span className="font-semibold">Welcome!</span>
@@ -255,7 +256,7 @@ const HighEngagementOffer: React.FC<{
         <div className="flex items-center space-x-2 mb-2">
           <div className="w-6 h-6 bg-white/20 rounded-full flex items-center justify-center">
             <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
-              <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+              <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
             </svg>
           </div>
           <span className="font-semibold">You're Engaged!</span>
@@ -283,7 +284,7 @@ const MobileOptimizedOffer: React.FC<{
       <div className="flex items-center space-x-3">
         <div className="w-8 h-8 bg-white/20 rounded-full flex items-center justify-center">
           <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
-            <path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z"/>
+            <path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z" />
           </svg>
         </div>
         <div>
@@ -315,12 +316,17 @@ const FormAbandonmentRecovery: React.FC<{
       <div className="text-center">
         <div className="w-12 h-12 bg-yellow-100 rounded-full flex items-center justify-center mx-auto mb-4">
           <svg className="w-6 h-6 text-yellow-600" fill="currentColor" viewBox="0 0 20 20">
-            <path fillRule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clipRule="evenodd"/>
+            <path
+              fillRule="evenodd"
+              d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z"
+              clipRule="evenodd"
+            />
           </svg>
         </div>
         <h3 className="text-lg font-semibold mb-2">Don't Leave Empty Handed!</h3>
         <p className="text-gray-600 mb-4">
-          You started filling out a form. Let us help you complete it and get your free consultation.
+          You started filling out a form. Let us help you complete it and get your free
+          consultation.
         </p>
         <div className="flex space-x-3">
           <button className="flex-1 bg-blue-600 text-white py-2 px-4 rounded-lg font-semibold hover:bg-blue-700 transition-colors">
@@ -347,13 +353,17 @@ const ExitIntentOffer: React.FC<{
       <div className="text-center">
         <div className="w-16 h-16 bg-red-100 rounded-full flex items-center justify-center mx-auto mb-4">
           <svg className="w-8 h-8 text-red-600" fill="currentColor" viewBox="0 0 20 20">
-            <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clipRule="evenodd"/>
+            <path
+              fillRule="evenodd"
+              d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z"
+              clipRule="evenodd"
+            />
           </svg>
         </div>
         <h3 className="text-xl font-bold mb-2">Wait! Don't Miss Out</h3>
         <p className="text-gray-600 mb-4">
-          Get exclusive access to new listings before they hit the market. 
-          Join our VIP list for early notifications.
+          Get exclusive access to new listings before they hit the market. Join our VIP list for
+          early notifications.
         </p>
         <form className="space-y-4">
           <input
@@ -365,10 +375,7 @@ const ExitIntentOffer: React.FC<{
             Join VIP List
           </button>
         </form>
-        <button
-          onClick={onDismiss}
-          className="mt-2 text-sm text-gray-500 hover:text-gray-700"
-        >
+        <button onClick={onDismiss} className="mt-2 text-sm text-gray-500 hover:text-gray-700">
           No thanks, I'll browse
         </button>
       </div>
@@ -386,7 +393,7 @@ const ReturningVisitorOffer: React.FC<{
         <div className="flex items-center space-x-2 mb-2">
           <div className="w-6 h-6 bg-white/20 rounded-full flex items-center justify-center">
             <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
-              <path d="M13 6a3 3 0 11-6 0 3 3 0 016 0zM18 8a2 2 0 11-4 0 2 2 0 014 0zM14 15a4 4 0 00-8 0v3h8v-3z"/>
+              <path d="M13 6a3 3 0 11-6 0 3 3 0 016 0zM18 8a2 2 0 11-4 0 2 2 0 014 0zM14 15a4 4 0 00-8 0v3h8v-3z" />
             </svg>
           </div>
           <span className="font-semibold">Welcome Back!</span>

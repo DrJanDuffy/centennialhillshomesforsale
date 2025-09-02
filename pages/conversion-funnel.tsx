@@ -1,6 +1,6 @@
 import Head from 'next/head';
-import Layout from '../components/Layout';
 import { ConversionFunnelPage } from '../components/ConversionOptimizer';
+import Layout from '../components/Layout';
 
 export default function ConversionFunnelPageRoute() {
   return (
