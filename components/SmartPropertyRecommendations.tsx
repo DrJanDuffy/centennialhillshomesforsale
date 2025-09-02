@@ -89,7 +89,7 @@ const SmartPropertyRecommendations: React.FC<SmartPropertyRecommendationsProps> 
       features: ['Guest House', 'Wine Cellar', 'Home Theater', 'Casita'],
       daysOnMarket: 12,
       pricePerSqft: 233,
-      image: '/images/centennial-hills-home-1.jpg',
+      image: '/assets/images/property-gallery/luxury-estate-exterior-main.svg',
       status: 'active',
     },
     {

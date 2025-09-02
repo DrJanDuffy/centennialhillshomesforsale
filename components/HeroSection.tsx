@@ -7,19 +7,19 @@ import { useEffect, useState } from 'react';
 
 const heroImages = [
   {
-    src: '/images/centennial-hills-luxury-1.jpg',
+    src: '/assets/images/property-gallery/luxury-estate-exterior-main.svg',
     alt: 'Luxury Centennial Hills Home with Mountain Views',
     title: 'Luxury Mountain Views',
     subtitle: 'Starting from $750K',
   },
   {
-    src: '/images/centennial-hills-golf-1.jpg',
+    src: '/assets/images/neighborhoods/centennial-hills-hero.svg',
     alt: 'Golf Course Home in Centennial Hills',
     title: 'Golf Course Living',
     subtitle: 'Premium Locations',
   },
   {
-    src: '/images/centennial-hills-new-construction.jpg',
+    src: '/assets/images/property-gallery/modern-home-exterior-main.svg',
     alt: 'New Construction in Centennial Hills',
     title: 'New Construction',
     subtitle: 'Move-in Ready',
