@@ -8,11 +8,7 @@ import {
 } from '@heroicons/react/24/outline';
 import { motion } from 'framer-motion';
 import Link from 'next/link';
-import { useTheme } from '../contexts/ThemeContext';
-
 export default function Custom404() {
-  const { isDark } = useTheme();
-
   const helpfulLinks = [
     {
       title: 'Browse Homes',
