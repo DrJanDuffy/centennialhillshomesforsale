@@ -17,7 +17,7 @@ const nextConfig = {
 
   // Force fresh build
   generateBuildId: async () => {
-    return `build-${Date.now()}`;
+    return `build-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`;
   },
 
   // Image optimization for Vercel
