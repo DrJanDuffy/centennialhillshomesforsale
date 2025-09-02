@@ -25,25 +25,25 @@ const imageRequests = [
     searchQuery: 'luxury home exterior mountain view',
     width: 1920,
     height: 1080,
-    description: 'Luxury home with mountain views'
+    description: 'Luxury home with mountain views',
   },
   {
-    category: 'hero', 
+    category: 'hero',
     filename: 'golf-course-living.jpg',
     searchQuery: 'golf course home luxury community',
     width: 1920,
     height: 1080,
-    description: 'Golf course community home'
+    description: 'Golf course community home',
   },
   {
     category: 'hero',
-    filename: 'new-construction.jpg', 
+    filename: 'new-construction.jpg',
     searchQuery: 'new construction modern home exterior',
     width: 1920,
     height: 1080,
-    description: 'New construction modern home'
+    description: 'New construction modern home',
   },
-  
+
   // Property Exteriors
   {
     category: 'properties/exteriors',
@@ -51,7 +51,7 @@ const imageRequests = [
     searchQuery: 'luxury estate exterior modern architecture',
     width: 1600,
     height: 1200,
-    description: 'Luxury estate exterior'
+    description: 'Luxury estate exterior',
   },
   {
     category: 'properties/exteriors',
@@ -59,7 +59,7 @@ const imageRequests = [
     searchQuery: 'modern home exterior contemporary',
     width: 1600,
     height: 1200,
-    description: 'Modern home exterior'
+    description: 'Modern home exterior',
   },
   {
     category: 'properties/exteriors',
@@ -67,9 +67,9 @@ const imageRequests = [
     searchQuery: 'luxury villa exterior gated community',
     width: 1600,
     height: 1200,
-    description: 'Providence villa exterior'
+    description: 'Providence villa exterior',
   },
-  
+
   // Property Interiors
   {
     category: 'properties/interiors',
@@ -77,7 +77,7 @@ const imageRequests = [
     searchQuery: 'luxury kitchen modern appliances',
     width: 1600,
     height: 1200,
-    description: 'Luxury estate kitchen'
+    description: 'Luxury estate kitchen',
   },
   {
     category: 'properties/interiors',
@@ -85,7 +85,7 @@ const imageRequests = [
     searchQuery: 'luxury living room modern fireplace',
     width: 1600,
     height: 1200,
-    description: 'Luxury estate living room'
+    description: 'Luxury estate living room',
   },
   {
     category: 'properties/interiors',
@@ -93,7 +93,7 @@ const imageRequests = [
     searchQuery: 'luxury master bedroom modern',
     width: 1600,
     height: 1200,
-    description: 'Luxury master bedroom'
+    description: 'Luxury master bedroom',
   },
   {
     category: 'properties/interiors',
@@ -101,7 +101,7 @@ const imageRequests = [
     searchQuery: 'luxury bathroom modern vanity',
     width: 1600,
     height: 1200,
-    description: 'Luxury master bathroom'
+    description: 'Luxury master bathroom',
   },
   {
     category: 'properties/interiors',
@@ -109,7 +109,7 @@ const imageRequests = [
     searchQuery: 'modern kitchen island contemporary',
     width: 1600,
     height: 1200,
-    description: 'Modern home kitchen'
+    description: 'Modern home kitchen',
   },
   {
     category: 'properties/interiors',
@@ -117,7 +117,7 @@ const imageRequests = [
     searchQuery: 'modern living room open concept',
     width: 1600,
     height: 1200,
-    description: 'Modern home living room'
+    description: 'Modern home living room',
   },
   {
     category: 'properties/interiors',
@@ -125,9 +125,9 @@ const imageRequests = [
     searchQuery: 'modern bedroom contemporary design',
     width: 1600,
     height: 1200,
-    description: 'Modern home bedroom'
+    description: 'Modern home bedroom',
   },
-  
+
   // Neighborhood Images
   {
     category: 'neighborhoods',
@@ -135,7 +135,7 @@ const imageRequests = [
     searchQuery: 'aerial view residential neighborhood',
     width: 1920,
     height: 1080,
-    description: 'Centennial Hills aerial view'
+    description: 'Centennial Hills aerial view',
   },
   {
     category: 'neighborhoods',
@@ -143,7 +143,7 @@ const imageRequests = [
     searchQuery: 'gated community entrance luxury',
     width: 1920,
     height: 1080,
-    description: 'Providence community entrance'
+    description: 'Providence community entrance',
   },
   {
     category: 'neighborhoods',
@@ -151,22 +151,22 @@ const imageRequests = [
     searchQuery: 'mountain community natural landscape',
     width: 1920,
     height: 1080,
-    description: 'Skye Canyon landscape'
-  }
+    description: 'Skye Canyon landscape',
+  },
 ];
 
 // Create directories
 function createDirectories() {
   console.log('📁 Creating directories...');
-  
+
   const directories = [
     'public/images/hero',
-    'public/images/properties/exteriors', 
+    'public/images/properties/exteriors',
     'public/images/properties/interiors',
-    'public/images/neighborhoods'
+    'public/images/neighborhoods',
   ];
-  
-  directories.forEach(dir => {
+
+  directories.forEach((dir) => {
     if (!fs.existsSync(dir)) {
       fs.mkdirSync(dir, { recursive: true });
       console.log(`   ✅ Created: ${dir}`);
@@ -178,21 +178,23 @@ function createDirectories() {
 function downloadImage(url, filepath) {
   return new Promise((resolve, reject) => {
     const file = fs.createWriteStream(filepath);
-    
-    https.get(url, (response) => {
-      if (response.statusCode === 200) {
-        response.pipe(file);
-        file.on('finish', () => {
-          file.close();
-          resolve();
-        });
-      } else {
-        reject(new Error(`HTTP ${response.statusCode}: ${response.statusMessage}`));
-      }
-    }).on('error', (err) => {
-      fs.unlink(filepath, () => {}); // Delete the file on error
-      reject(err);
-    });
+
+    https
+      .get(url, (response) => {
+        if (response.statusCode === 200) {
+          response.pipe(file);
+          file.on('finish', () => {
+            file.close();
+            resolve();
+          });
+        } else {
+          reject(new Error(`HTTP ${response.statusCode}: ${response.statusMessage}`));
+        }
+      })
+      .on('error', (err) => {
+        fs.unlink(filepath, () => {}); // Delete the file on error
+        reject(err);
+      });
   });
 }
 
@@ -201,81 +203,84 @@ async function searchUnsplash(query, width, height) {
   return new Promise((resolve, reject) => {
     const encodedQuery = encodeURIComponent(query);
     const url = `${UNSPLASH_API_URL}/search/photos?query=${encodedQuery}&per_page=10&orientation=landscape&w=${width}&h=${height}`;
-    
+
     const options = {
       headers: {
-        'Authorization': `Client-ID ${UNSPLASH_ACCESS_KEY}`,
-        'Accept-Version': 'v1'
-      }
+        Authorization: `Client-ID ${UNSPLASH_ACCESS_KEY}`,
+        'Accept-Version': 'v1',
+      },
     };
-    
-    https.get(url, options, (response) => {
-      let data = '';
-      
-      response.on('data', (chunk) => {
-        data += chunk;
-      });
-      
-      response.on('end', () => {
-        try {
-          const result = JSON.parse(data);
-          if (result.results && result.results.length > 0) {
-            resolve(result.results[0]); // Return first result
-          } else {
-            reject(new Error('No images found'));
+
+    https
+      .get(url, options, (response) => {
+        let data = '';
+
+        response.on('data', (chunk) => {
+          data += chunk;
+        });
+
+        response.on('end', () => {
+          try {
+            const result = JSON.parse(data);
+            if (result.results && result.results.length > 0) {
+              resolve(result.results[0]); // Return first result
+            } else {
+              reject(new Error('No images found'));
+            }
+          } catch (error) {
+            reject(error);
           }
-        } catch (error) {
-          reject(error);
-        }
-      });
-    }).on('error', reject);
+        });
+      })
+      .on('error', reject);
   });
 }
 
 // Download all images
 async function downloadAllImages() {
   console.log('\n📸 Downloading images from Unsplash...\n');
-  
+
   if (UNSPLASH_ACCESS_KEY === 'demo_key') {
     console.log('⚠️  Demo mode: No Unsplash API key provided');
-    console.log('   To download real images, get a free API key from: https://unsplash.com/developers');
+    console.log(
+      '   To download real images, get a free API key from: https://unsplash.com/developers'
+    );
     console.log('   Then set UNSPLASH_ACCESS_KEY environment variable\n');
-    
+
     // Generate demo instructions instead
     generateDemoInstructions();
     return;
   }
-  
+
   let successCount = 0;
   let errorCount = 0;
-  
+
   for (const request of imageRequests) {
     try {
       console.log(`🔍 Searching: ${request.description}`);
       console.log(`   Query: "${request.searchQuery}"`);
-      
+
       const imageData = await searchUnsplash(request.searchQuery, request.width, request.height);
-      
+
       const filepath = path.join('public/images', request.category, request.filename);
       const imageUrl = `${imageData.urls.raw}&w=${request.width}&h=${request.height}&fit=crop`;
-      
+
       console.log(`   📥 Downloading: ${request.filename}`);
       await downloadImage(imageUrl, filepath);
-      
+
       console.log(`   ✅ Saved: ${filepath}`);
       successCount++;
-      
+
       // Add small delay to respect rate limits
-      await new Promise(resolve => setTimeout(resolve, 100));
-      
+      await new Promise((resolve) => setTimeout(resolve, 100));
     } catch (error) {
       console.log(`   ❌ Error: ${error.message}`);
       errorCount++;
     }
-    
+
     console.log('');
   }
-  
+
   console.log(`\n📊 Download Summary:`);
   console.log(`   ✅ Successful: ${successCount}`);
   console.log(`   ❌ Failed: ${errorCount}`);
@@ -286,23 +291,27 @@ async function downloadAllImages() {
 function generateDemoInstructions() {
   console.log('📋 MANUAL DOWNLOAD INSTRUCTIONS');
   console.log('===============================\n');
-  
+
   console.log('🌐 Go to these sites and search for:');
   console.log('\n📸 Hero Images (1920x1080):');
   console.log('   1. Unsplash.com → Search: "luxury home exterior mountain view"');
   console.log('   2. Unsplash.com → Search: "golf course home luxury community"');
   console.log('   3. Unsplash.com → Search: "new construction modern home exterior"');
-  
+
   console.log('\n🏠 Property Images (1600x1200):');
-  console.log('   Exteriors: "luxury estate exterior", "modern home exterior", "luxury villa exterior"');
-  console.log('   Interiors: "luxury kitchen modern", "luxury living room", "luxury master bedroom"');
+  console.log(
+    '   Exteriors: "luxury estate exterior", "modern home exterior", "luxury villa exterior"'
+  );
+  console.log(
+    '   Interiors: "luxury kitchen modern", "luxury living room", "luxury master bedroom"'
+  );
   console.log('   More: "luxury bathroom", "modern kitchen island", "modern living room"');
-  
+
   console.log('\n🏘️ Neighborhood Images (1920x1080):');
   console.log('   1. "aerial view residential neighborhood"');
   console.log('   2. "gated community entrance luxury"');
   console.log('   3. "mountain community natural landscape"');
-  
+
   console.log('\n💡 Tips:');
   console.log('   • Filter by "Free to use" or "Unsplash License"');
   console.log('   • Download highest resolution available');
@@ -315,14 +324,13 @@ async function main() {
   try {
     createDirectories();
     await downloadAllImages();
-    
+
     console.log('\n✅ Image download process complete!');
     console.log('\n📝 Next steps:');
     console.log('   1. Verify all images downloaded correctly');
     console.log('   2. Optimize images for web (compress, convert to WebP)');
     console.log('   3. Update component references to use new images');
     console.log('   4. Test image loading and performance');
-    
   } catch (error) {
     console.error('❌ Error:', error.message);
     process.exit(1);
