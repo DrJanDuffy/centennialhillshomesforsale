@@ -3,6 +3,11 @@
  * Tracks user behavior, engagement, and conversion metrics
  */
 
+// Global type declarations
+declare global {
+  function gtag(command: string, action: string, parameters?: Record<string, any>): void;
+}
+
 interface AnalyticsEvent {
   event: string;
   properties: Record<string, any>;
@@ -230,7 +235,7 @@ class AnalyticsTracker {
       console.log('Analytics Event:', analyticsEvent);
 
       // Example: Send to Google Analytics
-      if (typeof gtag !== 'undefined') {
+      if (typeof window !== 'undefined' && typeof gtag !== 'undefined') {
         gtag('event', event, properties);
       }
     }
