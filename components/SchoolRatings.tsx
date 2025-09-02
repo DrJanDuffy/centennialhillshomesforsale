@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
 import { motion } from 'framer-motion';
+import React, { useState } from 'react';
 
 interface School {
   name: string;
@@ -18,12 +18,15 @@ interface SchoolRatingsProps {
   className?: string;
 }
 
-export default function SchoolRatings({ neighborhood, schools, className = '' }: SchoolRatingsProps) {
+export default function SchoolRatings({
+  neighborhood,
+  schools,
+  className = '',
+}: SchoolRatingsProps) {
   const [selectedType, setSelectedType] = useState<'all' | 'elementary' | 'middle' | 'high'>('all');
 
-  const filteredSchools = selectedType === 'all' 
-    ? schools 
-    : schools.filter(school => school.type === selectedType);
+  const filteredSchools =
+    selectedType === 'all' ? schools : schools.filter((school) => school.type === selectedType);
 
   const getRatingColor = (rating: number) => {
     if (rating >= 8) return 'text-green-600 bg-green-100';
@@ -40,9 +43,7 @@ export default function SchoolRatings({ neighborhood, schools, className = '' }:
   return (
     <div className={`school-ratings ${className}`}>
       <div className="bg-white rounded-lg shadow-lg p-6">
-        <h2 className="text-2xl font-bold text-gray-900 mb-6">
-          Schools in {neighborhood}
-        </h2>
+        <h2 className="text-2xl font-bold text-gray-900 mb-6">Schools in {neighborhood}</h2>
 
         {/* School Type Filter */}
         <div className="flex flex-wrap gap-2 mb-6">
@@ -64,7 +65,7 @@ export default function SchoolRatings({ neighborhood, schools, className = '' }:
                 : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
             }`}
           >
-            Elementary ({schools.filter(s => s.type === 'elementary').length})
+            Elementary ({schools.filter((s) => s.type === 'elementary').length})
           </button>
           <button
             onClick={() => setSelectedType('middle')}
@@ -74,7 +75,7 @@ export default function SchoolRatings({ neighborhood, schools, className = '' }:
                 : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
             }`}
           >
-            Middle ({schools.filter(s => s.type === 'middle').length})
+            Middle ({schools.filter((s) => s.type === 'middle').length})
           </button>
           <button
             onClick={() => setSelectedType('high')}
@@ -84,7 +85,7 @@ export default function SchoolRatings({ neighborhood, schools, className = '' }:
                 : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
             }`}
           >
-            High School ({schools.filter(s => s.type === 'high').length})
+            High School ({schools.filter((s) => s.type === 'high').length})
           </button>
         </div>
 
@@ -102,21 +103,25 @@ export default function SchoolRatings({ neighborhood, schools, className = '' }:
                 <div className="flex-1">
                   <div className="flex items-center gap-3 mb-2">
                     <h3 className="text-lg font-semibold text-gray-900">{school.name}</h3>
-                    <span className={`px-2 py-1 rounded-full text-xs font-medium ${getRatingColor(school.rating)}`}>
+                    <span
+                      className={`px-2 py-1 rounded-full text-xs font-medium ${getRatingColor(school.rating)}`}
+                    >
                       {school.type.charAt(0).toUpperCase() + school.type.slice(1)}
                     </span>
                   </div>
-                  
+
                   <div className="flex items-center gap-4 mb-2">
                     <div className="flex items-center gap-1">
-                      <span className="text-yellow-500 text-lg">{getRatingStars(school.rating)}</span>
+                      <span className="text-yellow-500 text-lg">
+                        {getRatingStars(school.rating)}
+                      </span>
                       <span className="text-sm text-gray-600 ml-1">({school.rating}/10)</span>
                     </div>
                     <span className="text-sm text-gray-600">📍 {school.distance} miles away</span>
                   </div>
-                  
+
                   <p className="text-sm text-gray-600 mb-2">{school.address}</p>
-                  
+
                   {school.programs.length > 0 && (
                     <div className="flex flex-wrap gap-1 mb-2">
                       {school.programs.map((program, idx) => (
@@ -130,7 +135,7 @@ export default function SchoolRatings({ neighborhood, schools, className = '' }:
                     </div>
                   )}
                 </div>
-                
+
                 <div className="flex flex-col sm:flex-row gap-2 mt-3 sm:mt-0">
                   <a
                     href={`tel:${school.phone}`}
@@ -155,8 +160,9 @@ export default function SchoolRatings({ neighborhood, schools, className = '' }:
         {/* Disclaimer */}
         <div className="mt-6 p-4 bg-gray-50 rounded-lg">
           <p className="text-sm text-gray-600">
-            <strong>Disclaimer:</strong> School ratings and information are provided for informational purposes only. 
-            Please verify current information directly with the school district. School boundaries and ratings may change.
+            <strong>Disclaimer:</strong> School ratings and information are provided for
+            informational purposes only. Please verify current information directly with the school
+            district. School boundaries and ratings may change.
           </p>
         </div>
       </div>
