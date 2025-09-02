@@ -5,7 +5,7 @@
  * This script will create an optimized prompt for image generation tools
  */
 
-const fs = require('fs');
+const fs = require('node:fs');
 
 // Load environment variables
 require('dotenv').config({ path: '.env.local' });
@@ -28,20 +28,20 @@ async function generateEnhancedPrompt() {
     'google/gemma-3n-e2b-it:free',
     'google/gemma-3n-e4b-it:free',
     'openai/gpt-oss-120b:free',
-    'openai/gpt-oss-20b:free'
+    'openai/gpt-oss-20b:free',
   ];
 
   for (const model of freeModels) {
     try {
       console.log(`🚀 Trying model: ${model}...`);
-      
+
       const response = await fetch('https://openrouter.ai/api/v1/chat/completions', {
         method: 'POST',
         headers: {
-          'Authorization': `Bearer ${OPENROUTER_API_KEY}`,
+          Authorization: `Bearer ${OPENROUTER_API_KEY}`,
           'Content-Type': 'application/json',
           'HTTP-Referer': 'https://centennialhillshomesforsale.com',
-          'X-Title': 'Centennial Hills Real Estate Hero Image Generator'
+          'X-Title': 'Centennial Hills Real Estate Hero Image Generator',
         },
         body: JSON.stringify({
           model: model,
@@ -57,12 +57,12 @@ Please create:
 2. A Midjourney optimized prompt (with proper parameters and style)
 3. A general AI art prompt (for Stable Diffusion, Adobe Firefly, etc.)
 
-Make each prompt extremely detailed, specific, and optimized for the best possible results. Include technical photography terms, lighting details, composition elements, and style specifications.`
-            }
+Make each prompt extremely detailed, specific, and optimized for the best possible results. Include technical photography terms, lighting details, composition elements, and style specifications.`,
+            },
           ],
           max_tokens: 2000,
-          temperature: 0.7
-        })
+          temperature: 0.7,
+        }),
       });
 
       if (!response.ok) {
@@ -75,35 +75,36 @@ Make each prompt extremely detailed, specific, and optimized for the best possib
       const data = await response.json();
       console.log(`✅ Success with model: ${model}!`);
 
-      if (data.choices && data.choices[0] && data.choices[0].message) {
+      if (data.choices?.[0]?.message) {
         const enhancedPrompts = data.choices[0].message.content;
         console.log('📝 Enhanced prompts:');
         console.log(enhancedPrompts);
-        
+
         // Save the enhanced prompts to a file
         const timestamp = new Date().toISOString().replace(/[:.]/g, '-');
         const filename = `enhanced-hero-prompts-${timestamp}.txt`;
         fs.writeFileSync(filename, enhancedPrompts);
         console.log(`\n💾 Enhanced prompts saved to: ${filename}`);
-        
+
         // Also save to a standard filename for easy access
         fs.writeFileSync('enhanced-hero-prompts.txt', enhancedPrompts);
         console.log('💾 Also saved to: enhanced-hero-prompts.txt');
-        
+
         console.log('\n🎯 Use these enhanced prompts with:');
         console.log('• DALL-E 3: https://chat.openai.com/');
         console.log('• Midjourney: https://midjourney.com/');
         console.log('• Adobe Firefly: https://firefly.adobe.com/');
-        console.log('• Stable Diffusion: https://huggingface.co/spaces/stabilityai/stable-diffusion');
+        console.log(
+          '• Stable Diffusion: https://huggingface.co/spaces/stabilityai/stable-diffusion'
+        );
         console.log('• Leonardo AI: https://leonardo.ai/');
         console.log('• Runway ML: https://runwayml.com/');
-        
+
         console.log('\n✨ Your enhanced prompts are ready for use!');
         return; // Success, exit the function
       }
     } catch (error) {
       console.log(`❌ Error with model ${model}:`, error.message);
-      continue; // Try next model
     }
   }
 

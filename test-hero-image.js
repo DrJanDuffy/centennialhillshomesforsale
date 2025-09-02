@@ -5,8 +5,8 @@
  * Tests if the hero image exists and provides integration instructions
  */
 
-const fs = require('fs');
-const path = require('path');
+const fs = require('node:fs');
+const _path = require('node:path');
 
 function testHeroImage() {
   const heroImagePath = 'public/images/hero-image.jpg';
@@ -56,4 +56,3 @@ function testHeroImage() {
 
 // Run the test
 testHeroImage();
-

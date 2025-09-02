@@ -92,4 +92,3 @@ const LuxuryHeroSection: React.FC<LuxuryHeroSectionProps> = ({
 };
 
 export default LuxuryHeroSection;
-

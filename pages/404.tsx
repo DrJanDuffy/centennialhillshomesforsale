@@ -137,7 +137,7 @@ export default function Custom404() {
           </motion.h2>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {helpfulLinks.map((link, index) => {
+            {helpfulLinks.map((link, _index) => {
               const Icon = link.icon;
               return (
                 <motion.div

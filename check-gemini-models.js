@@ -4,7 +4,7 @@
  * Check available Gemini models through OpenRouter
  */
 
-const fs = require('fs');
+const _fs = require('node:fs');
 
 // Load environment variables
 require('dotenv').config({ path: '.env.local' });
@@ -23,9 +23,9 @@ async function checkGeminiModels() {
     const response = await fetch('https://openrouter.ai/api/v1/models', {
       method: 'GET',
       headers: {
-        'Authorization': `Bearer ${OPENROUTER_API_KEY}`,
-        'Content-Type': 'application/json'
-      }
+        Authorization: `Bearer ${OPENROUTER_API_KEY}`,
+        'Content-Type': 'application/json',
+      },
     });
 
     if (!response.ok) {
@@ -33,29 +33,28 @@ async function checkGeminiModels() {
     }
 
     const data = await response.json();
-    
+
     console.log('📋 Available models:');
-    const geminiModels = data.data.filter(model => 
-      model.id.toLowerCase().includes('gemini') || 
-      model.id.toLowerCase().includes('google')
+    const geminiModels = data.data.filter(
+      (model) =>
+        model.id.toLowerCase().includes('gemini') || model.id.toLowerCase().includes('google')
     );
-    
+
     if (geminiModels.length > 0) {
       console.log('\n🎯 Gemini/Google models found:');
-      geminiModels.forEach(model => {
+      geminiModels.forEach((model) => {
         console.log(`• ${model.id} - ${model.name || 'No description'}`);
       });
     } else {
       console.log('\n❌ No Gemini models found');
       console.log('\n📋 All available models:');
-      data.data.slice(0, 20).forEach(model => {
+      data.data.slice(0, 20).forEach((model) => {
         console.log(`• ${model.id}`);
       });
       if (data.data.length > 20) {
         console.log(`... and ${data.data.length - 20} more models`);
       }
     }
-
   } catch (error) {
     console.error('❌ Error checking models:', error.message);
   }

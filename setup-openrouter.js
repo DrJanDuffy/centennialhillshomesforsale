@@ -5,8 +5,8 @@
  * Helps configure OpenRouter.ai API key for hero image generation
  */
 
-const fs = require('fs');
-const path = require('path');
+const fs = require('node:fs');
+const _path = require('node:path');
 
 function createEnvFile() {
   const envContent = `# OpenRouter.ai API Configuration
@@ -95,7 +95,6 @@ switch (command) {
   case 'check':
     checkApiKey();
     break;
-  case 'help':
   default:
     console.log('\n🔧 OPENROUTER.AI SETUP HELPER\n');
     console.log('Usage: node setup-openrouter.js [command]\n');
@@ -112,4 +111,3 @@ switch (command) {
 }
 
 console.log('✨ Ready to generate amazing hero images! ✨\n');
-

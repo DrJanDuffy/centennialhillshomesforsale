@@ -1,11 +1,7 @@
 import Head from 'next/head';
 import Layout from '../components/Layout';
 import SimpleInteriorGallery from '../components/SimpleInteriorGallery';
-import {
-  getAllInteriorPhotos,
-  getPhotosByCategory,
-  getPhotosByStyle,
-} from '../utils/interiorPhotos';
+import { getAllInteriorPhotos, getPhotosByCategory } from '../utils/interiorPhotos';
 
 export default function InteriorPhotos() {
   const allPhotos = getAllInteriorPhotos();

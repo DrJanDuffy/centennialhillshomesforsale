@@ -5,8 +5,8 @@
  * This script will generate a luxury real estate hero image using DALL-E 3
  */
 
-const fs = require('fs');
-const path = require('path');
+const fs = require('node:fs');
+const path = require('node:path');
 
 // Load environment variables
 require('dotenv').config({ path: '.env.local' });
@@ -38,12 +38,12 @@ async function generateHeroImage() {
 
   try {
     console.log('🚀 Sending request to OpenAI DALL-E 3...');
-    
+
     const response = await fetch('https://api.openai.com/v1/images/generations', {
       method: 'POST',
       headers: {
-        'Authorization': `Bearer ${OPENAI_API_KEY}`,
-        'Content-Type': 'application/json'
+        Authorization: `Bearer ${OPENAI_API_KEY}`,
+        'Content-Type': 'application/json',
       },
       body: JSON.stringify({
         model: 'dall-e-3',
@@ -51,8 +51,8 @@ async function generateHeroImage() {
         n: 1,
         size: '1792x1024',
         quality: 'hd',
-        style: 'natural'
-      })
+        style: 'natural',
+      }),
     });
 
     if (!response.ok) {
@@ -65,52 +65,50 @@ async function generateHeroImage() {
     const data = await response.json();
     console.log('✅ Image generated successfully!');
 
-    if (data.data && data.data[0] && data.data[0].url) {
+    if (data.data?.[0]?.url) {
       const imageUrl = data.data[0].url;
       console.log('📥 Downloading image...');
-      
+
       // Download the image
       const imageResponse = await fetch(imageUrl);
       if (!imageResponse.ok) {
         throw new Error('Failed to download image');
       }
-      
+
       const imageBuffer = await imageResponse.arrayBuffer();
-      
+
       // Ensure images directory exists
       const imagesDir = 'public/images';
       if (!fs.existsSync(imagesDir)) {
         fs.mkdirSync(imagesDir, { recursive: true });
         console.log('📁 Created public/images directory');
       }
-      
+
       // Save the image
       const imagePath = path.join(imagesDir, 'hero-image.jpg');
       fs.writeFileSync(imagePath, Buffer.from(imageBuffer));
-      
+
       const stats = fs.statSync(imagePath);
       const fileSizeKB = Math.round(stats.size / 1024);
-      
+
       console.log('🎉 Hero image saved successfully!');
       console.log(`📁 Location: ${imagePath}`);
       console.log(`📏 File size: ${fileSizeKB} KB`);
       console.log(`📅 Generated: ${new Date().toLocaleString()}`);
-      
+
       if (fileSizeKB > 1000) {
         console.log('⚠️  Large file size detected. Consider optimizing for web use.');
       }
-      
+
       console.log('\n🌐 Test your hero section at: http://localhost:3000/luxury-hero-test');
       console.log('✨ Your luxury real estate hero section is ready! ✨');
-      
     } else {
       console.log('❌ No image URL found in response');
       console.log('Response data:', JSON.stringify(data, null, 2));
     }
-
   } catch (error) {
     console.error('❌ Error generating image:', error.message);
-    
+
     if (error.message.includes('API request failed')) {
       console.log('\n🔧 Troubleshooting:');
       console.log('1. Check your OpenAI API key in .env.local');
