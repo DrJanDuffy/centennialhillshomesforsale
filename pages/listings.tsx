@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion';
 import Link from 'next/link';
 import Layout from '../components/Layout';
+import RealScoutListingsSection from '../components/RealScoutListingsSection';
 
 export default function Listings() {
   return (
@@ -134,6 +135,12 @@ export default function Listings() {
             </div>
           </div>
         </motion.section>
+
+        {/* RealScout Office Listings */}
+        <RealScoutListingsSection
+          title="All Available Properties"
+          subtitle="Browse our complete inventory of homes for sale in Centennial Hills and surrounding areas"
+        />
       </main>
     </Layout>
   );

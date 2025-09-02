@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
 import { motion } from 'framer-motion';
+import { useState } from 'react';
 
 interface Property {
   id: string;
@@ -19,14 +19,17 @@ interface PropertyComparisonProps {
   className?: string;
 }
 
-export default function PropertyComparison({ properties, className = '' }: PropertyComparisonProps) {
+export default function PropertyComparison({
+  properties,
+  className = '',
+}: PropertyComparisonProps) {
   const [selectedProperties, setSelectedProperties] = useState<string[]>([]);
   const [showComparison, setShowComparison] = useState(false);
 
   const toggleProperty = (propertyId: string) => {
-    setSelectedProperties(prev => {
+    setSelectedProperties((prev) => {
       if (prev.includes(propertyId)) {
-        return prev.filter(id => id !== propertyId);
+        return prev.filter((id) => id !== propertyId);
       } else if (prev.length < 3) {
         return [...prev, propertyId];
       }
@@ -47,13 +50,13 @@ export default function PropertyComparison({ properties, className = '' }: Prope
     return new Intl.NumberFormat('en-US').format(sqft);
   };
 
-  const selectedProps = properties.filter(p => selectedProperties.includes(p.id));
+  const selectedProps = properties.filter((p) => selectedProperties.includes(p.id));
 
   return (
     <div className={`property-comparison ${className}`}>
       <div className="bg-white rounded-lg shadow-lg p-6">
         <h2 className="text-2xl font-bold text-gray-900 mb-6">Compare Properties</h2>
-        
+
         {/* Property Selection */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-6">
           {properties.map((property) => (
@@ -78,7 +81,10 @@ export default function PropertyComparison({ properties, className = '' }: Prope
               <h3 className="font-semibold text-gray-900 mb-1">{property.address}</h3>
               <p className="text-lg font-bold text-blue-600 mb-2">{formatPrice(property.price)}</p>
               <div className="text-sm text-gray-600">
-                <p>{property.bedrooms} bed • {property.bathrooms} bath • {formatSquareFeet(property.squareFeet)} sqft</p>
+                <p>
+                  {property.bedrooms} bed • {property.bathrooms} bath •{' '}
+                  {formatSquareFeet(property.squareFeet)} sqft
+                </p>
               </div>
               {selectedProperties.includes(property.id) && (
                 <div className="mt-2 text-blue-600 text-sm font-medium">✓ Selected</div>

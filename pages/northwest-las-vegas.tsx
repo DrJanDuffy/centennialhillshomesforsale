@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { useState } from 'react';
 import Layout from '../components/Layout';
 import NeighborhoodBar from '../components/NeighborhoodBar';
+import RealScoutListingsSection from '../components/RealScoutListingsSection';
 import SchoolInfo from '../components/SchoolInfo';
 import RealScoutWidget from '../components/widgets/RealScoutWidget';
 
@@ -212,6 +213,11 @@ export default function NorthwestLasVegas() {
           </div>
         </motion.section>
       </main>
+      {/* RealScout Office Listings */}
+      <RealScoutListingsSection
+        title="Current Listings"
+        subtitle="Browse our latest property listings in Centennial Hills and surrounding areas"
+      />
     </Layout>
   );
 }

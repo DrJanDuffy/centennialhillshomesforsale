@@ -6,6 +6,7 @@ import Layout from '../components/Layout';
 import type { NeighborhoodName } from '../components/NeighborhoodBar';
 import NeighborhoodBar from '../components/NeighborhoodBar';
 import RealScoutListings from '../components/RealScoutListings';
+import RealScoutListingsSection from '../components/RealScoutListingsSection';
 import SchoolInfo from '../components/SchoolInfo';
 
 export default function LasVegas89149() {
@@ -172,6 +173,11 @@ export default function LasVegas89149() {
           </div>
         </motion.section>
       </main>
+      {/* RealScout Office Listings */}
+      <RealScoutListingsSection
+        title="Current Listings"
+        subtitle="Browse our latest property listings in Centennial Hills and surrounding areas"
+      />
     </Layout>
   );
 }

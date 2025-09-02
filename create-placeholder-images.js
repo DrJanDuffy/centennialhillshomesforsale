@@ -35,7 +35,7 @@ const placeholderImages = [
     height: 1080,
     text: 'Luxury Estate Exterior',
     bgColor: '#1e40af',
-    textColor: '#ffffff'
+    textColor: '#ffffff',
   },
   {
     path: 'public/assets/images/property-gallery/luxury-estate-kitchen.jpg',
@@ -43,7 +43,7 @@ const placeholderImages = [
     height: 1200,
     text: 'Gourmet Kitchen',
     bgColor: '#059669',
-    textColor: '#ffffff'
+    textColor: '#ffffff',
   },
   {
     path: 'public/assets/images/property-gallery/luxury-estate-master-bedroom.jpg',
@@ -51,7 +51,7 @@ const placeholderImages = [
     height: 1200,
     text: 'Master Bedroom',
     bgColor: '#7c3aed',
-    textColor: '#ffffff'
+    textColor: '#ffffff',
   },
   {
     path: 'public/assets/images/property-gallery/luxury-estate-pool.jpg',
@@ -59,7 +59,7 @@ const placeholderImages = [
     height: 1200,
     text: 'Resort-Style Pool',
     bgColor: '#0891b2',
-    textColor: '#ffffff'
+    textColor: '#ffffff',
   },
   {
     path: 'public/assets/images/property-gallery/modern-home-exterior-main.jpg',
@@ -67,7 +67,7 @@ const placeholderImages = [
     height: 1080,
     text: 'Modern Home Exterior',
     bgColor: '#dc2626',
-    textColor: '#ffffff'
+    textColor: '#ffffff',
   },
   {
     path: 'public/assets/images/property-gallery/modern-home-living-room.jpg',
@@ -75,7 +75,7 @@ const placeholderImages = [
     height: 1200,
     text: 'Open Living Room',
     bgColor: '#ea580c',
-    textColor: '#ffffff'
+    textColor: '#ffffff',
   },
   {
     path: 'public/assets/images/property-gallery/modern-home-kitchen.jpg',
@@ -83,7 +83,7 @@ const placeholderImages = [
     height: 1200,
     text: 'Modern Kitchen',
     bgColor: '#16a34a',
-    textColor: '#ffffff'
+    textColor: '#ffffff',
   },
   {
     path: 'public/assets/images/property-gallery/providence-villa-exterior-main.jpg',
@@ -91,7 +91,7 @@ const placeholderImages = [
     height: 1080,
     text: 'Providence Villa',
     bgColor: '#9333ea',
-    textColor: '#ffffff'
+    textColor: '#ffffff',
   },
   {
     path: 'public/assets/images/property-gallery/providence-villa-wine-cellar.jpg',
@@ -99,7 +99,7 @@ const placeholderImages = [
     height: 1200,
     text: 'Wine Cellar',
     bgColor: '#be123c',
-    textColor: '#ffffff'
+    textColor: '#ffffff',
   },
   {
     path: 'public/assets/images/property-gallery/providence-villa-home-theater.jpg',
@@ -107,7 +107,7 @@ const placeholderImages = [
     height: 1200,
     text: 'Home Theater',
     bgColor: '#1f2937',
-    textColor: '#ffffff'
+    textColor: '#ffffff',
   },
   // Neighborhood Images
   {
@@ -116,7 +116,7 @@ const placeholderImages = [
     height: 1080,
     text: 'Centennial Hills',
     bgColor: '#0f766e',
-    textColor: '#ffffff'
+    textColor: '#ffffff',
   },
   {
     path: 'public/assets/images/neighborhoods/providence-hero.jpg',
@@ -124,7 +124,7 @@ const placeholderImages = [
     height: 1080,
     text: 'Providence',
     bgColor: '#7c2d12',
-    textColor: '#ffffff'
+    textColor: '#ffffff',
   },
   {
     path: 'public/assets/images/neighborhoods/skye-canyon-hero.jpg',
@@ -132,38 +132,40 @@ const placeholderImages = [
     height: 1080,
     text: 'Skye Canyon',
     bgColor: '#365314',
-    textColor: '#ffffff'
-  }
+    textColor: '#ffffff',
+  },
 ];
 
 async function createPlaceholderImages() {
   let createdCount = 0;
-  
+
   for (const image of placeholderImages) {
     const dirPath = path.dirname(image.path);
     const fileName = path.basename(image.path, path.extname(image.path));
     const svgPath = path.join(dirPath, `${fileName}.svg`);
-    
+
     // Ensure directory exists
     ensureDirectoryExists(dirPath);
-    
+
     // Create SVG placeholder
     const svgContent = createSVGPlaceholder(
-      image.width, 
-      image.height, 
-      image.text, 
-      image.bgColor, 
+      image.width,
+      image.height,
+      image.text,
+      image.bgColor,
       image.textColor
     );
-    
+
     // Write SVG file
     fs.writeFileSync(svgPath, svgContent);
     console.log(`✅ Created: ${svgPath}`);
     createdCount++;
   }
-  
+
   console.log(`\n🎉 Successfully created ${createdCount} placeholder images!`);
-  console.log('\n📝 Note: These are SVG placeholders. For production, replace with actual high-quality images.');
+  console.log(
+    '\n📝 Note: These are SVG placeholders. For production, replace with actual high-quality images.'
+  );
   console.log('   The placeholders will prevent broken image errors and provide visual feedback.');
 }
 

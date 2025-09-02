@@ -1,7 +1,6 @@
 import Head from 'next/head';
 import Link from 'next/link';
 
-import AIHeroSection from '../components/AIHeroSection';
 import ConversionOptimizer from '../components/ConversionOptimizer';
 import Layout from '../components/Layout';
 import RealScoutListings from '../components/RealScoutListings';
@@ -12,9 +11,6 @@ import { getPhotosForPage } from '../utils/interiorPhotos';
 export default function Home() {
   return (
     <Layout>
-      {/* AI-Generated Hero with Luxury Real Estate Image */}
-      <AIHeroSection />
-
       <Head>
         <title>Centennial Hills Homes for Sale | Dr. Jan Duffy | Luxury Real Estate</title>
         <meta
@@ -30,57 +26,81 @@ export default function Home() {
         <script type="application/ld+json" id="business-schema" />
       </Head>
 
-      {/* Quick Navigation Cards */}
-      <section className="py-16 bg-gray-50">
+      {/* Hero Section with RealScout Focus */}
+      <section className="relative bg-gradient-to-br from-blue-900 via-blue-800 to-blue-700 text-white py-20 lg:py-32">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 mb-6">
-              Explore Centennial Hills
+          <div className="text-center mb-16">
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6">
+              Find Your Dream Home in
+              <span className="block text-yellow-400">Centennial Hills</span>
+            </h1>
+            <p className="text-xl lg:text-2xl text-blue-100 mb-8 max-w-4xl mx-auto">
+              Browse our exclusive collection of luxury homes, condos, and townhomes in Las Vegas's
+              premier Centennial Hills area. Each listing features detailed property information,
+              high-quality photos, and virtual tours.
+            </p>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <Link
+                href="#listings"
+                className="bg-yellow-500 text-blue-900 hover:bg-yellow-400 px-8 lg:px-10 py-3 lg:py-4 rounded-lg font-semibold transition-all duration-300 transform hover:scale-105 text-base lg:text-lg"
+              >
+                View All Listings
+              </Link>
+              <Link
+                href="/contact"
+                className="border-2 border-white text-white hover:bg-white hover:text-blue-900 px-8 lg:px-10 py-3 lg:py-4 rounded-lg font-semibold transition-all duration-300 transform hover:scale-105 text-base lg:text-lg"
+              >
+                Get Started Today
+              </Link>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Featured RealScout Listings Section */}
+      <section id="listings" className="py-20 bg-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
+              Featured Properties
             </h2>
-            <p className="text-lg lg:text-xl text-gray-600 max-w-3xl mx-auto">
-              Everything you need to know about living, buying, and investing in this premier Las
-              Vegas community
+            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+              Discover our handpicked selection of luxury homes in Centennial Hills. Each property
+              is carefully selected for its exceptional quality, prime location, and outstanding
+              value.
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8">
-            {/* Properties Card */}
-            <Link href="/properties" className="group">
-              <div className="bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 p-6 lg:p-8 text-center">
-                <div className="w-12 h-12 lg:w-14 lg:h-14 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-6 group-hover:bg-blue-200 transition-colors">
-                  <svg
-                    className="w-6 h-6 lg:w-7 lg:h-7 text-blue-600"
-                    fill="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path d="M19 7c0-1.103-.897-2-2-2h-3v2h3v2.765l-3.447 4.018c-.34.39-.553.895-.553 1.47V19h4v2h-6v-4.765c0-.575-.213-1.08-.553-1.47L7 9.765V7h3V5H7c-1.103 0-2 .897-2 2v2.765l3.447 4.018c.34.39.553.895.553 1.47V19H5v2h4v-4.765c0-.575.213-1.08.553-1.47L13 9.765V7z" />
-                  </svg>
-                </div>
-                <h3 className="text-xl lg:text-2xl font-bold text-gray-900 mb-4">
-                  Available Properties
-                </h3>
-                <p className="text-gray-600 mb-6">
-                  Browse our curated selection of premium homes with stunning mountain views
-                </p>
-                <div className="text-blue-600 font-semibold group-hover:text-blue-700 transition-colors">
-                  View Properties →
-                </div>
-              </div>
-            </Link>
+          {/* RealScout Listings Component */}
+          <realscout-office-listings
+            agent-encoded-id="QWdlbnQtMjI1MDUw"
+            sort-order="STATUS_AND_SIGNIFICANT_CHANGE"
+            listing-status="For Sale"
+            property-types="SFR,MF,TC"
+          />
+        </div>
+      </section>
 
-            {/* Neighborhoods Card */}
+      {/* Quick Navigation Section */}
+      <section className="py-16 bg-gray-50">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-6">Explore More</h2>
+            <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+              Discover neighborhoods, market insights, and everything you need to know about
+              Centennial Hills
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             <Link href="/neighborhoods" className="group">
-              <div className="bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 p-6 lg:p-8 text-center">
-                <div className="w-12 h-12 lg:w-14 lg:h-14 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-6 group-hover:bg-green-200 transition-colors">
-                  <svg
-                    className="w-6 h-6 lg:w-7 lg:h-7 text-green-600"
-                    fill="currentColor"
-                    viewBox="0 0 24 24"
-                  >
+              <div className="bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 p-8 text-center">
+                <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-6 group-hover:bg-green-200 transition-colors">
+                  <svg className="w-8 h-8 text-green-600" fill="currentColor" viewBox="0 0 24 24">
                     <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z" />
                   </svg>
                 </div>
-                <h3 className="text-xl lg:text-2xl font-bold text-gray-900 mb-4">Neighborhoods</h3>
+                <h3 className="text-xl font-bold text-gray-900 mb-4">Neighborhoods</h3>
                 <p className="text-gray-600 mb-6">
                   Discover the unique character and amenities of each community
                 </p>
@@ -90,19 +110,14 @@ export default function Home() {
               </div>
             </Link>
 
-            {/* Market Data Card */}
             <Link href="/market-data" className="group">
-              <div className="bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 p-6 lg:p-8 text-center">
-                <div className="w-12 h-12 lg:w-14 lg:h-14 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-6 group-hover:bg-purple-200 transition-colors">
-                  <svg
-                    className="w-6 h-6 lg:w-7 lg:h-7 text-purple-600"
-                    fill="currentColor"
-                    viewBox="0 0 24 24"
-                  >
+              <div className="bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 p-8 text-center">
+                <div className="w-16 h-16 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-6 group-hover:bg-purple-200 transition-colors">
+                  <svg className="w-8 h-8 text-purple-600" fill="currentColor" viewBox="0 0 24 24">
                     <path d="M3 13h2v-2H3v2zm0 4h2v-2H3v2zm0-8h2V7H3v2zm4 4h14v-2H7v2zm0 4h14v-2H7v2zM7 7v2h14V7H7z" />
                   </svg>
                 </div>
-                <h3 className="text-xl lg:text-2xl font-bold text-gray-900 mb-4">Market Trends</h3>
+                <h3 className="text-xl font-bold text-gray-900 mb-4">Market Trends</h3>
                 <p className="text-gray-600 mb-6">
                   Stay informed with the latest real estate market data and trends
                 </p>
@@ -112,24 +127,19 @@ export default function Home() {
               </div>
             </Link>
 
-            {/* Area Explorer Card */}
-            <Link href="/area-explorer" className="group">
-              <div className="bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 p-6 lg:p-8 text-center">
-                <div className="w-12 h-12 lg:w-14 lg:h-14 bg-orange-100 rounded-full flex items-center justify-center mx-auto mb-6 group-hover:bg-orange-200 transition-colors">
-                  <svg
-                    className="w-6 h-6 lg:w-7 lg:h-7 text-orange-600"
-                    fill="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path d="M20.5 3l-.16.03L15 5.1 9 3 3.36 4.9c-.21.07-.36.25-.36.48V20.5c0 .28.22.5.5.5l.16-.03L9 18.9l6 2.1 5.64-1.9c.21-.07.36-.25.36-.48V3.5c0-.28-.22-.5-.5-.5zM15 19l-6-2.11V5l6 2.11V19z" />
+            <Link href="/contact" className="group">
+              <div className="bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 p-8 text-center">
+                <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-6 group-hover:bg-blue-200 transition-colors">
+                  <svg className="w-8 h-8 text-blue-600" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z" />
                   </svg>
                 </div>
-                <h3 className="text-xl lg:text-2xl font-bold text-gray-900 mb-4">Area Explorer</h3>
+                <h3 className="text-xl font-bold text-gray-900 mb-4">Get In Touch</h3>
                 <p className="text-gray-600 mb-6">
-                  Interactive map showing amenities, schools, and attractions
+                  Ready to find your dream home? Let's start the conversation
                 </p>
-                <div className="text-orange-600 font-semibold group-hover:text-orange-700 transition-colors">
-                  Explore Map →
+                <div className="text-blue-600 font-semibold group-hover:text-blue-700 transition-colors">
+                  Contact Us →
                 </div>
               </div>
             </Link>

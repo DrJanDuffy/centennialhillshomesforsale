@@ -11,6 +11,7 @@ import {
 import type React from 'react';
 import { useEffect, useState } from 'react';
 import Layout from '../components/Layout';
+import RealScoutListingsSection from '../components/RealScoutListingsSection';
 import TaskMasterDashboard from '../components/TaskMasterDashboard';
 import TaskMasterStatus from '../components/TaskMasterStatus';
 
@@ -236,6 +237,11 @@ const TaskMasterPage: React.FC = () => {
           }
         }
       `}</style>
+      {/* RealScout Office Listings */}
+      <RealScoutListingsSection
+        title="Current Listings"
+        subtitle="Browse our latest property listings in Centennial Hills and surrounding areas"
+      />
     </Layout>
   );
 };

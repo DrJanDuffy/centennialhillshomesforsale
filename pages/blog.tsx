@@ -6,6 +6,7 @@ import Layout from '@/components/Layout';
 import RealScoutListings from '@/components/RealScoutListings';
 import KCMFeed from '@/components/rss/KCMFeed';
 import MarketInsightsWidget from '@/components/rss/MarketInsightsWidget';
+import RealScoutListingsSection from '../components/RealScoutListingsSection';
 
 const BlogPage: React.FC = () => {
   const blogPosts = [
@@ -301,6 +302,11 @@ const BlogPage: React.FC = () => {
           </div>
         </section>
       </div>
+      {/* RealScout Office Listings */}
+      <RealScoutListingsSection
+        title="Current Listings"
+        subtitle="Browse our latest property listings in Centennial Hills and surrounding areas"
+      />
     </Layout>
   );
 };

@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
 import { motion } from 'framer-motion';
+import type React from 'react';
+import { useState } from 'react';
 
 interface ValuationResult {
   estimatedValue: number;
@@ -27,62 +28,61 @@ export default function PropertyValuation({ className = '' }: PropertyValuationP
     yearBuilt: '',
     lotSize: '',
     condition: 'good',
-    upgrades: [] as string[]
+    upgrades: [] as string[],
   });
-  
+
   const [result, setResult] = useState<ValuationResult | null>(null);
   const [isLoading, setIsLoading] = useState(false);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
-    setFormData(prev => ({ ...prev, [name]: value }));
+    setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
   const handleUpgradeChange = (upgrade: string) => {
-    setFormData(prev => ({
+    setFormData((prev) => ({
       ...prev,
       upgrades: prev.upgrades.includes(upgrade)
-        ? prev.upgrades.filter(u => u !== upgrade)
-        : [...prev.upgrades, upgrade]
+        ? prev.upgrades.filter((u) => u !== upgrade)
+        : [...prev.upgrades, upgrade],
     }));
   };
 
   const calculateValuation = async () => {
     setIsLoading(true);
-    
+
     // Simulate API call
-    await new Promise(resolve => setTimeout(resolve, 2000));
-    
+    await new Promise((resolve) => setTimeout(resolve, 2000));
+
     // Mock calculation (in real app, this would call a valuation API)
-    const baseValue = parseInt(formData.squareFeet) * 180; // $180/sqft base
-    const bedroomBonus = parseInt(formData.bedrooms) * 5000;
-    const bathroomBonus = parseInt(formData.bathrooms) * 3000;
+    const baseValue = parseInt(formData.squareFeet, 10) * 180; // $180/sqft base
+    const bedroomBonus = parseInt(formData.bedrooms, 10) * 5000;
+    const bathroomBonus = parseInt(formData.bathrooms, 10) * 3000;
     const upgradeBonus = formData.upgrades.length * 10000;
-    const conditionMultiplier = formData.condition === 'excellent' ? 1.1 : 
-                               formData.condition === 'good' ? 1.0 : 0.9;
-    
-    const estimatedValue = Math.round((baseValue + bedroomBonus + bathroomBonus + upgradeBonus) * conditionMultiplier);
-    
+    const conditionMultiplier =
+      formData.condition === 'excellent' ? 1.1 : formData.condition === 'good' ? 1.0 : 0.9;
+
+    const estimatedValue = Math.round(
+      (baseValue + bedroomBonus + bathroomBonus + upgradeBonus) * conditionMultiplier
+    );
+
     const mockResult: ValuationResult = {
       estimatedValue,
       priceRange: {
         low: Math.round(estimatedValue * 0.9),
-        high: Math.round(estimatedValue * 1.1)
+        high: Math.round(estimatedValue * 1.1),
       },
       confidence: 85,
       factors: {
         positive: [
           'Recent market trends favor this area',
           'Good school district',
-          'Recent comparable sales support this range'
+          'Recent comparable sales support this range',
         ],
-        negative: [
-          'Limited recent sales data',
-          'Market conditions may vary'
-        ]
-      }
+        negative: ['Limited recent sales data', 'Market conditions may vary'],
+      },
     };
-    
+
     setResult(mockResult);
     setIsLoading(false);
   };
@@ -100,12 +100,12 @@ export default function PropertyValuation({ className = '' }: PropertyValuationP
     <div className={`property-valuation ${className}`}>
       <div className="bg-white rounded-lg shadow-lg p-6">
         <h2 className="text-2xl font-bold text-gray-900 mb-6">Property Valuation Tool</h2>
-        
+
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
           {/* Input Form */}
           <div>
             <h3 className="text-lg font-semibold text-gray-900 mb-4">Property Details</h3>
-            
+
             <div className="space-y-4">
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-1">
@@ -120,7 +120,7 @@ export default function PropertyValuation({ className = '' }: PropertyValuationP
                   placeholder="123 Main St, Las Vegas, NV"
                 />
               </div>
-              
+
               <div className="grid grid-cols-2 gap-4">
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-1">
@@ -135,7 +135,7 @@ export default function PropertyValuation({ className = '' }: PropertyValuationP
                     placeholder="2500"
                   />
                 </div>
-                
+
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-1">
                     Lot Size (acres)
@@ -151,12 +151,10 @@ export default function PropertyValuation({ className = '' }: PropertyValuationP
                   />
                 </div>
               </div>
-              
+
               <div className="grid grid-cols-3 gap-4">
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">
-                    Bedrooms
-                  </label>
+                  <label className="block text-sm font-medium text-gray-700 mb-1">Bedrooms</label>
                   <input
                     type="number"
                     name="bedrooms"
@@ -166,11 +164,9 @@ export default function PropertyValuation({ className = '' }: PropertyValuationP
                     placeholder="3"
                   />
                 </div>
-                
+
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">
-                    Bathrooms
-                  </label>
+                  <label className="block text-sm font-medium text-gray-700 mb-1">Bathrooms</label>
                   <input
                     type="number"
                     step="0.5"
@@ -181,11 +177,9 @@ export default function PropertyValuation({ className = '' }: PropertyValuationP
                     placeholder="2.5"
                   />
                 </div>
-                
+
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">
-                    Year Built
-                  </label>
+                  <label className="block text-sm font-medium text-gray-700 mb-1">Year Built</label>
                   <input
                     type="number"
                     name="yearBuilt"
@@ -196,7 +190,7 @@ export default function PropertyValuation({ className = '' }: PropertyValuationP
                   />
                 </div>
               </div>
-              
+
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-1">
                   Property Condition
@@ -213,13 +207,13 @@ export default function PropertyValuation({ className = '' }: PropertyValuationP
                   <option value="poor">Poor</option>
                 </select>
               </div>
-              
+
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-1">
                   Recent Upgrades
                 </label>
                 <div className="grid grid-cols-2 gap-2">
-                  {['Kitchen', 'Bathroom', 'Flooring', 'Roof', 'HVAC', 'Windows'].map(upgrade => (
+                  {['Kitchen', 'Bathroom', 'Flooring', 'Roof', 'HVAC', 'Windows'].map((upgrade) => (
                     <label key={upgrade} className="flex items-center">
                       <input
                         type="checkbox"
@@ -232,7 +226,7 @@ export default function PropertyValuation({ className = '' }: PropertyValuationP
                   ))}
                 </div>
               </div>
-              
+
               <button
                 onClick={calculateValuation}
                 disabled={isLoading || !formData.squareFeet}
@@ -242,7 +236,7 @@ export default function PropertyValuation({ className = '' }: PropertyValuationP
               </button>
             </div>
           </div>
-          
+
           {/* Results */}
           <div>
             {result && (
@@ -252,19 +246,18 @@ export default function PropertyValuation({ className = '' }: PropertyValuationP
                 className="space-y-6"
               >
                 <h3 className="text-lg font-semibold text-gray-900">Estimated Value</h3>
-                
+
                 <div className="text-center p-6 bg-blue-50 rounded-lg">
                   <div className="text-3xl font-bold text-blue-600 mb-2">
                     {formatPrice(result.estimatedValue)}
                   </div>
                   <div className="text-sm text-gray-600">
-                    Range: {formatPrice(result.priceRange.low)} - {formatPrice(result.priceRange.high)}
+                    Range: {formatPrice(result.priceRange.low)} -{' '}
+                    {formatPrice(result.priceRange.high)}
                   </div>
-                  <div className="text-sm text-gray-600 mt-1">
-                    Confidence: {result.confidence}%
-                  </div>
+                  <div className="text-sm text-gray-600 mt-1">Confidence: {result.confidence}%</div>
                 </div>
-                
+
                 <div>
                   <h4 className="font-semibold text-gray-900 mb-2">Positive Factors</h4>
                   <ul className="space-y-1">
@@ -276,7 +269,7 @@ export default function PropertyValuation({ className = '' }: PropertyValuationP
                     ))}
                   </ul>
                 </div>
-                
+
                 <div>
                   <h4 className="font-semibold text-gray-900 mb-2">Considerations</h4>
                   <ul className="space-y-1">
@@ -288,11 +281,12 @@ export default function PropertyValuation({ className = '' }: PropertyValuationP
                     ))}
                   </ul>
                 </div>
-                
+
                 <div className="p-4 bg-gray-50 rounded-lg">
                   <p className="text-sm text-gray-600">
-                    <strong>Disclaimer:</strong> This is an estimated value based on the information provided. 
-                    For an accurate valuation, contact a licensed real estate professional for a comparative market analysis.
+                    <strong>Disclaimer:</strong> This is an estimated value based on the information
+                    provided. For an accurate valuation, contact a licensed real estate professional
+                    for a comparative market analysis.
                   </p>
                 </div>
               </motion.div>

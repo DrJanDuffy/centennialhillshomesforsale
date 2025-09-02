@@ -3,6 +3,7 @@ import Head from 'next/head';
 import Link from 'next/link';
 import { useCallback, useId, useMemo, useState } from 'react';
 import Layout from '../components/Layout';
+import RealScoutListingsSection from '../components/RealScoutListingsSection';
 import FeaturedInsight from '../components/rss/FeaturedInsight';
 import MarketInsightsWidget from '../components/rss/MarketInsightsWidget';
 
@@ -803,6 +804,11 @@ export default function FAQ() {
           </div>
         </motion.section>
       </main>
+      {/* RealScout Office Listings */}
+      <RealScoutListingsSection
+        title="Current Listings"
+        subtitle="Browse our latest property listings in Centennial Hills and surrounding areas"
+      />
     </Layout>
   );
 }

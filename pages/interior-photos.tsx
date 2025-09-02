@@ -1,5 +1,6 @@
 import Head from 'next/head';
 import Layout from '../components/Layout';
+import RealScoutListingsSection from '../components/RealScoutListingsSection';
 import SimpleInteriorGallery from '../components/SimpleInteriorGallery';
 import { getAllInteriorPhotos, getPhotosByCategory } from '../utils/interiorPhotos';
 
@@ -152,6 +153,11 @@ export default function InteriorPhotos() {
             </div>
           </div>
         </section>
+        {/* RealScout Office Listings */}
+        <RealScoutListingsSection
+          title="Current Listings"
+          subtitle="Browse our latest property listings in Centennial Hills and surrounding areas"
+        />
       </Layout>
     </>
   );

@@ -4,6 +4,7 @@ import React from 'react';
 import Layout from '../components/Layout';
 import LocalAmenities from '../components/LocalAmenities';
 import NeighborhoodBar from '../components/NeighborhoodBar';
+import RealScoutListingsSection from '../components/RealScoutListingsSection';
 import SchoolInfo from '../components/SchoolInfo';
 
 type NeighborhoodName =
@@ -171,6 +172,11 @@ export default function CentennialHills() {
           </div>
         </motion.section>
       </main>
+      {/* RealScout Office Listings */}
+      <RealScoutListingsSection
+        title="Current Listings"
+        subtitle="Browse our latest property listings in Centennial Hills and surrounding areas"
+      />
     </Layout>
   );
 }

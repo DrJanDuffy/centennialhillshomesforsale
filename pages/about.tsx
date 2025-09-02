@@ -1,6 +1,7 @@
 import Head from 'next/head';
 import Layout from '../components/Layout';
 import RealScoutListings from '../components/RealScoutListings';
+import RealScoutListingsSection from '../components/RealScoutListingsSection';
 import SimpleInteriorGallery from '../components/SimpleInteriorGallery';
 import { getPageSchema } from '../lib/business-schema';
 import { getPhotosForPage } from '../utils/interiorPhotos';
@@ -306,6 +307,12 @@ export default function About() {
             </div>
           </div>
         </section>
+
+        {/* RealScout Office Listings */}
+        <RealScoutListingsSection
+          title="Featured Properties"
+          subtitle="Discover the exceptional properties I help clients buy and sell in Centennial Hills"
+        />
       </Layout>
     </>
   );

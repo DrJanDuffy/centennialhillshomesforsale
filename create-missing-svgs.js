@@ -26,7 +26,7 @@ const missingImages = [
     height: 1200,
     text: 'Living Room',
     bgColor: '#7c3aed',
-    textColor: '#ffffff'
+    textColor: '#ffffff',
   },
   {
     path: 'public/assets/images/property-gallery/luxury-estate-bathroom.svg',
@@ -34,7 +34,7 @@ const missingImages = [
     height: 1200,
     text: 'Bathroom',
     bgColor: '#0891b2',
-    textColor: '#ffffff'
+    textColor: '#ffffff',
   },
   {
     path: 'public/assets/images/property-gallery/luxury-estate-hallway.svg',
@@ -42,7 +42,7 @@ const missingImages = [
     height: 1200,
     text: 'Hallway',
     bgColor: '#059669',
-    textColor: '#ffffff'
+    textColor: '#ffffff',
   },
   {
     path: 'public/assets/images/property-gallery/modern-home-bedroom.svg',
@@ -50,7 +50,7 @@ const missingImages = [
     height: 1200,
     text: 'Bedroom',
     bgColor: '#dc2626',
-    textColor: '#ffffff'
+    textColor: '#ffffff',
   },
   {
     path: 'public/assets/images/property-gallery/providence-villa-kitchen.svg',
@@ -58,7 +58,7 @@ const missingImages = [
     height: 1200,
     text: 'Kitchen',
     bgColor: '#16a34a',
-    textColor: '#ffffff'
+    textColor: '#ffffff',
   },
   {
     path: 'public/assets/images/property-gallery/providence-villa-living-room.svg',
@@ -66,37 +66,37 @@ const missingImages = [
     height: 1200,
     text: 'Living Room',
     bgColor: '#ea580c',
-    textColor: '#ffffff'
-  }
+    textColor: '#ffffff',
+  },
 ];
 
 async function createMissingImages() {
   let createdCount = 0;
-  
+
   for (const image of missingImages) {
     const dirPath = path.dirname(image.path);
-    
+
     // Ensure directory exists
     if (!fs.existsSync(dirPath)) {
       fs.mkdirSync(dirPath, { recursive: true });
       console.log(`📁 Created directory: ${dirPath}`);
     }
-    
+
     // Create SVG placeholder
     const svgContent = createSVGPlaceholder(
-      image.width, 
-      image.height, 
-      image.text, 
-      image.bgColor, 
+      image.width,
+      image.height,
+      image.text,
+      image.bgColor,
       image.textColor
     );
-    
+
     // Write SVG file
     fs.writeFileSync(image.path, svgContent);
     console.log(`✅ Created: ${image.path}`);
     createdCount++;
   }
-  
+
   console.log(`\n🎉 Successfully created ${createdCount} missing placeholder images!`);
 }
 

@@ -63,14 +63,16 @@ export default function EnhancedHero() {
             backgroundImage: `url('/images/hero-image.jpg')`,
           }}
         />
-        
+
         {/* Dark Overlay for Text Readability */}
         <div className="absolute inset-0 bg-black/40" />
-        
+
         {/* Gradient Overlay for Enhanced Visual Appeal */}
         <div
           className={`absolute inset-0 bg-gradient-to-br ${
-            isDark ? 'from-gray-900/60 via-blue-900/40 to-gray-900/60' : 'from-blue-900/30 via-transparent to-green-900/30'
+            isDark
+              ? 'from-gray-900/60 via-blue-900/40 to-gray-900/60'
+              : 'from-blue-900/30 via-transparent to-green-900/30'
           }`}
         />
 

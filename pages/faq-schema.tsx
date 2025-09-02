@@ -3,6 +3,7 @@ import Link from 'next/link';
 import type React from 'react';
 import Layout from '../components/Layout';
 import RealScoutListings from '../components/RealScoutListings';
+import RealScoutListingsSection from '../components/RealScoutListingsSection';
 
 const FAQSchemaPage: React.FC = () => {
   // FAQ Schema for better SERP visibility
@@ -301,6 +302,11 @@ const FAQSchemaPage: React.FC = () => {
           </div>
         </div>
       </section>
+      {/* RealScout Office Listings */}
+      <RealScoutListingsSection
+        title="Current Listings"
+        subtitle="Browse our latest property listings in Centennial Hills and surrounding areas"
+      />
     </Layout>
   );
 };

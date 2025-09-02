@@ -15,7 +15,7 @@ const issues = {
   missingImages: [],
   brokenReferences: [],
   optimizationIssues: [],
-  accessibilityIssues: []
+  accessibilityIssues: [],
 };
 
 // Check if image exists
@@ -32,7 +32,7 @@ function getImageSize(imagePath) {
     return {
       size: stats.size,
       sizeKB: Math.round(stats.size / 1024),
-      sizeMB: Math.round(stats.size / (1024 * 1024) * 100) / 100
+      sizeMB: Math.round((stats.size / (1024 * 1024)) * 100) / 100,
     };
   }
   return null;
@@ -41,7 +41,7 @@ function getImageSize(imagePath) {
 // Audit property gallery images
 function auditPropertyGallery() {
   console.log('📸 Auditing Property Gallery Images...');
-  
+
   const galleryPath = 'public/assets/images/property-gallery/index.json';
   if (!fs.existsSync(galleryPath)) {
     issues.brokenReferences.push('Property gallery index.json not found');
@@ -49,10 +49,10 @@ function auditPropertyGallery() {
   }
 
   const galleryData = JSON.parse(fs.readFileSync(galleryPath, 'utf8'));
-  
+
   // Check property images
-  galleryData.properties.forEach(property => {
-    property.images.forEach(image => {
+  galleryData.properties.forEach((property) => {
+    property.images.forEach((image) => {
       const imagePath = image.src.replace('/assets/images/', 'assets/images/');
       if (!checkImageExists(imagePath)) {
         issues.missingImages.push({
@@ -60,7 +60,7 @@ function auditPropertyGallery() {
           property: property.title,
           image: image.id,
           path: image.src,
-          alt: image.alt
+          alt: image.alt,
         });
       } else {
         const size = getImageSize(imagePath);
@@ -69,7 +69,7 @@ function auditPropertyGallery() {
             type: 'large-image',
             path: image.src,
             size: `${size.sizeMB}MB`,
-            recommendation: 'Optimize image size'
+            recommendation: 'Optimize image size',
           });
         }
       }
@@ -77,14 +77,14 @@ function auditPropertyGallery() {
   });
 
   // Check neighborhood images
-  galleryData.neighborhoods.forEach(neighborhood => {
+  galleryData.neighborhoods.forEach((neighborhood) => {
     const imagePath = neighborhood.heroImage.src.replace('/assets/images/', 'assets/images/');
     if (!checkImageExists(imagePath)) {
       issues.missingImages.push({
         type: 'neighborhood',
         name: neighborhood.name,
         path: neighborhood.heroImage.src,
-        alt: neighborhood.heroImage.alt
+        alt: neighborhood.heroImage.alt,
       });
     }
   });
@@ -93,25 +93,25 @@ function auditPropertyGallery() {
 // Audit hero images
 function auditHeroImages() {
   console.log('🎨 Auditing Hero Images...');
-  
+
   const heroImagePath = 'images/hero-image.jpg';
   if (checkImageExists(heroImagePath)) {
     const size = getImageSize(heroImagePath);
     console.log(`✅ Hero image found: ${size.sizeMB}MB`);
-    
+
     if (size.sizeMB > 1.5) {
       issues.optimizationIssues.push({
         type: 'hero-image-large',
         path: '/images/hero-image.jpg',
         size: `${size.sizeMB}MB`,
-        recommendation: 'Consider compressing hero image'
+        recommendation: 'Consider compressing hero image',
       });
     }
   } else {
     issues.missingImages.push({
       type: 'hero',
       path: '/images/hero-image.jpg',
-      description: 'Main hero image missing'
+      description: 'Main hero image missing',
     });
   }
 }
@@ -119,21 +119,22 @@ function auditHeroImages() {
 // Audit component image references
 function auditComponentImages() {
   console.log('🧩 Auditing Component Image References...');
-  
+
   const componentsDir = 'components';
   if (!fs.existsSync(componentsDir)) return;
 
-  const componentFiles = fs.readdirSync(componentsDir)
-    .filter(file => file.endsWith('.tsx') || file.endsWith('.jsx'));
+  const componentFiles = fs
+    .readdirSync(componentsDir)
+    .filter((file) => file.endsWith('.tsx') || file.endsWith('.jsx'));
 
-  componentFiles.forEach(file => {
+  componentFiles.forEach((file) => {
     const filePath = path.join(componentsDir, file);
     const content = fs.readFileSync(filePath, 'utf8');
-    
+
     // Check for image references
     const imageMatches = content.match(/src=["']([^"']*\.(jpg|jpeg|png|webp|gif|svg))["']/g);
     if (imageMatches) {
-      imageMatches.forEach(match => {
+      imageMatches.forEach((match) => {
         const srcMatch = match.match(/src=["']([^"']*)["']/);
         if (srcMatch) {
           const imagePath = srcMatch[1];
@@ -143,7 +144,7 @@ function auditComponentImages() {
               issues.brokenReferences.push({
                 component: file,
                 path: imagePath,
-                type: 'missing-image'
+                type: 'missing-image',
               });
             }
           }
@@ -154,13 +155,13 @@ function auditComponentImages() {
     // Check for alt text
     const altMatches = content.match(/alt=["']([^"']*)["']/g);
     if (altMatches) {
-      altMatches.forEach(match => {
+      altMatches.forEach((match) => {
         const altMatch = match.match(/alt=["']([^"']*)["']/);
         if (altMatch && (altMatch[1] === '' || altMatch[1] === 'image')) {
           issues.accessibilityIssues.push({
             component: file,
             issue: 'Empty or generic alt text',
-            alt: altMatch[1]
+            alt: altMatch[1],
           });
         }
       });
@@ -176,7 +177,7 @@ function generateReport() {
   // Missing Images
   if (issues.missingImages.length > 0) {
     console.log('❌ MISSING IMAGES:');
-    issues.missingImages.forEach(issue => {
+    issues.missingImages.forEach((issue) => {
       console.log(`   • ${issue.type}: ${issue.path}`);
       if (issue.property) console.log(`     Property: ${issue.property}`);
       if (issue.image) console.log(`     Image: ${issue.image}`);
@@ -188,7 +189,7 @@ function generateReport() {
   // Broken References
   if (issues.brokenReferences.length > 0) {
     console.log('🔗 BROKEN REFERENCES:');
-    issues.brokenReferences.forEach(issue => {
+    issues.brokenReferences.forEach((issue) => {
       if (typeof issue === 'string') {
         console.log(`   • ${issue}`);
       } else {
@@ -201,7 +202,7 @@ function generateReport() {
   // Optimization Issues
   if (issues.optimizationIssues.length > 0) {
     console.log('⚡ OPTIMIZATION ISSUES:');
-    issues.optimizationIssues.forEach(issue => {
+    issues.optimizationIssues.forEach((issue) => {
       console.log(`   • ${issue.path}: ${issue.size} - ${issue.recommendation}`);
     });
     console.log('');
@@ -210,17 +211,18 @@ function generateReport() {
   // Accessibility Issues
   if (issues.accessibilityIssues.length > 0) {
     console.log('♿ ACCESSIBILITY ISSUES:');
-    issues.accessibilityIssues.forEach(issue => {
+    issues.accessibilityIssues.forEach((issue) => {
       console.log(`   • ${issue.component}: ${issue.issue}`);
     });
     console.log('');
   }
 
   // Summary
-  const totalIssues = issues.missingImages.length + 
-                     issues.brokenReferences.length + 
-                     issues.optimizationIssues.length + 
-                     issues.accessibilityIssues.length;
+  const totalIssues =
+    issues.missingImages.length +
+    issues.brokenReferences.length +
+    issues.optimizationIssues.length +
+    issues.accessibilityIssues.length;
 
   if (totalIssues === 0) {
     console.log('✅ No issues found! Your images are properly configured.');
@@ -241,14 +243,13 @@ async function main() {
     auditHeroImages();
     auditPropertyGallery();
     auditComponentImages();
-    
+
     const report = generateReport();
-    
+
     // Save report to file
     const reportPath = 'image-audit-report.json';
     fs.writeFileSync(reportPath, JSON.stringify(report, null, 2));
     console.log(`\n📄 Detailed report saved to: ${reportPath}`);
-    
   } catch (error) {
     console.error('❌ Audit failed:', error.message);
     process.exit(1);

@@ -20,6 +20,7 @@ import Link from 'next/link';
 import type React from 'react';
 import { useState } from 'react';
 import Layout from '../components/Layout';
+import RealScoutListingsSection from '../components/RealScoutListingsSection';
 
 const FeaturedHome: React.FC = () => {
   const [currentImage, setCurrentImage] = useState(0);
@@ -435,6 +436,11 @@ const FeaturedHome: React.FC = () => {
           </motion.div>
         </div>
       </section>
+      {/* RealScout Office Listings */}
+      <RealScoutListingsSection
+        title="Current Listings"
+        subtitle="Browse our latest property listings in Centennial Hills and surrounding areas"
+      />
     </Layout>
   );
 };

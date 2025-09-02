@@ -2,6 +2,7 @@ import { motion } from 'framer-motion';
 import Head from 'next/head';
 import Layout from '../components/Layout';
 import MarketTrendChart from '../components/MarketTrendChart';
+import RealScoutListingsSection from '../components/RealScoutListingsSection';
 import RealScoutWidget from '../components/widgets/RealScoutWidget';
 
 const marketData = {
@@ -180,6 +181,11 @@ export default function MarketUpdate() {
           ></realscout-your-listings>
         </motion.section>
       </main>
+      {/* RealScout Office Listings */}
+      <RealScoutListingsSection
+        title="Current Listings"
+        subtitle="Browse our latest property listings in Centennial Hills and surrounding areas"
+      />
     </Layout>
   );
 }
