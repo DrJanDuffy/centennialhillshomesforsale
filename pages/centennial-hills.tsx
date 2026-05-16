@@ -7,6 +7,7 @@ import NeighborhoodBar from '../components/NeighborhoodBar';
 import SchoolInfo from '../components/SchoolInfo';
 import LocalAmenities from '../components/LocalAmenities';
 import RealScoutWidget from '../components/widgets/RealScoutWidget';
+import PalmsListingCard from '../components/PalmsListingCard';
 
 type NeighborhoodName = 'Centennial Hills' | 'The Trails' | 'Tournament Hills' | 'Skye Canyon' | 'Sun City Aliante';
 
@@ -130,13 +131,14 @@ export default function CentennialHills() {
           <div className="container">
             <h2>Current Homes for Sale in Centennial Hills</h2>
             <div className="realscout-widget-container">
-              <realscout-office-listings 
-                agent-encoded-id="QWdlbnQtMjI1MDUw" 
-                sort-order="STATUS_AND_SIGNIFICANT_CHANGE" 
-                listing-status="For Sale" 
-                property-types="SFR,MF,TC" 
+              <realscout-office-listings
+                agent-encoded-id="QWdlbnQtMjI1MDUw"
+                sort-order="STATUS_AND_SIGNIFICANT_CHANGE"
+                listing-status="For Sale"
+                property-types="SFR,MF,TC"
                 price-min="450000">
               </realscout-office-listings>
+              <PalmsListingCard />
             </div>
           </div>
         </motion.section>
