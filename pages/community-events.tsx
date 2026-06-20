@@ -1,4 +1,5 @@
 import Head from 'next/head';
+import { canonicalForPath, getProductionSiteOrigin, siteEntityId, toAbsoluteUrl } from '@/lib/site-url';
 import React from 'react';
 import Layout from '../components/Layout';
 import RealScoutListingsSection from '../components/RealScoutListingsSection';
@@ -155,7 +156,7 @@ export default function CommunityEvents() {
               name: 'Centennial Hills Community Events',
               description:
                 'Calendar of community events and activities in Centennial Hills, Las Vegas',
-              url: 'https://centennialhillshomesforsale.com/community-events',
+              url: canonicalForPath('/community-events'),
               itemListElement: communityEvents.map((event, index) => ({
                 '@type': 'ListItem',
                 position: index + 1,
@@ -203,6 +204,13 @@ export default function CommunityEvents() {
             </p>
           </div>
         </section>
+
+      {/* RealScout Listings — below hero */}
+      <RealScoutListingsSection
+        title="Current Listings"
+        subtitle="Browse our latest property listings in Centennial Hills and surrounding areas"
+      />
+
 
         {/* Featured Events */}
         <section className="py-16 bg-yellow-50">
@@ -391,11 +399,6 @@ export default function CommunityEvents() {
           </div>
         </section>
       </main>
-      {/* RealScout Office Listings */}
-      <RealScoutListingsSection
-        title="Current Listings"
-        subtitle="Browse our latest property listings in Centennial Hills and surrounding areas"
-      />
     </Layout>
   );
 }

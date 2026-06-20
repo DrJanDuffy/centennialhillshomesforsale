@@ -44,6 +44,12 @@ const TaskMasterPage: React.FC = () => {
               </p>
             </div>
 
+            <RealScoutListingsSection
+              title="Current Listings"
+              subtitle="Browse our latest property listings in Centennial Hills and surrounding areas"
+              className="py-12 bg-white"
+            />
+
             <div className="quick-actions">
               <button className="action-btn primary">
                 <Zap size={20} />
@@ -237,11 +243,6 @@ const TaskMasterPage: React.FC = () => {
           }
         }
       `}</style>
-      {/* RealScout Office Listings */}
-      <RealScoutListingsSection
-        title="Current Listings"
-        subtitle="Browse our latest property listings in Centennial Hills and surrounding areas"
-      />
     </Layout>
   );
 };

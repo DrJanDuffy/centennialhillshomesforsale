@@ -1,4 +1,5 @@
 import Head from 'next/head';
+import { canonicalForPath, getProductionSiteOrigin, siteEntityId, toAbsoluteUrl } from '@/lib/site-url';
 import type React from 'react';
 import { useEffect } from 'react';
 
@@ -22,7 +23,7 @@ interface GoogleSearchConsoleProps {
 const GoogleSearchConsole: React.FC<GoogleSearchConsoleProps> = ({
   pageTitle = 'Centennial Hills Homes For Sale | Dr. Jan Duffy | Las Vegas Luxury Real Estate',
   pageDescription = 'Discover luxury homes for sale in Centennial Hills, Las Vegas. Dr. Jan Duffy, Top 1% REALTOR®, specializes in Providence, Skye Canyon, and Northwest Las Vegas luxury real estate.',
-  pageUrl = 'https://centennialhillshomesforsale.com',
+  pageUrl = getProductionSiteOrigin(),
   propertyData,
 }) => {
   useEffect(() => {
@@ -48,7 +49,7 @@ const GoogleSearchConsole: React.FC<GoogleSearchConsoleProps> = ({
     name: 'Dr. Jan Duffy',
     description:
       'Top 1% REALTOR® specializing in luxury real estate in Centennial Hills, Providence, and Skye Canyon, Las Vegas',
-    url: 'https://centennialhillshomesforsale.com',
+    url: canonicalForPath('/'),
     telephone: '+1-702-903-1952',
     email: 'jan@centennialhillshomesforsale.com',
     address: {
@@ -100,7 +101,7 @@ const GoogleSearchConsole: React.FC<GoogleSearchConsoleProps> = ({
       '@type': 'Brand',
       name: 'Berkshire Hathaway HomeServices',
     },
-    image: 'https://centennialhillshomesforsale.com/images/dr-jan-duffy-realtor.jpg',
+    image: toAbsoluteUrl('/images/dr-jan-duffy-realtor.jpg'),
   };
 
   // Generate structured data for local business
@@ -109,7 +110,7 @@ const GoogleSearchConsole: React.FC<GoogleSearchConsoleProps> = ({
     '@type': 'LocalBusiness',
     name: 'Dr. Jan Duffy Real Estate',
     description: 'Luxury real estate specialist in Centennial Hills, Las Vegas',
-    url: 'https://centennialhillshomesforsale.com',
+    url: canonicalForPath('/'),
     telephone: '+1-702-903-1952',
     email: 'jan@centennialhillshomesforsale.com',
     address: {
@@ -194,13 +195,13 @@ const GoogleSearchConsole: React.FC<GoogleSearchConsoleProps> = ({
         '@type': 'ListItem',
         position: 1,
         name: 'Home',
-        item: 'https://centennialhillshomesforsale.com',
+        item: canonicalForPath('/'),
       },
       {
         '@type': 'ListItem',
         position: 2,
         name: 'Centennial Hills',
-        item: 'https://centennialhillshomesforsale.com/centennial-hills',
+        item: canonicalForPath('/centennial-hills'),
       },
     ],
   };
@@ -226,7 +227,7 @@ const GoogleSearchConsole: React.FC<GoogleSearchConsoleProps> = ({
       <meta property="og:site_name" content="Centennial Hills Homes For Sale" />
       <meta
         property="og:image"
-        content="https://centennialhillshomesforsale.com/images/og-image.jpg"
+        content={toAbsoluteUrl('/images/og-image.jpg')}
       />
       <meta property="og:image:width" content="1200" />
       <meta property="og:image:height" content="630" />
@@ -238,7 +239,7 @@ const GoogleSearchConsole: React.FC<GoogleSearchConsoleProps> = ({
       <meta name="twitter:description" content={pageDescription} />
       <meta
         name="twitter:image"
-        content="https://centennialhillshomesforsale.com/images/twitter-card.jpg"
+        content={toAbsoluteUrl('/images/twitter-card.jpg')}
       />
 
       {/* Local Business Meta Tags */}

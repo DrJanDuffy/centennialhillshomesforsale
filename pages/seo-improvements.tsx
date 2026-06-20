@@ -217,6 +217,13 @@ export default function SEOImprovements() {
           </div>
         </section>
 
+      {/* RealScout Listings — below hero */}
+      <RealScoutListingsSection
+        title="Current Listings"
+        subtitle="Browse our latest property listings in Centennial Hills and surrounding areas"
+      />
+
+
         <section className="improvement-areas section">
           <div className="container">
             <h2>Priority Improvement Areas</h2>
@@ -381,11 +388,6 @@ export default function SEOImprovements() {
           </div>
         </section>
       </div>
-      {/* RealScout Office Listings */}
-      <RealScoutListingsSection
-        title="Current Listings"
-        subtitle="Browse our latest property listings in Centennial Hills and surrounding areas"
-      />
     </Layout>
   );
 }

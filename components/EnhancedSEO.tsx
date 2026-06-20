@@ -1,4 +1,5 @@
 import Head from 'next/head';
+import { canonicalForPath, getProductionSiteOrigin, siteEntityId, toAbsoluteUrl } from '@/lib/site-url';
 import { useEffect, useId, useMemo, useRef } from 'react';
 import GoogleAnalytics from './GoogleAnalytics';
 import GoogleSearchConsole from './GoogleSearchConsole';
@@ -32,10 +33,10 @@ export default function EnhancedSEO({
   const _scriptRef = useRef<HTMLDivElement>(null);
   const containerId = useId();
 
-  const siteUrl = 'https://centennialhillshomesforsale.com';
+  const siteUrl = getProductionSiteOrigin();
   const fullCanonicalUrl =
     canonicalUrl || (typeof window !== 'undefined' ? window.location.href : siteUrl);
-  const fullOgImage = ogImage.startsWith('http') ? ogImage : `${siteUrl}${ogImage}`;
+  const fullOgImage = toAbsoluteUrl(ogImage);
 
   const defaultStructuredData = useMemo(
     () => ({
@@ -43,7 +44,7 @@ export default function EnhancedSEO({
       '@type': 'RealEstateAgent',
       name: 'Centennial Hills Homes',
       description: 'Premium Real Estate Services in Centennial Hills, Las Vegas',
-      url: 'https://centennialhillshomesforsale.com',
+      url: canonicalForPath('/'),
       telephone: '+1-702-555-0123',
       address: {
         '@type': 'PostalAddress',

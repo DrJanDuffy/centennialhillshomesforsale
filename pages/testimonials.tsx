@@ -1,4 +1,5 @@
 import { motion } from 'framer-motion';
+import { canonicalForPath, getProductionSiteOrigin, siteEntityId, toAbsoluteUrl } from '@/lib/site-url';
 import Head from 'next/head';
 import Link from 'next/link';
 import { FaQuoteLeft, FaStar } from 'react-icons/fa';
@@ -78,7 +79,7 @@ export default function Testimonials() {
           name="keywords"
           content="client testimonials, real estate reviews, Dr Jan Duffy reviews, Centennial Hills realtor reviews, Las Vegas realtor testimonials"
         />
-        <link rel="canonical" href="https://centennialhillshomesforsale.com/testimonials" />
+        <link rel="canonical" href={canonicalForPath('/testimonials')} />
 
         {/* Reviews Schema */}
         <script
@@ -157,6 +158,13 @@ export default function Testimonials() {
             </div>
           </div>
         </motion.section>
+
+      {/* RealScout Listings — below hero */}
+      <RealScoutListingsSection
+        title="Current Listings"
+        subtitle="Browse our latest property listings in Centennial Hills and surrounding areas"
+      />
+
 
         <motion.section
           className="testimonials-grid-section"
@@ -310,11 +318,6 @@ export default function Testimonials() {
           </div>
         </motion.section>
       </main>
-      {/* RealScout Office Listings */}
-      <RealScoutListingsSection
-        title="Current Listings"
-        subtitle="Browse our latest property listings in Centennial Hills and surrounding areas"
-      />
     </Layout>
   );
 }

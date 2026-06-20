@@ -40,6 +40,13 @@ export default function InteriorPhotos() {
           </div>
         </section>
 
+      {/* RealScout Listings — below hero */}
+      <RealScoutListingsSection
+          title="Current Listings"
+          subtitle="Browse our latest property listings in Centennial Hills and surrounding areas"
+        />
+
+
         {/* Featured Interior Photos */}
         <section className="py-16 bg-white">
           <div className="container mx-auto px-4">
@@ -153,11 +160,6 @@ export default function InteriorPhotos() {
             </div>
           </div>
         </section>
-        {/* RealScout Office Listings */}
-        <RealScoutListingsSection
-          title="Current Listings"
-          subtitle="Browse our latest property listings in Centennial Hills and surrounding areas"
-        />
       </Layout>
     </>
   );

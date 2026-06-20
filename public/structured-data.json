@@ -3,8 +3,8 @@
   "@graph": [
     {
       "@type": "WebSite",
-      "@id": "https://centennialhillshomesforsale.com/#website",
-      "url": "https://centennialhillshomesforsale.com",
+      "@id": "https://www.centennialhillshomesforsale.com/#website",
+      "url": "https://www.centennialhillshomesforsale.com",
       "name": "Centennial Hills Homes For Sale",
       "description": "Find luxury homes in Centennial Hills, Providence & Skye Canyon with Dr. Jan Duffy, top-rated REALTOR®",
       "potentialAction": [
@@ -12,7 +12,7 @@
           "@type": "SearchAction",
           "target": {
             "@type": "EntryPoint",
-            "urlTemplate": "https://centennialhillshomesforsale.com/listings?search={search_term_string}"
+            "urlTemplate": "https://www.centennialhillshomesforsale.com/listings?search={search_term_string}"
           },
           "query-input": "required name=search_term_string"
         }
@@ -21,9 +21,9 @@
     },
     {
       "@type": "Organization",
-      "@id": "https://centennialhillshomesforsale.com/#organization",
+      "@id": "https://www.centennialhillshomesforsale.com/#organization",
       "name": "Dr. Jan Duffy, REALTOR®",
-      "url": "https://centennialhillshomesforsale.com",
+      "url": "https://www.centennialhillshomesforsale.com",
       "telephone": "(702) 903-1952",
       "address": {
         "@type": "PostalAddress",

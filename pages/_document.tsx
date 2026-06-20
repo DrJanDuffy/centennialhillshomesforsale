@@ -1,4 +1,5 @@
 import { Head, Html, Main, NextScript } from 'next/document';
+import { canonicalForPath } from '@/lib/site-url';
 
 export default function Document() {
   return (
@@ -7,8 +8,8 @@ export default function Document() {
         <meta charSet="utf-8" />
         <meta name="robots" content="index, follow" />
 
-        {/* Canonical URL - Force HTTPS and non-www */}
-        <link rel="canonical" href="https://centennialhillshomesforsale.com" />
+        {/* Canonical URL — production origin from lib/site-url */}
+        <link rel="canonical" href={canonicalForPath('/')} />
 
         {/* Favicon and PWA icons */}
         <link rel="icon" href="/favicon.ico" />

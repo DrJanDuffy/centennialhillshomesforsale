@@ -3,11 +3,11 @@
   "@graph": [
     {
       "@type": "RealEstateAgent",
-      "@id": "https://centennialhillshomesforsale.com/#realestateagent",
+      "@id": "https://www.centennialhillshomesforsale.com/#realestateagent",
       "name": "Dr. Jan Duffy, REALTOR®",
       "alternateName": "Centennial Hills Homes | Providence & Skye Canyon | Dr. Jan Duffy, REALTOR®",
       "description": "Looking for homes for sale in North Las Vegas, Centennial Hills, or Lone Mountain? Dr. Jan Duffy, REALTOR® with Berkshire Hathaway HomeServices, is your trusted expert in luxury and new-build Las Vegas homes. With 20+ years of experience in master-planned communities.",
-      "url": "https://centennialhillshomesforsale.com",
+      "url": "https://www.centennialhillshomesforsale.com",
       "telephone": "(702) 903-1952",
       "email": "jan@centennialhillshomes.com",
       "foundingDate": "1993-09-01",
@@ -166,16 +166,16 @@
     },
     {
       "@type": "Person",
-      "@id": "https://centennialhillshomesforsale.com/#person",
+      "@id": "https://www.centennialhillshomesforsale.com/#person",
       "name": "Dr. Jan Duffy",
       "alternateName": "Jan Duffy",
       "description": "Dr. Jan Duffy is a Top 1% REALTOR® specializing in luxury homes and master-planned communities in Centennial Hills, Las Vegas. With over 20 years of experience, she has helped hundreds of families find their dream homes.",
-      "url": "https://centennialhillshomesforsale.com",
+      "url": "https://www.centennialhillshomesforsale.com",
       "telephone": "(702) 903-1952",
       "email": "jan@centennialhillshomes.com",
       "jobTitle": "REALTOR®",
       "worksFor": {
-        "@id": "https://centennialhillshomesforsale.com/#organization"
+        "@id": "https://www.centennialhillshomesforsale.com/#organization"
       },
       "knowsAbout": [
         "Real Estate",
@@ -217,10 +217,10 @@
     },
     {
       "@type": "LocalBusiness",
-      "@id": "https://centennialhillshomesforsale.com/#localbusiness",
+      "@id": "https://www.centennialhillshomesforsale.com/#localbusiness",
       "name": "Centennial Hills Homes | Providence & Skye Canyon",
       "description": "Premier real estate services in Centennial Hills with local market expertise",
-      "url": "https://centennialhillshomesforsale.com",
+      "url": "https://www.centennialhillshomesforsale.com",
       "telephone": "(702) 903-1952",
       "email": "jan@centennialhillshomes.com",
       "address": {
@@ -249,10 +249,10 @@
     },
     {
       "@type": "Organization",
-      "@id": "https://centennialhillshomesforsale.com/#organization",
+      "@id": "https://www.centennialhillshomesforsale.com/#organization",
       "name": "Centennial Hills Homes | Providence & Skye Canyon | Dr. Jan Duffy, REALTOR®",
-      "url": "https://centennialhillshomesforsale.com",
-      "logo": "https://centennialhillshomesforsale.com/apple-touch-icon.png",
+      "url": "https://www.centennialhillshomesforsale.com",
+      "logo": "https://www.centennialhillshomesforsale.com/apple-touch-icon.png",
       "contactPoint": {
         "@type": "ContactPoint",
         "telephone": "(702) 903-1952",
@@ -273,19 +273,19 @@
     },
     {
       "@type": "WebSite",
-      "@id": "https://centennialhillshomesforsale.com/#website",
-      "url": "https://centennialhillshomesforsale.com",
+      "@id": "https://www.centennialhillshomesforsale.com/#website",
+      "url": "https://www.centennialhillshomesforsale.com",
       "name": "Centennial Hills Homes | Providence & Skye Canyon | Dr. Jan Duffy, REALTOR®",
       "description": "Find homes for sale in Centennial Hills, Providence, and Skye Canyon. Expert real estate services by Dr. Jan Duffy, REALTOR®",
       "publisher": {
-        "@id": "https://centennialhillshomesforsale.com/#organization"
+        "@id": "https://www.centennialhillshomesforsale.com/#organization"
       },
       "potentialAction": [
         {
           "@type": "SearchAction",
           "target": {
             "@type": "EntryPoint",
-            "urlTemplate": "https://centennialhillshomesforsale.com/listings?search={search_term_string}"
+            "urlTemplate": "https://www.centennialhillshomesforsale.com/listings?search={search_term_string}"
           },
           "query-input": "required name=search_term_string"
         }
@@ -293,36 +293,36 @@
     },
     {
       "@type": "BreadcrumbList",
-      "@id": "https://centennialhillshomesforsale.com/#breadcrumbs",
+      "@id": "https://www.centennialhillshomesforsale.com/#breadcrumbs",
       "itemListElement": [
         {
           "@type": "ListItem",
           "position": 1,
           "name": "Home",
-          "item": "https://centennialhillshomesforsale.com"
+          "item": "https://www.centennialhillshomesforsale.com"
         },
         {
           "@type": "ListItem",
           "position": 2,
           "name": "Neighborhoods",
-          "item": "https://centennialhillshomesforsale.com/neighborhoods"
+          "item": "https://www.centennialhillshomesforsale.com/neighborhoods"
         },
         {
           "@type": "ListItem",
           "position": 3,
           "name": "Listings",
-          "item": "https://centennialhillshomesforsale.com/listings"
+          "item": "https://www.centennialhillshomesforsale.com/listings"
         }
       ]
     },
     {
       "@type": "RealEstateListing",
-      "@id": "https://centennialhillshomesforsale.com/#realestatelisting",
+      "@id": "https://www.centennialhillshomesforsale.com/#realestatelisting",
       "name": "Centennial Hills Luxury Homes",
       "description": "Luxury homes for sale in Centennial Hills, Las Vegas featuring master-planned communities with stunning mountain views and exceptional quality.",
-      "url": "https://centennialhillshomesforsale.com/properties",
+      "url": "https://www.centennialhillshomesforsale.com/properties",
       "provider": {
-        "@id": "https://centennialhillshomesforsale.com/#realestateagent"
+        "@id": "https://www.centennialhillshomesforsale.com/#realestateagent"
       },
       "category": "Luxury Homes",
       "location": {

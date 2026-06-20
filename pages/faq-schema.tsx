@@ -1,4 +1,5 @@
 import Head from 'next/head';
+import { canonicalForPath, getProductionSiteOrigin, siteEntityId, toAbsoluteUrl } from '@/lib/site-url';
 import Link from 'next/link';
 import type React from 'react';
 import Layout from '../components/Layout';
@@ -70,7 +71,7 @@ const FAQSchemaPage: React.FC = () => {
           name="description"
           content="Get answers to frequently asked questions about Centennial Hills real estate, home prices, schools, amenities, and living in this beautiful Las Vegas community."
         />
-        <link rel="canonical" href="https://centennialhillshomesforsale.com/faq-schema" />
+        <link rel="canonical" href={canonicalForPath('/faq-schema')} />
 
         {/* FAQ Schema for better SERP visibility */}
         <script
@@ -93,6 +94,13 @@ const FAQSchemaPage: React.FC = () => {
           </p>
         </div>
       </section>
+
+      {/* RealScout Listings — below hero */}
+      <RealScoutListingsSection
+        title="Current Listings"
+        subtitle="Browse our latest property listings in Centennial Hills and surrounding areas"
+      />
+
 
       {/* FAQ Content Section */}
       <section className="py-16 bg-white">
@@ -302,11 +310,6 @@ const FAQSchemaPage: React.FC = () => {
           </div>
         </div>
       </section>
-      {/* RealScout Office Listings */}
-      <RealScoutListingsSection
-        title="Current Listings"
-        subtitle="Browse our latest property listings in Centennial Hills and surrounding areas"
-      />
     </Layout>
   );
 };

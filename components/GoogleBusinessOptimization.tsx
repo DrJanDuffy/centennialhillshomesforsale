@@ -1,4 +1,5 @@
 import Head from 'next/head';
+import { canonicalForPath, getProductionSiteOrigin, siteEntityId, toAbsoluteUrl } from '@/lib/site-url';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
 
@@ -31,7 +32,7 @@ export default function GoogleBusinessOptimization({
     alternateName: 'Centennial Hills Homes | Providence & Skye Canyon | Dr. Jan Duffy, REALTOR®',
     description:
       'Top-rated Las Vegas REALTOR® specializing in Centennial Hills, Providence, and Skye Canyon. 30+ years experience in luxury and new construction homes.',
-    url: 'https://centennialhillshomesforsale.com',
+    url: canonicalForPath('/'),
     telephone: '(702) 903-1952',
     email: 'jan@centennialhillshomes.com',
     sameAs: ['https://g.co/kgs/4qQ8DsY'],
@@ -118,7 +119,7 @@ export default function GoogleBusinessOptimization({
         <meta name="google-site-verification" content="centennial-hills-homes-verification" />
         <link
           rel="canonical"
-          href={`https://centennialhillshomesforsale.com${pageType === 'home' ? '' : `/${pageType}`}`}
+          href={canonicalForPath(pageType === 'home' ? '/' : `/${pageType}`)}
         />
       </Head>
 

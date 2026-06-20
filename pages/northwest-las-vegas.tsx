@@ -1,4 +1,5 @@
 import { motion } from 'framer-motion';
+import { canonicalForPath, getProductionSiteOrigin, siteEntityId, toAbsoluteUrl } from '@/lib/site-url';
 import Head from 'next/head';
 import Link from 'next/link';
 import { useState } from 'react';
@@ -25,7 +26,7 @@ export default function NorthwestLasVegas() {
           name="keywords"
           content="Northwest Las Vegas homes, Centennial Hills real estate, Skye Canyon, northwest valley homes, Las Vegas suburbs"
         />
-        <link rel="canonical" href="https://centennialhillshomesforsale.com/northwest-las-vegas" />
+        <link rel="canonical" href={canonicalForPath('/northwest-las-vegas')} />
       </Head>
 
       <main>
@@ -49,6 +50,13 @@ export default function NorthwestLasVegas() {
             </p>
           </div>
         </motion.section>
+
+      {/* RealScout Listings — below hero */}
+      <RealScoutListingsSection
+        title="Current Listings"
+        subtitle="Browse our latest property listings in Centennial Hills and surrounding areas"
+      />
+
 
         <motion.section
           className="area-overview"
@@ -170,54 +178,7 @@ export default function NorthwestLasVegas() {
             ></realscout-your-listings>
           </div>
         </motion.section>
-
-        {/* RealScout Office Listings */}
-        <motion.section
-          className="section"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.7, duration: 0.6 }}
-        >
-          <div className="container">
-            <div className="text-center mb-8">
-              <h2>Current Listings</h2>
-              <p>Browse our latest properties in Northwest Las Vegas and surrounding areas</p>
-            </div>
-            <realscout-office-listings
-              agent-encoded-id="QWdlbnQtMjI1MDUw"
-              sort-order="STATUS_AND_SIGNIFICANT_CHANGE"
-              listing-status="For Sale"
-              property-types="SFR,MF,TC"
-              price-min="600000"
-              price-max="1200000"
-            ></realscout-office-listings>
-          </div>
-        </motion.section>
-
-        <motion.section
-          className="listings-section"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.8, duration: 0.6 }}
-        >
-          <div className="container">
-            <h2>Current Homes for Sale in Northwest Las Vegas</h2>
-            <RealScoutWidget
-              type="office-listings"
-              title="Homes in Northwest Las Vegas"
-              description="Discover available properties in Northwest Las Vegas including Centennial Hills and Skye Canyon"
-              priceMin={400000}
-              priceMax={2000000}
-              propertyTypes="SFR,MF,TC"
-            />
-          </div>
-        </motion.section>
       </main>
-      {/* RealScout Office Listings */}
-      <RealScoutListingsSection
-        title="Current Listings"
-        subtitle="Browse our latest property listings in Centennial Hills and surrounding areas"
-      />
     </Layout>
   );
 }

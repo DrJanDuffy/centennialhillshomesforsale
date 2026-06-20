@@ -1,4 +1,5 @@
 import Head from 'next/head';
+import { canonicalForPath, getProductionSiteOrigin, siteEntityId, toAbsoluteUrl } from '@/lib/site-url';
 import Link from 'next/link';
 import React from 'react';
 import Layout from '../components/Layout';
@@ -134,7 +135,7 @@ export default function LocalBusinessDirectory() {
               name: 'Centennial Hills Local Business Directory',
               description:
                 'Comprehensive directory of businesses and services in Centennial Hills, Las Vegas',
-              url: 'https://centennialhillshomesforsale.com/local-business-directory',
+              url: canonicalForPath('/local-business-directory'),
               itemListElement: localBusinesses.map((business, index) => ({
                 '@type': 'ListItem',
                 position: index + 1,
@@ -176,6 +177,13 @@ export default function LocalBusinessDirectory() {
             </p>
           </div>
         </section>
+
+      {/* RealScout Listings — below hero */}
+      <RealScoutListingsSection
+        title="Current Listings"
+        subtitle="Browse our latest property listings in Centennial Hills and surrounding areas"
+      />
+
 
         {/* Search and Filter Section */}
         <section className="py-12 bg-gray-50">
@@ -322,11 +330,6 @@ export default function LocalBusinessDirectory() {
           </div>
         </section>
       </main>
-      {/* RealScout Office Listings */}
-      <RealScoutListingsSection
-        title="Current Listings"
-        subtitle="Browse our latest property listings in Centennial Hills and surrounding areas"
-      />
     </Layout>
   );
 }

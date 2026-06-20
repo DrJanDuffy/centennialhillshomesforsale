@@ -1,4 +1,5 @@
 import Head from 'next/head';
+import { canonicalForPath, getProductionSiteOrigin, siteEntityId, toAbsoluteUrl } from '@/lib/site-url';
 import React from 'react';
 import Layout from '../components/Layout';
 import RealScoutListingsSection from '../components/RealScoutListingsSection';
@@ -157,7 +158,7 @@ export default function NeighborhoodComparison() {
               name: 'Centennial Hills Neighborhood Comparison',
               description:
                 'Comprehensive comparison of neighborhoods in Centennial Hills, Las Vegas',
-              url: 'https://centennialhillshomesforsale.com/neighborhood-comparison',
+              url: canonicalForPath('/neighborhood-comparison'),
               itemListElement: neighborhoods.map((neighborhood, index) => ({
                 '@type': 'ListItem',
                 position: index + 1,
@@ -190,6 +191,13 @@ export default function NeighborhoodComparison() {
             </p>
           </div>
         </section>
+
+      {/* RealScout Listings — below hero */}
+      <RealScoutListingsSection
+        title="Current Listings"
+        subtitle="Browse our latest property listings in Centennial Hills and surrounding areas"
+      />
+
 
         {/* Selection and Sort Controls */}
         <section className="py-12 bg-gray-50">
@@ -415,11 +423,6 @@ export default function NeighborhoodComparison() {
           </div>
         </section>
       </main>
-      {/* RealScout Office Listings */}
-      <RealScoutListingsSection
-        title="Current Listings"
-        subtitle="Browse our latest property listings in Centennial Hills and surrounding areas"
-      />
     </Layout>
   );
 }

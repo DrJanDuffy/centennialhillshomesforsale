@@ -1,4 +1,5 @@
 import Head from 'next/head';
+import { canonicalForPath, getProductionSiteOrigin, siteEntityId, toAbsoluteUrl } from '@/lib/site-url';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import styles from './GoogleBusinessProfileOptimizer.module.css';
@@ -32,12 +33,12 @@ export default function GoogleBusinessProfileOptimizer({
   const googleBusinessSchema = {
     '@context': 'https://schema.org',
     '@type': ['RealEstateAgent', 'LocalBusiness'],
-    '@id': 'https://centennialhillshomesforsale.com/#googlebusiness',
+    '@id': siteEntityId('googlebusiness'),
     name: 'Dr. Jan Duffy, REALTOR®',
     alternateName: 'Centennial Hills Homes | Providence & Skye Canyon | Dr. Jan Duffy, REALTOR®',
     description:
       'Top-rated Las Vegas REALTOR® specializing in luxury homes in Centennial Hills, Providence, and Skye Canyon. 30+ years experience, 4.9/5 star rating, available 24/7 for real estate needs.',
-    url: 'https://centennialhillshomesforsale.com',
+    url: canonicalForPath('/'),
     telephone: '(702) 903-1952',
     email: 'jan@centennialhillshomes.com',
     foundingDate: '1993-09-01',

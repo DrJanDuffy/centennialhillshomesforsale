@@ -1,4 +1,5 @@
 import Head from 'next/head';
+import { canonicalForPath, getProductionSiteOrigin, siteEntityId, toAbsoluteUrl } from '@/lib/site-url';
 import Layout from '../components/Layout';
 import MortgageCalculator from '../components/MortgageCalculator';
 import PropertyComparison from '../components/PropertyComparison';
@@ -121,7 +122,7 @@ export default function RealEstateTools() {
         <meta property="og:type" content="website" />
         <meta
           property="og:url"
-          content="https://www.centennialhillshomesforsale.com/real-estate-tools"
+          content={canonicalForPath('/real-estate-tools')}
         />
       </Head>
 
@@ -149,6 +150,13 @@ export default function RealEstateTools() {
             </div>
           </div>
         </section>
+
+      {/* RealScout Listings — below hero */}
+      <RealScoutListingsSection
+        title="Current Listings"
+        subtitle="Browse our latest property listings in Centennial Hills and surrounding areas"
+      />
+
 
         {/* Property Valuation Tool */}
         <section className="py-16">
@@ -238,11 +246,6 @@ export default function RealEstateTools() {
           </div>
         </section>
       </div>
-      {/* RealScout Office Listings */}
-      <RealScoutListingsSection
-        title="Current Listings"
-        subtitle="Browse our latest property listings in Centennial Hills and surrounding areas"
-      />
     </Layout>
   );
 }

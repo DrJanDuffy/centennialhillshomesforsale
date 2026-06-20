@@ -1,4 +1,5 @@
 import { motion } from 'framer-motion';
+import { canonicalForPath, getProductionSiteOrigin, siteEntityId, toAbsoluteUrl } from '@/lib/site-url';
 import Head from 'next/head';
 import Link from 'next/link';
 import { FaCheckCircle, FaClock, FaMapMarkerAlt, FaPhone, FaStar } from 'react-icons/fa';
@@ -63,7 +64,7 @@ export default function LocalBusinessOptimization() {
         />
         <link
           rel="canonical"
-          href="https://centennialhillshomesforsale.com/local-business-optimization"
+          href={canonicalForPath('/local-business-optimization')}
         />
 
         {/* Local Business Schema */}
@@ -145,6 +146,13 @@ export default function LocalBusinessOptimization() {
             </div>
           </div>
         </motion.section>
+
+      {/* RealScout Listings — below hero */}
+      <RealScoutListingsSection
+        title="Current Listings"
+        subtitle="Browse our latest property listings in Centennial Hills and surrounding areas"
+      />
+
 
         <motion.section
           className="service-areas-section"
@@ -253,11 +261,6 @@ export default function LocalBusinessOptimization() {
           </div>
         </motion.section>
       </main>
-      {/* RealScout Office Listings */}
-      <RealScoutListingsSection
-        title="Current Listings"
-        subtitle="Browse our latest property listings in Centennial Hills and surrounding areas"
-      />
     </Layout>
   );
 }

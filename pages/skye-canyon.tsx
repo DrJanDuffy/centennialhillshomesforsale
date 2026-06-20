@@ -1,9 +1,9 @@
 import { motion } from 'framer-motion';
+import { canonicalForPath, getProductionSiteOrigin, siteEntityId, toAbsoluteUrl } from '@/lib/site-url';
 import Head from 'next/head';
 import { useState } from 'react';
 import Layout from '../components/Layout';
 import NeighborhoodBar from '../components/NeighborhoodBar';
-import RealScoutListings from '../components/RealScoutListings';
 import RealScoutListingsSection from '../components/RealScoutListingsSection';
 import SchoolInfo from '../components/SchoolInfo';
 
@@ -24,7 +24,7 @@ export default function SkyeCanyon() {
           name="keywords"
           content="Skye Canyon homes for sale, Las Vegas new construction, family community, Skye Canyon Park, 89166 homes"
         />
-        <link rel="canonical" href="https://centennialhillshomesforsale.com/skye-canyon" />
+        <link rel="canonical" href={canonicalForPath('/skye-canyon')} />
       </Head>
 
       <main>
@@ -48,6 +48,13 @@ export default function SkyeCanyon() {
             </p>
           </div>
         </motion.section>
+
+      {/* RealScout Listings — below hero */}
+      <RealScoutListingsSection
+        title="Current Listings"
+        subtitle="Browse our latest property listings in Centennial Hills and surrounding areas"
+      />
+
 
         <motion.section
           className="area-overview"
@@ -125,32 +132,7 @@ export default function SkyeCanyon() {
         </motion.section>
 
         <SchoolInfo neighborhood="Skye Canyon" />
-
-        <motion.section
-          className="listings-section"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.8, duration: 0.6 }}
-        >
-          <div className="container">
-            <h2>Current Homes for Sale in Skye Canyon</h2>
-            <div className="realscout-widget-container">
-              <RealScoutListings
-                agentId="QWdlbnQtMjI1MDUw"
-                sortOrder="STATUS_AND_SIGNIFICANT_CHANGE"
-                listingStatus="For Sale"
-                propertyTypes="SFR,MF,TC"
-                priceMin={450000}
-              />
-            </div>
-          </div>
-        </motion.section>
       </main>
-      {/* RealScout Office Listings */}
-      <RealScoutListingsSection
-        title="Current Listings"
-        subtitle="Browse our latest property listings in Centennial Hills and surrounding areas"
-      />
     </Layout>
   );
 }

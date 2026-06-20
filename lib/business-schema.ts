@@ -1,15 +1,20 @@
 // lib/business-schema.ts
 // Comprehensive business schema for Dr. Jan Duffy and Centennial Hills Homes
 
+import { SITE_ORIGIN, canonicalForPath, siteEntityId, toAbsoluteUrl } from './site-url';
+
+const HOME_URL = canonicalForPath('/');
+const LOGO_URL = toAbsoluteUrl('/logo.png');
+
 export const BUSINESS_SCHEMA = {
   '@context': 'https://schema.org',
   '@type': 'RealEstateAgent',
-  '@id': 'https://centennialhillshomesforsale.com/#realestateagent',
+  '@id': siteEntityId('realestateagent'),
   name: 'Dr. Jan Duffy',
   alternateName: 'Centennial Hills Homes for Sale',
   description:
     'Looking for a homes for sale in North Las Vegas, Centennial Hills, or Lone Mountain? 🏠 Dr. Jan Duffy, REALTOR® with Berkshire Hathaway HomeServices, is your trusted expert in luxury and new-build Las Vegas homes. 📍 With 20+ years of experience in master-planned communities, Dr. Duffy specializes in top neighborhoods like Skye Canyon, Providence, Aliante, Centennial Hills, Tule Springs, El Dorado, Lone Mountain, and Summerlin. ⭐ Ranked in the Top 1% of Las Vegas REALTORS®, Dr. Duffy offers expert guidance, same-day showings, and a free market analysis. 📱 Available 24/7, Dr. Duffy provides personalized service to make buying or selling your Las Vegas home easy. 4.9/5 ⭐',
-  url: 'https://centennialhillshomesforsale.com/',
+  url: HOME_URL,
   telephone: '(702) 903-1952',
   email: 'jan@centennialhillshomes.com',
   foundingDate: '1993-09-01',
@@ -282,13 +287,13 @@ export const BUSINESS_SCHEMA = {
 export const ORGANIZATION_SCHEMA = {
   '@context': 'https://schema.org',
   '@type': 'Organization',
-  '@id': 'https://centennialhillshomesforsale.com/#organization',
+  '@id': siteEntityId('organization'),
   name: 'Centennial Hills Homes for Sale',
   alternateName: 'Dr. Jan Duffy Real Estate',
   description:
     'Premier real estate agency specializing in luxury homes and master-planned communities throughout the Las Vegas Valley',
-  url: 'https://centennialhillshomesforsale.com/',
-  logo: 'https://centennialhillshomesforsale.com/logo.png',
+  url: HOME_URL,
+  logo: LOGO_URL,
   foundingDate: '1993-09-01',
   address: {
     '@type': 'PostalAddress',
@@ -322,19 +327,19 @@ export const ORGANIZATION_SCHEMA = {
 export const WEBSITE_SCHEMA = {
   '@context': 'https://schema.org',
   '@type': 'WebSite',
-  '@id': 'https://centennialhillshomesforsale.com/#website',
+  '@id': siteEntityId('website'),
   name: 'Centennial Hills Homes for Sale',
   description:
     'Your trusted source for luxury homes in Centennial Hills, Las Vegas. Expert real estate services from Dr. Jan Duffy, Top 1% REALTOR®.',
-  url: 'https://centennialhillshomesforsale.com',
+  url: SITE_ORIGIN,
   publisher: {
     '@type': 'RealEstateAgent',
-    '@id': 'https://centennialhillshomesforsale.com/#realestateagent',
+    '@id': siteEntityId('realestateagent'),
     name: 'Dr. Jan Duffy',
   },
   potentialAction: {
     '@type': 'SearchAction',
-    target: 'https://centennialhillshomesforsale.com/search?q={search_term_string}',
+    target: `${SITE_ORIGIN}/search?q={search_term_string}`,
     'query-input': 'required name=search_term_string',
   },
   inLanguage: 'en-US',
@@ -344,11 +349,11 @@ export const WEBSITE_SCHEMA = {
 export const LOCAL_BUSINESS_SCHEMA = {
   '@context': 'https://schema.org',
   '@type': 'LocalBusiness',
-  '@id': 'https://centennialhillshomesforsale.com/#localbusiness',
+  '@id': siteEntityId('localbusiness'),
   name: 'Centennial Hills Homes for Sale',
   description:
     'Premier real estate agency serving Centennial Hills and the greater Las Vegas area with luxury homes and expert guidance.',
-  url: 'https://centennialhillshomesforsale.com/',
+  url: HOME_URL,
   telephone: '(702) 903-1952',
   email: 'jan@centennialhillshomes.com',
   address: {

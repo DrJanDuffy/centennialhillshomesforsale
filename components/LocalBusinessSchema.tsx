@@ -1,4 +1,5 @@
 import Head from 'next/head';
+import { canonicalForPath, getProductionSiteOrigin, siteEntityId, toAbsoluteUrl } from '@/lib/site-url';
 
 // Define proper interfaces for different schema types
 interface LocalBusinessSchema {
@@ -162,7 +163,7 @@ export default function LocalBusinessSchema({
   },
   phone = '(702) 903-1952',
   email = 'jan@centennialhillshomes.com',
-  website = 'https://centennialhillshomesforsale.com',
+  website = getProductionSiteOrigin(),
   serviceArea = [
     'Centennial Hills',
     'Providence',

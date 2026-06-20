@@ -22,6 +22,13 @@ export default function Listings() {
           </p>
         </motion.section>
 
+      {/* RealScout Listings — below hero */}
+      <RealScoutListingsSection
+          title="All Available Properties"
+          subtitle="Browse our complete inventory of homes for sale in Centennial Hills and surrounding areas"
+        />
+
+
         {/* RealScout Your Listings */}
         <motion.section
           className="section"
@@ -69,44 +76,6 @@ export default function Listings() {
           </div>
         </motion.section>
 
-        {/* RealScout Office Listings */}
-        <motion.section
-          className="section"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.7, duration: 0.6 }}
-        >
-          <div className="text-center mb-8">
-            <h2>Current Listings</h2>
-            <p>Browse our latest properties in Centennial Hills and surrounding areas</p>
-          </div>
-          <realscout-office-listings
-            agent-encoded-id="QWdlbnQtMjI1MDUw"
-            sort-order="STATUS_AND_SIGNIFICANT_CHANGE"
-            listing-status="For Sale"
-            property-types="SFR,MF,TC"
-            price-min="600000"
-            price-max="1200000"
-          ></realscout-office-listings>
-        </motion.section>
-
-        <motion.section
-          className="listings-widget"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.8, duration: 0.6 }}
-        >
-          <h2>All Available Properties</h2>
-          <realscout-office-listings
-            agent-encoded-id="QWdlbnQtMjI1MDUw"
-            sort-order="STATUS_AND_SIGNIFICANT_CHANGE"
-            listing-status="For Sale"
-            property-types="SFR,MF,TC"
-            price-min="300000"
-            price-max="2000000"
-          ></realscout-office-listings>
-        </motion.section>
-
         <motion.section
           className="local-expertise-cta"
           initial={{ opacity: 0, y: 20 }}
@@ -135,12 +104,6 @@ export default function Listings() {
             </div>
           </div>
         </motion.section>
-
-        {/* RealScout Office Listings */}
-        <RealScoutListingsSection
-          title="All Available Properties"
-          subtitle="Browse our complete inventory of homes for sale in Centennial Hills and surrounding areas"
-        />
       </main>
     </Layout>
   );

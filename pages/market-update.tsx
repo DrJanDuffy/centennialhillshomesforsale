@@ -1,9 +1,9 @@
 import { motion } from 'framer-motion';
+import { canonicalForPath, getProductionSiteOrigin, siteEntityId, toAbsoluteUrl } from '@/lib/site-url';
 import Head from 'next/head';
 import Layout from '../components/Layout';
 import MarketTrendChart from '../components/MarketTrendChart';
 import RealScoutListingsSection from '../components/RealScoutListingsSection';
-import RealScoutWidget from '../components/widgets/RealScoutWidget';
 
 const marketData = {
   medianPrice: 635000,
@@ -33,7 +33,7 @@ export default function MarketUpdate() {
           name="keywords"
           content="Centennial Hills market report, Las Vegas home prices, 89149 real estate, 89166 market data, Las Vegas housing market"
         />
-        <link rel="canonical" href="https://centennialhillshomesforsale.com/market-update" />
+        <link rel="canonical" href={canonicalForPath('/market-update')} />
       </Head>
 
       <main className="container">
@@ -49,6 +49,13 @@ export default function MarketUpdate() {
             and surrounding Las Vegas communities. Updated monthly with current sales data.
           </p>
         </motion.section>
+
+      {/* RealScout Listings — below hero */}
+      <RealScoutListingsSection
+        title="Current Listings"
+        subtitle="Browse our latest property listings in Centennial Hills and surrounding areas"
+      />
+
 
         <motion.section
           className="market-overview"
@@ -123,44 +130,6 @@ export default function MarketUpdate() {
           <MarketTrendChart />
         </motion.section>
 
-        {/* RealScout Office Listings */}
-        <motion.section
-          className="section"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.7, duration: 0.6 }}
-        >
-          <div className="text-center mb-8">
-            <h2>Current Listings</h2>
-            <p>Browse our latest properties in Centennial Hills and surrounding areas</p>
-          </div>
-          <realscout-office-listings
-            agent-encoded-id="QWdlbnQtMjI1MDUw"
-            sort-order="STATUS_AND_SIGNIFICANT_CHANGE"
-            listing-status="For Sale"
-            property-types="SFR,MF,TC"
-            price-min="600000"
-            price-max="1200000"
-          ></realscout-office-listings>
-        </motion.section>
-
-        <motion.section
-          className="market-listings"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.8, duration: 0.6 }}
-        >
-          <h2>Current Market Listings</h2>
-          <RealScoutWidget
-            type="office-listings"
-            title="Current Market Listings"
-            description="Latest properties on the market in Centennial Hills"
-            priceMin={400000}
-            priceMax={1500000}
-            propertyTypes="SFR,MF,TC"
-          />
-        </motion.section>
-
         {/* RealScout Your Listings */}
         <motion.section
           className="section"
@@ -181,11 +150,6 @@ export default function MarketUpdate() {
           ></realscout-your-listings>
         </motion.section>
       </main>
-      {/* RealScout Office Listings */}
-      <RealScoutListingsSection
-        title="Current Listings"
-        subtitle="Browse our latest property listings in Centennial Hills and surrounding areas"
-      />
     </Layout>
   );
 }

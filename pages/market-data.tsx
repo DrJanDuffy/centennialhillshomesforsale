@@ -1,4 +1,5 @@
 import Head from 'next/head';
+import { canonicalForPath, getProductionSiteOrigin, siteEntityId, toAbsoluteUrl } from '@/lib/site-url';
 import Layout from '../components/Layout';
 import RealScoutListings from '../components/RealScoutListings';
 import RealScoutListingsSection from '../components/RealScoutListingsSection';
@@ -29,10 +30,10 @@ export default function MarketData() {
               name: 'Centennial Hills Real Estate Market Data',
               description:
                 'Comprehensive real estate market data and analysis for Centennial Hills, Las Vegas including property trends, pricing statistics, and market insights.',
-              url: 'https://centennialhillshomesforsale.com/market-data',
+              url: canonicalForPath('/market-data'),
               publisher: {
                 '@type': 'RealEstateAgent',
-                '@id': 'https://centennialhillshomesforsale.com/#realestateagent',
+                '@id': siteEntityId('realestateagent'),
                 name: 'Dr. Jan Duffy',
                 description:
                   'Top 1% REALTOR® specializing in luxury homes and master-planned communities in Centennial Hills, Las Vegas',
@@ -86,7 +87,7 @@ export default function MarketData() {
                     distribution: {
                       '@type': 'DataDownload',
                       encodingFormat: 'application/json',
-                      contentUrl: 'https://centennialhillshomesforsale.com/api/market-data',
+                      contentUrl: canonicalForPath('/api/market-data'),
                     },
                   },
                 },
@@ -125,6 +126,13 @@ export default function MarketData() {
             </p>
           </div>
         </section>
+
+      {/* RealScout Listings — below hero */}
+      <RealScoutListingsSection
+          title="Current Listings"
+          subtitle="Browse our latest property listings in Centennial Hills and surrounding areas"
+        />
+
 
         {/* Market Stats Cards */}
         <section className="py-16 bg-gray-50">
@@ -471,11 +479,6 @@ export default function MarketData() {
             </div>
           </div>
         </section>
-        {/* RealScout Office Listings */}
-        <RealScoutListingsSection
-          title="Current Listings"
-          subtitle="Browse our latest property listings in Centennial Hills and surrounding areas"
-        />
       </Layout>
     </>
   );

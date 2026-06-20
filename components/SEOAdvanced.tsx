@@ -1,4 +1,5 @@
 import Head from 'next/head';
+import { canonicalForPath, getProductionSiteOrigin, siteEntityId, toAbsoluteUrl } from '@/lib/site-url';
 
 interface SEOAdvancedProps {
   title?: string;
@@ -17,7 +18,7 @@ export default function SEOAdvanced({
   canonicalUrl,
   neighborhood,
 }: SEOAdvancedProps) {
-  const siteUrl = 'https://centennialhillshomesforsale.com';
+  const siteUrl = getProductionSiteOrigin();
   const fullCanonicalUrl =
     canonicalUrl || `${siteUrl}${typeof window !== 'undefined' ? window.location.pathname : ''}`;
 

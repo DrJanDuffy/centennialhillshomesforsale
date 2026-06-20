@@ -1,4 +1,5 @@
 import Head from 'next/head';
+import { canonicalForPath, getProductionSiteOrigin, siteEntityId, toAbsoluteUrl } from '@/lib/site-url';
 import Link from 'next/link';
 import KCMFeed from '../components/KCMFeed';
 import Layout from '../components/Layout';
@@ -20,11 +21,11 @@ export default function MarketInsights() {
         />
         <meta
           property="og:url"
-          content="https://centennialhillshomesforsale.com/market-insights/"
+          content={canonicalForPath('/market-insights/')}
         />
         <meta
           property="og:image"
-          content="https://centennialhillshomesforsale.com/images/market-insights-og.jpg"
+          content={canonicalForPath('/images/market-insights-og.jpg')}
         />
         <meta name="twitter:card" content="summary_large_image" />
         <meta
@@ -37,7 +38,7 @@ export default function MarketInsights() {
         />
         <meta
           name="twitter:image"
-          content="https://centennialhillshomesforsale.com/images/market-insights-og.jpg"
+          content={canonicalForPath('/images/market-insights-og.jpg')}
         />
 
         {/* Structured Data */}
@@ -50,11 +51,11 @@ export default function MarketInsights() {
               name: 'Centennial Hills Market Insights',
               description:
                 'Latest real estate market insights and trends for Centennial Hills, Las Vegas',
-              url: 'https://centennialhillshomesforsale.com/market-insights/',
+              url: canonicalForPath('/market-insights/'),
               publisher: {
                 '@type': 'RealEstateAgent',
                 name: 'Dr. Jan Duffy',
-                url: 'https://centennialhillshomesforsale.com',
+                url: canonicalForPath('/'),
                 address: {
                   '@type': 'PostalAddress',
                   addressLocality: 'Las Vegas',
@@ -98,6 +99,13 @@ export default function MarketInsights() {
             </div>
           </div>
         </section>
+
+      {/* RealScout Listings — below hero */}
+      <RealScoutListingsSection
+        title="Current Listings"
+        subtitle="Browse our latest property listings in Centennial Hills and surrounding areas"
+      />
+
 
         {/* Market Overview Section */}
         <section className="py-16 bg-white">
@@ -332,11 +340,6 @@ export default function MarketInsights() {
           </div>
         </section>
       </div>
-      {/* RealScout Office Listings */}
-      <RealScoutListingsSection
-        title="Current Listings"
-        subtitle="Browse our latest property listings in Centennial Hills and surrounding areas"
-      />
     </Layout>
   );
 }

@@ -1,4 +1,5 @@
 import Head from 'next/head';
+import { canonicalForPath, getProductionSiteOrigin, siteEntityId, toAbsoluteUrl } from '@/lib/site-url';
 import Layout from '../components/Layout';
 import ModernInteractiveMap from '../components/ModernInteractiveMap';
 import RealScoutListings from '../components/RealScoutListings';
@@ -30,10 +31,10 @@ export default function AreaExplorer() {
               name: 'Centennial Hills Area Explorer',
               description:
                 'Comprehensive guide to amenities, schools, shopping, and points of interest in Centennial Hills, Las Vegas.',
-              url: 'https://centennialhillshomesforsale.com/area-explorer',
+              url: canonicalForPath('/area-explorer'),
               publisher: {
                 '@type': 'RealEstateAgent',
-                '@id': 'https://centennialhillshomesforsale.com/#realestateagent',
+                '@id': siteEntityId('realestateagent'),
                 name: 'Dr. Jan Duffy',
                 description:
                   'Top 1% REALTOR® specializing in luxury homes and master-planned communities in Centennial Hills, Las Vegas',
@@ -44,11 +45,11 @@ export default function AreaExplorer() {
                   position: 1,
                   item: {
                     '@type': 'TouristAttraction',
-                    '@id': 'https://centennialhillshomesforsale.com/#centennial-hills-center',
+                    '@id': siteEntityId('centennial-hills-center'),
                     name: 'Centennial Hills Center',
                     description:
                       'Major shopping center featuring retail stores, restaurants, and services in Centennial Hills.',
-                    url: 'https://centennialhillshomesforsale.com/area-explorer',
+                    url: canonicalForPath('/area-explorer'),
                     geo: {
                       '@type': 'GeoCoordinates',
                       latitude: '36.268',
@@ -87,11 +88,11 @@ export default function AreaExplorer() {
                   position: 2,
                   item: {
                     '@type': 'Place',
-                    '@id': 'https://centennialhillshomesforsale.com/#centennial-hills-elementary',
+                    '@id': siteEntityId('centennial-hills-elementary'),
                     name: 'Centennial Hills Elementary School',
                     description:
                       'Highly-rated elementary school serving the Centennial Hills community with excellent academic programs.',
-                    url: 'https://centennialhillshomesforsale.com/area-explorer',
+                    url: canonicalForPath('/area-explorer'),
                     geo: {
                       '@type': 'GeoCoordinates',
                       latitude: '36.270',
@@ -130,11 +131,11 @@ export default function AreaExplorer() {
                   position: 3,
                   item: {
                     '@type': 'Place',
-                    '@id': 'https://centennialhillshomesforsale.com/#providence-park',
+                    '@id': siteEntityId('providence-park'),
                     name: 'Providence Park',
                     description:
                       'Beautiful community park featuring walking trails, playgrounds, and recreational facilities.',
-                    url: 'https://centennialhillshomesforsale.com/area-explorer',
+                    url: canonicalForPath('/area-explorer'),
                     geo: {
                       '@type': 'GeoCoordinates',
                       latitude: '36.265',
@@ -178,11 +179,11 @@ export default function AreaExplorer() {
                   position: 4,
                   item: {
                     '@type': 'Place',
-                    '@id': 'https://centennialhillshomesforsale.com/#medical-facilities',
+                    '@id': siteEntityId('medical-facilities'),
                     name: 'Medical Facilities',
                     description:
                       'Convenient access to medical offices, urgent care, and healthcare services in the Centennial Hills area.',
-                    url: 'https://centennialhillshomesforsale.com/area-explorer',
+                    url: canonicalForPath('/area-explorer'),
                     geo: {
                       '@type': 'GeoCoordinates',
                       latitude: '36.272',
@@ -237,6 +238,13 @@ export default function AreaExplorer() {
             </p>
           </div>
         </section>
+
+      {/* RealScout Listings — below hero */}
+      <RealScoutListingsSection
+          title="Current Listings"
+          subtitle="Browse our latest property listings in Centennial Hills and surrounding areas"
+        />
+
 
         {/* Interactive Map */}
         <section className="py-16 bg-white">
@@ -533,11 +541,6 @@ export default function AreaExplorer() {
             </div>
           </div>
         </section>
-        {/* RealScout Office Listings */}
-        <RealScoutListingsSection
-          title="Current Listings"
-          subtitle="Browse our latest property listings in Centennial Hills and surrounding areas"
-        />
       </Layout>
     </>
   );

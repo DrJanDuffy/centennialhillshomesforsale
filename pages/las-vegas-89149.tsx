@@ -1,4 +1,5 @@
 import { motion } from 'framer-motion';
+import { canonicalForPath, getProductionSiteOrigin, siteEntityId, toAbsoluteUrl } from '@/lib/site-url';
 import Head from 'next/head';
 import Link from 'next/link';
 import { useState } from 'react';
@@ -26,7 +27,7 @@ export default function LasVegas89149() {
           name="keywords"
           content="89149 homes for sale, Las Vegas 89149, Centennial Hills real estate, Tournament Hills homes, TPC Las Vegas golf"
         />
-        <link rel="canonical" href="https://centennialhillshomesforsale.com/las-vegas-89149" />
+        <link rel="canonical" href={canonicalForPath('/las-vegas-89149')} />
       </Head>
 
       <main>
@@ -49,6 +50,13 @@ export default function LasVegas89149() {
             </p>
           </div>
         </motion.section>
+
+      {/* RealScout Listings — below hero */}
+      <RealScoutListingsSection
+        title="Current Listings"
+        subtitle="Browse our latest property listings in Centennial Hills and surrounding areas"
+      />
+
 
         <motion.section
           className="zip-overview"
@@ -152,32 +160,7 @@ export default function LasVegas89149() {
         </motion.section>
 
         <SchoolInfo neighborhood="Centennial Hills" />
-
-        <motion.section
-          className="listings-section"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.8, duration: 0.6 }}
-        >
-          <div className="container">
-            <h2>Current Homes for Sale in 89149</h2>
-            <div className="realscout-widget-container">
-              <RealScoutListings
-                agent-encoded-id="QWdlbnQtMjI1MDUw"
-                sort-order="STATUS_AND_SIGNIFICANT_CHANGE"
-                listing-status="For Sale"
-                property-types="SFR,MF,TC"
-                price-min="450000"
-              />
-            </div>
-          </div>
-        </motion.section>
       </main>
-      {/* RealScout Office Listings */}
-      <RealScoutListingsSection
-        title="Current Listings"
-        subtitle="Browse our latest property listings in Centennial Hills and surrounding areas"
-      />
     </Layout>
   );
 }

@@ -38,6 +38,13 @@ export default function Contact() {
           </div>
         </section>
 
+      {/* RealScout Listings — below hero */}
+      <RealScoutListingsSection
+          title="Current Listings"
+          subtitle="Browse our available properties while you're here"
+        />
+
+
         {/* Contact Information */}
         {/* RealScout Listings */}
         <section className="py-16 bg-gray-50">
@@ -387,12 +394,6 @@ export default function Contact() {
             </div>
           </div>
         </section>
-
-        {/* RealScout Office Listings */}
-        <RealScoutListingsSection
-          title="Current Listings"
-          subtitle="Browse our available properties while you're here"
-        />
       </Layout>
     </>
   );

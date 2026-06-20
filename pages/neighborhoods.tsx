@@ -1,4 +1,5 @@
 import Head from 'next/head';
+import { canonicalForPath, getProductionSiteOrigin, siteEntityId, toAbsoluteUrl } from '@/lib/site-url';
 import Layout from '../components/Layout';
 import ModernNeighborhoods from '../components/ModernNeighborhoods';
 import RealScoutListings from '../components/RealScoutListings';
@@ -30,10 +31,10 @@ export default function Neighborhoods() {
               name: 'Centennial Hills Neighborhoods',
               description:
                 'Comprehensive guide to neighborhoods in Centennial Hills, Las Vegas including Providence, Skye Canyon, and other master-planned communities.',
-              url: 'https://centennialhillshomesforsale.com/neighborhoods',
+              url: canonicalForPath('/neighborhoods'),
               publisher: {
                 '@type': 'RealEstateAgent',
-                '@id': 'https://centennialhillshomesforsale.com/#realestateagent',
+                '@id': siteEntityId('realestateagent'),
                 name: 'Dr. Jan Duffy',
                 description:
                   'Top 1% REALTOR® specializing in luxury homes and master-planned communities in Centennial Hills, Las Vegas',
@@ -44,11 +45,11 @@ export default function Neighborhoods() {
                   position: 1,
                   item: {
                     '@type': 'Place',
-                    '@id': 'https://centennialhillshomesforsale.com/#providence-neighborhood',
+                    '@id': siteEntityId('providence-neighborhood'),
                     name: 'Providence Neighborhood',
                     description:
                       'Luxury master-planned community in Centennial Hills featuring custom homes, mountain views, and resort-style amenities.',
-                    url: 'https://centennialhillshomesforsale.com/providence-las-vegas',
+                    url: canonicalForPath('/providence-las-vegas'),
                     geo: {
                       '@type': 'GeoCoordinates',
                       latitude: '36.268',
@@ -98,11 +99,11 @@ export default function Neighborhoods() {
                   position: 2,
                   item: {
                     '@type': 'Place',
-                    '@id': 'https://centennialhillshomesforsale.com/#skye-canyon-neighborhood',
+                    '@id': siteEntityId('skye-canyon-neighborhood'),
                     name: 'Skye Canyon',
                     description:
                       'Modern master-planned community featuring new construction homes, outdoor recreation, and family-friendly amenities.',
-                    url: 'https://centennialhillshomesforsale.com/skye-canyon',
+                    url: canonicalForPath('/skye-canyon'),
                     geo: {
                       '@type': 'GeoCoordinates',
                       latitude: '36.275',
@@ -152,11 +153,11 @@ export default function Neighborhoods() {
                   position: 3,
                   item: {
                     '@type': 'Place',
-                    '@id': 'https://centennialhillshomesforsale.com/#northwest-las-vegas',
+                    '@id': siteEntityId('northwest-las-vegas'),
                     name: 'Northwest Las Vegas',
                     description:
                       'Growing area of Las Vegas featuring diverse housing options, excellent schools, and convenient access to amenities.',
-                    url: 'https://centennialhillshomesforsale.com/northwest-las-vegas',
+                    url: canonicalForPath('/northwest-las-vegas'),
                     geo: {
                       '@type': 'GeoCoordinates',
                       latitude: '36.260',
@@ -217,6 +218,13 @@ export default function Neighborhoods() {
             </p>
           </div>
         </section>
+
+      {/* RealScout Listings — below hero */}
+      <RealScoutListingsSection
+          title="Current Listings"
+          subtitle="Browse our latest property listings in Centennial Hills and surrounding areas"
+        />
+
 
         {/* Neighborhoods Component */}
         <ModernNeighborhoods />
@@ -383,11 +391,6 @@ export default function Neighborhoods() {
             </div>
           </div>
         </section>
-        {/* RealScout Office Listings */}
-        <RealScoutListingsSection
-          title="Current Listings"
-          subtitle="Browse our latest property listings in Centennial Hills and surrounding areas"
-        />
       </Layout>
     </>
   );

@@ -1,4 +1,5 @@
 import { motion } from 'framer-motion';
+import { canonicalForPath, getProductionSiteOrigin, siteEntityId, toAbsoluteUrl } from '@/lib/site-url';
 import Link from 'next/link';
 import { FaBuilding, FaChartLine, FaHandshake, FaHome, FaKey, FaUsers } from 'react-icons/fa';
 import Layout from '../components/Layout';
@@ -86,7 +87,7 @@ export default function Services() {
         description="Comprehensive real estate services in Las Vegas including luxury sales, commercial properties, first-time buyers, and building lots. Top 1% REALTOR® with 20+ years experience."
         keywords="Las Vegas real estate services, luxury property sales, commercial real estate, first-time home buyers, building lots, relocation services"
         pageType="website"
-        canonicalUrl="https://centennialhillshomesforsale.com/services"
+        canonicalUrl={canonicalForPath('/services')}
       />
 
       <main className="services-page">
@@ -115,6 +116,13 @@ export default function Services() {
             </div>
           </div>
         </motion.section>
+
+      {/* RealScout Listings — below hero */}
+      <RealScoutListingsSection
+        title="Current Listings"
+        subtitle="Browse our latest property listings in Centennial Hills and surrounding areas"
+      />
+
 
         <motion.section
           className="services-grid"
@@ -270,11 +278,6 @@ export default function Services() {
           </div>
         </motion.section>
       </main>
-      {/* RealScout Office Listings */}
-      <RealScoutListingsSection
-        title="Current Listings"
-        subtitle="Browse our latest property listings in Centennial Hills and surrounding areas"
-      />
     </Layout>
   );
 }

@@ -1,5 +1,6 @@
 import Head from 'next/head';
 import { useEffect } from 'react';
+import { canonicalForPath, toAbsoluteUrl } from '@/lib/site-url';
 
 interface SEOProps {
   title?: string;
@@ -16,7 +17,7 @@ interface SEOProps {
 export default function SEOOptimized({
   title = 'Centennial Hills Homes For Sale | Dr. Jan Duffy REALTOR®',
   description = 'Find luxury homes in Centennial Hills, Providence & Skye Canyon with Dr. Jan Duffy, top-rated REALTOR® at Berkshire Hathaway HomeServices Nevada Properties.',
-  keywords = 'Centennial Hills homes, Las Vegas real estate, Providence, Skye Canyon, Dr Jan Duff',
+  keywords = 'Centennial Hills homes, Las Vegas real estate, Providence, Skye Canyon, Dr Jan Duffy',
   ogImage = '/icon-512x512.png',
   canonicalUrl,
   structuredData,
@@ -87,6 +88,7 @@ export default function SEOOptimized({
   };
 
   const finalStructuredData = structuredData || defaultStructuredData;
+  const absoluteOgImage = toAbsoluteUrl(ogImage);
 
   return (
     <Head>
@@ -104,7 +106,7 @@ export default function SEOOptimized({
       <meta property="og:url" content={canonicalUrl || ''} />
       <meta property="og:title" content={title} />
       <meta property="og:description" content={description} />
-      <meta property="og:image" content={ogImage} />
+      <meta property="og:image" content={absoluteOgImage} />
       <meta property="og:image:width" content="1200" />
       <meta property="og:image:height" content="630" />
       <meta property="og:site_name" content="Centennial Hills Homes For Sale" />
@@ -115,7 +117,7 @@ export default function SEOOptimized({
       <meta property="twitter:url" content={canonicalUrl || ''} />
       <meta property="twitter:title" content={title} />
       <meta property="twitter:description" content={description} />
-      <meta property="twitter:image" content={ogImage} />
+      <meta property="twitter:image" content={absoluteOgImage} />
 
       {/* Additional SEO Meta Tags */}
       <meta

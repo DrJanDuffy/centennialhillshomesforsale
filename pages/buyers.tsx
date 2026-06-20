@@ -109,6 +109,13 @@ const BuyersPage: React.FC = () => {
           </div>
         </section>
 
+      {/* RealScout Listings — below hero */}
+      <RealScoutListingsSection
+        title="Current Listings"
+        subtitle="Browse our latest property listings in Centennial Hills and surrounding areas"
+      />
+
+
         {/* Why Choose Dr. Jan Duffy */}
         <section className="py-16 bg-white">
           <div className="container mx-auto px-4">
@@ -307,11 +314,6 @@ const BuyersPage: React.FC = () => {
           </div>
         </section>
       </div>
-      {/* RealScout Office Listings */}
-      <RealScoutListingsSection
-        title="Current Listings"
-        subtitle="Browse our latest property listings in Centennial Hills and surrounding areas"
-      />
     </Layout>
   );
 };

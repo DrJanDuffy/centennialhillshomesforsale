@@ -1,3 +1,4 @@
+import { getSiteHostname } from '@/lib/site-url';
 import type { NextApiRequest, NextApiResponse } from 'next';
 
 interface ErrorLogData {
@@ -54,7 +55,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
           body: JSON.stringify({
             ...errorData,
             environment: process.env.NODE_ENV,
-            domain: 'centennialhillshomesforsale.com',
+            domain: getSiteHostname().replace(/^www\./, ''),
           }),
         });
       } catch (webhookError) {

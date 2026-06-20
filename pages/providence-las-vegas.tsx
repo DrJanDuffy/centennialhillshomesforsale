@@ -1,4 +1,5 @@
 import { motion } from 'framer-motion';
+import { canonicalForPath, getProductionSiteOrigin, siteEntityId, toAbsoluteUrl } from '@/lib/site-url';
 import Head from 'next/head';
 import { useState } from 'react';
 import Layout from '../components/Layout';
@@ -24,7 +25,7 @@ export default function ProvidenceLasVegas() {
           name="keywords"
           content="Providence Las Vegas homes, Providence real estate, family community Las Vegas, 89149 Providence homes"
         />
-        <link rel="canonical" href="https://centennialhillshomesforsale.com/providence-las-vegas" />
+        <link rel="canonical" href={canonicalForPath('/providence-las-vegas')} />
       </Head>
 
       <main>
@@ -47,6 +48,13 @@ export default function ProvidenceLasVegas() {
             </p>
           </div>
         </motion.section>
+
+      {/* RealScout Listings — below hero */}
+      <RealScoutListingsSection
+        title="Current Listings"
+        subtitle="Browse our latest property listings in Centennial Hills and surrounding areas"
+      />
+
 
         <motion.section
           className="area-overview"
@@ -125,32 +133,7 @@ export default function ProvidenceLasVegas() {
         </motion.section>
 
         <SchoolInfo neighborhood="Providence" />
-
-        <motion.section
-          className="listings-section"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.8, duration: 0.6 }}
-        >
-          <div className="container">
-            <h2>Current Homes for Sale in Providence</h2>
-            <div className="realscout-widget-container">
-              <RealScoutListings
-                agentEncodedId="QWdlbnQtMjI1MDUw"
-                sortOrder="STATUS_AND_SIGNIFICANT_CHANGE"
-                listingStatus="For Sale"
-                propertyTypes="SFR,MF,TC"
-                priceMin={450000}
-              />
-            </div>
-          </div>
-        </motion.section>
       </main>
-      {/* RealScout Office Listings */}
-      <RealScoutListingsSection
-        title="Current Listings"
-        subtitle="Browse our latest property listings in Centennial Hills and surrounding areas"
-      />
     </Layout>
   );
 }

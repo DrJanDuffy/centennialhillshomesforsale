@@ -1,4 +1,5 @@
 import { ChevronRight, Home } from 'lucide-react';
+import { canonicalForPath, getProductionSiteOrigin, siteEntityId, toAbsoluteUrl } from '@/lib/site-url';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useEffect, useMemo, useRef } from 'react';
@@ -45,7 +46,7 @@ export default function BreadcrumbNavigation({ items }: BreadcrumbNavigationProp
         '@type': 'ListItem',
         position: index + 1,
         name: item.name,
-        item: `https://centennialhillshomesforsale.com${item.href}`,
+        item: `${getProductionSiteOrigin()}${item.href}`,
       })),
     }),
     [breadcrumbItems]

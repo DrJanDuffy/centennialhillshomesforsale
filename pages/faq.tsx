@@ -1,4 +1,5 @@
 import { motion } from 'framer-motion';
+import { canonicalForPath, getProductionSiteOrigin, siteEntityId, toAbsoluteUrl } from '@/lib/site-url';
 import Head from 'next/head';
 import Link from 'next/link';
 import { useCallback, useId, useMemo, useState } from 'react';
@@ -216,7 +217,7 @@ export default function FAQ() {
           name="keywords"
           content="Centennial Hills FAQ, real estate questions, Las Vegas home prices, school ratings, market conditions, Providence homes, Skye Canyon real estate, Northwest Las Vegas property values, HOA fees, investment properties"
         />
-        <link rel="canonical" href="https://centennialhillshomesforsale.com/faq" />
+        <link rel="canonical" href={canonicalForPath('/faq')} />
         <meta name="robots" content="index, follow" />
         <meta name="last-modified" content={new Date().toISOString()} />
 
@@ -251,7 +252,7 @@ export default function FAQ() {
               name: 'Dr. Jan Duffy, REALTOR®',
               alternateName:
                 'Centennial Hills Homes | Providence & Skye Canyon | Dr. Jan Duffy, REALTOR®',
-              url: 'https://centennialhillshomesforsale.com',
+              url: canonicalForPath('/'),
               telephone: '(702) 903-1952',
               sameAs: ['https://g.co/kgs/4qQ8DsY'],
               address: {
@@ -333,13 +334,13 @@ export default function FAQ() {
                   '@type': 'ListItem',
                   position: 1,
                   name: 'Home',
-                  item: 'https://centennialhillshomesforsale.com',
+                  item: canonicalForPath('/'),
                 },
                 {
                   '@type': 'ListItem',
                   position: 2,
                   name: 'FAQ',
-                  item: 'https://centennialhillshomesforsale.com/faq',
+                  item: canonicalForPath('/faq'),
                 },
               ],
             }),
@@ -416,6 +417,11 @@ export default function FAQ() {
             </div>
           </div>
         </motion.section>
+
+      <RealScoutListingsSection
+        title="Current Listings"
+        subtitle="Browse our latest property listings in Centennial Hills and surrounding areas"
+      />
 
         {/* Table of Contents */}
         <motion.section
@@ -804,11 +810,6 @@ export default function FAQ() {
           </div>
         </motion.section>
       </main>
-      {/* RealScout Office Listings */}
-      <RealScoutListingsSection
-        title="Current Listings"
-        subtitle="Browse our latest property listings in Centennial Hills and surrounding areas"
-      />
     </Layout>
   );
 }

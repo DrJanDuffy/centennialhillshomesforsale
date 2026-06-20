@@ -1,4 +1,5 @@
 import Head from 'next/head';
+import { canonicalForPath, getProductionSiteOrigin, siteEntityId, toAbsoluteUrl } from '@/lib/site-url';
 
 import Layout from '../components/Layout';
 import ModernFeaturedProperties from '../components/ModernFeaturedProperties';
@@ -33,14 +34,14 @@ export default function Properties() {
               name: 'Centennial Hills Luxury Properties',
               description:
                 'Luxury properties for sale in Centennial Hills, Las Vegas featuring master-planned communities with stunning mountain views and exceptional quality.',
-              url: 'https://centennialhillshomesforsale.com/properties',
+              url: canonicalForPath('/properties'),
               provider: {
                 '@type': 'RealEstateAgent',
-                '@id': 'https://centennialhillshomesforsale.com/#realestateagent',
+                '@id': siteEntityId('realestateagent'),
                 name: 'Dr. Jan Duffy',
                 description:
                   'Top 1% REALTOR® specializing in luxury homes and master-planned communities in Centennial Hills, Las Vegas',
-                url: 'https://centennialhillshomesforsale.com',
+                url: canonicalForPath('/'),
                 telephone: '(702) 903-1952',
                 email: 'jan@centennialhillshomes.com',
                 address: {
@@ -230,6 +231,13 @@ export default function Properties() {
             </p>
           </div>
         </section>
+
+      {/* RealScout Listings — below hero */}
+      <RealScoutListingsSection
+          title="Complete Property Inventory"
+          subtitle="Explore our full selection of luxury homes and properties available in Centennial Hills"
+        />
+
 
         {/* Properties Component */}
         <ModernFeaturedProperties />
@@ -535,12 +543,6 @@ export default function Properties() {
             </div>
           </div>
         </section>
-
-        {/* RealScout Office Listings */}
-        <RealScoutListingsSection
-          title="Complete Property Inventory"
-          subtitle="Explore our full selection of luxury homes and properties available in Centennial Hills"
-        />
       </Layout>
     </>
   );

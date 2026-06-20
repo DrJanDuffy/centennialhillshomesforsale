@@ -72,7 +72,7 @@ A modern, high-performance real estate website showcasing luxury properties in C
 3. **Environment Variables**
    Create a `.env.local` file in the root directory:
    ```env
-   NEXT_PUBLIC_SITE_URL=https://centennialhillshomesforsale.com
+   NEXT_PUBLIC_SITE_URL=https://www.centennialhillshomesforsale.com
    NEXT_PUBLIC_GOOGLE_ANALYTICS_ID=your_ga_id
    NEXT_PUBLIC_REALSCOUT_AGENT_ID=your_realscout_id
    ```

@@ -137,6 +137,13 @@ const FeaturedHome: React.FC = () => {
         </div>
       </section>
 
+      {/* RealScout Listings — below hero */}
+      <RealScoutListingsSection
+        title="Current Listings"
+        subtitle="Browse our latest property listings in Centennial Hills and surrounding areas"
+      />
+
+
       {/* Property Images */}
       <section className="py-12 bg-gray-50">
         <div className="container mx-auto px-4">
@@ -436,11 +443,6 @@ const FeaturedHome: React.FC = () => {
           </motion.div>
         </div>
       </section>
-      {/* RealScout Office Listings */}
-      <RealScoutListingsSection
-        title="Current Listings"
-        subtitle="Browse our latest property listings in Centennial Hills and surrounding areas"
-      />
     </Layout>
   );
 };

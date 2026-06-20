@@ -15,13 +15,13 @@ export default function ConversionFunnelPageRoute() {
         <meta name="robots" content="noindex, nofollow" />
       </Head>
 
-      {/* Conversion Funnel with Full Optimization */}
-      <ConversionFunnelPage />
-      {/* RealScout Office Listings */}
       <RealScoutListingsSection
         title="Current Listings"
         subtitle="Browse our latest property listings in Centennial Hills and surrounding areas"
       />
+
+      {/* Conversion Funnel with Full Optimization */}
+      <ConversionFunnelPage />
     </Layout>
   );
 }

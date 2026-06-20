@@ -40,6 +40,13 @@ export default function About() {
           </div>
         </section>
 
+      {/* RealScout Listings — below hero */}
+      <RealScoutListingsSection
+          title="Featured Properties"
+          subtitle="Discover the exceptional properties I help clients buy and sell in Centennial Hills"
+        />
+
+
         {/* About Content */}
         <section className="py-16 bg-white">
           <div className="container mx-auto px-4">
@@ -307,12 +314,6 @@ export default function About() {
             </div>
           </div>
         </section>
-
-        {/* RealScout Office Listings */}
-        <RealScoutListingsSection
-          title="Featured Properties"
-          subtitle="Discover the exceptional properties I help clients buy and sell in Centennial Hills"
-        />
       </Layout>
     </>
   );

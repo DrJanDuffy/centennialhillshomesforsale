@@ -1,4 +1,5 @@
 import { motion } from 'framer-motion';
+import { canonicalForPath, getProductionSiteOrigin, siteEntityId, toAbsoluteUrl } from '@/lib/site-url';
 import Layout from '../components/Layout';
 import RealScoutListingsSection from '../components/RealScoutListingsSection';
 import SEOOptimized from '../components/SEOOptimized';
@@ -9,7 +10,7 @@ export default function BusinessVerification() {
     category: 'Real Estate Agent',
     address: 'Providence Skye Canyon Dr, Las Vegas, NV 89166',
     phone: '(702) 903-1952',
-    website: 'https://centennialhillshomesforsale.com',
+    website: getProductionSiteOrigin(),
     established: 'September 1993',
     services: [
       'Building lot sales',
@@ -80,6 +81,13 @@ export default function BusinessVerification() {
           </div>
         </motion.section>
 
+      {/* RealScout Listings — below hero */}
+      <RealScoutListingsSection
+        title="Current Listings"
+        subtitle="Browse our latest property listings in Centennial Hills and surrounding areas"
+      />
+
+
         <motion.section
           className="services-verification"
           initial={{ opacity: 0, y: 20 }}
@@ -144,11 +152,6 @@ export default function BusinessVerification() {
           </div>
         </motion.section>
       </main>
-      {/* RealScout Office Listings */}
-      <RealScoutListingsSection
-        title="Current Listings"
-        subtitle="Browse our latest property listings in Centennial Hills and surrounding areas"
-      />
     </Layout>
   );
 }
