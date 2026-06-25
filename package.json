@@ -44,7 +44,8 @@
     "optimize:all": "npm run bundle:analyze && npm run images:optimize && npm run sw:generate && npm run performance:monitor",
     "deploy:optimized": "npm run optimize:all && git add . && git commit -m '🚀 Performance optimization complete' && git push",
     "realscout:verify": "node scripts/verify-realscout.mjs",
-    "ship:production": "node scripts/verify-realscout.mjs && git push origin main",
+    "verify:deploy": "node scripts/verify-deploy.mjs",
+    "ship:production": "npm run realscout:verify && npm run type-check && git push origin main",
     "hooks:install": "lefthook install",
     "hooks:uninstall": "lefthook uninstall",
     "hooks:run": "lefthook run",
@@ -138,7 +139,7 @@
     "@types/react-dom": "^18.3.1"
   },
   "engines": {
-    "node": ">=18.0.0",
+    "node": "22.x",
     "npm": ">=9.0.0"
   },
   "keywords": [

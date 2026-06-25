@@ -1,10 +1,8 @@
 name: Vercel Deployment Pipeline
 
+# Legacy workflow — use deploy-production.yml for pushes to main.
+# Kept for manual preview/production testing only.
 on:
-  push:
-    branches: [main, develop]
-  pull_request:
-    branches: [main, develop]
   workflow_dispatch:
 
 env:
