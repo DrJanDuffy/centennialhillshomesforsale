@@ -87,8 +87,8 @@ const HomePage: React.FC = () => {
 
   return (
     <Layout
-      title="Centennial Hills Homes For Sale | AI-Powered Property Search | Dr. Jan Duff"
-      description="Discover your dream home in Centennial Hills, Providence, and Skye Canyon with AI-powered search technology. Expert real estate services by Dr. Jan Duff - Northwest Las Vegas specialist."
+      title="Centennial Hills Homes For Sale | AI-Powered Property Search | Dr. Jan Duffy"
+      description="Discover your dream home in Centennial Hills, Providence, and Skye Canyon with AI-powered search technology. Expert real estate services by Dr. Jan Duffy - Northwest Las Vegas specialist."
       canonical="https://centennialhillshomesforsale.com"
     >
       {/* Hero Section */}

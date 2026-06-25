@@ -16,7 +16,7 @@ interface SEOProps {
 export default function SEOOptimized({ 
   title = "Centennial Hills Homes For Sale | Dr. Jan Duffy REALTOR®",
   description = "Find luxury homes in Centennial Hills, Providence & Skye Canyon with Dr. Jan Duffy, top-rated REALTOR® at Berkshire Hathaway HomeServices Nevada Properties.",
-  keywords = "Centennial Hills homes, Las Vegas real estate, Providence, Skye Canyon, Dr Jan Duff",
+  keywords = "Centennial Hills homes, Las Vegas real estate, Providence, Skye Canyon, Dr Jan Duffy",
   ogImage = "/icon-512x512.png",
   canonicalUrl,
   structuredData,

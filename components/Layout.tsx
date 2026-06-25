@@ -33,8 +33,8 @@ interface LayoutProps {
 
 const Layout: React.FC<LayoutProps> = ({
   children,
-  title = "Centennial Hills Homes For Sale | Dr. Jan Duff",
-  description = "Find your dream home in Centennial Hills, Providence, and Skye Canyon. Expert real estate services by Dr. Jan Duff.",
+  title = "Centennial Hills Homes For Sale | Dr. Jan Duffy",
+  description = "Find your dream home in Centennial Hills, Providence, and Skye Canyon. Expert real estate services by Dr. Jan Duffy.",
   canonical,
   keywords = "Centennial Hills homes, Las Vegas real estate, Providence homes, Skye Canyon properties",
   ogImage = "/images/centennial-hills-og.jpg",
@@ -44,7 +44,7 @@ const Layout: React.FC<LayoutProps> = ({
   propertyData = null,
   canonicalUrl
 }) => {
-  const fullTitle = title.includes('|') ? title : `${title} | Dr. Jan Duff Real Estate`;
+  const fullTitle = title.includes('|') ? title : `${title} | Dr. Jan Duffy Real Estate`;
 
   return (
     <ErrorBoundaryWrapper>

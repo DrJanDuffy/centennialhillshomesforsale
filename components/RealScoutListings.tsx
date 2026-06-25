@@ -157,7 +157,7 @@ const RealScoutListings: React.FC<RealScoutListingsProps> = ({
       features: ["Gourmet Kitchen", "Master Suite", "3-Car Garage", "Pool", "Mountain Views"],
       coordinates: { latitude: 36.2845, longitude: -115.1969 },
       agent: {
-        name: "Jan Duff",
+        name: "Dr. Jan Duffy",
         phone: "(702) 903-1952",
         email: "jan@centennialhillshomes.com"
       }
@@ -186,7 +186,7 @@ const RealScoutListings: React.FC<RealScoutListingsProps> = ({
       features: ["Resort Backyard", "Wine Cellar", "Home Theater", "Guest Suite", "4-Car Garage"],
       coordinates: { latitude: 36.2851, longitude: -115.1975 },
       agent: {
-        name: "Jan Duff",
+        name: "Dr. Jan Duffy",
         phone: "(702) 903-1952",
         email: "jan@centennialhillshomes.com"
       }
@@ -215,7 +215,7 @@ const RealScoutListings: React.FC<RealScoutListingsProps> = ({
       features: ["Golf Course Views", "Open Floor Plan", "Upgraded Kitchen", "Covered Patio", "2-Car Garage"],
       coordinates: { latitude: 36.2839, longitude: -115.1963 },
       agent: {
-        name: "Jan Duff",
+        name: "Dr. Jan Duffy",
         phone: "(702) 903-1952",
         email: "jan@centennialhillshomes.com"
       }
