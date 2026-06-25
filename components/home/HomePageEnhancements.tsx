@@ -1,26 +1,18 @@
-import Link from "next/link";
-import {
-  MapPin,
-  Home,
-  TrendingUp,
-  Phone,
-  Star,
-  ArrowRight,
-  Award,
-  Shield,
-} from "lucide-react";
+import { ArrowRight, Award, Home, MapPin, Phone, Shield, Star, TrendingUp } from 'lucide-react';
+import Link from 'next/link';
 
 // ─── Shared Tokens ────────────────────────────────────────────────────────────
-const NAVY = "#0a2540";
-const GOLD = "#d4af37";
+const NAVY = '#0a2540';
+const GOLD = '#d4af37';
 
 // ─── HomeHero ─────────────────────────────────────────────────────────────────
-export function HomeHero({ listingsSectionId = 'featured-listings' }: { listingsSectionId?: string }) {
+export function HomeHero({
+  listingsSectionId = 'featured-listings',
+}: {
+  listingsSectionId?: string;
+}) {
   return (
-    <section
-      className="relative w-full overflow-hidden"
-      style={{ backgroundColor: NAVY }}
-    >
+    <section className="relative w-full overflow-hidden" style={{ backgroundColor: NAVY }}>
       {/* Subtle diagonal accent */}
       <div
         className="absolute inset-0 opacity-10 pointer-events-none"
@@ -42,20 +34,18 @@ export function HomeHero({ listingsSectionId = 'featured-listings' }: { listings
         {/* Headline */}
         <h1
           className="text-4xl font-extrabold leading-tight tracking-tight sm:text-5xl lg:text-6xl text-balance"
-          style={{ color: "#ffffff" }}
+          style={{ color: '#ffffff' }}
         >
-          Discover Your Dream Home in{" "}
-          <span style={{ color: GOLD }}>Centennial Hills</span>
+          Discover Your Dream Home in <span style={{ color: GOLD }}>Centennial Hills</span>
         </h1>
 
         {/* Sub-headline */}
         <p
           className="mt-5 max-w-2xl mx-auto text-base sm:text-lg leading-relaxed"
-          style={{ color: "#b0bec5" }}
+          style={{ color: '#b0bec5' }}
         >
-          Northwest Las Vegas&apos;s most sought-after master-planned community —
-          top-rated schools, resort amenities, and homes built for the way you
-          live.
+          Northwest Las Vegas&apos;s most sought-after master-planned community — top-rated schools,
+          resort amenities, and homes built for the way you live.
         </p>
 
         {/* CTA buttons */}
@@ -66,7 +56,6 @@ export function HomeHero({ listingsSectionId = 'featured-listings' }: { listings
             style={{
               backgroundColor: GOLD,
               color: NAVY,
-              focusRingColor: GOLD,
             }}
           >
             Browse Listings
@@ -75,7 +64,7 @@ export function HomeHero({ listingsSectionId = 'featured-listings' }: { listings
           <Link
             href="/contact"
             className="inline-flex items-center gap-2 rounded-lg border px-7 py-3 text-sm font-bold transition-colors hover:bg-white/10 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2"
-            style={{ borderColor: "#ffffff", color: "#ffffff" }}
+            style={{ borderColor: '#ffffff', color: '#ffffff' }}
           >
             <Phone size={16} aria-hidden="true" />
             Contact an Agent
@@ -85,13 +74,9 @@ export function HomeHero({ listingsSectionId = 'featured-listings' }: { listings
         {/* Trust bar */}
         <div
           className="mt-12 flex flex-wrap justify-center gap-6 text-xs font-medium tracking-wide uppercase"
-          style={{ color: "#78909c" }}
+          style={{ color: '#78909c' }}
         >
-          {[
-            'Top 1% REALTOR®',
-            'Providence & Skye Canyon',
-            'Same-day showings',
-          ].map((item) => (
+          {['Top 1% REALTOR®', 'Providence & Skye Canyon', 'Same-day showings'].map((item) => (
             <span key={item} className="flex items-center gap-1.5">
               <Star size={12} style={{ color: GOLD }} aria-hidden="true" />
               {item}
@@ -106,27 +91,27 @@ export function HomeHero({ listingsSectionId = 'featured-listings' }: { listings
 // ─── ExploreCards ─────────────────────────────────────────────────────────────
 const CARDS = [
   {
-    href: "/properties",
+    href: '/properties',
     icon: Home,
-    label: "Homes for Sale",
+    label: 'Homes for Sale',
     description:
-      "Browse active listings across Centennial Hills — from cozy starter homes to luxury estates.",
+      'Browse active listings across Centennial Hills — from cozy starter homes to luxury estates.',
     accent: GOLD,
   },
   {
-    href: "/market-data",
+    href: '/market-data',
     icon: TrendingUp,
-    label: "Market Trends",
+    label: 'Market Trends',
     description:
-      "Stay ahead with the latest pricing data, days-on-market stats, and neighborhood insights.",
+      'Stay ahead with the latest pricing data, days-on-market stats, and neighborhood insights.',
     accent: GOLD,
   },
   {
-    href: "/neighborhoods",
+    href: '/neighborhoods',
     icon: MapPin,
-    label: "Community Guide",
+    label: 'Community Guide',
     description:
-      "Explore parks, schools, dining, and everything that makes Centennial Hills special.",
+      'Explore parks, schools, dining, and everything that makes Centennial Hills special.',
     accent: GOLD,
   },
 ] as const;
@@ -137,16 +122,10 @@ export function ExploreCards() {
       <div className="mx-auto max-w-5xl px-4 sm:px-6">
         {/* Section header */}
         <div className="mb-10 text-center">
-          <p
-            className="text-xs font-bold tracking-widest uppercase mb-2"
-            style={{ color: GOLD }}
-          >
+          <p className="text-xs font-bold tracking-widest uppercase mb-2" style={{ color: GOLD }}>
             Start Exploring
           </p>
-          <h2
-            className="text-2xl font-extrabold sm:text-3xl text-balance"
-            style={{ color: NAVY }}
-          >
+          <h2 className="text-2xl font-extrabold sm:text-3xl text-balance" style={{ color: NAVY }}>
             Everything You Need to Find Your Next Home
           </h2>
         </div>
@@ -160,8 +139,8 @@ export function ExploreCards() {
               className="group relative flex flex-col rounded-2xl border p-6 shadow-sm transition-shadow hover:shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2"
               style={
                 {
-                  borderColor: "#e2e8f0",
-                  "--tw-ring-color": GOLD,
+                  borderColor: '#e2e8f0',
+                  '--tw-ring-color': GOLD,
                 } as React.CSSProperties
               }
             >
@@ -170,23 +149,13 @@ export function ExploreCards() {
                 className="mb-4 inline-flex h-11 w-11 items-center justify-center rounded-xl"
                 style={{ backgroundColor: `${NAVY}12` }}
               >
-                <Icon
-                  size={22}
-                  style={{ color: NAVY }}
-                  aria-hidden="true"
-                />
+                <Icon size={22} style={{ color: NAVY }} aria-hidden="true" />
               </span>
 
-              <h3
-                className="mb-2 text-base font-bold"
-                style={{ color: NAVY }}
-              >
+              <h3 className="mb-2 text-base font-bold" style={{ color: NAVY }}>
                 {label}
               </h3>
-              <p
-                className="text-sm leading-relaxed flex-1"
-                style={{ color: "#4a5568" }}
-              >
+              <p className="text-sm leading-relaxed flex-1" style={{ color: '#4a5568' }}>
                 {description}
               </p>
 
@@ -213,10 +182,7 @@ export function ExploreCards() {
 // ─── AgentSpotlight ───────────────────────────────────────────────────────────
 export function AgentSpotlight() {
   return (
-    <section
-      className="w-full py-14 sm:py-20"
-      style={{ backgroundColor: "#f7f9fc" }}
-    >
+    <section className="w-full py-14 sm:py-20" style={{ backgroundColor: '#f7f9fc' }}>
       <div className="mx-auto max-w-5xl px-4 sm:px-6">
         <div className="rounded-2xl overflow-hidden shadow-md flex flex-col md:flex-row">
           {/* Left accent panel */}
@@ -226,6 +192,7 @@ export function AgentSpotlight() {
           >
             {/* Avatar placeholder */}
             <div
+              role="img"
               className="flex h-24 w-24 items-center justify-center rounded-full text-3xl font-extrabold border-4"
               style={{
                 borderColor: GOLD,
@@ -238,10 +205,7 @@ export function AgentSpotlight() {
             </div>
 
             <div className="text-center">
-              <p
-                className="text-lg font-extrabold leading-tight"
-                style={{ color: "#ffffff" }}
-              >
+              <p className="text-lg font-extrabold leading-tight" style={{ color: '#ffffff' }}>
                 Dr. Jan Duffy
               </p>
               <p
@@ -256,14 +220,14 @@ export function AgentSpotlight() {
             <div className="flex flex-col gap-2 w-full mt-2">
               <span
                 className="flex items-center gap-2 rounded-lg px-3 py-1.5 text-xs font-medium"
-                style={{ backgroundColor: "#0d2f52", color: "#b0c4de" }}
+                style={{ backgroundColor: '#0d2f52', color: '#b0c4de' }}
               >
                 <Award size={12} style={{ color: GOLD }} aria-hidden="true" />
                 License: S.0197614.LLC
               </span>
               <span
                 className="flex items-center gap-2 rounded-lg px-3 py-1.5 text-xs font-medium"
-                style={{ backgroundColor: "#0d2f52", color: "#b0c4de" }}
+                style={{ backgroundColor: '#0d2f52', color: '#b0c4de' }}
               >
                 <Shield size={12} style={{ color: GOLD }} aria-hidden="true" />
                 Berkshire Hathaway HomeServices Nevada Properties
@@ -273,10 +237,7 @@ export function AgentSpotlight() {
 
           {/* Right content */}
           <div className="flex-1 bg-white px-8 py-10">
-            <p
-              className="text-xs font-bold uppercase tracking-widest mb-3"
-              style={{ color: GOLD }}
-            >
+            <p className="text-xs font-bold uppercase tracking-widest mb-3" style={{ color: GOLD }}>
               Your Centennial Hills Expert
             </p>
             <h2
@@ -285,19 +246,12 @@ export function AgentSpotlight() {
             >
               Local Knowledge You Can Trust
             </h2>
-            <p
-              className="text-sm leading-relaxed mb-4"
-              style={{ color: "#4a5568" }}
-            >
-              With over two decades serving the Centennial Hills and Northwest
-              Las Vegas market, Dr. Jan Duffy combines deep neighborhood
-              expertise with the global reach of{" "}
-              <strong style={{ color: NAVY }}>
-                Berkshire Hathaway HomeServices
-              </strong>{" "}
-              Nevada Properties. Whether you&apos;re buying your first home or
-              upgrading to a luxury estate, Dr. Duffy delivers a seamless,
-              data-driven experience tailored to you.
+            <p className="text-sm leading-relaxed mb-4" style={{ color: '#4a5568' }}>
+              With over two decades serving the Centennial Hills and Northwest Las Vegas market, Dr.
+              Jan Duffy combines deep neighborhood expertise with the global reach of{' '}
+              <strong style={{ color: NAVY }}>Berkshire Hathaway HomeServices</strong> Nevada
+              Properties. Whether you&apos;re buying your first home or upgrading to a luxury
+              estate, Dr. Duffy delivers a seamless, data-driven experience tailored to you.
             </p>
 
             {/* Stats row */}
@@ -308,13 +262,10 @@ export function AgentSpotlight() {
                 { value: '89149', label: 'Centennial Hills' },
               ].map(({ value, label }) => (
                 <div key={label} className="text-center">
-                  <p
-                    className="text-xl font-extrabold"
-                    style={{ color: NAVY }}
-                  >
+                  <p className="text-xl font-extrabold" style={{ color: NAVY }}>
                     {value}
                   </p>
-                  <p className="text-xs mt-0.5" style={{ color: "#718096" }}>
+                  <p className="text-xs mt-0.5" style={{ color: '#718096' }}>
                     {label}
                   </p>
                 </div>
@@ -325,7 +276,7 @@ export function AgentSpotlight() {
             <Link
               href="/contact"
               className="inline-flex items-center gap-2 rounded-lg px-6 py-2.5 text-sm font-bold transition-opacity hover:opacity-90 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2"
-              style={{ backgroundColor: NAVY, color: "#ffffff" }}
+              style={{ backgroundColor: NAVY, color: '#ffffff' }}
             >
               <Phone size={15} aria-hidden="true" />
               Schedule a Consultation
@@ -338,12 +289,13 @@ export function AgentSpotlight() {
 }
 
 // ─── BottomCta ────────────────────────────────────────────────────────────────
-export function BottomCta({ listingsSectionId = 'featured-listings' }: { listingsSectionId?: string }) {
+export function BottomCta({
+  listingsSectionId = 'featured-listings',
+}: {
+  listingsSectionId?: string;
+}) {
   return (
-    <section
-      className="w-full py-14 sm:py-20"
-      style={{ backgroundColor: NAVY }}
-    >
+    <section className="w-full py-14 sm:py-20" style={{ backgroundColor: NAVY }}>
       <div className="mx-auto max-w-3xl px-4 sm:px-6 text-center">
         {/* Decorative rule */}
         <div
@@ -354,19 +306,17 @@ export function BottomCta({ listingsSectionId = 'featured-listings' }: { listing
 
         <h2
           className="text-2xl font-extrabold sm:text-3xl lg:text-4xl text-balance leading-tight"
-          style={{ color: "#ffffff" }}
+          style={{ color: '#ffffff' }}
         >
-          Ready to Make Your Move in{" "}
-          <span style={{ color: GOLD }}>Centennial Hills?</span>
+          Ready to Make Your Move in <span style={{ color: GOLD }}>Centennial Hills?</span>
         </h2>
 
         <p
           className="mt-4 text-sm sm:text-base leading-relaxed max-w-xl mx-auto"
-          style={{ color: "#90a4ae" }}
+          style={{ color: '#90a4ae' }}
         >
-          Connect with Dr. Jan Duffy today — your trusted Berkshire Hathaway
-          HomeServices agent dedicated to finding the perfect home at the right
-          price.
+          Connect with Dr. Jan Duffy today — your trusted Berkshire Hathaway HomeServices agent
+          dedicated to finding the perfect home at the right price.
         </p>
 
         <div className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-4">
@@ -388,10 +338,7 @@ export function BottomCta({ listingsSectionId = 'featured-listings' }: { listing
           </a>
         </div>
 
-        <p
-          className="mt-8 text-xs tracking-wide"
-          style={{ color: "#546e7a" }}
-        >
+        <p className="mt-8 text-xs tracking-wide" style={{ color: '#546e7a' }}>
           Berkshire Hathaway HomeServices Nevada Properties · License S.0197614.LLC
         </p>
       </div>

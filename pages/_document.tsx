@@ -48,13 +48,11 @@ export default function Document() {
         {/* Preconnect to external domains */}
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://images.unsplash.com" />
+        <link rel="preconnect" href="https://em.realscout.com" />
         <link rel="dns-prefetch" href="//www.google-analytics.com" />
+        <link rel="dns-prefetch" href="//www.realscout.com" />
 
-        {/* RealScout Web Components Script and Styles */}
-        <script
-          src="https://em.realscout.com/widgets/realscout-web-components.umd.js"
-          type="module"
-        />
+        {/* RealScout widget styles — script loads once via components/RealScoutScript.tsx in Layout */}
         <style
           // biome-ignore lint/security/noDangerouslySetInnerHtml: RealScout styling requires dangerouslySetInnerHTML
           dangerouslySetInnerHTML={{
