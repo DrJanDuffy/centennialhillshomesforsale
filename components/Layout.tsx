@@ -1,4 +1,5 @@
 import type { ReactNode } from 'react';
+import AIChatBox from './AIChatBox';
 import EnhancedFooter from './EnhancedFooter';
 import EnhancedNavigation from './EnhancedNavigation';
 import RealScoutScript from './RealScoutScript';
@@ -14,6 +15,7 @@ export default function Layout({ children }: LayoutProps) {
       <EnhancedNavigation />
       <main className="flex-grow pt-20">{children}</main>
       <EnhancedFooter />
+      <AIChatBox />
     </div>
   );
 }
