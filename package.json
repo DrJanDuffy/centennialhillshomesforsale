@@ -29,8 +29,8 @@
     "check:all": "npm run optimize && npm run security:audit && npm run deps:check",
     "biome:expert": "node scripts/biome-expert-optimize.js",
     "biome:analyze": "biome check . --verbose",
-    "biome:security": "biome check --apply-unsafe",
-    "biome:performance": "biome check --apply",
+    "biome:security": "biome check . --apply-unsafe",
+    "biome:performance": "biome check . --apply",
     "biome:real-estate": "npm run biome:expert",
     "biome:full": "npm run biome:format && npm run biome:fix && npm run biome:analyze",
     "biome:report": "npm run biome:expert && open biome-optimization-report.json",
@@ -55,8 +55,6 @@
     "git:setup": "npm run hooks:install && npm run optimize"
   },
   "dependencies": {
-    "@cerebras/cerebras_cloud_sdk": "^1.91.0",
-    "@drjanduffy/cerebras-service": "github:DrJanDuffy/cerebras-service",
     "@headlessui/react": "^2.2.7",
     "@heroicons/react": "^2.2.0",
     "@hookform/resolvers": "^5.2.1",
@@ -69,7 +67,7 @@
     "@radix-ui/react-dialog": "^1.1.14",
     "@radix-ui/react-dropdown-menu": "^2.1.15",
     "@radix-ui/react-hover-card": "^1.1.14",
-    "@radix-ui/react-label": "^1.1.7",
+    "@radix-ui/react-label": "^2.1.7",
     "@radix-ui/react-menubar": "^1.1.15",
     "@radix-ui/react-navigation-menu": "^1.2.13",
     "@radix-ui/react-popover": "^1.1.14",
