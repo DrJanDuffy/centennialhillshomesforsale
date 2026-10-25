@@ -126,12 +126,12 @@ export default function AIHeroSection() {
             className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-16"
           >
             <motion.a
-              href="tel:702-222-1964"
+              href="tel:702-903-1952"
               className="group relative px-8 py-4 bg-gradient-to-r from-blue-600 to-blue-700 text-white font-semibold rounded-full shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
             >
-              <span className="relative z-10">Call 702-222-1964</span>
+              <span className="relative z-10">Call 702-903-1952</span>
               <div className="absolute inset-0 bg-gradient-to-r from-blue-700 to-blue-800 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
             </motion.a>
 
