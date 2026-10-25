@@ -294,7 +294,7 @@ const MobileOptimizedOffer: React.FC<{
       </div>
       <div className="flex items-center space-x-2">
         <a
-          href="tel:702-222-1964"
+          href="tel:702-903-1952"
           className="bg-white text-blue-600 px-4 py-2 rounded-lg font-semibold hover:bg-gray-100 transition-colors"
         >
           Call Now
