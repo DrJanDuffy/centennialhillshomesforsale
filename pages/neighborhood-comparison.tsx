@@ -33,7 +33,7 @@ const neighborhoods: NeighborhoodData[] = [
     amenities: ['TPC Las Vegas Golf', 'Shopping Centers', 'Parks', 'Schools'],
     pros: [
       'Championship golf courses',
-      'Top-rated schools',
+      'Nearby public schools',
       'Master-planned community',
       'Mountain views',
     ],
@@ -51,7 +51,7 @@ const neighborhoods: NeighborhoodData[] = [
     schoolRating: 9.0,
     walkability: 6.8,
     amenities: ["Bear's Best Golf", 'Country Club', 'Tennis Courts', 'Swimming Pools'],
-    pros: ['Golf course living', 'Exclusive community', 'High-end amenities', 'Quiet atmosphere'],
+    pros: ['Golf course living', 'Luxury community', 'High-end amenities', 'Quiet atmosphere'],
     cons: ['Limited shopping nearby', 'HOA fees', 'Smaller community'],
     bestFor: ['Golf lovers', 'Upscale buyers', 'Retirees', 'Peaceful living'],
     image: '/assets/icons/golf-course.svg',
@@ -66,9 +66,9 @@ const neighborhoods: NeighborhoodData[] = [
     schoolRating: 8.8,
     walkability: 8.5,
     amenities: ['Walking Trails', 'Community Parks', 'Playgrounds', 'Sports Fields'],
-    pros: ['Excellent walkability', 'Family-friendly', 'Scenic trails', 'Community events'],
+    pros: ['Excellent walkability', 'Community Amenities', 'Scenic trails', 'Community events'],
     cons: ['Newer development', 'Limited golf access', 'Higher density'],
-    bestFor: ['Young families', 'Active outdoors people', 'First-time buyers', 'Pet owners'],
+    bestFor: ['First-time buyers', 'Active outdoors people', 'First-time buyers', 'Pet owners'],
     image: '/assets/icons/trail.svg',
   },
   {
@@ -83,7 +83,7 @@ const neighborhoods: NeighborhoodData[] = [
     amenities: ['Community Pool', 'Fitness Center', 'Parks', 'Shopping Nearby'],
     pros: ['Affordable entry point', 'Modern homes', 'Good amenities', 'Growing community'],
     cons: ['New construction feel', 'Limited mature landscaping', 'Higher HOA fees'],
-    bestFor: ['First-time buyers', 'Growing families', 'Modern home seekers', 'Value buyers'],
+    bestFor: ['First-time buyers', 'Move-up buyers', 'Modern home seekers', 'Value buyers'],
     image: '/assets/icons/modern-house.svg',
   },
   {
@@ -101,7 +101,7 @@ const neighborhoods: NeighborhoodData[] = [
     bestFor: [
       'New construction buyers',
       'Energy-conscious buyers',
-      'Young professionals',
+      'Professionals',
       'Modern lifestyles',
     ],
     image: '/assets/icons/new-home.svg',

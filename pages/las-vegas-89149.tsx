@@ -72,7 +72,7 @@ export default function LasVegas89149() {
                   Zip code 89149 encompasses some of Las Vegas&apos;s most prestigious
                   neighborhoods, including Centennial Hills, Tournament Hills, and portions of The
                   Trails. This area is renowned for its championship golf courses, luxury homes, and
-                  family-friendly master-planned communities.
+                  master-planned communities.
                 </p>
                 <p>
                   Residents enjoy access to TPC Las Vegas, Bear&apos;s Best Golf Course, top-rated
@@ -134,7 +134,7 @@ export default function LasVegas89149() {
                 <ul>
                   <li>Bear&apos;s Best Golf Course</li>
                   <li>Mountain and city views</li>
-                  <li>Established community</li>
+                  <li>Older community</li>
                   <li>Premium lot locations</li>
                 </ul>
                 <Link href="/tournament-hills" className="btn btn-primary">
@@ -148,7 +148,7 @@ export default function LasVegas89149() {
                 <ul>
                   <li>Mature landscaping</li>
                   <li>Walking trails throughout</li>
-                  <li>Family-friendly environment</li>
+
                   <li>Close to shopping</li>
                 </ul>
                 <Link href="/the-trails" className="btn btn-primary">

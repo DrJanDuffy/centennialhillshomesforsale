@@ -63,7 +63,7 @@ export default function Listings() {
             </Link>
             <Link href="/neighborhoods?area=the-trails" className="neighborhood-link">
               <h3>The Trails</h3>
-              <p>Established community with mature trees</p>
+              <p>Older community with mature trees</p>
             </Link>
             <Link href="/neighborhoods?area=tournament-hills" className="neighborhood-link">
               <h3>Tournament Hills</h3>

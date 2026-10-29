@@ -45,7 +45,7 @@ export default function NorthwestLasVegas() {
             <h1>Northwest Las Vegas Real Estate</h1>
             <p className="hero-subtitle">
               Explore the premier residential communities of Northwest Las Vegas, featuring
-              master-planned neighborhoods, championship golf, top schools, and stunning desert
+              master-planned neighborhoods, championship golf, nearby public schools, and stunning desert
               views.
             </p>
           </div>
@@ -137,7 +137,7 @@ export default function NorthwestLasVegas() {
               <div className="community-card">
                 <h3>The Trails</h3>
                 <p className="price-range">$550K - $2M</p>
-                <p>Established community with mature landscaping and walking trails.</p>
+                <p>Older community with mature landscaping and walking trails.</p>
                 <Link href="/neighborhoods" className="btn btn-primary">
                   Explore
                 </Link>

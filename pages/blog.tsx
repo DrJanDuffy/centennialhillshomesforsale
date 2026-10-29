@@ -26,7 +26,7 @@ const BlogPage: React.FC = () => {
       id: 2,
       title: 'Why Providence is the Perfect Family Neighborhood',
       excerpt:
-        "Explore the family-friendly amenities, top-rated schools, and community features that make Providence one of Las Vegas' most sought-after neighborhoods.",
+        "Explore the community amenities, nearby public schools, and community features that make Providence one of Las Vegas' most sought-after neighborhoods.",
       author: 'Dr. Jan Duffy',
       date: 'July 10, 2024',
       readTime: '4 min read',

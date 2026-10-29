@@ -31,7 +31,7 @@ const InteractivePropertyMap: React.FC<InteractivePropertyMapProps> = ({ classNa
       properties: 45,
       avgPrice: 789000,
       description: 'Upscale residential community with mountain views and modern amenities',
-      features: ['Mountain Views', 'Golf Course', 'Shopping Centers', 'Top Schools'],
+      features: ['Mountain Views', 'Golf Course', 'Shopping Centers', 'Nearby Public Schools'],
       image: 'https://images.unsplash.com/photo-1564013799919-ab600027ffc6?w=400&h=300&fit=crop',
     },
     {
@@ -50,7 +50,7 @@ const InteractivePropertyMap: React.FC<InteractivePropertyMapProps> = ({ classNa
       coordinates: { lat: 36.275, lng: -115.275 },
       properties: 28,
       avgPrice: 650000,
-      description: 'Family-friendly community with parks and recreational facilities',
+      description: 'Community with parks and recreational facilities',
       features: ['Parks & Trails', 'Community Pool', 'Playgrounds', 'Family Amenities'],
       image: 'https://images.unsplash.com/photo-1600607687644-c7171b42498b?w=400&h=300&fit=crop',
     },

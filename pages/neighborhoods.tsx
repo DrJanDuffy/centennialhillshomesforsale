@@ -102,7 +102,7 @@ export default function Neighborhoods() {
                     '@id': siteEntityId('skye-canyon-neighborhood'),
                     name: 'Skye Canyon',
                     description:
-                      'Modern master-planned community featuring new construction homes, outdoor recreation, and family-friendly amenities.',
+                      'Modern master-planned community featuring new construction homes, outdoor recreation, and community amenities.',
                     url: canonicalForPath('/skye-canyon'),
                     geo: {
                       '@type': 'GeoCoordinates',
@@ -156,7 +156,7 @@ export default function Neighborhoods() {
                     '@id': siteEntityId('northwest-las-vegas'),
                     name: 'Northwest Las Vegas',
                     description:
-                      'Growing area of Las Vegas featuring diverse housing options, excellent schools, and convenient access to amenities.',
+                      'Growing area of Las Vegas featuring diverse housing options, nearby public schools, and convenient access to amenities.',
                     url: canonicalForPath('/northwest-las-vegas'),
                     geo: {
                       '@type': 'GeoCoordinates',
@@ -174,7 +174,7 @@ export default function Neighborhoods() {
                     amenityFeature: [
                       {
                         '@type': 'LocationFeatureSpecification',
-                        name: 'Top-Rated Schools',
+                        name: 'Nearby Public Schools',
                         value: true,
                       },
                       {
@@ -282,7 +282,7 @@ export default function Neighborhoods() {
                 </div>
                 <h3 className="text-xl font-semibold mb-4 text-gray-800">Quality of Life</h3>
                 <p className="text-gray-600">
-                  Master-planned communities with excellent schools, parks, and recreational
+                  Master-planned communities with nearby public schools, parks, and recreational
                   facilities for families of all sizes.
                 </p>
               </div>

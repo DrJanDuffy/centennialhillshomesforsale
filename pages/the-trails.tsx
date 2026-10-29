@@ -22,14 +22,14 @@ export default function TheTrails() {
   return (
     <Layout>
       <Head>
-        <title>The Trails Las Vegas Homes for Sale | Family-Friendly Community</title>
+        <title>The Trails Las Vegas Homes for Sale | Trails and Parks</title>
         <meta
           name="description"
-          content="Find homes for sale in The Trails Las Vegas. Family-friendly community with walking trails, parks, and excellent schools. Master-planned neighborhood in Centennial Hills."
+          content="Find homes for sale in The Trails Las Vegas. Community with walking trails, parks, and nearby public schools. Master-planned neighborhood in Centennial Hills."
         />
         <meta
           name="keywords"
-          content="The Trails homes for sale, Las Vegas family community, walking trails, parks, excellent schools, master-planned neighborhood"
+          content="The Trails homes for sale, Las Vegas family community, walking trails, parks, nearby public schools, master-planned neighborhood"
         />
         <link rel="canonical" href={canonicalForPath('/the-trails')} />
 
@@ -42,7 +42,7 @@ export default function TheTrails() {
               '@type': 'Place',
               name: 'The Trails',
               description:
-                'Family-friendly master-planned community in Centennial Hills featuring walking trails, parks, and excellent schools',
+                'Master-planned community in Centennial Hills featuring walking trails, parks, and nearby public schools',
               address: {
                 '@type': 'PostalAddress',
                 addressLocality: 'Las Vegas',
@@ -68,7 +68,7 @@ export default function TheTrails() {
                 },
                 {
                   '@type': 'LocationFeatureSpecification',
-                  name: 'Top-Rated Schools',
+                  name: 'Nearby Public Schools',
                   value: true,
                 },
               ],
@@ -92,8 +92,8 @@ export default function TheTrails() {
           <div className="container">
             <h1>The Trails Las Vegas Real Estate</h1>
             <p className="hero-subtitle">
-              Discover family-friendly living in this master-planned community featuring scenic
-              walking trails, beautiful parks, and award-winning schools in the heart of Centennial
+              Discover community living in this master-planned community featuring scenic
+              walking trails, beautiful parks, and public schools in the heart of Centennial
               Hills.
             </p>
           </div>
@@ -124,7 +124,7 @@ export default function TheTrails() {
                 <p>
                   Located in the desirable 89149 zip code, The Trails offers residents easy access
                   to shopping, dining, and entertainment while maintaining a peaceful,
-                  family-oriented atmosphere. Home prices range from $550K to $1.5M with diverse
+                  community atmosphere. Home prices range from $550K to $1.5M with diverse
                   architectural styles.
                 </p>
               </div>
@@ -180,7 +180,7 @@ export default function TheTrails() {
                 </p>
               </div>
               <div className="amenity-card">
-                <h3>Family-Friendly Environment</h3>
+                <h3>Environment</h3>
                 <p>
                   Safe, welcoming community with active neighborhood watch programs and strong
                   community involvement in local events and activities.
@@ -217,7 +217,7 @@ export default function TheTrails() {
                 <h3>Stable Appreciation</h3>
                 <p>
                   Consistent 7-9% annual appreciation driven by strong family demand and limited new
-                  construction in established communities.
+                  construction in older communities.
                 </p>
               </div>
             </div>

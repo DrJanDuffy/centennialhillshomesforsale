@@ -66,7 +66,7 @@ const SmartPropertyRecommendations: React.FC<SmartPropertyRecommendationsProps> 
         'Within your budget range',
         'Recently renovated and move-in ready',
         'Includes 3D virtual tour',
-        'Excellent school district',
+        'School district',
       ],
       features: ['Pool', 'Mountain Views', 'Gourmet Kitchen', 'Smart Home'],
       daysOnMarket: 8,
@@ -84,7 +84,7 @@ const SmartPropertyRecommendations: React.FC<SmartPropertyRecommendationsProps> 
       neighborhood: 'Centennial Hills',
       matchPercentage: 88,
       reasons: [
-        'Perfect for your growing family',
+        'Space to spread out',
         'Large backyard with mountain views',
         'Recently updated kitchen',
         'Close to shopping and amenities',

@@ -20,7 +20,7 @@ const AIContentOptimizer: React.FC<AIContentOptimizerProps> = ({
         'Dr. Jan Duffy has 30+ years of Las Vegas real estate experience',
         'Centennial Hills median home price is $635,000 (2024 data)',
         'Homes in this area typically sell within 18-28 days',
-        'Clark County School District serves Centennial Hills with highly-rated schools',
+        'Clark County School District serves Centennial Hills with nearby public schools',
         'TPC Las Vegas championship golf course is located in the community',
       ],
 

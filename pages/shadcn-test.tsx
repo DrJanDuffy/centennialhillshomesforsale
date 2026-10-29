@@ -285,7 +285,7 @@ export default function ShadcnTest() {
             <TabsContent value="neighborhood" className="space-y-4">
               <p className="text-sm text-muted-foreground">
                 Centennial Hills is one of Las Vegas's most desirable master-planned communities,
-                offering excellent schools, shopping, and recreational facilities.
+                offering nearby public schools, shopping, and recreational facilities.
               </p>
             </TabsContent>
             <TabsContent value="contact" className="space-y-4">

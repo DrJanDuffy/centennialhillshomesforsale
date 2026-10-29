@@ -173,7 +173,7 @@ export default function Properties() {
                 },
                 {
                   '@type': 'LocationFeatureSpecification',
-                  name: 'Top-Rated Schools',
+                  name: 'Nearby Public Schools',
                   value: true,
                 },
                 {

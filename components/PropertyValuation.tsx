@@ -76,7 +76,7 @@ export default function PropertyValuation({ className = '' }: PropertyValuationP
       factors: {
         positive: [
           'Recent market trends favor this area',
-          'Good school district',
+          'School district',
           'Recent comparable sales support this range',
         ],
         negative: ['Limited recent sales data', 'Market conditions may vary'],

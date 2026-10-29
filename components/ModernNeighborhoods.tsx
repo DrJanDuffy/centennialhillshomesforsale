@@ -25,7 +25,7 @@ const ModernNeighborhoods: React.FC = () => {
         image:
           'https://images.unsplash.com/photo-1564013799919-ab600027ffc6?w=800&h=600&fit=crop&q=75',
         href: '/centennial-hills',
-        features: ['Mountain Views', 'Golf Course Access', 'Top Schools', 'Shopping Centers'],
+        features: ['Mountain Views', 'Golf Course Access', 'Nearby Public Schools', 'Shopping Centers'],
         priceRange: '$750k - $2M+',
         homesCount: 150,
         rating: 4.9,
@@ -33,11 +33,11 @@ const ModernNeighborhoods: React.FC = () => {
       {
         name: 'Providence',
         description:
-          'Family-friendly neighborhood with excellent schools, parks, and community events in a safe, welcoming environment.',
+          'Neighborhood with nearby public schools, parks, and community events.',
         image:
           'https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=800&h=600&fit=crop&q=75',
         href: '/providence-las-vegas',
-        features: ['Family-Oriented', 'Excellent Schools', 'Community Parks', 'Walking Trails'],
+        features: ['Community Amenities', 'Nearby Public Schools', 'Community Parks', 'Walking Trails'],
         priceRange: '$500k - $1.2M',
         homesCount: 89,
         rating: 4.8,

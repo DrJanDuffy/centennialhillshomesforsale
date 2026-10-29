@@ -25,7 +25,7 @@ export default function CentennialHills() {
         <title>Centennial Hills Las Vegas Homes for Sale | Real Estate Guide 2024</title>
         <meta
           name="description"
-          content="Find homes for sale in Centennial Hills Las Vegas. Master-planned community with luxury homes, TPC Las Vegas Golf, top schools. Browse listings & neighborhood info."
+          content="Find homes for sale in Centennial Hills Las Vegas. Master-planned community with luxury homes, TPC Las Vegas Golf, nearby public schools. Browse listings & neighborhood info."
         />
         <meta
           name="keywords"
@@ -50,7 +50,7 @@ export default function CentennialHills() {
             <h1>Centennial Hills Las Vegas Real Estate</h1>
             <p className="hero-subtitle">
               Discover luxury living in Las Vegas&apos;s premier master-planned community. Featuring
-              championship golf, top-rated schools, and stunning desert homes.
+              championship golf, nearby public schools, and stunning desert homes.
             </p>
           </div>
         </motion.section>
@@ -80,7 +80,7 @@ export default function CentennialHills() {
                 <p>
                   Located in the northwest valley, Centennial Hills provides easy access to Downtown
                   Summerlin, Red Rock Canyon, and the Las Vegas Strip while maintaining a peaceful,
-                  family-friendly atmosphere.
+                  community atmosphere.
                 </p>
               </div>
               <div className="quick-stats">

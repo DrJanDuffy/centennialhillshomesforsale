@@ -50,7 +50,7 @@ const ModernInteractiveMap: React.FC = () => {
         name: 'Providence',
         type: 'neighborhood',
         coordinates: { lat: 36.2856, lng: -115.2712 },
-        description: 'Family-friendly neighborhood with excellent schools',
+        description: 'Neighborhood near public schools',
         image:
           'https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=400&h=300&fit=crop&q=75',
         rating: 4.8,
