@@ -14,7 +14,7 @@ export default function LocalSEOBooster({
   const localCitations = [
     {
       platform: 'Google My Business',
-      url: 'https://g.page/centennial-hills-homes',
+      url: 'https://www.google.com/maps/search/?api=1&query=Centennial+Hills+Real+Estate+%7C+Homes+by+Dr.+Jan+Duffy&query_place_id=ChIJzSdcBq6_yIARnzG7oOQ-swA',
       status: 'verified',
     },
     {
