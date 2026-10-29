@@ -25,7 +25,7 @@ const FAQSchemaPage: React.FC = () => {
         name: 'What makes Centennial Hills a desirable place to live?',
         acceptedAnswer: {
           '@type': 'Answer',
-          text: 'Centennial Hills offers stunning mountain views, master-planned communities, excellent schools, shopping centers, parks, and easy access to major highways. The area is known for its family-friendly atmosphere, low crime rates, and proximity to outdoor recreation.',
+          text: 'Centennial Hills offers stunning mountain views, master-planned communities, nearby public schools, shopping centers, parks, and easy access to major highways. The area is known for its parks and proximity to outdoor recreation.',
         },
       },
       {
@@ -46,10 +46,10 @@ const FAQSchemaPage: React.FC = () => {
       },
       {
         '@type': 'Question',
-        name: 'Are there good schools in the Centennial Hills area?',
+        name: 'Are there public schools in the Centennial Hills area?',
         acceptedAnswer: {
           '@type': 'Answer',
-          text: 'Yes, Centennial Hills has excellent schools including Centennial Hills Elementary, Centennial High School, and private school options. The area is served by the Clark County School District with high ratings and strong academic programs.',
+          text: 'Yes, Centennial Hills has nearby public schools including Centennial Hills Elementary, Centennial High School, and private school options. The area is served by the Clark County School District with high ratings and strong academic programs.',
         },
       },
       {
@@ -135,8 +135,8 @@ const FAQSchemaPage: React.FC = () => {
               </h3>
               <p className="text-gray-600 leading-relaxed">
                 Centennial Hills offers stunning mountain views, master-planned communities,
-                excellent schools, shopping centers, parks, and easy access to major highways. The
-                area is known for its family-friendly atmosphere, low crime rates, and proximity to
+                nearby public schools, shopping centers, parks, and easy access to major highways. The
+                area is known for its parks and proximity to
                 outdoor recreation.
               </p>
             </div>
@@ -168,10 +168,10 @@ const FAQSchemaPage: React.FC = () => {
             {/* FAQ Item 5 */}
             <div className="bg-white rounded-2xl shadow-lg p-6 lg:p-8 border border-gray-100">
               <h3 className="text-xl lg:text-2xl font-bold text-gray-900 mb-4">
-                Are there good schools in the Centennial Hills area?
+                Are there public schools in the Centennial Hills area?
               </h3>
               <p className="text-gray-600 leading-relaxed">
-                Yes, Centennial Hills has excellent schools including Centennial Hills Elementary,
+                Yes, Centennial Hills has nearby public schools including Centennial Hills Elementary,
                 Centennial High School, and private school options. The area is served by the Clark
                 County School District with high ratings and strong academic programs.
               </p>

@@ -77,11 +77,11 @@ const FeaturedHome: React.FC = () => {
       'Fireplace',
       'Large Backyard',
     ],
-    description: `Discover this stunning luxury home in the prestigious Golden Moments neighborhood of Las Vegas. This meticulously maintained 4-bedroom, 3-bathroom residence offers 3,200 square feet of living space with premium finishes throughout. The open-concept design features a gourmet kitchen with granite countertops, stainless steel appliances, and a large center island perfect for entertaining. The master suite includes a spa-like bathroom and generous walk-in closet. Enjoy the beautiful backyard with pool, spa, and breathtaking mountain views. This home combines luxury living with the perfect location near shopping, dining, and excellent schools.`,
+    description: `Discover this stunning luxury home in the prestigious Golden Moments neighborhood of Las Vegas. This meticulously maintained 4-bedroom, 3-bathroom residence offers 3,200 square feet of living space with premium finishes throughout. The open-concept design features a gourmet kitchen with granite countertops, stainless steel appliances, and a large center island perfect for entertaining. The master suite includes a spa-like bathroom and generous walk-in closet. Enjoy the beautiful backyard with pool, spa, and breathtaking mountain views. This home combines luxury living with the perfect location near shopping, dining, and nearby public schools.`,
     neighborhood: {
       name: 'Golden Moments',
       description:
-        'A prestigious neighborhood in Northwest Las Vegas known for luxury homes and family-friendly amenities.',
+        'A prestigious neighborhood in Northwest Las Vegas known for luxury homes and community amenities.',
       amenities: ['Shopping Centers', 'Restaurants', 'Parks', 'Schools', 'Golf Courses'],
     },
     realScoutUrl:

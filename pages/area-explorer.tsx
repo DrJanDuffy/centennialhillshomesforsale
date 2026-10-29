@@ -419,7 +419,7 @@ export default function AreaExplorer() {
                   <li>• Northwest Las Vegas</li>
                   <li>• Mountain Views</li>
                   <li>• Quiet Neighborhoods</li>
-                  <li>• Family-Friendly</li>
+                  <li>• Community amenities</li>
                 </ul>
               </div>
             </div>

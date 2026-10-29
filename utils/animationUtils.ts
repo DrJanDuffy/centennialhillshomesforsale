@@ -267,7 +267,7 @@ function loadAmenities(container: HTMLElement): void {
         <div class="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center mr-3">
           🏫
         </div>
-        <span class="text-sm font-medium">Top Schools</span>
+        <span class="text-sm font-medium">Nearby Public Schools</span>
       </div>
       <div class="flex items-center p-3 bg-gray-50 rounded-lg">
         <div class="w-8 h-8 bg-green-100 rounded-full flex items-center justify-center mr-3">

@@ -12,11 +12,11 @@ const faqs = [
   {
     question: 'What areas does Dr. Jan Duffy specialize in?',
     answer:
-      "Dr. Jan Duffy specializes in North Las Vegas, Centennial Hills, Providence, Skye Canyon, Summerlin, Lone Mountain, Aliante, Tule Springs, El Dorado, and other master-planned communities. With 20+ years of experience, she's ranked in the Top 1% of Las Vegas REALTORS®. Her expertise covers ZIP codes 89166, 89131, 89149, and surrounding areas. Dr. Duffy has extensive knowledge of each neighborhood's unique characteristics, from Providence's luxury amenities to Skye Canyon's family-friendly atmosphere. She understands the local market dynamics, school districts, HOA structures, and community features that make each area special. Whether you're looking for a starter home in Centennial Hills or a luxury estate in Summerlin, Dr. Duffy provides personalized guidance tailored to your specific needs and budget.",
+      "Dr. Jan Duffy specializes in North Las Vegas, Centennial Hills, Providence, Skye Canyon, Summerlin, Lone Mountain, Aliante, Tule Springs, El Dorado, and other master-planned communities. With 20+ years of experience, she's ranked in the Top 1% of Las Vegas REALTORS®. Her expertise covers ZIP codes 89166, 89131, 89149, and surrounding areas. Dr. Duffy has extensive knowledge of each neighborhood's unique characteristics, from Providence's luxury amenities to Skye Canyon's atmosphere. She understands the local market dynamics, school districts, HOA structures, and community features that make each area special. Whether you're looking for a starter home in Centennial Hills or a luxury estate in Summerlin, Dr. Duffy provides personalized guidance tailored to your specific needs and budget.",
     category: 'Service Areas',
     relatedQuestions: [
       'What makes each neighborhood unique?',
-      'Which areas have the best schools?',
+      'Which areas have the nearby public schools?',
     ],
   },
   {
@@ -40,9 +40,9 @@ const faqs = [
     ],
   },
   {
-    question: 'What are the best schools in Centennial Hills?',
+    question: 'What are the public schools in Centennial Hills?',
     answer:
-      "Centennial Hills is served by the highly-rated Clark County School District, with several top-performing schools. Shadow Ridge High School consistently ranks among Nevada's best public high schools, with strong academic programs and extracurricular activities. Centennial High School offers excellent STEM programs and college preparation. Elementary schools like Garehime Elementary and Staton Elementary receive high ratings for student achievement and teacher quality. Private school options include Faith Lutheran School and The Meadows School, both offering rigorous academic programs. The area's schools benefit from active parent involvement, modern facilities, and experienced teachers. Dr. Duffy can provide detailed school ratings, enrollment information, and help you find homes in specific school attendance zones. School quality significantly impacts property values, with homes in top-rated school districts commanding premium prices.",
+      "Centennial Hills is served by the Clark County School District. Public campuses include Shadow Ridge High School, Centennial High School, Garehime Elementary, and Staton Elementary. Private school options include Faith Lutheran School and The Meadows School, both offering rigorous academic programs. Dr. Duffy can share enrollment information and help you find homes in specific school attendance zones. Check current CCSD and Nevada state data for school ratings.",
     category: 'Education',
     relatedQuestions: [
       'How do school ratings affect home values?',
@@ -72,7 +72,7 @@ const faqs = [
   {
     question: 'Is Centennial Hills a good investment for rental properties?',
     answer:
-      "Centennial Hills offers excellent rental property investment opportunities due to its growing population, strong job market, and desirable location. Rental yields typically range from 6-8% annually, with average rents for single-family homes between $2,500-$4,000 monthly. The area's proximity to major employers, good schools, and amenities makes it attractive to renters. Investment considerations include HOA fees, property management costs, and market appreciation potential. Dr. Duffy provides detailed investment analysis including cash flow projections, cap rates, and appreciation forecasts. She works with investors to identify properties with strong rental potential and helps navigate landlord-tenant laws. The area's master-planned communities often have rental restrictions, so it's important to verify HOA policies before purchasing. Dr. Duffy can connect you with property management companies and provide guidance on rental pricing strategies.",
+      "Centennial Hills offers excellent rental property investment opportunities due to its growing population, strong job market, and desirable location. Rental yields typically range from 6-8% annually, with average rents for single-family homes between $2,500-$4,000 monthly. The area's proximity to major employers, nearby public schools, and amenities makes it attractive to renters. Investment considerations include HOA fees, property management costs, and market appreciation potential. Dr. Duffy provides detailed investment analysis including cash flow projections, cap rates, and appreciation forecasts. She works with investors to identify properties with strong rental potential and helps navigate landlord-tenant laws. The area's master-planned communities often have rental restrictions, so it's important to verify HOA policies before purchasing. Dr. Duffy can connect you with property management companies and provide guidance on rental pricing strategies.",
     category: 'Investment',
     relatedQuestions: ['What are current rental rates?', 'Are there rental restrictions?'],
   },
@@ -86,7 +86,7 @@ const faqs = [
   {
     question: 'How far is Centennial Hills from the Las Vegas Strip?',
     answer:
-      "Centennial Hills is approximately 20-25 miles northwest of the Las Vegas Strip, with drive times ranging from 30-45 minutes depending on traffic and time of day. The distance provides the perfect balance of accessibility to Las Vegas attractions while maintaining a suburban, family-friendly atmosphere. Major routes include US-95 North and the 215 Beltway, with the new 215 extension improving connectivity. During peak hours (7-9 AM, 4-6 PM), commute times can extend to 45-60 minutes. The area's distance from the Strip means lower noise levels, cleaner air, and a more residential feel. Many residents appreciate being close enough for occasional entertainment while living in a quieter, more family-oriented community. Dr. Duffy can provide detailed commute information and help you find homes that balance your work location with lifestyle preferences.",
+      "Centennial Hills is approximately 20-25 miles northwest of the Las Vegas Strip, with drive times ranging from 30-45 minutes depending on traffic and time of day. The distance provides the perfect balance of accessibility to Las Vegas attractions while maintaining a suburban atmosphere. Major routes include US-95 North and the 215 Beltway, with the new 215 extension improving connectivity. During peak hours (7-9 AM, 4-6 PM), commute times can extend to 45-60 minutes. The area's distance from the Strip means lower noise levels, cleaner air, and a more residential feel. Many residents appreciate being close enough for occasional entertainment while living in a quieter, more community. Dr. Duffy can provide detailed commute information and help you find homes that balance your work location with lifestyle preferences.",
     category: 'Location',
     relatedQuestions: [
       'What are the commute times to major employers?',
@@ -211,7 +211,7 @@ export default function FAQ() {
         <title>Expert Answers to 20+ FAQs About Centennial Hills Real Estate | Dr. Jan Duffy</title>
         <meta
           name="description"
-          content="Expert answers to 20+ FAQs about Centennial Hills real estate, including 2024 home prices ($400K-$2M+), top-rated schools, HOA fees, and investment opportunities. Local REALTOR® insights from Dr. Jan Duffy."
+          content="Expert answers to 20+ FAQs about Centennial Hills real estate, including 2024 home prices ($400K-$2M+), nearby public schools, HOA fees, and investment opportunities. Local REALTOR® insights from Dr. Jan Duffy."
         />
         <meta
           name="keywords"

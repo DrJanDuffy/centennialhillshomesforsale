@@ -19,7 +19,7 @@ export default function ProvidenceLasVegas() {
         <title>Providence Las Vegas Homes for Sale | Family Community Real Estate</title>
         <meta
           name="description"
-          content="Browse homes for sale in Providence Las Vegas. Family-friendly community with parks, schools, and convenient access to Centennial Hills amenities."
+          content="Browse homes for sale in Providence Las Vegas. Community with parks, schools, and convenient access to Centennial Hills amenities."
         />
         <meta
           name="keywords"
@@ -43,8 +43,8 @@ export default function ProvidenceLasVegas() {
           <div className="container">
             <h1>Providence Las Vegas Real Estate</h1>
             <p className="hero-subtitle">
-              Discover family-friendly living in Providence, a well-established community offering
-              affordable homes, parks, and excellent school access in northwest Las Vegas.
+              Discover community living in Providence, an older community offering
+              affordable homes, parks, and nearby public schools in northwest Las Vegas.
             </p>
           </div>
         </motion.section>
@@ -69,7 +69,7 @@ export default function ProvidenceLasVegas() {
                 <p>
                   Providence is a charming residential community that offers excellent value for
                   families seeking quality homes in northwest Las Vegas. With tree-lined streets,
-                  neighborhood parks, and proximity to top-rated schools, Providence provides a
+                  neighborhood parks, and proximity to public schools, Providence provides a
                   suburban lifestyle with urban conveniences.
                 </p>
                 <p>
@@ -113,7 +113,7 @@ export default function ProvidenceLasVegas() {
             <h2>Providence Community Features</h2>
             <div className="features-grid">
               <div className="feature-card">
-                <h3>🏫 Excellent Schools</h3>
+                <h3>🏫 Nearby Public Schools</h3>
                 <p>Zoned for Centennial High School and quality elementary/middle schools</p>
               </div>
               <div className="feature-card">

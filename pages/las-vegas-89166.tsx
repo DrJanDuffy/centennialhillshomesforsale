@@ -45,7 +45,7 @@ export default function LasVegas89166() {
             <h1>Las Vegas 89166 Homes for Sale</h1>
             <p className="hero-subtitle">
               Explore new construction and established homes in Las Vegas zip code 89166, featuring
-              the award-winning Skye Canyon community and family-friendly neighborhoods.
+              the award-winning Skye Canyon community and neighborhoods.
             </p>
           </div>
         </motion.section>
@@ -130,10 +130,10 @@ export default function LasVegas89166() {
                 <h3>North Centennial</h3>
                 <p className="price-range">$500K - $900K</p>
                 <ul>
-                  <li>Established neighborhoods</li>
+                  <li>Older neighborhoods</li>
                   <li>Close to amenities</li>
-                  <li>Family-friendly environment</li>
-                  <li>Good school access</li>
+
+                  <li>Nearby public schools</li>
                 </ul>
                 <Link href="/centennial-hills" className="btn btn-primary">
                   Explore Area

@@ -44,7 +44,7 @@ export function HomeHero({
           className="mt-5 max-w-2xl mx-auto text-base sm:text-lg leading-relaxed"
           style={{ color: '#b0bec5' }}
         >
-          Northwest Las Vegas&apos;s most sought-after master-planned community — top-rated schools,
+          Northwest Las Vegas&apos;s most sought-after master-planned community — nearby public schools,
           resort amenities, and homes built for the way you live.
         </p>
 

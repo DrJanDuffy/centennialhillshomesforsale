@@ -34,7 +34,7 @@ export default function LocalSEOBooster({
     '@context': 'https://schema.org',
     '@type': 'Place',
     name: `${neighborhood}, Las Vegas, Nevada`,
-    description: `Luxury master-planned community in Las Vegas featuring beautiful homes, excellent schools, and resort-style amenities`,
+    description: `Luxury master-planned community in Las Vegas featuring beautiful homes, nearby public schools, and resort-style amenities`,
     geo: {
       '@type': 'GeoCoordinates',
       latitude:
@@ -80,7 +80,7 @@ export default function LocalSEOBooster({
       },
       {
         '@type': 'LocationFeatureSpecification',
-        name: 'Top-Rated Schools',
+        name: 'Nearby Public Schools',
         value: true,
       },
     ],

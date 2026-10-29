@@ -75,7 +75,7 @@ export default function SkyeCanyon() {
                 <p>
                   The community features the spectacular Skye Canyon Park with its state-of-the-art
                   recreation center, pools, sports courts, and extensive trail system. New
-                  construction homes range from $400K to $1.2M, offering something for every family.
+                  construction homes range from $400K to $1.2M, offering a range of floor plans and prices.
                 </p>
               </div>
               <div className="quick-stats">
