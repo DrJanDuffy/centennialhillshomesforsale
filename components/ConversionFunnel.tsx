@@ -324,7 +324,7 @@ const IntentStage: React.FC<{ onAction: (action: string) => void }> = ({ onActio
           onClick={() => onAction('phone_click')}
           className="bg-green-600 text-white px-8 py-3 rounded-lg font-semibold hover:bg-green-700 transition-colors"
         >
-          Call Now: (702) 222-1964
+          Call Now: (702) 903-1952
         </button>
         <button
           onClick={() => onAction('email_click')}

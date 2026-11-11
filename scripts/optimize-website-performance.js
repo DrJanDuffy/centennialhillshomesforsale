@@ -71,7 +71,7 @@ const optimizations = {
             "name": "Centennial Hills, Las Vegas, NV"
           },
           "serviceType": "Real Estate Services",
-          "telephone": "+1-702-222-1964",
+          "telephone": "+1-702-903-1952",
           "email": "jan@centennialhills.com",
           "url": "https://centennialhillshomesforsale.com",
           "address": {
