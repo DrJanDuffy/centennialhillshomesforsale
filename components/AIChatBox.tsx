@@ -60,13 +60,11 @@ const AIChatBox: React.FC = () => {
       const question = inputValue.trim();
       if (!question || isLoading) return;
 
-      // Add user message
       addMessage(question, 'user');
       setInputValue('');
       setIsLoading(true);
 
       try {
-        // Call Perplexity API endpoint
         const response = await fetch('/api/perplexity', {
           method: 'POST',
           headers: {
@@ -85,15 +83,11 @@ const AIChatBox: React.FC = () => {
           'assistant'
         );
 
-        // Capture interests for recommendations
         if (
           typeof window !== 'undefined' &&
           (window as WindowWithPropertyBehaviour).propertyBehaviour
         ) {
           const propertyBehaviour = (window as WindowWithPropertyBehaviour).propertyBehaviour;
-          if (/school|college|elementary/i.test(question)) {
-            propertyBehaviour.add('feature:school');
-          }
           if (/pool|spa/i.test(question)) {
             propertyBehaviour.add('feature:pool');
           }
@@ -131,7 +125,6 @@ const AIChatBox: React.FC = () => {
 
   return (
     <>
-      {/* Chat Toggle Button */}
       <button
         type="button"
         onClick={toggleChat}
@@ -145,10 +138,8 @@ const AIChatBox: React.FC = () => {
         {isOpen ? <X size={24} /> : <MessageCircle size={24} />}
       </button>
 
-      {/* Chat Window */}
       {isOpen && (
         <div className="fixed bottom-24 right-6 z-40 w-96 h-[500px] bg-white rounded-2xl shadow-2xl border border-gray-200 flex flex-col">
-          {/* Chat Header */}
           <div className="bg-gradient-to-r from-blue-600 to-blue-700 text-white p-4 rounded-t-2xl">
             <div className="flex items-center gap-3">
               <div className="w-10 h-10 bg-white/20 rounded-full flex items-center justify-center">
@@ -161,7 +152,6 @@ const AIChatBox: React.FC = () => {
             </div>
           </div>
 
-          {/* Messages Area */}
           <div className="flex-1 overflow-y-auto p-4 space-y-3 bg-gray-50">
             {messages.map((message) => (
               <div
@@ -190,7 +180,6 @@ const AIChatBox: React.FC = () => {
               </div>
             ))}
 
-            {/* Loading indicator */}
             {isLoading && (
               <div className="flex justify-start">
                 <div className="bg-white shadow-sm border border-gray-200 max-w-xs p-3 rounded-lg">
@@ -205,7 +194,6 @@ const AIChatBox: React.FC = () => {
             <div ref={messagesEndRef} />
           </div>
 
-          {/* Input Area */}
           <form onSubmit={handleSubmit} className="p-4 border-t border-gray-200">
             <div className="flex gap-2">
               <input
@@ -227,12 +215,11 @@ const AIChatBox: React.FC = () => {
               </button>
             </div>
 
-            {/* Quick Questions */}
             <div className="mt-3 flex flex-wrap gap-2">
               {[
-                'What&apos;s the average home price?',
-                'Tell me about schools',
-                'Show me neighborhoods',
+                'What is the average home price?',
+                'What amenities are nearby?',
+                'What is the commute toward the Strip?',
               ].map((question) => (
                 <button
                   key={question}

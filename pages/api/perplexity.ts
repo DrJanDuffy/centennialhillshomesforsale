@@ -1,68 +1,31 @@
-import axios from 'axios';
 import type { NextApiRequest, NextApiResponse } from 'next';
 
-// Define proper response types
-interface PerplexityResponse {
-  choices: Array<{
-    message: {
-      content: string;
-    };
-  }>;
-}
+import { CEREBRAS_FALLBACK, draftSiteReply } from '../../lib/cerebras-draft';
 
-interface PerplexityError {
-  response?: {
-    data?: unknown;
-  };
-}
+type ChatResponse = { reply: string } | { error: string };
 
-export default async function handler(req: NextApiRequest, res: NextApiResponse) {
+/**
+ * Centennial Hills AI chat. Cerebras is the inference path (sync, ≤200 tokens).
+ * Route kept at /api/perplexity so existing AIChatBox clients keep working.
+ */
+export default async function handler(req: NextApiRequest, res: NextApiResponse<ChatResponse>) {
   if (req.method !== 'POST') {
+    res.setHeader('Allow', 'POST');
     return res.status(405).json({ error: 'Method not allowed' });
   }
 
-  const { prompt } = req.body;
+  const prompt = typeof req.body?.prompt === 'string' ? req.body.prompt : '';
 
   if (!prompt) {
     return res.status(400).json({ error: 'Prompt is required' });
   }
 
   try {
-    // --------------------------------------------------------------
-    // PERPLEXITY API CALL
-    // --------------------------------------------------------------
-    const response = await axios.post<PerplexityResponse>(
-      'https://api.perplexity.ai/chat/completions', // <-- official endpoint
-      {
-        model: 'llama-3-sonar-small-32k-online', // pick any model you have access to
-        messages: [
-          {
-            role: 'system',
-            content: `You are a helpful real‑estate assistant specialized in Centennial Hills, Las Vegas. Give concise, friendly answers and reference local schools, parks, and price ranges when relevant.`,
-          },
-          { role: 'user', content: prompt },
-        ],
-        temperature: 0.6,
-        max_tokens: 300,
-      },
-      {
-        headers: {
-          // Perplexity expects the key in the Authorization header:
-          Authorization: `Bearer ${process.env.PERPLEXITY_API_KEY}`,
-          'Content-Type': 'application/json',
-        },
-      }
-    );
-
-    // Perplexity returns a `choices` array with `message.content`
-    const reply =
-      response.data.choices?.[0]?.message?.content?.trim() || 'I could not generate a response.';
-
-    res.status(200).json({ reply });
+    const reply = (await draftSiteReply(prompt)) ?? CEREBRAS_FALLBACK;
+    return res.status(200).json({ reply });
   } catch (error: unknown) {
-    const errorMessage = error instanceof Error ? error.message : 'Unknown error occurred';
-    const responseData = (error as PerplexityError)?.response?.data;
-    console.error('Perplexity error →', responseData || errorMessage);
-    res.status(500).json({ error: 'Failed to fetch response from Perplexity' });
+    const errorMessage = error instanceof Error ? error.message : 'Unknown error';
+    console.error('Cerebras chat error →', errorMessage);
+    return res.status(500).json({ error: 'Failed to generate a draft reply' });
   }
 }
