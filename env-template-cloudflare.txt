@@ -1,19 +1,15 @@
 # Cloudflare Environment Configuration Template
-# Copy this file to .env.local and fill in your actual values
+# Copy this file to .env.local and fill in your actual values.
+# NEVER put real values in this file — it is committed to a public repo.
 
-# Cloudflare Configuration
-CLOUDFLARE_API_KEY=006a036208c6527a48175ccf9393d794509e3
-CLOUDFLARE_EMAIL=drduffy@bhhsnv.com
-CLOUDFLARE_ZONE_ID=ee98107e4df3984ca1593206046598da
-CLOUDFLARE_ACCOUNT_ID=2cc579c1ec9e426ed585e933ebf4753b
+# Cloudflare Configuration (server-side only — use a scoped API Token, not the Global API Key)
+CLOUDFLARE_API_TOKEN=your_scoped_cloudflare_api_token_here
+CLOUDFLARE_ZONE_ID=your_zone_id_here
+CLOUDFLARE_ACCOUNT_ID=your_account_id_here
 
-# Bing Search API Configuration
-BING_API_KEY=ffa071c950ed46a88eff81fe85836214
+# Bing Search API Configuration (server-side only)
+BING_API_KEY=your_bing_api_key_here
 
 # Next.js Environment (Client-side accessible)
-NEXT_PUBLIC_CLOUDFLARE_API_KEY=006a036208c6527a48175ccf9393d794509e3
-NEXT_PUBLIC_CLOUDFLARE_EMAIL=drduffy@bhhsnv.com
+# Never prefix an API key or secret with NEXT_PUBLIC_ — those values ship to every visitor's browser.
 NEXT_PUBLIC_VERCEL_ENV=development
-
-# Important: Never commit .env.local to version control!
-# This file is already in your .gitignore
