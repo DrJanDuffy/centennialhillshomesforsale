@@ -59,9 +59,9 @@ class FollowUpBossAPI {
   private accountId: string;
 
   constructor() {
-    this.apiKey = process.env.NEXT_PUBLIC_FUB_API_KEY || 'fka_0N4mnN0gI0wiplmBLtC4TTO93R9CDV83W7';
+    this.apiKey = process.env.FUB_API_KEY || '';
     this.baseUrl = 'https://api.followupboss.com/v1';
-    this.accountId = process.env.NEXT_PUBLIC_FUB_ACCOUNT_ID || '';
+    this.accountId = process.env.FUB_ACCOUNT_ID || process.env.NEXT_PUBLIC_FUB_ACCOUNT_ID || '';
   }
 
   /**
